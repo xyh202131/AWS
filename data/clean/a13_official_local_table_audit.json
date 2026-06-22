@@ -1,0 +1,515 @@
+{
+  "audit_agent": "DraftOps A13 Official Local Table Audit Agent",
+  "generated_from_local_files_only": true,
+  "sources": {
+    "official_markdown": "data/raw/nba-official-2026-prospects-live.md",
+    "final_bundle": "data/final/final_import_bundle.json"
+  },
+  "normalization": {
+    "case_insensitive": true,
+    "punctuation_ignored": true,
+    "accents_ignored": true,
+    "jr_sr_suffix_ignored": true
+  },
+  "counts": {
+    "official_prospects_parsed": 101,
+    "final_players": 30,
+    "matched_final_players": 30,
+    "missing_from_official_count": 0,
+    "canonical_name_difference_count": 0,
+    "duplicate_final_id_count": 0,
+    "unique_final_ids": 30
+  },
+  "missing_from_official": [],
+  "matched_final_players": [
+    {
+      "final_id": "darryn-peterson",
+      "final_name": "Darryn Peterson",
+      "normalized_name": "darryn peterson",
+      "official": {
+        "name": "Darryn Peterson",
+        "pos": "G",
+        "age": 19,
+        "school": "Kansas",
+        "height": "6-5",
+        "weight": "199 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/darryn-peterson"
+      }
+    },
+    {
+      "final_id": "aj-dybantsa",
+      "final_name": "AJ Dybantsa",
+      "normalized_name": "aj dybantsa",
+      "official": {
+        "name": "AJ Dybantsa",
+        "pos": "F",
+        "age": 19,
+        "school": "BYU",
+        "height": "6-9",
+        "weight": "217 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/aj-dybantsa"
+      }
+    },
+    {
+      "final_id": "cameron-boozer",
+      "final_name": "Cameron Boozer",
+      "normalized_name": "cameron boozer",
+      "official": {
+        "name": "Cameron Boozer",
+        "pos": "F-C",
+        "age": 18,
+        "school": "Duke",
+        "height": "6-8",
+        "weight": "253 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/cameron-boozer"
+      }
+    },
+    {
+      "final_id": "caleb-wilson",
+      "final_name": "Caleb Wilson",
+      "normalized_name": "caleb wilson",
+      "official": {
+        "name": "Caleb Wilson",
+        "pos": "F",
+        "age": 19,
+        "school": "North Carolina",
+        "height": "6-9",
+        "weight": "211 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/caleb-wilson"
+      }
+    },
+    {
+      "final_id": "keaton-wagler",
+      "final_name": "Keaton Wagler",
+      "normalized_name": "keaton wagler",
+      "official": {
+        "name": "Keaton Wagler",
+        "pos": "G",
+        "age": 19,
+        "school": "Illinois",
+        "height": "6-5",
+        "weight": "188 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/keaton-wagler"
+      }
+    },
+    {
+      "final_id": "darius-acuff-jr",
+      "final_name": "Darius Acuff Jr.",
+      "normalized_name": "darius acuff",
+      "official": {
+        "name": "Darius Acuff Jr.",
+        "pos": "G",
+        "age": 19,
+        "school": "Arkansas",
+        "height": "6-2",
+        "weight": "186 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/darius-acuff"
+      }
+    },
+    {
+      "final_id": "mikel-brown-jr",
+      "final_name": "Mikel Brown Jr.",
+      "normalized_name": "mikel brown",
+      "official": {
+        "name": "Mikel Brown Jr.",
+        "pos": "G",
+        "age": 20,
+        "school": "Louisville",
+        "height": "6-5",
+        "weight": "180 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/mikel-brown"
+      }
+    },
+    {
+      "final_id": "kingston-flemings",
+      "final_name": "Kingston Flemings",
+      "normalized_name": "kingston flemings",
+      "official": {
+        "name": "Kingston Flemings",
+        "pos": "G",
+        "age": 19,
+        "school": "Houston",
+        "height": "6-3",
+        "weight": "183 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/kingston-flemings"
+      }
+    },
+    {
+      "final_id": "nate-ament",
+      "final_name": "Nate Ament",
+      "normalized_name": "nate ament",
+      "official": {
+        "name": "Nate Ament",
+        "pos": "F",
+        "age": 19,
+        "school": "Tennessee",
+        "height": "6-10",
+        "weight": "211 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/nate-ament"
+      }
+    },
+    {
+      "final_id": "aday-mara",
+      "final_name": "Aday Mara",
+      "normalized_name": "aday mara",
+      "official": {
+        "name": "Aday Mara",
+        "pos": "C",
+        "age": 21,
+        "school": "Michigan",
+        "height": "7-3",
+        "weight": "260 lbs",
+        "status": "Junior",
+        "country": "Spain",
+        "url": "https://www.nba.com/draft/2026/prospects/aday-mara"
+      }
+    },
+    {
+      "final_id": "brayden-burries",
+      "final_name": "Brayden Burries",
+      "normalized_name": "brayden burries",
+      "official": {
+        "name": "Brayden Burries",
+        "pos": "G",
+        "age": 20,
+        "school": "Arizona",
+        "height": "6-4",
+        "weight": "215 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/brayden-burries"
+      }
+    },
+    {
+      "final_id": "yaxel-lendeborg",
+      "final_name": "Yaxel Lendeborg",
+      "normalized_name": "yaxel lendeborg",
+      "official": {
+        "name": "Yaxel Lendeborg",
+        "pos": "F",
+        "age": 23,
+        "school": "Michigan",
+        "height": "6-9",
+        "weight": "241 lbs",
+        "status": "Senior",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/yaxel-lendeborg"
+      }
+    },
+    {
+      "final_id": "hannes-steinbach",
+      "final_name": "Hannes Steinbach",
+      "normalized_name": "hannes steinbach",
+      "official": {
+        "name": "Hannes Steinbach",
+        "pos": "F-C",
+        "age": 20,
+        "school": "Washington",
+        "height": "6-10",
+        "weight": "248 lbs",
+        "status": "Freshman",
+        "country": "Germany",
+        "url": "https://www.nba.com/draft/2026/prospects/hannes-steinbach"
+      }
+    },
+    {
+      "final_id": "karim-lopez",
+      "final_name": "Karim Lopez",
+      "normalized_name": "karim lopez",
+      "official": {
+        "name": "Karim Lopez",
+        "pos": "F",
+        "age": 19,
+        "school": "New Zealand Breakers (Australia)",
+        "height": "6-8",
+        "weight": "222 lbs",
+        "status": "International",
+        "country": "Mexico",
+        "url": "https://www.nba.com/draft/2026/prospects/karim-lopez"
+      }
+    },
+    {
+      "final_id": "morez-johnson-jr",
+      "final_name": "Morez Johnson Jr.",
+      "normalized_name": "morez johnson",
+      "official": {
+        "name": "Morez Johnson Jr.",
+        "pos": "F-C",
+        "age": 20,
+        "school": "Michigan",
+        "height": "6-9",
+        "weight": "250 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/morez-johnson-jr"
+      }
+    },
+    {
+      "final_id": "christian-anderson",
+      "final_name": "Christian Anderson",
+      "normalized_name": "christian anderson",
+      "official": {
+        "name": "Christian Anderson",
+        "pos": "G",
+        "age": 20,
+        "school": "Texas Tech",
+        "height": "6-1",
+        "weight": "180 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/christian-anderson"
+      }
+    },
+    {
+      "final_id": "allen-graves",
+      "final_name": "Allen Graves",
+      "normalized_name": "allen graves",
+      "official": {
+        "name": "Allen Graves",
+        "pos": "F",
+        "age": 19,
+        "school": "Santa Clara",
+        "height": "6-8",
+        "weight": "226 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/allen-graves"
+      }
+    },
+    {
+      "final_id": "labaron-philon-jr",
+      "final_name": "Labaron Philon Jr.",
+      "normalized_name": "labaron philon",
+      "official": {
+        "name": "Labaron Philon Jr.",
+        "pos": "G",
+        "age": 20,
+        "school": "Alabama",
+        "height": "6-3",
+        "weight": "176 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/labaron-philon"
+      }
+    },
+    {
+      "final_id": "chris-cenac-jr",
+      "final_name": "Chris Cenac Jr.",
+      "normalized_name": "chris cenac",
+      "official": {
+        "name": "Chris Cenac Jr.",
+        "pos": "F-C",
+        "age": 19,
+        "school": "Houston",
+        "height": "6-11",
+        "weight": "240 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/chris-cenac-jr"
+      }
+    },
+    {
+      "final_id": "bennett-stirtz",
+      "final_name": "Bennett Stirtz",
+      "normalized_name": "bennett stirtz",
+      "official": {
+        "name": "Bennett Stirtz",
+        "pos": "G",
+        "age": 22,
+        "school": "Iowa",
+        "height": "6-3",
+        "weight": "186 lbs",
+        "status": "Senior",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/bennett-stirtz"
+      }
+    },
+    {
+      "final_id": "cameron-carr",
+      "final_name": "Cameron Carr",
+      "normalized_name": "cameron carr",
+      "official": {
+        "name": "Cameron Carr",
+        "pos": "G",
+        "age": 21,
+        "school": "Baylor",
+        "height": "6-5",
+        "weight": "184 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/cameron-carr"
+      }
+    },
+    {
+      "final_id": "jayden-quaintance",
+      "final_name": "Jayden Quaintance",
+      "normalized_name": "jayden quaintance",
+      "official": {
+        "name": "Jayden Quaintance",
+        "pos": "F-C",
+        "age": 18,
+        "school": "Kentucky",
+        "height": "6-9",
+        "weight": "253 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/jayden-quaintance"
+      }
+    },
+    {
+      "final_id": "dailyn-swain",
+      "final_name": "Dailyn Swain",
+      "normalized_name": "dailyn swain",
+      "official": {
+        "name": "Dailyn Swain",
+        "pos": "F",
+        "age": 20,
+        "school": "Texas",
+        "height": "6-7",
+        "weight": "211 lbs",
+        "status": "Junior",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/dailyn-swain"
+      }
+    },
+    {
+      "final_id": "ebuka-okorie",
+      "final_name": "Ebuka Okorie",
+      "normalized_name": "ebuka okorie",
+      "official": {
+        "name": "Ebuka Okorie",
+        "pos": "G",
+        "age": 19,
+        "school": "Stanford",
+        "height": "6-1",
+        "weight": "186 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/ebuka-okorie"
+      }
+    },
+    {
+      "final_id": "isaiah-evans",
+      "final_name": "Isaiah Evans",
+      "normalized_name": "isaiah evans",
+      "official": {
+        "name": "Isaiah Evans",
+        "pos": "G",
+        "age": 20,
+        "school": "Duke",
+        "height": "6-6",
+        "weight": "186 lbs",
+        "status": "Sophomore",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/isaiah-evans"
+      }
+    },
+    {
+      "final_id": "henri-veesaar",
+      "final_name": "Henri Veesaar",
+      "normalized_name": "henri veesaar",
+      "official": {
+        "name": "Henri Veesaar",
+        "pos": "C",
+        "age": 22,
+        "school": "North Carolina",
+        "height": "6-11",
+        "weight": "227 lbs",
+        "status": "Junior",
+        "country": "Estonia",
+        "url": "https://www.nba.com/draft/2026/prospects/henri-veesaar"
+      }
+    },
+    {
+      "final_id": "koa-peat",
+      "final_name": "Koa Peat",
+      "normalized_name": "koa peat",
+      "official": {
+        "name": "Koa Peat",
+        "pos": "F",
+        "age": 19,
+        "school": "Arizona",
+        "height": "6-7",
+        "weight": "245 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/koa-peat"
+      }
+    },
+    {
+      "final_id": "meleek-thomas",
+      "final_name": "Meleek Thomas",
+      "normalized_name": "meleek thomas",
+      "official": {
+        "name": "Meleek Thomas",
+        "pos": "G-F",
+        "age": 19,
+        "school": "Arkansas",
+        "height": "6-3",
+        "weight": "190 lbs",
+        "status": "Freshman",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/meleek-thomas"
+      }
+    },
+    {
+      "final_id": "tarris-reed-jr",
+      "final_name": "Tarris Reed Jr.",
+      "normalized_name": "tarris reed",
+      "official": {
+        "name": "Tarris Reed Jr.",
+        "pos": "C",
+        "age": 22,
+        "school": "Connecticut",
+        "height": "6-10",
+        "weight": "260 lbs",
+        "status": "Senior",
+        "country": "United States",
+        "url": "https://www.nba.com/draft/2026/prospects/tarris-reed-jr"
+      }
+    },
+    {
+      "final_id": "sergio-de-larrea",
+      "final_name": "Sergio De Larrea",
+      "normalized_name": "sergio de larrea",
+      "official": {
+        "name": "Sergio De Larrea",
+        "pos": "G",
+        "age": 20,
+        "school": "Vallodolid (Spain)",
+        "height": "6-6",
+        "weight": "205 lbs",
+        "status": "International",
+        "country": "Spain",
+        "url": "https://www.nba.com/draft/2026/prospects/sergio-de-larrea"
+      }
+    }
+  ],
+  "canonical_name_differences": [],
+  "duplicate_final_ids": [],
+  "verdict": {
+    "final_count_exactly_30": true,
+    "all_final_players_in_official": true,
+    "final_contains_non_official_players": false,
+    "final_ids_unique": true,
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Local browser and visual QA artifacts
+.edge-profile*/
+.verify-*.png
+
+# Competition raw media kept outside git because of GitHub file limits
+数据/DraftCombine_Hackathon.zip
+数据/DraftCombine_Hackathon/视频介绍/
+数据/DraftCombine_Hackathon/__MACOSX/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

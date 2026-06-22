@@ -1,0 +1,1370 @@
+{
+  "scenario": {
+    "id": "recommended",
+    "label": "Official consensus balanced",
+    "weights": {
+      "consensus": 44,
+      "need": 24,
+      "player": 17,
+      "upside": 7,
+      "intel": 8
+    }
+  },
+  "generatedAt": "2026-06-21T20:19:09.658Z",
+  "board": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "prospect": {
+        "id": "aj-dybantsa",
+        "name": "AJ Dybantsa",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "BYU",
+        "consensusRank": 2,
+        "mockHeat": 99
+      },
+      "score": 96,
+      "margin": 3,
+      "roleFit": "wing creator",
+      "breakdown": {
+        "consensus": 95,
+        "need": 100,
+        "player": 88,
+        "upside": 100,
+        "intel": 100
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Darryn Peterson",
+          "score": 93,
+          "consensusRank": 1,
+          "roleFit": "creation"
+        },
+        {
+          "name": "Caleb Wilson",
+          "score": 92,
+          "consensusRank": 4,
+          "roleFit": "two-way"
+        },
+        {
+          "name": "Cameron Boozer",
+          "score": 91,
+          "consensusRank": 3,
+          "roleFit": "size"
+        }
+      ]
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "prospect": {
+        "id": "darryn-peterson",
+        "name": "Darryn Peterson",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Kansas",
+        "consensusRank": 1,
+        "mockHeat": 99
+      },
+      "score": 96,
+      "margin": 5,
+      "roleFit": "primary guard",
+      "breakdown": {
+        "consensus": 95,
+        "need": 100,
+        "player": 84,
+        "upside": 100,
+        "intel": 100
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Keaton Wagler",
+          "score": 91,
+          "consensusRank": 5,
+          "roleFit": "pull-up shooting"
+        },
+        {
+          "name": "Darius Acuff Jr.",
+          "score": 89,
+          "consensusRank": 6,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Cameron Boozer",
+          "score": 85,
+          "consensusRank": 3,
+          "roleFit": "frontcourt size"
+        }
+      ]
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "prospect": {
+        "id": "cameron-boozer",
+        "name": "Cameron Boozer",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "school": "Duke",
+        "consensusRank": 3,
+        "mockHeat": 97
+      },
+      "score": 98,
+      "margin": 15,
+      "roleFit": "frontcourt engine",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 84,
+        "upside": 100,
+        "intel": 100
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Caleb Wilson",
+          "score": 83,
+          "consensusRank": 4,
+          "roleFit": "wing depth"
+        },
+        {
+          "name": "Darius Acuff Jr.",
+          "score": 78,
+          "consensusRank": 6,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Keaton Wagler",
+          "score": 78,
+          "consensusRank": 5,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "prospect": {
+        "id": "caleb-wilson",
+        "name": "Caleb Wilson",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "North Carolina",
+        "consensusRank": 4,
+        "mockHeat": 94
+      },
+      "score": 94,
+      "margin": 10,
+      "roleFit": "big wing",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 86,
+        "upside": 100,
+        "intel": 98
+      },
+      "riskPenalty": 4,
+      "alternatives": [
+        {
+          "name": "Darius Acuff Jr.",
+          "score": 84,
+          "consensusRank": 6,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Kingston Flemings",
+          "score": 82,
+          "consensusRank": 8,
+          "roleFit": "defense"
+        },
+        {
+          "name": "Keaton Wagler",
+          "score": 81,
+          "consensusRank": 5,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "acquiredFrom": "Indiana",
+      "prospect": {
+        "id": "keaton-wagler",
+        "name": "Keaton Wagler",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Illinois",
+        "consensusRank": 5,
+        "mockHeat": 92
+      },
+      "score": 97,
+      "margin": 3,
+      "roleFit": "combo guard",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 83,
+        "upside": 100,
+        "intel": 96
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Darius Acuff Jr.",
+          "score": 95,
+          "consensusRank": 6,
+          "roleFit": "guard"
+        },
+        {
+          "name": "Mikel Brown Jr.",
+          "score": 93,
+          "consensusRank": 7,
+          "roleFit": "pull-up shooting"
+        },
+        {
+          "name": "Kingston Flemings",
+          "score": 90,
+          "consensusRank": 8,
+          "roleFit": "guard"
+        }
+      ]
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "prospect": {
+        "id": "darius-acuff-jr",
+        "name": "Darius Acuff Jr.",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Arkansas",
+        "consensusRank": 6,
+        "mockHeat": 90
+      },
+      "score": 96,
+      "margin": 3,
+      "roleFit": "primary guard",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 80,
+        "upside": 100,
+        "intel": 94
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Mikel Brown Jr.",
+          "score": 93,
+          "consensusRank": 7,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Kingston Flemings",
+          "score": 92,
+          "consensusRank": 8,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Brayden Burries",
+          "score": 80,
+          "consensusRank": 11,
+          "roleFit": "shot creator"
+        }
+      ]
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "prospect": {
+        "id": "mikel-brown-jr",
+        "name": "Mikel Brown Jr.",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Louisville",
+        "consensusRank": 7,
+        "mockHeat": 88
+      },
+      "score": 95,
+      "margin": 1,
+      "roleFit": "primary guard",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 79,
+        "upside": 96,
+        "intel": 92
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Kingston Flemings",
+          "score": 94,
+          "consensusRank": 8,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Brayden Burries",
+          "score": 87,
+          "consensusRank": 11,
+          "roleFit": "guard"
+        },
+        {
+          "name": "Aday Mara",
+          "score": 81,
+          "consensusRank": 10,
+          "roleFit": "defense"
+        }
+      ]
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "acquiredFrom": "New Orleans",
+      "prospect": {
+        "id": "aday-mara",
+        "name": "Aday Mara",
+        "positions": [
+          "C"
+        ],
+        "school": "Michigan",
+        "consensusRank": 10,
+        "mockHeat": 81
+      },
+      "score": 91,
+      "margin": 6,
+      "roleFit": "rim protector",
+      "breakdown": {
+        "consensus": 91,
+        "need": 100,
+        "player": 78,
+        "upside": 93,
+        "intel": 85
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Nate Ament",
+          "score": 85,
+          "consensusRank": 9,
+          "roleFit": "size"
+        },
+        {
+          "name": "Yaxel Lendeborg",
+          "score": 82,
+          "consensusRank": 12,
+          "roleFit": "size"
+        },
+        {
+          "name": "Karim Lopez",
+          "score": 81,
+          "consensusRank": 14,
+          "roleFit": "size"
+        }
+      ]
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "prospect": {
+        "id": "brayden-burries",
+        "name": "Brayden Burries",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Arizona",
+        "consensusRank": 11,
+        "mockHeat": 79
+      },
+      "score": 91,
+      "margin": 5,
+      "roleFit": "combo guard",
+      "breakdown": {
+        "consensus": 91,
+        "need": 100,
+        "player": 81,
+        "upside": 96,
+        "intel": 83
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Nate Ament",
+          "score": 86,
+          "consensusRank": 9,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Kingston Flemings",
+          "score": 85,
+          "consensusRank": 8,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 80,
+          "consensusRank": 16,
+          "roleFit": "combo guard"
+        }
+      ]
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "prospect": {
+        "id": "kingston-flemings",
+        "name": "Kingston Flemings",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Houston",
+        "consensusRank": 8,
+        "mockHeat": 86
+      },
+      "score": 91,
+      "margin": 1,
+      "roleFit": "defense",
+      "breakdown": {
+        "consensus": 91,
+        "need": 100,
+        "player": 80,
+        "upside": 100,
+        "intel": 90
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Yaxel Lendeborg",
+          "score": 90,
+          "consensusRank": 12,
+          "roleFit": "connector"
+        },
+        {
+          "name": "Karim Lopez",
+          "score": 86,
+          "consensusRank": 14,
+          "roleFit": "big wing"
+        },
+        {
+          "name": "Nate Ament",
+          "score": 85,
+          "consensusRank": 9,
+          "roleFit": "big wing"
+        }
+      ]
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "prospect": {
+        "id": "nate-ament",
+        "name": "Nate Ament",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "Tennessee",
+        "consensusRank": 9,
+        "mockHeat": 83
+      },
+      "score": 82,
+      "margin": 3,
+      "roleFit": "shooter",
+      "breakdown": {
+        "consensus": 91,
+        "need": 73,
+        "player": 79,
+        "upside": 99,
+        "intel": 87
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 80,
+          "consensusRank": 16,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Yaxel Lendeborg",
+          "score": 76,
+          "consensusRank": 12,
+          "roleFit": "decision maker"
+        },
+        {
+          "name": "Bennett Stirtz",
+          "score": 76,
+          "consensusRank": 20,
+          "roleFit": "shooter"
+        }
+      ]
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "acquiredFrom": "LA Clippers",
+      "prospect": {
+        "id": "yaxel-lendeborg",
+        "name": "Yaxel Lendeborg",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "Michigan",
+        "consensusRank": 12,
+        "mockHeat": 77
+      },
+      "score": 92,
+      "margin": 5,
+      "roleFit": "feel",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 80,
+        "upside": 76,
+        "intel": 81
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Hannes Steinbach",
+          "score": 87,
+          "consensusRank": 13,
+          "roleFit": "feel"
+        },
+        {
+          "name": "Karim Lopez",
+          "score": 86,
+          "consensusRank": 14,
+          "roleFit": "defense"
+        },
+        {
+          "name": "Morez Johnson Jr.",
+          "score": 84,
+          "consensusRank": 15,
+          "roleFit": "defense"
+        }
+      ]
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "prospect": {
+        "id": "karim-lopez",
+        "name": "Karim Lopez",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "New Zealand Breakers (Australia)",
+        "consensusRank": 14,
+        "mockHeat": 72
+      },
+      "score": 91,
+      "margin": 1,
+      "roleFit": "big wing",
+      "breakdown": {
+        "consensus": 95,
+        "need": 100,
+        "player": 79,
+        "upside": 99,
+        "intel": 76
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Hannes Steinbach",
+          "score": 90,
+          "consensusRank": 13,
+          "roleFit": "frontcourt"
+        },
+        {
+          "name": "Morez Johnson Jr.",
+          "score": 87,
+          "consensusRank": 15,
+          "roleFit": "frontcourt"
+        },
+        {
+          "name": "Allen Graves",
+          "score": 85,
+          "consensusRank": 17,
+          "roleFit": "frontcourt"
+        }
+      ]
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "prospect": {
+        "id": "morez-johnson-jr",
+        "name": "Morez Johnson Jr.",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "school": "Michigan",
+        "consensusRank": 15,
+        "mockHeat": 70
+      },
+      "score": 90,
+      "margin": 5,
+      "roleFit": "rim protector",
+      "breakdown": {
+        "consensus": 95,
+        "need": 100,
+        "player": 71,
+        "upside": 92,
+        "intel": 74
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Hannes Steinbach",
+          "score": 85,
+          "consensusRank": 13,
+          "roleFit": "rebounder"
+        },
+        {
+          "name": "Allen Graves",
+          "score": 82,
+          "consensusRank": 17,
+          "roleFit": "rebounder"
+        },
+        {
+          "name": "Chris Cenac Jr.",
+          "score": 79,
+          "consensusRank": 19,
+          "roleFit": "rim protector"
+        }
+      ]
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "acquiredFrom": "Portland",
+      "prospect": {
+        "id": "allen-graves",
+        "name": "Allen Graves",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "Santa Clara",
+        "consensusRank": 17,
+        "mockHeat": 63
+      },
+      "score": 89,
+      "margin": 5,
+      "roleFit": "stretch forward",
+      "breakdown": {
+        "consensus": 91,
+        "need": 100,
+        "player": 76,
+        "upside": 91,
+        "intel": 67
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Hannes Steinbach",
+          "score": 84,
+          "consensusRank": 13,
+          "roleFit": "rebounder"
+        },
+        {
+          "name": "Chris Cenac Jr.",
+          "score": 81,
+          "consensusRank": 19,
+          "roleFit": "rebounder"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 76,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "acquiredFrom": "Phoenix via Orlando",
+      "prospect": {
+        "id": "hannes-steinbach",
+        "name": "Hannes Steinbach",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "school": "Washington",
+        "consensusRank": 13,
+        "mockHeat": 72
+      },
+      "score": 86,
+      "margin": 4,
+      "roleFit": "size",
+      "breakdown": {
+        "consensus": 86,
+        "need": 96,
+        "player": 74,
+        "upside": 87,
+        "intel": 76
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Chris Cenac Jr.",
+          "score": 82,
+          "consensusRank": 19,
+          "roleFit": "rim protector"
+        },
+        {
+          "name": "Dailyn Swain",
+          "score": 75,
+          "consensusRank": 23,
+          "roleFit": "size"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 74,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 17,
+      "team": "Oklahoma City Thunder",
+      "acquiredFrom": "Philadelphia",
+      "prospect": {
+        "id": "chris-cenac-jr",
+        "name": "Chris Cenac Jr.",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "school": "Houston",
+        "consensusRank": 19,
+        "mockHeat": 58
+      },
+      "score": 79,
+      "margin": 3,
+      "roleFit": "upside",
+      "breakdown": {
+        "consensus": 91,
+        "need": 69,
+        "player": 74,
+        "upside": 99,
+        "intel": 62
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 76,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Labaron Philon Jr.",
+          "score": 74,
+          "consensusRank": 18,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Cameron Carr",
+          "score": 74,
+          "consensusRank": 21,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 18,
+      "team": "Charlotte Hornets",
+      "acquiredFrom": "Orlando via Phoenix",
+      "prospect": {
+        "id": "labaron-philon-jr",
+        "name": "Labaron Philon Jr.",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Alabama",
+        "consensusRank": 18,
+        "mockHeat": 61
+      },
+      "score": 89,
+      "margin": 1,
+      "roleFit": "playmaking",
+      "breakdown": {
+        "consensus": 100,
+        "need": 90,
+        "player": 79,
+        "upside": 92,
+        "intel": 65
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 89,
+          "consensusRank": 16,
+          "roleFit": "combo guard"
+        },
+        {
+          "name": "Bennett Stirtz",
+          "score": 88,
+          "consensusRank": 20,
+          "roleFit": "combo guard"
+        },
+        {
+          "name": "Cameron Carr",
+          "score": 81,
+          "consensusRank": 21,
+          "roleFit": "shooter"
+        }
+      ]
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "prospect": {
+        "id": "dailyn-swain",
+        "name": "Dailyn Swain",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "Texas",
+        "consensusRank": 23,
+        "mockHeat": 50
+      },
+      "score": 79,
+      "margin": 1,
+      "roleFit": "defense",
+      "breakdown": {
+        "consensus": 80,
+        "need": 100,
+        "player": 79,
+        "upside": 90,
+        "intel": 54
+      },
+      "riskPenalty": 5,
+      "alternatives": [
+        {
+          "name": "Bennett Stirtz",
+          "score": 79,
+          "consensusRank": 20,
+          "roleFit": "shooting"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 78,
+          "consensusRank": 22,
+          "roleFit": "defense"
+        },
+        {
+          "name": "Cameron Carr",
+          "score": 77,
+          "consensusRank": 21,
+          "roleFit": "shooting"
+        }
+      ]
+    },
+    {
+      "pick": 20,
+      "team": "San Antonio Spurs",
+      "acquiredFrom": "Atlanta",
+      "prospect": {
+        "id": "bennett-stirtz",
+        "name": "Bennett Stirtz",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Iowa",
+        "consensusRank": 20,
+        "mockHeat": 56
+      },
+      "score": 91,
+      "margin": 2,
+      "roleFit": "combo guard",
+      "breakdown": {
+        "consensus": 100,
+        "need": 100,
+        "player": 76,
+        "upside": 68,
+        "intel": 60
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Cameron Carr",
+          "score": 89,
+          "consensusRank": 21,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 85,
+          "consensusRank": 16,
+          "roleFit": "combo guard"
+        },
+        {
+          "name": "Ebuka Okorie",
+          "score": 83,
+          "consensusRank": 24,
+          "roleFit": "combo guard"
+        }
+      ]
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "acquiredFrom": "Minnesota",
+      "prospect": {
+        "id": "cameron-carr",
+        "name": "Cameron Carr",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Baylor",
+        "consensusRank": 21,
+        "mockHeat": 54
+      },
+      "score": 92,
+      "margin": 7,
+      "roleFit": "wing defender",
+      "breakdown": {
+        "consensus": 99,
+        "need": 100,
+        "player": 78,
+        "upside": 81,
+        "intel": 58
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Ebuka Okorie",
+          "score": 84,
+          "consensusRank": 24,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 84,
+          "consensusRank": 16,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Isaiah Evans",
+          "score": 82,
+          "consensusRank": 25,
+          "roleFit": "3-and-D"
+        }
+      ]
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "acquiredFrom": "Houston via Oklahoma City",
+      "prospect": {
+        "id": "isaiah-evans",
+        "name": "Isaiah Evans",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Duke",
+        "consensusRank": 25,
+        "mockHeat": 45
+      },
+      "score": 84,
+      "margin": 2,
+      "roleFit": "shooter",
+      "breakdown": {
+        "consensus": 83,
+        "need": 100,
+        "player": 77,
+        "upside": 83,
+        "intel": 49
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 82,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Ebuka Okorie",
+          "score": 81,
+          "consensusRank": 24,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Koa Peat",
+          "score": 74,
+          "consensusRank": 27,
+          "roleFit": "maturity"
+        }
+      ]
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "acquiredFrom": "Cleveland",
+      "prospect": {
+        "id": "ebuka-okorie",
+        "name": "Ebuka Okorie",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Stanford",
+        "consensusRank": 24,
+        "mockHeat": 47
+      },
+      "score": 82,
+      "margin": 3,
+      "roleFit": "pace",
+      "breakdown": {
+        "consensus": 93,
+        "need": 83,
+        "player": 75,
+        "upside": 89,
+        "intel": 51
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 79,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 73,
+          "consensusRank": 22,
+          "roleFit": "defense"
+        },
+        {
+          "name": "Henri Veesaar",
+          "score": 71,
+          "consensusRank": 26,
+          "roleFit": "defense"
+        }
+      ]
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "prospect": {
+        "id": "koa-peat",
+        "name": "Koa Peat",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "school": "Arizona",
+        "consensusRank": 27,
+        "mockHeat": 37
+      },
+      "score": 82,
+      "margin": 3,
+      "roleFit": "maturity",
+      "breakdown": {
+        "consensus": 81,
+        "need": 100,
+        "player": 74,
+        "upside": 84,
+        "intel": 41
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Henri Veesaar",
+          "score": 79,
+          "consensusRank": 26,
+          "roleFit": "frontcourt"
+        },
+        {
+          "name": "Sergio De Larrea",
+          "score": 77,
+          "consensusRank": 30,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 75,
+          "consensusRank": 16,
+          "roleFit": "shooter"
+        }
+      ]
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
+      "prospect": {
+        "id": "henri-veesaar",
+        "name": "Henri Veesaar",
+        "positions": [
+          "C"
+        ],
+        "school": "North Carolina",
+        "consensusRank": 26,
+        "mockHeat": 39
+      },
+      "score": 80,
+      "margin": 4,
+      "roleFit": "frontcourt",
+      "breakdown": {
+        "consensus": 91,
+        "need": 96,
+        "player": 72,
+        "upside": 70,
+        "intel": 43
+      },
+      "riskPenalty": 4,
+      "alternatives": [
+        {
+          "name": "Tarris Reed Jr.",
+          "score": 76,
+          "consensusRank": 29,
+          "roleFit": "frontcourt"
+        },
+        {
+          "name": "Sergio De Larrea",
+          "score": 69,
+          "consensusRank": 30,
+          "roleFit": "size"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 68,
+          "consensusRank": 22,
+          "roleFit": "frontcourt"
+        }
+      ]
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "prospect": {
+        "id": "tarris-reed-jr",
+        "name": "Tarris Reed Jr.",
+        "positions": [
+          "C"
+        ],
+        "school": "Connecticut",
+        "consensusRank": 29,
+        "mockHeat": 32
+      },
+      "score": 73,
+      "margin": 8,
+      "roleFit": "rebounder",
+      "breakdown": {
+        "consensus": 80,
+        "need": 81,
+        "player": 68,
+        "upside": 65,
+        "intel": 29
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Sergio De Larrea",
+          "score": 65,
+          "consensusRank": 30,
+          "roleFit": "primary guard"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 62,
+          "consensusRank": 22,
+          "roleFit": "rebounder"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 59,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "prospect": {
+        "id": "sergio-de-larrea",
+        "name": "Sergio De Larrea",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Vallodolid (Spain)",
+        "consensusRank": 30,
+        "mockHeat": 30
+      },
+      "score": 71,
+      "margin": 3,
+      "roleFit": "shooter",
+      "breakdown": {
+        "consensus": 79,
+        "need": 66,
+        "player": 78,
+        "upside": 83,
+        "intel": 34
+      },
+      "riskPenalty": 0,
+      "alternatives": [
+        {
+          "name": "Meleek Thomas",
+          "score": 68,
+          "consensusRank": 28,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Christian Anderson",
+          "score": 63,
+          "consensusRank": 16,
+          "roleFit": "shooter"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 52,
+          "consensusRank": 22,
+          "roleFit": "frontcourt size"
+        }
+      ]
+    },
+    {
+      "pick": 28,
+      "team": "Minnesota Timberwolves",
+      "acquiredFrom": "Detroit",
+      "prospect": {
+        "id": "meleek-thomas",
+        "name": "Meleek Thomas",
+        "positions": [
+          "SG",
+          "SF"
+        ],
+        "school": "Arkansas",
+        "consensusRank": 28,
+        "mockHeat": 35
+      },
+      "score": 77,
+      "margin": 5,
+      "roleFit": "combo guard",
+      "breakdown": {
+        "consensus": 94,
+        "need": 100,
+        "player": 75,
+        "upside": 87,
+        "intel": 32
+      },
+      "riskPenalty": 9,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 72,
+          "consensusRank": 16,
+          "roleFit": "combo guard"
+        },
+        {
+          "name": "Jayden Quaintance",
+          "score": 56,
+          "consensusRank": 22,
+          "roleFit": "defense"
+        }
+      ]
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "acquiredFrom": "San Antonio via Atlanta",
+      "prospect": {
+        "id": "jayden-quaintance",
+        "name": "Jayden Quaintance",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "school": "Kentucky",
+        "consensusRank": 22,
+        "mockHeat": 52
+      },
+      "score": 63,
+      "margin": 10,
+      "roleFit": "rim protector",
+      "breakdown": {
+        "consensus": 66,
+        "need": 100,
+        "player": 71,
+        "upside": 96,
+        "intel": 49
+      },
+      "riskPenalty": 14,
+      "alternatives": [
+        {
+          "name": "Christian Anderson",
+          "score": 53,
+          "consensusRank": 16,
+          "roleFit": "primary guard"
+        }
+      ]
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "acquiredFrom": "Oklahoma City via WAS and PHI",
+      "prospect": {
+        "id": "christian-anderson",
+        "name": "Christian Anderson",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Texas Tech",
+        "consensusRank": 16,
+        "mockHeat": 65
+      },
+      "score": 68,
+      "margin": 12,
+      "roleFit": "combo guard",
+      "breakdown": {
+        "consensus": 36,
+        "need": 98,
+        "player": 76,
+        "upside": 83,
+        "intel": 69
+      },
+      "riskPenalty": 0,
+      "alternatives": []
+    }
+  ]
+}

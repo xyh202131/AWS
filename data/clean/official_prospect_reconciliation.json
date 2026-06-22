@@ -1,0 +1,786 @@
+{
+  "schema_version": "draftops.official_prospect_reconciliation.v1",
+  "checked_at": "2026-06-22T04:04:42+08:00",
+  "official_sources": {
+    "prospects_url": "https://www.nba.com/draft/2026/prospects",
+    "draft_order_url": "https://www.nba.com/news/2026-nba-draft-order",
+    "local_prospects_capture": "data/raw/nba-official-2026-prospects-live.md",
+    "local_order_capture": "data/raw/nba-official-2026-draft-order-live.md"
+  },
+  "counts": {
+    "official_prospect_rows": 101,
+    "final_prospects_checked": 30,
+    "matched_final_prospects": 30,
+    "missing_from_official_prospects": 0,
+    "name_updates": 2,
+    "field_updates": 30,
+    "official_first_round_order_rows": 30,
+    "team_pick_errors": 0
+  },
+  "missing_from_official_prospects": [],
+  "name_updates": [
+    {
+      "before": "Christian Anderson Jr.",
+      "after": "Christian Anderson"
+    },
+    {
+      "before": "Sergio de Larrea",
+      "after": "Sergio De Larrea"
+    }
+  ],
+  "field_updates": [
+    {
+      "player_before": "Darryn Peterson",
+      "player_after": "Darryn Peterson",
+      "changes": {
+        "height": {
+          "before": "6'6\"",
+          "after": "6-5"
+        },
+        "weight": {
+          "before": "199",
+          "after": "199 lbs"
+        },
+        "age": {
+          "before": 19.4,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "AJ Dybantsa",
+      "player_after": "AJ Dybantsa",
+      "changes": {
+        "positions": {
+          "before": [
+            "SF"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'9\"",
+          "after": "6-9"
+        },
+        "weight": {
+          "before": "217",
+          "after": "217 lbs"
+        },
+        "age": {
+          "before": 19.4,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Cameron Boozer",
+      "player_after": "Cameron Boozer",
+      "changes": {
+        "height": {
+          "before": "6'9\"",
+          "after": "6-8"
+        },
+        "weight": {
+          "before": "253",
+          "after": "253 lbs"
+        },
+        "age": {
+          "before": 18.9,
+          "after": 18
+        }
+      }
+    },
+    {
+      "player_before": "Caleb Wilson",
+      "player_after": "Caleb Wilson",
+      "changes": {
+        "positions": {
+          "before": [
+            "PF",
+            "C"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'10\"",
+          "after": "6-9"
+        },
+        "weight": {
+          "before": "211",
+          "after": "211 lbs"
+        },
+        "age": {
+          "before": 19.9,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Keaton Wagler",
+      "player_after": "Keaton Wagler",
+      "changes": {
+        "height": {
+          "before": "6'6\"",
+          "after": "6-5"
+        },
+        "weight": {
+          "before": "188",
+          "after": "188 lbs"
+        },
+        "age": {
+          "before": 19.4,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Darius Acuff Jr.",
+      "player_after": "Darius Acuff Jr.",
+      "changes": {
+        "id": {
+          "before": "darius-acuff",
+          "after": "darius-acuff-jr"
+        },
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'3\"",
+          "after": "6-2"
+        },
+        "weight": {
+          "before": "186",
+          "after": "186 lbs"
+        },
+        "age": {
+          "before": 19.6,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Mikel Brown Jr.",
+      "player_after": "Mikel Brown Jr.",
+      "changes": {
+        "id": {
+          "before": "mikel-brown",
+          "after": "mikel-brown-jr"
+        },
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'5\"",
+          "after": "6-5"
+        },
+        "weight": {
+          "before": "190",
+          "after": "180 lbs"
+        },
+        "age": {
+          "before": 20.2,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Kingston Flemings",
+      "player_after": "Kingston Flemings",
+      "changes": {
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'4\"",
+          "after": "6-3"
+        },
+        "weight": {
+          "before": "183",
+          "after": "183 lbs"
+        },
+        "age": {
+          "before": 19.5,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Nate Ament",
+      "player_after": "Nate Ament",
+      "changes": {
+        "height": {
+          "before": "6'10\"",
+          "after": "6-10"
+        },
+        "weight": {
+          "before": "211",
+          "after": "211 lbs"
+        },
+        "age": {
+          "before": 19.5,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Aday Mara",
+      "player_after": "Aday Mara",
+      "changes": {
+        "height": {
+          "before": "7'3\"",
+          "after": "7-3"
+        },
+        "weight": {
+          "before": "260",
+          "after": "260 lbs"
+        },
+        "age": {
+          "before": 21.2,
+          "after": 21
+        }
+      }
+    },
+    {
+      "player_before": "Brayden Burries",
+      "player_after": "Brayden Burries",
+      "changes": {
+        "positions": {
+          "before": [
+            "SG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'4\"",
+          "after": "6-4"
+        },
+        "weight": {
+          "before": "215",
+          "after": "215 lbs"
+        },
+        "age": {
+          "before": 20.7,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Yaxel Lendeborg",
+      "player_after": "Yaxel Lendeborg",
+      "changes": {
+        "positions": {
+          "before": [
+            "PF",
+            "C"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'9\"",
+          "after": "6-9"
+        },
+        "weight": {
+          "before": "241",
+          "after": "241 lbs"
+        },
+        "age": {
+          "before": 23.7,
+          "after": 23
+        }
+      }
+    },
+    {
+      "player_before": "Hannes Steinbach",
+      "player_after": "Hannes Steinbach",
+      "changes": {
+        "height": {
+          "before": "6'11\"",
+          "after": "6-10"
+        },
+        "weight": {
+          "before": "248",
+          "after": "248 lbs"
+        },
+        "age": {
+          "before": 20.1,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Karim Lopez",
+      "player_after": "Karim Lopez",
+      "changes": {
+        "school": {
+          "before": "New Zealand Breakers",
+          "after": "New Zealand Breakers (Australia)"
+        },
+        "height": {
+          "before": "6'9.5\"",
+          "after": "6-8"
+        },
+        "weight": {
+          "before": "222",
+          "after": "222 lbs"
+        },
+        "age": {
+          "before": 19.2,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Morez Johnson Jr.",
+      "player_after": "Morez Johnson Jr.",
+      "changes": {
+        "id": {
+          "before": "morez-johnson",
+          "after": "morez-johnson-jr"
+        },
+        "height": {
+          "before": "6'9\"",
+          "after": "6-9"
+        },
+        "weight": {
+          "before": "251",
+          "after": "250 lbs"
+        },
+        "age": {
+          "before": 20.4,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Christian Anderson Jr.",
+      "player_after": "Christian Anderson",
+      "changes": {
+        "name": {
+          "before": "Christian Anderson Jr.",
+          "after": "Christian Anderson"
+        },
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'3\"",
+          "after": "6-1"
+        },
+        "weight": {
+          "before": "180",
+          "after": "180 lbs"
+        },
+        "age": {
+          "before": 20.2,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Allen Graves",
+      "player_after": "Allen Graves",
+      "changes": {
+        "positions": {
+          "before": [
+            "PF"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'9\"",
+          "after": "6-8"
+        },
+        "weight": {
+          "before": "226",
+          "after": "226 lbs"
+        },
+        "age": {
+          "before": 19.9,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Labaron Philon Jr.",
+      "player_after": "Labaron Philon Jr.",
+      "changes": {
+        "id": {
+          "before": "labaron-philon",
+          "after": "labaron-philon-jr"
+        },
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'4\"",
+          "after": "6-3"
+        },
+        "weight": {
+          "before": "176",
+          "after": "176 lbs"
+        },
+        "age": {
+          "before": 20.6,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Chris Cenac Jr.",
+      "player_after": "Chris Cenac Jr.",
+      "changes": {
+        "id": {
+          "before": "chris-cenac",
+          "after": "chris-cenac-jr"
+        },
+        "height": {
+          "before": "6'11\"",
+          "after": "6-11"
+        },
+        "weight": {
+          "before": "240",
+          "after": "240 lbs"
+        },
+        "age": {
+          "before": 19.4,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Bennett Stirtz",
+      "player_after": "Bennett Stirtz",
+      "changes": {
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'4\"",
+          "after": "6-3"
+        },
+        "weight": {
+          "before": "186",
+          "after": "186 lbs"
+        },
+        "age": {
+          "before": 22.7,
+          "after": 22
+        }
+      }
+    },
+    {
+      "player_before": "Cameron Carr",
+      "player_after": "Cameron Carr",
+      "changes": {
+        "positions": {
+          "before": [
+            "SG",
+            "SF"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'5\"",
+          "after": "6-5"
+        },
+        "weight": {
+          "before": "184",
+          "after": "184 lbs"
+        },
+        "age": {
+          "before": 21.6,
+          "after": 21
+        }
+      }
+    },
+    {
+      "player_before": "Jayden Quaintance",
+      "player_after": "Jayden Quaintance",
+      "changes": {
+        "positions": {
+          "before": [
+            "C"
+          ],
+          "after": [
+            "PF",
+            "C"
+          ]
+        },
+        "height": {
+          "before": "6'10\"",
+          "after": "6-9"
+        },
+        "weight": {
+          "before": "253",
+          "after": "253 lbs"
+        },
+        "age": {
+          "before": 18.9,
+          "after": 18
+        }
+      }
+    },
+    {
+      "player_before": "Dailyn Swain",
+      "player_after": "Dailyn Swain",
+      "changes": {
+        "positions": {
+          "before": [
+            "SG",
+            "SF"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'8\"",
+          "after": "6-7"
+        },
+        "weight": {
+          "before": "211",
+          "after": "211 lbs"
+        },
+        "age": {
+          "before": 20.9,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Ebuka Okorie",
+      "player_after": "Ebuka Okorie",
+      "changes": {
+        "positions": {
+          "before": [
+            "PG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'2\"",
+          "after": "6-1"
+        },
+        "weight": {
+          "before": "186",
+          "after": "186 lbs"
+        },
+        "age": {
+          "before": 19.2,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Isaiah Evans",
+      "player_after": "Isaiah Evans",
+      "changes": {
+        "positions": {
+          "before": [
+            "SG"
+          ],
+          "after": [
+            "PG",
+            "SG"
+          ]
+        },
+        "height": {
+          "before": "6'6\"",
+          "after": "6-6"
+        },
+        "weight": {
+          "before": "186",
+          "after": "186 lbs"
+        },
+        "age": {
+          "before": 20.5,
+          "after": 20
+        }
+      }
+    },
+    {
+      "player_before": "Henri Veesaar",
+      "player_after": "Henri Veesaar",
+      "changes": {
+        "height": {
+          "before": "7'0.5\"",
+          "after": "6-11"
+        },
+        "weight": {
+          "before": "227",
+          "after": "227 lbs"
+        },
+        "age": {
+          "before": 22.2,
+          "after": 22
+        }
+      }
+    },
+    {
+      "player_before": "Koa Peat",
+      "player_after": "Koa Peat",
+      "changes": {
+        "positions": {
+          "before": [
+            "PF",
+            "SF"
+          ],
+          "after": [
+            "SF",
+            "PF"
+          ]
+        },
+        "height": {
+          "before": "6'8.25\"",
+          "after": "6-7"
+        },
+        "weight": {
+          "before": "245",
+          "after": "245 lbs"
+        },
+        "age": {
+          "before": 19.4,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Meleek Thomas",
+      "player_after": "Meleek Thomas",
+      "changes": {
+        "positions": {
+          "before": [
+            "PG",
+            "SG"
+          ],
+          "after": [
+            "SG",
+            "SF"
+          ]
+        },
+        "height": {
+          "before": "6'4.25\"",
+          "after": "6-3"
+        },
+        "weight": {
+          "before": "190",
+          "after": "190 lbs"
+        },
+        "age": {
+          "before": 19.9,
+          "after": 19
+        }
+      }
+    },
+    {
+      "player_before": "Tarris Reed Jr.",
+      "player_after": "Tarris Reed Jr.",
+      "changes": {
+        "id": {
+          "before": "tarris-reed",
+          "after": "tarris-reed-jr"
+        },
+        "school": {
+          "before": "UConn",
+          "after": "Connecticut"
+        },
+        "height": {
+          "before": "TBD",
+          "after": "6-10"
+        },
+        "weight": {
+          "before": "TBD",
+          "after": "260 lbs"
+        },
+        "age": {
+          "before": 22.8,
+          "after": 22
+        }
+      }
+    },
+    {
+      "player_before": "Sergio de Larrea",
+      "player_after": "Sergio De Larrea",
+      "changes": {
+        "name": {
+          "before": "Sergio de Larrea",
+          "after": "Sergio De Larrea"
+        },
+        "school": {
+          "before": "Valencia, Spain",
+          "after": "Vallodolid (Spain)"
+        },
+        "height": {
+          "before": "6'7.25\"",
+          "after": "6-6"
+        },
+        "weight": {
+          "before": "204",
+          "after": "205 lbs"
+        },
+        "age": {
+          "before": 20.5,
+          "after": 20
+        }
+      }
+    }
+  ],
+  "team_pick_errors": []
+}

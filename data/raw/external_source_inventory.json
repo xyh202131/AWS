@@ -1,0 +1,263 @@
+[
+  {
+    "sourceId": "nba-official-draft-hub",
+    "sourceName": "NBA.com 2026 NBA Draft Hub",
+    "url": "https://www.nba.com/draft/2026",
+    "sourceType": "official_hub",
+    "credibility": "authoritative",
+    "usableFor": ["official draft hub", "team profile links", "prospect profile links", "official NBA draft coverage"],
+    "notes": "Official NBA draft landing page. Use as a top-level official entry point; extract linked detail pages separately if needed."
+  },
+  {
+    "sourceId": "nba-official-draft-order",
+    "sourceName": "NBA.com 2026 NBA Draft Order",
+    "url": "https://www.nba.com/news/2026-nba-draft-order",
+    "sourceType": "official_order",
+    "credibility": "authoritative",
+    "usableFor": ["draft order", "pick numbers", "round assignment"],
+    "notes": "Primary source for current 2026 pick order. This should override media mock pages and third-party order aggregators on order conflicts."
+  },
+  {
+    "sourceId": "nba-consensus-mock",
+    "sourceName": "NBA.com Consensus Mock Draft",
+    "url": "https://www.nba.com/news/2026-consensus-mock-draft",
+    "sourceType": "official_consensus_aggregator",
+    "credibility": "authoritative",
+    "usableFor": ["consensus mock", "cross-source agreement", "lottery-level confidence"],
+    "notes": "Official NBA.com aggregation of external mock drafts. Treat as authoritative for consensus calculation, not as a single team's or league's internal preference."
+  },
+  {
+    "sourceId": "the-athletic-via-nba-mock",
+    "sourceName": "The Athletic mock draft via NBA.com",
+    "url": "https://www.nba.com/news/the-athletic-latest-mock-draft",
+    "sourceType": "syndicated_major_media_mock",
+    "credibility": "high",
+    "usableFor": ["mock draft", "team fit notes", "external expert signal"],
+    "notes": "The content is branded as The Athletic/Sam Vecenie but hosted on NBA.com. Use as The Athletic signal, not as an official NBA projection."
+  },
+  {
+    "sourceId": "espn-big-board-top100",
+    "sourceName": "ESPN 2026 NBA draft big board top 100",
+    "url": "https://www.espn.com/nba/story/_/id/46886245/2026-nba-draft-big-board-rankings-top-100-prospects-players",
+    "sourceType": "major_media_big_board",
+    "credibility": "high",
+    "usableFor": ["prospect rankings", "player profiles", "strengths", "risks", "tiering"],
+    "notes": "High-value professional board. Use for prospect quality and profile fields, separate from pick-order mocks."
+  },
+  {
+    "sourceId": "espn-final-mock-60",
+    "sourceName": "ESPN 2026 NBA mock draft projecting 60 picks",
+    "url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+    "sourceType": "major_media_mock",
+    "credibility": "high",
+    "usableFor": ["mock draft", "round 1 and 2 pick projections", "team intel", "team needs context"],
+    "notes": "Appears in multiple raw searches. Use as one deduplicated ESPN source; it is more current than the post-combine ESPN mock in this raw set."
+  },
+  {
+    "sourceId": "espn-post-combine-mock-60",
+    "sourceName": "ESPN 2026 NBA mock draft post-combine",
+    "url": "https://www.espn.com/nba/story/_/id/48790115/2026-nba-mock-draft-projecting-60-picks-post-combine-peterson-dybantsa-boozer",
+    "sourceType": "major_media_mock",
+    "credibility": "high",
+    "usableFor": ["combine aftermath", "movement tracking", "older mock baseline"],
+    "notes": "Useful for how projections changed after the combine. If it conflicts with ESPN final mock, use the final mock as fresher."
+  },
+  {
+    "sourceId": "espn-draftcast-rounds",
+    "sourceName": "ESPN Draftcast 2026 picks by round",
+    "url": "https://www.espn.com/nba/draft/rounds",
+    "sourceType": "major_media_tracker",
+    "credibility": "high",
+    "usableFor": ["pick-by-round validation", "draft tracker cross-check"],
+    "notes": "Usable as a secondary pick-order/tracker source. NBA.com official order remains the primary authority."
+  },
+  {
+    "sourceId": "cbs-trotter-mock",
+    "sourceName": "CBS Sports Isaac Trotter 2026 mock draft",
+    "url": "https://www.cbssports.com/nba/news/2026-nba-mock-draft-isaac-trotter/",
+    "sourceType": "major_media_mock",
+    "credibility": "high",
+    "usableFor": ["mock draft", "first-round projections", "team fit notes"],
+    "notes": "Usable professional media source. Keep separate from other CBS mocks because author and assumptions can differ."
+  },
+  {
+    "sourceId": "cbs-norlander-mock",
+    "sourceName": "CBS Sports Matt Norlander 2026 mock draft",
+    "url": "https://www.cbssports.com/nba/news/2026-nba-mock-draft-cameron-boozer-goes-to-jazz-at-no-2-clippers-like-mikel-brown-for-fifth-pick/",
+    "sourceType": "major_media_mock",
+    "credibility": "high",
+    "usableFor": ["mock draft", "team fit notes", "alternative CBS signal"],
+    "notes": "Usable professional media source. Do not double-count as independent from CBS Trotter without author-level weighting."
+  },
+  {
+    "sourceId": "yahoo-mock-draft",
+    "sourceName": "Yahoo Sports NBA Mock Draft 2026",
+    "url": "https://sports.yahoo.com/nba/draft/",
+    "sourceType": "major_media_mock",
+    "credibility": "high",
+    "usableFor": ["mock draft", "pick projections", "consensus comparison"],
+    "notes": "Usable major-media mock source. Prefer the Yahoo page itself over Facebook reposts of Yahoo/Kevin O'Connor content."
+  },
+  {
+    "sourceId": "the-ringer-draft-guide-mock",
+    "sourceName": "The Ringer 2026 NBA Draft Guide Mock Draft",
+    "url": "https://theringer.com/nba-draft/2026/mock-draft",
+    "sourceType": "media_draft_guide",
+    "credibility": "high",
+    "usableFor": ["mock draft", "player evaluations", "team fit context"],
+    "notes": "Usable independent draft guide. Appears in mock-draft and team-needs searches; deduplicate by URL."
+  },
+  {
+    "sourceId": "bleacher-report-consensus-mock",
+    "sourceName": "Bleacher Report 2026 NBA mock draft consensus picks",
+    "url": "https://bleacherreport.com/articles/25441296-2026-nba-mock-draft-consensus-picks-every-1st-rounder",
+    "sourceType": "major_media_mock",
+    "credibility": "medium",
+    "usableFor": ["secondary mock signal", "consensus comparison", "tie-breaker context"],
+    "notes": "Usable but should be weighted below NBA.com consensus, ESPN, The Athletic, CBS, Yahoo, and The Ringer when conflicts appear."
+  },
+  {
+    "sourceId": "tankathon-full-draft-order",
+    "sourceName": "Tankathon Full 2026 NBA Draft Order",
+    "url": "https://www.tankathon.com/full-draft",
+    "sourceType": "draft_order_aggregator",
+    "credibility": "medium",
+    "usableFor": ["draft order sanity check", "pick-order cross-check"],
+    "notes": "Useful draft-order aggregator, but not official. Use NBA.com order as the source of truth on conflicts."
+  },
+  {
+    "sourceId": "realgm-future-pick-details",
+    "sourceName": "RealGM NBA Future Draft Pick Details",
+    "url": "https://basketball.realgm.com/nba/draft/future_drafts/detailed",
+    "sourceType": "transaction_reference",
+    "credibility": "high",
+    "usableFor": ["future pick obligations", "trade provenance", "pick ownership context"],
+    "notes": "Strong reference for traded-pick history and future obligations. Not a mock draft source; filter out unrelated RealGM sports links."
+  },
+  {
+    "sourceId": "nbc-sports-big-board",
+    "sourceName": "NBC Sports 2026 NBA Draft Big Board",
+    "url": "https://www.nbcsports.com/fantasy/basketball/news/nbc-sports-2026-nba-draft-big-board-aj-dybantsa-darryn-peterson-lead-the-way",
+    "sourceType": "secondary_media_big_board",
+    "credibility": "medium",
+    "usableFor": ["secondary big board", "prospect rank comparison", "tie-breaker context"],
+    "notes": "Usable as a supporting board. It is not part of the explicitly requested core outlet list, so weight it below ESPN and other core sources."
+  },
+  {
+    "sourceId": "wikipedia-2026-nba-draft",
+    "sourceName": "Wikipedia 2026 NBA draft",
+    "url": "https://en.wikipedia.org/wiki/2026_NBA_draft",
+    "sourceType": "encyclopedia",
+    "credibility": "low",
+    "usableFor": ["discovery only"],
+    "notes": "Do not use as final evidence for order, trades, or player data when official NBA.com, ESPN, RealGM, or other primary/professional sources exist."
+  },
+  {
+    "sourceId": "youtube-cbs-top10",
+    "sourceName": "CBS Sports YouTube top 10 mock draft video",
+    "url": "https://www.youtube.com/watch?v=0ExeDsHiBCc",
+    "sourceType": "official_media_video",
+    "credibility": "context_only",
+    "usableFor": ["fallback transcript context"],
+    "notes": "Official CBS Sports video, but less structured than article pages. Prefer CBS Sports web articles for ingestion."
+  },
+  {
+    "sourceId": "youtube-cbs-full-first-round",
+    "sourceName": "CBS Sports YouTube full first-round mock draft video",
+    "url": "https://www.youtube.com/watch?v=ZsEGDTXAWoc",
+    "sourceType": "official_media_video",
+    "credibility": "context_only",
+    "usableFor": ["fallback transcript context"],
+    "notes": "Official CBS Sports video. Do not treat as independent from CBS article signals unless the content is materially different and manually reviewed."
+  },
+  {
+    "sourceId": "youtube-cbs-college-bb-first-round",
+    "sourceName": "CBS Sports College Basketball YouTube first-round mock video",
+    "url": "https://www.youtube.com/watch?v=QRTHISEatqs",
+    "sourceType": "official_media_video",
+    "credibility": "context_only",
+    "usableFor": ["fallback transcript context"],
+    "notes": "Official CBS Sports College Basketball video. Prefer structured CBS Sports article pages."
+  },
+  {
+    "sourceId": "youtube-espn-chiney-mock-show",
+    "sourceName": "ESPN YouTube mock draft show",
+    "url": "https://www.youtube.com/watch?v=puFbPFHPRSc",
+    "sourceType": "official_media_video",
+    "credibility": "context_only",
+    "usableFor": ["fallback transcript context"],
+    "notes": "Official ESPN video result. Prefer ESPN article pages for structured projection and profile data."
+  },
+  {
+    "sourceId": "youtube-chat-sports-espn-react",
+    "sourceName": "Chat Sports YouTube ESPN mock draft reaction",
+    "url": "https://www.youtube.com/watch?v=B4z44m0ulXg",
+    "sourceType": "self_media_video",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Self-media/reactive video. Ignore for model input; use the original ESPN source instead."
+  },
+  {
+    "sourceId": "youtube-utility-sports-full-round",
+    "sourceName": "Utility Sports YouTube full first-round mock draft video",
+    "url": "https://www.youtube.com/watch?v=FBixMWfkpZE",
+    "sourceType": "self_media_video",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Self-media video. Ignore for source-backed draft data."
+  },
+  {
+    "sourceId": "youtube-utility-sports-trades",
+    "sourceName": "Utility Sports YouTube mock draft with trades video",
+    "url": "https://www.youtube.com/watch?v=nYfxfdVe0fo",
+    "sourceType": "self_media_video",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Self-media video with speculative trades. Ignore for source-backed draft data unless explicitly building a fan-scenario variant."
+  },
+  {
+    "sourceId": "reddit-nba-mock-discussion",
+    "sourceName": "Reddit r/nba mock draft discussion",
+    "url": "https://www.reddit.com/r/nba/comments/1m273e8/2026_nba_mock_draft_darryn_peterson_aj_dybantsa/",
+    "sourceType": "community_discussion",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Community commentary. Ignore for data ingestion."
+  },
+  {
+    "sourceId": "reddit-wizards-consensus-post",
+    "sourceName": "Reddit r/washingtonwizards NBA.com consensus repost",
+    "url": "https://www.reddit.com/r/washingtonwizards/comments/1tljx4o/nbacom_consensus_mock_draft_where_things_stand/",
+    "sourceType": "community_repost",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Community repost of NBA.com consensus. Ignore and use the NBA.com source directly."
+  },
+  {
+    "sourceId": "facebook-azcentral-repost",
+    "sourceName": "Facebook azcentral mock draft repost",
+    "url": "https://www.facebook.com/azcentral/posts/latest-nba-mock-draft-has-cameron-boozer-aj-dybantsa-and-darryn-peterson-going-i/1419874373508237/",
+    "sourceType": "social_repost",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Social repost. Ignore unless the underlying article is separately fetched and evaluated."
+  },
+  {
+    "sourceId": "facebook-yahoo-koc-repost",
+    "sourceName": "Facebook Yahoo/Kevin O'Connor mock draft repost",
+    "url": "https://www.facebook.com/100063714099712/posts/nba-mock-draft-the-2026-nba-draft-is-one-week-away-and-kevin-oconnor-has-his-lat/1595785622555226/",
+    "sourceType": "social_repost",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Social repost. Prefer the Yahoo Sports mock page or original article."
+  },
+  {
+    "sourceId": "instagram-top4-post",
+    "sourceName": "Instagram top 4 draft order post",
+    "url": "https://www.instagram.com/p/DYK3ZeqDfzL/?hl=en",
+    "sourceType": "social_post",
+    "credibility": "ignore",
+    "usableFor": [],
+    "notes": "Social post with partial draft-order information. Ignore and use official NBA.com order."
+  }
+]

@@ -1,0 +1,2956 @@
+{
+  "schema_version": "a5-web-team-context.v1",
+  "generated_at": "2026-06-21T19:38:26.934Z",
+  "normalization_scope": {
+    "agent": "A5-Web Team/Draft-Order Agent",
+    "network_access_used": false,
+    "raw_input_files": [
+      "data/raw/firecrawl-2026-draft-order-search.json",
+      "data/raw/firecrawl-2026-team-needs-search.json",
+      "data/raw/external_source_inventory.json"
+    ],
+    "note": "Generated only from provided Firecrawl raw files. No live web requests were made."
+  },
+  "sources": {
+    "records": [
+      {
+        "source_id": "nba-official-draft-order",
+        "source_name": "NBA.com 2026 NBA Draft Order",
+        "url": "https://www.nba.com/news/2026-nba-draft-order",
+        "source_type": "official_order",
+        "credibility": "authoritative",
+        "role": "primary_draft_order",
+        "notes": "Primary source for current 2026 pick order. This should override media mock pages and third-party order aggregators on order conflicts."
+      },
+      {
+        "source_id": "nba-official-draft-hub",
+        "source_name": "NBA.com 2026 NBA Draft Hub",
+        "url": "https://www.nba.com/draft/2026",
+        "source_type": "official_hub",
+        "credibility": "authoritative",
+        "role": "primary_team_profile_link_index",
+        "notes": "Official NBA draft landing page. Use as a top-level official entry point; extract linked detail pages separately if needed."
+      },
+      {
+        "source_id": "tankathon-full-draft-order",
+        "source_name": "Tankathon Full 2026 NBA Draft Order",
+        "url": "https://www.tankathon.com/full-draft",
+        "source_type": "draft_order_aggregator",
+        "credibility": "medium",
+        "role": "draft_order_cross_check",
+        "notes": "Useful draft-order aggregator, but not official. Use NBA.com order as the source of truth on conflicts."
+      },
+      {
+        "source_id": "realgm-future-pick-details",
+        "source_name": "RealGM NBA Future Draft Pick Details",
+        "url": "https://basketball.realgm.com/nba/draft/future_drafts/detailed",
+        "source_type": "transaction_reference",
+        "credibility": "high",
+        "role": "future_pick_asset_cross_check",
+        "notes": "Strong reference for traded-pick history and future obligations. Not a mock draft source; filter out unrelated RealGM sports links."
+      },
+      {
+        "source_id": "espn-final-mock-60",
+        "source_name": "ESPN 2026 NBA mock draft projecting 60 picks",
+        "url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+        "source_type": "major_media_mock",
+        "credibility": "high",
+        "role": "media_need_and_fit_signal",
+        "notes": "Appears in multiple raw searches. Use as one deduplicated ESPN source; it is more current than the post-combine ESPN mock in this raw set."
+      },
+      {
+        "source_id": "the-athletic-via-nba-mock",
+        "source_name": "The Athletic mock draft via NBA.com",
+        "url": "https://www.nba.com/news/the-athletic-latest-mock-draft",
+        "source_type": "syndicated_major_media_mock",
+        "credibility": "high",
+        "role": "media_need_and_fit_signal_hosted_on_nba_com",
+        "notes": "The content is branded as The Athletic/Sam Vecenie but hosted on NBA.com. Use as The Athletic signal, not as an official NBA projection."
+      }
+    ],
+    "raw_urls_present": [
+      "https://basketball.realgm.com/nba/draft/future_drafts/detailed",
+      "https://en.wikipedia.org/wiki/2026_NBA_draft",
+      "https://theringer.com/nba-draft/2026/mock-draft",
+      "https://www.cbssports.com/nba/news/2026-nba-mock-draft-cameron-boozer-goes-to-jazz-at-no-2-clippers-like-mikel-brown-for-fifth-pick/",
+      "https://www.espn.com/nba/draft/rounds",
+      "https://www.espn.com/nba/story/_/id/48790115/2026-nba-mock-draft-projecting-60-picks-post-combine-peterson-dybantsa-boozer",
+      "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "https://www.instagram.com/p/DYK3ZeqDfzL/?hl=en",
+      "https://www.nba.com/draft/2026",
+      "https://www.nba.com/news/2026-nba-draft-order",
+      "https://www.nba.com/news/the-athletic-latest-mock-draft",
+      "https://www.tankathon.com/full-draft",
+      "https://www.youtube.com/watch?v=0ExeDsHiBCc",
+      "https://www.youtube.com/watch?v=FBixMWfkpZE",
+      "https://www.youtube.com/watch?v=nYfxfdVe0fo"
+    ],
+    "official_source_ids": [
+      "nba-official-draft-order",
+      "nba-official-draft-hub"
+    ],
+    "cross_check_source_ids": [
+      "tankathon-full-draft-order",
+      "realgm-future-pick-details"
+    ],
+    "media_need_signal_source_ids": [
+      "espn-final-mock-60",
+      "the-athletic-via-nba-mock"
+    ]
+  },
+  "draft_order_context": {
+    "primary_source_id": "nba-official-draft-order",
+    "coverage": {
+      "parsed_pick_count": 60,
+      "lottery_pick_count": 14,
+      "first_round_pick_count": 30,
+      "second_round_pick_count": 30
+    },
+    "picks": [
+      {
+        "pick": 1,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "washington-wizards",
+        "team_name": "Washington Wizards",
+        "team_abbreviation": "WAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards",
+        "displayed_team_text": "Washington",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 2,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "utah-jazz",
+        "team_name": "Utah Jazz",
+        "team_abbreviation": "UTA",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-utah-jazz",
+        "displayed_team_text": "Utah",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 3,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "memphis-grizzlies",
+        "team_name": "Memphis Grizzlies",
+        "team_abbreviation": "MEM",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies",
+        "displayed_team_text": "Memphis",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 4,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "team_abbreviation": "CHI",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls",
+        "displayed_team_text": "Chicago",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 5,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "team_abbreviation": "LAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-la-clippers",
+        "displayed_team_text": "LA Clippers",
+        "acquired_from_text": "from Indiana",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 6,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "brooklyn-nets",
+        "team_name": "Brooklyn Nets",
+        "team_abbreviation": "BKN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets",
+        "displayed_team_text": "Brooklyn",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 7,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "sacramento-kings",
+        "team_name": "Sacramento Kings",
+        "team_abbreviation": "SAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings",
+        "displayed_team_text": "Sacramento",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 8,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "team_abbreviation": "ATL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks",
+        "displayed_team_text": "Atlanta",
+        "acquired_from_text": "from New Orleans",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 9,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "dallas-mavericks",
+        "team_name": "Dallas Mavericks",
+        "team_abbreviation": "DAL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks",
+        "displayed_team_text": "Dallas",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 10,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "milwaukee-bucks",
+        "team_name": "Milwaukee Bucks",
+        "team_abbreviation": "MIL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-milwaukee-bucks",
+        "displayed_team_text": "Milwaukee",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 11,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "golden-state-warriors",
+        "team_name": "Golden State Warriors",
+        "team_abbreviation": "GSW",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors",
+        "displayed_team_text": "Golden State",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 12,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "team_abbreviation": "OKC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder",
+        "displayed_team_text": "Oklahoma City",
+        "acquired_from_text": "from the LA Clippers",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 13,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "miami-heat",
+        "team_name": "Miami Heat",
+        "team_abbreviation": "MIA",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-miami-heat",
+        "displayed_team_text": "Miami",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 14,
+        "round": 1,
+        "is_lottery": true,
+        "team_key": "charlotte-hornets",
+        "team_name": "Charlotte Hornets",
+        "team_abbreviation": "CHA",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets",
+        "displayed_team_text": "Charlotte",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 15,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "team_abbreviation": "CHI",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls",
+        "displayed_team_text": "Chicago",
+        "acquired_from_text": "from Portland",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 16,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "memphis-grizzlies",
+        "team_name": "Memphis Grizzlies",
+        "team_abbreviation": "MEM",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies",
+        "displayed_team_text": "Memphis",
+        "acquired_from_text": "from Phoenix via Orlando",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 17,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "team_abbreviation": "OKC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder",
+        "displayed_team_text": "Oklahoma City",
+        "acquired_from_text": "from Philadelphia",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 18,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "charlotte-hornets",
+        "team_name": "Charlotte Hornets",
+        "team_abbreviation": "CHA",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets",
+        "displayed_team_text": "Charlotte",
+        "acquired_from_text": "from Orlando via Phoenix",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 19,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "toronto-raptors",
+        "team_name": "Toronto Raptors",
+        "team_abbreviation": "TOR",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors",
+        "displayed_team_text": "Toronto",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 20,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "team_abbreviation": "SAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs",
+        "displayed_team_text": "San Antonio",
+        "acquired_from_text": "from Atlanta",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 21,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "detroit-pistons",
+        "team_name": "Detroit Pistons",
+        "team_abbreviation": "DET",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-detroit-pistons",
+        "displayed_team_text": "Detroit",
+        "acquired_from_text": "from Minnesota",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 22,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "philadelphia-76ers",
+        "team_name": "Philadelphia 76ers",
+        "team_abbreviation": "PHI",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-philadelphia-76ers",
+        "displayed_team_text": "Philadelphia",
+        "acquired_from_text": "from Houston via Oklahoma City",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 23,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "team_abbreviation": "ATL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks",
+        "displayed_team_text": "Atlanta",
+        "acquired_from_text": "from Cleveland",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 24,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "new-york-knicks",
+        "team_name": "New York Knicks",
+        "team_abbreviation": "NYK",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks",
+        "displayed_team_text": "New York",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 25,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "los-angeles-lakers",
+        "team_name": "Los Angeles Lakers",
+        "team_abbreviation": "LAL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-los-angeles-lakers",
+        "displayed_team_text": "Los Angeles Lakers",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 26,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "denver-nuggets",
+        "team_name": "Denver Nuggets",
+        "team_abbreviation": "DEN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets",
+        "displayed_team_text": "Denver",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 27,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "boston-celtics",
+        "team_name": "Boston Celtics",
+        "team_abbreviation": "BOS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics",
+        "displayed_team_text": "Boston",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 28,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "minnesota-timberwolves",
+        "team_name": "Minnesota Timberwolves",
+        "team_abbreviation": "MIN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves",
+        "displayed_team_text": "Minnesota",
+        "acquired_from_text": "from Detroit",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 29,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "cleveland-cavaliers",
+        "team_name": "Cleveland Cavaliers",
+        "team_abbreviation": "CLE",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-cleveland-cavaliers",
+        "displayed_team_text": "Cleveland",
+        "acquired_from_text": "from San Antonio via Atlanta",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 30,
+        "round": 1,
+        "is_lottery": false,
+        "team_key": "dallas-mavericks",
+        "team_name": "Dallas Mavericks",
+        "team_abbreviation": "DAL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks",
+        "displayed_team_text": "Dallas",
+        "acquired_from_text": "from Oklahoma City via WAS and PHI",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 31,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "new-york-knicks",
+        "team_name": "New York Knicks",
+        "team_abbreviation": "NYK",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks",
+        "displayed_team_text": "New York",
+        "acquired_from_text": "from Washington via Oklahoma City and Houston",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 32,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "memphis-grizzlies",
+        "team_name": "Memphis Grizzlies",
+        "team_abbreviation": "MEM",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies",
+        "displayed_team_text": "Memphis",
+        "acquired_from_text": "from Indiana via Milwaukee",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 33,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "brooklyn-nets",
+        "team_name": "Brooklyn Nets",
+        "team_abbreviation": "BKN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets",
+        "displayed_team_text": "Brooklyn",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 34,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "sacramento-kings",
+        "team_name": "Sacramento Kings",
+        "team_abbreviation": "SAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings",
+        "displayed_team_text": "Sacramento",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 35,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "team_abbreviation": "SAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs",
+        "displayed_team_text": "San Antonio",
+        "acquired_from_text": "from Utah via Minnesota",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 36,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "team_abbreviation": "LAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-la-clippers",
+        "displayed_team_text": "LA Clippers",
+        "acquired_from_text": "from Memphis via Atlanta and Utah",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 37,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "team_abbreviation": "OKC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder",
+        "displayed_team_text": "Oklahoma City",
+        "acquired_from_text": "from Dallas",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 38,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "team_abbreviation": "CHI",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls",
+        "displayed_team_text": "Chicago",
+        "acquired_from_text": "from New Orleans via Boston, Detroit, and Portland",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 39,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "houston-rockets",
+        "team_name": "Houston Rockets",
+        "team_abbreviation": "HOU",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets",
+        "displayed_team_text": "Houston",
+        "acquired_from_text": "from Chicago via Washington",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 40,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "boston-celtics",
+        "team_name": "Boston Celtics",
+        "team_abbreviation": "BOS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics",
+        "displayed_team_text": "Boston",
+        "acquired_from_text": "from Milwaukee via Orlando",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 41,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "miami-heat",
+        "team_name": "Miami Heat",
+        "team_abbreviation": "MIA",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-miami-heat",
+        "displayed_team_text": "Miami",
+        "acquired_from_text": "from Golden State via CHA, NYK, OKC, and ATL",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 42,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "team_abbreviation": "SAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs",
+        "displayed_team_text": "San Antonio",
+        "acquired_from_text": "from Portland via New Orleans",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 43,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "brooklyn-nets",
+        "team_name": "Brooklyn Nets",
+        "team_abbreviation": "BKN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets",
+        "displayed_team_text": "Brooklyn",
+        "acquired_from_text": "from the LA Clippers via Houston",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 44,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "team_abbreviation": "SAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs",
+        "displayed_team_text": "San Antonio",
+        "acquired_from_text": "from Miami via Indiana",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 45,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "sacramento-kings",
+        "team_name": "Sacramento Kings",
+        "team_abbreviation": "SAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings",
+        "displayed_team_text": "Sacramento",
+        "acquired_from_text": "from Charlotte via SAS, ATL, and NYK",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 46,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "orlando-magic",
+        "team_name": "Orlando Magic",
+        "team_abbreviation": "ORL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-orlando-magic",
+        "displayed_team_text": "Orlando",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 47,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "phoenix-suns",
+        "team_name": "Phoenix Suns",
+        "team_abbreviation": "PHX",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-phoenix-suns",
+        "displayed_team_text": "Phoenix",
+        "acquired_from_text": "from Philadelphia via Houston and Oklahoma City",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 48,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "dallas-mavericks",
+        "team_name": "Dallas Mavericks",
+        "team_abbreviation": "DAL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks",
+        "displayed_team_text": "Dallas",
+        "acquired_from_text": "from Phoenix via Washington",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 49,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "denver-nuggets",
+        "team_name": "Denver Nuggets",
+        "team_abbreviation": "DEN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets",
+        "displayed_team_text": "Denver",
+        "acquired_from_text": "from Atlanta via Brooklyn and Golden State",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 50,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "toronto-raptors",
+        "team_name": "Toronto Raptors",
+        "team_abbreviation": "TOR",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors",
+        "displayed_team_text": "Toronto",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 51,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "washington-wizards",
+        "team_name": "Washington Wizards",
+        "team_abbreviation": "WAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards",
+        "displayed_team_text": "Washington",
+        "acquired_from_text": "from Minnesota via Detroit and New York",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 52,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "team_abbreviation": "LAC",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-la-clippers",
+        "displayed_team_text": "LA Clippers",
+        "acquired_from_text": "from Cleveland",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 53,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "houston-rockets",
+        "team_name": "Houston Rockets",
+        "team_abbreviation": "HOU",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets",
+        "displayed_team_text": "Houston",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 54,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "golden-state-warriors",
+        "team_name": "Golden State Warriors",
+        "team_abbreviation": "GSW",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors",
+        "displayed_team_text": "Golden State",
+        "acquired_from_text": "from the Los Angeles Lakers via TOR, MIA and CLE",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 55,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "new-york-knicks",
+        "team_name": "New York Knicks",
+        "team_abbreviation": "NYK",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks",
+        "displayed_team_text": "New York",
+        "acquired_from_text": null,
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": null
+      },
+      {
+        "pick": 56,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "team_abbreviation": "CHI",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls",
+        "displayed_team_text": "Chicago",
+        "acquired_from_text": "from Denver via MIN, PHX, CHA, and PHX",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 57,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "team_abbreviation": "ATL",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks",
+        "displayed_team_text": "Atlanta",
+        "acquired_from_text": "from Boston",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 58,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "new-orleans-pelicans",
+        "team_name": "New Orleans Pelicans",
+        "team_abbreviation": "NOP",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-orleans-pelicans",
+        "displayed_team_text": "New Orleans",
+        "acquired_from_text": "from Detroit via NYK, BKN, PHX, ORL, and LAC",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 59,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "minnesota-timberwolves",
+        "team_name": "Minnesota Timberwolves",
+        "team_abbreviation": "MIN",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves",
+        "displayed_team_text": "Minnesota",
+        "acquired_from_text": "from San Antonio via Indiana",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      },
+      {
+        "pick": 60,
+        "round": 2,
+        "is_lottery": false,
+        "team_key": "washington-wizards",
+        "team_name": "Washington Wizards",
+        "team_abbreviation": "WAS",
+        "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards",
+        "displayed_team_text": "Washington",
+        "acquired_from_text": "from Oklahoma City via San Antonio and Miami",
+        "source_ids": [
+          "nba-official-draft-order"
+        ],
+        "cross_check_source_ids": [
+          "tankathon-full-draft-order"
+        ],
+        "notes": "Official NBA.com order includes acquired/from text."
+      }
+    ]
+  },
+  "team_profile_links": [
+    {
+      "team_key": "atlanta-hawks",
+      "team_name": "Atlanta Hawks",
+      "team_abbreviation": "ATL",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        8,
+        23,
+        57
+      ]
+    },
+    {
+      "team_key": "boston-celtics",
+      "team_name": "Boston Celtics",
+      "team_abbreviation": "BOS",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        27,
+        40
+      ]
+    },
+    {
+      "team_key": "brooklyn-nets",
+      "team_name": "Brooklyn Nets",
+      "team_abbreviation": "BKN",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        6,
+        33,
+        43
+      ]
+    },
+    {
+      "team_key": "charlotte-hornets",
+      "team_name": "Charlotte Hornets",
+      "team_abbreviation": "CHA",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        14,
+        18
+      ]
+    },
+    {
+      "team_key": "chicago-bulls",
+      "team_name": "Chicago Bulls",
+      "team_abbreviation": "CHI",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        4,
+        15,
+        38,
+        56
+      ]
+    },
+    {
+      "team_key": "cleveland-cavaliers",
+      "team_name": "Cleveland Cavaliers",
+      "team_abbreviation": "CLE",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-cleveland-cavaliers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        29
+      ]
+    },
+    {
+      "team_key": "dallas-mavericks",
+      "team_name": "Dallas Mavericks",
+      "team_abbreviation": "DAL",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        9,
+        30,
+        48
+      ]
+    },
+    {
+      "team_key": "denver-nuggets",
+      "team_name": "Denver Nuggets",
+      "team_abbreviation": "DEN",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        26,
+        49
+      ]
+    },
+    {
+      "team_key": "detroit-pistons",
+      "team_name": "Detroit Pistons",
+      "team_abbreviation": "DET",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-detroit-pistons",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        21
+      ]
+    },
+    {
+      "team_key": "golden-state-warriors",
+      "team_name": "Golden State Warriors",
+      "team_abbreviation": "GSW",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        11,
+        54
+      ]
+    },
+    {
+      "team_key": "houston-rockets",
+      "team_name": "Houston Rockets",
+      "team_abbreviation": "HOU",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        39,
+        53
+      ]
+    },
+    {
+      "team_key": "indiana-pacers",
+      "team_name": "Indiana Pacers",
+      "team_abbreviation": "IND",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-indiana-pacers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": []
+    },
+    {
+      "team_key": "la-clippers",
+      "team_name": "LA Clippers",
+      "team_abbreviation": "LAC",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-la-clippers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        5,
+        36,
+        52
+      ]
+    },
+    {
+      "team_key": "los-angeles-lakers",
+      "team_name": "Los Angeles Lakers",
+      "team_abbreviation": "LAL",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-los-angeles-lakers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        25
+      ]
+    },
+    {
+      "team_key": "memphis-grizzlies",
+      "team_name": "Memphis Grizzlies",
+      "team_abbreviation": "MEM",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        3,
+        16,
+        32
+      ]
+    },
+    {
+      "team_key": "miami-heat",
+      "team_name": "Miami Heat",
+      "team_abbreviation": "MIA",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-miami-heat",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        13,
+        41
+      ]
+    },
+    {
+      "team_key": "milwaukee-bucks",
+      "team_name": "Milwaukee Bucks",
+      "team_abbreviation": "MIL",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-milwaukee-bucks",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        10
+      ]
+    },
+    {
+      "team_key": "minnesota-timberwolves",
+      "team_name": "Minnesota Timberwolves",
+      "team_abbreviation": "MIN",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        28,
+        59
+      ]
+    },
+    {
+      "team_key": "new-orleans-pelicans",
+      "team_name": "New Orleans Pelicans",
+      "team_abbreviation": "NOP",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-orleans-pelicans",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        58
+      ]
+    },
+    {
+      "team_key": "new-york-knicks",
+      "team_name": "New York Knicks",
+      "team_abbreviation": "NYK",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        24,
+        31,
+        55
+      ]
+    },
+    {
+      "team_key": "oklahoma-city-thunder",
+      "team_name": "Oklahoma City Thunder",
+      "team_abbreviation": "OKC",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        12,
+        17,
+        37
+      ]
+    },
+    {
+      "team_key": "orlando-magic",
+      "team_name": "Orlando Magic",
+      "team_abbreviation": "ORL",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-orlando-magic",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        46
+      ]
+    },
+    {
+      "team_key": "philadelphia-76ers",
+      "team_name": "Philadelphia 76ers",
+      "team_abbreviation": "PHI",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-philadelphia-76ers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        22
+      ]
+    },
+    {
+      "team_key": "phoenix-suns",
+      "team_name": "Phoenix Suns",
+      "team_abbreviation": "PHX",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-phoenix-suns",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        47
+      ]
+    },
+    {
+      "team_key": "portland-trail-blazers",
+      "team_name": "Portland Trail Blazers",
+      "team_abbreviation": "POR",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-portland-trail-blazers",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": []
+    },
+    {
+      "team_key": "sacramento-kings",
+      "team_name": "Sacramento Kings",
+      "team_abbreviation": "SAC",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        7,
+        34,
+        45
+      ]
+    },
+    {
+      "team_key": "san-antonio-spurs",
+      "team_name": "San Antonio Spurs",
+      "team_abbreviation": "SAS",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        20,
+        35,
+        42,
+        44
+      ]
+    },
+    {
+      "team_key": "toronto-raptors",
+      "team_name": "Toronto Raptors",
+      "team_abbreviation": "TOR",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        19,
+        50
+      ]
+    },
+    {
+      "team_key": "utah-jazz",
+      "team_name": "Utah Jazz",
+      "team_abbreviation": "UTA",
+      "conference": "West",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-utah-jazz",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        2
+      ]
+    },
+    {
+      "team_key": "washington-wizards",
+      "team_name": "Washington Wizards",
+      "team_abbreviation": "WAS",
+      "conference": "East",
+      "nba_team_profile_url": "https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards",
+      "raw_source_id": "nba-official-draft-hub",
+      "raw_source_file": "data/raw/firecrawl-2026-draft-order-search.json",
+      "scrape_status": "link_only_from_official_hub_raw",
+      "body_status": "team_profile_page_body_not_present_in_provided_raw_files",
+      "draft_pick_numbers_2026": [
+        1,
+        51,
+        60
+      ]
+    }
+  ],
+  "team_need_signals": [
+    {
+      "team_key": "atlanta-hawks",
+      "team_name": "Atlanta Hawks",
+      "team_abbreviation": "ATL",
+      "draft_pick_numbers_2026": [
+        8,
+        23,
+        57
+      ],
+      "tags": [
+        "guard",
+        "big",
+        "shooting"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "mixed_signal_needs_review",
+      "evidence_notes": [
+        "Athletic p8: lead guard need but centers heard more, trade-down explored; ESPN p8/p23: center need and wing-shooter/flexibility clues."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p8 guard vs center"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p8/p23 center/wing shooting"
+        }
+      ]
+    },
+    {
+      "team_key": "boston-celtics",
+      "team_name": "Boston Celtics",
+      "team_abbreviation": "BOS",
+      "draft_pick_numbers_2026": [
+        27,
+        40
+      ],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "ESPN p27 frames Boston as a luxury pick with roster depth; no clear priority need in provided raw."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p27 luxury pick"
+        }
+      ]
+    },
+    {
+      "team_key": "brooklyn-nets",
+      "team_name": "Brooklyn Nets",
+      "team_abbreviation": "BKN",
+      "draft_pick_numbers_2026": [
+        6,
+        33,
+        43
+      ],
+      "tags": [
+        "guard",
+        "wing",
+        "size",
+        "creation"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "mixed_signal_needs_review",
+      "evidence_notes": [
+        "ESPN p6: no obvious fit, positional size preference, shot creator option; Athletic p6: contradictory guard/big/trade-down intel."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p6 mixed fit"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p6 contradictory intel"
+        }
+      ]
+    },
+    {
+      "team_key": "charlotte-hornets",
+      "team_name": "Charlotte Hornets",
+      "team_abbreviation": "CHA",
+      "draft_pick_numbers_2026": [
+        14,
+        18
+      ],
+      "tags": [
+        "forward",
+        "big",
+        "size",
+        "defense"
+      ],
+      "confidence": "medium",
+      "needs_review": true,
+      "status": "explicit_need_with_trade_uncertainty",
+      "evidence_notes": [
+        "ESPN p14/p18: needs help at four and five, frontcourt upgrades, picks could move; Athletic p14: toughness and physicality."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p14/p18 frontcourt/trade"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p14 toughness"
+        }
+      ]
+    },
+    {
+      "team_key": "chicago-bulls",
+      "team_name": "Chicago Bulls",
+      "team_abbreviation": "CHI",
+      "draft_pick_numbers_2026": [
+        4,
+        15,
+        38,
+        56
+      ],
+      "tags": [
+        "forward",
+        "big",
+        "size",
+        "defense"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p4: direct frontcourt need; Athletic p4/p15: four fit plus size, length, athleticism, defense."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p4 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p4 and p15 size/defense"
+        }
+      ]
+    },
+    {
+      "team_key": "cleveland-cavaliers",
+      "team_name": "Cleveland Cavaliers",
+      "team_abbreviation": "CLE",
+      "draft_pick_numbers_2026": [
+        29
+      ],
+      "tags": [
+        "big",
+        "forward",
+        "creation",
+        "shooting"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "mixed_signal_needs_review",
+      "evidence_notes": [
+        "ESPN p29: frontcourt depth; Athletic p29: bench offense/shooting if guard salary is cut."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p29 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p29 bench offense"
+        }
+      ]
+    },
+    {
+      "team_key": "dallas-mavericks",
+      "team_name": "Dallas Mavericks",
+      "team_abbreviation": "DAL",
+      "draft_pick_numbers_2026": [
+        9,
+        30,
+        48
+      ],
+      "tags": [
+        "guard",
+        "wing",
+        "shooting",
+        "creation"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "mixed_signal_needs_review",
+      "evidence_notes": [
+        "Athletic p9: many positions and trade explored; Athletic p30: floor spacing around Cooper Flagg; ESPN p30: long-term point guard."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p9/p30 trade and shooting"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p30 point guard"
+        }
+      ]
+    },
+    {
+      "team_key": "denver-nuggets",
+      "team_name": "Denver Nuggets",
+      "team_abbreviation": "DEN",
+      "draft_pick_numbers_2026": [
+        26,
+        49
+      ],
+      "tags": [
+        "guard",
+        "creation",
+        "forward",
+        "size",
+        "defense"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "mixed_signal_needs_review",
+      "evidence_notes": [
+        "Athletic p26: second ballhandler behind Jamal Murray; ESPN p26: more athletic along frontline."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p26 second ballhandler"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p26 athletic frontline"
+        }
+      ]
+    },
+    {
+      "team_key": "detroit-pistons",
+      "team_name": "Detroit Pistons",
+      "team_abbreviation": "DET",
+      "draft_pick_numbers_2026": [
+        21
+      ],
+      "tags": [
+        "guard",
+        "wing",
+        "shooting",
+        "creation"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p21: offense-minded target and glaring shooting need; Athletic p21: lead guards or wings/forwards who shoot/create."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p21 shooting"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p21 guard/wing creation"
+        }
+      ]
+    },
+    {
+      "team_key": "golden-state-warriors",
+      "team_name": "Golden State Warriors",
+      "team_abbreviation": "GSW",
+      "draft_pick_numbers_2026": [
+        11,
+        54
+      ],
+      "tags": [
+        "big",
+        "size",
+        "shooting"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "fit_signal_needs_review",
+      "evidence_notes": [
+        "Athletic p11: 6-9 big fits via passing, cutting, corner spacing; ESPN p11 range: frontcourt size context."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p11 big fit"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p11 size context"
+        }
+      ]
+    },
+    {
+      "team_key": "houston-rockets",
+      "team_name": "Houston Rockets",
+      "team_abbreviation": "HOU",
+      "draft_pick_numbers_2026": [
+        39,
+        53
+      ],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear Houston need statement in provided raw; appears as second-round pick holder at pick 39."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "indiana-pacers",
+      "team_name": "Indiana Pacers",
+      "team_abbreviation": "IND",
+      "draft_pick_numbers_2026": [],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear Indiana need statement; mainly referenced as outgoing pick source."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "la-clippers",
+      "team_name": "LA Clippers",
+      "team_abbreviation": "LAC",
+      "draft_pick_numbers_2026": [
+        5,
+        36,
+        52
+      ],
+      "tags": [
+        "guard",
+        "creation",
+        "shooting"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_fit_and_asset_signal_supported",
+      "evidence_notes": [
+        "Athletic p5: top guard prospects and trade-down scenarios; ESPN p5: complement smaller guard with size/shooting/feel."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p5 guards/trade-down"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p5 guard complement"
+        }
+      ]
+    },
+    {
+      "team_key": "los-angeles-lakers",
+      "team_name": "Los Angeles Lakers",
+      "team_abbreviation": "LAL",
+      "draft_pick_numbers_2026": [
+        25
+      ],
+      "tags": [
+        "big",
+        "size"
+      ],
+      "confidence": "low_medium",
+      "needs_review": false,
+      "status": "explicit_need_supported_from_single_source",
+      "evidence_notes": [
+        "ESPN p25: lob option up front; Athletic p25 is prospect-fit oriented but not a strong separate need."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p25 lob option"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p25 developmental big"
+        }
+      ]
+    },
+    {
+      "team_key": "memphis-grizzlies",
+      "team_name": "Memphis Grizzlies",
+      "team_abbreviation": "MEM",
+      "draft_pick_numbers_2026": [
+        3,
+        16,
+        32
+      ],
+      "tags": [
+        "forward",
+        "big",
+        "guard",
+        "creation"
+      ],
+      "confidence": "low_medium",
+      "needs_review": true,
+      "status": "multiple_pick_mixed_signal",
+      "evidence_notes": [
+        "Athletic p3: skilled forward/big fits team values; ESPN p16: younger point guard makes sense if Morant future is uncertain."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p3 forward/big values"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p16 point guard"
+        }
+      ]
+    },
+    {
+      "team_key": "miami-heat",
+      "team_name": "Miami Heat",
+      "team_abbreviation": "MIA",
+      "draft_pick_numbers_2026": [
+        13,
+        41
+      ],
+      "tags": [
+        "big",
+        "forward",
+        "size"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "Athletic p13: little frontcourt depth beyond Adebayo and Ware; pick may also be in star-trade scenario."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p13 frontcourt/trade"
+        }
+      ]
+    },
+    {
+      "team_key": "milwaukee-bucks",
+      "team_name": "Milwaukee Bucks",
+      "team_abbreviation": "MIL",
+      "draft_pick_numbers_2026": [
+        10
+      ],
+      "tags": [
+        "guard",
+        "creation"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p10: obvious backcourt talent need; Athletic p10: lead guard due diligence and Giannis-contingent upside."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p10 backcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p10 lead guards"
+        }
+      ]
+    },
+    {
+      "team_key": "minnesota-timberwolves",
+      "team_name": "Minnesota Timberwolves",
+      "team_abbreviation": "MIN",
+      "draft_pick_numbers_2026": [
+        28,
+        59
+      ],
+      "tags": [
+        "guard",
+        "creation"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p28: another ball handler and long-term backcourt depth; Athletic p28: point guard options."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p28 ballhandler"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p28 point guard"
+        }
+      ]
+    },
+    {
+      "team_key": "new-orleans-pelicans",
+      "team_name": "New Orleans Pelicans",
+      "team_abbreviation": "NOP",
+      "draft_pick_numbers_2026": [
+        58
+      ],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear New Orleans need statement; holds pick 58 in parsed order."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "new-york-knicks",
+      "team_name": "New York Knicks",
+      "team_abbreviation": "NYK",
+      "draft_pick_numbers_2026": [
+        24,
+        31,
+        55
+      ],
+      "tags": [
+        "big",
+        "size",
+        "defense"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "Athletic p24: backup center with toughness; ESPN p24: center depth via size/shooting."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p24 backup center"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p24 center depth"
+        }
+      ]
+    },
+    {
+      "team_key": "oklahoma-city-thunder",
+      "team_name": "Oklahoma City Thunder",
+      "team_abbreviation": "OKC",
+      "draft_pick_numbers_2026": [
+        12,
+        17,
+        37
+      ],
+      "tags": [
+        "big",
+        "wing",
+        "size"
+      ],
+      "confidence": "low",
+      "needs_review": true,
+      "status": "asset_and_fit_signal_needs_review",
+      "evidence_notes": [
+        "ESPN p12: trade options and movable future assets; Athletic p17: Wembanyama matchup problem and future capital path."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p12 trade assets"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p17 big/future capital"
+        }
+      ]
+    },
+    {
+      "team_key": "orlando-magic",
+      "team_name": "Orlando Magic",
+      "team_abbreviation": "ORL",
+      "draft_pick_numbers_2026": [
+        46
+      ],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear Orlando need statement; mainly referenced in acquired/from chains."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "philadelphia-76ers",
+      "team_name": "Philadelphia 76ers",
+      "team_abbreviation": "PHI",
+      "draft_pick_numbers_2026": [
+        22
+      ],
+      "tags": [
+        "forward",
+        "size",
+        "defense"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "Athletic p22: powerful four with athleticism/strength/defense; ESPN p22: downhill and defensive upside."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p22 powerful four"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p22 defense"
+        }
+      ]
+    },
+    {
+      "team_key": "phoenix-suns",
+      "team_name": "Phoenix Suns",
+      "team_abbreviation": "PHX",
+      "draft_pick_numbers_2026": [
+        47
+      ],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear Phoenix need statement; mainly referenced in acquired/from chains."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "portland-trail-blazers",
+      "team_name": "Portland Trail Blazers",
+      "team_abbreviation": "POR",
+      "draft_pick_numbers_2026": [],
+      "tags": [
+        "unknown"
+      ],
+      "confidence": "unknown",
+      "needs_review": true,
+      "status": "no_clear_need_source",
+      "evidence_notes": [
+        "No clear Portland need statement; mainly referenced in acquired/from chains."
+      ],
+      "source_clues": [
+        {
+          "source_id": "nba-official-draft-order",
+          "clue": "pick ownership only"
+        }
+      ]
+    },
+    {
+      "team_key": "sacramento-kings",
+      "team_name": "Sacramento Kings",
+      "team_abbreviation": "SAC",
+      "draft_pick_numbers_2026": [
+        7,
+        34,
+        45
+      ],
+      "tags": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "Athletic p7: needs point guard to replace DeAaron Fox; ESPN p7: guard upside/shooting with limited extra assets."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p7 point guard"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p7 guard upside"
+        }
+      ]
+    },
+    {
+      "team_key": "san-antonio-spurs",
+      "team_name": "San Antonio Spurs",
+      "team_abbreviation": "SAS",
+      "draft_pick_numbers_2026": [
+        20,
+        35,
+        42,
+        44
+      ],
+      "tags": [
+        "big",
+        "size",
+        "shooting"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p20: bigger frontcourt fit beside Wembanyama; Athletic p20: best shooter and lineup versatility."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p20 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p20 shooting"
+        }
+      ]
+    },
+    {
+      "team_key": "toronto-raptors",
+      "team_name": "Toronto Raptors",
+      "team_abbreviation": "TOR",
+      "draft_pick_numbers_2026": [
+        19,
+        50
+      ],
+      "tags": [
+        "big",
+        "creation",
+        "shooting"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "ESPN p19: long-term center, creation, and 3-point shooting; Athletic p19: veteran big market and another creator."
+      ],
+      "source_clues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p19 center/creation/shooting"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p19 big/creator"
+        }
+      ]
+    },
+    {
+      "team_key": "utah-jazz",
+      "team_name": "Utah Jazz",
+      "team_abbreviation": "UTA",
+      "draft_pick_numbers_2026": [
+        2
+      ],
+      "tags": [
+        "guard",
+        "creation",
+        "shooting"
+      ],
+      "confidence": "medium",
+      "needs_review": false,
+      "status": "explicit_need_supported",
+      "evidence_notes": [
+        "Athletic p2: playmaking guard and dribble/pass/shoot need; ESPN p2: offense boost, loaded frontcourt fit issue."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p2 playmaking guard"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p2 offense/frontcourt fit"
+        }
+      ]
+    },
+    {
+      "team_key": "washington-wizards",
+      "team_name": "Washington Wizards",
+      "team_abbreviation": "WAS",
+      "draft_pick_numbers_2026": [
+        1,
+        51,
+        60
+      ],
+      "tags": [
+        "wing",
+        "size",
+        "creation"
+      ],
+      "confidence": "low_medium",
+      "needs_review": false,
+      "status": "fit_signal_supported",
+      "evidence_notes": [
+        "Athletic p1: wing/rim-pressure fit; ESPN p1: taller scoring wing profile."
+      ],
+      "source_clues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p1 wing fit"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p1 scoring wing"
+        }
+      ]
+    }
+  ],
+  "pick_asset_notes": {
+    "official_order_trade_notes": [
+      {
+        "pick": 5,
+        "round": 1,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "acquired_from_text": "from Indiana",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 8,
+        "round": 1,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "acquired_from_text": "from New Orleans",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 12,
+        "round": 1,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "acquired_from_text": "from the LA Clippers",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 15,
+        "round": 1,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "acquired_from_text": "from Portland",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 16,
+        "round": 1,
+        "team_key": "memphis-grizzlies",
+        "team_name": "Memphis Grizzlies",
+        "acquired_from_text": "from Phoenix via Orlando",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 17,
+        "round": 1,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "acquired_from_text": "from Philadelphia",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 18,
+        "round": 1,
+        "team_key": "charlotte-hornets",
+        "team_name": "Charlotte Hornets",
+        "acquired_from_text": "from Orlando via Phoenix",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 20,
+        "round": 1,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "acquired_from_text": "from Atlanta",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 21,
+        "round": 1,
+        "team_key": "detroit-pistons",
+        "team_name": "Detroit Pistons",
+        "acquired_from_text": "from Minnesota",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 22,
+        "round": 1,
+        "team_key": "philadelphia-76ers",
+        "team_name": "Philadelphia 76ers",
+        "acquired_from_text": "from Houston via Oklahoma City",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 23,
+        "round": 1,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "acquired_from_text": "from Cleveland",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 28,
+        "round": 1,
+        "team_key": "minnesota-timberwolves",
+        "team_name": "Minnesota Timberwolves",
+        "acquired_from_text": "from Detroit",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 29,
+        "round": 1,
+        "team_key": "cleveland-cavaliers",
+        "team_name": "Cleveland Cavaliers",
+        "acquired_from_text": "from San Antonio via Atlanta",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 30,
+        "round": 1,
+        "team_key": "dallas-mavericks",
+        "team_name": "Dallas Mavericks",
+        "acquired_from_text": "from Oklahoma City via WAS and PHI",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 31,
+        "round": 2,
+        "team_key": "new-york-knicks",
+        "team_name": "New York Knicks",
+        "acquired_from_text": "from Washington via Oklahoma City and Houston",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 32,
+        "round": 2,
+        "team_key": "memphis-grizzlies",
+        "team_name": "Memphis Grizzlies",
+        "acquired_from_text": "from Indiana via Milwaukee",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 35,
+        "round": 2,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "acquired_from_text": "from Utah via Minnesota",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 36,
+        "round": 2,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "acquired_from_text": "from Memphis via Atlanta and Utah",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 37,
+        "round": 2,
+        "team_key": "oklahoma-city-thunder",
+        "team_name": "Oklahoma City Thunder",
+        "acquired_from_text": "from Dallas",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 38,
+        "round": 2,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "acquired_from_text": "from New Orleans via Boston, Detroit, and Portland",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 39,
+        "round": 2,
+        "team_key": "houston-rockets",
+        "team_name": "Houston Rockets",
+        "acquired_from_text": "from Chicago via Washington",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 40,
+        "round": 2,
+        "team_key": "boston-celtics",
+        "team_name": "Boston Celtics",
+        "acquired_from_text": "from Milwaukee via Orlando",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 41,
+        "round": 2,
+        "team_key": "miami-heat",
+        "team_name": "Miami Heat",
+        "acquired_from_text": "from Golden State via CHA, NYK, OKC, and ATL",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 42,
+        "round": 2,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "acquired_from_text": "from Portland via New Orleans",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 43,
+        "round": 2,
+        "team_key": "brooklyn-nets",
+        "team_name": "Brooklyn Nets",
+        "acquired_from_text": "from the LA Clippers via Houston",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 44,
+        "round": 2,
+        "team_key": "san-antonio-spurs",
+        "team_name": "San Antonio Spurs",
+        "acquired_from_text": "from Miami via Indiana",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 45,
+        "round": 2,
+        "team_key": "sacramento-kings",
+        "team_name": "Sacramento Kings",
+        "acquired_from_text": "from Charlotte via SAS, ATL, and NYK",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 47,
+        "round": 2,
+        "team_key": "phoenix-suns",
+        "team_name": "Phoenix Suns",
+        "acquired_from_text": "from Philadelphia via Houston and Oklahoma City",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 48,
+        "round": 2,
+        "team_key": "dallas-mavericks",
+        "team_name": "Dallas Mavericks",
+        "acquired_from_text": "from Phoenix via Washington",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 49,
+        "round": 2,
+        "team_key": "denver-nuggets",
+        "team_name": "Denver Nuggets",
+        "acquired_from_text": "from Atlanta via Brooklyn and Golden State",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 51,
+        "round": 2,
+        "team_key": "washington-wizards",
+        "team_name": "Washington Wizards",
+        "acquired_from_text": "from Minnesota via Detroit and New York",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 52,
+        "round": 2,
+        "team_key": "la-clippers",
+        "team_name": "LA Clippers",
+        "acquired_from_text": "from Cleveland",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 54,
+        "round": 2,
+        "team_key": "golden-state-warriors",
+        "team_name": "Golden State Warriors",
+        "acquired_from_text": "from the Los Angeles Lakers via TOR, MIA and CLE",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 56,
+        "round": 2,
+        "team_key": "chicago-bulls",
+        "team_name": "Chicago Bulls",
+        "acquired_from_text": "from Denver via MIN, PHX, CHA, and PHX",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 57,
+        "round": 2,
+        "team_key": "atlanta-hawks",
+        "team_name": "Atlanta Hawks",
+        "acquired_from_text": "from Boston",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 58,
+        "round": 2,
+        "team_key": "new-orleans-pelicans",
+        "team_name": "New Orleans Pelicans",
+        "acquired_from_text": "from Detroit via NYK, BKN, PHX, ORL, and LAC",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 59,
+        "round": 2,
+        "team_key": "minnesota-timberwolves",
+        "team_name": "Minnesota Timberwolves",
+        "acquired_from_text": "from San Antonio via Indiana",
+        "source_id": "nba-official-draft-order"
+      },
+      {
+        "pick": 60,
+        "round": 2,
+        "team_key": "washington-wizards",
+        "team_name": "Washington Wizards",
+        "acquired_from_text": "from Oklahoma City via San Antonio and Miami",
+        "source_id": "nba-official-draft-order"
+      }
+    ],
+    "strategic_source_clues": [
+      {
+        "pick": 5,
+        "team_key": "la-clippers",
+        "tags": [
+          "trade_down",
+          "asset_accumulation",
+          "guard"
+        ],
+        "note": "Guard options and trade/down asset pathways.",
+        "source_ids": [
+          "espn-final-mock-60",
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 8,
+        "team_key": "atlanta-hawks",
+        "tags": [
+          "trade_down",
+          "big",
+          "guard"
+        ],
+        "note": "Trade-down scenarios while weighing lead guard vs center.",
+        "source_ids": [
+          "the-athletic-via-nba-mock",
+          "espn-final-mock-60"
+        ]
+      },
+      {
+        "pick": 9,
+        "team_key": "dallas-mavericks",
+        "tags": [
+          "trade",
+          "guard",
+          "wing"
+        ],
+        "note": "Explored trading the selection and considered several positions.",
+        "source_ids": [
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 10,
+        "team_key": "milwaukee-bucks",
+        "tags": [
+          "guard",
+          "transaction_contingency"
+        ],
+        "note": "Guard strategy tied to potential Giannis outcome.",
+        "source_ids": [
+          "espn-final-mock-60",
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 12,
+        "team_key": "oklahoma-city-thunder",
+        "tags": [
+          "trade_up",
+          "future_assets"
+        ],
+        "note": "Explored trade options with movable future assets.",
+        "source_ids": [
+          "espn-final-mock-60"
+        ]
+      },
+      {
+        "pick": 13,
+        "team_key": "miami-heat",
+        "tags": [
+          "trade",
+          "big"
+        ],
+        "note": "Star-trade scenarios plus frontcourt depth issue.",
+        "source_ids": [
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 14,
+        "team_key": "charlotte-hornets",
+        "tags": [
+          "trade",
+          "frontcourt"
+        ],
+        "note": "Could move one of picks 14 and 18 for right upgrade.",
+        "source_ids": [
+          "espn-final-mock-60"
+        ]
+      },
+      {
+        "pick": 15,
+        "team_key": "chicago-bulls",
+        "tags": [
+          "move_up",
+          "size"
+        ],
+        "note": "Asked about moving up from 15; values size/length/athleticism/physicality.",
+        "source_ids": [
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 17,
+        "team_key": "oklahoma-city-thunder",
+        "tags": [
+          "trade_out",
+          "future_assets",
+          "big"
+        ],
+        "note": "Could keep, move up, or trade out for future draft capital.",
+        "source_ids": [
+          "the-athletic-via-nba-mock"
+        ]
+      },
+      {
+        "pick": 18,
+        "team_key": "charlotte-hornets",
+        "tags": [
+          "trade",
+          "frontcourt"
+        ],
+        "note": "Flexible with two first-rounders and potentially trade-focused.",
+        "source_ids": [
+          "espn-final-mock-60"
+        ]
+      },
+      {
+        "pick": 23,
+        "team_key": "atlanta-hawks",
+        "tags": [
+          "trade",
+          "wing",
+          "shooting"
+        ],
+        "note": "Second selection is flexible; may not need two rookies.",
+        "source_ids": [
+          "espn-final-mock-60"
+        ]
+      }
+    ],
+    "notes": [
+      "Official order trade notes preserve NBA.com acquired/from text without resolving every original-owner chain.",
+      "Strategic clues are media signals for preference modeling and must not override official pick ownership."
+    ]
+  }
+}

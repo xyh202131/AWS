@@ -1,0 +1,1830 @@
+{
+  "schema_version": "a2_web_mock_lottery.v1",
+  "generated_at": "2026-06-22T03:33:07+08:00",
+  "extraction_agent": "A2-Web Mock/Prospect Normalizer Agent",
+  "inputs": [
+    "data/raw/firecrawl-2026-mock-draft-search.json",
+    "data/raw/firecrawl-2026-big-board-search.json",
+    "data/raw/external_source_inventory.json"
+  ],
+  "sources": [
+    {
+      "source_id": "nba-consensus-mock",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_type": "official_consensus_aggregator",
+      "credibility": "authoritative",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "consensus_lottery",
+        "source_mock_picks",
+        "sources"
+      ]
+    },
+    {
+      "source_id": "espn-final-mock-60",
+      "source_name": "ESPN.com",
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "source_type": "major_media_mock",
+      "credibility": "high",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "The Ringer",
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "The Athletic",
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "Yahoo Sports",
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "Bleacher Report",
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "NetScouts Basketball",
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "CBS Sports",
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "Hoops HQ",
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "SB Nation",
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": null,
+      "source_name": "USA Today / For the Win",
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "source_type": "media_mock_from_nba_consensus_table",
+      "credibility": null,
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "raw_file": "data/raw/firecrawl-2026-mock-draft-search.json",
+      "fields_used": [
+        "source_mock_picks"
+      ]
+    },
+    {
+      "source_id": "raw-big-board-search-context",
+      "source_name": "Firecrawl 2026 big-board search raw file",
+      "source_url": null,
+      "source_type": "local_raw_context_file",
+      "credibility": null,
+      "raw_file": "data/raw/firecrawl-2026-big-board-search.json",
+      "fields_used": [],
+      "notes": "Inspected for context; contains 8 search results and a duplicate NBA.com consensus result, but did not override NBA.com consensus fields."
+    },
+    {
+      "source_id": "external-source-inventory",
+      "source_name": "External source inventory",
+      "source_url": null,
+      "source_type": "local_source_inventory",
+      "credibility": null,
+      "raw_file": "data/raw/external_source_inventory.json",
+      "fields_used": [
+        "sources.source_type",
+        "sources.credibility",
+        "source selection notes"
+      ]
+    }
+  ],
+  "consensus_lottery": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "player": "AJ Dybantsa",
+      "school_or_team": "BYU",
+      "position": "F",
+      "height": "6-8½",
+      "class_or_status": "Freshman",
+      "most_common_pick": 1,
+      "most_common_votes": 10,
+      "most_common_raw": "1 (10)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "player": "Darryn Peterson",
+      "school_or_team": "Kansas",
+      "position": "G",
+      "height": "6-4½",
+      "class_or_status": "Freshman",
+      "most_common_pick": 2,
+      "most_common_votes": 8,
+      "most_common_raw": "2 (8)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "player": "Cameron Boozer",
+      "school_or_team": "Duke",
+      "position": "F-C",
+      "height": "6-8¼",
+      "class_or_status": "Freshman",
+      "most_common_pick": 3,
+      "most_common_votes": 8,
+      "most_common_raw": "3 (8)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "player": "Caleb Wilson",
+      "school_or_team": "North Carolina",
+      "position": "F",
+      "height": "6-9¼",
+      "class_or_status": "Freshman",
+      "most_common_pick": 4,
+      "most_common_votes": 8,
+      "most_common_raw": "4 (8)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "player": "Keaton Wagler",
+      "school_or_team": "Illinois",
+      "position": "G",
+      "height": "6-5",
+      "class_or_status": "Freshman",
+      "most_common_pick": 5,
+      "most_common_votes": 8,
+      "most_common_raw": "5 (8)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "player": "Darius Acuff Jr.",
+      "school_or_team": "Arkansas",
+      "position": "G",
+      "height": "6-2",
+      "class_or_status": "Freshman",
+      "most_common_pick": 6,
+      "most_common_votes": 5,
+      "most_common_raw": "6 (5)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "player": "Mikel Brown Jr.",
+      "school_or_team": "Louisville",
+      "position": "G",
+      "height": "6-5",
+      "class_or_status": "Freshman",
+      "most_common_pick": 6,
+      "most_common_votes": 4,
+      "most_common_raw": "6 (4)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "player": "Kingston Flemings",
+      "school_or_team": "Houston",
+      "position": "G",
+      "height": "6-2½",
+      "class_or_status": "Freshman",
+      "most_common_pick": [
+        7,
+        9
+      ],
+      "most_common_votes": 3,
+      "most_common_raw": "7, 9 (3)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "player": "Brayden Burries",
+      "school_or_team": "Arizona",
+      "position": "G",
+      "height": "6-3¾",
+      "class_or_status": "Freshman",
+      "most_common_pick": 9,
+      "most_common_votes": 5,
+      "most_common_raw": "9 (5)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "player": "Aday Mara",
+      "school_or_team": "Michigan",
+      "position": "C",
+      "height": "7-3",
+      "class_or_status": "Junior",
+      "most_common_pick": 8,
+      "most_common_votes": 4,
+      "most_common_raw": "8 (4)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "player": "Nate Ament",
+      "school_or_team": "Tennessee",
+      "position": "F",
+      "height": "6-9½",
+      "class_or_status": "Freshman",
+      "most_common_pick": [
+        10,
+        12
+      ],
+      "most_common_votes": 3,
+      "most_common_raw": "10, 12 (3)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "player": "Yaxel Lendeborg",
+      "school_or_team": "Michigan",
+      "position": "F",
+      "height": "6-8¾",
+      "class_or_status": "Senior",
+      "most_common_pick": [
+        11,
+        12
+      ],
+      "most_common_votes": 4,
+      "most_common_raw": "11, 12 (4)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "player": "Karim López",
+      "school_or_team": "New Zealand Breakers (Australia)",
+      "position": "F",
+      "height": "6-8¼",
+      "class_or_status": "International",
+      "most_common_pick": 11,
+      "most_common_votes": 2,
+      "most_common_raw": "11 (2)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "player": "Morez Johnson Jr.",
+      "school_or_team": "Michigan",
+      "position": "F-C",
+      "height": "6-9",
+      "class_or_status": "Sophomore",
+      "most_common_pick": 14,
+      "most_common_votes": 8,
+      "most_common_raw": "14 (8)",
+      "source_url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "source_name": "NBA.com Consensus Mock Draft",
+      "source_date": "2026-06-19T09:41:00",
+      "source_date_raw": "June 19, 2026 9:41 AM"
+    }
+  ],
+  "source_mock_picks": [
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 6,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 7,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 8,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 9,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 10,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 11,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 12,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 13,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "ESPN.com",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 14,
+      "player": "Karim López",
+      "team_if_available": null,
+      "source_url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 6,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 7,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 8,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 9,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 10,
+      "player": "Cameron Carr",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 11,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 12,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 13,
+      "player": "Dailyn Swain",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Ringer",
+      "source_last_updated": "2026-05-27",
+      "source_last_updated_raw": "May 27 (Chau)",
+      "pick": 14,
+      "player": "Jayden Quaintance",
+      "team_if_available": null,
+      "source_url": "https://www.theringer.com/nba-draft/2026//mock-draft?view=skim&expert=danny-chau",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 6,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 7,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 8,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 9,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 10,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 11,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 12,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 13,
+      "player": "Hannes Steinbach",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "The Athletic",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.nytimes.com/athletic/7337276/2026/06/08/nba-mock-draft-dybantsa-boozer-intel/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 2,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 3,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 5,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 6,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 7,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 8,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 9,
+      "player": "Karim López",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 10,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 11,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 12,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 13,
+      "player": "Hannes Steinbach",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Yahoo Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://sports.yahoo.com/nba/article/nba-mock-draft-90-the-latest-projections-with-less-than-1-week-to-go-162407099.html",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 6,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 7,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 8,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 9,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 10,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 11,
+      "player": "Karim López",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 12,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 13,
+      "player": "Cameron Carr",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Bleacher Report",
+      "source_last_updated": "2026-06-16",
+      "source_last_updated_raw": "June 16",
+      "pick": 14,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://bleacherreport.com/articles/25262746-2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 6,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 7,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 8,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 9,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 10,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 11,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 12,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 13,
+      "player": "Labaron Philon Jr.",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "NetScouts Basketball",
+      "source_last_updated": "2026-06-14",
+      "source_last_updated_raw": "June 14",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://netscoutsbasketball.com/?p=1199",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 6,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 7,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 8,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 9,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 10,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 11,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 12,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 13,
+      "player": "Hannes Steinbach",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "CBS Sports",
+      "source_last_updated": "2026-06-17",
+      "source_last_updated_raw": "June 17",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.cbssports.com/nba/draft/mock-draft/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 5,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 6,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 7,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 8,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 9,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 10,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 11,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 12,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 13,
+      "player": "Labaron Philon Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "Hoops HQ",
+      "source_last_updated": "2026-05-29",
+      "source_last_updated_raw": "May 29",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.hoopshq.com/nba-draft/2026-nba-mock-draft",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 2,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 3,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 6,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 7,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 8,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 9,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 10,
+      "player": "Labaron Philon Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 11,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 12,
+      "player": "Aday Mara",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 13,
+      "player": "Karim López",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "SB Nation",
+      "source_last_updated": "2026-06-08",
+      "source_last_updated_raw": "June 8",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://www.sbnation.com/nba/1116972/nba-mock-draft-2026-rumors-workouts-predictions",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 1,
+      "player": "AJ Dybantsa",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 2,
+      "player": "Cameron Boozer",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 3,
+      "player": "Darryn Peterson",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 4,
+      "player": "Caleb Wilson",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 5,
+      "player": "Keaton Wagler",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 6,
+      "player": "Mikel Brown Jr.",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 7,
+      "player": "Darius Acuff Jr.",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 8,
+      "player": "Brayden Burries",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 9,
+      "player": "Kingston Flemings",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 10,
+      "player": "Yaxel Lendeborg",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 11,
+      "player": "Karim López",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 12,
+      "player": "Nate Ament",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 13,
+      "player": "Hannes Steinbach",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    },
+    {
+      "source_name": "USA Today / For the Win",
+      "source_last_updated": "2026-06-15",
+      "source_last_updated_raw": "June 15",
+      "pick": 14,
+      "player": "Morez Johnson Jr.",
+      "team_if_available": null,
+      "source_url": "https://ftw.usatoday.com/story/sports/nba/draft/2026/06/15/2026-nba-mock-draft-projecting-all-60-picks-both-rounds/90556340007/",
+      "extraction_origin": "NBA.com Consensus Mock Draft MOCK DRAFTS markdown table"
+    }
+  ],
+  "validation_summary": {
+    "consensus_lottery_count": 14,
+    "media_source_count": 10,
+    "source_mock_pick_count": 140,
+    "source_mock_rows_per_source_expected": 14,
+    "raw_search_sources_with_markdown_used_or_available": [
+      {
+        "url": "https://www.nba.com/news/2026-consensus-mock-draft",
+        "title": "Consensus Mock Draft: Where things stand entering final ... - NBA.com",
+        "raw_search_position": 1
+      }
+    ]
+  }
+}

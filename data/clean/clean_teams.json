@@ -1,0 +1,571 @@
+[
+  {
+    "pick": 1,
+    "team": "Washington Wizards",
+    "phase": "rebuild",
+    "needs": [
+      "alpha scorer",
+      "wing creator",
+      "defensive size"
+    ],
+    "priorityTags": [
+      "wing creator",
+      "star upside",
+      "two-way",
+      "wing",
+      "size",
+      "creation"
+    ],
+    "riskTolerance": 84,
+    "notes": "Top-pick team can prioritize ceiling over narrow positional fit. Official NBA.com order pick 1. Need signal: fit_signal_supported; confidence low_medium; usable explicit tags."
+  },
+  {
+    "pick": 2,
+    "team": "Utah Jazz",
+    "phase": "rebuild",
+    "needs": [
+      "lead guard",
+      "shot creation",
+      "late-clock offense"
+    ],
+    "priorityTags": [
+      "primary guard",
+      "shot creator",
+      "pull-up shooting",
+      "guard",
+      "creation",
+      "shooting"
+    ],
+    "riskTolerance": 78,
+    "notes": "Needs a lead initiator who can organize young frontcourt pieces. Official NBA.com order pick 2. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 3,
+    "team": "Memphis Grizzlies",
+    "phase": "accelerate",
+    "needs": [
+      "frontcourt scoring",
+      "rebounding",
+      "secondary passing"
+    ],
+    "priorityTags": [
+      "frontcourt engine",
+      "rebounder",
+      "feel"
+    ],
+    "riskTolerance": 66,
+    "notes": "Best value is a high-floor frontcourt hub who can help quickly. Official NBA.com order pick 3. Need signal: multiple_pick_mixed_signal; confidence low_medium; needs review."
+  },
+  {
+    "pick": 4,
+    "team": "Chicago Bulls",
+    "phase": "rebuild",
+    "needs": [
+      "big wing",
+      "rim pressure",
+      "defensive playmaking"
+    ],
+    "priorityTags": [
+      "big wing",
+      "two-way",
+      "transition",
+      "forward",
+      "frontcourt",
+      "size",
+      "defense"
+    ],
+    "riskTolerance": 74,
+    "notes": "Roster needs size and creation more than another low-usage guard. Official NBA.com order pick 4. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 5,
+    "team": "LA Clippers",
+    "acquiredFrom": "Indiana",
+    "phase": "asset",
+    "needs": [
+      "young guard",
+      "shooting",
+      "pace"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "pull-up shooting",
+      "decision maker",
+      "guard",
+      "creation",
+      "shooting"
+    ],
+    "riskTolerance": 72,
+    "notes": "Traded pick context makes upside and trade value important. Official NBA.com order pick 5, acquired from Indiana. Need signal: explicit_fit_and_asset_signal_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 6,
+    "team": "Brooklyn Nets",
+    "phase": "rebuild",
+    "needs": [
+      "primary guard",
+      "rim pressure",
+      "fan-facing upside"
+    ],
+    "priorityTags": [
+      "primary guard",
+      "shot creator",
+      "speed"
+    ],
+    "riskTolerance": 80,
+    "notes": "Can take a creator with development runway. Official NBA.com order pick 6. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 7,
+    "team": "Sacramento Kings",
+    "phase": "accelerate",
+    "needs": [
+      "point guard depth",
+      "paint touch",
+      "defensive activity"
+    ],
+    "priorityTags": [
+      "primary guard",
+      "pace",
+      "playmaking",
+      "guard",
+      "creation",
+      "defense"
+    ],
+    "riskTolerance": 64,
+    "notes": "Best fit is a guard who creates easy offense without killing tempo. Official NBA.com order pick 7. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 8,
+    "team": "Atlanta Hawks",
+    "acquiredFrom": "New Orleans",
+    "phase": "asset",
+    "needs": [
+      "rim protection",
+      "frontcourt size",
+      "vertical spacing"
+    ],
+    "priorityTags": [
+      "rim protector",
+      "size",
+      "interior finisher"
+    ],
+    "riskTolerance": 69,
+    "notes": "Pick acquired from another team gives room for a specialized big. Official NBA.com order pick 8, acquired from New Orleans. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 9,
+    "team": "Dallas Mavericks",
+    "phase": "contend",
+    "needs": [
+      "two-way guard",
+      "shooting",
+      "secondary creation"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "shooter",
+      "two-way"
+    ],
+    "riskTolerance": 55,
+    "notes": "Contending context favors a cleaner role and shooting translation. Official NBA.com order pick 9. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 10,
+    "team": "Milwaukee Bucks",
+    "phase": "contend",
+    "needs": [
+      "connector forward",
+      "defense",
+      "rebounding"
+    ],
+    "priorityTags": [
+      "big wing",
+      "connector",
+      "defense",
+      "guard",
+      "creation"
+    ],
+    "riskTolerance": 53,
+    "notes": "Immediate role fit matters more than a long development arc. Official NBA.com order pick 10. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 11,
+    "team": "Golden State Warriors",
+    "phase": "contend",
+    "needs": [
+      "smart guard",
+      "movement shooting",
+      "decision making"
+    ],
+    "priorityTags": [
+      "shooter",
+      "decision maker",
+      "off-ball"
+    ],
+    "riskTolerance": 50,
+    "notes": "System fit rewards processing, shooting and low-mistake play. Official NBA.com order pick 11. Need signal: fit_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 12,
+    "team": "Oklahoma City Thunder",
+    "acquiredFrom": "LA Clippers",
+    "phase": "asset",
+    "needs": [
+      "frontcourt depth",
+      "versatility",
+      "long-term value"
+    ],
+    "priorityTags": [
+      "versatile forward",
+      "feel",
+      "defense"
+    ],
+    "riskTolerance": 82,
+    "notes": "Deep roster can swing on a developmental or positional luxury pick. Official NBA.com order pick 12, acquired from LA Clippers. Need signal: asset_and_fit_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 13,
+    "team": "Miami Heat",
+    "phase": "contend",
+    "needs": [
+      "physical wing",
+      "defense",
+      "self creation"
+    ],
+    "priorityTags": [
+      "two-way",
+      "toughness",
+      "big wing",
+      "frontcourt",
+      "forward",
+      "size"
+    ],
+    "riskTolerance": 58,
+    "notes": "Profile should survive demanding defensive and conditioning standards. Official NBA.com order pick 13. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 14,
+    "team": "Charlotte Hornets",
+    "phase": "accelerate",
+    "needs": [
+      "frontcourt defense",
+      "rebounding",
+      "finishing"
+    ],
+    "priorityTags": [
+      "rim protector",
+      "rebounder",
+      "finisher"
+    ],
+    "riskTolerance": 68,
+    "notes": "Young core benefits from a reliable interior complement. Official NBA.com order pick 14. Need signal: explicit_need_with_trade_uncertainty; confidence medium; needs review."
+  },
+  {
+    "pick": 15,
+    "team": "Chicago Bulls",
+    "acquiredFrom": "Portland",
+    "phase": "rebuild",
+    "needs": [
+      "frontcourt depth",
+      "shooting",
+      "upside"
+    ],
+    "priorityTags": [
+      "stretch forward",
+      "rebounder",
+      "upside",
+      "forward",
+      "frontcourt",
+      "size",
+      "defense"
+    ],
+    "riskTolerance": 76,
+    "notes": "Second first-rounder can cover a different role than pick 4. Official NBA.com order pick 15, acquired from Portland. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 16,
+    "team": "Memphis Grizzlies",
+    "acquiredFrom": "Phoenix via Orlando",
+    "phase": "accelerate",
+    "needs": [
+      "rim protection",
+      "bench size",
+      "defense"
+    ],
+    "priorityTags": [
+      "rim protector",
+      "size",
+      "rebounder"
+    ],
+    "riskTolerance": 62,
+    "notes": "Additional pick can target depth behind established creators. Official NBA.com order pick 16, acquired from Phoenix via Orlando. Need signal: multiple_pick_mixed_signal; confidence low_medium; needs review."
+  },
+  {
+    "pick": 17,
+    "team": "Oklahoma City Thunder",
+    "acquiredFrom": "Philadelphia",
+    "phase": "asset",
+    "needs": [
+      "big wing",
+      "shooting",
+      "stash optionality"
+    ],
+    "priorityTags": [
+      "big wing",
+      "international",
+      "upside"
+    ],
+    "riskTolerance": 86,
+    "notes": "Can tolerate longer development if the player protects trade value. Official NBA.com order pick 17, acquired from Philadelphia. Need signal: asset_and_fit_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 18,
+    "team": "Charlotte Hornets",
+    "acquiredFrom": "Orlando via Phoenix",
+    "phase": "accelerate",
+    "needs": [
+      "guard depth",
+      "shooting",
+      "secondary creation"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "shooter",
+      "playmaking"
+    ],
+    "riskTolerance": 63,
+    "notes": "A second selection can balance earlier frontcourt value. Official NBA.com order pick 18, acquired from Orlando via Phoenix. Need signal: explicit_need_with_trade_uncertainty; confidence medium; needs review."
+  },
+  {
+    "pick": 19,
+    "team": "Toronto Raptors",
+    "phase": "accelerate",
+    "needs": [
+      "connector forward",
+      "length",
+      "team defense"
+    ],
+    "priorityTags": [
+      "versatile forward",
+      "defense",
+      "passing",
+      "frontcourt",
+      "creation",
+      "shooting"
+    ],
+    "riskTolerance": 61,
+    "notes": "Length and multi-position defense remain the cleanest identity fit. Official NBA.com order pick 19. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 20,
+    "team": "San Antonio Spurs",
+    "acquiredFrom": "Atlanta",
+    "phase": "accelerate",
+    "needs": [
+      "shooting guard",
+      "secondary handler",
+      "spacing"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "shooter",
+      "decision maker",
+      "frontcourt",
+      "size",
+      "shooting"
+    ],
+    "riskTolerance": 60,
+    "notes": "Needs a guard who complements high-usage frontcourt creation. Official NBA.com order pick 20, acquired from Atlanta. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 21,
+    "team": "Detroit Pistons",
+    "acquiredFrom": "Minnesota",
+    "phase": "accelerate",
+    "needs": [
+      "wing shooting",
+      "defensive activity",
+      "floor spacing"
+    ],
+    "priorityTags": [
+      "3-and-D",
+      "wing defender",
+      "shooter",
+      "guard",
+      "wing",
+      "shooting",
+      "creation"
+    ],
+    "riskTolerance": 57,
+    "notes": "Role clarity matters around existing young ball handlers. Official NBA.com order pick 21, acquired from Minnesota. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 22,
+    "team": "Philadelphia 76ers",
+    "acquiredFrom": "Houston via Oklahoma City",
+    "phase": "contend",
+    "needs": [
+      "ready guard",
+      "bench creation",
+      "shooting"
+    ],
+    "priorityTags": [
+      "primary guard",
+      "shooter",
+      "maturity",
+      "forward",
+      "size",
+      "defense"
+    ],
+    "riskTolerance": 48,
+    "notes": "Pick should produce a rotation pathway quickly. Official NBA.com order pick 22, acquired from Houston via Oklahoma City. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 23,
+    "team": "Atlanta Hawks",
+    "acquiredFrom": "Cleveland",
+    "phase": "asset",
+    "needs": [
+      "guard defense",
+      "playmaking",
+      "depth"
+    ],
+    "priorityTags": [
+      "primary guard",
+      "defense",
+      "pace"
+    ],
+    "riskTolerance": 64,
+    "notes": "Second pick can chase a different skill package than pick 8. Official NBA.com order pick 23, acquired from Cleveland. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 24,
+    "team": "New York Knicks",
+    "phase": "contend",
+    "needs": [
+      "bench guard",
+      "shooting",
+      "toughness"
+    ],
+    "priorityTags": [
+      "shooter",
+      "maturity",
+      "decision maker",
+      "frontcourt",
+      "size",
+      "defense"
+    ],
+    "riskTolerance": 42,
+    "notes": "Late first should fit a playoff rotation role. Official NBA.com order pick 24. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 25,
+    "team": "Los Angeles Lakers",
+    "phase": "contend",
+    "needs": [
+      "wing shooting",
+      "size",
+      "low-usage defense"
+    ],
+    "priorityTags": [
+      "3-and-D",
+      "big wing",
+      "off-ball",
+      "frontcourt",
+      "size"
+    ],
+    "riskTolerance": 49,
+    "notes": "Needs a wing who can survive high-leverage minutes. Official NBA.com order pick 25. Need signal: explicit_need_supported_from_single_source; confidence low_medium; usable explicit tags."
+  },
+  {
+    "pick": 26,
+    "team": "Denver Nuggets",
+    "phase": "contend",
+    "needs": [
+      "frontcourt depth",
+      "passing feel",
+      "rebounding"
+    ],
+    "priorityTags": [
+      "connector",
+      "rebounder",
+      "feel"
+    ],
+    "riskTolerance": 46,
+    "notes": "Passing and processing reduce friction in a motion-heavy offense. Official NBA.com order pick 26. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 27,
+    "team": "Boston Celtics",
+    "phase": "contend",
+    "needs": [
+      "switchable forward",
+      "shooting",
+      "defensive depth"
+    ],
+    "priorityTags": [
+      "two-way",
+      "big wing",
+      "shooter"
+    ],
+    "riskTolerance": 44,
+    "notes": "Roster context rewards players who defend multiple spots. Official NBA.com order pick 27. Need signal: no_clear_need_source; confidence unknown; needs review."
+  },
+  {
+    "pick": 28,
+    "team": "Minnesota Timberwolves",
+    "acquiredFrom": "Detroit",
+    "phase": "contend",
+    "needs": [
+      "combo guard",
+      "bench scoring",
+      "point-of-attack defense"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "shot creator",
+      "defense",
+      "guard",
+      "creation"
+    ],
+    "riskTolerance": 47,
+    "notes": "Late pick should add guard skill without sacrificing defense. Official NBA.com order pick 28, acquired from Detroit. Need signal: explicit_need_supported; confidence medium; usable explicit tags."
+  },
+  {
+    "pick": 29,
+    "team": "Cleveland Cavaliers",
+    "acquiredFrom": "San Antonio via Atlanta",
+    "phase": "contend",
+    "needs": [
+      "center depth",
+      "size",
+      "finishing"
+    ],
+    "priorityTags": [
+      "rim protector",
+      "size",
+      "finisher"
+    ],
+    "riskTolerance": 45,
+    "notes": "Interior insurance has a clearer path than another small guard. Official NBA.com order pick 29, acquired from San Antonio via Atlanta. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  },
+  {
+    "pick": 30,
+    "team": "Dallas Mavericks",
+    "acquiredFrom": "Oklahoma City via WAS and PHI",
+    "phase": "contend",
+    "needs": [
+      "big guard",
+      "shooting",
+      "secondary ball handling"
+    ],
+    "priorityTags": [
+      "combo guard",
+      "international",
+      "shooter"
+    ],
+    "riskTolerance": 52,
+    "notes": "Second late pick can add a bigger creator or stash value. Official NBA.com order pick 30, acquired from Oklahoma City via WAS and PHI. Need signal: mixed_signal_needs_review; confidence low; needs review."
+  }
+]

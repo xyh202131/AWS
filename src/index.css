@@ -1,0 +1,52 @@
+:root {
+  --ink: #111827;
+  --ink-soft: #253044;
+  --muted: #687386;
+  --line: #dfe5ec;
+  --line-strong: #c8d1dc;
+  --page: #eef2f5;
+  --surface: #ffffff;
+  --surface-tint: #f7f9fb;
+  --orange: #f59e0b;
+  --green: #14783f;
+  --blue: #1f5fbf;
+  --red: #b42318;
+  --shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+  font-family:
+    Aptos, "Bahnschrift", "Segoe UI Variable", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+
+button,
+input,
+select {
+  letter-spacing: 0;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(255, 153, 0, 0.45);
+  outline-offset: 2px;
+}

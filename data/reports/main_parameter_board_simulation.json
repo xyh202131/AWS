@@ -1,0 +1,480 @@
+{
+  "generatedAt": "2026-06-21T20:19:09.660Z",
+  "scenarios": [
+    {
+      "id": "baseline",
+      "label": "Balanced baseline",
+      "weights": {
+        "consensus": 35,
+        "need": 25,
+        "player": 20,
+        "upside": 10,
+        "intel": 10
+      }
+    },
+    {
+      "id": "consensus-heavy",
+      "label": "Consensus heavy",
+      "weights": {
+        "consensus": 50,
+        "need": 20,
+        "player": 15,
+        "upside": 5,
+        "intel": 10
+      }
+    },
+    {
+      "id": "team-fit-heavy",
+      "label": "Team fit heavy",
+      "weights": {
+        "consensus": 28,
+        "need": 38,
+        "player": 21,
+        "upside": 8,
+        "intel": 5
+      }
+    },
+    {
+      "id": "recommended",
+      "label": "Official consensus balanced",
+      "weights": {
+        "consensus": 44,
+        "need": 24,
+        "player": 17,
+        "upside": 7,
+        "intel": 8
+      }
+    }
+  ],
+  "unanimousPicks": [
+    {
+      "pick": 1,
+      "name": "AJ Dybantsa"
+    },
+    {
+      "pick": 2,
+      "name": "Darryn Peterson"
+    },
+    {
+      "pick": 3,
+      "name": "Cameron Boozer"
+    },
+    {
+      "pick": 4,
+      "name": "Caleb Wilson"
+    },
+    {
+      "pick": 5,
+      "name": "Keaton Wagler"
+    },
+    {
+      "pick": 6,
+      "name": "Darius Acuff Jr."
+    },
+    {
+      "pick": 7,
+      "name": "Mikel Brown Jr."
+    },
+    {
+      "pick": 8,
+      "name": "Aday Mara"
+    },
+    {
+      "pick": 9,
+      "name": "Brayden Burries"
+    },
+    {
+      "pick": 10,
+      "name": "Kingston Flemings"
+    },
+    {
+      "pick": 12,
+      "name": "Yaxel Lendeborg"
+    },
+    {
+      "pick": 13,
+      "name": "Karim Lopez"
+    },
+    {
+      "pick": 14,
+      "name": "Morez Johnson Jr."
+    },
+    {
+      "pick": 15,
+      "name": "Allen Graves"
+    },
+    {
+      "pick": 16,
+      "name": "Hannes Steinbach"
+    },
+    {
+      "pick": 27,
+      "name": "Sergio De Larrea"
+    },
+    {
+      "pick": 28,
+      "name": "Meleek Thomas"
+    }
+  ],
+  "disputedPicks": [
+    {
+      "pick": 11,
+      "byScenario": {
+        "baseline": "Nate Ament",
+        "consensus-heavy": "Nate Ament",
+        "team-fit-heavy": "Bennett Stirtz",
+        "recommended": "Nate Ament"
+      }
+    },
+    {
+      "pick": 17,
+      "byScenario": {
+        "baseline": "Chris Cenac Jr.",
+        "consensus-heavy": "Chris Cenac Jr.",
+        "team-fit-heavy": "Nate Ament",
+        "recommended": "Chris Cenac Jr."
+      }
+    },
+    {
+      "pick": 18,
+      "byScenario": {
+        "baseline": "Christian Anderson",
+        "consensus-heavy": "Labaron Philon Jr.",
+        "team-fit-heavy": "Christian Anderson",
+        "recommended": "Labaron Philon Jr."
+      }
+    },
+    {
+      "pick": 19,
+      "byScenario": {
+        "baseline": "Dailyn Swain",
+        "consensus-heavy": "Bennett Stirtz",
+        "team-fit-heavy": "Chris Cenac Jr.",
+        "recommended": "Dailyn Swain"
+      }
+    },
+    {
+      "pick": 20,
+      "byScenario": {
+        "baseline": "Bennett Stirtz",
+        "consensus-heavy": "Cameron Carr",
+        "team-fit-heavy": "Cameron Carr",
+        "recommended": "Bennett Stirtz"
+      }
+    },
+    {
+      "pick": 21,
+      "byScenario": {
+        "baseline": "Cameron Carr",
+        "consensus-heavy": "Ebuka Okorie",
+        "team-fit-heavy": "Ebuka Okorie",
+        "recommended": "Cameron Carr"
+      }
+    },
+    {
+      "pick": 22,
+      "byScenario": {
+        "baseline": "Labaron Philon Jr.",
+        "consensus-heavy": "Dailyn Swain",
+        "team-fit-heavy": "Isaiah Evans",
+        "recommended": "Isaiah Evans"
+      }
+    },
+    {
+      "pick": 23,
+      "byScenario": {
+        "baseline": "Ebuka Okorie",
+        "consensus-heavy": "Christian Anderson",
+        "team-fit-heavy": "Labaron Philon Jr.",
+        "recommended": "Ebuka Okorie"
+      }
+    },
+    {
+      "pick": 24,
+      "byScenario": {
+        "baseline": "Koa Peat",
+        "consensus-heavy": "Isaiah Evans",
+        "team-fit-heavy": "Koa Peat",
+        "recommended": "Koa Peat"
+      }
+    },
+    {
+      "pick": 25,
+      "byScenario": {
+        "baseline": "Isaiah Evans",
+        "consensus-heavy": "Koa Peat",
+        "team-fit-heavy": "Dailyn Swain",
+        "recommended": "Henri Veesaar"
+      }
+    },
+    {
+      "pick": 26,
+      "byScenario": {
+        "baseline": "Tarris Reed Jr.",
+        "consensus-heavy": "Henri Veesaar",
+        "team-fit-heavy": "Tarris Reed Jr.",
+        "recommended": "Tarris Reed Jr."
+      }
+    },
+    {
+      "pick": 29,
+      "byScenario": {
+        "baseline": "Henri Veesaar",
+        "consensus-heavy": "Tarris Reed Jr.",
+        "team-fit-heavy": "Henri Veesaar",
+        "recommended": "Jayden Quaintance"
+      }
+    },
+    {
+      "pick": 30,
+      "byScenario": {
+        "baseline": "Jayden Quaintance",
+        "consensus-heavy": "Jayden Quaintance",
+        "team-fit-heavy": "Jayden Quaintance",
+        "recommended": "Christian Anderson"
+      }
+    }
+  ],
+  "recommendedBoard": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "player": "AJ Dybantsa",
+      "consensusRank": 2,
+      "score": 96,
+      "margin": 3
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "player": "Darryn Peterson",
+      "consensusRank": 1,
+      "score": 96,
+      "margin": 5
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "player": "Cameron Boozer",
+      "consensusRank": 3,
+      "score": 98,
+      "margin": 15
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "player": "Caleb Wilson",
+      "consensusRank": 4,
+      "score": 94,
+      "margin": 10
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "player": "Keaton Wagler",
+      "consensusRank": 5,
+      "score": 97,
+      "margin": 3
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "player": "Darius Acuff Jr.",
+      "consensusRank": 6,
+      "score": 96,
+      "margin": 3
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "player": "Mikel Brown Jr.",
+      "consensusRank": 7,
+      "score": 95,
+      "margin": 1
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "player": "Aday Mara",
+      "consensusRank": 10,
+      "score": 91,
+      "margin": 6
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "player": "Brayden Burries",
+      "consensusRank": 11,
+      "score": 91,
+      "margin": 5
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "player": "Kingston Flemings",
+      "consensusRank": 8,
+      "score": 91,
+      "margin": 1
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "player": "Nate Ament",
+      "consensusRank": 9,
+      "score": 82,
+      "margin": 3
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "player": "Yaxel Lendeborg",
+      "consensusRank": 12,
+      "score": 92,
+      "margin": 5
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "player": "Karim Lopez",
+      "consensusRank": 14,
+      "score": 91,
+      "margin": 1
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "player": "Morez Johnson Jr.",
+      "consensusRank": 15,
+      "score": 90,
+      "margin": 5
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "player": "Allen Graves",
+      "consensusRank": 17,
+      "score": 89,
+      "margin": 5
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "player": "Hannes Steinbach",
+      "consensusRank": 13,
+      "score": 86,
+      "margin": 4
+    },
+    {
+      "pick": 17,
+      "team": "Oklahoma City Thunder",
+      "player": "Chris Cenac Jr.",
+      "consensusRank": 19,
+      "score": 79,
+      "margin": 3
+    },
+    {
+      "pick": 18,
+      "team": "Charlotte Hornets",
+      "player": "Labaron Philon Jr.",
+      "consensusRank": 18,
+      "score": 89,
+      "margin": 1
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "player": "Dailyn Swain",
+      "consensusRank": 23,
+      "score": 79,
+      "margin": 1
+    },
+    {
+      "pick": 20,
+      "team": "San Antonio Spurs",
+      "player": "Bennett Stirtz",
+      "consensusRank": 20,
+      "score": 91,
+      "margin": 2
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "player": "Cameron Carr",
+      "consensusRank": 21,
+      "score": 92,
+      "margin": 7
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "player": "Isaiah Evans",
+      "consensusRank": 25,
+      "score": 84,
+      "margin": 2
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "player": "Ebuka Okorie",
+      "consensusRank": 24,
+      "score": 82,
+      "margin": 3
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "player": "Koa Peat",
+      "consensusRank": 27,
+      "score": 82,
+      "margin": 3
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
+      "player": "Henri Veesaar",
+      "consensusRank": 26,
+      "score": 80,
+      "margin": 4
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "player": "Tarris Reed Jr.",
+      "consensusRank": 29,
+      "score": 73,
+      "margin": 8
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "player": "Sergio De Larrea",
+      "consensusRank": 30,
+      "score": 71,
+      "margin": 3
+    },
+    {
+      "pick": 28,
+      "team": "Minnesota Timberwolves",
+      "player": "Meleek Thomas",
+      "consensusRank": 28,
+      "score": 77,
+      "margin": 5
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "player": "Jayden Quaintance",
+      "consensusRank": 22,
+      "score": 63,
+      "margin": 10
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "player": "Christian Anderson",
+      "consensusRank": 16,
+      "score": 68,
+      "margin": 12
+    }
+  ]
+}

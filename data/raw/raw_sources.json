@@ -1,0 +1,974 @@
+{
+  "schema_version": "draftops.raw_sources.v1",
+  "generated_at": "2026-06-22T04:04:42+08:00",
+  "project_root": "C:\\Users\\24048\\Desktop\\AWS\\draftops",
+  "source_policy": {
+    "official_data_dir": "数据/",
+    "official_data_rule": "Treat as read-only official/user-provided source material.",
+    "agent_output_dir": "data/",
+    "external_policy": "Use NBA.com official pages first; use major media as weighted signals; ignore social/self-media for model input."
+  },
+  "counts": {
+    "total_sources": 39,
+    "official_user_provided": 8,
+    "external_web": 29,
+    "ignored_external": 8,
+    "official_live_web": 2
+  },
+  "sources": [
+    {
+      "id": "official-draft-results-2000-2025",
+      "sourceName": "Official provided 2000-2025 NBA draft results workbook",
+      "url": null,
+      "localPath": "数据/2000-2025_NBA选秀结果_数据汇总.xlsx",
+      "sourceType": "official_historical_draft_results",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/2000-2025_NBA选秀结果_数据汇总.xlsx",
+      "sizeBytes": 164594,
+      "usableFor": [
+        "historical draft results",
+        "undrafted players",
+        "draft lottery",
+        "position notation"
+      ],
+      "rawText": "",
+      "notes": "User explicitly identified 数据/ as the official data package. Use for historical priors and validation, not direct 2026 predictions."
+    },
+    {
+      "id": "official-draft-combine-hackathon-archive",
+      "sourceName": "Official DraftCombine Hackathon archive",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon.zip",
+      "sourceType": "official_archive",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/DraftCombine_Hackathon.zip",
+      "sizeBytes": 516065322,
+      "usableFor": [
+        "source archive",
+        "combine package provenance"
+      ],
+      "rawText": "",
+      "notes": "Official archive copy. Prefer extracted files for processing."
+    },
+    {
+      "id": "official-combine-history-2000-2025",
+      "sourceName": "Official Draft Combine history 2000-2025 workbook",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/DraftCombineHistory2000_2025.csv",
+      "sourceType": "official_combine_history",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/DraftCombine_Hackathon/DraftCombineHistory2000_2025.csv",
+      "sizeBytes": 368902,
+      "usableFor": [
+        "historical combine measurements",
+        "athletic testing",
+        "player physical profile"
+      ],
+      "rawText": "",
+      "notes": "Extension is .csv but binary header indicates Excel/OpenXML workbook. Read with an Excel parser, not as plain CSV."
+    },
+    {
+      "id": "official-combine-metric-dictionary",
+      "sourceName": "Official NBA Combine Stat Lab metric dictionary",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/NBA_Combine_Stat_Lab_指标中英文.xlsx",
+      "sourceType": "official_metric_dictionary",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/DraftCombine_Hackathon/NBA_Combine_Stat_Lab_指标中英文.xlsx",
+      "sizeBytes": 11573,
+      "usableFor": [
+        "metric names",
+        "Chinese-English mapping",
+        "units",
+        "field definitions"
+      ],
+      "rawText": "",
+      "notes": "Use as canonical metric dictionary for normalized combine fields."
+    },
+    {
+      "id": "official-combine-intro-cn",
+      "sourceName": "Official NBA Draft Combine Chinese intro deck",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/NBA_Draft_Combine_Intro_CN.pptx",
+      "sourceType": "official_combine_intro",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/DraftCombine_Hackathon/NBA_Draft_Combine_Intro_CN.pptx",
+      "sizeBytes": 1501278,
+      "usableFor": [
+        "combine background",
+        "method explanation",
+        "presentation context"
+      ],
+      "rawText": "",
+      "notes": "Use for explanation and pitch context; not structured model input until parsed."
+    },
+    {
+      "id": "official-combine-video-01",
+      "sourceName": "Official combine video: 2026 AWS NBA Draft Combine： Strength & Agility + Shooting Drill Highlights.webm",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/视频介绍/2026 AWS NBA Draft Combine： Strength & Agility + Shooting Drill Highlights.webm",
+      "sourceType": "official_video_context",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 0.95,
+      "rawArtifact": "数据/DraftCombine_Hackathon/视频介绍/2026 AWS NBA Draft Combine： Strength & Agility + Shooting Drill Highlights.webm",
+      "sizeBytes": 501969705,
+      "usableFor": [
+        "combine drill context",
+        "presentation visual evidence"
+      ],
+      "rawText": "",
+      "notes": "Use for demo/pitch context unless a separate video parser extracts structured signals."
+    },
+    {
+      "id": "official-combine-video-02",
+      "sourceName": "Official combine video: Lane agility drills side-by-side.mp4",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/视频介绍/Lane agility drills side-by-side.mp4",
+      "sourceType": "official_video_context",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 0.95,
+      "rawArtifact": "数据/DraftCombine_Hackathon/视频介绍/Lane agility drills side-by-side.mp4",
+      "sizeBytes": 7080919,
+      "usableFor": [
+        "combine drill context",
+        "presentation visual evidence"
+      ],
+      "rawText": "",
+      "notes": "Use for demo/pitch context unless a separate video parser extracts structured signals."
+    },
+    {
+      "id": "official-combine-video-03",
+      "sourceName": "Official combine video: shuttle run.mp4",
+      "url": null,
+      "localPath": "数据/DraftCombine_Hackathon/视频介绍/shuttle run.mp4",
+      "sourceType": "official_video_context",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 0.95,
+      "rawArtifact": "数据/DraftCombine_Hackathon/视频介绍/shuttle run.mp4",
+      "sizeBytes": 5291971,
+      "usableFor": [
+        "combine drill context",
+        "presentation visual evidence"
+      ],
+      "rawText": "",
+      "notes": "Use for demo/pitch context unless a separate video parser extracts structured signals."
+    },
+    {
+      "id": "nba-official-draft-hub",
+      "sourceName": "NBA.com 2026 NBA Draft Hub",
+      "url": "https://www.nba.com/draft/2026",
+      "localPath": null,
+      "sourceType": "official_hub",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.98,
+      "credibilityLabel": "authoritative",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "2026 NBA Draft",
+      "searchDescription": "The official site of the 2026 NBA Draft. News, video, prospect profiles, team needs, mock drafts and more.",
+      "searchPositions": [
+        1
+      ],
+      "usableFor": [
+        "official draft hub",
+        "team profile links",
+        "prospect profile links",
+        "official NBA draft coverage"
+      ],
+      "rawText": "The official site of the 2026 NBA Draft. News, video, prospect profiles, team needs, mock drafts and more.",
+      "notes": "Official NBA draft landing page. Use as a top-level official entry point; extract linked detail pages separately if needed."
+    },
+    {
+      "id": "nba-official-draft-order",
+      "sourceName": "NBA.com 2026 NBA Draft Order",
+      "url": "https://www.nba.com/news/2026-nba-draft-order",
+      "localPath": null,
+      "sourceType": "official_order",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.98,
+      "credibilityLabel": "authoritative",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "2026 NBA Draft Order: Picks 1-60",
+      "searchDescription": "The order of selection for the first 14 picks of the 2026 NBA Draft ... 2026 First Round Draft Order. 1. Washington. 2. Utah. 3. Memphis. 4 ...",
+      "searchPositions": [
+        4
+      ],
+      "usableFor": [
+        "draft order",
+        "pick numbers",
+        "round assignment"
+      ],
+      "rawText": "The order of selection for the first 14 picks of the 2026 NBA Draft ... 2026 First Round Draft Order. 1. Washington. 2. Utah. 3. Memphis. 4 ...",
+      "notes": "Primary source for current 2026 pick order. This should override media mock pages and third-party order aggregators on order conflicts."
+    },
+    {
+      "id": "nba-consensus-mock",
+      "sourceName": "NBA.com Consensus Mock Draft",
+      "url": "https://www.nba.com/news/2026-consensus-mock-draft",
+      "localPath": null,
+      "sourceType": "official_consensus_aggregator",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.98,
+      "credibilityLabel": "authoritative",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json",
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "Consensus Mock Draft: Where things stand entering final ... - NBA.com",
+      "searchDescription": "2026 NBA Draft: Complete coverage ; No. 1 (Wizards): AJ Dybantsa (10) ; No. 2 (Jazz): Darryn Peterson (8) ; No. 3 (Grizzlies): Cameron Boozer (8).",
+      "searchPositions": [
+        1,
+        3
+      ],
+      "usableFor": [
+        "consensus mock",
+        "cross-source agreement",
+        "lottery-level confidence"
+      ],
+      "rawText": "2026 NBA Draft: Complete coverage ; No. 1 (Wizards): AJ Dybantsa (10) ; No. 2 (Jazz): Darryn Peterson (8) ; No. 3 (Grizzlies): Cameron Boozer (8).",
+      "notes": "Official NBA.com aggregation of external mock drafts. Treat as authoritative for consensus calculation, not as a single team's or league's internal preference."
+    },
+    {
+      "id": "the-athletic-via-nba-mock",
+      "sourceName": "The Athletic mock draft via NBA.com",
+      "url": "https://www.nba.com/news/the-athletic-latest-mock-draft",
+      "localPath": null,
+      "sourceType": "syndicated_major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "The Athletic: Latest predictions on how the first 2 rounds will go",
+      "searchDescription": "The Athletic's Sam Vecenie updates his mock draft with the latest intel on how the first round will play out.",
+      "searchPositions": [
+        4
+      ],
+      "usableFor": [
+        "mock draft",
+        "team fit notes",
+        "external expert signal"
+      ],
+      "rawText": "The Athletic's Sam Vecenie updates his mock draft with the latest intel on how the first round will play out.",
+      "notes": "The content is branded as The Athletic/Sam Vecenie but hosted on NBA.com. Use as The Athletic signal, not as an official NBA projection."
+    },
+    {
+      "id": "espn-big-board-top100",
+      "sourceName": "ESPN 2026 NBA draft big board top 100",
+      "url": "https://www.espn.com/nba/story/_/id/46886245/2026-nba-draft-big-board-rankings-top-100-prospects-players",
+      "localPath": null,
+      "sourceType": "major_media_big_board",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json"
+      ],
+      "searchTitle": "2026 NBA draft big board rankings: Top 100 prospects - ESPN",
+      "searchDescription": "2026 NBA draft big board rankings: Top 100 prospects · 1. Darryn Peterson, PG/SG, Kansas · 2. AJ Dybantsa, SF, BYU · 3. Cameron Boozer, PF/C, Duke.",
+      "searchPositions": [
+        1
+      ],
+      "usableFor": [
+        "prospect rankings",
+        "player profiles",
+        "strengths",
+        "risks",
+        "tiering"
+      ],
+      "rawText": "2026 NBA draft big board rankings: Top 100 prospects · 1. Darryn Peterson, PG/SG, Kansas · 2. AJ Dybantsa, SF, BYU · 3. Cameron Boozer, PF/C, Duke.",
+      "notes": "High-value professional board. Use for prospect quality and profile fields, separate from pick-order mocks."
+    },
+    {
+      "id": "espn-final-mock-60",
+      "sourceName": "ESPN 2026 NBA mock draft projecting 60 picks",
+      "url": "https://www.espn.com/nba/story/_/id/49041464/2026-nba-mock-draft-projecting-60-picks-draft-night-trade-talks-boozer-peterson-dybantsa-acuff",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json",
+        "data/raw/firecrawl-2026-draft-order-search.json",
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "2026 NBA mock draft: Projecting all 60 picks in Rounds 1 and 2",
+      "searchDescription": "AJ Dybantsa and Darryn Peterson remain the projected top two picks, Utah Jazz Darryn Peterson, PG/SG, Kansas. Dybantsa will be the first two ...",
+      "searchPositions": [
+        1,
+        3,
+        7
+      ],
+      "usableFor": [
+        "mock draft",
+        "round 1 and 2 pick projections",
+        "team intel",
+        "team needs context"
+      ],
+      "rawText": "AJ Dybantsa and Darryn Peterson remain the projected top two picks, Utah Jazz Darryn Peterson, PG/SG, Kansas. Dybantsa will be the first two ...",
+      "notes": "Appears in multiple raw searches. Use as one deduplicated ESPN source; it is more current than the post-combine ESPN mock in this raw set."
+    },
+    {
+      "id": "espn-post-combine-mock-60",
+      "sourceName": "ESPN 2026 NBA mock draft post-combine",
+      "url": "https://www.espn.com/nba/story/_/id/48790115/2026-nba-mock-draft-projecting-60-picks-post-combine-peterson-dybantsa-boozer",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "2026 NBA mock draft: Projecting all 60 picks post-combine - ESPN",
+      "searchDescription": "The Wizards became the talk of the combine after making good on their lottery odds, setting them up to pick No. 1 for the first time since 2010.",
+      "searchPositions": [
+        6
+      ],
+      "usableFor": [
+        "combine aftermath",
+        "movement tracking",
+        "older mock baseline"
+      ],
+      "rawText": "The Wizards became the talk of the combine after making good on their lottery odds, setting them up to pick No. 1 for the first time since 2010.",
+      "notes": "Useful for how projections changed after the combine. If it conflicts with ESPN final mock, use the final mock as fresher."
+    },
+    {
+      "id": "espn-draftcast-rounds",
+      "sourceName": "ESPN Draftcast 2026 picks by round",
+      "url": "https://www.espn.com/nba/draft/rounds",
+      "localPath": null,
+      "sourceType": "major_media_tracker",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "NBA Draft 2026 Picks by Round - ESPN",
+      "searchDescription": "Get pick by pick results from each round of the 2026 NBA Draft with Draftcast on ESPN.",
+      "searchPositions": [
+        5
+      ],
+      "usableFor": [
+        "pick-by-round validation",
+        "draft tracker cross-check"
+      ],
+      "rawText": "Get pick by pick results from each round of the 2026 NBA Draft with Draftcast on ESPN.",
+      "notes": "Usable as a secondary pick-order/tracker source. NBA.com official order remains the primary authority."
+    },
+    {
+      "id": "cbs-trotter-mock",
+      "sourceName": "CBS Sports Isaac Trotter 2026 mock draft",
+      "url": "https://www.cbssports.com/nba/news/2026-nba-mock-draft-isaac-trotter/",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft: Isaac Trotter predicts all 30 first-round picks ...",
+      "searchDescription": "With the NBA Draft less than a week away, here's what we're hearing about how the first round could shake out.",
+      "searchPositions": [
+        7
+      ],
+      "usableFor": [
+        "mock draft",
+        "first-round projections",
+        "team fit notes"
+      ],
+      "rawText": "With the NBA Draft less than a week away, here's what we're hearing about how the first round could shake out.",
+      "notes": "Usable professional media source. Keep separate from other CBS mocks because author and assumptions can differ."
+    },
+    {
+      "id": "cbs-norlander-mock",
+      "sourceName": "CBS Sports Matt Norlander 2026 mock draft",
+      "url": "https://www.cbssports.com/nba/news/2026-nba-mock-draft-cameron-boozer-goes-to-jazz-at-no-2-clippers-like-mikel-brown-for-fifth-pick/",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft: Cameron Boozer goes to Jazz at No. 2 ...",
+      "searchDescription": "Cameron Boozer goes to Jazz at No. 2, Clippers like Mikel Brown for fifth pick. They need a star, potential if the Clippers pass on him at No. ...",
+      "searchPositions": [
+        8
+      ],
+      "usableFor": [
+        "mock draft",
+        "team fit notes",
+        "alternative CBS signal"
+      ],
+      "rawText": "Cameron Boozer goes to Jazz at No. 2, Clippers like Mikel Brown for fifth pick. They need a star, potential if the Clippers pass on him at No. ...",
+      "notes": "Usable professional media source. Do not double-count as independent from CBS Trotter without author-level weighting."
+    },
+    {
+      "id": "yahoo-mock-draft",
+      "sourceName": "Yahoo Sports NBA Mock Draft 2026",
+      "url": "https://sports.yahoo.com/nba/draft/",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "NBA Mock Draft 2026 - Yahoo Sports",
+      "searchDescription": "Mock Draft · RD1, PK1Round 1, Pick 1. Washington Wizards · RD1, PK2Round 1, Pick 2. Utah Jazz · RD1, PK3Round 1, Pick 3. Memphis Grizzlies · RD1, PK4Round 1, Pick 4.",
+      "searchPositions": [
+        3
+      ],
+      "usableFor": [
+        "mock draft",
+        "pick projections",
+        "consensus comparison"
+      ],
+      "rawText": "Mock Draft · RD1, PK1Round 1, Pick 1. Washington Wizards · RD1, PK2Round 1, Pick 2. Utah Jazz · RD1, PK3Round 1, Pick 3. Memphis Grizzlies · RD1, PK4Round 1, Pick 4.",
+      "notes": "Usable major-media mock source. Prefer the Yahoo page itself over Facebook reposts of Yahoo/Kevin O'Connor content."
+    },
+    {
+      "id": "the-ringer-draft-guide-mock",
+      "sourceName": "The Ringer 2026 NBA Draft Guide Mock Draft",
+      "url": "https://theringer.com/nba-draft/2026/mock-draft",
+      "localPath": null,
+      "sourceType": "media_draft_guide",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json",
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "The Ringer 2026 NBA Draft Guide - Mock Draft",
+      "searchDescription": "You're reading J. Kyle Mann's post-lottery mock draft, projecting every pick of the first round now that the order is set. Check back for more mocks and big ...",
+      "searchPositions": [
+        3,
+        8
+      ],
+      "usableFor": [
+        "mock draft",
+        "player evaluations",
+        "team fit context"
+      ],
+      "rawText": "You're reading J. Kyle Mann's post-lottery mock draft, projecting every pick of the first round now that the order is set. Check back for more mocks and big ...",
+      "notes": "Usable independent draft guide. Appears in mock-draft and team-needs searches; deduplicate by URL."
+    },
+    {
+      "id": "bleacher-report-consensus-mock",
+      "sourceName": "Bleacher Report 2026 NBA mock draft consensus picks",
+      "url": "https://bleacherreport.com/articles/25441296-2026-nba-mock-draft-consensus-picks-every-1st-rounder",
+      "localPath": null,
+      "sourceType": "major_media_mock",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.68,
+      "credibilityLabel": "medium",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft with Consensus Picks for Every 1st-Rounder",
+      "searchDescription": "Four of the five mock drafts (with The Ringer being the lone exception) have the Dallas Mavericks taking Brayden Burries. And it's not hard to ...",
+      "searchPositions": [
+        4
+      ],
+      "usableFor": [
+        "secondary mock signal",
+        "consensus comparison",
+        "tie-breaker context"
+      ],
+      "rawText": "Four of the five mock drafts (with The Ringer being the lone exception) have the Dallas Mavericks taking Brayden Burries. And it's not hard to ...",
+      "notes": "Usable but should be weighted below NBA.com consensus, ESPN, The Athletic, CBS, Yahoo, and The Ringer when conflicts appear."
+    },
+    {
+      "id": "tankathon-full-draft-order",
+      "sourceName": "Tankathon Full 2026 NBA Draft Order",
+      "url": "https://www.tankathon.com/full-draft",
+      "localPath": null,
+      "sourceType": "draft_order_aggregator",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.68,
+      "credibilityLabel": "medium",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "Full 2026 NBA Draft Order - Tankathon",
+      "searchDescription": "Full 2026 NBA Draft Order. 1st Round. 1. Washington. Washington. 2. Utah. Utah. 3. Memphis. Memphis. 4. Chicago. Chicago. 5. LAC. LA Clippers.",
+      "searchPositions": [
+        7
+      ],
+      "usableFor": [
+        "draft order sanity check",
+        "pick-order cross-check"
+      ],
+      "rawText": "Full 2026 NBA Draft Order. 1st Round. 1. Washington. Washington. 2. Utah. Utah. 3. Memphis. Memphis. 4. Chicago. Chicago. 5. LAC. LA Clippers.",
+      "notes": "Useful draft-order aggregator, but not official. Use NBA.com order as the source of truth on conflicts."
+    },
+    {
+      "id": "realgm-future-pick-details",
+      "sourceName": "RealGM NBA Future Draft Pick Details",
+      "url": "https://basketball.realgm.com/nba/draft/future_drafts/detailed",
+      "localPath": null,
+      "sourceType": "transaction_reference",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.86,
+      "credibilityLabel": "high",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "NBA Future Draft Pick Details - RealGM",
+      "searchDescription": "2026 first round draft pick from New Orleans New Orleans' 2026 1st round pick to Atlanta [Atlanta-New Orleans, 6/25/2025]. 2026 second round draft pick from ...",
+      "searchPositions": [
+        8
+      ],
+      "usableFor": [
+        "future pick obligations",
+        "trade provenance",
+        "pick ownership context"
+      ],
+      "rawText": "2026 first round draft pick from New Orleans New Orleans' 2026 1st round pick to Atlanta [Atlanta-New Orleans, 6/25/2025]. 2026 second round draft pick from ...",
+      "notes": "Strong reference for traded-pick history and future obligations. Not a mock draft source; filter out unrelated RealGM sports links."
+    },
+    {
+      "id": "nbc-sports-big-board",
+      "sourceName": "NBC Sports 2026 NBA Draft Big Board",
+      "url": "https://www.nbcsports.com/fantasy/basketball/news/nbc-sports-2026-nba-draft-big-board-aj-dybantsa-darryn-peterson-lead-the-way",
+      "localPath": null,
+      "sourceType": "secondary_media_big_board",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.68,
+      "credibilityLabel": "medium",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json"
+      ],
+      "searchTitle": "2026 NBA Draft Big Board: AJ Dybantsa, Darryn Peterson lead the ...",
+      "searchDescription": "2026 NBA Draft Big Board: AJ Dybantsa, Darryn Peterson lead the way · 1. G/F AJ Dybantsa, BYU · 2. G Darryn Peterson, Kansas · 3. F Cameron Boozer, ...",
+      "searchPositions": [
+        5
+      ],
+      "usableFor": [
+        "secondary big board",
+        "prospect rank comparison",
+        "tie-breaker context"
+      ],
+      "rawText": "2026 NBA Draft Big Board: AJ Dybantsa, Darryn Peterson lead the way · 1. G/F AJ Dybantsa, BYU · 2. G Darryn Peterson, Kansas · 3. F Cameron Boozer, ...",
+      "notes": "Usable as a supporting board. It is not part of the explicitly requested core outlet list, so weight it below ESPN and other core sources."
+    },
+    {
+      "id": "wikipedia-2026-nba-draft",
+      "sourceName": "Wikipedia 2026 NBA draft",
+      "url": "https://en.wikipedia.org/wiki/2026_NBA_draft",
+      "localPath": null,
+      "sourceType": "encyclopedia",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.35,
+      "credibilityLabel": "low",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "2026 NBA draft - Wikipedia",
+      "searchDescription": "Pre-draft trades · Washington acquired Reggie Jackson and 2026 OKC first-round pick · Philadelphia acquired Jared Butler, 2027 second-round pick, 2028 GSW second- ...",
+      "searchPositions": [
+        2
+      ],
+      "usableFor": [
+        "discovery only"
+      ],
+      "rawText": "Pre-draft trades · Washington acquired Reggie Jackson and 2026 OKC first-round pick · Philadelphia acquired Jared Butler, 2027 second-round pick, 2028 GSW second- ...",
+      "notes": "Do not use as final evidence for order, trades, or player data when official NBA.com, ESPN, RealGM, or other primary/professional sources exist."
+    },
+    {
+      "id": "youtube-cbs-top10",
+      "sourceName": "CBS Sports YouTube top 10 mock draft video",
+      "url": "https://www.youtube.com/watch?v=0ExeDsHiBCc",
+      "localPath": null,
+      "sourceType": "official_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.25,
+      "credibilityLabel": "context_only",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json",
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft TOP 10 PICKS: Wizards take AJ ... - YouTube",
+      "searchDescription": "... Cameron Boozer at 3rd overall (9:14) Jazz select Darryn Peterson at 2nd overall (10:17) Wizards select AJ Dybantsa at 1st overall SUBSCRIBE ...",
+      "searchPositions": [
+        7,
+        8
+      ],
+      "usableFor": [
+        "fallback transcript context"
+      ],
+      "rawText": "... Cameron Boozer at 3rd overall (9:14) Jazz select Darryn Peterson at 2nd overall (10:17) Wizards select AJ Dybantsa at 1st overall SUBSCRIBE ...",
+      "notes": "Official CBS Sports video, but less structured than article pages. Prefer CBS Sports web articles for ingestion."
+    },
+    {
+      "id": "youtube-cbs-full-first-round",
+      "sourceName": "CBS Sports YouTube full first-round mock draft video",
+      "url": "https://www.youtube.com/watch?v=ZsEGDTXAWoc",
+      "localPath": null,
+      "sourceType": "official_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.25,
+      "credibilityLabel": "context_only",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft FULL FIRST ROUND + Second Round Steals",
+      "searchDescription": "Adam Finkelstein and Mike O'Donnell join CBS Sports HQ Spotlight to break down Adam's latest NBA Mock Draft less than two weeks away from ...",
+      "searchPositions": [
+        2
+      ],
+      "usableFor": [
+        "fallback transcript context"
+      ],
+      "rawText": "Adam Finkelstein and Mike O'Donnell join CBS Sports HQ Spotlight to break down Adam's latest NBA Mock Draft less than two weeks away from ...",
+      "notes": "Official CBS Sports video. Do not treat as independent from CBS article signals unless the content is materially different and manually reviewed."
+    },
+    {
+      "id": "youtube-cbs-college-bb-first-round",
+      "sourceName": "CBS Sports College Basketball YouTube first-round mock video",
+      "url": "https://www.youtube.com/watch?v=QRTHISEatqs",
+      "localPath": null,
+      "sourceType": "official_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.25,
+      "credibilityLabel": "context_only",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft! ALL 30 1st round picks - YouTube",
+      "searchDescription": "March… and everything in between. 2026 NBA Mock Draft! ALL 30 1st round picks: AJ Dybantsa, Darryn Peterson, Cam Boozer intel + more! 10K ...",
+      "searchPositions": [
+        2
+      ],
+      "usableFor": [
+        "fallback transcript context"
+      ],
+      "rawText": "March… and everything in between. 2026 NBA Mock Draft! ALL 30 1st round picks: AJ Dybantsa, Darryn Peterson, Cam Boozer intel + more! 10K ...",
+      "notes": "Official CBS Sports College Basketball video. Prefer structured CBS Sports article pages."
+    },
+    {
+      "id": "youtube-espn-chiney-mock-show",
+      "sourceName": "ESPN YouTube mock draft show",
+      "url": "https://www.youtube.com/watch?v=puFbPFHPRSc",
+      "localPath": null,
+      "sourceType": "official_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.25,
+      "credibilityLabel": "context_only",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "SHOCKING No. 1 Pick! Jeremy Woo's 2026 NBA Mock Draft Show",
+      "searchDescription": "| First Take. ESPN. New. 19K views · 12:39. Go to channel CBS Sports · 2026 NBA Draft: Everything you NEED to know about the Top 5 Prospects ✓.",
+      "searchPositions": [
+        5
+      ],
+      "usableFor": [
+        "fallback transcript context"
+      ],
+      "rawText": "| First Take. ESPN. New. 19K views · 12:39. Go to channel CBS Sports · 2026 NBA Draft: Everything you NEED to know about the Top 5 Prospects ✓.",
+      "notes": "Official ESPN video result. Prefer ESPN article pages for structured projection and profile data."
+    },
+    {
+      "id": "youtube-chat-sports-espn-react",
+      "sourceName": "Chat Sports YouTube ESPN mock draft reaction",
+      "url": "https://www.youtube.com/watch?v=B4z44m0ulXg",
+      "localPath": null,
+      "sourceType": "self_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "BRAND NEW 2026 NBA Mock Draft via ESPN - YouTube",
+      "searchDescription": "ESPN has just released their latest 2026 NBA Mock Draft, providing a fresh look at the top prospects heading into the upcoming NBA Draft.",
+      "searchPositions": [
+        10
+      ],
+      "usableFor": [],
+      "rawText": "ESPN has just released their latest 2026 NBA Mock Draft, providing a fresh look at the top prospects heading into the upcoming NBA Draft.",
+      "notes": "Self-media/reactive video. Ignore for model input; use the original ESPN source instead."
+    },
+    {
+      "id": "youtube-utility-sports-full-round",
+      "sourceName": "Utility Sports YouTube full first-round mock draft video",
+      "url": "https://www.youtube.com/watch?v=FBixMWfkpZE",
+      "localPath": null,
+      "sourceType": "self_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft | FULL FIRST ROUND MOCK DRAFT - YouTube",
+      "searchDescription": "the Utah Jazz, Cam Boozer lands with Memphis and the Chicago Bulls land their first ... Jazz Washington Wizards.",
+      "searchPositions": [
+        2
+      ],
+      "usableFor": [],
+      "rawText": "the Utah Jazz, Cam Boozer lands with Memphis and the Chicago Bulls land their first ... Jazz Washington Wizards.",
+      "notes": "Self-media video. Ignore for source-backed draft data."
+    },
+    {
+      "id": "youtube-utility-sports-trades",
+      "sourceName": "Utility Sports YouTube mock draft with trades video",
+      "url": "https://www.youtube.com/watch?v=nYfxfdVe0fo",
+      "localPath": null,
+      "sourceType": "self_media_video",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-draft-order-search.json"
+      ],
+      "searchTitle": "2026 NBA Mock Draft with TRADES | FULL FIRST ... - YouTube",
+      "searchDescription": "2026 NBA Draft Cycle! In this first round NBA mock draft, we cover the entire first round with the official order of the 2026 NBA Draft. AJ ...",
+      "searchPositions": [
+        6
+      ],
+      "usableFor": [],
+      "rawText": "2026 NBA Draft Cycle! In this first round NBA mock draft, we cover the entire first round with the official order of the 2026 NBA Draft. AJ ...",
+      "notes": "Self-media video with speculative trades. Ignore for source-backed draft data unless explicitly building a fan-scenario variant."
+    },
+    {
+      "id": "reddit-nba-mock-discussion",
+      "sourceName": "Reddit r/nba mock draft discussion",
+      "url": "https://www.reddit.com/r/nba/comments/1m273e8/2026_nba_mock_draft_darryn_peterson_aj_dybantsa/",
+      "localPath": null,
+      "sourceType": "community_discussion",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json"
+      ],
+      "searchTitle": "Darryn Peterson, AJ Dybantsa, or Cameron Boozer at No. 1? : r/nba",
+      "searchDescription": "2026 NBA Mock Draft: Darryn Peterson, AJ Dybantsa, or Cameron Boozer at No. 1? it feels like a very Sacramento pick. This isn't a big board, it ...",
+      "searchPositions": [
+        4
+      ],
+      "usableFor": [],
+      "rawText": "2026 NBA Mock Draft: Darryn Peterson, AJ Dybantsa, or Cameron Boozer at No. 1? it feels like a very Sacramento pick. This isn't a big board, it ...",
+      "notes": "Community commentary. Ignore for data ingestion."
+    },
+    {
+      "id": "reddit-wizards-consensus-post",
+      "sourceName": "Reddit r/washingtonwizards NBA.com consensus repost",
+      "url": "https://www.reddit.com/r/washingtonwizards/comments/1tljx4o/nbacom_consensus_mock_draft_where_things_stand/",
+      "localPath": null,
+      "sourceType": "community_repost",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "Where things stand exiting the AWS NBA Draft Combine 2026. AJ ...",
+      "searchDescription": "AJ Dybantsa is #1 to the Wizards in every updated mock draft: ESPN, The Ringer, The Athletic, Yahoo Sports, Bleacher Report, NetScouts ...",
+      "searchPositions": [
+        6
+      ],
+      "usableFor": [],
+      "rawText": "AJ Dybantsa is #1 to the Wizards in every updated mock draft: ESPN, The Ringer, The Athletic, Yahoo Sports, Bleacher Report, NetScouts ...",
+      "notes": "Community repost of NBA.com consensus. Ignore and use the NBA.com source directly."
+    },
+    {
+      "id": "facebook-azcentral-repost",
+      "sourceName": "Facebook azcentral mock draft repost",
+      "url": "https://www.facebook.com/azcentral/posts/latest-nba-mock-draft-has-cameron-boozer-aj-dybantsa-and-darryn-peterson-going-i/1419874373508237/",
+      "localPath": null,
+      "sourceType": "social_repost",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-big-board-search.json"
+      ],
+      "searchTitle": "Latest NBA mock draft has Cameron Boozer, AJ Dybantsa and ...",
+      "searchDescription": "NBA mock draft has Cameron Boozer, AJ Dybantsa and Darryn Peterson going in first three picks of first round of 2026 draft, but in what order?",
+      "searchPositions": [
+        6
+      ],
+      "usableFor": [],
+      "rawText": "NBA mock draft has Cameron Boozer, AJ Dybantsa and Darryn Peterson going in first three picks of first round of 2026 draft, but in what order?",
+      "notes": "Social repost. Ignore unless the underlying article is separately fetched and evaluated."
+    },
+    {
+      "id": "facebook-yahoo-koc-repost",
+      "sourceName": "Facebook Yahoo/Kevin O'Connor mock draft repost",
+      "url": "https://www.facebook.com/100063714099712/posts/nba-mock-draft-the-2026-nba-draft-is-one-week-away-and-kevin-oconnor-has-his-lat/1595785622555226/",
+      "localPath": null,
+      "sourceType": "social_repost",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-mock-draft-search.json"
+      ],
+      "searchTitle": "NBA MOCK DRAFT The 2026 NBA Draft is ONE week away and ...",
+      "searchDescription": "OUR LATEST NBA MOCK DRAFT IS LIVE Kevin O'Connor drops his first-round mock draft based on the most recent intel ➡️ https://yhoo.it/4k9QSoH.",
+      "searchPositions": [
+        9
+      ],
+      "usableFor": [],
+      "rawText": "OUR LATEST NBA MOCK DRAFT IS LIVE Kevin O'Connor drops his first-round mock draft based on the most recent intel ➡️ https://yhoo.it/4k9QSoH.",
+      "notes": "Social repost. Prefer the Yahoo Sports mock page or original article."
+    },
+    {
+      "id": "instagram-top4-post",
+      "sourceName": "Instagram top 4 draft order post",
+      "url": "https://www.instagram.com/p/DYK3ZeqDfzL/?hl=en",
+      "localPath": null,
+      "sourceType": "social_post",
+      "originLayer": "external_web",
+      "collectedAt": "2026-06-22T03:31:27+08:00",
+      "retrievedBy": "firecrawl-cli + A1-Web Source Inventory Agent",
+      "credibility": 0.0,
+      "credibilityLabel": "ignore",
+      "rawArtifact": [
+        "data/raw/firecrawl-2026-team-needs-search.json"
+      ],
+      "searchTitle": "Top 4 order in the 2026 NBA Draft: 1. Washington Wizards 2. Utah ...",
+      "searchDescription": "The Washington Wizards are officially on the clock with the #1 overall pick, followed closely by the Utah Jazz and Memphis Grizzlies.",
+      "searchPositions": [
+        5
+      ],
+      "usableFor": [],
+      "rawText": "The Washington Wizards are officially on the clock with the #1 overall pick, followed closely by the Utah Jazz and Memphis Grizzlies.",
+      "notes": "Social post with partial draft-order information. Ignore and use official NBA.com order."
+    },
+    {
+      "id": "nba-official-2026-prospects-live",
+      "sourceName": "NBA.com 2026 Draft Prospects live capture",
+      "url": "https://www.nba.com/draft/2026/prospects",
+      "localPath": "data/raw/nba-official-2026-prospects-live.md",
+      "sourceType": "official_prospect_list",
+      "originLayer": "external_web_official",
+      "collectedAt": "2026-06-22T04:04:42+08:00",
+      "retrievedBy": "firecrawl-cli scrape",
+      "credibility": 1.0,
+      "rawArtifact": "data/raw/nba-official-2026-prospects-live.md",
+      "usableFor": [
+        "2026 candidate membership",
+        "position",
+        "age",
+        "school/club",
+        "height",
+        "weight",
+        "status",
+        "country"
+      ],
+      "rawText": "",
+      "notes": "Authoritative current NBA.com Prospects table used to reconcile final import bundle."
+    },
+    {
+      "id": "nba-official-2026-draft-order-live",
+      "sourceName": "NBA.com 2026 Draft Order live capture",
+      "url": "https://www.nba.com/news/2026-nba-draft-order",
+      "localPath": "data/raw/nba-official-2026-draft-order-live.md",
+      "sourceType": "official_order",
+      "originLayer": "external_web_official",
+      "collectedAt": "2026-06-22T04:04:42+08:00",
+      "retrievedBy": "firecrawl-cli scrape",
+      "credibility": 1.0,
+      "rawArtifact": "data/raw/nba-official-2026-draft-order-live.md",
+      "usableFor": [
+        "2026 draft order",
+        "pick ownership",
+        "acquired from notes"
+      ],
+      "rawText": "",
+      "notes": "Authoritative current NBA.com Draft Order used to verify first-round pick order."
+    }
+  ]
+}

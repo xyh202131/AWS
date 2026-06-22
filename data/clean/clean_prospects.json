@@ -1,0 +1,1467 @@
+[
+  {
+    "id": "darryn-peterson",
+    "name": "Darryn Peterson",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Kansas",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-5",
+    "weight": "199 lbs",
+    "age": 19,
+    "consensusRank": 1,
+    "mockHeat": 99,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "shot creator",
+      "pull-up shooting",
+      "combo guard"
+    ],
+    "strengths": [
+      "Lead-guard scoring",
+      "Pull-up shooting",
+      "High-usage creation"
+    ],
+    "risks": [
+      "Playmaking consistency",
+      "Defensive engagement"
+    ],
+    "profile": {
+      "shooting": 90,
+      "creation": 93,
+      "defense": 72,
+      "athleticism": 84,
+      "feel": 80,
+      "size": 82,
+      "upside": 96
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 19, Kansas, 6-5, 199 lbs, Freshman, United States",
+      "NBA.com consensus: common No. 2 pick",
+      "ESPN and Tankathon top guard tier",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 1; source rank 1; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 2, most common 2 (8).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 2, most common 2 (8)."
+    ]
+  },
+  {
+    "id": "aj-dybantsa",
+    "name": "AJ Dybantsa",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "BYU",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-9",
+    "weight": "217 lbs",
+    "age": 19,
+    "consensusRank": 2,
+    "mockHeat": 99,
+    "international": false,
+    "roleTags": [
+      "wing creator",
+      "alpha scorer",
+      "star upside",
+      "two-way",
+      "transition"
+    ],
+    "strengths": [
+      "Elite scoring wing",
+      "Top-pick media consensus",
+      "Size and downhill pressure"
+    ],
+    "risks": [
+      "Decision load",
+      "Shot selection variance"
+    ],
+    "profile": {
+      "shooting": 86,
+      "creation": 94,
+      "defense": 78,
+      "athleticism": 92,
+      "feel": 81,
+      "size": 91,
+      "upside": 98
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, BYU, 6-9, 217 lbs, Freshman, United States",
+      "NBA.com consensus: most common No. 1 pick",
+      "Tankathon top-tier wing",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 2; source rank 2; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 1, most common 1 (10).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 1, most common 1 (10)."
+    ]
+  },
+  {
+    "id": "cameron-boozer",
+    "name": "Cameron Boozer",
+    "positions": [
+      "PF",
+      "C"
+    ],
+    "school": "Duke",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-8",
+    "weight": "253 lbs",
+    "age": 18,
+    "consensusRank": 3,
+    "mockHeat": 97,
+    "international": false,
+    "roleTags": [
+      "frontcourt engine",
+      "rebounder",
+      "feel",
+      "connector",
+      "interior scorer"
+    ],
+    "strengths": [
+      "Polished production",
+      "Rebounding and passing feel",
+      "Strong frame"
+    ],
+    "risks": [
+      "Top-end vertical pop",
+      "Switch defense ceiling"
+    ],
+    "profile": {
+      "shooting": 78,
+      "creation": 79,
+      "defense": 82,
+      "athleticism": 80,
+      "feel": 92,
+      "size": 90,
+      "upside": 94
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F-C, age 18, Duke, 6-8, 253 lbs, Freshman, United States",
+      "NBA.com consensus: common No. 3 pick",
+      "Tankathon lists him in tier 1",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 3; source rank 3; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 3, most common 3 (8).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 3, most common 3 (8)."
+    ]
+  },
+  {
+    "id": "caleb-wilson",
+    "name": "Caleb Wilson",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "North Carolina",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-9",
+    "weight": "211 lbs",
+    "age": 19,
+    "consensusRank": 4,
+    "mockHeat": 94,
+    "international": false,
+    "roleTags": [
+      "big wing",
+      "versatile forward",
+      "two-way",
+      "rim pressure",
+      "transition"
+    ],
+    "strengths": [
+      "Size and fluidity",
+      "Two-way forward tools",
+      "Open-court play"
+    ],
+    "risks": [
+      "Strength development",
+      "Half-court shot diet"
+    ],
+    "profile": {
+      "shooting": 79,
+      "creation": 82,
+      "defense": 86,
+      "athleticism": 89,
+      "feel": 80,
+      "size": 93,
+      "upside": 95
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, North Carolina, 6-9, 211 lbs, Freshman, United States",
+      "NBA.com consensus: common No. 4 pick",
+      "High lottery forward archetype",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 4; source rank 4; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 4, most common 4 (8).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 4, most common 4 (8)."
+    ]
+  },
+  {
+    "id": "keaton-wagler",
+    "name": "Keaton Wagler",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Illinois",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-5",
+    "weight": "188 lbs",
+    "age": 19,
+    "consensusRank": 5,
+    "mockHeat": 92,
+    "international": false,
+    "roleTags": [
+      "combo guard",
+      "pull-up shooting",
+      "decision maker",
+      "shooter"
+    ],
+    "strengths": [
+      "Big guard shooting",
+      "Rising lottery momentum",
+      "Secondary playmaking"
+    ],
+    "risks": [
+      "Frame strength",
+      "Primary creation ceiling"
+    ],
+    "profile": {
+      "shooting": 91,
+      "creation": 84,
+      "defense": 74,
+      "athleticism": 79,
+      "feel": 83,
+      "size": 84,
+      "upside": 90
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 19, Illinois, 6-5, 188 lbs, Freshman, United States",
+      "NBA.com consensus: common No. 5 pick",
+      "Media momentum near top five",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 5; source rank 5; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 5, most common 5 (8).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 5, most common 5 (8)."
+    ]
+  },
+  {
+    "id": "darius-acuff-jr",
+    "name": "Darius Acuff Jr.",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Arkansas",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-2",
+    "weight": "186 lbs",
+    "age": 19,
+    "consensusRank": 6,
+    "mockHeat": 90,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "shot creator",
+      "pace",
+      "paint touch",
+      "playmaking"
+    ],
+    "strengths": [
+      "Rim pressure",
+      "Live-dribble playmaking",
+      "Aggressive scoring"
+    ],
+    "risks": [
+      "Size versus NBA length",
+      "Shot discipline"
+    ],
+    "profile": {
+      "shooting": 80,
+      "creation": 90,
+      "defense": 66,
+      "athleticism": 88,
+      "feel": 79,
+      "size": 70,
+      "upside": 89
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 19, Arkansas, 6-2, 186 lbs, Freshman, United States",
+      "NBA.com consensus: common pick in 6-7 range",
+      "Tankathon top guard group",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 6; source rank 6; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 6, most common 6 (5).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 6, most common 6 (5)."
+    ]
+  },
+  {
+    "id": "mikel-brown-jr",
+    "name": "Mikel Brown Jr.",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Louisville",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-5",
+    "weight": "180 lbs",
+    "age": 20,
+    "consensusRank": 7,
+    "mockHeat": 88,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "pull-up shooting",
+      "decision maker",
+      "pace"
+    ],
+    "strengths": [
+      "Shooting off movement",
+      "Pick-and-roll feel",
+      "Clean guard skill"
+    ],
+    "risks": [
+      "Defensive pressure",
+      "Finishing through size"
+    ],
+    "profile": {
+      "shooting": 88,
+      "creation": 84,
+      "defense": 68,
+      "athleticism": 78,
+      "feel": 84,
+      "size": 76,
+      "upside": 83
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Louisville, 6-5, 180 lbs, Freshman, United States",
+      "NBA.com consensus top-ten range",
+      "Tankathon guard group",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 7; source rank 7; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 7, most common 6 (4).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 7, most common 6 (4)."
+    ]
+  },
+  {
+    "id": "kingston-flemings",
+    "name": "Kingston Flemings",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Houston",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-3",
+    "weight": "183 lbs",
+    "age": 19,
+    "consensusRank": 8,
+    "mockHeat": 86,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "pace",
+      "playmaking",
+      "defense"
+    ],
+    "strengths": [
+      "Speed and table setting",
+      "Point-of-attack pressure",
+      "Transition creation"
+    ],
+    "risks": [
+      "Jumper consistency",
+      "Finishing through contact"
+    ],
+    "profile": {
+      "shooting": 76,
+      "creation": 86,
+      "defense": 80,
+      "athleticism": 87,
+      "feel": 83,
+      "size": 72,
+      "upside": 88
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 19, Houston, 6-3, 183 lbs, Freshman, United States",
+      "Appears across NBA.com consensus mocks",
+      "Houston guard with creation profile",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 8; source rank 8; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 8, most common 7, 9 (3).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 8, most common 7, 9 (3)."
+    ]
+  },
+  {
+    "id": "nate-ament",
+    "name": "Nate Ament",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "Tennessee",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-10",
+    "weight": "211 lbs",
+    "age": 19,
+    "consensusRank": 9,
+    "mockHeat": 83,
+    "international": false,
+    "roleTags": [
+      "big wing",
+      "stretch forward",
+      "shooter",
+      "upside"
+    ],
+    "strengths": [
+      "Tall shooting wing",
+      "Floor spacing",
+      "Late-lottery upside"
+    ],
+    "risks": [
+      "Strength",
+      "Defensive physicality"
+    ],
+    "profile": {
+      "shooting": 86,
+      "creation": 73,
+      "defense": 72,
+      "athleticism": 76,
+      "feel": 75,
+      "size": 92,
+      "upside": 87
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, Tennessee, 6-10, 211 lbs, Freshman, United States",
+      "Appears in NBA.com consensus lottery boards",
+      "Valued for size-shooting mix",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 9; source rank 9; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 11, most common 10, 12 (3).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 11, most common 10, 12 (3)."
+    ]
+  },
+  {
+    "id": "aday-mara",
+    "name": "Aday Mara",
+    "positions": [
+      "C"
+    ],
+    "school": "Michigan",
+    "origin": "Spain",
+    "classYear": "Junior",
+    "height": "7-3",
+    "weight": "260 lbs",
+    "age": 21,
+    "consensusRank": 10,
+    "mockHeat": 81,
+    "international": true,
+    "roleTags": [
+      "rim protector",
+      "size",
+      "interior finisher",
+      "passing",
+      "international"
+    ],
+    "strengths": [
+      "Rare height",
+      "Shot blocking",
+      "Touch and passing windows"
+    ],
+    "risks": [
+      "Mobility in space",
+      "Physical stamina"
+    ],
+    "profile": {
+      "shooting": 65,
+      "creation": 61,
+      "defense": 91,
+      "athleticism": 67,
+      "feel": 82,
+      "size": 99,
+      "upside": 83
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: C, age 21, Michigan, 7-3, 260 lbs, Junior, Spain",
+      "NBA.com consensus common top-eight mention",
+      "International big milestone candidate",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 10; source rank 10; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 10, most common 8 (4).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 10, most common 8 (4)."
+    ]
+  },
+  {
+    "id": "brayden-burries",
+    "name": "Brayden Burries",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Arizona",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-4",
+    "weight": "215 lbs",
+    "age": 20,
+    "consensusRank": 11,
+    "mockHeat": 79,
+    "international": false,
+    "roleTags": [
+      "combo guard",
+      "two-way",
+      "wing defender",
+      "shot creator"
+    ],
+    "strengths": [
+      "Strong guard frame",
+      "Two-way tools",
+      "Scoring versatility"
+    ],
+    "risks": [
+      "Age for class",
+      "Passing reads"
+    ],
+    "profile": {
+      "shooting": 82,
+      "creation": 81,
+      "defense": 83,
+      "athleticism": 82,
+      "feel": 77,
+      "size": 84,
+      "upside": 84
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Arizona, 6-4, 215 lbs, Freshman, United States",
+      "Consensus lottery name",
+      "Tankathon top-ten wing/guard",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 11; source rank 11; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 9, most common 9 (5).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 9, most common 9 (5)."
+    ]
+  },
+  {
+    "id": "yaxel-lendeborg",
+    "name": "Yaxel Lendeborg",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "Michigan",
+    "origin": "United States",
+    "classYear": "Senior",
+    "height": "6-9",
+    "weight": "241 lbs",
+    "age": 23,
+    "consensusRank": 12,
+    "mockHeat": 77,
+    "international": false,
+    "roleTags": [
+      "connector",
+      "rebounder",
+      "defense",
+      "maturity",
+      "feel"
+    ],
+    "strengths": [
+      "Older productive forward",
+      "Passing feel",
+      "Rebounding and defense"
+    ],
+    "risks": [
+      "Age curve",
+      "Shooting volume"
+    ],
+    "profile": {
+      "shooting": 72,
+      "creation": 70,
+      "defense": 88,
+      "athleticism": 76,
+      "feel": 91,
+      "size": 88,
+      "upside": 72
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 23, Michigan, 6-9, 241 lbs, Senior, United States",
+      "NBA.com consensus mid-first name",
+      "Strong analytics profile",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 12; source rank 12; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4)."
+    ]
+  },
+  {
+    "id": "hannes-steinbach",
+    "name": "Hannes Steinbach",
+    "positions": [
+      "PF",
+      "C"
+    ],
+    "school": "Washington",
+    "origin": "Germany",
+    "classYear": "Freshman",
+    "height": "6-10",
+    "weight": "248 lbs",
+    "age": 20,
+    "consensusRank": 13,
+    "mockHeat": 72,
+    "international": true,
+    "roleTags": [
+      "rebounder",
+      "connector",
+      "international",
+      "size",
+      "feel"
+    ],
+    "strengths": [
+      "Size and rebounding",
+      "Low-mistake frontcourt feel",
+      "International background"
+    ],
+    "risks": [
+      "Vertical explosiveness",
+      "Perimeter shooting proof"
+    ],
+    "profile": {
+      "shooting": 67,
+      "creation": 58,
+      "defense": 78,
+      "athleticism": 70,
+      "feel": 82,
+      "size": 92,
+      "upside": 77
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F-C, age 20, Washington, 6-10, 248 lbs, Freshman, Germany",
+      "Consensus mid-first name",
+      "Fits international-player milestones",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 13; source rank 13; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "karim-lopez",
+    "name": "Karim Lopez",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "New Zealand Breakers (Australia)",
+    "origin": "Mexico",
+    "classYear": "International",
+    "height": "6-8",
+    "weight": "222 lbs",
+    "age": 19,
+    "consensusRank": 14,
+    "mockHeat": 72,
+    "international": true,
+    "roleTags": [
+      "big wing",
+      "international",
+      "defense",
+      "transition",
+      "upside"
+    ],
+    "strengths": [
+      "International wing size",
+      "Defensive tools",
+      "Open-court flashes"
+    ],
+    "risks": [
+      "Shooting consistency",
+      "Half-court creation"
+    ],
+    "profile": {
+      "shooting": 73,
+      "creation": 70,
+      "defense": 85,
+      "athleticism": 83,
+      "feel": 75,
+      "size": 91,
+      "upside": 86
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, New Zealand Breakers (Australia), 6-8, 222 lbs, International, Mexico",
+      "Appears in NBA.com consensus top-14 boards",
+      "International milestone candidate",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 14; source rank 14; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 13, most common 11 (2).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 13, most common 11 (2)."
+    ]
+  },
+  {
+    "id": "morez-johnson-jr",
+    "name": "Morez Johnson Jr.",
+    "positions": [
+      "PF",
+      "C"
+    ],
+    "school": "Michigan",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-9",
+    "weight": "250 lbs",
+    "age": 20,
+    "consensusRank": 15,
+    "mockHeat": 70,
+    "international": false,
+    "roleTags": [
+      "rebounder",
+      "rim protector",
+      "finisher",
+      "size"
+    ],
+    "strengths": [
+      "Physical rebounding",
+      "Interior finishing",
+      "Frontcourt strength"
+    ],
+    "risks": [
+      "Spacing",
+      "Passing feel"
+    ],
+    "profile": {
+      "shooting": 56,
+      "creation": 54,
+      "defense": 84,
+      "athleticism": 79,
+      "feel": 66,
+      "size": 90,
+      "upside": 78
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F-C, age 20, Michigan, 6-9, 250 lbs, Sophomore, United States",
+      "NBA.com consensus top-14 in several boards",
+      "Clear frontcourt role",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 15; source rank 15; confidence high.",
+      "NBA.com consensus lottery cross-check: pick 14, most common 14 (8).",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 14, most common 14 (8)."
+    ]
+  },
+  {
+    "id": "christian-anderson",
+    "name": "Christian Anderson",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Texas Tech",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-1",
+    "weight": "180 lbs",
+    "age": 20,
+    "consensusRank": 16,
+    "mockHeat": 65,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "playmaking",
+      "pace",
+      "bench guard"
+    ],
+    "strengths": [
+      "High assist pressure",
+      "Pick-and-roll pace",
+      "Guard production"
+    ],
+    "risks": [
+      "Size",
+      "Finishing angles"
+    ],
+    "profile": {
+      "shooting": 78,
+      "creation": 82,
+      "defense": 69,
+      "athleticism": 77,
+      "feel": 83,
+      "size": 66,
+      "upside": 74
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Texas Tech, 6-1, 180 lbs, Sophomore, United States",
+      "Tankathon first-round guard",
+      "High playmaking signal",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 16; source rank 16; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "allen-graves",
+    "name": "Allen Graves",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "Santa Clara",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-8",
+    "weight": "226 lbs",
+    "age": 19,
+    "consensusRank": 17,
+    "mockHeat": 63,
+    "international": false,
+    "roleTags": [
+      "defense",
+      "rebounder",
+      "stretch forward",
+      "versatile forward"
+    ],
+    "strengths": [
+      "Defensive events",
+      "Rebounding",
+      "Forward size"
+    ],
+    "risks": [
+      "Level-of-competition translation",
+      "Self creation"
+    ],
+    "profile": {
+      "shooting": 72,
+      "creation": 62,
+      "defense": 86,
+      "athleticism": 78,
+      "feel": 76,
+      "size": 85,
+      "upside": 78
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, Santa Clara, 6-8, 226 lbs, Freshman, United States",
+      "Tankathon No. 21 range",
+      "Multi-category forward production",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 17; source rank 17; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "labaron-philon-jr",
+    "name": "Labaron Philon Jr.",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Alabama",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-3",
+    "weight": "176 lbs",
+    "age": 20,
+    "consensusRank": 18,
+    "mockHeat": 61,
+    "international": false,
+    "roleTags": [
+      "primary guard",
+      "pace",
+      "shot creator",
+      "playmaking"
+    ],
+    "strengths": [
+      "Fast decision making",
+      "Scoring and passing balance",
+      "SEC production"
+    ],
+    "risks": [
+      "Frame",
+      "Defensive matchups"
+    ],
+    "profile": {
+      "shooting": 81,
+      "creation": 86,
+      "defense": 69,
+      "athleticism": 82,
+      "feel": 86,
+      "size": 68,
+      "upside": 82
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Alabama, 6-3, 176 lbs, Sophomore, United States",
+      "Consensus fringe lottery candidate",
+      "Productive guard profile",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 18; source rank 18; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "chris-cenac-jr",
+    "name": "Chris Cenac Jr.",
+    "positions": [
+      "PF",
+      "C"
+    ],
+    "school": "Houston",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-11",
+    "weight": "240 lbs",
+    "age": 19,
+    "consensusRank": 19,
+    "mockHeat": 58,
+    "international": false,
+    "roleTags": [
+      "rim protector",
+      "rebounder",
+      "size",
+      "upside",
+      "finisher"
+    ],
+    "strengths": [
+      "Long frontcourt tools",
+      "Rebounding range",
+      "Upside swing"
+    ],
+    "risks": [
+      "Offensive polish",
+      "Strength through contact"
+    ],
+    "profile": {
+      "shooting": 60,
+      "creation": 55,
+      "defense": 82,
+      "athleticism": 81,
+      "feel": 63,
+      "size": 93,
+      "upside": 84
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F-C, age 19, Houston, 6-11, 240 lbs, Freshman, United States",
+      "Tankathon top-20 frontcourt prospect",
+      "Useful late-lottery big target",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 19; source rank 19; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "bennett-stirtz",
+    "name": "Bennett Stirtz",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Iowa",
+    "origin": "United States",
+    "classYear": "Senior",
+    "height": "6-3",
+    "weight": "186 lbs",
+    "age": 22,
+    "consensusRank": 20,
+    "mockHeat": 56,
+    "international": false,
+    "roleTags": [
+      "maturity",
+      "decision maker",
+      "shooter",
+      "bench guard"
+    ],
+    "strengths": [
+      "Older guard production",
+      "Decision making",
+      "Rotation readiness"
+    ],
+    "risks": [
+      "Ceiling",
+      "Point-of-attack defense"
+    ],
+    "profile": {
+      "shooting": 84,
+      "creation": 75,
+      "defense": 70,
+      "athleticism": 68,
+      "feel": 88,
+      "size": 70,
+      "upside": 66
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 22, Iowa, 6-3, 186 lbs, Senior, United States",
+      "Tankathon first-round range",
+      "Ready guard archetype",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 20; source rank 20; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "cameron-carr",
+    "name": "Cameron Carr",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Baylor",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-5",
+    "weight": "184 lbs",
+    "age": 21,
+    "consensusRank": 21,
+    "mockHeat": 54,
+    "international": false,
+    "roleTags": [
+      "shooter",
+      "two-way",
+      "wing defender",
+      "off-ball"
+    ],
+    "strengths": [
+      "Shotmaking guard",
+      "Length for position",
+      "Useful low-usage fit"
+    ],
+    "risks": [
+      "Handle pressure",
+      "Creation scale"
+    ],
+    "profile": {
+      "shooting": 87,
+      "creation": 74,
+      "defense": 79,
+      "athleticism": 77,
+      "feel": 75,
+      "size": 82,
+      "upside": 76
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 21, Baylor, 6-5, 184 lbs, Sophomore, United States",
+      "Tankathon top-15 range",
+      "Consensus late-lottery/mid-first",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 21; source rank 21; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "jayden-quaintance",
+    "name": "Jayden Quaintance",
+    "positions": [
+      "PF",
+      "C"
+    ],
+    "school": "Kentucky",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-9",
+    "weight": "253 lbs",
+    "age": 18,
+    "consensusRank": 22,
+    "mockHeat": 52,
+    "international": false,
+    "roleTags": [
+      "rim protector",
+      "rebounder",
+      "upside",
+      "defense",
+      "finisher"
+    ],
+    "strengths": [
+      "Young for class",
+      "Defensive upside",
+      "Physical tools"
+    ],
+    "risks": [
+      "Medical review",
+      "Small sample"
+    ],
+    "profile": {
+      "shooting": 55,
+      "creation": 52,
+      "defense": 86,
+      "athleticism": 85,
+      "feel": 64,
+      "size": 90,
+      "upside": 88
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F-C, age 18, Kentucky, 6-9, 253 lbs, Sophomore, United States",
+      "Draft health-risk discussion",
+      "First-round tools if medicals check out",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 22; source rank 22; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "dailyn-swain",
+    "name": "Dailyn Swain",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "Texas",
+    "origin": "United States",
+    "classYear": "Junior",
+    "height": "6-7",
+    "weight": "211 lbs",
+    "age": 20,
+    "consensusRank": 23,
+    "mockHeat": 50,
+    "international": false,
+    "roleTags": [
+      "big wing",
+      "defense",
+      "passing",
+      "connector",
+      "two-way"
+    ],
+    "strengths": [
+      "Wing size",
+      "Passing flashes",
+      "Defensive activity"
+    ],
+    "risks": [
+      "Pull-up shooting",
+      "Primary creation"
+    ],
+    "profile": {
+      "shooting": 74,
+      "creation": 70,
+      "defense": 83,
+      "athleticism": 81,
+      "feel": 82,
+      "size": 89,
+      "upside": 80
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 20, Texas, 6-7, 211 lbs, Junior, United States",
+      "Appears on NBA.com consensus boards",
+      "Tankathon No. 22 range",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 23; source rank 23; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "ebuka-okorie",
+    "name": "Ebuka Okorie",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Stanford",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-1",
+    "weight": "186 lbs",
+    "age": 19,
+    "consensusRank": 24,
+    "mockHeat": 47,
+    "international": false,
+    "roleTags": [
+      "shot creator",
+      "pace",
+      "bench guard",
+      "pull-up shooting"
+    ],
+    "strengths": [
+      "Scoring punch",
+      "Freshman production",
+      "Late-clock handle"
+    ],
+    "risks": [
+      "Playmaking balance",
+      "Defensive size"
+    ],
+    "profile": {
+      "shooting": 82,
+      "creation": 84,
+      "defense": 64,
+      "athleticism": 79,
+      "feel": 72,
+      "size": 67,
+      "upside": 78
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 19, Stanford, 6-1, 186 lbs, Freshman, United States",
+      "Tankathon No. 24 range",
+      "Scoring guard profile",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 24; source rank 24; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "isaiah-evans",
+    "name": "Isaiah Evans",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Duke",
+    "origin": "United States",
+    "classYear": "Sophomore",
+    "height": "6-6",
+    "weight": "186 lbs",
+    "age": 20,
+    "consensusRank": 25,
+    "mockHeat": 45,
+    "international": false,
+    "roleTags": [
+      "3-and-D",
+      "big wing",
+      "shooter",
+      "off-ball"
+    ],
+    "strengths": [
+      "Wing shooting",
+      "Duke pedigree",
+      "Low-usage fit"
+    ],
+    "risks": [
+      "Strength",
+      "On-ball creation"
+    ],
+    "profile": {
+      "shooting": 86,
+      "creation": 66,
+      "defense": 76,
+      "athleticism": 75,
+      "feel": 73,
+      "size": 82,
+      "upside": 75
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Duke, 6-6, 186 lbs, Sophomore, United States",
+      "Tankathon No. 25 range",
+      "Late-first 3-and-D fit",
+      "ESPN 2026 NBA draft big board top 100: normalized rank 25; source rank 25; confidence high.",
+      "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+    ]
+  },
+  {
+    "id": "henri-veesaar",
+    "name": "Henri Veesaar",
+    "positions": [
+      "C"
+    ],
+    "school": "North Carolina",
+    "origin": "Estonia",
+    "classYear": "Junior",
+    "height": "6-11",
+    "weight": "227 lbs",
+    "age": 22,
+    "consensusRank": 26,
+    "mockHeat": 39,
+    "international": true,
+    "roleTags": [
+      "rim protector",
+      "international",
+      "size",
+      "finisher"
+    ],
+    "strengths": [
+      "Seven-foot size",
+      "Finishing touch",
+      "Backup center path"
+    ],
+    "risks": [
+      "Strength",
+      "Switch defense"
+    ],
+    "profile": {
+      "shooting": 62,
+      "creation": 52,
+      "defense": 81,
+      "athleticism": 70,
+      "feel": 72,
+      "size": 94,
+      "upside": 70
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: C, age 22, North Carolina, 6-11, 227 lbs, Junior, Estonia",
+      "Tankathon No. 29 range",
+      "International center option",
+      "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 26; source rank 24; confidence medium_high.",
+      "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 24 to New York Knicks."
+    ]
+  },
+  {
+    "id": "koa-peat",
+    "name": "Koa Peat",
+    "positions": [
+      "SF",
+      "PF"
+    ],
+    "school": "Arizona",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-7",
+    "weight": "245 lbs",
+    "age": 19,
+    "consensusRank": 27,
+    "mockHeat": 37,
+    "international": false,
+    "roleTags": [
+      "rebounder",
+      "connector",
+      "toughness",
+      "frontcourt"
+    ],
+    "strengths": [
+      "Physical forward",
+      "Passing flashes",
+      "Interior toughness"
+    ],
+    "risks": [
+      "Spacing",
+      "Defensive position"
+    ],
+    "profile": {
+      "shooting": 66,
+      "creation": 64,
+      "defense": 77,
+      "athleticism": 78,
+      "feel": 78,
+      "size": 84,
+      "upside": 76
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: F, age 19, Arizona, 6-7, 245 lbs, Freshman, United States",
+      "Tankathon No. 26 range",
+      "Physical forward archetype",
+      "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 27; source rank 26; confidence medium_high.",
+      "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 26 to Denver Nuggets."
+    ]
+  },
+  {
+    "id": "meleek-thomas",
+    "name": "Meleek Thomas",
+    "positions": [
+      "SG",
+      "SF"
+    ],
+    "school": "Arkansas",
+    "origin": "United States",
+    "classYear": "Freshman",
+    "height": "6-3",
+    "weight": "190 lbs",
+    "age": 19,
+    "consensusRank": 28,
+    "mockHeat": 35,
+    "international": false,
+    "roleTags": [
+      "combo guard",
+      "shot creator",
+      "bench scoring",
+      "pull-up shooting"
+    ],
+    "strengths": [
+      "Shot creation",
+      "Guard size",
+      "Bench scoring pathway"
+    ],
+    "risks": [
+      "Efficiency",
+      "Decision speed"
+    ],
+    "profile": {
+      "shooting": 80,
+      "creation": 82,
+      "defense": 68,
+      "athleticism": 78,
+      "feel": 70,
+      "size": 76,
+      "upside": 78
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G-F, age 19, Arkansas, 6-3, 190 lbs, Freshman, United States",
+      "Tankathon No. 28 range",
+      "Late-first scoring guard",
+      "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 28; source rank 27; confidence medium_high.",
+      "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 27 to Boston Celtics."
+    ]
+  },
+  {
+    "id": "tarris-reed-jr",
+    "name": "Tarris Reed Jr.",
+    "positions": [
+      "C"
+    ],
+    "school": "Connecticut",
+    "origin": "United States",
+    "classYear": "Senior",
+    "height": "6-10",
+    "weight": "260 lbs",
+    "age": 22,
+    "consensusRank": 29,
+    "mockHeat": 32,
+    "international": false,
+    "roleTags": [
+      "center depth",
+      "size",
+      "rebounder",
+      "needs_review"
+    ],
+    "strengths": [
+      "First-round media mock inclusion",
+      "Conservative frontcourt role projection",
+      "Manual scouting review required"
+    ],
+    "risks": [
+      "No seed profile match",
+      "Height/age/weight require manual confirmation",
+      "Generated profile should not be treated as scouted grade"
+    ],
+    "profile": {
+      "shooting": 58,
+      "creation": 52,
+      "defense": 76,
+      "athleticism": 72,
+      "feel": 68,
+      "size": 86,
+      "upside": 65
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: C, age 22, Connecticut, 6-10, 260 lbs, Senior, United States",
+      "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 29; source rank 29; confidence medium_high.",
+      "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 29 to Cleveland Cavaliers.",
+      "needs_review: generated conservative DraftOps profile from normalized source row; manual player-image/profile review required.",
+      "needs_review: normalized source did not provide height; placeholder retained.",
+      "needs_review: normalized source did not provide age; neutral age placeholder 22.8 used."
+    ]
+  },
+  {
+    "id": "sergio-de-larrea",
+    "name": "Sergio De Larrea",
+    "positions": [
+      "PG",
+      "SG"
+    ],
+    "school": "Vallodolid (Spain)",
+    "origin": "Spain",
+    "classYear": "International",
+    "height": "6-6",
+    "weight": "205 lbs",
+    "age": 20,
+    "consensusRank": 30,
+    "mockHeat": 30,
+    "international": true,
+    "roleTags": [
+      "combo guard",
+      "international",
+      "shooter",
+      "playmaking",
+      "size"
+    ],
+    "strengths": [
+      "Big guard passing",
+      "International experience",
+      "Shooting projection"
+    ],
+    "risks": [
+      "NBA athletic translation",
+      "Role certainty"
+    ],
+    "profile": {
+      "shooting": 78,
+      "creation": 77,
+      "defense": 70,
+      "athleticism": 71,
+      "feel": 84,
+      "size": 86,
+      "upside": 76
+    },
+    "sourceNotes": [
+      "NBA.com official prospects: G, age 20, Vallodolid (Spain), 6-6, 205 lbs, International, Spain",
+      "Tankathon No. 30 range",
+      "Late-first international guard",
+      "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 30; source rank 30; confidence medium_high.",
+      "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 30 to Dallas Mavericks."
+    ]
+  }
+]

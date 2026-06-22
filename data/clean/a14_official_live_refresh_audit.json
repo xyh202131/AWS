@@ -1,0 +1,290 @@
+{
+  "audit_agent": "DraftOps A14 Official Live Refresh Audit Agent",
+  "checked_at": "2026-06-22T04:10:42+08:00",
+  "refresh_command_or_tool": "firecrawl scrape \"https://www.nba.com/draft/2026/prospects\" --wait-for 5000 -o \"data\\raw\\nba-official-2026-prospects-a14-refresh.md\"",
+  "official_url": "https://www.nba.com/draft/2026/prospects",
+  "raw_refresh_path": "data/raw/nba-official-2026-prospects-a14-refresh.md",
+  "official_rows_refreshed": 101,
+  "official_unique_names_refreshed": 101,
+  "duplicate_official_names": [],
+  "final_source_path": "data/final/final_import_bundle.json",
+  "final_count": 30,
+  "final_exactly_30": true,
+  "final_ids_unique": true,
+  "duplicate_final_ids": [],
+  "matched_final_count": 30,
+  "missing_from_refreshed_official": [],
+  "final_non_official_count": 0,
+  "all_final_in_refreshed_official": true,
+  "canonical_name_differences": [],
+  "official_slug_differences_non_blocking": [
+    {
+      "id": "darius-acuff-jr",
+      "final_name": "Darius Acuff Jr.",
+      "official_name": "Darius Acuff Jr.",
+      "official_slug": "darius-acuff",
+      "match_method": "normalized_name",
+      "official_line": 695
+    },
+    {
+      "id": "mikel-brown-jr",
+      "final_name": "Mikel Brown Jr.",
+      "official_name": "Mikel Brown Jr.",
+      "official_slug": "mikel-brown",
+      "match_method": "normalized_name",
+      "official_line": 712
+    },
+    {
+      "id": "labaron-philon-jr",
+      "final_name": "Labaron Philon Jr.",
+      "official_name": "Labaron Philon Jr.",
+      "official_slug": "labaron-philon",
+      "match_method": "normalized_name",
+      "official_line": 770
+    }
+  ],
+  "matched_final_prospects": [
+    {
+      "id": "darryn-peterson",
+      "final_name": "Darryn Peterson",
+      "official_name": "Darryn Peterson",
+      "official_slug": "darryn-peterson",
+      "match_method": "normalized_name",
+      "official_line": 769
+    },
+    {
+      "id": "aj-dybantsa",
+      "final_name": "AJ Dybantsa",
+      "official_name": "AJ Dybantsa",
+      "official_slug": "aj-dybantsa",
+      "match_method": "normalized_name",
+      "official_line": 726
+    },
+    {
+      "id": "cameron-boozer",
+      "final_name": "Cameron Boozer",
+      "official_name": "Cameron Boozer",
+      "official_slug": "cameron-boozer",
+      "match_method": "normalized_name",
+      "official_line": 706
+    },
+    {
+      "id": "caleb-wilson",
+      "final_name": "Caleb Wilson",
+      "official_name": "Caleb Wilson",
+      "official_slug": "caleb-wilson",
+      "match_method": "normalized_name",
+      "official_line": 793
+    },
+    {
+      "id": "keaton-wagler",
+      "final_name": "Keaton Wagler",
+      "official_name": "Keaton Wagler",
+      "official_slug": "keaton-wagler",
+      "match_method": "normalized_name",
+      "official_line": 789
+    },
+    {
+      "id": "darius-acuff-jr",
+      "final_name": "Darius Acuff Jr.",
+      "official_name": "Darius Acuff Jr.",
+      "official_slug": "darius-acuff",
+      "match_method": "normalized_name",
+      "official_line": 695
+    },
+    {
+      "id": "mikel-brown-jr",
+      "final_name": "Mikel Brown Jr.",
+      "official_name": "Mikel Brown Jr.",
+      "official_slug": "mikel-brown",
+      "match_method": "normalized_name",
+      "official_line": 712
+    },
+    {
+      "id": "kingston-flemings",
+      "final_name": "Kingston Flemings",
+      "official_name": "Kingston Flemings",
+      "official_slug": "kingston-flemings",
+      "match_method": "normalized_name",
+      "official_line": 729
+    },
+    {
+      "id": "nate-ament",
+      "final_name": "Nate Ament",
+      "official_name": "Nate Ament",
+      "official_slug": "nate-ament",
+      "match_method": "normalized_name",
+      "official_line": 697
+    },
+    {
+      "id": "aday-mara",
+      "final_name": "Aday Mara",
+      "official_name": "Aday Mara",
+      "official_slug": "aday-mara",
+      "match_method": "normalized_name",
+      "official_line": 752
+    },
+    {
+      "id": "brayden-burries",
+      "final_name": "Brayden Burries",
+      "official_name": "Brayden Burries",
+      "official_slug": "brayden-burries",
+      "match_method": "normalized_name",
+      "official_line": 713
+    },
+    {
+      "id": "yaxel-lendeborg",
+      "final_name": "Yaxel Lendeborg",
+      "official_name": "Yaxel Lendeborg",
+      "official_slug": "yaxel-lendeborg",
+      "match_method": "normalized_name",
+      "official_line": 747
+    },
+    {
+      "id": "hannes-steinbach",
+      "final_name": "Hannes Steinbach",
+      "official_name": "Hannes Steinbach",
+      "official_slug": "hannes-steinbach",
+      "match_method": "normalized_name",
+      "official_line": 779
+    },
+    {
+      "id": "karim-lopez",
+      "final_name": "Karim Lopez",
+      "official_name": "Karim Lopez",
+      "official_slug": "karim-lopez",
+      "match_method": "normalized_name",
+      "official_line": 750
+    },
+    {
+      "id": "morez-johnson-jr",
+      "final_name": "Morez Johnson Jr.",
+      "official_name": "Morez Johnson Jr.",
+      "official_slug": "morez-johnson-jr",
+      "match_method": "normalized_name",
+      "official_line": 739
+    },
+    {
+      "id": "christian-anderson",
+      "final_name": "Christian Anderson",
+      "official_name": "Christian Anderson",
+      "official_slug": "christian-anderson",
+      "match_method": "normalized_name",
+      "official_line": 699
+    },
+    {
+      "id": "allen-graves",
+      "final_name": "Allen Graves",
+      "official_name": "Allen Graves",
+      "official_slug": "allen-graves",
+      "match_method": "normalized_name",
+      "official_line": 732
+    },
+    {
+      "id": "labaron-philon-jr",
+      "final_name": "Labaron Philon Jr.",
+      "official_name": "Labaron Philon Jr.",
+      "official_slug": "labaron-philon",
+      "match_method": "normalized_name",
+      "official_line": 770
+    },
+    {
+      "id": "chris-cenac-jr",
+      "final_name": "Chris Cenac Jr.",
+      "official_name": "Chris Cenac Jr.",
+      "official_slug": "chris-cenac-jr",
+      "match_method": "normalized_name",
+      "official_line": 717
+    },
+    {
+      "id": "bennett-stirtz",
+      "final_name": "Bennett Stirtz",
+      "official_name": "Bennett Stirtz",
+      "official_slug": "bennett-stirtz",
+      "match_method": "normalized_name",
+      "official_line": 780
+    },
+    {
+      "id": "cameron-carr",
+      "final_name": "Cameron Carr",
+      "official_name": "Cameron Carr",
+      "official_slug": "cameron-carr",
+      "match_method": "normalized_name",
+      "official_line": 714
+    },
+    {
+      "id": "jayden-quaintance",
+      "final_name": "Jayden Quaintance",
+      "official_name": "Jayden Quaintance",
+      "official_slug": "jayden-quaintance",
+      "match_method": "normalized_name",
+      "official_line": 772
+    },
+    {
+      "id": "dailyn-swain",
+      "final_name": "Dailyn Swain",
+      "official_name": "Dailyn Swain",
+      "official_slug": "dailyn-swain",
+      "match_method": "normalized_name",
+      "official_line": 782
+    },
+    {
+      "id": "ebuka-okorie",
+      "final_name": "Ebuka Okorie",
+      "official_name": "Ebuka Okorie",
+      "official_slug": "ebuka-okorie",
+      "match_method": "normalized_name",
+      "official_line": 764
+    },
+    {
+      "id": "isaiah-evans",
+      "final_name": "Isaiah Evans",
+      "official_name": "Isaiah Evans",
+      "official_slug": "isaiah-evans",
+      "match_method": "normalized_name",
+      "official_line": 728
+    },
+    {
+      "id": "henri-veesaar",
+      "final_name": "Henri Veesaar",
+      "official_name": "Henri Veesaar",
+      "official_slug": "henri-veesaar",
+      "match_method": "normalized_name",
+      "official_line": 788
+    },
+    {
+      "id": "koa-peat",
+      "final_name": "Koa Peat",
+      "official_name": "Koa Peat",
+      "official_slug": "koa-peat",
+      "match_method": "normalized_name",
+      "official_line": 768
+    },
+    {
+      "id": "meleek-thomas",
+      "final_name": "Meleek Thomas",
+      "official_name": "Meleek Thomas",
+      "official_slug": "meleek-thomas",
+      "match_method": "normalized_name",
+      "official_line": 783
+    },
+    {
+      "id": "tarris-reed-jr",
+      "final_name": "Tarris Reed Jr.",
+      "official_name": "Tarris Reed Jr.",
+      "official_slug": "tarris-reed-jr",
+      "match_method": "normalized_name",
+      "official_line": 773
+    },
+    {
+      "id": "sergio-de-larrea",
+      "final_name": "Sergio De Larrea",
+      "official_name": "Sergio De Larrea",
+      "official_slug": "sergio-de-larrea",
+      "match_method": "normalized_name",
+      "official_line": 722
+    }
+  ],
+  "method_note": "Parsed only the newly refreshed NBA.com markdown table from data/raw/nba-official-2026-prospects-a14-refresh.md; data/clean/official_prospect_reconciliation.json was not used for verdict.",
+  "verdict": "PASS: final has exactly 30 unique-id prospects, and all 30 appear in the refreshed NBA.com official Prospects list."
+}
