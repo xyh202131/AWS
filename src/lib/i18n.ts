@@ -90,7 +90,7 @@ export const UI_COPY = {
     deepSeekWindow: "DeepSeek 问答窗口",
     deepSeekSubtitle: "比赛问答 · 不直接改代码",
     chatIntro: (modelLabel: string) =>
-      `${modelLabel} 已接入。当前 DeepSeek 可回答本次比赛相关问题，包括数据、里程碑、预测、AWS、提交和代码说明；默认按全局问题回答，只有你明确说当前顺位/这个球队/选中球员时才使用当前栏目；但不能直接修改代码、写文件或提交仓库。`,
+      `${modelLabel} 已接入。当前 DeepSeek 可回答本次比赛相关问题，包括数据、里程碑、预测、AWS、提交和代码说明；默认按全局问题回答，只有你明确说当前顺位/这个球队/选中球员时才使用当前栏目；回答会标记证据状态，资料不足时必须说明缺口；但不能直接修改代码、写文件或提交仓库。`,
     closeDeepSeek: "关闭 DeepSeek 窗口",
     you: "你",
     chatThinking: "分析中...",
@@ -200,7 +200,7 @@ export const UI_COPY = {
     deepSeekWindow: "DeepSeek Window",
     deepSeekSubtitle: "Competition Q&A · no direct code edits",
     chatIntro: (modelLabel: string) =>
-      `${modelLabel} is connected. This DeepSeek answers global competition questions by default and only uses the current panel when you explicitly ask about the current pick, this team, or the selected player. It cannot directly edit code, write files, or push commits.`,
+      `${modelLabel} is connected. This DeepSeek answers global competition questions by default and only uses the current panel when you explicitly ask about the current pick, this team, or the selected player. It marks grounding status and must name evidence gaps when local material is insufficient. It cannot directly edit code, write files, or push commits.`,
     closeDeepSeek: "Close DeepSeek window",
     you: "You",
     chatThinking: "Analyzing...",

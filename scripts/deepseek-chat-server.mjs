@@ -64,6 +64,23 @@ const officialWebSources = (draftOpsManifest.sourceLinks ?? []).map((source) => 
 const ragEmbeddingDimensions = 256;
 const ragRerankPoolSize = 42;
 const ragSnippetLimit = 14;
+const antiHallucinationPolicy = [
+  "Only state player, team, pick, score, source, risk, image, and submission-field claims when they are grounded in deepSeekContext or retrievedKnowledge.",
+  "Separate grounded facts from model inference and unresolved gaps.",
+  "If retrieval reflection is insufficient or missingSignals is non-empty, lower certainty and name the missing evidence class.",
+  "Do not use model memory to fill missing DraftOps roster, draft-order, milestone, or team-preference facts.",
+];
+const missingSignalLabels = {
+  "too-few-snippets": "检索片段过少",
+  "weak-direct-match": "直接匹配弱",
+  "low-source-diversity": "来源类型单一",
+  "missing-milestone-source": "缺少里程碑资料",
+  "missing-evidence-source": "缺少来源/审计资料",
+  "missing-team-source": "缺少球队偏好资料",
+  "missing-prospect-source": "缺少球员画像资料",
+  "missing-board-source": "缺少预测板资料",
+  "missing-architecture-source": "缺少架构资料",
+};
 
 const loadEnvFile = async (path) => {
   const content = await readFile(path, "utf8").catch((error) => {
@@ -268,6 +285,51 @@ const getSearchTerms = ({ question, selectedPick, useSelectedPickContext = false
       ]
     : [];
   return tokenize([question, ...selectedTerms].join(" ")).slice(0, 32);
+};
+
+const localQuestionIntent = (question, selectedPickMode = "inactive") => {
+  const text = String(question ?? "").toLowerCase();
+  const intent = {
+    milestone: /里程碑|题目|答题|答案|字段|a\d|b\d|c\d|d\d|question|milestone|field|answer/.test(text),
+    team: /球队|适配|需求|阵容|签位|team|fit|need|roster|pick/.test(text),
+    prospect: /球员|候选|学校|身高|体重|位置|prospect|player|school|height|weight|position/.test(text),
+    evidence: /来源|证据|官方|验证|审计|source|evidence|official|audit|verify/.test(text),
+    board: /预测|榜单|首轮|顺位|board|mock|draft|rank|prediction/.test(text),
+    architecture: /架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text),
+  };
+
+  if (selectedPickMode === "direct") {
+    intent.team = true;
+    intent.prospect = true;
+    intent.board = true;
+  }
+
+  return intent;
+};
+
+const activeIntentLabels = (intent) =>
+  Object.entries(intent)
+    .filter(([, active]) => active)
+    .map(([label]) => label);
+
+const selectedPickRetrievalValues = (selectedPick) => {
+  if (!selectedPick) return [];
+  const pick = Number(selectedPick.pick ?? 0);
+  return [
+    Number.isFinite(pick) && pick > 0 ? `pick ${pick}` : "",
+    Number.isFinite(pick) && pick > 0 ? `#${pick}` : "",
+    Number.isFinite(pick) && pick > 0 ? `第${pick}顺位` : "",
+    selectedPick.team,
+    selectedPick.acquiredFrom,
+    selectedPick.prospect?.name,
+    selectedPick.prospect?.school,
+    selectedPick.prospect?.origin,
+    selectedPick.roleFit,
+    ...(selectedPick.prospect?.positions ?? []),
+    ...(selectedPick.evidence ?? []),
+    ...(selectedPick.warnings ?? []),
+    ...(selectedPick.alternatives ?? []).flatMap((item) => [item.name, item.roleFit]),
+  ].filter(Boolean);
 };
 
 const chunkText = (text, size = 1100) => {
@@ -580,6 +642,124 @@ const retrieveLocalKnowledge = async ({ question, selectedPick, useSelectedPickC
   };
 };
 
+const snippetSourceText = (snippet) => [snippet?.source, snippet?.path, snippet?.sourceName].filter(Boolean).join("\n").toLowerCase();
+
+const hasSnippetSource = (snippets, pattern) => snippets.some((snippet) => pattern.test(snippetSourceText(snippet)));
+
+const isStrongLocalSnippet = (snippet) =>
+  Number(snippet.exactMatches ?? 0) >= 2 ||
+  Number(snippet.lexicalScore ?? 0) >= 0.16 ||
+  Number(snippet.semanticScore ?? 0) >= 0.24 ||
+  Number(snippet.score ?? 0) >= 0.42 ||
+  (["official-local", "structured-data", "milestone-data"].includes(snippet.sourceRank) && Number(snippet.exactMatches ?? 0) > 0);
+
+const reflectLocalRetrieval = ({ question, selectedPickMode, local, attemptCount }) => {
+  const intent = localQuestionIntent(question, selectedPickMode);
+  const snippets = local?.snippets ?? [];
+  const sourceDiversity = new Set(snippets.map((snippet) => String(snippet.source ?? "").split("#")[0])).size;
+  const strongSnippetCount = snippets.filter(isStrongLocalSnippet).length;
+  const maxScore = snippets.reduce((score, snippet) => Math.max(score, Number(snippet.score ?? 0)), 0);
+  const coverage = {
+    board: hasSnippetSource(snippets, /board|mock|draft|prediction|consensus|strategy|agent_(balanced|expanded)|final_import_bundle|expanded_import_bundle/),
+    team: hasSnippetSource(snippets, /team|team_context|team_preference|official_team_profiles|clean_teams|needs/),
+    prospect: hasSnippetSource(snippets, /prospect|player|local_player_pool|feature_reference|official_prospects|clean_prospects|china_nba_draft|big_board/),
+    milestone: hasSnippetSource(snippets, /milestone|draftcode24|answer|答题|里程碑/),
+    evidence: hasSnippetSource(snippets, /audit|source|official|raw|verification|reconciliation|quality/),
+    architecture: hasSnippetSource(snippets, /architecture|aws|lambda|s3|cloudfront|dynamodb|rag|readme/),
+  };
+  const missingSignals = [];
+
+  if (snippets.length < 4) missingSignals.push("too-few-snippets");
+  if (strongSnippetCount < 2) missingSignals.push("weak-direct-match");
+  if (sourceDiversity < 2 && snippets.length >= 3) missingSignals.push("low-source-diversity");
+  if (intent.milestone && !coverage.milestone) missingSignals.push("missing-milestone-source");
+  if (intent.evidence && !coverage.evidence) missingSignals.push("missing-evidence-source");
+  if (intent.team && !coverage.team) missingSignals.push("missing-team-source");
+  if (intent.prospect && !coverage.prospect) missingSignals.push("missing-prospect-source");
+  if (intent.board && !coverage.board) missingSignals.push("missing-board-source");
+  if (intent.architecture && !coverage.architecture) missingSignals.push("missing-architecture-source");
+
+  const criticalMissing = missingSignals.filter((signal) => signal.startsWith("missing-"));
+  const sufficient =
+    snippets.length >= 4 &&
+    strongSnippetCount >= 2 &&
+    maxScore >= 0.16 &&
+    (sourceDiversity >= 2 || criticalMissing.length === 0);
+
+  return {
+    attemptCount,
+    sufficient,
+    decision: sufficient ? "answer" : attemptCount >= 2 ? "answer-cautiously" : "retrieve-again",
+    missingSignals,
+    coverage,
+    snippetCount: snippets.length,
+    strongSnippetCount,
+    sourceDiversity,
+    maxScore: Number(maxScore.toFixed(4)),
+  };
+};
+
+const followUpLocalQuery = ({ question, selectedPick, selectedPickMode, reflection }) => {
+  if (reflection?.sufficient || !(reflection?.missingSignals?.length)) return "";
+  const intent = localQuestionIntent(question, selectedPickMode);
+  const supplements = [];
+
+  if (reflection.missingSignals.includes("too-few-snippets")) supplements.push("broaden recall across indexed local knowledge");
+  if (reflection.missingSignals.includes("weak-direct-match")) supplements.push("exact aliases fields evidence records");
+  if (reflection.missingSignals.includes("low-source-diversity")) supplements.push("cross check another source family");
+  if (intent.milestone || reflection.missingSignals.includes("missing-milestone-source")) {
+    supplements.push("milestone answers DraftCode24 answer card required fields");
+  }
+  if (intent.evidence || reflection.missingSignals.includes("missing-evidence-source")) {
+    supplements.push("official source audit verification reconciliation evidence");
+  }
+  if (intent.team || reflection.missingSignals.includes("missing-team-source")) {
+    supplements.push("team preference roster needs fit pick ownership");
+  }
+  if (intent.prospect || reflection.missingSignals.includes("missing-prospect-source")) {
+    supplements.push("prospect profile measurements school position risk");
+  }
+  if (intent.board || reflection.missingSignals.includes("missing-board-source")) {
+    supplements.push("draft board mock consensus prediction rerun strategy");
+  }
+  if (intent.architecture || reflection.missingSignals.includes("missing-architecture-source")) {
+    supplements.push("AWS Lambda S3 CloudFront DynamoDB RAG Bedrock DeepSeek architecture");
+  }
+  if (selectedPickMode === "direct") {
+    supplements.push("selected pick board row team preference prospect profile alternatives evidence");
+    supplements.push(...selectedPickRetrievalValues(selectedPick).slice(0, 14));
+  }
+
+  return [...new Set([String(question ?? ""), ...supplements].filter(Boolean))].join("\n检索补充: ").slice(0, 1400);
+};
+
+const mergeLocalRetrievalAttempts = (attempts) => {
+  const snippetMap = new Map();
+  for (const attempt of attempts) {
+    for (const snippet of attempt.result?.snippets ?? []) {
+      const key = `${snippet.source}\n${snippet.path ?? ""}\n${String(snippet.text ?? "").slice(0, 80)}`;
+      const existing = snippetMap.get(key);
+      if (!existing || Number(snippet.score ?? 0) > Number(existing.score ?? 0)) {
+        snippetMap.set(key, snippet);
+      }
+    }
+  }
+
+  const snippets = [...snippetMap.values()]
+    .sort((left, right) => Number(right.score ?? 0) - Number(left.score ?? 0))
+    .slice(0, ragSnippetLimit);
+  const terms = [...new Set(attempts.flatMap((attempt) => attempt.result?.terms ?? []))].slice(0, 48);
+
+  return {
+    terms,
+    retrievalMode: "Agentic local loop: plan -> retrieve -> reflect -> optional second retrieve -> decide",
+    snippets,
+    hasStrongLocalMatch:
+      attempts.some((attempt) => attempt.result?.hasStrongLocalMatch) ||
+      snippets.some(isStrongLocalSnippet),
+  };
+};
+
 const fetchOfficialWebKnowledge = async (terms) => {
   const results = [];
   const queryEmbedding = embedText(terms.join(" "));
@@ -843,12 +1023,45 @@ const buildContext = async (selectedPickNumber) => {
 };
 
 const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPickContext = false, selectedPickMode = "inactive" }) => {
-  const local = await retrieveLocalKnowledge({ question, selectedPick, useSelectedPickContext });
-  const officialWeb = local.hasStrongLocalMatch ? [] : await fetchOfficialWebKnowledge(local.terms);
+  const intent = localQuestionIntent(question, selectedPickMode);
+  const plan = {
+    mode: "plan-retrieve-reflect-decide",
+    intent: activeIntentLabels(intent).length ? activeIntentLabels(intent) : ["general"],
+    selectedPickMode,
+    planningHints: [
+      useSelectedPickContext
+        ? "direct selected-pick questions require board row, team fit, and prospect evidence"
+        : selectedPickMode === "background"
+          ? "selected pick is background only; preserve the user's broader question scope"
+          : "use user question scope first",
+    ],
+  };
+  const attempts = [];
+  const firstLocal = await retrieveLocalKnowledge({ question, selectedPick, useSelectedPickContext });
+  attempts.push({ query: question, result: firstLocal });
+
+  let local = mergeLocalRetrievalAttempts(attempts);
+  let reflection = reflectLocalRetrieval({ question, selectedPickMode, local, attemptCount: attempts.length });
+
+  if (!reflection.sufficient) {
+    const nextQuery = followUpLocalQuery({ question, selectedPick, selectedPickMode, reflection });
+    if (nextQuery && nextQuery !== question) {
+      const secondLocal = await retrieveLocalKnowledge({
+        question: nextQuery,
+        selectedPick,
+        useSelectedPickContext,
+      });
+      attempts.push({ query: nextQuery, result: secondLocal });
+      local = mergeLocalRetrievalAttempts(attempts);
+      reflection = reflectLocalRetrieval({ question, selectedPickMode, local, attemptCount: attempts.length });
+    }
+  }
+
+  const officialWeb = local.hasStrongLocalMatch && reflection.sufficient ? [] : await fetchOfficialWebKnowledge(local.terms);
 
   return {
     retrievalPolicy:
-      "优先使用本地知识库与官方本地数据；本地证据不足时才使用官方联网网页；官方数据优先于媒体和模型全局知识；模型全局知识只作最后兜底。",
+      "Agentic RAG：先规划查询范围，再检索本地知识库，随后反思证据是否覆盖问题；本地证据不足时改写查询再检索，仍不足才使用官方联网网页；模型全局知识只作最后兜底。",
     retrievalMode: local.retrievalMode,
     selectedPickFocusMode: selectedPickMode,
     selectedPickRetrievalPolicy: useSelectedPickContext
@@ -859,6 +1072,21 @@ const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPick
     localSnippets: local.snippets.map(retrievalSnippet),
     officialWebSnippets: officialWeb.map(retrievalSnippet),
     usedWebFallback: officialWeb.length > 0,
+    agentic: {
+      ...plan,
+      attempts: attempts.map((attempt) => ({
+        query: String(attempt.query ?? "").slice(0, 420),
+        snippetCount: attempt.result?.snippets?.length ?? 0,
+        strongLocalMatch: Boolean(attempt.result?.hasStrongLocalMatch),
+        topSources: (attempt.result?.snippets ?? []).slice(0, 4).map((snippet) => ({
+          source: snippet.source,
+          path: snippet.path,
+          score: Number(Number(snippet.score ?? 0).toFixed(4)),
+          exactMatches: snippet.exactMatches,
+        })),
+      })),
+      reflection,
+    },
   };
 };
 
@@ -879,6 +1107,33 @@ const sanitizeAnswer = (value) =>
     .filter(Boolean)
     .join("\n")
     .trim();
+
+const groundingStatusLine = (retrievedKnowledge) => {
+  const reflection = retrievedKnowledge?.agentic?.reflection ?? {};
+  const localCount = retrievedKnowledge?.localSnippets?.length ?? 0;
+  const webCount = retrievedKnowledge?.officialWebSnippets?.length ?? 0;
+  const totalCount = localCount + webCount;
+  const missingSignals = Array.isArray(reflection.missingSignals) ? reflection.missingSignals : [];
+  const missingText = missingSignals
+    .map((signal) => missingSignalLabels[signal] ?? signal)
+    .slice(0, 4)
+    .join("、");
+  const sourceScope = webCount > 0 ? "本地知识库加官方联网兜底" : "本地知识库";
+
+  if (reflection.sufficient) {
+    return `证据状态：${sourceScope}已检索 ${totalCount} 条片段，反思结果为可回答。`;
+  }
+
+  return missingText
+    ? `证据状态：${sourceScope}已检索 ${totalCount} 条片段，仍需复核：${missingText}。`
+    : `证据状态：${sourceScope}已检索 ${totalCount} 条片段，仍需复核。`;
+};
+
+const attachGroundingStatus = (answer, retrievedKnowledge) => {
+  const cleanAnswer = String(answer ?? "").trim();
+  if (!cleanAnswer || /^证据状态[:：]/.test(cleanAnswer)) return cleanAnswer;
+  return `${groundingStatusLine(retrievedKnowledge)}\n${cleanAnswer}`;
+};
 
 const promptTokens = (value) => tokenize(value).filter((term) => term.length >= 2);
 
@@ -973,7 +1228,14 @@ const isDirectCodeModificationRequest = (question) => {
 const buildScopeGuardAnswer = () =>
   "当前 DeepSeek 可以回答比赛相关问题，但不能直接修改代码、写文件、运行命令、提交或推送仓库。";
 
-const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPickFocusActive = false, context: providedContext }) => {
+const callDeepSeek = async ({
+  question,
+  history,
+  selectedPickNumber,
+  selectedPickFocusActive = false,
+  context: providedContext,
+  antiHallucinationGuardrails = [],
+}) => {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     throw new Error("Missing DEEPSEEK_API_KEY. Put it in .env.local before using the chat window.");
@@ -1017,6 +1279,10 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
         content: String(message.content ?? "").slice(0, 1600),
       }))
     : [];
+  const clientGuardrails = Array.isArray(antiHallucinationGuardrails)
+    ? antiHallucinationGuardrails.map((item) => String(item ?? "").trim()).filter(Boolean).slice(0, 8)
+    : [];
+  const activeGuardrails = [...new Set([...antiHallucinationPolicy, ...clientGuardrails])];
 
   const requestBody = {
     model,
@@ -1036,8 +1302,11 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
           "必须按以下优先级回答：1 本地知识库、当前锁定预测板和当前应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
           "官方来源优先级高于媒体、社区、传闻和模型记忆。",
           "防幻觉硬规则：涉及球员、球队、顺位、评分、证据、风险、图片、来源或提交字段时，必须能在当前 deepSeekContext 或 retrievedKnowledge 中找到依据；找不到就明确说本地资料未提供，不能用模型记忆补写。",
+          "回答时必须区分三类信息：已由当前资料支持的事实、基于资料的模型推断、仍需复核的缺口。",
+          "如果 retrievedKnowledge.agentic.reflection.sufficient 为 false，或者 missingSignals 非空，必须降低确定性，并明确说明缺少哪类证据。",
+          "如果需要提到依据，只能使用短标签，例如预测板、球队偏好、球员证据、官方本地资料、官方联网片段；不要编造 URL、媒体名或来源名称。",
           "最终只输出当前问题最可能正确的答案。",
-          "只回答用户当前问题，不要给额外建议，不要扩展无关背景，不要列来源清单，不要免责声明。",
+          "只回答用户当前问题，不要给额外建议，不要扩展无关背景，不要冗长列来源清单，不要免责声明。",
           "不要输出 Markdown，不要标题，不要 # 号，不要项目符号，不要代码块。",
           "不要输出任何密钥。",
         ].join("\n"),
@@ -1047,6 +1316,8 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
         content: [
           "执行边界重复说明：当前 DeepSeek 只能回答问题，不能直接修改代码、写文件、运行命令、提交或推送仓库。",
           "栏目范围重复说明：selectedPickFocusMode 为 direct 才聚焦当前顺位；为 background 时不要只回答当前顺位。",
+          "防幻觉执行策略：",
+          JSON.stringify(activeGuardrails),
           "当前比赛上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
           JSON.stringify(deepSeekContext),
           "已按优先级检索到的知识如下：",
@@ -1077,14 +1348,20 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
   }
 
   const completion = JSON.parse(responseText);
-  const answer = sanitizeAnswer(completion.choices?.[0]?.message?.content);
-  if (!answer) throw new Error("DeepSeek response did not include message content.");
+  const sanitizedAnswer = sanitizeAnswer(completion.choices?.[0]?.message?.content);
+  if (!sanitizedAnswer) throw new Error("DeepSeek response did not include message content.");
+  const answer = attachGroundingStatus(sanitizedAnswer, retrievedKnowledge);
 
   return {
     answer,
     model,
     modelLabel,
     mode: "deepseek-competition",
+    grounding: {
+      status: groundingStatusLine(retrievedKnowledge),
+      reflection: retrievedKnowledge?.agentic?.reflection ?? null,
+      usedWebFallback: Boolean(retrievedKnowledge?.usedWebFallback),
+    },
     usage: completion.usage ?? null,
   };
 };
@@ -1109,10 +1386,17 @@ const server = http.createServer(async (request, response) => {
         model,
         modelLabel: getModelLabel(model),
         rag: {
-          retrievalMode: "hashed-token-embedding + lexical hybrid score + MMR rerank",
+          retrievalMode: "Agentic local loop: plan -> retrieve -> reflect -> optional second retrieve -> decide",
           embeddingDimensions: ragEmbeddingDimensions,
           rerankPoolSize: ragRerankPoolSize,
           topK: ragSnippetLimit,
+          agenticEnabled: true,
+          agenticMaxIterations: 2,
+        },
+        antiHallucination: {
+          enabled: true,
+          answerGroundingStatus: true,
+          missingEvidencePolicy: "state-gap-instead-of-inventing",
         },
       });
       return;
@@ -1159,6 +1443,7 @@ const server = http.createServer(async (request, response) => {
         history: body.history,
         selectedPickNumber,
         selectedPickFocusActive: Boolean(body.selectedPickFocusActive) || Boolean(explicitPickNumber),
+        antiHallucinationGuardrails: body.antiHallucinationGuardrails,
         context,
       });
       sendJson(request, response, 200, result);

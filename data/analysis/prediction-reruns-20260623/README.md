@@ -18,6 +18,8 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Strong DeepSeek guardrail stress-test variant.
 - `boards/sequential_dynamic_board_123_audit_deepseek_mild.json`
   - Mild DeepSeek parameter rerun; current best candidate parameter set for analysis.
+- `boards/sequential_dynamic_board_123_audit_deepseek_llm.json`
+  - DeepSeek LLM-generated parameter rerun. It reviewed the same 123-player pool sequentially and matched the mild board's player order.
 
 ## Reports
 
@@ -37,6 +39,14 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Codex + DeepSeek reasonableness review summary.
 - `reports/mild_parameter_rerun_summary_20260623.md`
   - Concise summary of the mild rerun and remaining fragile picks.
+- `reports/llm_variant_generation_20260623.md`
+  - DeepSeek LLM parameter generation record. Claude generation is pending because the local Claude subscription CLI hit its session limit.
+- `reports/llm_variant_generation_20260623.json`
+  - Structured LLM parameter generation artifact.
+- `reports/sequential_dynamic_board_123_audit_deepseek_llm_20260623.md`
+  - DeepSeek LLM parameter rerun report.
+- `reports/claude_format_failure_data_audit_20260623.md`
+  - Audit of the earlier Claude non-JSON run. The complete raw Claude response was not recoverable, so no Claude-labeled board was created from it.
 
 ## Inputs
 
@@ -50,6 +60,8 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Team preference families and confidence coefficients.
 - `inputs/weight_scenarios.json`
   - Baseline scoring weight configuration.
+- `inputs/deepseek_llm_variant_20260623.json`
+  - Parameter variant returned by DeepSeek for the LLM rerun.
 
 ## Scripts
 
@@ -63,6 +75,12 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
 ## Current Analysis Note
 
 The mild rerun is the cleanest candidate for follow-up analysis. It preserves the stable top board while only changing picks 18 and 21 compared with the first sequential dynamic rerun.
+
+The DeepSeek LLM rerun currently produces the same top-30 player order as the mild rerun. Its only parameter difference is a slightly lower athletic-deficit penalty, so it is best treated as confirmation of the mild board rather than a materially different board.
+
+Claude rerun status: pending. The local Claude CLI returned a subscription session-limit error and said it resets at `1:10am (Asia/Shanghai)`.
+
+Claude raw-output safeguard: `scripts/generate-llm-variant-configs.mjs` now saves future parse failures under `data/reports/llm_variant_raw_failures/`, so prose-form Claude responses can be inspected later without manually predicting players.
 
 Remaining fragile picks for discussion:
 

@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { resolve } from "node:path";
 
@@ -8,6 +9,7 @@ const envPath = resolve(rootDir, ".env");
 const boardsDir = resolve(rootDir, "data", "analysis", "prediction-reruns-20260623", "boards");
 const reportsDir = resolve(rootDir, "data", "reports");
 const outputDir = resolve(rootDir, "data", "agent_variants");
+const rawFailureDir = resolve(reportsDir, "llm_variant_raw_failures");
 const outputReportJsonPath = resolve(reportsDir, "llm_variant_generation_20260623.json");
 const outputReportMdPath = resolve(reportsDir, "llm_variant_generation_20260623.md");
 
@@ -51,6 +53,33 @@ const extractJson = (content) => {
 
     throw new Error("Model response was not valid JSON.");
   }
+};
+
+const timestampForPath = () => new Date().toISOString().replace(/[:.]/g, "-");
+
+const saveRawFailure = ({ agent, modelLabel, rawContent, stdout, stderr, error }) => {
+  mkdirSync(rawFailureDir, { recursive: true });
+  const generatedAt = new Date().toISOString();
+  const path = resolve(rawFailureDir, `${timestampForPath()}_${agent}_raw_failure.json`);
+  writeFileSync(
+    path,
+    `${JSON.stringify(
+      {
+        schemaVersion: "draftops.llm_variant_raw_failure.v1",
+        generatedAt,
+        agent,
+        modelLabel,
+        error: String(error?.message ?? error ?? ""),
+        rawContent: rawContent ?? null,
+        stdout: stdout ?? null,
+        stderr: stderr ?? null,
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+  return path;
 };
 
 const boardRows = (board) =>
@@ -123,7 +152,7 @@ const getTopCandidates = (board, picks) =>
     };
   });
 
-const buildPrompt = ({ agentName, context }) => [
+const buildPrompt = ({ agentName, context, contextCharLimit = 14000 }) => [
   `你是 DraftOps ${agentName} 参数预测 Agent。`,
   "",
   "任务：基于给定的 123 人池多版预测差异，给出一版新的参数配置 JSON。注意：你不能手工指定任何球员，不能输出选秀名单，不能替换某个顺位的人选。",
@@ -161,7 +190,7 @@ const buildPrompt = ({ agentName, context }) => [
   }),
   "",
   "Context:",
-  compact(context, 18000),
+  compact(context, contextCharLimit),
 ].join("\n");
 
 const normalizeVariant = ({ parsed, id, label, sourceAgent }) => {
@@ -229,12 +258,24 @@ const callDeepSeek = async (prompt) => {
   const completion = JSON.parse(responseText);
   const content = completion.choices?.[0]?.message?.content;
   if (!content) throw new Error("DeepSeek response did not include content.");
+  let parsed = null;
+  try {
+    parsed = extractJson(content);
+  } catch (error) {
+    const failurePath = saveRawFailure({
+      agent: "deepseek",
+      modelLabel: getModelLabel(model),
+      rawContent: content,
+      error,
+    });
+    throw new Error(`DeepSeek response parse failed; raw output saved to ${failurePath}: ${error.message}`);
+  }
   return {
     model,
     modelLabel: getModelLabel(model),
     usage: completion.usage ?? null,
     rawContent: content,
-    parsed: extractJson(content),
+    parsed,
   };
 };
 
@@ -256,7 +297,7 @@ const callClaude = (prompt) => {
     input: prompt,
     encoding: "utf8",
     shell: process.platform === "win32",
-    timeout: Number(process.env.CLAUDE_AGENT_TIMEOUT_MS ?? 240000),
+    timeout: Number(process.env.CLAUDE_AGENT_TIMEOUT_MS ?? 600000),
     windowsHide: true,
     maxBuffer: 1024 * 1024 * 8,
   });
@@ -265,16 +306,42 @@ const callClaude = (prompt) => {
   const stdout = String(result.stdout ?? "").trim();
   const stderr = String(result.stderr ?? "").trim();
   if (result.status !== 0) {
-    throw new Error(`Claude CLI failed, exit=${result.status}\n${stdout}\n${stderr}`.trim());
+    const failurePath = saveRawFailure({
+      agent: "claude",
+      modelLabel: `claude-${process.env.CLAUDE_AGENT_MODEL ?? "opus"}:${process.env.CLAUDE_AGENT_EFFORT ?? "max"}`,
+      stdout,
+      stderr,
+      error: `Claude CLI failed, exit=${result.status}`,
+    });
+    throw new Error(`Claude CLI failed, exit=${result.status}; raw output saved to ${failurePath}\n${stdout}\n${stderr}`.trim());
   }
-  const wrapper = JSON.parse(stdout);
-  const content = typeof wrapper.result === "string" ? wrapper.result.trim() : stdout;
+  let wrapper = null;
+  try {
+    wrapper = JSON.parse(stdout);
+  } catch {
+    wrapper = null;
+  }
+  const content = typeof wrapper?.result === "string" ? wrapper.result.trim() : stdout;
+  let parsed = null;
+  try {
+    parsed = extractJson(content);
+  } catch (error) {
+    const failurePath = saveRawFailure({
+      agent: "claude",
+      modelLabel: `claude-${process.env.CLAUDE_AGENT_MODEL ?? "opus"}:${process.env.CLAUDE_AGENT_EFFORT ?? "max"}`,
+      rawContent: content,
+      stdout,
+      stderr,
+      error,
+    });
+    throw new Error(`Claude response parse failed; raw output saved to ${failurePath}: ${error.message}`);
+  }
   return {
     model: process.env.CLAUDE_AGENT_MODEL ?? "opus",
     modelLabel: `claude-${process.env.CLAUDE_AGENT_MODEL ?? "opus"}:${process.env.CLAUDE_AGENT_EFFORT ?? "max"}`,
-    usage: wrapper.usage ?? null,
+    usage: wrapper?.usage ?? null,
     rawContent: content,
-    parsed: extractJson(content),
+    parsed,
   };
 };
 
@@ -306,6 +373,13 @@ const toMarkdown = ({ generatedAt, variants, calls }) => [
 const main = async () => {
   await loadEnvFile(localEnvPath);
   await loadEnvFile(envPath);
+  const onlyArgIndex = process.argv.indexOf("--only");
+  const only = onlyArgIndex >= 0 && process.argv[onlyArgIndex + 1] ? process.argv[onlyArgIndex + 1] : "all";
+  const runClaude = only === "all" || only === "claude";
+  const runDeepSeek = only === "all" || only === "deepseek";
+  if (!["all", "claude", "deepseek"].includes(only)) {
+    throw new Error('Unknown --only value. Use "all", "claude", or "deepseek".');
+  }
 
   const [oldBoard, dynamicBoard, guardBoard, mildBoard] = await Promise.all([
     readJson(resolve(boardsDir, "local_pool_124_baseline_board.json")),
@@ -329,16 +403,25 @@ const main = async () => {
     fragileCandidateDetailsFromMild: getTopCandidates(mildBoard, [10, 12, 15, 18, 19, 21, 26, 30]),
   };
 
-  const claudePrompt = buildPrompt({ agentName: "Claude Code Opus/max", context });
-  const deepSeekPrompt = buildPrompt({ agentName: "DeepSeek LLM", context });
+  const claudeContext = {
+    summaries: context.summaries,
+    variants: context.variants,
+    diffRows: context.diffRows,
+    fragileCandidateDetailsFromMild: context.fragileCandidateDetailsFromMild.filter((item) =>
+      [10, 12, 15, 18, 21, 26, 30].includes(item.pick),
+    ),
+  };
+  const claudePrompt = buildPrompt({ agentName: "Claude Code Opus/max", context: claudeContext, contextCharLimit: 9000 });
+  const deepSeekPrompt = buildPrompt({ agentName: "DeepSeek LLM", context, contextCharLimit: 16000 });
 
-  console.log("Calling Claude for parameter variant...");
-  const claude = callClaude(claudePrompt);
-  console.log("Calling DeepSeek for parameter variant...");
-  const deepseek = await callDeepSeek(deepSeekPrompt);
+  const variants = [];
+  const calls = [];
 
-  const variants = [
-    {
+  if (runClaude) {
+    console.log("Calling Claude for parameter variant...");
+    const claude = callClaude(claudePrompt);
+    calls.push({ agent: "claude", model: claude.model, modelLabel: claude.modelLabel, usage: claude.usage, rawContent: claude.rawContent });
+    variants.push({
       pathLabel: "data/agent_variants/claude_agent_variant_20260623.json",
       path: resolve(outputDir, "claude_agent_variant_20260623.json"),
       label: "Claude Opus agent parameter rerun",
@@ -348,8 +431,14 @@ const main = async () => {
         label: "Claude Opus agent parameter rerun",
         sourceAgent: "claude-opus-max",
       }),
-    },
-    {
+    });
+  }
+
+  if (runDeepSeek) {
+    console.log("Calling DeepSeek for parameter variant...");
+    const deepseek = await callDeepSeek(deepSeekPrompt);
+    calls.push({ agent: "deepseek", model: deepseek.model, modelLabel: deepseek.modelLabel, usage: deepseek.usage, rawContent: deepseek.rawContent });
+    variants.push({
       pathLabel: "data/agent_variants/deepseek_llm_variant_20260623.json",
       path: resolve(outputDir, "deepseek_llm_variant_20260623.json"),
       label: "DeepSeek LLM parameter rerun",
@@ -359,8 +448,8 @@ const main = async () => {
         label: "DeepSeek LLM parameter rerun",
         sourceAgent: "deepseek-v4-pro",
       }),
-    },
-  ];
+    });
+  }
 
   const generatedAt = new Date().toISOString();
   const artifact = {
@@ -378,10 +467,7 @@ const main = async () => {
       modelsOnlyOutputParameters: true,
       localSequentialScorerProducesBoards: true,
     },
-    calls: [
-      { agent: "claude", model: claude.model, modelLabel: claude.modelLabel, usage: claude.usage, rawContent: claude.rawContent },
-      { agent: "deepseek", model: deepseek.model, modelLabel: deepseek.modelLabel, usage: deepseek.usage, rawContent: deepseek.rawContent },
-    ],
+    calls,
     variants: variants.map((variant) => ({
       path: variant.pathLabel,
       config: variant.config,

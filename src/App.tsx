@@ -851,6 +851,8 @@ function App() {
   const agentReviewNote = `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 低置信 ${lowConfidenceCount} 个 · 回退入选 ${fallbackPickCount} 个`;
   const selectedReviewLabel = "需复核";
   const fallbackProfileLabel = "扩展回退画像";
+  const selectedProspectName = localizeProspectName(selectedPick.prospect.name, entityLanguage);
+  const selectedTeamName = localizeTeamName(selectedPick.team, entityLanguage);
   const selectedUpsideGrade = gradeFromScore(selectedPick.prospect.profile.upside);
   const selectedReadinessScore = average([
     selectedPick.prospect.profile.shooting,
@@ -867,11 +869,90 @@ function App() {
     riskNotes,
     teamNeeds,
     teamNote,
-    prospectName: localizeProspectName(selectedPick.prospect.name, entityLanguage),
-    teamName: localizeTeamName(selectedPick.team, entityLanguage),
+    prospectName: selectedProspectName,
+    teamName: selectedTeamName,
     manifest: draftOpsManifest,
     language: uiLanguage,
   });
+  const decisionPathItems = [
+    {
+      label: "球队问题",
+      value: teamNeeds[0] ?? "需求待确认",
+      detail: teamNeeds.slice(1, 3).join(" / ") || teamNote,
+      tone: "good" as const,
+    },
+    {
+      label: "球员解法",
+      value: playerRoleTags.slice(0, 2).join(" / ") || selectedPick.prospect.positions.join("/"),
+      detail: localizePhrase(selectedPick.roleFit, uiLanguage),
+      tone: "good" as const,
+    },
+    {
+      label: "复核重点",
+      value: selectedNeedsReview ? selectedReviewLabel : "可直接解释",
+      detail: `分差 ${formatSignedOneDecimal(selectedPick.margin)} · 置信 ${Math.round(selectedPick.confidence)}%`,
+      tone: decisionReport.tone,
+    },
+  ];
+  const evidenceCoverageItems = [
+    {
+      label: "预测板",
+      value: "已命中",
+      detail: `综合分 ${formatOneDecimal(selectedPick.score)} / 置信 ${Math.round(selectedPick.confidence)}%`,
+      tone: "good" as const,
+    },
+    {
+      label: "球队偏好",
+      value: selectedTeam ? "已加载" : "待补强",
+      detail: teamNeeds.slice(0, 2).join(" / ") || "本地球队字段不足",
+      tone: selectedTeam ? ("good" as const) : ("watch" as const),
+    },
+    {
+      label: "球员证据",
+      value: selectedPick.evidence.length ? "已加载" : "待补强",
+      detail: evidenceItems[0] ?? "证据字段不足",
+      tone: selectedPick.evidence.length ? ("good" as const) : ("watch" as const),
+    },
+    {
+      label: "幻觉防护",
+      value: "已开启",
+      detail: "无证据时必须标记资料不足或需复核",
+      tone: selectedPick.evidence.length && selectedTeam ? ("good" as const) : ("watch" as const),
+    },
+  ];
+  const antiHallucinationGuardrails = [
+    "优先使用 selectedPickContext、retrievedKnowledge、锁定预测板和本地资料回答。",
+    "涉及球员、球队、顺位、评分、证据、风险、来源或提交字段时，找不到依据就说本地资料未提供。",
+    "区分已证据支持的事实、模型推断和待复核缺口；不要把模型记忆或常识写成已验证事实。",
+    "如果检索反思显示证据不足，必须降低确定性并说明缺哪类资料。",
+  ];
+  const quickQuestions = [
+    {
+      id: "why",
+      label: "为什么选他",
+      question: `为什么 ${selectedTeamName} 在第 ${selectedPick.pick} 顺位选择 ${selectedProspectName}？请先区分已证据支持、模型推断和待复核缺口，再结合球队偏好、球员画像和当前预测分差。`,
+    },
+    {
+      id: "alternatives",
+      label: "看备选人",
+      question: `第 ${selectedPick.pick} 顺位如果不选 ${selectedProspectName}，前三个备选是谁？分别差在哪里？证据不足的地方请明确标记，不要补写。`,
+    },
+    {
+      id: "risk",
+      label: "风险复核",
+      question: `复核第 ${selectedPick.pick} 顺位 ${selectedProspectName} 的主要风险，哪些风险有证据支持，哪些只是待查假设？`,
+    },
+    {
+      id: "team",
+      label: "球队偏好",
+      question: `${selectedTeamName} 当前选人偏好是什么？这些偏好如何解释第 ${selectedPick.pick} 顺位？请不要使用本地资料没有的球队偏好。`,
+    },
+    {
+      id: "rag",
+      label: "RAG 证据",
+      question: `按 Agentic RAG 的方式解释第 ${selectedPick.pick} 顺位：先说明检索了哪些资料类型、证据是否充分，再给结论。`,
+    },
+  ];
   const filteredBoard = board
     .filter((pick) => {
       if (riskOnly && !needsBoardReview(pick)) return false;
@@ -1017,9 +1098,14 @@ function App() {
     });
   };
 
-  const askDeepSeek = async () => {
-    const question = chatInput.trim();
+  const askDeepSeek = async (overrideQuestion?: string, options?: { focusActive?: boolean }) => {
+    const question = (overrideQuestion ?? chatInput).trim();
     if (!question || isChatLoading) return;
+
+    if (overrideQuestion) {
+      setIsChatOpen(true);
+      setSelectedPickFocusActive(options?.focusActive ?? true);
+    }
 
     const userMessage: ChatMessage = {
       id: nextChatMessageId("user"),
@@ -1065,8 +1151,9 @@ function App() {
         body: JSON.stringify({
           question,
           selectedPickNumber,
-          selectedPickFocusActive,
+          selectedPickFocusActive: options?.focusActive ?? selectedPickFocusActive,
           selectedPickContext,
+          antiHallucinationGuardrails,
           history: chatMessages.slice(-8).map((message) => ({
             role: message.role,
             content: message.content,
@@ -1606,6 +1693,41 @@ function App() {
                     <strong>{decisionReport.verdict}</strong>
                   </header>
                   <p>{decisionReport.summary}</p>
+                  <div className="ops-decision-path">
+                    {decisionPathItems.map((item) => (
+                      <article className={item.tone} key={item.label}>
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small>{item.detail}</small>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="ops-evidence-coverage" aria-label="证据覆盖">
+                    {evidenceCoverageItems.map((item) => (
+                      <article className={item.tone} key={item.label}>
+                        <CheckCircle2 size={15} />
+                        <div>
+                          <span>{item.label}</span>
+                          <strong>{item.value}</strong>
+                          <small>{item.detail}</small>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="ops-quick-prompts" aria-label="顺位快捷提问">
+                    {quickQuestions.slice(0, 4).map((item) => (
+                      <button
+                        type="button"
+                        key={item.id}
+                        disabled={isChatLoading}
+                        onClick={() => void askDeepSeek(item.question, { focusActive: true })}
+                        {...buttonMeta(item.label)}
+                      >
+                        <MessageCircle size={14} />
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
                   <div className="ops-decision-metrics">
                     {decisionReport.metrics.map((item) => (
                       <article className={item.tone ?? ""} key={item.label}>
@@ -1855,6 +1977,21 @@ function App() {
                   <p>{copy.chatThinking}</p>
                 </article>
               )}
+            </div>
+
+            <div className="chat-quick-actions" aria-label="DeepSeek 快捷问题">
+              {quickQuestions.map((item) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  disabled={isChatLoading}
+                  onClick={() => void askDeepSeek(item.question, { focusActive: true })}
+                  {...buttonMeta(item.label)}
+                >
+                  <BrainCircuit size={14} />
+                  {item.label}
+                </button>
+              ))}
             </div>
 
             <form

@@ -1,0 +1,380 @@
+{
+  "generatedAt": "2026-06-23T14:42:09.326925+00:00",
+  "inputWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_里程碑预测已填）.xlsx",
+  "outputWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx",
+  "boardSource": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+  "frontendBoardCompared": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json",
+  "method": "Copied exact option values from the official answer-card PlayerPool using the local 124-player Agent board. No manual prediction or free translation.",
+  "playerPoolOptionCount": 124,
+  "duplicatePlayerPoolOptions": [
+    "纳撒尼尔 阿门特"
+  ],
+  "filledPickCells": 30,
+  "blankPickCells": [],
+  "invalidPickCells": [],
+  "blankMilestoneCells": [],
+  "playerPoolValidationPresent": true,
+  "dataValidations": [
+    {
+      "type": "list",
+      "formula1": "PlayerPool",
+      "sqref": "C3:C32"
+    }
+  ],
+  "changesFromFrontendBoard": [
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "english": "Jack Kayil",
+      "optionValue": "杰克 卡伊尔",
+      "cell": "C32",
+      "score": 76,
+      "confidence": 60,
+      "frontendBoardPlayer": "Marc-Owen Fodzo Dada",
+      "changedFromFrontendBoard": true
+    }
+  ],
+  "picks": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "english": "AJ Dybantsa",
+      "optionValue": "AJ 迪班萨",
+      "cell": "C3",
+      "score": 93,
+      "confidence": 96,
+      "frontendBoardPlayer": "AJ Dybantsa",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "english": "Darryn Peterson",
+      "optionValue": "达林 彼得森",
+      "cell": "C4",
+      "score": 92,
+      "confidence": 93,
+      "frontendBoardPlayer": "Darryn Peterson",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "english": "Cameron Boozer",
+      "optionValue": "卡梅隆 布泽尔",
+      "cell": "C5",
+      "score": 94,
+      "confidence": 100,
+      "frontendBoardPlayer": "Cameron Boozer",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "english": "Caleb Wilson",
+      "optionValue": "凯莱布 威尔逊",
+      "cell": "C6",
+      "score": 90,
+      "confidence": 100,
+      "frontendBoardPlayer": "Caleb Wilson",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "english": "Keaton Wagler",
+      "optionValue": "基顿 瓦格勒",
+      "cell": "C7",
+      "score": 93,
+      "confidence": 89,
+      "frontendBoardPlayer": "Keaton Wagler",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "english": "Darius Acuff Jr.",
+      "optionValue": "达柳斯 阿卡夫",
+      "cell": "C8",
+      "score": 93,
+      "confidence": 89,
+      "frontendBoardPlayer": "Darius Acuff Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "english": "Mikel Brown Jr.",
+      "optionValue": "迈克尔 布朗",
+      "cell": "C9",
+      "score": 92,
+      "confidence": 86,
+      "frontendBoardPlayer": "Mikel Brown Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "english": "Aday Mara",
+      "optionValue": "阿达伊 马拉",
+      "cell": "C10",
+      "score": 89,
+      "confidence": 94,
+      "frontendBoardPlayer": "Aday Mara",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "english": "Brayden Burries",
+      "optionValue": "布雷登 伯里斯",
+      "cell": "C11",
+      "score": 90,
+      "confidence": 97,
+      "frontendBoardPlayer": "Brayden Burries",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "english": "Kingston Flemings",
+      "optionValue": "金斯顿 弗莱明斯",
+      "cell": "C12",
+      "score": 90,
+      "confidence": 83,
+      "frontendBoardPlayer": "Kingston Flemings",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "english": "Nate Ament",
+      "optionValue": "纳撒尼尔 阿门特",
+      "cell": "C13",
+      "score": 81,
+      "confidence": 75,
+      "frontendBoardPlayer": "Nate Ament",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "english": "Yaxel Lendeborg",
+      "optionValue": "亚克塞尔 伦德伯格",
+      "cell": "C14",
+      "score": 90,
+      "confidence": 94,
+      "frontendBoardPlayer": "Yaxel Lendeborg",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "english": "Karim Lopez",
+      "optionValue": "卡里姆 洛佩兹",
+      "cell": "C15",
+      "score": 91,
+      "confidence": 88,
+      "frontendBoardPlayer": "Karim Lopez",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "english": "Morez Johnson Jr.",
+      "optionValue": "小莫雷兹 约翰逊",
+      "cell": "C16",
+      "score": 89,
+      "confidence": 96,
+      "frontendBoardPlayer": "Morez Johnson Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "english": "Allen Graves",
+      "optionValue": "阿伦 格雷夫斯",
+      "cell": "C17",
+      "score": 88,
+      "confidence": 94,
+      "frontendBoardPlayer": "Allen Graves",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "english": "Hannes Steinbach",
+      "optionValue": "汉内斯 施泰因巴赫",
+      "cell": "C18",
+      "score": 85,
+      "confidence": 82,
+      "frontendBoardPlayer": "Hannes Steinbach",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 17,
+      "team": "Oklahoma City Thunder",
+      "english": "Chris Cenac Jr.",
+      "optionValue": "克里斯 塞纳克",
+      "cell": "C19",
+      "score": 78,
+      "confidence": 79,
+      "frontendBoardPlayer": "Chris Cenac Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 18,
+      "team": "Charlotte Hornets",
+      "english": "Christian Anderson",
+      "optionValue": "克里斯蒂安 安德森",
+      "cell": "C20",
+      "score": 88,
+      "confidence": 78,
+      "frontendBoardPlayer": "Christian Anderson",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "english": "Labaron Philon Jr.",
+      "optionValue": "小拉巴伦 菲隆",
+      "cell": "C21",
+      "score": 79,
+      "confidence": 71,
+      "frontendBoardPlayer": "Labaron Philon Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 20,
+      "team": "San Antonio Spurs",
+      "english": "Bennett Stirtz",
+      "optionValue": "本内特 斯特茨",
+      "cell": "C22",
+      "score": 90,
+      "confidence": 84,
+      "frontendBoardPlayer": "Bennett Stirtz",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "english": "Cameron Carr",
+      "optionValue": "卡梅隆 卡尔",
+      "cell": "C23",
+      "score": 90,
+      "confidence": 99,
+      "frontendBoardPlayer": "Cameron Carr",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "english": "Dailyn Swain",
+      "optionValue": "戴林 斯温",
+      "cell": "C24",
+      "score": 84,
+      "confidence": 74,
+      "frontendBoardPlayer": "Dailyn Swain",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "english": "Ebuka Okorie",
+      "optionValue": "埃布卡 奥科里",
+      "cell": "C25",
+      "score": 82,
+      "confidence": 91,
+      "frontendBoardPlayer": "Ebuka Okorie",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "english": "Isaiah Evans",
+      "optionValue": "以赛亚 埃文斯",
+      "cell": "C26",
+      "score": 82,
+      "confidence": 74,
+      "frontendBoardPlayer": "Isaiah Evans",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
+      "english": "Koa Peat",
+      "optionValue": "科阿 皮特",
+      "cell": "C27",
+      "score": 81,
+      "confidence": 74,
+      "frontendBoardPlayer": "Koa Peat",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "english": "Tarris Reed Jr.",
+      "optionValue": "小塔里斯 里德",
+      "cell": "C28",
+      "score": 73,
+      "confidence": 68,
+      "frontendBoardPlayer": "Tarris Reed Jr.",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "english": "Sergio De Larrea",
+      "optionValue": "塞尔吉奥 德拉雷亚",
+      "cell": "C29",
+      "score": 71,
+      "confidence": 68,
+      "frontendBoardPlayer": "Sergio De Larrea",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 28,
+      "team": "Minnesota Timberwolves",
+      "english": "Meleek Thomas",
+      "optionValue": "马利克 托马斯",
+      "cell": "C30",
+      "score": 77,
+      "confidence": 76,
+      "frontendBoardPlayer": "Meleek Thomas",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "english": "Henri Veesaar",
+      "optionValue": "亨利 维萨尔",
+      "cell": "C31",
+      "score": 78,
+      "confidence": 80,
+      "frontendBoardPlayer": "Henri Veesaar",
+      "changedFromFrontendBoard": false
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "english": "Jack Kayil",
+      "optionValue": "杰克 卡伊尔",
+      "cell": "C32",
+      "score": 76,
+      "confidence": 60,
+      "frontendBoardPlayer": "Marc-Owen Fodzo Dada",
+      "changedFromFrontendBoard": true
+    }
+  ],
+  "milestoneSheet": "③里程碑预测",
+  "milestoneFilledCells": 7,
+  "q6SchoolOptionValid": true,
+  "q6SchoolOptionCell": "③里程碑预测!F8",
+  "milestoneDataValidations": [
+    {
+      "type": "list",
+      "formula1": "SchoolPool",
+      "sqref": "F8"
+    }
+  ]
+}

@@ -3,9 +3,34 @@ import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { rootDir } from "./lib/draftops-manifest.mjs";
 
+const loadEnvFile = async (path) => {
+  const content = await readFile(path, "utf8").catch((error) => {
+    if (error.code === "ENOENT") return "";
+    throw error;
+  });
+
+  for (const line of content.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const separator = trimmed.indexOf("=");
+    if (separator < 1) continue;
+
+    const key = trimmed.slice(0, separator).trim();
+    const value = trimmed.slice(separator + 1).trim().replace(/^['"]|['"]$/g, "");
+    if (!process.env[key]) process.env[key] = value;
+  }
+};
+
+await loadEnvFile(resolve(rootDir, ".env.local"));
+await loadEnvFile(resolve(rootDir, ".env"));
+
 const outputDir = resolve(rootDir, "data", "rag");
-const embeddingProvider = (process.env.DRAFTOPS_RAG_INDEX_EMBEDDING_PROVIDER ?? "dashscope").toLowerCase();
-const embeddingDimensions = Number(process.env.DRAFTOPS_RAG_EMBEDDING_DIMENSIONS ?? "1024");
+const requestedEmbeddingProvider =
+  process.env.DRAFTOPS_RAG_INDEX_EMBEDDING_PROVIDER ?? (process.env.DASHSCOPE_API_KEY ? "dashscope" : "local-hash");
+const embeddingProvider = requestedEmbeddingProvider.toLowerCase();
+const embeddingDimensions = Number(
+  process.env.DRAFTOPS_RAG_EMBEDDING_DIMENSIONS ?? (embeddingProvider === "dashscope" ? "1024" : "256"),
+);
 const embeddingModel = process.env.DRAFTOPS_RAG_DASHSCOPE_EMBEDDING_MODEL ?? "text-embedding-v4";
 const dashScopeBaseUrl = process.env.DRAFTOPS_RAG_DASHSCOPE_BASE_URL ?? "https://dashscope.aliyuncs.com/compatible-mode/v1";
 const dashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DASHSCOPE_BATCH_SIZE ?? "10"), 1), 10);
@@ -121,6 +146,51 @@ const normalizeText = (value) =>
     .replace(/[ \t]+/g, " ")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+
+const tokenize = (value) => {
+  const normalized = String(value ?? "").toLowerCase();
+  const ascii = normalized.match(/[a-z0-9][a-z0-9.'-]{1,}/g) ?? [];
+  const cjkSequences = normalized.match(/[\u4e00-\u9fff]{2,}/g) ?? [];
+  const cjkTerms = cjkSequences.flatMap((sequence) => {
+    const terms = [sequence];
+    for (const size of [2, 3, 4, 5, 6]) {
+      for (let index = 0; index <= sequence.length - size; index += 1) {
+        terms.push(sequence.slice(index, index + size));
+      }
+    }
+    return terms;
+  });
+  return [...new Set([...ascii, ...cjkTerms].filter((term) => term.length >= 2))];
+};
+
+const hashToken = (token) => {
+  let hash = 2166136261;
+  for (let index = 0; index < token.length; index += 1) {
+    hash ^= token.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+const embedText = (value, dimensions = embeddingDimensions) => {
+  const vector = new Float32Array(dimensions);
+  const terms = tokenize(value);
+  if (!terms.length) return [...vector];
+
+  for (const term of terms) {
+    const tokenHash = hashToken(term);
+    const index = (tokenHash >>> 1) % dimensions;
+    const sign = tokenHash & 1 ? -1 : 1;
+    vector[index] += sign * (1 + Math.log2(term.length + 1));
+  }
+
+  let norm = 0;
+  for (const value of vector) norm += value * value;
+  norm = Math.sqrt(norm);
+  if (!norm) return [...vector];
+  for (let index = 0; index < vector.length; index += 1) vector[index] = Number((vector[index] / norm).toFixed(6));
+  return [...vector];
+};
 
 const compactJson = (value, maxLength = 2400) => {
   const text = JSON.stringify(value, null, 2);
@@ -269,16 +339,22 @@ const dashScopeEmbedTexts = async (texts) => {
   return embeddings;
 };
 
+const embedTexts = async (texts) => {
+  if (embeddingProvider === "dashscope") return dashScopeEmbedTexts(texts);
+  if (["local", "local-hash", "hash"].includes(embeddingProvider)) return texts.map((text) => embedText(text));
+  return texts.map(() => null);
+};
+
 const buildIndex = async (spec) => {
   const sourceChunks = (
     await Promise.all(spec.sources.map((source) => readSourceChunks(source, spec.id)))
   ).flat();
-  const embeddings = await dashScopeEmbedTexts(sourceChunks.map((chunk) => [chunk.source, chunk.path, chunk.text].join("\n")));
+  const embeddings = await embedTexts(sourceChunks.map((chunk) => [chunk.source, chunk.path, chunk.text].join("\n")));
   const chunks = sourceChunks.map((chunk, index) => ({
     ...chunk,
     embeddingProvider,
-    embeddingModel: embeddingProvider === "dashscope" ? embeddingModel : null,
-    embeddingDimensions: embeddingProvider === "dashscope" ? embeddingDimensions : null,
+    embeddingModel: embeddingProvider === "dashscope" ? embeddingModel : embeddingProvider,
+    embeddingDimensions,
     embedding: embeddings[index],
   }));
 
@@ -290,8 +366,8 @@ const buildIndex = async (spec) => {
     id: spec.id,
     description: spec.description,
     embeddingProvider,
-    embeddingModel: embeddingProvider === "dashscope" ? embeddingModel : null,
-    embeddingDimensions: embeddingProvider === "dashscope" ? embeddingDimensions : null,
+    embeddingModel: embeddingProvider === "dashscope" ? embeddingModel : embeddingProvider,
+    embeddingDimensions,
     sourceCount: spec.sources.length,
     chunkCount: chunks.length,
     sources: spec.sources,

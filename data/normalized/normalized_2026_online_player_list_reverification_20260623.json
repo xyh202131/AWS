@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.online_player_list_reverification.v1",
-  "generatedAt": "2026-06-23T13:00:00.700Z",
+  "generatedAt": "2026-06-23T14:59:11.970Z",
   "scope": "Live online re-verification of 2026 NBA player-list sources against the local 124-player answer-card pool. Raw local data is not modified.",
   "sources": {
     "nbaProspects": {
@@ -13,19 +13,19 @@
       "label": "NBA China draft board",
       "url": "https://china.nba.cn/draft/",
       "path": ".firecrawl/online-reverify-20260623-china-draft.md",
-      "sha256": "4F19F446670BD813D172DD9E8CA9B62FEE22314F1F4D9BD0F81F3022DC974819"
+      "sha256": "1C873731DC7423DCF0F8F08C10AF8C5A398FED6220B1AC008B0FDEB2599BF8F9"
     },
     "combineInvite": {
       "label": "NBA.com 73-player AWS NBA Draft Combine invite article",
       "url": "https://www.nba.com/news/nba-announces-73-players-invited-to-2026-nba-draft-combine",
       "path": ".firecrawl/online-reverify-20260623-combine-invite-73.md",
-      "sha256": "FACADC47C717228AAA9EA4E2ABCBBE909D404B05E3D2B6653576AA283357F22A"
+      "sha256": "7116BFFCF86C40EFAC23878E5AF097A75A4CF060B06C2E8C2FF4D995079FEFFE"
     },
     "combineDataHub": {
       "label": "NBA.com AWS NBA Draft Combine Data Hub article",
       "url": "https://www.nba.com/news/2026-aws-nba-draft-combine-data-hub-everything-you-need-to-know",
       "path": ".firecrawl/online-reverify-20260623-combine-data-hub.md",
-      "sha256": "4FC03341EA2CCC50A4EB92F3B567196A2979EC7BD8516FED9BAD80BC29C439D8"
+      "sha256": "D3CAFD8EAB742F1DBB25A03030361AF7D973D263E39AF7363AF4DB0C98CA9935"
     },
     "statsCombine": {
       "label": "NBA Stats Draft Combine summary",
@@ -43,7 +43,7 @@
       "label": "NBA.com 2026 early entry candidates",
       "url": "https://www.nba.com/news/2026-nba-draft-early-entry-candidates",
       "path": ".firecrawl/online-reverify-20260623-early-entry-candidates.md",
-      "sha256": "8C200BEC8849AEDCA35746DD7FC1449E7336ED23101C214C8E0EC91F12382A7B"
+      "sha256": "B9FD8AE9C94F5F70C7A23E6451BCF9D5BEE395A7D18B03E49005EE17581B2238"
     },
     "savedOfficialProspects": {
       "label": "Saved normalized official prospects",
@@ -72,9 +72,12 @@
     },
     "chinaDraft": {
       "rowCount": 60,
-      "populatedPickCount": 3,
-      "top30PopulatedPickCount": 3,
+      "populatedPickCount": 0,
+      "top30PopulatedPickCount": 0,
       "emptyTop30Picks": [
+        1,
+        2,
+        3,
         4,
         5,
         6,
@@ -103,53 +106,22 @@
         29,
         30
       ],
-      "populatedPicks": [
-        {
-          "pick": 1,
-          "team": "华盛顿 奇才",
-          "pickTrade": "",
-          "draftDayTradeTo": "Atlanta Hawks",
-          "playerNameZh": "aj 迪班萨",
-          "playerUrl": "https://china.nba.cn/draft/player.htm?name=AJDybantsa",
-          "details": "前锋/BYU2.06米210",
-          "populated": true
-        },
-        {
-          "pick": 2,
-          "team": "犹他 爵士",
-          "pickTrade": "",
-          "draftDayTradeTo": "",
-          "playerNameZh": "达林 彼得森",
-          "playerUrl": "https://china.nba.cn/draft/player.htm?name=DarrynPeterson",
-          "details": "后卫/Kansas1.98米205",
-          "populated": true
-        },
-        {
-          "pick": 3,
-          "team": "孟菲斯 灰熊",
-          "pickTrade": "",
-          "draftDayTradeTo": "",
-          "playerNameZh": "卡梅隆 布泽尔",
-          "playerUrl": "https://china.nba.cn/draft/player.htm?name=CameronBoozer",
-          "details": "前锋/Duke2.06米250",
-          "populated": true
-        }
-      ],
+      "populatedPicks": [],
       "topThreeLocalCoverage": [
         {
           "pick": 1,
-          "playerNameZh": "aj 迪班萨",
-          "foundInLocalPool": true
+          "playerNameZh": "",
+          "foundInLocalPool": false
         },
         {
           "pick": 2,
-          "playerNameZh": "达林 彼得森",
-          "foundInLocalPool": true
+          "playerNameZh": "",
+          "foundInLocalPool": false
         },
         {
           "pick": 3,
-          "playerNameZh": "卡梅隆 布泽尔",
-          "foundInLocalPool": true
+          "playerNameZh": "",
+          "foundInLocalPool": false
         }
       ]
     },
@@ -1565,31 +1537,31 @@
         "pick": 1,
         "team": "华盛顿 奇才",
         "pickTrade": "",
-        "draftDayTradeTo": "Atlanta Hawks",
-        "playerNameZh": "aj 迪班萨",
-        "playerUrl": "https://china.nba.cn/draft/player.htm?name=AJDybantsa",
-        "details": "前锋/BYU2.06米210",
-        "populated": true
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
       },
       {
         "pick": 2,
         "team": "犹他 爵士",
         "pickTrade": "",
         "draftDayTradeTo": "",
-        "playerNameZh": "达林 彼得森",
-        "playerUrl": "https://china.nba.cn/draft/player.htm?name=DarrynPeterson",
-        "details": "后卫/Kansas1.98米205",
-        "populated": true
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
       },
       {
         "pick": 3,
         "team": "孟菲斯 灰熊",
         "pickTrade": "",
         "draftDayTradeTo": "",
-        "playerNameZh": "卡梅隆 布泽尔",
-        "playerUrl": "https://china.nba.cn/draft/player.htm?name=CameronBoozer",
-        "details": "前锋/Duke2.06米250",
-        "populated": true
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
       },
       {
         "pick": 4,

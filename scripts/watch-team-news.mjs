@@ -433,24 +433,25 @@ const formatDraftOrderWindow = (entries, start, end) =>
 
 const extractDraftOrderSignals = (source, html, maxItems) => {
   const entries = extractDraftOrderEntries(html);
-  if (entries.length < 10) return [];
+  const firstRoundEntries = entries.filter((entry) => entry.pick >= 1 && entry.pick <= 30);
+  if (firstRoundEntries.length < 10) return [];
 
-  const signature = draftOrderSignature(entries);
+  const signature = draftOrderSignature(firstRoundEntries);
   const signals = [
     {
-      id: hash(`${source.id}:order:${signature}`),
+      id: hash(`${source.id}:first-round-order:${signature}`),
       sourceId: source.id,
       sourceLabel: source.label,
       tier: source.tier,
       url: source.url,
       reason: "顺位次序相关",
-      text: `官方 1-60 顺位次序快照已纳入监控：首轮前14 ${formatDraftOrderWindow(entries, 1, 14)}；次轮前8 ${formatDraftOrderWindow(entries, 31, 38)}；共 ${entries.length} 个顺位。`,
+      text: `官方前30顺位次序快照已纳入监控：${formatDraftOrderWindow(firstRoundEntries, 1, 30)}；共 ${firstRoundEntries.length} 个首轮顺位。`,
       draftOrderSignature: signature,
-      draftOrder: entries,
+      draftOrder: firstRoundEntries,
     },
   ];
 
-  for (const entry of entries) {
+  for (const entry of firstRoundEntries) {
     signals.push({
       id: hash(`${source.id}:pick:${entry.pick}:${entry.team}:${entry.from}`),
       sourceId: source.id,
@@ -465,7 +466,7 @@ const extractDraftOrderSignals = (source, html, maxItems) => {
     });
   }
 
-  return signals.slice(0, maxItems);
+  return signals.slice(0, Math.max(maxItems, firstRoundEntries.length + 1));
 };
 
 const extractSignals = (source, html, maxItems) => {
@@ -636,7 +637,7 @@ const main = async () => {
   let runNumber = 1;
 
   console.log("DraftOps 球队变动监控已启动。");
-  console.log(`优先级：NBA 官方源（含 1-60 顺位次序）-> 主流媒体 -> 传闻监控。轮询间隔：${options.intervalSeconds} 秒。`);
+  console.log(`优先级：NBA 官方源（含前30顺位次序）-> 主流媒体 -> 传闻监控。轮询间隔：${options.intervalSeconds} 秒。`);
   console.log(`状态文件：${resolve(rootDir, options.statePath)}`);
 
   while (true) {
