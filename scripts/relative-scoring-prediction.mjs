@@ -4,8 +4,10 @@ import { dirname, resolve } from "node:path";
 
 const rootDir = process.cwd();
 const stampArgIndex = process.argv.indexOf("--run-stamp");
+const forceArgIndex = process.argv.indexOf("--force");
 const runStamp =
   stampArgIndex >= 0 && process.argv[stampArgIndex + 1] ? process.argv[stampArgIndex + 1] : "20260624";
+const forceOverwrite = forceArgIndex >= 0;
 
 const localBundlePath = resolve(rootDir, "data", "final", "local_pool_124_import_bundle.json");
 const teamPreferencePath = resolve(rootDir, "data", "reports", "team_preference_research_20260623.json");
@@ -1073,8 +1075,8 @@ const main = async () => {
   if (!Object.entries(validation).every(([key, value]) => key === "duplicateSelectedProspectIds" || value === true || typeof value === "number")) {
     throw new Error(`Validation failed: ${JSON.stringify(validation)}`);
   }
-  if (existsSync(outputJsonPath) || existsSync(outputReportPath)) {
-    throw new Error(`Refusing to overwrite existing output for runStamp=${runStamp}`);
+  if (!forceOverwrite && (existsSync(outputJsonPath) || existsSync(outputReportPath))) {
+    throw new Error(`Refusing to overwrite existing output for runStamp=${runStamp} (use --force to override for live repredict)`);
   }
 
   await Promise.all([mkdir(dirname(outputJsonPath), { recursive: true }), mkdir(dirname(outputReportPath), { recursive: true })]);

@@ -21,7 +21,7 @@
     <text x="78" y="260" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" fill="#94A8BC">面向 2026 NBA 选秀的 Agent 提交驾驶舱</text>
     <rect x="78" y="302" width="560" height="5" fill="url(#accentLine)" rx="2.5"/>
     <text x="78" y="360" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF">
-      <tspan x="78" dy="0">把 101 官方池、124 本地池和多 Agent 复核</tspan>
+      <tspan x="78" dy="0">把 123 前端池、124 本地池和多 Agent 复核</tspan>
       <tspan x="78" dy="38">收束成可解释、可导出的项目交付资产。</tspan>
     </text>
   </g>
@@ -38,8 +38,8 @@
     <text x="104" y="526" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#33E18A" font-weight="800">30/30</text>
     <text x="104" y="556" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">完整预测板</text>
     <rect x="262" y="480" width="160" height="94" rx="12" fill="#142231" stroke="#28455E"/>
-    <text x="288" y="526" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#62B8FF" font-weight="800">124</text>
-    <text x="288" y="556" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">本地候选池</text>
+    <text x="282" y="524" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#62B8FF" font-weight="800">123/124</text>
+    <text x="288" y="556" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">双候选池</text>
     <rect x="446" y="480" width="160" height="94" rx="12" fill="#142231" stroke="#28455E"/>
     <text x="472" y="526" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#FFD166" font-weight="800">RAG</text>
     <text x="472" y="556" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">AWS 问答层</text>

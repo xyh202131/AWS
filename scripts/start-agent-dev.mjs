@@ -66,5 +66,5 @@ process.on("SIGTERM", () => shutdown(0));
 console.log(`DraftOps dev server target: ${clientOrigin}/`);
 console.log(`DeepSeek chat proxy target: http://${host}:${agentPort}`);
 
-start("deepseek-chat-server", "node", ["scripts/deepseek-chat-server.mjs"]);
+start("deepseek-chat-server-v2", "node", ["scripts/deepseek-chat-server-v2.mjs"]);
 start("vite", npmCommand, npmArgs(["run", "dev", "--", "--host", host, "--port", String(clientPort), "--strictPort"]));

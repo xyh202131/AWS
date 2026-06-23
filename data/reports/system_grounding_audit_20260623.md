@@ -1,6 +1,6 @@
 # DraftOps System Grounding Audit
 
-Generated: 2026-06-23T19:15:55.585Z
+Generated: 2026-06-23T22:10:49.834Z
 
 Status: pass_with_warnings
 
@@ -57,7 +57,7 @@ Evidence:
 
 Remediation: Regenerate the board through scripts/agents; do not hand-edit picks or evidence.
 
-### PASS board-review-surface
+### WARN board-review-surface
 
 Severity: warning
 
@@ -66,7 +66,7 @@ Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.
 Evidence:
 - lowConfidence=none
 - thinEvidence=none
-- narrowMargins=none
+- narrowMargins=10:Karim Lopez:margin=0.22, 11:Labaron Philon Jr.:margin=0.11, 14:Allen Graves:margin=0.43, 15:Cameron Carr:margin=0.71, 16:Dailyn Swain:margin=0.52, 18:Christian Anderson:margin=0.94, 21:Isaiah Evans:margin=0.78, 22:Hannes Steinbach:margin=0.08, 23:Sergio De Larrea:margin=0.76
 
 Remediation: Treat these picks as explanation-review targets, not as manual replacement targets.
 

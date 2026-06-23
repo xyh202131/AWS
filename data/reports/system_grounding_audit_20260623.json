@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.system_grounding_audit.v1",
-  "generatedAt": "2026-06-23T19:15:55.585Z",
+  "generatedAt": "2026-06-23T22:10:49.834Z",
   "generatedBy": "scripts/audit-grounding.mjs",
   "status": "pass_with_warnings",
   "summary": {
@@ -65,13 +65,13 @@
     },
     {
       "id": "board-review-surface",
-      "status": "pass",
+      "status": "warn",
       "severity": "warning",
       "summary": "Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.",
       "evidence": [
         "lowConfidence=none",
         "thinEvidence=none",
-        "narrowMargins=none"
+        "narrowMargins=10:Karim Lopez:margin=0.22, 11:Labaron Philon Jr.:margin=0.11, 14:Allen Graves:margin=0.43, 15:Cameron Carr:margin=0.71, 16:Dailyn Swain:margin=0.52, 18:Christian Anderson:margin=0.94, 21:Isaiah Evans:margin=0.78, 22:Hannes Steinbach:margin=0.08, 23:Sergio De Larrea:margin=0.76"
       ],
       "remediation": "Treat these picks as explanation-review targets, not as manual replacement targets."
     },

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.online_player_list_reverification.v1",
-  "generatedAt": "2026-06-23T18:31:38.728Z",
+  "generatedAt": "2026-06-23T22:07:54.405Z",
   "scope": "Live online re-verification of 2026 NBA player-list sources against the local 124-player answer-card pool. Raw local data is not modified.",
   "sources": {
     "nbaProspects": {

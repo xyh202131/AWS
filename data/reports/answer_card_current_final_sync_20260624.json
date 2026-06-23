@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-06-24T06:09:21.332710",
+  "targetWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx",
+  "currentWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_当前最终预测已填）.xlsx",
+  "boardScenario": "relative-minmax-pool-scoring",
+  "draftValuesMatchCurrentBoard": true,
+  "milestoneValuesMatchCurrentFinal": true,
+  "allDraftPlayersInPlayerPool": true,
+  "schoolAnswerInSchoolPool": true,
+  "draftValidationPreserved": true,
+  "schoolValidationPreserved": true,
+  "first3": [
+    "AJ 迪班萨",
+    "达林 彼得森",
+    "卡梅隆 布泽尔"
+  ],
+  "last3": [
+    "马利克 托马斯",
+    "小塔里斯 里德",
+    "泰勒 比洛多"
+  ],
+  "milestones": [
+    2,
+    2,
+    4,
+    12,
+    7,
+    "密歇根大学",
+    3
+  ]
+}

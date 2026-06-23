@@ -31,6 +31,16 @@ export interface ProspectMedia {
   updatedAt?: string;
 }
 
+export interface ProspectLocalPool {
+  ordinal?: number;
+  nameZh?: string;
+  positionZh?: string;
+  schoolClubZh?: string;
+  countryRegionZh?: string;
+  matchStatus?: string;
+  matchMethod?: string;
+}
+
 export interface Prospect {
   id: string;
   name: string;
@@ -50,6 +60,7 @@ export interface Prospect {
   profile: ScoreProfile;
   sourceNotes: string[];
   media?: ProspectMedia;
+  localPool?: ProspectLocalPool;
 }
 
 export interface TeamProfile {

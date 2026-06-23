@@ -4,7 +4,7 @@
   </g>
   <g id="header">
     <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">数据先可信，预测才可信</text>
-    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">官方池、本地答题池和派生产物都进入可追溯链路。</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">官方 Prospects 101、前端池 123、本地答题池 124 都进入可追溯链路。</text>
   </g>
   <g id="pipeline">
     <rect x="113" y="178" width="218" height="126" rx="14" fill="#142231" stroke="#62B8FF"/>
@@ -36,7 +36,7 @@
     <rect x="148" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
     <text x="170" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#33E18A" font-weight="700">30 picks / 0 重复</text>
     <rect x="410" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
-    <text x="432" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">101 官方候选池</text>
+    <text x="432" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">123 前端候选池</text>
     <rect x="672" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
     <text x="694" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">124 本地答题池</text>
     <rect x="934" y="468" width="198" height="42" rx="8" fill="#142231" stroke="#28455E"/>

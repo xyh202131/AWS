@@ -4,7 +4,7 @@
   </g>
   <g id="header">
     <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">数据先可信，预测才可信</text>
-    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">官方池、本地答题池和派生产物都进入可追溯链路。</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">官方 Prospects 101、前端池 123、本地答题池 124 都进入可追溯链路。</text>
   </g>
   <g id="pipeline">
     <path fill="#142231" stroke="#62B8FF" d="M127,178 H317 A14,14 0 0 1 331,192 V290 A14,14 0 0 1 317,304 H127 A14,14 0 0 1 113,290 V192 A14,14 0 0 1 127,178 Z" />
@@ -55,7 +55,7 @@
     <path fill="#142231" stroke="#28455E" d="M156,468 H376 A8,8 0 0 1 384,476 V502 A8,8 0 0 1 376,510 H156 A8,8 0 0 1 148,502 V476 A8,8 0 0 1 156,468 Z" />
     <text x="170" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#33E18A" font-weight="700">30 picks / 0 重复</text>
     <path fill="#142231" stroke="#28455E" d="M418,468 H638 A8,8 0 0 1 646,476 V502 A8,8 0 0 1 638,510 H418 A8,8 0 0 1 410,502 V476 A8,8 0 0 1 418,468 Z" />
-    <text x="432" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">101 官方候选池</text>
+    <text x="432" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">123 前端候选池</text>
     <path fill="#142231" stroke="#28455E" d="M680,468 H900 A8,8 0 0 1 908,476 V502 A8,8 0 0 1 900,510 H680 A8,8 0 0 1 672,502 V476 A8,8 0 0 1 680,468 Z" />
     <text x="694" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">124 本地答题池</text>
     <path fill="#142231" stroke="#28455E" d="M942,468 H1124 A8,8 0 0 1 1132,476 V502 A8,8 0 0 1 1124,510 H942 A8,8 0 0 1 934,502 V476 A8,8 0 0 1 942,468 Z" />

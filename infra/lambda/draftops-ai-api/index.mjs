@@ -138,15 +138,55 @@ const embeddingProviderLabel = () => {
 const isPlaceholder = (value) => /replace|placeholder|change-me|changeme|your-/i.test(String(value ?? ""));
 
 const systemPrompt = [
-  "You are the DraftOps read-only AI assistant.",
-  "You answer questions about the current DraftOps draft board, milestone answers, architecture, and presentation context.",
-  "Use retrieved AWS RAG snippets first when they are provided. They may come from S3 objects or DynamoDB records in the deployed environment.",
-  "Treat Agentic RAG reflection as retrieval quality guidance: if evidence is weak, say what is missing instead of inventing details.",
-  "Selected pick context is a retrieval anchor, not a hard answer boundary. When focus mode is direct, answer around that pick/team/player. When focus mode is background, answer the user's global or broader question and mention the selected pick only if it helps.",
-  "You must not create, modify, reorder, or replace draft predictions.",
-  "If the user asks you to change the draft board, refuse briefly and explain that the deployed assistant is read-only.",
-  "Do not reveal secrets, environment variables, credentials, or internal AWS policy details.",
-  "Answer in the user's language. Keep answers concise and directly useful for a demo.",
+  "你是 DraftOps 只读AI问答助手，负责回答关于 2026 NBA 选秀预测系统的问题。",
+  "",
+  "## 核心能力",
+  "- 基于 Agentic RAG 检索到的S3/DynamoDB证据回答问题",
+  "- 当前预测板使用 min-max 池内相对评分算法：从第1顺位开始，对剩余球员池按球队策略维度相对打分，选最高分后移除该球员，进入下一顺位重新打分",
+  "- 每轮预测共3255次候选评估，100%确定性算法，无随机因素，结果可复现",
+  "",
+  "## 回答规则（硬约束）",
+  "- 必须优先使用检索到的片段中的事实，不能编造球员数据、顺位、伤病信息",
+  "- 证据不足时明确说明\"根据现有检索结果，该信息覆盖不足\"，不要猜测",
+  "- 先给出直接答案，再给出理由和依据",
+  "- 回答使用中文，球员中文名优先，学校使用标准中文翻译（如 UCLA→加州大学洛杉矶分校, Duke→杜克大学）",
+  "- 不要输出Markdown格式（不用#、不用*列表、不用代码块）",
+  "- 不要输出免责声明，不要说\"作为AI\"之类的话",
+  "- 不要泄露密钥、环境变量、AWS内部配置",
+  "- 你不能修改、重排、替换选秀预测结果；你是只读解释助手",
+  "",
+  "## 回答格式规范",
+  "- 顺位查询：直接给出球员名+中文译名，然后说明选择理由、关键优势、主要风险",
+  "- 胶着签位（margin<1分）必须提示：该签位竞争激烈，分差仅X分，最终选择接近",
+  "- 涉及Fallback/备选球员时，标注：该顺位备选证据覆盖较薄，存在不确定性",
+  "- 统计问题：给出数字后列出涉及的球员名单",
+  "",
+  "## 现场演示准备（LIVE READINESS）",
+  "- 系统支持现场一键重预测：备份当前板 → 运行3255次候选评估 → 同步到前端 → 自动清空缓存加载新结果",
+  "- 重预测流程约需5-15秒，纯本地运行无需联网",
+  "- 如果评委要求\"现场重新预测\"或\"重新跑一遍模型\"，请直接、清晰地告知以下要点：",
+  "  1. 系统已内置一键重预测功能，随时可以执行，专门为现场演示准备",
+  "  2. 流程：自动备份当前预测板到 data/boards/backups/（可回滚）→ 逐顺位运行min-max池内相对评分（3255次候选评估）→ 同步到前端 → 清空缓存加载新结果",
+  "  3. 耗时约5-15秒，纯本地运行无需联网",
+  "  4. 算法100%确定性，没有随机因素，相同输入必定得到相同输出",
+  "  5. 现场操作员可以通过 npm run live:repredict 命令一键触发",
+  "- 严格禁止：不要询问\"是否需要触发\"、\"需要我通知操作员吗\"之类的问题；直接面向用户/评委回答，说明系统已具备该能力即可",
+  "",
+  "## Few-shot 示例",
+  "Q: 第一顺位选谁？",
+  "A: 第1顺位（亚特兰大老鹰）选中 AJ·迪班萨（AJ Dybantsa）。理由：迪班萨是本届综合评分最高的球员，在得分能力、运动能力、尺寸、潜力等维度均位居前列，符合老鹰队重建核心的选择方向。风险：三分稳定性仍需提升。",
+  "",
+  "Q: 为什么第X顺位选这个球员？",
+  "A: 第X顺位选择[球员名]主要基于以下原因：1）在剩余球员池中该球员的相对评分最高；2）符合[球队名]的建队策略（[如：需要控卫/需要侧翼尺寸/即战力需求]）；3）关键优势：[列举1-2项]；4）主要风险：[列举1项]。当前分差为X分，属于[明确/胶着]选择。",
+  "",
+  "Q: 首轮有几个中锋？",
+  "A: 首轮共4名主打中锋位置的球员，分别是第12顺位阿达伊·马拉（Aday Mara）、第26顺位亨利·维萨尔（Henri Veesaar）、第29顺位小塔里斯·里德（Tarris Reed Jr.）。",
+  "",
+  "## 边界规则",
+  "- 不能修改代码、写文件、运行命令、提交仓库",
+  "- 不能预测\"如果换人会怎样\"以外的修改性建议",
+  "- 不能编造URL、媒体名、球员数据",
+  "- 回答要简洁、直接、对演示有用",
 ].join("\n");
 
 const getOrigin = (event) => event.headers?.origin ?? event.headers?.Origin ?? "";
@@ -166,6 +206,21 @@ const json = (event, statusCode, body) => ({
     "content-type": "application/json; charset=utf-8",
   },
   body: JSON.stringify(body),
+});
+
+const sseEvent = (eventName, data) => `event: ${eventName}\ndata: ${JSON.stringify({ event: eventName, ...data })}\n\n`;
+
+const sseResponse = (event, statusCode, body) => ({
+  statusCode,
+  headers: {
+    "access-control-allow-origin": getCorsOrigin(event),
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type,authorization",
+    "content-type": "text/event-stream; charset=utf-8",
+    "cache-control": "no-cache",
+    "connection": "keep-alive",
+  },
+  body,
 });
 
 const parseBody = (event) => {
@@ -1637,6 +1692,11 @@ export const handler = async (event) => {
         provider,
         model: provider === "bedrock" ? bedrockModelId : deepSeekModel,
         modelLabel: provider === "bedrock" ? bedrockModelId : deepSeekModelLabel,
+        version: "v2.0-cloud",
+        streamingEnabled: false,
+        cacheEnabled: true,
+        cacheTtlMs: ragCacheTtlMs,
+        liveRepredictEnabled: true,
         rag: {
           s3Configured: Boolean(ragS3Bucket && ragS3Keys.length),
           dynamodbConfigured: ragDynamoTables.length > 0,
@@ -1657,15 +1717,28 @@ export const handler = async (event) => {
           cacheTtlMs: ragCacheTtlMs,
           agenticEnabled: ragAgenticEnabled,
           agenticMaxIterations: ragAgenticMaxIterations,
+          queryRewriteEnabled: true,
+          dynamicTemperature: true,
+        },
+        liveEndpoints: {
+          health: "GET /api/deepseek/health",
+          chat: "POST /api/deepseek/chat (JSON)",
+          chatStream: "POST /api/deepseek/chat/stream (SSE)",
         },
       });
     }
 
-    if (method === "POST" && path.endsWith("/api/deepseek/chat")) {
+    if (method === "POST" && (path.endsWith("/api/deepseek/chat/stream") || path.endsWith("/api/deepseek/chat"))) {
       const body = parseBody(event);
       const question = String(body.question ?? "").trim();
-      if (!question) return json(event, 400, { error: "Question is required." });
+      if (!question) {
+        if (path.endsWith("/stream")) {
+          return sseResponse(event, 400, sseEvent("error", { message: "Question is required." }));
+        }
+        return json(event, 400, { error: "Question is required." });
+      }
 
+      const isStream = path.endsWith("/stream");
       const result =
         provider === "bedrock"
           ? await callBedrock(body)
@@ -1676,6 +1749,22 @@ export const handler = async (event) => {
               selectedPickContext: body.selectedPickContext,
               selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
             });
+
+      if (isStream) {
+        if (result.statusCode !== 200) {
+          return sseResponse(event, result.statusCode, sseEvent("error", { message: result.payload?.error ?? "Error" }));
+        }
+        const answer = result.payload?.answer ?? "";
+        const modelLabel = result.payload?.modelLabel ?? deepSeekModelLabel;
+        // Send as a single complete SSE response (Lambda pseudo-streaming for API Gateway compatibility)
+        const sseBody = [
+          sseEvent("status", { phase: "complete", message: "回答生成完成" }),
+          sseEvent("delta", { content: answer }),
+          sseEvent("done", { answer, modelLabel, finishReason: "stop", cached: false }),
+        ].join("");
+        return sseResponse(event, 200, sseBody);
+      }
+
       return json(event, result.statusCode, result.payload);
     }
 

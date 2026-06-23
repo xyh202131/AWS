@@ -207,8 +207,12 @@
       },
       "evidenceI18n": [
         {
-          "zh": "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。",
-          "en": "Picks 12 and 14, Axel Lundberg and Morez Johnson Jr., both clear the threshold at 6.5 inches."
+          "zh": "Codex LLM最终板第4-14顺位中，臂展差>=5英寸的球员为第13顺位亚克塞尔 伦德伯格，点估计1人。",
+          "en": "On the Codex LLM final board, the pick 4-14 players clearing a 5-inch wingspan delta are pick 13 Yaxel Lendeborg, point estimate 1."
+        },
+        {
+          "zh": "容错策略：提交值2，覆盖1-3；第7顺位达柳斯 阿卡夫臂展差4.5英寸接近阈值，保留上行空间。",
+          "en": "Tolerance strategy: submit 2, covering 1-3; Darius Acuff Jr. is close at 4.5 inches, so upside uncertainty is retained."
         }
       ]
     },
@@ -220,15 +224,19 @@
       },
       "type": "number",
       "confidence": 82,
-      "answer": "1",
+      "answer": "2",
       "answerI18n": {
-        "zh": "1",
-        "en": "1"
+        "zh": "2",
+        "en": "2"
       },
       "evidenceI18n": [
         {
-          "zh": "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。",
-          "en": "The top three max-vertical players are Toby Lawal, Cameron Carr, and Amari Allen; only Cameron Carr is in the first round."
+          "zh": "助跑最大弹跳前三含并列为托比 拉瓦尔、阿马里 阿伦、卡梅隆 卡尔；其中进入Codex LLM首轮的是第15顺位卡梅隆 卡尔，点估计1人。",
+          "en": "The top max-vertical group is 托比 拉瓦尔, 阿马里 阿伦, 卡梅隆 卡尔; selected first-round players are pick 15 卡梅隆 卡尔, point estimate 1."
+        },
+        {
+          "zh": "容错策略：提交值2，覆盖1-3。",
+          "en": "Tolerance strategy: submit 2, covering 1-3."
         }
       ]
     },
@@ -240,15 +248,19 @@
       },
       "type": "number",
       "confidence": 88,
-      "answer": "3",
+      "answer": "4",
       "answerI18n": {
-        "zh": "3",
-        "en": "3"
+        "zh": "4",
+        "en": "4"
       },
       "evidenceI18n": [
         {
-          "zh": "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。",
-          "en": "Using the answer-card primary-position rule, the centers are pick 8 Aday Mara, pick 26 Tarris Reed Jr., and pick 29 Henri Veesaar."
+          "zh": "按答题卡主位置口径，Codex LLM首轮中锋为第12顺位阿达伊 马拉、第26顺位亨利 维萨尔、第29顺位小塔里斯 里德，点估计3人。",
+          "en": "Using answer-card primary position, the Codex LLM first-round centers are pick 12 Aday Mara, pick 26 Henri Veesaar, pick 29 Tarris Reed Jr., point estimate 3."
+        },
+        {
+          "zh": "容错策略：提交值4，覆盖3-5；PF/C副位置仍有上浮空间。",
+          "en": "Tolerance strategy: submit 4, covering 3-5; PF/C secondary-position uncertainty remains upward."
         }
       ]
     },
@@ -260,15 +272,19 @@
       },
       "type": "number",
       "confidence": 90,
-      "answer": "8",
+      "answer": "12",
       "answerI18n": {
-        "zh": "8",
-        "en": "8"
+        "zh": "12",
+        "en": "12"
       },
       "evidenceI18n": [
         {
-          "zh": "第4–30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。",
-          "en": "The first primary-position center from picks 4-30 is Aday Mara at pick 8."
+          "zh": "Codex LLM最终板第4-30顺位中，第一个答题卡主位置中锋是第12顺位阿达伊 马拉。",
+          "en": "On the Codex LLM final board, the first primary-position center from picks 4-30 is pick 12 Aday Mara."
+        },
+        {
+          "zh": "容错策略：提交值12，±2覆盖第10-14顺位。",
+          "en": "Tolerance strategy: submit 12; ±2 covers picks 10-14."
         }
       ]
     },
@@ -280,15 +296,19 @@
       },
       "type": "number",
       "confidence": 84,
-      "answer": "6",
+      "answer": "7",
       "answerI18n": {
-        "zh": "6",
-        "en": "6"
+        "zh": "7",
+        "en": "7"
       },
       "evidenceI18n": [
         {
-          "zh": "当前首轮国际球员为第8、13、16、27、29、30顺位，共6人。",
-          "en": "The current first-round international players are picks 8, 13, 16, 27, 29, and 30, for a total of 6."
+          "zh": "Codex LLM首轮国际球员为第10顺位卡里姆 洛佩兹、第12顺位阿达伊 马拉、第13顺位亚克塞尔 伦德伯格、第22顺位汉内斯 施泰因巴赫、第23顺位塞尔吉奥 德拉雷亚、第26顺位亨利 维萨尔，点估计6人。",
+          "en": "The Codex LLM first-round international players are pick 10 Karim Lopez, pick 12 Aday Mara, pick 13 Yaxel Lendeborg, pick 22 Hannes Steinbach, pick 23 Sergio De Larrea, pick 26 Henri Veesaar, point estimate 6."
+        },
+        {
+          "zh": "容错策略：提交值7，覆盖6-8；国际身份口径保留上行空间。",
+          "en": "Tolerance strategy: submit 7, covering 6-8; international classification keeps upward uncertainty."
         }
       ]
     },
@@ -307,8 +327,12 @@
       },
       "evidenceI18n": [
         {
-          "zh": "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。",
-          "en": "Michigan has three first-round players at picks 8, 12, and 14, more than any other school or program."
+          "zh": "Codex LLM首轮中，密歇根大学有3名球员：第12顺位阿达伊 马拉、第13顺位亚克塞尔 伦德伯格、第17顺位小莫雷兹 约翰逊。",
+          "en": "Michigan has 3 first-round players on the Codex LLM board: pick 12 Aday Mara, pick 13 Yaxel Lendeborg, pick 17 Morez Johnson Jr.."
+        },
+        {
+          "zh": "机构名题无数值容错；提交答题卡下拉项：密歇根大学。",
+          "en": "Institution-name answer has no numeric tolerance; submit the answer-card dropdown option for Michigan."
         }
       ]
     },
@@ -320,15 +344,19 @@
       },
       "type": "number",
       "confidence": 84,
-      "answer": "2",
+      "answer": "3",
       "answerI18n": {
-        "zh": "2",
-        "en": "2"
+        "zh": "3",
+        "en": "3"
       },
       "evidenceI18n": [
         {
-          "zh": "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。",
-          "en": "Among the top five hand-length players, the first-rounders are Morez Johnson Jr. and Karim Lopez, for a total of 2."
+          "zh": "手掌长度前5含并列为鲁本 钦耶卢、基肖恩 霍尔、杰登 昆坦斯、卡里姆 洛佩兹、乌戈纳 奥尼恩索、小莫雷兹 约翰逊；其中Codex LLM首轮球员为第10顺位卡里姆 洛佩兹、第17顺位小莫雷兹 约翰逊，点估计2人。",
+          "en": "The top hand-length group is 鲁本 钦耶卢, 基肖恩 霍尔, 杰登 昆坦斯, 卡里姆 洛佩兹, 乌戈纳 奥尼恩索, 小莫雷兹 约翰逊; Codex LLM first-rounders are pick 10 卡里姆 洛佩兹, pick 17 小莫雷兹 约翰逊, point estimate 2."
+        },
+        {
+          "zh": "容错策略：提交值3，覆盖2-4。",
+          "en": "Tolerance strategy: submit 3, covering 2-4."
         }
       ]
     }
