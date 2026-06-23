@@ -1,11 +1,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { draftOpsManifest, resolveManifestPath, rootDir } from "./lib/draftops-manifest.mjs";
 
-const rootDir = process.cwd();
 const localEnvPath = resolve(rootDir, ".env.local");
 const envPath = resolve(rootDir, ".env");
-const boardPath = resolve(rootDir, "public", "data", "agent_balanced_board.json");
-const bundlePath = resolve(rootDir, "public", "data", "final_import_bundle.json");
+const boardPath = resolveManifestPath(draftOpsManifest.data?.boardPath, "public/data/agent_balanced_board.json");
+const bundlePath = resolveManifestPath(draftOpsManifest.data?.bundlePath, "public/data/final_import_bundle.json");
 const documentIndexPath = resolve(rootDir, "data", "documents", "document_index.json");
 const milestoneReferencePath = resolve(rootDir, "data", "documents", "milestone-questions", "DraftCode24里程碑事件预测.md");
 const outputJsonPath = resolve(rootDir, "data", "reports", "deepseek_exam_answers.json");
@@ -311,8 +311,8 @@ const main = async () => {
     modelLabel: result.modelLabel,
     usage: result.usage,
     inputFiles: [
-      "public/data/agent_balanced_board.json",
-      "public/data/final_import_bundle.json",
+      draftOpsManifest.data?.boardPath ?? "public/data/agent_balanced_board.json",
+      draftOpsManifest.data?.bundlePath ?? "public/data/final_import_bundle.json",
       "data/documents/document_index.json",
       "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
     ],

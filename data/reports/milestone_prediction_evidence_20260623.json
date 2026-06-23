@@ -1,0 +1,899 @@
+{
+  "sourceFiles": {
+    "answerCard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
+    "officialData": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\NBA选秀大会_26-27赛季数据.xlsx",
+    "currentBoard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json"
+  },
+  "currentBoardRows": [
+    {
+      "pick": 1,
+      "name": "AJ Dybantsa",
+      "zh": "AJ 迪班萨",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "BYU",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 2,
+      "name": "Darryn Peterson",
+      "zh": "达林 彼得森",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Kansas",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 3,
+      "name": "Cameron Boozer",
+      "zh": "卡梅隆 布泽尔",
+      "positions": [
+        "PF",
+        "C"
+      ],
+      "school": "Duke",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 4,
+      "name": "Caleb Wilson",
+      "zh": "凯莱布 威尔逊",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "North Carolina",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 5,
+      "name": "Keaton Wagler",
+      "zh": "基顿 瓦格勒",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Illinois",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 6,
+      "name": "Darius Acuff Jr.",
+      "zh": "达柳斯 阿卡夫",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Arkansas",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 7,
+      "name": "Mikel Brown Jr.",
+      "zh": "迈克尔 布朗",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Louisville",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 8,
+      "name": "Aday Mara",
+      "zh": "阿达伊 马拉",
+      "positions": [
+        "C"
+      ],
+      "school": "Michigan",
+      "intl": true,
+      "origin": "Spain"
+    },
+    {
+      "pick": 9,
+      "name": "Brayden Burries",
+      "zh": "布雷登 伯里斯",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Arizona",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 10,
+      "name": "Kingston Flemings",
+      "zh": "金斯顿 弗莱明斯",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Houston",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 11,
+      "name": "Nate Ament",
+      "zh": "纳撒尼尔 阿门特",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Tennessee",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 12,
+      "name": "Yaxel Lendeborg",
+      "zh": "亚克塞尔 伦德伯格",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Michigan",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 13,
+      "name": "Karim Lopez",
+      "zh": "卡里姆 洛佩兹",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "New Zealand Breakers (Australia)",
+      "intl": true,
+      "origin": "Mexico"
+    },
+    {
+      "pick": 14,
+      "name": "Morez Johnson Jr.",
+      "zh": "小莫雷兹 约翰逊",
+      "positions": [
+        "PF",
+        "C"
+      ],
+      "school": "Michigan",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 15,
+      "name": "Allen Graves",
+      "zh": "阿伦 格雷夫斯",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Santa Clara",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 16,
+      "name": "Hannes Steinbach",
+      "zh": "汉内斯 施泰因巴赫",
+      "positions": [
+        "PF",
+        "C"
+      ],
+      "school": "Washington",
+      "intl": true,
+      "origin": "Germany"
+    },
+    {
+      "pick": 17,
+      "name": "Chris Cenac Jr.",
+      "zh": "克里斯 塞纳克",
+      "positions": [
+        "PF",
+        "C"
+      ],
+      "school": "Houston",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 18,
+      "name": "Christian Anderson",
+      "zh": "克里斯蒂安 安德森",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Texas Tech",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 19,
+      "name": "Labaron Philon Jr.",
+      "zh": "小拉巴伦 菲隆",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Alabama",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 20,
+      "name": "Bennett Stirtz",
+      "zh": "本内特 斯特茨",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Iowa",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 21,
+      "name": "Cameron Carr",
+      "zh": "卡梅隆 卡尔",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Baylor",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 22,
+      "name": "Dailyn Swain",
+      "zh": "戴林 斯温",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Texas",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 23,
+      "name": "Ebuka Okorie",
+      "zh": "埃布卡 奥科里",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Stanford",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 24,
+      "name": "Isaiah Evans",
+      "zh": "以赛亚 埃文斯",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Duke",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 25,
+      "name": "Koa Peat",
+      "zh": "科阿 皮特",
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Arizona",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 26,
+      "name": "Tarris Reed Jr.",
+      "zh": "小塔里斯 里德",
+      "positions": [
+        "C"
+      ],
+      "school": "Connecticut",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 27,
+      "name": "Sergio De Larrea",
+      "zh": "塞尔吉奥 德拉雷亚",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Vallodolid (Spain)",
+      "intl": true,
+      "origin": "Spain"
+    },
+    {
+      "pick": 28,
+      "name": "Meleek Thomas",
+      "zh": "马利克 托马斯",
+      "positions": [
+        "SG",
+        "SF"
+      ],
+      "school": "Arkansas",
+      "intl": false,
+      "origin": "United States"
+    },
+    {
+      "pick": 29,
+      "name": "Henri Veesaar",
+      "zh": "亨利 维萨尔",
+      "positions": [
+        "C"
+      ],
+      "school": "North Carolina",
+      "intl": true,
+      "origin": "Estonia"
+    },
+    {
+      "pick": 30,
+      "name": "Marc-Owen Fodzo Dada",
+      "zh": "马克-欧文 福佐 达达",
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Nancy Basket (France)",
+      "intl": true,
+      "origin": "France"
+    }
+  ],
+  "questionEvidence": {
+    "Q1": {
+      "answer": 2,
+      "rule": "pick 4-14, wingspan minus barefoot height >= 5 inches; missing measurement counted as not confirmed",
+      "rows": [
+        {
+          "pick": 4,
+          "name": "凯莱布 威尔逊",
+          "height": "6' 9.25''",
+          "wingspan": "7' 0.25''",
+          "diff": 3.0,
+          "long": false
+        },
+        {
+          "pick": 5,
+          "name": "基顿 瓦格勒",
+          "height": "6' 5.00''",
+          "wingspan": "6' 6.25''",
+          "diff": 1.25,
+          "long": false
+        },
+        {
+          "pick": 6,
+          "name": "达柳斯 阿卡夫",
+          "height": "6' 2.00''",
+          "wingspan": "6' 6.50''",
+          "diff": 4.5,
+          "long": false
+        },
+        {
+          "pick": 7,
+          "name": "迈克尔 布朗",
+          "height": null,
+          "wingspan": null,
+          "diff": null,
+          "long": false
+        },
+        {
+          "pick": 8,
+          "name": "阿达伊 马拉",
+          "height": "7' 3.00''",
+          "wingspan": "7' 6.00''",
+          "diff": 3.0,
+          "long": false
+        },
+        {
+          "pick": 9,
+          "name": "布雷登 伯里斯",
+          "height": "6' 3.75''",
+          "wingspan": "6' 6.00''",
+          "diff": 2.25,
+          "long": false
+        },
+        {
+          "pick": 10,
+          "name": "金斯顿 弗莱明斯",
+          "height": "6' 2.50''",
+          "wingspan": "6' 3.50''",
+          "diff": 1.0,
+          "long": false
+        },
+        {
+          "pick": 11,
+          "name": "纳撒尼尔 阿门特",
+          "height": "6' 9.50''",
+          "wingspan": "6' 11.50''",
+          "diff": 2.0,
+          "long": false
+        },
+        {
+          "pick": 12,
+          "name": "亚克塞尔 伦德伯格",
+          "height": "6' 8.75''",
+          "wingspan": "7' 3.25''",
+          "diff": 6.5,
+          "long": true
+        },
+        {
+          "pick": 13,
+          "name": "卡里姆 洛佩兹",
+          "height": "6' 8.25''",
+          "wingspan": "6' 11.50''",
+          "diff": 3.25,
+          "long": false
+        },
+        {
+          "pick": 14,
+          "name": "小莫雷兹 约翰逊",
+          "height": "6' 9.00''",
+          "wingspan": "7' 3.50''",
+          "diff": 6.5,
+          "long": true
+        }
+      ]
+    },
+    "Q2": {
+      "answer": 1,
+      "rule": "strict top 3 rows by 助跑弹跳(英寸), descending",
+      "topRows": [
+        {
+          "rank": 1,
+          "name": "托比 拉瓦尔",
+          "position": "PF",
+          "vertical": 45.5,
+          "firstRound": false
+        },
+        {
+          "rank": 2,
+          "name": "卡梅隆 卡尔",
+          "position": "SG",
+          "vertical": 42.5,
+          "firstRound": true
+        },
+        {
+          "rank": 3,
+          "name": "阿马里 阿伦",
+          "position": "SF",
+          "vertical": 42.5,
+          "firstRound": false
+        },
+        {
+          "rank": 4,
+          "name": "AJ 迪班萨",
+          "position": "SF",
+          "vertical": 42,
+          "firstRound": true
+        },
+        {
+          "rank": 5,
+          "name": "特雷冯 布拉齐尔",
+          "position": "PF",
+          "vertical": 41.5,
+          "firstRound": false
+        },
+        {
+          "rank": 6,
+          "name": "安德烈 斯托亚科维奇",
+          "position": "SF",
+          "vertical": 41.5,
+          "firstRound": false
+        },
+        {
+          "rank": 7,
+          "name": "小比利 里士满三世",
+          "position": "SF",
+          "vertical": 41,
+          "firstRound": false
+        },
+        {
+          "rank": 8,
+          "name": "克里斯蒂安 安德森",
+          "position": "PG",
+          "vertical": 40.5,
+          "firstRound": true
+        },
+        {
+          "rank": 9,
+          "name": "金斯顿 弗莱明斯",
+          "position": "PG",
+          "vertical": 40.5,
+          "firstRound": true
+        },
+        {
+          "rank": 10,
+          "name": "弗洛里 比敦加",
+          "position": "C",
+          "vertical": 40.5,
+          "firstRound": false
+        }
+      ]
+    },
+    "Q3": {
+      "answerPrimaryPosition": 3,
+      "answerAnyCPosition": 7,
+      "chosenRule": "主打位置 uses answer-card/player-pool primary 位置, not JSON secondary PF/C",
+      "primaryCenters": [
+        {
+          "pick": 8,
+          "name": "阿达伊 马拉",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 26,
+          "name": "小塔里斯 里德",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 29,
+          "name": "亨利 维萨尔",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        }
+      ],
+      "anyCPlayers": [
+        {
+          "pick": 3,
+          "name": "卡梅隆 布泽尔",
+          "poolPosition": "前锋",
+          "jsonPosition": "PF/C"
+        },
+        {
+          "pick": 8,
+          "name": "阿达伊 马拉",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 14,
+          "name": "小莫雷兹 约翰逊",
+          "poolPosition": "前锋",
+          "jsonPosition": "PF/C"
+        },
+        {
+          "pick": 16,
+          "name": "汉内斯 施泰因巴赫",
+          "poolPosition": "前锋",
+          "jsonPosition": "PF/C"
+        },
+        {
+          "pick": 17,
+          "name": "克里斯 塞纳克",
+          "poolPosition": "前锋",
+          "jsonPosition": "PF/C"
+        },
+        {
+          "pick": 26,
+          "name": "小塔里斯 里德",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 29,
+          "name": "亨利 维萨尔",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        }
+      ]
+    },
+    "Q4": {
+      "answerPrimaryPosition": 8,
+      "answerAnyCPosition": 8,
+      "firstPrimaryCenterRows": [
+        {
+          "pick": 8,
+          "name": "阿达伊 马拉",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 26,
+          "name": "小塔里斯 里德",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        },
+        {
+          "pick": 29,
+          "name": "亨利 维萨尔",
+          "poolPosition": "中锋",
+          "jsonPosition": "C"
+        }
+      ]
+    },
+    "Q5": {
+      "answer": 6,
+      "rule": "current board prospect.international true = non-US development/origin flag",
+      "internationalPlayers": [
+        {
+          "pick": 8,
+          "name": "阿达伊 马拉",
+          "origin": "Spain"
+        },
+        {
+          "pick": 13,
+          "name": "卡里姆 洛佩兹",
+          "origin": "Mexico"
+        },
+        {
+          "pick": 16,
+          "name": "汉内斯 施泰因巴赫",
+          "origin": "Germany"
+        },
+        {
+          "pick": 27,
+          "name": "塞尔吉奥 德拉雷亚",
+          "origin": "Spain"
+        },
+        {
+          "pick": 29,
+          "name": "亨利 维萨尔",
+          "origin": "Estonia"
+        },
+        {
+          "pick": 30,
+          "name": "马克-欧文 福佐 达达",
+          "origin": "France"
+        }
+      ]
+    },
+    "Q6": {
+      "answer": "密歇根大学",
+      "schoolLeaders": [
+        {
+          "school": "密歇根大学",
+          "count": 3,
+          "players": [
+            {
+              "pick": 8,
+              "name": "阿达伊 马拉"
+            },
+            {
+              "pick": 12,
+              "name": "亚克塞尔 伦德伯格"
+            },
+            {
+              "pick": 14,
+              "name": "小莫雷兹 约翰逊"
+            }
+          ]
+        },
+        {
+          "school": "杜克大学",
+          "count": 2,
+          "players": [
+            {
+              "pick": 3,
+              "name": "卡梅隆 布泽尔"
+            },
+            {
+              "pick": 24,
+              "name": "以赛亚 埃文斯"
+            }
+          ]
+        },
+        {
+          "school": "北卡罗来纳大学",
+          "count": 2,
+          "players": [
+            {
+              "pick": 4,
+              "name": "凯莱布 威尔逊"
+            },
+            {
+              "pick": 29,
+              "name": "亨利 维萨尔"
+            }
+          ]
+        },
+        {
+          "school": "阿肯色大学",
+          "count": 2,
+          "players": [
+            {
+              "pick": 6,
+              "name": "达柳斯 阿卡夫"
+            },
+            {
+              "pick": 28,
+              "name": "马利克 托马斯"
+            }
+          ]
+        },
+        {
+          "school": "亚利桑那大学",
+          "count": 2,
+          "players": [
+            {
+              "pick": 9,
+              "name": "布雷登 伯里斯"
+            },
+            {
+              "pick": 25,
+              "name": "科阿 皮特"
+            }
+          ]
+        },
+        {
+          "school": "休斯顿大学",
+          "count": 2,
+          "players": [
+            {
+              "pick": 10,
+              "name": "金斯顿 弗莱明斯"
+            },
+            {
+              "pick": 17,
+              "name": "克里斯 塞纳克"
+            }
+          ]
+        },
+        {
+          "school": "杨百翰大学",
+          "count": 1,
+          "players": [
+            {
+              "pick": 1,
+              "name": "AJ 迪班萨"
+            }
+          ]
+        },
+        {
+          "school": "堪萨斯大学",
+          "count": 1,
+          "players": [
+            {
+              "pick": 2,
+              "name": "达林 彼得森"
+            }
+          ]
+        },
+        {
+          "school": "伊利诺伊大学",
+          "count": 1,
+          "players": [
+            {
+              "pick": 5,
+              "name": "基顿 瓦格勒"
+            }
+          ]
+        },
+        {
+          "school": "路易斯维尔大学",
+          "count": 1,
+          "players": [
+            {
+              "pick": 7,
+              "name": "迈克尔 布朗"
+            }
+          ]
+        }
+      ]
+    },
+    "Q7": {
+      "answer": 2,
+      "rule": "strict top 5 rows by 手长(英寸); tie at 9.5 does not change selected count if all tied-at-threshold non-FR beyond 5 are included",
+      "topRows": [
+        {
+          "rank": 1,
+          "name": "鲁本 钦耶卢",
+          "position": "C",
+          "handLength": 10,
+          "firstRound": false
+        },
+        {
+          "rank": 2,
+          "name": "小莫雷兹 约翰逊",
+          "position": "PF",
+          "handLength": 9.5,
+          "firstRound": true
+        },
+        {
+          "rank": 3,
+          "name": "卡里姆 洛佩兹",
+          "position": "PF",
+          "handLength": 9.5,
+          "firstRound": true
+        },
+        {
+          "rank": 4,
+          "name": "乌戈纳 奥尼恩索",
+          "position": "C",
+          "handLength": 9.5,
+          "firstRound": false
+        },
+        {
+          "rank": 5,
+          "name": "杰登 昆坦斯",
+          "position": "C",
+          "handLength": 9.5,
+          "firstRound": false
+        },
+        {
+          "rank": 6,
+          "name": "基肖恩 霍尔",
+          "position": "SF",
+          "handLength": 9.5,
+          "firstRound": false
+        },
+        {
+          "rank": 7,
+          "name": "弗洛里 比敦加",
+          "position": "C",
+          "handLength": 9.25,
+          "firstRound": false
+        },
+        {
+          "rank": 8,
+          "name": "克里斯 塞纳克",
+          "position": "PF",
+          "handLength": 9.25,
+          "firstRound": true
+        },
+        {
+          "rank": 9,
+          "name": "马拉奇 莫雷诺",
+          "position": "C",
+          "handLength": 9.25,
+          "firstRound": false
+        },
+        {
+          "rank": 10,
+          "name": "祖比 埃吉奥福尔",
+          "position": "C",
+          "handLength": 9.25,
+          "firstRound": false
+        },
+        {
+          "rank": 11,
+          "name": "以赛亚 尼尔森",
+          "position": "C",
+          "handLength": 9.25,
+          "firstRound": false
+        },
+        {
+          "rank": 12,
+          "name": "小塔里斯 里德",
+          "position": "C",
+          "handLength": 9.25,
+          "firstRound": true
+        }
+      ]
+    }
+  },
+  "proposedAnswers": {
+    "Q1": 2,
+    "Q2": 1,
+    "Q3": 3,
+    "Q4": 8,
+    "Q5": 6,
+    "Q6": "密歇根大学",
+    "Q7": 2
+  }
+}

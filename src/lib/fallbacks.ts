@@ -1,7 +1,3 @@
-export const ORIGINAL_PICK_LABEL = "Original pick";
-export const WARNING_FALLBACK = "No blocking warning from the agent.";
-export const NO_ALTERNATIVE_FALLBACK = "No alternative candidate retained by current board.";
-
 export const compactTextList = (items: string[] | null | undefined) =>
   (items ?? []).map((item) => item.trim()).filter(Boolean);
 
@@ -16,7 +12,7 @@ export const formatOptionalValue = (value: number | string | null | undefined, f
   return fallback;
 };
 
-export const formatPositions = (positions: string[] | null | undefined, fallback = "Position pending") => {
+export const formatPositions = (positions: string[] | null | undefined, fallback: string) => {
   const compactPositions = compactTextList(positions);
   return compactPositions.length ? compactPositions.join("/") : fallback;
 };

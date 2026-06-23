@@ -88,12 +88,13 @@ export const UI_COPY = {
     agentMargin: "智能体分差",
     liveLlm: "实时大模型",
     deepSeekWindow: "DeepSeek 问答窗口",
-    deepSeekSubtitle: "只读问答 · 当前锁定预测板",
-    chatIntro: "DeepSeek V4 Pro[1m] 已接入。当前 DeepSeek 是只读问答 Agent，可回答应试题、参考口径和预测主题问题；预测结果只读取当前锁定预测板，不能参与改动。",
+    deepSeekSubtitle: "比赛问答 · 不直接改代码",
+    chatIntro: (modelLabel: string) =>
+      `${modelLabel} 已接入。当前 DeepSeek 可回答本次比赛相关问题，包括数据、里程碑、预测、AWS、提交和代码说明；默认按全局问题回答，只有你明确说当前顺位/这个球队/选中球员时才使用当前栏目；但不能直接修改代码、写文件或提交仓库。`,
     closeDeepSeek: "关闭 DeepSeek 窗口",
     you: "你",
     chatThinking: "分析中...",
-    chatPlaceholder: "问：哪所学校贡献首轮秀最多？A1 需要哪些字段？乐透区有多少后卫？",
+    chatPlaceholder: "问：A1 需要哪些字段？第一顺位为什么这么选？AWS 架构怎么讲？",
     send: "发送",
     heightPending: "身高待确认",
     weightPending: "体重待确认",
@@ -197,12 +198,13 @@ export const UI_COPY = {
     agentMargin: "Agent margin",
     liveLlm: "Live LLM",
     deepSeekWindow: "DeepSeek Window",
-    deepSeekSubtitle: "Read-only Q&A · locked board",
-    chatIntro: "DeepSeek V4 Pro[1m] is connected. This DeepSeek is a read-only Q&A agent for exam, reference, and prediction-themed questions; prediction answers only read the locked board and cannot change it.",
+    deepSeekSubtitle: "Competition Q&A · no direct code edits",
+    chatIntro: (modelLabel: string) =>
+      `${modelLabel} is connected. This DeepSeek answers global competition questions by default and only uses the current panel when you explicitly ask about the current pick, this team, or the selected player. It cannot directly edit code, write files, or push commits.`,
     closeDeepSeek: "Close DeepSeek window",
     you: "You",
     chatThinking: "Analyzing...",
-    chatPlaceholder: "Ask: which school contributes the most first-rounders? What fields does A1 need? How many lottery guards?",
+    chatPlaceholder: "Ask: what fields does A1 need? Why is this the first pick? How should I explain the AWS plan?",
     send: "Send",
     heightPending: "Height pending",
     weightPending: "Weight pending",
@@ -254,8 +256,14 @@ const prospectZh: Record<string, string> = {
   "Jayden Quaintance": "杰登 昆坦斯",
   "Joshua Jefferson": "约书亚 杰斐逊",
   "Sergio de Larrea": "塞尔吉奥 德拉雷亚",
+  "Marc-Owen Fodzo Dada": "马克-欧文 福佐 达达",
+  "Jack Kayil": "杰克 卡伊尔",
+  "Mohammad Amini": "穆罕默德 阿米尼",
+  "Kylan Boswell": "凯兰 博斯韦尔",
 };
 
+// Chinese team names should follow NBA China/NBA Chinese-site naming first;
+// keep source-specific short names as aliases only after the official full-name keys.
 const teamZh: Record<string, string> = {
   "Washington Wizards": "华盛顿奇才",
   "Utah Jazz": "犹他爵士",
@@ -270,8 +278,8 @@ const teamZh: Record<string, string> = {
   "Dallas Mavericks": "达拉斯独行侠",
   "Milwaukee Bucks": "密尔沃基雄鹿",
   "Golden State Warriors": "金州勇士",
-  "Oklahoma City Thunder": "俄克拉荷马城雷霆",
-  "Oklahoma City": "俄克拉荷马城雷霆",
+  "Oklahoma City Thunder": "俄克拉荷马雷霆",
+  "Oklahoma City": "俄克拉荷马雷霆",
   "Miami Heat": "迈阿密热火",
   "Charlotte Hornets": "夏洛特黄蜂",
   "Toronto Raptors": "多伦多猛龙",
@@ -289,15 +297,22 @@ const teamZh: Record<string, string> = {
   Minnesota: "明尼苏达森林狼",
   "Cleveland Cavaliers": "克利夫兰骑士",
   Cleveland: "克利夫兰骑士",
-  "Indiana": "印第安纳步行者",
+  "Indiana Pacers": "印第安纳步行者",
+  Indiana: "印第安纳步行者",
+  "New Orleans Pelicans": "新奥尔良鹈鹕",
   "New Orleans": "新奥尔良鹈鹕",
+  "Houston Rockets": "休斯顿火箭",
   Houston: "休斯顿火箭",
+  "Portland Trail Blazers": "波特兰开拓者",
   Portland: "波特兰开拓者",
+  "Phoenix Suns": "菲尼克斯太阳",
+  "Orlando Magic": "奥兰多魔术",
   "Phoenix via Orlando": "菲尼克斯经奥兰多转来",
   "Orlando via Phoenix": "奥兰多经菲尼克斯转来",
-  "Houston via Oklahoma City": "休斯顿经俄克拉荷马城转来",
+  "Houston via Oklahoma City": "休斯顿经俄克拉荷马雷霆转来",
   "San Antonio via Atlanta": "圣安东尼奥经亚特兰大转来",
-  "Oklahoma City via Washington and Philadelphia": "俄克拉荷马城经华盛顿和费城转来",
+  "Oklahoma City via Washington and Philadelphia": "俄克拉荷马雷霆经华盛顿和费城转来",
+  "Oklahoma City via WAS and PHI": "俄克拉荷马雷霆经华盛顿和费城转来",
 };
 
 const schoolZh: Record<string, string> = {
@@ -327,6 +342,7 @@ const schoolZh: Record<string, string> = {
   Valencia: "瓦伦西亚",
   "Iowa State": "爱荷华州立大学",
   Kentucky: "肯塔基大学",
+  "Nancy Basket (France)": "南锡篮球（法国）",
 };
 
 const countryZh: Record<string, string> = {
@@ -334,6 +350,7 @@ const countryZh: Record<string, string> = {
   Spain: "西班牙",
   Mexico: "墨西哥",
   Germany: "德国",
+  France: "法国",
   Estonia: "爱沙尼亚",
   Nigeria: "尼日利亚",
   Australia: "澳大利亚",
@@ -343,6 +360,7 @@ const countryZh: Record<string, string> = {
 const positionZh: Record<string, string> = {
   G: "后卫",
   F: "前锋",
+  "G-F": "后卫/前锋",
   "F-C": "前锋/中锋",
   PG: "控卫",
   SG: "分卫",
@@ -431,6 +449,9 @@ const phraseZh: Record<string, string> = {
   "decision maker": "决策者",
   "decision making": "决策能力",
   "Defensive events": "防守事件制造",
+  "Defensive event creation": "防守事件制造",
+  "developmental guard": "培养型后卫",
+  "Draft-ready projection uncertainty": "即战力选秀预期不确定",
   "Draft health-risk discussion": "选秀健康风险讨论",
   "Duke pedigree": "杜克背景",
   Efficiency: "效率",
@@ -442,6 +463,7 @@ const phraseZh: Record<string, string> = {
   "Finishing through size": "面对尺寸终结",
   "Finishing touch": "终结手感",
   "First-round tools if medicals check out": "若医疗评估通过，具备首轮工具",
+  "First-round media mock inclusion": "首轮媒体模拟入选",
   "Floor spacing": "拉开空间",
   "floor spacing": "拉开空间",
   "Forward size": "前锋尺寸",
@@ -470,6 +492,7 @@ const phraseZh: Record<string, string> = {
   "International background": "国际背景",
   "International center option": "国际中锋选择",
   "International experience": "国际比赛经验",
+  "Handle pressure": "持球压力",
   international: "国际球员",
   "International big milestone candidate": "国际内线里程碑候选",
   "International milestone candidate": "国际球员里程碑候选",
@@ -504,6 +527,13 @@ const phraseZh: Record<string, string> = {
   "NBA.com consensus top-14 in several boards": "多份 NBA.com 共识榜单进入前 14",
   "NBA.com consensus top-ten range": "NBA.com 共识前十区间",
   needs_review: "需复核",
+  "No seed profile match": "未匹配到种子画像",
+  "Height/age/weight require manual confirmation": "身高/年龄/体重需要人工确认",
+  "Generated profile should not be treated as scouted grade": "生成画像不应视为球探评分",
+  "Manual scouting review required": "需要人工球探复核",
+  "needs_review: generated conservative DraftOps profile from normalized source row; manual player-image/profile review required.": "需复核：已根据标准化来源行生成保守画像；需要人工复核球员图片和画像。",
+  "needs_review: normalized source did not provide height; placeholder retained.": "需复核：标准化来源未提供身高，已保留占位值。",
+  "needs_review: normalized source did not provide age; neutral age placeholder 22.8 used.": "需复核：标准化来源未提供年龄，已使用 22.8 的中性占位值。",
   "Offensive polish": "进攻成熟度",
   "off-ball": "无球",
   "Older forward production": "高年级前锋产出",
@@ -548,6 +578,8 @@ const phraseZh: Record<string, string> = {
   "Rebounding range": "篮板覆盖范围",
   "Rim pressure": "冲框压力",
   "Rising lottery momentum": "乐透热度上升",
+  "Role certainty": "角色确定性",
+  "Rotation readiness": "轮换准备度",
   "ready guard": "即战力后卫",
   "rim pressure": "冲框压力",
   "rim protection": "护框",
@@ -658,8 +690,18 @@ const phraseZh: Record<string, string> = {
   "Ready guard archetype": "即战力后卫类型",
   "Ready connector forward": "即战力衔接型前锋",
   "Consensus late-lottery/mid-first": "共识乐透后段/首轮中段",
+  "Conservative frontcourt role projection": "保守前场角色预测",
   "International guard option": "国际后卫选择",
+  "LNB Elite development track": "法国 LNB 精英联赛培养路径",
+  "Limited senior-squad sample": "一线队样本有限",
+  "long-term developmental scoring guard": "长期培养型得分后卫",
+  "NBA translation uncertainty": "NBA 转换不确定性",
+  "Playmaking flashes": "组织亮点",
   "Scoring guard profile": "得分后卫画像",
+  "U21 scoring production": "U21 得分产出",
+  "NBA.com official profile: came through the SLUC Nancy youth system and represented France at the 2025 FIBA U19 Basketball World Cup.": "NBA.com 官方档案：他出自 SLUC 南锡青训体系，并代表法国参加 2025 年 FIBA U19 篮球世界杯。",
+  "NBA.com official profile: 2025-26 LNB Elite line was 6.2 points in 13.8 minutes per game.": "NBA.com 官方档案：2025-26 赛季在法国 LNB 精英联赛场均 13.8 分钟得到 6.2 分。",
+  "NBA.com projection: long-term developmental scoring guard; unlikely to be draft-ready in 2026.": "NBA.com 预测：长期培养型得分后卫，2026 年大概率还不是即战力选秀人选。",
   "Contending team may prefer a cleaner immediate role.": "争冠球队可能更偏好角色更清晰的即战力。",
   "Fit score is below target; verify with team-need notes.": "适配分低于目标，请结合球队需求说明复核。",
   "International milestone impact: monitor first international slot.": "可能影响国际球员里程碑，请关注首位国际球员顺位。",
@@ -707,6 +749,7 @@ const signalZh: Record<string, string> = {
 
 const confidenceZh: Record<string, string> = {
   high: "高",
+  medium_high: "中高",
   medium: "中",
   low_medium: "中低",
   low: "低",
@@ -823,11 +866,17 @@ export const localizeEvidenceText = (text: string, lang: Language) => {
   if (text === "Agent parameter profile locked; risk and fit adjustments applied.") {
     return "智能体参数画像已锁定；风险和适配修正已应用。";
   }
-  if (/^Raw model margin over next candidate: [\d.]+ points vs .+\.$/.test(text)) {
-    return text.replace(/^Raw model margin over next candidate: ([\d.]+) points vs (.+)\.$/, (_, margin: string, name: string) => `原始模型领先下一候选 ${margin} 分；对比 ${localizeProspectName(name, "zh")}。`);
+  if (/^Raw model margin over next candidate: [+-]?[\d.]+ points vs .+\.$/.test(text)) {
+    return text.replace(/^Raw model margin over next candidate: ([+-]?[\d.]+) points vs (.+)\.$/, (_, margin: string, name: string) => `原始模型相对下一候选分差 ${margin} 分；对比 ${localizeProspectName(name, "zh")}。`);
+  }
+  if (text === "Model margin: no remaining runner-up candidate.") {
+    return "模型分差：没有剩余备选候选。";
   }
   if (/^Narrow-race check: raw score led by [\d.]+ points; consensus rank \d+ over \d+ confirmed the pick\.$/.test(text)) {
     return text.replace(/^Narrow-race check: raw score led by ([\d.]+) points; consensus rank (\d+) over (\d+) confirmed the pick\.$/, "胶着顺位复核：原始分领先 $1 分；共识排名 $2 优于 $3，确认该选择。");
+  }
+  if (/^Narrow-race tiebreaker: raw score trailed by [\d.]+ points; consensus rank \d+ over \d+ broke the tie\.$/.test(text)) {
+    return text.replace(/^Narrow-race tiebreaker: raw score trailed by ([\d.]+) points; consensus rank (\d+) over (\d+) broke the tie\.$/, "胶着顺位决胜：原始分落后 $1 分；共识排名 $2 优于 $3，打破平局。");
   }
   if (/^Team needs: .+\.$/.test(text)) {
     return text.replace(/^Team needs: (.+)\.$/, (_, needs: string) => `球队需求：${localizeCommaList(needs)}。`);
@@ -837,6 +886,12 @@ export const localizeEvidenceText = (text: string, lang: Language) => {
   }
   if (/^ESPN 2026 NBA draft big board top 100: normalized rank \d+; source rank \d+; confidence .+\.$/.test(text)) {
     return text.replace(/^ESPN 2026 NBA draft big board top 100: normalized rank (\d+); source rank (\d+); confidence (.+)\.$/, (_, normalized: string, source: string, confidence: string) => `ESPN 2026 NBA 选秀前 100 大榜：标准化排名第 ${normalized}；来源排名第 ${source}；置信度 ${confidenceZh[confidence] ?? confidence}。`);
+  }
+  if (/^ESPN 2026 NBA mock draft projecting \d+ picks: normalized rank \d+; source rank \d+; confidence .+\.$/.test(text)) {
+    return text.replace(/^ESPN 2026 NBA mock draft projecting (\d+) picks: normalized rank (\d+); source rank (\d+); confidence (.+)\.$/, (_, picks: string, normalized: string, source: string, confidence: string) => `ESPN 2026 NBA 模拟选秀 ${picks} 顺位：标准化排名第 ${normalized}；来源排名第 ${source}；置信度 ${confidenceZh[confidence] ?? confidence}。`);
+  }
+  if (/^Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible\. ESPN mock pick \d+ to .+\.$/.test(text)) {
+    return text.replace(/^Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible\. ESPN mock pick (\d+) to (.+)\.$/, (_, pick: string, team: string) => `由于 ESPN 大榜第 26-100 名不可见，该球员按 ESPN 最终模拟选秀补充为首轮候选；ESPN 模拟第 ${pick} 顺位给 ${localizeTeamName(team, "zh")}。`);
   }
   if (/^NBA\.com consensus lottery cross-check: pick \d+, most common .+\.$/.test(text)) {
     return text.replace(/^NBA\.com consensus lottery cross-check: pick (\d+), most common (.+)\.$/, "NBA.com 共识乐透交叉核对：预测第 $1 顺位，最常见结果为 $2。");

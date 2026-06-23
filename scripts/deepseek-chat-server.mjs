@@ -1,51 +1,59 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
+import { draftOpsManifest, resolveManifestPath, rootDir } from "./lib/draftops-manifest.mjs";
 
-const rootDir = process.cwd();
 const localEnvPath = resolve(rootDir, ".env.local");
 const envPath = resolve(rootDir, ".env");
-const boardPath = resolve(rootDir, "public", "data", "agent_balanced_board.json");
-const bundlePath = resolve(rootDir, "public", "data", "final_import_bundle.json");
+const boardPath = resolveManifestPath(draftOpsManifest.data?.boardPath, "public/data/agent_balanced_board.json");
+const bundlePath = resolveManifestPath(draftOpsManifest.data?.bundlePath, "public/data/final_import_bundle.json");
 const documentIndexPath = resolve(rootDir, "data", "documents", "document_index.json");
 const milestoneReferencePath = resolve(rootDir, "data", "documents", "milestone-questions", "DraftCode24里程碑事件预测.md");
+const milestoneAnswersPath = resolve(rootDir, "data", "final", "milestone_answers.json");
 const examReportPath = resolve(rootDir, "data", "reports", "deepseek_exam_answers.json");
 const knowledgePaths = [
   "data/README.md",
   "data/documents/README.md",
-  "data/documents/document_index.json",
   "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
-  "data/clean/data_quality_report.md",
-  "data/clean/official_prospect_reconciliation.json",
   "data/reports/official_prospect_reconciliation_report.md",
   "data/reports/official_double_agent_roster_audit_summary.md",
   "data/reports/a13_official_local_table_audit.md",
   "data/reports/a14_official_live_refresh_audit.md",
   "data/reports/d8_source_quality_debate.md",
   "data/reports/raw_sources_registry_report.md",
-  "data/raw/raw_sources.json",
+  "data/reports/china_nba_draft_scrape_report_20260623.md",
   "data/raw/nba-official-2026-prospects-live.md",
   "data/raw/nba-official-2026-draft-order-live.md",
+  "data/raw/china-nba-draft-20260623.md",
+];
+const structuredKnowledgePaths = [
+  "data/documents/document_index.json",
+  "data/clean/data_quality_report.md",
+  "data/clean/official_prospect_reconciliation.json",
+  "data/raw/raw_sources.json",
+  "data/raw/china-nba-draft-links-20260623.json",
   "data/normalized/normalized_2026_mock_lottery.json",
+  "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/normalized/normalized_2026_official_prospects_101.json",
+  "data/normalized/normalized_2026_official_team_profiles_30.json",
   "data/normalized/normalized_2026_team_context.json",
   "data/normalized/normalized_2026_prospect_big_board.json",
-  "public/data/final_import_bundle.json",
-  "public/data/agent_balanced_board.json",
+  "data/final/milestone_answers.json",
+  "data/reports/team_preference_research_20260623.json",
+  "data/reports/milestone_prediction_evidence_20260623.json",
+  "data/reports/milestone_deepseek_discussion_20260623.json",
+  "data/reports/milestone_answer_card_write_report_20260623.json",
+  "public/data/prospect_media.json",
+  draftOpsManifest.data?.bundlePath ?? "public/data/final_import_bundle.json",
+  draftOpsManifest.data?.boardPath ?? "public/data/agent_balanced_board.json",
 ];
-const officialWebSources = [
-  {
-    name: "NBA.com official 2026 Draft Order",
-    url: "https://www.nba.com/news/2026-nba-draft-order",
-  },
-  {
-    name: "NBA.com official 2026 Prospects",
-    url: "https://www.nba.com/draft/2026/prospects",
-  },
-  {
-    name: "NBA.com 2026 Consensus Mock Draft",
-    url: "https://www.nba.com/news/2026-consensus-mock-draft",
-  },
-];
+const officialWebSources = (draftOpsManifest.sourceLinks ?? []).map((source) => ({
+  name: source.label?.en ?? source.label?.zh ?? source.url,
+  url: source.url,
+}));
+const ragEmbeddingDimensions = 256;
+const ragRerankPoolSize = 42;
+const ragSnippetLimit = 14;
 
 const loadEnvFile = async (path) => {
   const content = await readFile(path, "utf8").catch((error) => {
@@ -110,8 +118,99 @@ const compactText = (value, maxLength = 9000) => {
   return text.length > maxLength ? `${text.slice(0, maxLength)}\n...[truncated]` : text;
 };
 
-const getSearchTerms = ({ question, selectedPick }) => {
-  const selectedTerms = selectedPick
+const compactJson = (value, maxLength = 2200) => {
+  const text = JSON.stringify(value, null, 2);
+  return text.length > maxLength ? `${text.slice(0, maxLength)}\n...[truncated]` : text;
+};
+
+const toDeepSeekSelectedPick = (selectedPick) =>
+  selectedPick
+    ? {
+        pick: selectedPick.pick,
+        team: selectedPick.team,
+        acquiredFrom: selectedPick.acquiredFrom ?? null,
+        player: selectedPick.prospect?.name,
+        positions: selectedPick.prospect?.positions ?? [],
+        school: selectedPick.prospect?.school,
+        origin: selectedPick.prospect?.origin,
+        classYear: selectedPick.prospect?.classYear,
+        international: Boolean(selectedPick.prospect?.international),
+      }
+    : null;
+
+const includesAlias = (text, alias) => {
+  const normalizedAlias = String(alias ?? "").toLowerCase().trim();
+  return normalizedAlias.length >= 3 && text.includes(normalizedAlias);
+};
+
+const selectedPickAliases = (selectedPick) => {
+  if (!selectedPick) return [];
+  const player = String(selectedPick.prospect?.name ?? "");
+  const team = String(selectedPick.team ?? "");
+  const school = String(selectedPick.prospect?.school ?? "");
+  const origin = String(selectedPick.prospect?.origin ?? "");
+  const aliases = [player, team, school, origin];
+
+  for (const value of [player, team]) {
+    const parts = value.split(/\s+/).filter((part) => part.length >= 4);
+    aliases.push(...parts);
+  }
+
+  return [...new Set(aliases.filter(Boolean))];
+};
+
+const questionNamesSelectedPick = (question, selectedPick) => {
+  const text = String(question ?? "").toLowerCase();
+  if (!selectedPick || !text) return false;
+
+  const explicitPickNumbers = [
+    ...text.matchAll(/(?:#|pick\s*)\s*(\d{1,2})|(?:第\s*)?(\d{1,2})\s*(?:顺位|签位|号签)/g),
+  ]
+    .map((match) => Number(match[1] ?? match[2]))
+    .filter(Number.isFinite);
+  if (explicitPickNumbers.includes(Number(selectedPick.pick))) return true;
+
+  return selectedPickAliases(selectedPick).some((alias) => includesAlias(text, alias));
+};
+
+const shouldUseSelectedPickContext = (question, selectedPick) => {
+  if (!selectedPick) return false;
+  const text = String(question ?? "").toLowerCase();
+  if (!text) return false;
+
+  const selectedContextPatterns = [
+    /当前\s*(顺位|签位|球队|球员|栏目|选中)/,
+    /(这个|该|此)\s*(顺位|签位|球队|球员|栏目)/,
+    /(选中|点击|右侧|详情页|详情栏|当前页).*(顺位|签位|球队|球员|栏目)/,
+    /(顺位|签位|球队|球员|栏目).*(选中|点击|右侧|详情页|详情栏|当前页)/,
+    /\b(this|selected|current)\s+(pick|team|player|slot|panel|card)\b/,
+    /\b(pick|team|player|slot|panel|card)\s+(selected|current)\b/,
+  ];
+
+  return selectedContextPatterns.some((pattern) => pattern.test(text)) || questionNamesSelectedPick(question, selectedPick);
+};
+
+const questionAsksGlobalScope = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return /整体|全局|全部|所有|整轮|首轮|前\s*30|30\s*(顺位|签|队|人)|三十|排名|榜单|统计|数量|多少|几个|哪所|哪支|哪个大学|哪个学校|里程碑|答题卡|比赛|赛题|规则|提交|演示|视频|架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text);
+};
+
+const questionLooksLikeSelectedFollowUp = (question) => {
+  const text = String(question ?? "").toLowerCase().trim();
+  if (!text) return false;
+  return /^(为什么|为何|理由|依据|证据|风险|备选|替代|适配|fit|risk|why|reason|evidence|alternative|runner-up|详细|展开|分析|说明|解释)/.test(text) ||
+    /为什么.*(选|这样|这么)|这么选|这样选|适配吗|合适吗|风险呢|还有谁|备选是谁|理由是什么|依据是什么/.test(text);
+};
+
+const selectedPickFocusMode = ({ question, selectedPick, selectedPickFocusActive = false }) => {
+  if (shouldUseSelectedPickContext(question, selectedPick)) return "direct";
+  if (!selectedPickFocusActive) return "inactive";
+  if (questionLooksLikeSelectedFollowUp(question) && !questionAsksGlobalScope(question)) return "direct";
+  return "background";
+};
+
+const getSearchTerms = ({ question, selectedPick, useSelectedPickContext = false }) => {
+  const selectedTerms = useSelectedPickContext && selectedPick
     ? [
         selectedPick.team,
         selectedPick.prospect?.name,
@@ -124,12 +223,42 @@ const getSearchTerms = ({ question, selectedPick }) => {
 };
 
 const chunkText = (text, size = 1100) => {
-  const clean = normalizeText(text);
+  const clean = String(text ?? "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
   if (!clean) return [];
   const chunks = [];
-  for (let index = 0; index < clean.length; index += size) {
-    chunks.push(clean.slice(index, index + size));
+  const paragraphs = clean.split(/(?:(?:\r?\n){2,}|(?=#+\s+))/).map((part) => part.trim()).filter(Boolean);
+  let current = "";
+
+  for (const paragraph of paragraphs.length ? paragraphs : [clean]) {
+    if (paragraph.length > size) {
+      if (current) {
+        chunks.push(current);
+        current = "";
+      }
+      const overlap = 180;
+      for (let index = 0; index < paragraph.length; index += size - overlap) {
+        chunks.push(paragraph.slice(index, index + size));
+      }
+      continue;
+    }
+
+    if (!current) {
+      current = paragraph;
+    } else if (`${current}\n\n${paragraph}`.length <= size) {
+      current = `${current}\n\n${paragraph}`;
+    } else {
+      chunks.push(current);
+      current = paragraph;
+    }
   }
+
+  if (current) chunks.push(current);
   return chunks;
 };
 
@@ -137,6 +266,107 @@ const scoreText = (text, terms) => {
   const lower = text.toLowerCase();
   return terms.reduce((score, term) => score + (lower.includes(term.toLowerCase()) ? 1 : 0), 0);
 };
+
+const sourceBoostForRank = (sourceRank) =>
+  ({
+    "official-local": 0.14,
+    "official-web": 0.14,
+    "structured-data": 0.12,
+    "milestone-data": 0.12,
+    "question-reference": 0.1,
+    "source-registry": 0.08,
+    "local-knowledge": 0.04,
+  })[sourceRank] ?? 0.04;
+
+const hashToken = (token) => {
+  let hash = 2166136261;
+  for (let index = 0; index < token.length; index += 1) {
+    hash ^= token.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+const embedText = (value, dimensions = ragEmbeddingDimensions) => {
+  const vector = new Float32Array(dimensions);
+  const terms = tokenize(value);
+  if (!terms.length) return vector;
+
+  for (const term of terms) {
+    const hash = hashToken(term);
+    const index = (hash >>> 1) % dimensions;
+    const sign = hash & 1 ? -1 : 1;
+    vector[index] += sign * (1 + Math.log2(term.length + 1));
+  }
+
+  let norm = 0;
+  for (const value of vector) norm += value * value;
+  norm = Math.sqrt(norm);
+  if (!norm) return vector;
+  for (let index = 0; index < vector.length; index += 1) vector[index] /= norm;
+  return vector;
+};
+
+const cosineSimilarity = (left, right) => {
+  const length = Math.min(left?.length ?? 0, right?.length ?? 0);
+  if (!length) return 0;
+  let score = 0;
+  for (let index = 0; index < length; index += 1) score += left[index] * right[index];
+  return score;
+};
+
+const scoreChunkForRetrieval = (chunk, { terms, queryEmbedding }) => {
+  const searchableText = [chunk.source, chunk.path, chunk.sourceName, chunk.text].filter(Boolean).join("\n");
+  const embedding = chunk.embedding ?? embedText(searchableText);
+  const exactMatches = scoreText(searchableText, terms);
+  const lexicalScore = terms.length ? Math.min(exactMatches / terms.length, 1) : 0;
+  const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
+  const sourceBoost = sourceBoostForRank(chunk.sourceRank);
+  const score = semanticScore * 0.58 + lexicalScore * 0.32 + sourceBoost + (exactMatches >= 2 ? 0.05 : 0);
+
+  return {
+    ...chunk,
+    embedding,
+    exactMatches,
+    lexicalScore,
+    semanticScore,
+    score,
+  };
+};
+
+const rerankChunks = (candidates, limit = ragSnippetLimit, poolSize = ragRerankPoolSize) => {
+  const pool = [...candidates].sort((left, right) => right.score - left.score).slice(0, poolSize);
+  const selected = [];
+
+  while (selected.length < limit && pool.length) {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+
+    for (let index = 0; index < pool.length; index += 1) {
+      const candidate = pool[index];
+      const redundancy = selected.length
+        ? Math.max(...selected.map((item) => cosineSimilarity(candidate.embedding, item.embedding)))
+        : 0;
+      const mmrScore = candidate.score * 0.78 - redundancy * 0.22;
+      if (mmrScore > bestScore) {
+        bestScore = mmrScore;
+        bestIndex = index;
+      }
+    }
+
+    selected.push(pool.splice(bestIndex, 1)[0]);
+  }
+
+  return selected;
+};
+
+const retrievalSnippet = ({ embedding, lexicalScore, semanticScore, score, exactMatches, ...chunk }) => ({
+  ...chunk,
+  retrievalScore: Number(score.toFixed(4)),
+  semanticScore: Number(semanticScore.toFixed(4)),
+  lexicalScore: Number(lexicalScore.toFixed(4)),
+  exactMatches,
+});
 
 const readKnowledgeFile = async (relativePath) => {
   const absolutePath = resolve(rootDir, relativePath);
@@ -159,27 +389,144 @@ const readKnowledgeFile = async (relativePath) => {
   }));
 };
 
-const retrieveLocalKnowledge = async ({ question, selectedPick }) => {
-  const terms = getSearchTerms({ question, selectedPick });
-  const allChunks = (await Promise.all(knowledgePaths.map(readKnowledgeFile))).flat();
-  const ranked = allChunks
-    .map((chunk) => ({
-      ...chunk,
-      score: scoreText(chunk.text, terms) + (chunk.sourceRank === "official-local" ? 2 : 0),
-    }))
-    .filter((chunk) => chunk.score > 0)
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 10);
+const sourceRankForStructuredPath = (relativePath) =>
+  relativePath.includes("board") || relativePath.includes("bundle") || relativePath.includes("normalized")
+    ? "structured-data"
+    : relativePath.includes("milestone")
+      ? "milestone-data"
+      : relativePath.includes("official") || relativePath.includes("nba-official")
+        ? "official-local"
+        : relativePath.includes("raw_sources") || relativePath.includes("source_quality")
+          ? "source-registry"
+          : "local-knowledge";
+
+const makeStructuredChunk = ({ source, sourceRank, path, value, label }) => ({
+  source,
+  sourceRank,
+  path,
+  text: [
+    label ? `Record: ${label}` : null,
+    `Path: ${path}`,
+    compactJson(value),
+  ]
+    .filter(Boolean)
+    .join("\n"),
+});
+
+const labelForRecord = (item, fallback) => {
+  if (!item || typeof item !== "object") return fallback;
+  const pick = item.pick ?? item.draft_pick ?? item.draftPick ?? item.rank ?? item.source_rank;
+  const team = item.team ?? item.team_name ?? item.teamName ?? item.team_abbreviation;
+  const player =
+    item.player ??
+    item.name ??
+    item.prospect?.name ??
+    item.prospect_name ??
+    item.prospectName ??
+    item.sourceName ??
+    item.title;
+  return [pick ? `pick/rank ${pick}` : null, team, player].filter(Boolean).join(" | ") || fallback;
+};
+
+const collectStructuredChunks = (value, { source, sourceRank, path = "$", chunks = [], depth = 0 }) => {
+  if (chunks.length >= 800 || depth > 6 || value == null) return chunks;
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      const itemPath = `${path}[${index}]`;
+      if (item && typeof item === "object") {
+        chunks.push(
+          makeStructuredChunk({
+            source,
+            sourceRank,
+            path: itemPath,
+            value: item,
+            label: labelForRecord(item, itemPath),
+          }),
+        );
+        collectStructuredChunks(item, { source, sourceRank, path: itemPath, chunks, depth: depth + 1 });
+      }
+    });
+    return chunks;
+  }
+
+  if (typeof value !== "object") return chunks;
+
+  const keys = Object.keys(value);
+  if (depth > 0 && keys.length <= 18 && JSON.stringify(value).length <= 2600) {
+    chunks.push(
+      makeStructuredChunk({
+        source,
+        sourceRank,
+        path,
+        value,
+        label: labelForRecord(value, path),
+      }),
+    );
+  }
+
+  for (const [key, child] of Object.entries(value)) {
+    if (Array.isArray(child)) {
+      collectStructuredChunks(child, { source, sourceRank, path: `${path}.${key}`, chunks, depth: depth + 1 });
+    } else if (child && typeof child === "object" && depth < 3) {
+      collectStructuredChunks(child, { source, sourceRank, path: `${path}.${key}`, chunks, depth: depth + 1 });
+    }
+  }
+
+  return chunks;
+};
+
+const readStructuredKnowledgeFile = async (relativePath) => {
+  const absolutePath = resolve(rootDir, relativePath);
+  const content = await readFile(absolutePath, "utf8").catch(() => "");
+  if (!content) return [];
+
+  const sourceRank = sourceRankForStructuredPath(relativePath);
+  const trimmed = content.trim();
+  if (!trimmed) return [];
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    return collectStructuredChunks(parsed, { source: relativePath, sourceRank });
+  } catch {
+    return chunkText(content).map((text, index) => ({
+      source: relativePath,
+      sourceRank,
+      path: `$text[${index}]`,
+      text,
+    }));
+  }
+};
+
+const retrieveLocalKnowledge = async ({ question, selectedPick, useSelectedPickContext = false }) => {
+  const terms = getSearchTerms({ question, selectedPick, useSelectedPickContext });
+  const queryEmbedding = embedText([question, ...terms].join(" "));
+  const allChunks = (
+    await Promise.all([
+      ...knowledgePaths.map(readKnowledgeFile),
+      ...structuredKnowledgePaths.map(readStructuredKnowledgeFile),
+    ])
+  ).flat();
+  const scored = allChunks.map((chunk) => scoreChunkForRetrieval(chunk, { terms, queryEmbedding }));
+  const matching = scored.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
+  const ranked = rerankChunks(matching.length ? matching : scored, ragSnippetLimit, ragRerankPoolSize);
 
   return {
     terms,
+    retrievalMode: "hashed-token-embedding + lexical hybrid score + MMR rerank",
     snippets: ranked,
-    hasStrongLocalMatch: ranked.some((item) => item.score >= 4 || item.sourceRank === "official-local"),
+    hasStrongLocalMatch: ranked.some(
+      (item) =>
+        item.exactMatches >= 3 ||
+        item.score >= 0.52 ||
+        (["official-local", "structured-data"].includes(item.sourceRank) && item.exactMatches > 0),
+    ),
   };
 };
 
 const fetchOfficialWebKnowledge = async (terms) => {
   const results = [];
+  const queryEmbedding = embedText(terms.join(" "));
   for (const source of officialWebSources) {
     try {
       const response = await fetch(source.url, {
@@ -190,28 +537,48 @@ const fetchOfficialWebKnowledge = async (terms) => {
       });
       if (!response.ok) continue;
       const text = await response.text();
-      const chunks = chunkText(text)
-        .map((chunk) => ({
+      const chunks = chunkText(text).map((chunk) =>
+        scoreChunkForRetrieval(
+          {
           source: source.url,
           sourceName: source.name,
           sourceRank: "official-web",
           text: chunk,
-          score: scoreText(chunk, terms) + 3,
-        }))
-        .filter((chunk) => chunk.score > 3)
-        .sort((left, right) => right.score - left.score)
-        .slice(0, 3);
+          },
+          { terms, queryEmbedding },
+        ),
+      );
       results.push(...chunks);
     } catch {
       // Network search is a fallback. If it fails, DeepSeek still receives local knowledge and the failure stays silent.
     }
   }
-  return results.slice(0, 6);
+
+  const matching = results.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
+  return rerankChunks(matching.length ? matching : results, 6, 18);
 };
 
-const sendJson = (response, statusCode, value) => {
+const defaultClientOrigin = process.env.DRAFTOPS_CLIENT_ORIGIN ?? "http://127.0.0.1:3002";
+
+const getCorsOrigin = (request) => {
+  const origin = request.headers.origin;
+  if (!origin) return defaultClientOrigin;
+
+  try {
+    const parsed = new URL(origin);
+    if ((parsed.hostname === "127.0.0.1" || parsed.hostname === "localhost") && /^https?:$/.test(parsed.protocol)) {
+      return origin;
+    }
+  } catch {
+    // Fall back to the configured local client origin.
+  }
+
+  return defaultClientOrigin;
+};
+
+const sendJson = (request, response, statusCode, value) => {
   response.writeHead(statusCode, {
-    "Access-Control-Allow-Origin": "http://127.0.0.1:3002",
+    "Access-Control-Allow-Origin": getCorsOrigin(request),
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json; charset=utf-8",
@@ -241,6 +608,32 @@ const boardRows = (board = []) =>
     consensusRank: pick.prospect?.consensusRank,
   }));
 
+const readOnlyPredictionRows = (board = []) =>
+  board.map((pick) => ({
+    pick: pick.pick,
+    team: pick.team,
+    acquiredFrom: pick.acquiredFrom ?? null,
+    player: pick.prospect?.name,
+    positions: pick.prospect?.positions ?? [],
+    school: pick.prospect?.school,
+    origin: pick.prospect?.origin,
+    classYear: pick.prospect?.classYear,
+    international: Boolean(pick.prospect?.international),
+    consensusRank: pick.prospect?.consensusRank,
+    score: pick.score,
+    confidence: pick.confidence,
+    margin: pick.margin,
+    roleFit: pick.roleFit,
+    evidence: (pick.evidence ?? []).slice(0, 5),
+    warnings: pick.warnings ?? [],
+    risks: pick.prospect?.risks ?? [],
+    alternatives: (pick.alternatives ?? []).slice(0, 3).map((item) => ({
+      name: item.name,
+      score: item.score,
+      roleFit: item.roleFit,
+    })),
+  }));
+
 const schoolCounts = (board = []) => {
   const firstSeen = new Map();
   const counts = {};
@@ -256,7 +649,19 @@ const schoolCounts = (board = []) => {
   );
 };
 
-const buildExamFacts = (board = []) => {
+const officialMilestoneQuestions = (milestoneAnswers) =>
+  Array.isArray(milestoneAnswers?.answers)
+    ? milestoneAnswers.answers.map((item) => ({
+        id: item.id,
+        prompt: item.question,
+        answer: String(item.answer),
+        type: item.type,
+        tolerance: item.tolerance ?? null,
+        evidence: item.evidence ?? [],
+      }))
+    : [];
+
+const buildExamFacts = (board = [], milestoneAnswers = null) => {
   const rows = boardRows(board);
   const firstFive = rows.slice(0, 5);
   const firstInternational = rows.find((pick) => pick.international) ?? null;
@@ -268,7 +673,7 @@ const buildExamFacts = (board = []) => {
   const firstCenter = rows.find((pick) => pick.positions.includes("C")) ?? null;
   const freshmen = rows.filter((pick) => pick.classYear === "Freshman");
   const tradedPicks = rows.filter((pick) => pick.acquiredFrom);
-  const examQuestions = [
+  const fallbackExamQuestions = [
     {
       id: "intl-top-five",
       prompt: "前 5 位是否包含国际球员？",
@@ -316,17 +721,19 @@ const buildExamFacts = (board = []) => {
       evidence: tradedPicks.map((pick) => `第 ${pick.pick} 顺位 ${pick.team} from ${pick.acquiredFrom}`),
     },
   ];
+  const examQuestions = officialMilestoneQuestions(milestoneAnswers);
+  const activeExamQuestions = examQuestions.length ? examQuestions : fallbackExamQuestions;
 
   return {
-    scope: "当前 DeepSeek 是只读问答 Agent：可回答应试题、参考文档口径和预测主题问题，但只能读取当前锁定预测板，不能生成或改动预测球员。",
-    predictionLockRules: [
-      "当前 DeepSeek 禁止生成预测球员。",
-      "当前 DeepSeek 禁止修改、增删、交换、重排任何预测球员。",
-      "当前 DeepSeek 禁止建议某队改选其他球员。",
-      "涉及预测主题的问题只能读取当前锁定预测板并回答，不得参与预测改动。",
+    scope: "当前 DeepSeek 是比赛相关只读问答 Agent：可回答比赛、数据、里程碑、预测板、AWS/提交、路演和代码说明类问题，但不能直接修改代码、文件或仓库。",
+    readOnlyRules: [
+      "当前 DeepSeek 可以回答预测主题问题，包括预测结果、理由、风险、备选人选和策略讨论。",
+      "当前 DeepSeek 的回答只是文本问答，不会直接改代码、写文件、提交仓库、运行命令或改写锁定预测板。",
+      "如果用户要求直接修改代码、写文件、运行命令、提交或推送，必须说明当前 DeepSeek 不能直接执行，只能解释思路或交由代码工作流处理。",
     ],
-    questionCount: examQuestions.length,
-    examQuestions,
+    questionCount: activeExamQuestions.length,
+    examQuestions: activeExamQuestions,
+    officialMilestoneAnswers: milestoneAnswers?.answers ?? null,
     computedFacts: {
       firstFive,
       firstInternational,
@@ -342,16 +749,17 @@ const buildExamFacts = (board = []) => {
 };
 
 const buildContext = async (selectedPickNumber) => {
-  const [boardArtifact, bundle, previousExamRun, documentIndex, milestoneReference] = await Promise.all([
+  const [boardArtifact, bundle, previousExamRun, documentIndex, milestoneReference, milestoneAnswers] = await Promise.all([
     readJson(boardPath, {}),
     readJson(bundlePath, {}),
     readJson(examReportPath, null),
     readJson(documentIndexPath, null),
     readFile(milestoneReferencePath, "utf8").catch(() => ""),
+    readJson(milestoneAnswersPath, null),
   ]);
   const board = boardArtifact.board ?? [];
   const selectedPick = board.find((pick) => pick.pick === selectedPickNumber) ?? board[0] ?? null;
-  const examFacts = buildExamFacts(board);
+  const examFacts = buildExamFacts(board, milestoneAnswers);
 
   return {
     board,
@@ -363,6 +771,7 @@ const buildContext = async (selectedPickNumber) => {
         scenario: boardArtifact.scenario,
         sourceMetadata: boardArtifact.sourceMetadata ?? bundle.metadata,
         previousDeepSeekExamGeneratedAt: previousExamRun?.generatedAt ?? null,
+        officialMilestoneAnswersGeneratedAt: milestoneAnswers?.generatedAt ?? null,
       },
       referenceDocuments: {
         documentIndex,
@@ -370,38 +779,29 @@ const buildContext = async (selectedPickNumber) => {
         usagePolicy:
           "DraftCode24里程碑事件预测.md 可用于题意、字段口径、评分口径参考；不是官方赛果，不能用于调整预测球员。",
       },
-      selectedPick: selectedPick
-        ? {
-            pick: selectedPick.pick,
-            team: selectedPick.team,
-            acquiredFrom: selectedPick.acquiredFrom ?? null,
-            player: selectedPick.prospect?.name,
-            positions: selectedPick.prospect?.positions ?? [],
-            school: selectedPick.prospect?.school,
-            origin: selectedPick.prospect?.origin,
-            classYear: selectedPick.prospect?.classYear,
-            international: Boolean(selectedPick.prospect?.international),
-          }
-        : null,
+      predictionBoardForReadOnlyQa: readOnlyPredictionRows(board),
+      selectedPick: toDeepSeekSelectedPick(selectedPick),
       examFacts,
     },
   };
 };
 
-const buildRetrievedKnowledge = async ({ question, selectedPick }) => {
-  const local = await retrieveLocalKnowledge({ question, selectedPick });
+const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPickContext = false, selectedPickMode = "inactive" }) => {
+  const local = await retrieveLocalKnowledge({ question, selectedPick, useSelectedPickContext });
   const officialWeb = local.hasStrongLocalMatch ? [] : await fetchOfficialWebKnowledge(local.terms);
 
   return {
     retrievalPolicy:
       "优先使用本地知识库与官方本地数据；本地证据不足时才使用官方联网网页；官方数据优先于媒体和模型全局知识；模型全局知识只作最后兜底。",
-    localSnippets: local.snippets.map(({ source, sourceRank, text }) => ({ source, sourceRank, text })),
-    officialWebSnippets: officialWeb.map(({ source, sourceName, sourceRank, text }) => ({
-      source,
-      sourceName,
-      sourceRank,
-      text,
-    })),
+    retrievalMode: local.retrievalMode,
+    selectedPickFocusMode: selectedPickMode,
+    selectedPickRetrievalPolicy: useSelectedPickContext
+      ? "当前问题直接指向选中栏目；检索词使用当前选中栏目的顺位、球队、球员、学校、位置和球队需求。"
+      : selectedPickMode === "background"
+        ? "当前有点击栏目，但它只是背景参考；检索和回答优先服从用户问题的全局或更宽范围。"
+        : "当前没有明确点击焦点；按用户文字本身和全局比赛问题检索。",
+    localSnippets: local.snippets.map(retrievalSnippet),
+    officialWebSnippets: officialWeb.map(retrievalSnippet),
     usedWebFallback: officialWeb.length > 0,
   };
 };
@@ -486,96 +886,38 @@ const isPlayerPredictionQuestion = (question) => {
   return false;
 };
 
-const chineseDigits = {
-  零: 0,
-  一: 1,
-  二: 2,
-  两: 2,
-  三: 3,
-  四: 4,
-  五: 5,
-  六: 6,
-  七: 7,
-  八: 8,
-  九: 9,
-};
-
-const parseChineseNumber = (value) => {
-  const text = String(value ?? "").trim();
-  if (!text) return null;
-  if (text === "十") return 10;
-  if (text.includes("十")) {
-    const [tensText, onesText] = text.split("十");
-    const tens = tensText ? chineseDigits[tensText] : 1;
-    const ones = onesText ? chineseDigits[onesText] : 0;
-    if (typeof tens !== "number" || typeof ones !== "number") return null;
-    return tens * 10 + ones;
-  }
-  return typeof chineseDigits[text] === "number" ? chineseDigits[text] : null;
-};
-
-const getRequestedPickNumber = (question, selectedPickNumber) => {
-  const text = String(question ?? "");
-  const lower = text.toLowerCase();
-  if (/状元|第一顺位|第\s*一\s*顺位/.test(text)) return 1;
-  if (/榜眼|第二顺位|第\s*二\s*顺位/.test(text)) return 2;
-  if (/探花|第三顺位|第\s*三\s*顺位/.test(text)) return 3;
-
-  const numericMatch =
-    lower.match(/(?:第\s*)?(\d{1,2})\s*(?:顺位|号签)/) ?? lower.match(/pick\s*#?\s*(\d{1,2})/);
-  if (numericMatch) {
-    const pick = Number(numericMatch[1]);
-    if (pick >= 1 && pick <= 30) return pick;
-  }
-
-  const chineseMatch = text.match(/(?:第\s*)?([一二两三四五六七八九十]{1,3})\s*(?:顺位|号签)/);
-  if (chineseMatch) {
-    const pick = parseChineseNumber(chineseMatch[1]);
-    if (pick && pick >= 1 && pick <= 30) return pick;
-  }
-
-  return selectedPickNumber;
-};
-
-const buildReadOnlyPredictionAnswer = ({ question, context, selectedPickNumber }) => {
+const isCompetitionRelatedQuestion = (question, context) => {
   const text = String(question ?? "").toLowerCase();
-  const board = context.board ?? [];
-  const asksFullBoard = /完整.*首轮|全部.*首轮|所有.*首轮|30.*顺位|三十.*顺位|full.*board/.test(text);
-
-  if (asksFullBoard) {
-    const lines = board.map(
-      (pick) => `第 ${pick.pick} 顺位 ${pick.team} 选择 ${pick.prospect?.name ?? "N/A"}`,
-    );
-    return `当前锁定首轮预测：\n${lines.join("\n")}`;
+  if (isExamQuestion(question, context) || isPredictionQuestion(question) || isPlayerPredictionQuestion(question)) {
+    return true;
   }
 
-  const requestedPickNumber = getRequestedPickNumber(question, selectedPickNumber);
-  const pick = board.find((item) => item.pick === requestedPickNumber) ?? context.selectedPick ?? board[0];
-  if (!pick) return "当前没有可用的锁定预测板。";
+  return /比赛|竞赛|赛题|提交|答题|路演|ppt|视频|github|仓库|aws|bedrock|s3|dynamodb|app runner|ecs|nba|选秀|draft|combine|球员|顺位|球队|里程碑|数据|模型|agent|deepseek|codex|界面|前端|代码|部署|运行|readme|架构|成本|评分|规则|deadline|截止/.test(
+    text,
+  );
+};
 
-  const base = `当前锁定预测：第 ${pick.pick} 顺位 ${pick.team} 选择 ${pick.prospect?.name ?? "N/A"}。`;
-  if (/风险|risk|warning|隐患/.test(text)) {
-    const risks = [...(pick.warnings ?? []), ...(pick.prospect?.risks ?? [])].filter(Boolean);
-    return `${base}主要风险：${risks.slice(0, 3).join("；") || "当前锁定板未标注主要风险。"}。`;
-  }
+const isDirectCodeModificationRequest = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  const asksForExplanation = /怎么|如何|为什么|解释|说明|建议|方案|思路|能不能|是否|可不可以|where|how|why|explain|suggest|plan/.test(
+    text,
+  );
+  if (asksForExplanation) return false;
 
-  if (/替代|备选|人选|alternative|runner-up/.test(text)) {
-    const alternatives = (pick.alternatives ?? []).slice(0, 3).map((item) => item.name);
-    return `${base}备选人选：${alternatives.join("；") || "当前锁定板未保留备选人选。"}。`;
-  }
+  const codeTarget = /代码|文件|脚本|组件|css|tsx|ts|js|mjs|json|readme|git|github|仓库|项目|页面|按钮|样式|接口|server|package|commit|push|提交|推送/.test(
+    text,
+  );
+  const directAction = /改|修改|新增|添加|删除|实现|接入|创建|写入|修复|重构|替换|运行|执行|提交|推送|部署|帮我|给我|直接/.test(
+    text,
+  );
 
-  if (/为什么|理由|依据|证据|适配|fit|why/.test(text)) {
-    const evidence = (pick.evidence ?? []).slice(0, 3);
-    return `${base}主要依据：${evidence.join("；") || pick.roleFit || "当前锁定板未保留依据。"}。`;
-  }
-
-  return base;
+  return codeTarget && directAction;
 };
 
 const buildScopeGuardAnswer = () =>
-  "当前 DeepSeek 只负责只读问答：可以回答应试题、参考文档口径和预测主题问题，但只能读取当前锁定预测板，不能生成、修改、交换、重排或建议调整预测球员。";
+  "当前 DeepSeek 可以回答比赛相关问题，但不能直接修改代码、写文件、运行命令、提交或推送仓库。";
 
-const callDeepSeek = async ({ question, history, selectedPickNumber, context: providedContext }) => {
+const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPickFocusActive = false, context: providedContext }) => {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     throw new Error("Missing DEEPSEEK_API_KEY. Put it in .env.local before using the chat window.");
@@ -586,9 +928,25 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
   const modelLabel = getModelLabel(model);
   const maxTokens = Number(process.env.DEEPSEEK_CHAT_MAX_TOKENS ?? 1800);
   const context = providedContext ?? (await buildContext(selectedPickNumber));
+  const pickFocusMode = selectedPickFocusMode({ question, selectedPick: context.selectedPick, selectedPickFocusActive });
+  const selectedPickAvailable = pickFocusMode !== "inactive";
+  const useSelectedPickContext = pickFocusMode === "direct";
+  const deepSeekContext = {
+    ...context.deepSeekContext,
+    selectedPick: selectedPickAvailable ? toDeepSeekSelectedPick(context.selectedPick) : null,
+    selectedPickFocusMode: pickFocusMode,
+    selectedPickUsage:
+      pickFocusMode === "direct"
+        ? "当前问题直接指向 selectedPick；回答应围绕该顺位、球队、球员、需求和风险。"
+        : pickFocusMode === "background"
+          ? "当前有点击栏目，但它只是界面背景参考；不要把全局、统计、架构、规则、整体策略问题限制到 selectedPick。"
+          : "当前没有明确点击焦点；按用户文字本身和全局比赛问题回答。",
+  };
   const retrievedKnowledge = await buildRetrievedKnowledge({
     question,
     selectedPick: context.selectedPick,
+    useSelectedPickContext,
+    selectedPickMode: pickFocusMode,
   });
   const compactHistory = Array.isArray(history)
     ? history.slice(-8).map((message) => ({
@@ -603,20 +961,18 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
       {
         role: "system",
         content: [
-          "你是 DraftOps 当前 DeepSeek 只读问答 Agent，不是预测生成 Agent，不是预测修改 Agent。",
-          "你可以回答当前本地应试题集合、参考文档里的里程碑题意/字段口径/评分口径，也可以回答预测主题问题。",
-          "预测主题问题只允许基于当前锁定预测板做只读回答；不得产生新的预测，不得替换预测球员，不得建议改动。",
-          "硬性边界 1：当前 DeepSeek 禁止生成预测球员，禁止新增预测球员，禁止删除预测球员。",
-          "硬性边界 2：当前 DeepSeek 禁止修改、交换、重排、复核或建议调整任何 30 顺位球员预测。",
-          "硬性边界 3：当前 DeepSeek 禁止建议某队改选其他球员，禁止输出替代预测板。",
-          "硬性边界 4：30 顺位球员预测由当前锁定预测管线提供；该管线未来可以是 Codex、另一个 DeepSeek 或其他指定模块，但不是当前这个只读问答 DeepSeek。",
-          "参考文档边界：DraftCode24里程碑事件预测.md 可用于回答题意、字段口径、评分口径和参考题目说明，不能作为官方赛果或预测球员调整依据。",
-          "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，必须以当前本地 examFacts 为准。",
-          "如果参考文档与当前本地 examFacts 冲突，必须以当前本地 examFacts 为准；不能因为参考文档而改预测球员。",
-          "如果问题涉及具体球员预测、预测理由、风险或备选人选，只能基于当前锁定预测板中已有字段回答；如果用户要求改动、重排、替换或推荐新预测，必须拒绝改动并说明当前 DeepSeek 只读。",
-          "再次确认：你只能回答问题；你不能调整预测球员；你不能输出新的选秀预测。",
-          "必须按以下优先级回答：1 本地知识库和当前锁定板应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
+          "你是 DraftOps 当前 DeepSeek 比赛问答 Agent。",
+          "你可以回答任何与本次 AWS/NBA 选秀比赛有关的问题，包括赛题规则、数据、里程碑题、参考文档口径、预测板、预测理由、风险、备选人选、AWS 架构、提交、路演、前端界面、代码结构和运行说明。",
+          "唯一硬边界：当前 DeepSeek 不能直接修改代码，不能写文件，不能运行命令，不能提交或推送仓库，不能声称已经完成了代码或文件改动。",
+          "如果用户要求你直接改代码、写文件、运行命令、提交或推送，你只能说明当前 DeepSeek 不能直接执行，可以用文字解释思路、影响、步骤或让代码工作流处理。",
+          "你可以讨论预测主题和可能的预测分析，但输出只是问答文本，不会直接改写锁定预测板、代码或提交文件。",
+          "selectedPick 是界面上下文，不是硬性回答范围。selectedPickFocusMode 为 direct 时，围绕该顺位、球队、球员回答；为 background 时，按用户问题的全局或更宽范围回答，selectedPick 只作参考。",
+          "如果 selectedPick 为空，按用户文字本身和全局比赛数据回答。",
+          "参考文档边界：DraftCode24里程碑事件预测.md 可用于回答题意、字段口径、评分口径和参考题目说明，不能当作官方赛果。",
+          "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，优先使用当前本地 examFacts 和锁定预测板。",
+          "必须按以下优先级回答：1 本地知识库、当前锁定预测板和当前应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
           "官方来源优先级高于媒体、社区、传闻和模型记忆。",
+          "防幻觉硬规则：涉及球员、球队、顺位、评分、证据、风险、图片、来源或提交字段时，必须能在当前 deepSeekContext 或 retrievedKnowledge 中找到依据；找不到就明确说本地资料未提供，不能用模型记忆补写。",
           "最终只输出当前问题最可能正确的答案。",
           "只回答用户当前问题，不要给额外建议，不要扩展无关背景，不要列来源清单，不要免责声明。",
           "不要输出 Markdown，不要标题，不要 # 号，不要项目符号，不要代码块。",
@@ -626,9 +982,10 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
       {
         role: "user",
         content: [
-          "预测边界重复说明：当前 DeepSeek 禁止调整预测球员；禁止生成、修改、交换、重排 30 顺位预测；预测主题问题只能读取当前锁定预测板回答。",
-          "当前应试题上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
-          JSON.stringify(context.deepSeekContext),
+          "执行边界重复说明：当前 DeepSeek 只能回答问题，不能直接修改代码、写文件、运行命令、提交或推送仓库。",
+          "栏目范围重复说明：selectedPickFocusMode 为 direct 才聚焦当前顺位；为 background 时不要只回答当前顺位。",
+          "当前比赛上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
+          JSON.stringify(deepSeekContext),
           "已按优先级检索到的知识如下：",
           JSON.stringify(retrievedKnowledge),
           "最近对话：",
@@ -664,7 +1021,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
     answer,
     model,
     modelLabel,
-    mode: "deepseek-exam",
+    mode: "deepseek-competition",
     usage: completion.usage ?? null,
   };
 };
@@ -675,7 +1032,7 @@ await loadEnvFile(envPath);
 const port = Number(process.env.DEEPSEEK_AGENT_PORT ?? 4318);
 const server = http.createServer(async (request, response) => {
   if (request.method === "OPTIONS") {
-    sendJson(response, 204, {});
+    sendJson(request, response, 204, {});
     return;
   }
 
@@ -683,11 +1040,17 @@ const server = http.createServer(async (request, response) => {
     const url = new URL(request.url ?? "/", `http://${request.headers.host ?? "127.0.0.1"}`);
     if (request.method === "GET" && url.pathname === "/api/deepseek/health") {
       const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
-      sendJson(response, 200, {
+      sendJson(request, response, 200, {
         ok: true,
         configured: Boolean(process.env.DEEPSEEK_API_KEY),
         model,
         modelLabel: getModelLabel(model),
+        rag: {
+          retrievalMode: "hashed-token-embedding + lexical hybrid score + MMR rerank",
+          embeddingDimensions: ragEmbeddingDimensions,
+          rerankPoolSize: ragRerankPoolSize,
+          topK: ragSnippetLimit,
+        },
       });
       return;
     }
@@ -696,36 +1059,32 @@ const server = http.createServer(async (request, response) => {
       const body = await readRequestJson(request);
       const question = String(body.question ?? "").trim();
       if (!question) {
-        sendJson(response, 400, { error: "Question is required." });
+        sendJson(request, response, 400, { error: "Question is required." });
         return;
       }
 
       const selectedPickNumber = Number(body.selectedPickNumber ?? 1);
       const context = await buildContext(selectedPickNumber);
       const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
-      const examQuestion = isExamQuestion(question, context);
-      const predictionQuestion = isPredictionQuestion(question);
-      const playerPredictionQuestion = isPlayerPredictionQuestion(question);
+      const codeModificationRequest = isDirectCodeModificationRequest(question);
+      const competitionRelatedQuestion = isCompetitionRelatedQuestion(question, context);
 
-      if (playerPredictionQuestion) {
-        sendJson(response, 200, {
-          answer: buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber }),
+      if (codeModificationRequest) {
+        sendJson(request, response, 200, {
+          answer: buildScopeGuardAnswer(),
           model,
           modelLabel: getModelLabel(model),
-          mode: "locked-board-readonly",
+          mode: "local-code-guard",
         });
         return;
       }
 
-      if (!examQuestion) {
-        const answer = predictionQuestion
-          ? buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber })
-          : buildScopeGuardAnswer();
-        sendJson(response, 200, {
-          answer,
+      if (!competitionRelatedQuestion) {
+        sendJson(request, response, 200, {
+          answer: "当前 DeepSeek 只回答本次比赛相关问题。",
           model,
           modelLabel: getModelLabel(model),
-          mode: predictionQuestion ? "locked-board-readonly" : "local-scope-guard",
+          mode: "local-scope-guard",
         });
         return;
       }
@@ -734,15 +1093,16 @@ const server = http.createServer(async (request, response) => {
         question,
         history: body.history,
         selectedPickNumber,
+        selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
         context,
       });
-      sendJson(response, 200, result);
+      sendJson(request, response, 200, result);
       return;
     }
 
-    sendJson(response, 404, { error: "Not found." });
+    sendJson(request, response, 404, { error: "Not found." });
   } catch (error) {
-    sendJson(response, 500, { error: error instanceof Error ? error.message : "Unknown server error." });
+    sendJson(request, response, 500, { error: error instanceof Error ? error.message : "Unknown server error." });
   }
 });
 

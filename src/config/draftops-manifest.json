@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "draftops.manifest.v1",
+  "data": {
+    "bundleUrl": "/data/expanded_import_bundle.json",
+    "boardUrl": "/data/agent_expanded_recommended_board.json",
+    "bundlePath": "public/data/expanded_import_bundle.json",
+    "boardPath": "public/data/agent_expanded_recommended_board.json"
+  },
+  "submission": {
+    "deadlineIso": "2026-06-24T08:00:00+08:00",
+    "deadlineLabel": {
+      "zh": "2026-06-24 08:00",
+      "en": "2026-06-24 08:00"
+    }
+  },
+  "model": {
+    "version": "V5.3.2",
+    "sampleWindow": "2024.04-2026.05",
+    "chatModelLabel": "deepseek-v4-pro[1m]"
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh": "NBA.com 官方 2026 首轮顺位",
+        "en": "NBA.com official 2026 first-round order"
+      },
+      "url": "https://www.nba.com/news/2026-nba-draft-order"
+    },
+    {
+      "label": {
+        "zh": "NBA.com 官方 2026 候选人",
+        "en": "NBA.com official 2026 prospects"
+      },
+      "url": "https://www.nba.com/draft/2026/prospects"
+    },
+    {
+      "label": {
+        "zh": "NBA.com 共识模拟选秀",
+        "en": "NBA.com consensus mock draft"
+      },
+      "url": "https://www.nba.com/news/2026-consensus-mock-draft"
+    },
+    {
+      "label": {
+        "zh": "Tankathon 2026 大榜",
+        "en": "Tankathon 2026 big board"
+      },
+      "url": "https://www.tankathon.com/big-board"
+    }
+  ],
+  "workflowSteps": [
+    {
+      "id": "combine",
+      "icon": "user",
+      "label": {
+        "zh": "联合试训",
+        "en": "Combine"
+      },
+      "date": "5/11-5/18",
+      "statusKey": "completed",
+      "tone": "done"
+    },
+    {
+      "id": "team-workouts",
+      "icon": "users",
+      "label": {
+        "zh": "球队试训",
+        "en": "Team workouts"
+      },
+      "date": "5/20-6/15",
+      "statusKey": "active",
+      "tone": "active"
+    },
+    {
+      "id": "interviews",
+      "icon": "message",
+      "label": {
+        "zh": "球队面试",
+        "en": "Interviews"
+      },
+      "date": "6/16-6/23",
+      "statusKey": "pendingShort",
+      "tone": "pending"
+    },
+    {
+      "id": "mock-draft",
+      "icon": "clipboard",
+      "label": {
+        "zh": "模拟选秀",
+        "en": "Mock draft"
+      },
+      "date": "6/24-6/28",
+      "statusKey": "pendingShort",
+      "tone": "pending"
+    },
+    {
+      "id": "draft-night",
+      "icon": "calendar",
+      "label": {
+        "zh": "选秀大会",
+        "en": "Draft night"
+      },
+      "date": "6/25 7:00PM",
+      "statusKey": "pending",
+      "tone": "pending"
+    }
+  ],
+  "awsSteps": [
+    {
+      "id": "source-s3",
+      "icon": "database",
+      "label": {
+        "zh": "S3",
+        "en": "S3"
+      },
+      "detail": {
+        "zh": "Second Spectrum / NBA.com / 球探报告",
+        "en": "Second Spectrum / NBA.com / scouting"
+      }
+    },
+    {
+      "id": "raw-lake",
+      "icon": "server",
+      "label": {
+        "zh": "Amazon S3",
+        "en": "Amazon S3"
+      },
+      "detail": {
+        "zh": "原始数据湖",
+        "en": "Raw data lake"
+      }
+    },
+    {
+      "id": "catalog-etl",
+      "icon": "brain",
+      "label": {
+        "zh": "AWS Glue",
+        "en": "AWS Glue"
+      },
+      "detail": {
+        "zh": "数据目录 / ETL",
+        "en": "Catalog / ETL"
+      }
+    },
+    {
+      "id": "warehouse",
+      "icon": "database",
+      "label": {
+        "zh": "Amazon Redshift",
+        "en": "Amazon Redshift"
+      },
+      "detail": {
+        "zh": "数据仓库",
+        "en": "Warehouse"
+      }
+    },
+    {
+      "id": "model",
+      "icon": "brain",
+      "label": {
+        "zh": "Amazon SageMaker",
+        "en": "Amazon SageMaker"
+      },
+      "detail": {
+        "zh": "模型训练与推理",
+        "en": "Training / inference"
+      }
+    },
+    {
+      "id": "analytics",
+      "icon": "trending",
+      "label": {
+        "zh": "Amazon QuickSight",
+        "en": "Amazon QuickSight"
+      },
+      "detail": {
+        "zh": "可视化分析",
+        "en": "Analytics"
+      }
+    },
+    {
+      "id": "app",
+      "icon": "calendar",
+      "label": {
+        "zh": "API / App",
+        "en": "API / App"
+      },
+      "detail": {
+        "zh": "前端应用",
+        "en": "Frontend app"
+      }
+    }
+  ],
+  "milestones": [
+    {
+      "id": "long-wingspan-picks-4-14",
+      "prompt": {
+        "zh": "第 4–14 顺位（共11人）中，臂展减赤脚身高 ≥ 5 英寸（约12.7cm）的“超长臂展”球员有几人？",
+        "en": "Among picks 4-14, how many players have wingspan minus barefoot height of at least 5 inches?"
+      },
+      "type": "number",
+      "confidence": 86,
+      "answer": "2",
+      "answerI18n": {
+        "zh": "2",
+        "en": "2"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。",
+          "en": "Picks 12 and 14, Axel Lundberg and Morez Johnson Jr., both clear the threshold at 6.5 inches."
+        }
+      ]
+    },
+    {
+      "id": "max-vertical-top-three-first-round",
+      "prompt": {
+        "zh": "训练营“助跑最大弹跳”排名前 3 的球员中，有几人在首轮被选中？",
+        "en": "How many of the top three max-vertical combine players are selected in round one?"
+      },
+      "type": "number",
+      "confidence": 82,
+      "answer": "1",
+      "answerI18n": {
+        "zh": "1",
+        "en": "1"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。",
+          "en": "The top three max-vertical players are Toby Lawal, Cameron Carr, and Amari Allen; only Cameron Carr is in the first round."
+        }
+      ]
+    },
+    {
+      "id": "primary-centers-round-one",
+      "prompt": {
+        "zh": "首轮 30 人中，主打位置为中锋（C）的球员总数？",
+        "en": "How many first-round players have center as their primary position?"
+      },
+      "type": "number",
+      "confidence": 88,
+      "answer": "3",
+      "answerI18n": {
+        "zh": "3",
+        "en": "3"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。",
+          "en": "Using the answer-card primary-position rule, the centers are pick 8 Aday Mara, pick 26 Tarris Reed Jr., and pick 29 Henri Veesaar."
+        }
+      ]
+    },
+    {
+      "id": "first-center-pick-4-30",
+      "prompt": {
+        "zh": "第 4–30 顺位中，第一个被选中的中锋落在第几顺位？",
+        "en": "From picks 4-30, at what pick is the first center selected?"
+      },
+      "type": "number",
+      "confidence": 90,
+      "answer": "8",
+      "answerI18n": {
+        "zh": "8",
+        "en": "8"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "第4–30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。",
+          "en": "The first primary-position center from picks 4-30 is Aday Mara at pick 8."
+        }
+      ]
+    },
+    {
+      "id": "international-count-round-one",
+      "prompt": {
+        "zh": "首轮 30 人中，国际球员（非美国本土成长）总数？",
+        "en": "How many first-round players are international players, meaning not US-developed?"
+      },
+      "type": "number",
+      "confidence": 84,
+      "answer": "6",
+      "answerI18n": {
+        "zh": "6",
+        "en": "6"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "当前首轮国际球员为第8、13、16、27、29、30顺位，共6人。",
+          "en": "The current first-round international players are picks 8, 13, 16, 27, 29, and 30, for a total of 6."
+        }
+      ]
+    },
+    {
+      "id": "school-most",
+      "prompt": {
+        "zh": "本届首轮贡献球员最多的大学 / 培养机构是哪一所/家？",
+        "en": "Which school or development program contributes the most first-round players?"
+      },
+      "type": "text",
+      "confidence": 86,
+      "answer": "密歇根大学",
+      "answerI18n": {
+        "zh": "密歇根大学",
+        "en": "Michigan"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。",
+          "en": "Michigan has three first-round players at picks 8, 12, and 14, more than any other school or program."
+        }
+      ]
+    },
+    {
+      "id": "hand-length-top-five-first-round",
+      "prompt": {
+        "zh": "训练营“手掌长度”排名前 5 的球员中，有几人在首轮被选中？",
+        "en": "How many of the top five hand-length combine players are selected in round one?"
+      },
+      "type": "number",
+      "confidence": 84,
+      "answer": "2",
+      "answerI18n": {
+        "zh": "2",
+        "en": "2"
+      },
+      "evidenceI18n": [
+        {
+          "zh": "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。",
+          "en": "Among the top five hand-length players, the first-rounders are Morez Johnson Jr. and Karim Lopez, for a total of 2."
+        }
+      ]
+    }
+  ],
+  "exportSettings": {
+    "product": {
+      "zh": "DraftOps 2026 NBA 选秀预测智能体",
+      "en": "DraftOps 2026 NBA Draft Prediction Agent"
+    },
+    "submissionFilename": "draftops-submission.json",
+    "briefFilename": "draftops-brief.md",
+    "originalPick": {
+      "zh": "原始签位",
+      "en": "Original pick"
+    },
+    "alternativeRetained": {
+      "zh": "已保留备选候选。",
+      "en": "Runner-up candidates retained."
+    },
+    "alternativeMissing": {
+      "zh": "当前顺位没有保留备选候选。",
+      "en": "No alternative retained for this slot."
+    },
+    "evidenceFallback": {
+      "zh": "当前顺位没有保留证据文本。",
+      "en": "No evidence text retained for this pick."
+    },
+    "warningFallback": {
+      "zh": "智能体没有给出阻塞性警告。",
+      "en": "No blocking warning from the agent."
+    },
+    "milestoneEvidenceFallback": {
+      "zh": "当前里程碑没有保留证据。",
+      "en": "No evidence retained for this milestone."
+    },
+    "briefTitle": {
+      "zh": "DraftOps 提交简报",
+      "en": "DraftOps Submission Brief"
+    },
+    "firstRoundTitle": {
+      "zh": "首轮预测",
+      "en": "First Round Prediction"
+    },
+    "milestonesTitle": {
+      "zh": "里程碑答案",
+      "en": "Milestones"
+    },
+    "talkTrackTitle": {
+      "zh": "路演讲述主线",
+      "en": "Talk Track"
+    },
+    "talkTrack": {
+      "zh": "我们把官方顺位、公开共识模拟、球队需求、球员画像评分和后期情报合并成一张可解释预测板。每个顺位都保留证据和风险说明，便于 6 分钟 Demo 解释为什么这样预测，而不是只展示名单。",
+      "en": "We combine official pick order, public consensus mocks, team needs, prospect profile scores, and late intel into one explainable board. Each pick keeps its evidence and warnings so the final 6-minute demo can defend changes instead of only showing a list."
+    }
+  }
+}
