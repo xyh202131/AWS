@@ -1,6 +1,6 @@
 # DraftOps System Grounding Audit
 
-Generated: 2026-06-23T17:39:23.387Z
+Generated: 2026-06-23T19:08:31.646Z
 
 Status: pass_with_warnings
 
@@ -57,16 +57,16 @@ Evidence:
 
 Remediation: Regenerate the board through scripts/agents; do not hand-edit picks or evidence.
 
-### WARN board-review-surface
+### PASS board-review-surface
 
 Severity: warning
 
 Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.
 
 Evidence:
-- lowConfidence=30:Jack Kayil:60
+- lowConfidence=none
 - thinEvidence=none
-- narrowMargins=7:Mikel Brown Jr.:margin=0, 10:Kingston Flemings:margin=1, 18:Christian Anderson:margin=0, 19:Labaron Philon Jr.:margin=0, 20:Bennett Stirtz:margin=1, 22:Dailyn Swain:margin=0, 24:Isaiah Evans:margin=0, 30:Jack Kayil:margin=1
+- narrowMargins=none
 
 Remediation: Treat these picks as explanation-review targets, not as manual replacement targets.
 

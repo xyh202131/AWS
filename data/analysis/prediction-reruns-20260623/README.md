@@ -26,6 +26,10 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Third-round DeepSeek tool-driven rerun. DeepSeek is used only as the LLM decision layer after mandatory data analysis, clean RAG retrieval, and shortlist validation.
 - `boards/codex_sequential_123_prediction_20260623.json`
   - Third-round Codex independent sequential rerun. It reviews the 123-unique-candidate pool pick by pick, removes each selected prospect, and stores full per-pick scores.
+- `boards/consensus_10_agent_prediction_20260624.json`
+  - Fourth consensus rerun. Ten parameterized agent lenses vote each pick, debate until at least 7/10 agree, then remove the selected prospect before the next pick.
+- `boards/consensus_10_agent_prediction_20260624_relative.json`
+  - Relative-score consensus rerun. Each pick recomputes candidate scores relative to that team's current remaining pool before voting; after a player is selected, he is removed and the next team is rescored from scratch.
 
 ## Reports
 
@@ -63,6 +67,20 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Final third-round audit summary for the DeepSeek tool-driven and Codex independent reruns.
 - `reports/third_round_prediction_audit_20260623.json`
   - Structured audit result proving both third-round boards have 30 picks, 30 unique selections, 93 remaining prospects, and 3255 total candidate scans/reviews.
+- `reports/consensus_10_agent_prediction_20260624.md`
+  - Human-readable report for the 10-agent consensus rerun.
+- `reports/consensus_10_agent_prediction_audit_20260624.md`
+  - Audit report for the 10-agent consensus rerun.
+- `reports/consensus_10_agent_prediction_audit_20260624.json`
+  - Structured audit result for the 10-agent consensus rerun.
+- `reports/consensus_10_agent_prediction_20260624_relative.md`
+  - Human-readable report for the relative-score 10-agent consensus rerun.
+- `reports/consensus_10_agent_prediction_audit_20260624_relative.md`
+  - Audit report for the relative-score 10-agent consensus rerun.
+- `reports/consensus_10_agent_prediction_audit_20260624_relative.json`
+  - Structured audit result proving the relative-score rerun has 30 unique picks, 93 remaining prospects, 3255 total reviews, and all picks at or above the 7/10 agreement threshold.
+- `reports/real_subagent_challenge_summary_20260624.md`
+  - Summary of the ten real read-only subagent challenge passes around the 10-agent consensus rerun. It records disputes and hallucination checks but does not manually override the script-generated board.
 
 ## Inputs
 
@@ -95,6 +113,14 @@ This folder is a copied archive of the major 123-player-pool prediction reruns a
   - Runs the third-round Codex independent sequential prediction with full allScores retention and no manual override.
 - `scripts/audit-third-round-predictions.mjs`
   - Audits both third-round boards for candidate-pool validity, pick uniqueness, sequential removal, full scoring coverage, RAG evidence, and guardrails.
+- `scripts/run-consensus-10-agent-prediction.mjs`
+  - Runs the 10-agent consensus rerun using existing history as calibration anchors plus local candidate, team preference, and feature data.
+- `scripts/audit-consensus-10-agent-prediction.mjs`
+  - Audits the 10-agent consensus rerun for local-pool validity, 7/10 vote threshold, uniqueness, sequential removal, full allScores coverage, and no manual override.
+- `scripts/run-consensus-10-agent-relative-prediction.mjs`
+  - Archived copy of the relative-score version of the 10-agent consensus runner.
+- `scripts/audit-consensus-10-agent-relative-prediction.mjs`
+  - Archived copy of the audit script used for the relative-score run.
 
 ## Current Analysis Note
 
@@ -105,6 +131,10 @@ The DeepSeek LLM rerun currently produces the same top-30 player order as the mi
 Codex LLM + RAG rerun status: archived. It produced 30 picks, 30 unique selections, 93 remaining prospects, 3255 total candidate reviews, and 18 changed slots versus the current frontend board.
 
 Third-round rerun status: archived and audited. The DeepSeek tool-driven board produced 30 picks, 30 unique selections, 93 remaining prospects, 3255 total candidate scans, and 11 changed slots versus the current frontend board. The Codex independent board produced 30 picks, 30 unique selections, 93 remaining prospects, 3255 total candidate reviews, and 18 changed slots versus the current frontend board. `reports/third_round_prediction_audit_20260623.md` is the compact validation entry point.
+
+10-agent consensus rerun status: archived and audited. It loaded existing prediction history as calibration anchors, then used ten parameterized agent lenses to vote each pick until a candidate reached at least 7/10 agreement. It produced 30 picks, 30 unique selections, 93 remaining prospects, 3255 total candidate reviews, every pick reached threshold, average vote count 9.57/10, and 13 changed slots versus the current frontend board.
+
+Relative-score correction status: archived and audited. This rerun changes scoring from absolute weighted scores to per-team, per-pick relative scores over the current remaining candidate pool. It produced 30 picks, 30 unique selections, 93 remaining prospects, 3255 total candidate reviews, every pick reached threshold, average vote count 9.3/10, and 19 changed slots versus the current frontend board.
 
 Claude rerun status: pending. The local Claude CLI returned a subscription session-limit error and said it resets at `1:10am (Asia/Shanghai)`.
 

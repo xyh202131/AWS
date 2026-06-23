@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "consensus-10-agent-audit-v1",
+  "generatedAt": "2026-06-23T18:44:17.639Z",
+  "boardPath": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\consensus_10_agent_prediction_20260624.json",
+  "candidatePath": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\final\\local_pool_124_import_bundle.json",
+  "status": "pass",
+  "failures": [],
+  "summary": {
+    "candidatePoolUnique": 123,
+    "pickCount": 30,
+    "uniqueSelectedProspects": 30,
+    "remainingProspects": 93,
+    "totalCandidateReviews": 3255,
+    "allPicksReachedThreshold": true,
+    "averageVoteCount": 9.57,
+    "averageConsensusRound": 1.1,
+    "changedVsCurrentBoardCount": 13
+  }
+}

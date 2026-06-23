@@ -603,6 +603,7 @@ const getProspectInitials = (name: string) =>
 
 const formatPhotoSource = (prospect: Prospect, language: Language) => {
   const media = prospect.media;
+  if (media?.status === "missing") return language === "zh" ? "候选库已登记，暂无稳定头像" : "Registered in candidate media database; no stable headshot";
   if (!media?.provider) return language === "zh" ? "暂无官方头像来源" : "No official headshot source";
   const provider = mediaProviderLabels[media.provider]?.[language] ?? media.provider;
   if (language === "zh") return media.status === "fallback" ? `${provider}头像（备用来源）` : `${provider}官方头像`;
@@ -642,7 +643,7 @@ function PlayerPhoto({ prospect, label, language, variant = "table" }: PlayerPho
           )}
         </span>
       )}
-      {media?.sourceUrl && (
+      {media?.sourceUrl && media.status !== "missing" && (
         <span
           className={`player-photo-badge ${media.status === "fallback" ? "is-fallback" : ""}`}
           aria-label={sourceLabel}

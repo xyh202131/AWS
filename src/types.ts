@@ -27,7 +27,7 @@ export interface ProspectMedia {
   sourceUrl?: string;
   sourceLabel?: string;
   provider?: string;
-  status?: "verified" | "fallback" | "needs_review";
+  status?: "verified" | "fallback" | "needs_review" | "missing";
   updatedAt?: string;
 }
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.system_grounding_audit.v1",
-  "generatedAt": "2026-06-23T17:39:23.387Z",
+  "generatedAt": "2026-06-23T19:08:31.646Z",
   "generatedBy": "scripts/audit-grounding.mjs",
   "status": "pass_with_warnings",
   "summary": {
@@ -65,13 +65,13 @@
     },
     {
       "id": "board-review-surface",
-      "status": "warn",
+      "status": "pass",
       "severity": "warning",
       "summary": "Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.",
       "evidence": [
-        "lowConfidence=30:Jack Kayil:60",
+        "lowConfidence=none",
         "thinEvidence=none",
-        "narrowMargins=7:Mikel Brown Jr.:margin=0, 10:Kingston Flemings:margin=1, 18:Christian Anderson:margin=0, 19:Labaron Philon Jr.:margin=0, 20:Bennett Stirtz:margin=1, 22:Dailyn Swain:margin=0, 24:Isaiah Evans:margin=0, 30:Jack Kayil:margin=1"
+        "narrowMargins=none"
       ],
       "remediation": "Treat these picks as explanation-review targets, not as manual replacement targets."
     },
