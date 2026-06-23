@@ -91,15 +91,17 @@ const ragDashScopeEmbeddingMaxChars = Number(process.env.DRAFTOPS_RAG_DASHSCOPE_
 const ragDashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DASHSCOPE_BATCH_SIZE ?? "10"), 1), 10);
 const ragEmbeddingDimensions = Number(process.env.DRAFTOPS_RAG_EMBEDDING_DIMENSIONS ?? "256");
 const ragRerankPoolSize = Number(process.env.DRAFTOPS_RAG_RERANK_POOL ?? "36");
-const ragRemoteEmbeddingPoolSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_REMOTE_EMBEDDING_POOL ?? "12"), 1), ragRerankPoolSize);
+const ragRemoteEmbeddingPoolSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_REMOTE_EMBEDDING_POOL ?? "8"), 1), ragRerankPoolSize);
 const ragTopK = Number(process.env.DRAFTOPS_RAG_TOP_K ?? "12");
 const ragS3LoadConcurrency = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_S3_LOAD_CONCURRENCY ?? "8"), 1), 16);
 const ragMaxChunks = Math.max(Number(process.env.DRAFTOPS_RAG_MAX_CHUNKS ?? "5000"), ragTopK);
+const ragMaxS3KeysPerQuery = Math.max(Number(process.env.DRAFTOPS_RAG_MAX_S3_KEYS_PER_QUERY ?? "18"), 1);
 const allowedOrigins = csv(process.env.CORS_ALLOWED_ORIGINS);
 
 let cachedSecret;
 let cachedDashScopeSecret;
 let cachedRagChunks;
+let cachedRagCacheKey = "";
 let cachedRagLoadedAt = 0;
 const bedrockEmbeddingCache = new Map();
 const dashScopeEmbeddingCache = new Map();
@@ -329,6 +331,25 @@ const sourceIntentBoost = (source, question) => {
     boost += 0.16;
   }
   return Math.min(boost, 0.42);
+};
+
+const sourceKeyMatchesIntent = (key, intent) => {
+  const lower = String(key ?? "").toLowerCase();
+  if (/expanded_import_bundle|final_import_bundle|agent_expanded_recommended_board|agent_balanced_board/.test(lower)) return true;
+  if (/team_preference|integrated_scoring|parameter|prediction_strategy|multi_agent|main_parameter|consensus/.test(lower)) return true;
+  if (intent.milestone && /milestone|answer|draftcode24|deepseek_discussion|answer_card/.test(lower)) return true;
+  if (intent.team && /team|team_context|team_profiles|team_preference|needs/.test(lower)) return true;
+  if (intent.prospect && /prospect|big_board|mock_lottery|china_nba_draft|clean_prospects/.test(lower)) return true;
+  if (intent.evidence && /audit|source|official|raw|reconciliation|verification|quality/.test(lower)) return true;
+  if (intent.board && /board|mock|draft|prediction|consensus|strategy/.test(lower)) return true;
+  return false;
+};
+
+const selectRagS3KeysForQuestion = (question) => {
+  const intent = questionIntent(question);
+  const selected = ragS3Keys.filter((key) => sourceKeyMatchesIntent(key, intent));
+  const fallback = selected.length ? selected : ragS3Keys;
+  return fallback.slice(0, ragMaxS3KeysPerQuery);
 };
 
 const hashToken = (token) => {
@@ -681,6 +702,18 @@ const selectedPickFocusValues = (context, selectedPickNumber) => {
   ].filter(Boolean);
 };
 
+const selectedPickReferenceContext = (context) => {
+  if (!context) return null;
+  return {
+    pick: context.pick ?? null,
+    team: context.team ?? "",
+    teamCode: context.teamCode ?? "",
+    player: context.player ?? "",
+    positions: context.positions ?? [],
+    school: context.school ?? "",
+  };
+};
+
 const questionDirectlyTargetsSelectedPick = (question) => {
   const text = String(question ?? "").toLowerCase();
   const asksCurrentContext =
@@ -820,13 +853,15 @@ const mapWithConcurrency = async (items, limit, mapper) => {
   return results;
 };
 
-const loadRagChunks = async () => {
+const loadRagChunks = async (question) => {
   const now = Date.now();
-  if (cachedRagChunks && now - cachedRagLoadedAt < ragCacheTtlMs) return cachedRagChunks;
+  const selectedS3Keys = selectRagS3KeysForQuestion(question);
+  const cacheKey = [selectedS3Keys.join(","), ragDynamoTables.join(",")].join("|");
+  if (cachedRagChunks && cachedRagCacheKey === cacheKey && now - cachedRagLoadedAt < ragCacheTtlMs) return cachedRagChunks;
 
   const chunks = [];
-  if (ragS3Bucket && ragS3Keys.length) {
-    const loadedObjects = await mapWithConcurrency(ragS3Keys, ragS3LoadConcurrency, async (key) => {
+  if (ragS3Bucket && selectedS3Keys.length) {
+    const loadedObjects = await mapWithConcurrency(selectedS3Keys, ragS3LoadConcurrency, async (key) => {
       try {
         return await chunksFromS3Object(key);
       } catch (error) {
@@ -846,6 +881,7 @@ const loadRagChunks = async () => {
   }
 
   cachedRagChunks = chunks.slice(0, ragMaxChunks);
+  cachedRagCacheKey = cacheKey;
   cachedRagLoadedAt = now;
   return cachedRagChunks;
 };
@@ -860,7 +896,8 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
   const questionTerms = tokenize(question);
   const terms = unique([...questionTerms, ...(selectedPickDirectScope ? focusTerms : [])]).slice(0, 48);
   const queryEmbedding = embedText([question, ...(selectedPickDirectScope ? focusValues : [])].join(" "));
-  const chunks = await loadRagChunks();
+  const selectedS3Keys = selectRagS3KeysForQuestion(question);
+  const chunks = await loadRagChunks(question);
   const focusWeight = selectedPickDirectScope ? 0.2 : selectedPickContextUsed ? 0.06 : 0;
   const scored = chunks.map((chunk) => scoreChunkForRetrieval(chunk, { question, terms, queryEmbedding, focusTerms, focusWeight }));
   const focused = selectedPickContextUsed ? scored.filter((chunk) => chunk.focusMatches > 0) : [];
@@ -873,9 +910,14 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
     })
     .filter(Boolean);
   const localCandidates = rerankChunks(candidateSeed.length ? candidateSeed : scored, ragRerankPoolSize, Math.max(ragRerankPoolSize, ragTopK));
-  const finalRanked = (await maybeRerankWithBedrockEmbeddings({ question, terms, candidates: localCandidates })) ??
-    (await maybeRerankWithDashScopeEmbeddings({ question, terms, candidates: localCandidates })) ??
-    rerankChunks(localCandidates, ragTopK, ragRerankPoolSize);
+  const allowRemoteEmbeddingRerank = focusMode === "direct" || (focusMode === "inactive" && !questionAsksGlobalScope(question));
+  const effectiveTopK = selectedPickDirectScope ? Math.min(ragTopK, 8) : Math.min(ragTopK, 5);
+  const finalRanked = allowRemoteEmbeddingRerank
+    ? ((await maybeRerankWithBedrockEmbeddings({ question, terms, candidates: localCandidates })) ??
+      (await maybeRerankWithDashScopeEmbeddings({ question, terms, candidates: localCandidates })) ??
+      rerankChunks(localCandidates, effectiveTopK, ragRerankPoolSize))
+    : rerankChunks(localCandidates, effectiveTopK, ragRerankPoolSize);
+  const snippetTextLimit = selectedPickDirectScope ? 1000 : 600;
   const snippets = finalRanked
     .map((chunk) => ({
       source: chunk.source,
@@ -889,7 +931,7 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
       intentBoost: Number((chunk.intentBoost ?? 0).toFixed(4)),
       exactMatches: chunk.exactMatches,
       focusMatches: chunk.focusMatches ?? 0,
-      text: String(chunk.text ?? "").slice(0, 1600),
+      text: String(chunk.text ?? "").slice(0, snippetTextLimit),
     }));
 
   return {
@@ -902,16 +944,24 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
     selectedPickContextUsed,
     selectedPickFocusMode: focusMode,
     selectedPickFocusActive: Boolean(selectedPickFocusActive),
-    selectedPickContext: selectedPickContextUsed ? normalizedSelectedPickContext : null,
-    focusTerms,
+    remoteEmbeddingRerankUsed: allowRemoteEmbeddingRerank && embeddingProviderLabel() !== "local-hash",
+    selectedPickContext: selectedPickDirectScope
+      ? normalizedSelectedPickContext
+      : selectedPickContextUsed
+        ? selectedPickReferenceContext(normalizedSelectedPickContext)
+        : null,
+    focusTerms: selectedPickDirectScope ? focusTerms.slice(0, 24) : [],
     embeddingProvider: embeddingProviderLabel(),
     bedrockEmbeddingModelId: ragEmbeddingProvider === "bedrock" ? ragBedrockEmbeddingModelId : null,
     dashScopeEmbeddingModel: isDashScopeEmbeddingProvider() ? ragDashScopeEmbeddingModel : null,
     embeddingDimensions: ragEmbeddingDimensions,
     rerankPoolSize: ragRerankPoolSize,
+    effectiveTopK,
     remoteEmbeddingPoolSize: ragRemoteEmbeddingPoolSize,
     maxChunks: ragMaxChunks,
     configuredS3KeyCount: ragS3Keys.length,
+    selectedS3KeyCount: selectedS3Keys.length,
+    maxS3KeysPerQuery: ragMaxS3KeysPerQuery,
     loadedChunkCount: chunks.length,
     snippetCount: snippets.length,
     snippets,
@@ -948,6 +998,10 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
     };
   }
   const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
+  const responseMaxTokens =
+    retrievedKnowledge.selectedPickFocusMode === "background"
+      ? Math.min(maxTokens, 700)
+      : Math.min(maxTokens, 1000);
 
   const response = await fetch(`${deepSeekBaseUrl.replace(/\/$/, "")}/chat/completions`, {
     method: "POST",
@@ -962,7 +1016,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
         ...compactHistory(history),
         { role: "user", content: buildUserPrompt({ question, selectedPickNumber, retrievedKnowledge }) },
       ],
-      max_tokens: maxTokens,
+      max_tokens: responseMaxTokens,
       temperature: 0.25,
       stream: false,
     }),
@@ -992,6 +1046,10 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
 
 const callBedrock = async ({ question, history, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
   const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
+  const responseMaxTokens =
+    retrievedKnowledge.selectedPickFocusMode === "background"
+      ? Math.min(maxTokens, 700)
+      : Math.min(maxTokens, 1000);
   const historyText = compactHistory(history)
     .map((message) => `${message.role}: ${message.content}`)
     .join("\n");
@@ -1014,7 +1072,7 @@ const callBedrock = async ({ question, history, selectedPickNumber, selectedPick
       },
     ],
     inferenceConfig: {
-      maxTokens,
+      maxTokens: responseMaxTokens,
       temperature: 0.25,
     },
   });
@@ -1068,6 +1126,7 @@ export const handler = async (event) => {
           remoteEmbeddingPoolSize: ragRemoteEmbeddingPoolSize,
           topK: ragTopK,
           configuredS3KeyCount: ragS3Keys.length,
+          maxS3KeysPerQuery: ragMaxS3KeysPerQuery,
           maxChunks: ragMaxChunks,
           s3LoadConcurrency: ragS3LoadConcurrency,
           cacheTtlMs: ragCacheTtlMs,

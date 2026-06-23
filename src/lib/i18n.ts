@@ -262,6 +262,8 @@ const prospectZh: Record<string, string> = {
   "Kylan Boswell": "凯兰 博斯韦尔",
 };
 
+// Chinese team names should follow NBA China/NBA Chinese-site naming first;
+// keep source-specific short names as aliases only after the official full-name keys.
 const teamZh: Record<string, string> = {
   "Washington Wizards": "华盛顿奇才",
   "Utah Jazz": "犹他爵士",
@@ -276,8 +278,8 @@ const teamZh: Record<string, string> = {
   "Dallas Mavericks": "达拉斯独行侠",
   "Milwaukee Bucks": "密尔沃基雄鹿",
   "Golden State Warriors": "金州勇士",
-  "Oklahoma City Thunder": "俄克拉荷马城雷霆",
-  "Oklahoma City": "俄克拉荷马城雷霆",
+  "Oklahoma City Thunder": "俄克拉荷马雷霆",
+  "Oklahoma City": "俄克拉荷马雷霆",
   "Miami Heat": "迈阿密热火",
   "Charlotte Hornets": "夏洛特黄蜂",
   "Toronto Raptors": "多伦多猛龙",
@@ -295,16 +297,22 @@ const teamZh: Record<string, string> = {
   Minnesota: "明尼苏达森林狼",
   "Cleveland Cavaliers": "克利夫兰骑士",
   Cleveland: "克利夫兰骑士",
-  "Indiana": "印第安纳步行者",
+  "Indiana Pacers": "印第安纳步行者",
+  Indiana: "印第安纳步行者",
+  "New Orleans Pelicans": "新奥尔良鹈鹕",
   "New Orleans": "新奥尔良鹈鹕",
+  "Houston Rockets": "休斯顿火箭",
   Houston: "休斯顿火箭",
+  "Portland Trail Blazers": "波特兰开拓者",
   Portland: "波特兰开拓者",
+  "Phoenix Suns": "菲尼克斯太阳",
+  "Orlando Magic": "奥兰多魔术",
   "Phoenix via Orlando": "菲尼克斯经奥兰多转来",
   "Orlando via Phoenix": "奥兰多经菲尼克斯转来",
-  "Houston via Oklahoma City": "休斯顿经俄克拉荷马城转来",
+  "Houston via Oklahoma City": "休斯顿经俄克拉荷马雷霆转来",
   "San Antonio via Atlanta": "圣安东尼奥经亚特兰大转来",
-  "Oklahoma City via Washington and Philadelphia": "俄克拉荷马城经华盛顿和费城转来",
-  "Oklahoma City via WAS and PHI": "俄克拉荷马城经华盛顿和费城转来",
+  "Oklahoma City via Washington and Philadelphia": "俄克拉荷马雷霆经华盛顿和费城转来",
+  "Oklahoma City via WAS and PHI": "俄克拉荷马雷霆经华盛顿和费城转来",
 };
 
 const schoolZh: Record<string, string> = {
