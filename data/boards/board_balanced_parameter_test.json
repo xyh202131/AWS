@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.parameter_test_board.v2",
-  "generatedAt": "2026-06-22T10:08:34.676Z",
+  "generatedAt": "2026-06-23T06:15:01.282Z",
   "generatedBy": "DraftOps Model V2 Regeneration Script",
   "method": "Transpile src/lib/prediction.ts, then run generateBoard against public/data/final_import_bundle.json.",
   "inputFiles": [
@@ -60,12 +60,13 @@
       },
       "rawSources": {
         "schemaVersion": "draftops.raw_sources.v1",
-        "generatedAt": "2026-06-22T03:31:27+08:00",
+        "generatedAt": "2026-06-23T11:00:43+08:00",
         "counts": {
-          "total_sources": 37,
-          "official_user_provided": 8,
+          "total_sources": 42,
+          "official_user_provided": 11,
           "external_web": 29,
-          "ignored_external": 8
+          "ignored_external": 8,
+          "official_live_web": 2
         },
         "policy": {
           "official_data_dir": "数据/",
@@ -278,6 +279,14 @@
       ],
       "fieldUpdateCount": 30,
       "rule": "NBA.com official prospects are authoritative for candidate membership and base biographical fields; media mocks remain prediction signals only."
+    },
+    "media": {
+      "schemaVersion": "draftops.prospect_media.v1",
+      "updatedAt": "2026-06-23T13:00:00+08:00",
+      "sourceFile": "data/media/prospect_media.json",
+      "matchedProspects": 30,
+      "missingMedia": [],
+      "primaryRule": "Use official NBA.com prospect pages first. Use official school/team roster pages only when NBA.com did not expose a stable headshot."
     }
   },
   "health": {
@@ -413,7 +422,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 2; source rank 2; confidence high.",
           "NBA.com consensus lottery cross-check: pick 1, most common 1 (10).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 1, most common 1 (10)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/aj-dybantsa.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/AJ_Dybantsa_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/aj-dybantsa",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 93,
       "confidence": 96,
@@ -517,7 +535,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 1; source rank 1; confidence high.",
           "NBA.com consensus lottery cross-check: pick 2, most common 2 (8).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 2, most common 2 (8)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/darryn-peterson.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-13.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/darryn-peterson",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 92,
       "confidence": 93,
@@ -622,7 +649,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 3; source rank 3; confidence high.",
           "NBA.com consensus lottery cross-check: pick 3, most common 3 (8).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 3, most common 3 (8)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/cameron-boozer.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-12.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/cameron-boozer",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 94,
       "confidence": 100,
@@ -727,7 +763,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 4; source rank 4; confidence high.",
           "NBA.com consensus lottery cross-check: pick 4, most common 4 (8).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 4, most common 4 (8)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/caleb-wilson.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Caleb_Wilson_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/caleb-wilson",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 100,
@@ -832,7 +877,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 5; source rank 5; confidence high.",
           "NBA.com consensus lottery cross-check: pick 5, most common 5 (8).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 5, most common 5 (8)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/keaton-wagler.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Keaton_Wagler_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/keaton-wagler",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 93,
       "confidence": 89,
@@ -937,7 +991,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 6; source rank 6; confidence high.",
           "NBA.com consensus lottery cross-check: pick 6, most common 6 (5).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 6, most common 6 (5)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/darius-acuff-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-4.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/darius-acuff-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 93,
       "confidence": 89,
@@ -1041,7 +1104,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 7; source rank 7; confidence high.",
           "NBA.com consensus lottery cross-check: pick 7, most common 6 (4).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 7, most common 6 (4)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/mikel-brown-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-3.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/mikel-brown-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 92,
       "confidence": 86,
@@ -1147,7 +1219,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 10; source rank 10; confidence high.",
           "NBA.com consensus lottery cross-check: pick 10, most common 8 (4).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 10, most common 8 (4)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/aday-mara.webp",
+          "remotePhotoUrl": "https://mgoblue.com/images/2025/7/28/15-Aday-Mara_1yHES.jpg",
+          "sourceUrl": "https://mgoblue.com/sports/mens-basketball/roster/aday-mara/27049",
+          "sourceLabel": "Michigan official roster profile",
+          "provider": "Michigan Athletics",
+          "status": "fallback",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 89,
       "confidence": 94,
@@ -1253,7 +1334,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 11; source rank 11; confidence high.",
           "NBA.com consensus lottery cross-check: pick 9, most common 9 (5).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 9, most common 9 (5)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/brayden-burries.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Brayden_Burries_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/brayden-burries",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 97,
@@ -1357,7 +1447,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 8; source rank 8; confidence high.",
           "NBA.com consensus lottery cross-check: pick 8, most common 7, 9 (3).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 8, most common 7, 9 (3)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/kingston-flemings.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/kingston-flemings.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/kingston-flemings",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 83,
@@ -1461,7 +1560,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 9; source rank 9; confidence high.",
           "NBA.com consensus lottery cross-check: pick 11, most common 10, 12 (3).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 11, most common 10, 12 (3)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/nate-ament.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Nate_Ament_2026-1.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/nate-ament",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 81,
       "confidence": 75,
@@ -1567,7 +1675,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 12; source rank 12; confidence high.",
           "NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/yaxel-lendeborg.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-6.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/yaxel-lendeborg",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 94,
@@ -1672,7 +1789,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 14; source rank 14; confidence high.",
           "NBA.com consensus lottery cross-check: pick 13, most common 11 (2).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 13, most common 11 (2)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/karim-lopez.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Karim_Lopez_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/karim-lopez",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 91,
       "confidence": 88,
@@ -1778,7 +1904,16 @@
           "ESPN 2026 NBA draft big board top 100: normalized rank 15; source rank 15; confidence high.",
           "NBA.com consensus lottery cross-check: pick 14, most common 14 (8).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 14, most common 14 (8)."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/morez-johnson-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Morez_Johnson_Jr_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/morez-johnson-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 89,
       "confidence": 96,
@@ -1882,7 +2017,16 @@
           "Multi-category forward production",
           "ESPN 2026 NBA draft big board top 100: normalized rank 17; source rank 17; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/allen-graves.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Allen_Graves_2006.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/allen-graves",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 88,
       "confidence": 94,
@@ -1987,7 +2131,16 @@
           "Fits international-player milestones",
           "ESPN 2026 NBA draft big board top 100: normalized rank 13; source rank 13; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/hannes-steinbach.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Hannes_Steinbach_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/hannes-steinbach",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 85,
       "confidence": 82,
@@ -2094,7 +2247,16 @@
           "Useful late-lottery big target",
           "ESPN 2026 NBA draft big board top 100: normalized rank 19; source rank 19; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/chris-cenac-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Chris_Cenac_Jr_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/chris-cenac-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 78,
       "confidence": 79,
@@ -2198,7 +2360,16 @@
           "High playmaking signal",
           "ESPN 2026 NBA draft big board top 100: normalized rank 16; source rank 16; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/christian-anderson.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Christian_Anderson_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/christian-anderson",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 88,
       "confidence": 78,
@@ -2302,7 +2473,16 @@
           "Productive guard profile",
           "ESPN 2026 NBA draft big board top 100: normalized rank 18; source rank 18; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/labaron-philon-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-7.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/labaron-philon-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 79,
       "confidence": 71,
@@ -2407,7 +2587,16 @@
           "Ready guard archetype",
           "ESPN 2026 NBA draft big board top 100: normalized rank 20; source rank 20; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/bennett-stirtz.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-8.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/bennett-stirtz",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 84,
@@ -2512,7 +2701,16 @@
           "Consensus late-lottery/mid-first",
           "ESPN 2026 NBA draft big board top 100: normalized rank 21; source rank 21; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/cameron-carr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Cameron_Carr_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/cameron-carr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 90,
       "confidence": 99,
@@ -2617,7 +2815,16 @@
           "Tankathon No. 22 range",
           "ESPN 2026 NBA draft big board top 100: normalized rank 23; source rank 23; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/dailyn-swain.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Dailyn_Swain_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/dailyn-swain",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 84,
       "confidence": 74,
@@ -2722,7 +2929,16 @@
           "Scoring guard profile",
           "ESPN 2026 NBA draft big board top 100: normalized rank 24; source rank 24; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/ebuka-okorie.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Ebuka_Okorie_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/ebuka-okorie",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 82,
       "confidence": 91,
@@ -2825,7 +3041,16 @@
           "Late-first 3-and-D fit",
           "ESPN 2026 NBA draft big board top 100: normalized rank 25; source rank 25; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/isaiah-evans.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Isaiah_Evans_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/isaiah-evans",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 82,
       "confidence": 74,
@@ -2929,7 +3154,16 @@
           "Physical forward archetype",
           "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 27; source rank 26; confidence medium_high.",
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 26 to Denver Nuggets."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/koa-peat.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Koa_Peat_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/koa-peat",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 81,
       "confidence": 74,
@@ -3033,7 +3267,16 @@
           "needs_review: generated conservative DraftOps profile from normalized source row; manual player-image/profile review required.",
           "needs_review: normalized source did not provide height; placeholder retained.",
           "needs_review: normalized source did not provide age; neutral age placeholder 22.8 used."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/tarris-reed-jr.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Tarris_Reed_Jr_2026.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/tarris-reed-jr",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 73,
       "confidence": 68,
@@ -3139,7 +3382,16 @@
           "Late-first international guard",
           "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 30; source rank 30; confidence medium_high.",
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 30 to Dallas Mavericks."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/sergio-de-larrea.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/de-Larrea-Sergio.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/sergio-de-larrea",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 71,
       "confidence": 68,
@@ -3245,7 +3497,16 @@
           "Late-first scoring guard",
           "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 28; source rank 27; confidence medium_high.",
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 27 to Boston Celtics."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/meleek-thomas.png",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/meleek-thomas.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/meleek-thomas",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 77,
       "confidence": 76,
@@ -3345,7 +3606,16 @@
           "International center option",
           "ESPN 2026 NBA mock draft projecting 60 picks: normalized rank 26; source rank 24; confidence medium_high.",
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 24 to New York Knicks."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/henri-veesaar.png",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/veessaar.png",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/henri-veesaar",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 78,
       "confidence": 82,
@@ -3440,7 +3710,16 @@
           "First-round tools if medicals check out",
           "ESPN 2026 NBA draft big board top 100: normalized rank 22; source rank 22; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
+        ],
+        "media": {
+          "photoUrl": "/data/media/prospects/jayden-quaintance.jpg",
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Jayden_Quaintance_2026.jpg",
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/jayden-quaintance",
+          "sourceLabel": "NBA.com 2026 Draft prospect profile",
+          "provider": "NBA.com",
+          "status": "verified",
+          "updatedAt": "2026-06-23T14:50:40+08:00"
+        }
       },
       "score": 42,
       "confidence": 33,
@@ -4995,5 +5274,13 @@
         "Risk penalty is material; check injury, shooting or role translation notes."
       ]
     }
-  ]
+  ],
+  "mediaMetadata": {
+    "schemaVersion": "draftops.prospect_media.v1",
+    "updatedAt": "2026-06-23T14:50:40+08:00",
+    "sourceFile": "data/media/prospect_media.json",
+    "matchedProspects": 30,
+    "missingMedia": [],
+    "primaryRule": "Use official NBA.com prospect pages first. Use official school/team roster pages only when NBA.com did not expose a stable headshot."
+  }
 }

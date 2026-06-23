@@ -209,9 +209,27 @@ const fetchOfficialWebKnowledge = async (terms) => {
   return results.slice(0, 6);
 };
 
-const sendJson = (response, statusCode, value) => {
+const defaultClientOrigin = process.env.DRAFTOPS_CLIENT_ORIGIN ?? "http://127.0.0.1:3002";
+
+const getCorsOrigin = (request) => {
+  const origin = request.headers.origin;
+  if (!origin) return defaultClientOrigin;
+
+  try {
+    const parsed = new URL(origin);
+    if ((parsed.hostname === "127.0.0.1" || parsed.hostname === "localhost") && /^https?:$/.test(parsed.protocol)) {
+      return origin;
+    }
+  } catch {
+    // Fall back to the configured local client origin.
+  }
+
+  return defaultClientOrigin;
+};
+
+const sendJson = (request, response, statusCode, value) => {
   response.writeHead(statusCode, {
-    "Access-Control-Allow-Origin": "http://127.0.0.1:3002",
+    "Access-Control-Allow-Origin": getCorsOrigin(request),
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json; charset=utf-8",
@@ -675,7 +693,7 @@ await loadEnvFile(envPath);
 const port = Number(process.env.DEEPSEEK_AGENT_PORT ?? 4318);
 const server = http.createServer(async (request, response) => {
   if (request.method === "OPTIONS") {
-    sendJson(response, 204, {});
+    sendJson(request, response, 204, {});
     return;
   }
 
@@ -683,7 +701,7 @@ const server = http.createServer(async (request, response) => {
     const url = new URL(request.url ?? "/", `http://${request.headers.host ?? "127.0.0.1"}`);
     if (request.method === "GET" && url.pathname === "/api/deepseek/health") {
       const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
-      sendJson(response, 200, {
+      sendJson(request, response, 200, {
         ok: true,
         configured: Boolean(process.env.DEEPSEEK_API_KEY),
         model,
@@ -696,7 +714,7 @@ const server = http.createServer(async (request, response) => {
       const body = await readRequestJson(request);
       const question = String(body.question ?? "").trim();
       if (!question) {
-        sendJson(response, 400, { error: "Question is required." });
+        sendJson(request, response, 400, { error: "Question is required." });
         return;
       }
 
@@ -708,7 +726,7 @@ const server = http.createServer(async (request, response) => {
       const playerPredictionQuestion = isPlayerPredictionQuestion(question);
 
       if (playerPredictionQuestion) {
-        sendJson(response, 200, {
+        sendJson(request, response, 200, {
           answer: buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber }),
           model,
           modelLabel: getModelLabel(model),
@@ -721,7 +739,7 @@ const server = http.createServer(async (request, response) => {
         const answer = predictionQuestion
           ? buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber })
           : buildScopeGuardAnswer();
-        sendJson(response, 200, {
+        sendJson(request, response, 200, {
           answer,
           model,
           modelLabel: getModelLabel(model),
@@ -736,13 +754,13 @@ const server = http.createServer(async (request, response) => {
         selectedPickNumber,
         context,
       });
-      sendJson(response, 200, result);
+      sendJson(request, response, 200, result);
       return;
     }
 
-    sendJson(response, 404, { error: "Not found." });
+    sendJson(request, response, 404, { error: "Not found." });
   } catch (error) {
-    sendJson(response, 500, { error: error instanceof Error ? error.message : "Unknown server error." });
+    sendJson(request, response, 500, { error: error instanceof Error ? error.message : "Unknown server error." });
   }
 });
 
