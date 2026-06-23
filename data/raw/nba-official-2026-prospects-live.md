@@ -1,3 +1,282 @@
+Navigation Toggle [![NBA Logo](https://cdn.nba.com/logos/leagues/logo-nba.svg)](https://www.nba.com/ "NBA Logo Homepage Button")
+
+- [Games](https://www.nba.com/games)
+
+
+  - [Home](https://www.nba.com/games "")
+  - [Tickets](https://nbatickets.nba.com/?cid=nba:tickets:institutional:nbacom:domsites:rd "")
+
+- [Schedule](https://www.nba.com/schedule)
+
+
+  - [NBA Schedule](https://www.nba.com/schedule "")
+  - [Key Dates](https://www.nba.com/news/key-dates "")
+  - [Tap To Watch](https://www.nba.com/tap-to-watch "")
+  - [National TV Games](https://www.nba.com/schedule?bc=NATL&cal=all&region=1 "")
+  - [League Pass Schedule](https://www.nba.com/schedule?bc=LP&cal=all&region=1 "")
+
+- [Watch](https://www.nba.com/watch/featured)
+
+
+  - [Featured](https://www.nba.com/watch/featured "")
+  - [NBA TV](https://www.nba.com/watch/nba-tv "")
+
+- [Draft](https://www.nba.com/draft/2026)
+
+
+  - [Draft Home](https://www.nba.com/draft/2026 "")
+  - [Draft Board](https://www.nba.com/draft/2026/draft-board "")
+  - [All Picks: 1-60](https://www.nba.com/news/2026-nba-draft-order "")
+  - [Prospects](https://www.nba.com/draft/2026/prospects "")
+  - [Teams](https://www.nba.com/draft/2026/teams "")
+
+- [News](https://www.nba.com/news)
+
+
+  - [Home](https://www.nba.com/news "")
+  - [Top Stories](https://www.nba.com/news/category/top-stories "")
+  - [Playoffs](https://www.nba.com/playoffs/2026 "")
+  - [Draft](https://www.nba.com/draft/2026 "")
+  - [Summer League](https://www.nba.com/summer-league/2026 "")
+  - [Key Dates](https://www.nba.com/news/key-dates "")
+  - [Features](https://www.nba.com/news "")
+  - [Events](https://www.nba.com/news "")
+  - [Transactions](https://www.nba.com/players/transactions "")
+  - [History](https://www.nba.com/history "")
+  - [More](https://www.nba.com/news "")
+
+- [NBA Finals](https://www.nba.com/playoffs/2026/nba-finals)
+- [Stats](https://www.nba.com/stats)
+
+
+  - [Stats Home](https://www.nba.com/stats "")
+  - [Dunk Score](https://www.nba.com/dunk-score "")
+  - [Inside the Game](https://www.nba.com/inside-the-game "")
+  - [Players](https://www.nba.com/stats/players "")
+  - [Teams](https://www.nba.com/stats/teams "")
+  - [Leaders](https://www.nba.com/stats/leaders "")
+  - [Stats 101](https://www.nba.com/stats/help/glossary "")
+  - [Cume Stats](https://www.nba.com/stats/cumestats "")
+  - [Lineups Tool](https://www.nba.com/stats/lineups/lineups-tool "")
+  - [Media Central Game Stats](https://www.nba.com/stats/tools/media-central-game-stats "")
+  - [Draft](https://www.nba.com/stats/draft/combine "")
+  - [Quick Links](https://www.nba.com/stats/quicklinks "")
+  - [Contact Us](https://www.nba.com/stats/help "")
+
+- [Standings](https://www.nba.com/standings)
+
+
+  - [2025-26 Regular Season Standings](https://www.nba.com/standings "")
+  - [Division](https://www.nba.com/standings?GroupBy=div "")
+  - [Conference](https://www.nba.com/standings?GroupBy=conf "")
+  - [Emirates NBA Cup](https://www.nba.com/nba-cup/2025/standings "")
+  - [Preseason](https://www.nba.com/stats/teams/preseason "")
+
+- [Teams](https://www.nba.com/teams)
+
+
+
+
+
+
+
+
+Atlantic
+
+[![Boston Celtics Logo](https://cdn.nba.com/logos/nba/1610612738/global/L/logo.svg)\\
+\\
+Boston Celtics](https://www.nba.com/celtics/) [![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/global/L/logo.svg)\\
+\\
+Brooklyn Nets](https://www.nba.com/nets/) [![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/global/L/logo.svg)\\
+\\
+New York Knicks](https://www.nba.com/knicks/) [![Philadelphia 76ers Logo](https://cdn.nba.com/logos/nba/1610612755/global/L/logo.svg)\\
+\\
+Philadelphia 76ers](https://www.nba.com/sixers/) [![Toronto Raptors Logo](https://cdn.nba.com/logos/nba/1610612761/global/L/logo.svg)\\
+\\
+Toronto Raptors](https://www.nba.com/raptors/)
+
+
+
+
+
+Central
+
+[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg)\\
+\\
+Chicago Bulls](https://www.nba.com/bulls/) [![Cleveland Cavaliers Logo](https://cdn.nba.com/logos/nba/1610612739/global/L/logo.svg)\\
+\\
+Cleveland Cavaliers](https://www.nba.com/cavaliers/) [![Detroit Pistons Logo](https://cdn.nba.com/logos/nba/1610612765/global/L/logo.svg)\\
+\\
+Detroit Pistons](https://www.nba.com/pistons/) [![Indiana Pacers Logo](https://cdn.nba.com/logos/nba/1610612754/global/L/logo.svg)\\
+\\
+Indiana Pacers](https://www.nba.com/pacers/) [![Milwaukee Bucks Logo](https://cdn.nba.com/logos/nba/1610612749/global/L/logo.svg)\\
+\\
+Milwaukee Bucks](https://www.nba.com/bucks/)
+
+
+
+
+
+Southeast
+
+[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/global/L/logo.svg)\\
+\\
+Atlanta Hawks](https://www.nba.com/hawks/) [![Charlotte Hornets Logo](https://cdn.nba.com/logos/nba/1610612766/global/L/logo.svg)\\
+\\
+Charlotte Hornets](https://www.nba.com/hornets/) [![Miami Heat Logo](https://cdn.nba.com/logos/nba/1610612748/global/L/logo.svg)\\
+\\
+Miami Heat](https://www.nba.com/heat/) [![Orlando Magic Logo](https://cdn.nba.com/logos/nba/1610612753/global/L/logo.svg)\\
+\\
+Orlando Magic](https://www.nba.com/magic/) [![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/global/L/logo.svg)\\
+\\
+Washington Wizards](https://www.nba.com/wizards/)
+
+
+
+
+
+Northwest
+
+[![Denver Nuggets Logo](https://cdn.nba.com/logos/nba/1610612743/global/L/logo.svg)\\
+\\
+Denver Nuggets](https://www.nba.com/nuggets/) [![Minnesota Timberwolves Logo](https://cdn.nba.com/logos/nba/1610612750/global/L/logo.svg)\\
+\\
+Minnesota Timberwolves](https://www.nba.com/timberwolves/) [![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/global/L/logo.svg)\\
+\\
+Oklahoma City Thunder](https://www.nba.com/thunder/) [![Portland Trail Blazers Logo](https://cdn.nba.com/logos/nba/1610612757/global/L/logo.svg)\\
+\\
+Portland Trail Blazers](https://www.nba.com/blazers/) [![Utah Jazz Logo](https://cdn.nba.com/logos/nba/1610612762/global/L/logo.svg)\\
+\\
+Utah Jazz](https://www.nba.com/jazz/)
+
+
+
+
+
+Pacific
+
+[![Golden State Warriors Logo](https://cdn.nba.com/logos/nba/1610612744/global/L/logo.svg)\\
+\\
+Golden State Warriors](https://www.nba.com/warriors/) [![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/global/L/logo.svg)\\
+\\
+LA Clippers](https://www.nba.com/clippers/) [![Los Angeles Lakers Logo](https://cdn.nba.com/logos/nba/1610612747/global/L/logo.svg)\\
+\\
+Los Angeles Lakers](https://www.nba.com/lakers/) [![Phoenix Suns Logo](https://cdn.nba.com/logos/nba/1610612756/global/L/logo.svg)\\
+\\
+Phoenix Suns](https://www.nba.com/suns/) [![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/global/L/logo.svg)\\
+\\
+Sacramento Kings](https://www.nba.com/kings/)
+
+
+
+
+
+Southwest
+
+[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/global/L/logo.svg)\\
+\\
+Dallas Mavericks](https://www.nba.com/mavericks/) [![Houston Rockets Logo](https://cdn.nba.com/logos/nba/1610612745/global/L/logo.svg)\\
+\\
+Houston Rockets](https://www.nba.com/rockets/) [![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/global/L/logo.svg)\\
+\\
+Memphis Grizzlies](https://www.nba.com/grizzlies/) [![New Orleans Pelicans Logo](https://cdn.nba.com/logos/nba/1610612740/global/L/logo.svg)\\
+\\
+New Orleans Pelicans](https://www.nba.com/pelicans/) [![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/global/L/logo.svg)\\
+\\
+San Antonio Spurs](https://www.nba.com/spurs/)
+
+- [Players](https://www.nba.com/players)
+
+
+  - [League Roster](https://www.nba.com/players "")
+  - [Player Stats](https://www.nba.com/stats/players "")
+  - [Starting Lineups](https://www.nba.com/players/todays-lineups "")
+  - [Transactions](https://www.nba.com/players/transactions "")
+  - [Pronunciation Guide](https://www.nba.com/news/2025-26-nba-player-pronunciation-guide "")
+  - [Awards](https://www.nba.com/awards/2026 "")
+  - [Free Agent Tracker](https://www.nba.com/freeagents/2026 "")
+
+- [Summer League](https://www.nba.com/summer-league/2026)
+- [NBA Play](https://play.nba.com/)
+
+
+  - [Home](https://play.nba.com/ "")
+  - [Full Court Guess](https://play.nba.com/nba-full-court-guess "")
+  - [Rank](https://play.nba.com/nba-rank "")
+  - [IQ](https://play.nba.com/nba-iq "")
+  - [Player Path](https://play.nba.com/nba-player-path "")
+  - [Trivia](https://play.nba.com/nba-trivia?source=daily "")
+  - [Hoop Connect](https://play.nba.com/nba-hoop-connect "")
+
+- [Fantasy](https://www.nba.com/fantasy)
+
+
+  - [Fantasy Home](https://www.nba.com/fantasy "")
+  - [Bracket Challenge](https://picks.nba.com/bracket-challenge "")
+  - [Play Yahoo Fantasy](https://basketball.fantasysports.yahoo.com/nba/signup/?ncid=100001720 "")
+  - [FantasyPros Tools](https://www.fantasypros.com/nba "")
+  - [NBA Pick'Em](https://picks.nba.com/pickem "")
+  - [NBABet](https://www.nba.com/nbabet "")
+  - [FanDuel DFS](https://www.fanduel.com/nba "")
+  - [DraftKings DFS](https://www.draftkings.com/fantasy-basketball "")
+  - [Play Sorare NBA](https://sorare.com/nba?utm_source=partnerships&utm_medium=social&utm_campaign=nba_website_link&utm_term=nba "")
+  - [Authorized Gaming Operators](https://www.nba.com/nbabet/official-nba-gaming-partners-and-operators-2 "")
+
+- [League Pass](https://www.nba.com/league-pass-purchase)
+- [Store](https://global.nba.com/store-link-handler)
+
+
+  - [![NBA Store Icon](https://cdn.nba.com/logos/leagues/logo-nbastore.svg)NBA Store](https://global.nba.com/store-link-handler "Logo Link to NBA Store")
+  - [Shop Knicks](https://store.nba.com/new-york-knicks/t-25360764+z-9272060-390849173?vap=1/source/bm-nbacom-knicks "")
+  - [Jerseys](https://store.nba.com/jerseys/d-2338402972+z-930066-3838517996?_s=bm-nbacom-hp-jerseys "")
+  - [Men](https://store.nba.com/men/ga-12+z-9834227610-3678762441?_s=bm-nbacom-hp-mens "")
+  - [Women](https://store.nba.com/women/ga-13+z-9992883065-944190737?_s=bm-nbacom-hp-womens "")
+  - [Kids](https://store.nba.com/kids/ga-69+z-851589194-1574389178?_s=bm-nbacom-hp-kids "")
+  - [Custom Shop](https://store.nba.com/custom-shop/c-2642?_s=bm-nbacom-hp-customshop "")
+  - [Hardwood Classics](https://store.nba.com/hardwood-classics/c-48147129+z-9352503-894010671?_s=bm-nbacom-hp-hardwoodclassics "")
+  - [Hats](https://store.nba.com/hats/d-1238400306+z-933233-2567195697?_s=bm-nbacom-hp-hats "")
+  - [Footwear](https://store.nba.com/footwear/d-1294282497+z-957317-2506523281?_s=bm-nbacom-hp-footwear "")
+  - [Auctions](https://auctions.nba.com/iSynApp/showHomePage.action?sid=1101461 "")
+  - [NBA Game Worn](https://nbagameworn.nba.com/iSynApp/showHomePage.action?sid=1101561 "")
+  - [NYC Store](https://store.nba.com/nyc-store/x-265968+z-785787-1605852944 "")
+  - [NBA Photo Store](https://photostore.nba.com/ "")
+
+- [Tickets](https://nbatickets.nba.com/?cid=nba:tickets:institutional:nbacom:domsites:rd)
+
+
+  - [NBATickets.com](https://nbatickets.nba.com/?cid=nba:tickets:institutional:nbacom:domsites:rd "")
+  - [Official Tickets by Ticketmaster](https://www.ticketmaster.com/nba?brand=nba&wt.mc_id=NBA_LEAGUE_NBA_TICKET_NAV_DROPDOWN&utm_source=NBA.com&utm_medium=client&utm_campaign=NBA_LEAGUE&utm_content=NBA_TICKET_NAV_DROPDOWN "")
+  - [NBA Experiences](https://nbaexperiences.com/ "")
+
+- Affiliates
+
+
+  - [![NBA G-League Icon](https://cdn.nba.com/logos/leagues/logo-gleague.svg)\\
+    \\
+    NBA G League](https://gleague.nba.com/)
+  - [![WNBA Icon](https://cdn.nba.com/logos/leagues/logo-wnba.svg)\\
+    \\
+    WNBA](https://www.wnba.com/)
+  - [![NBA 2K Icon](https://cdn.nba.com/logos/leagues/logo-2k.svg)\\
+    \\
+    NBA 2K League](https://2kleague.nba.com/)
+  - [![NBA BAL Icon](https://cdn.nba.com/logos/leagues/logo-bal.svg)\\
+    \\
+    Basketball Africa League](https://www.thebal.com/)
+
+- Sign In
+
+
+
+
+  - [Sign in with NBA ID](https://www.nba.com/account/sign-in "")
+
+* * *
+
+  - Hide Scores
+
+  - [Help](https://support.watch.nba.com/ "")
+
 - [Summer League](https://www.nba.com/summer-league/2026)
 - Games
 - Schedule
@@ -19,185 +298,203 @@
 - [Home](https://www.nba.com/games "")
 - [Tickets](https://nbatickets.nba.com/?cid=nba:tickets:institutional:nbacom:domsites:rd "")
 
+- 2026 NBA Draft
+- [Latest](https://www.nba.com/draft/2026)
+- [Draft Board](https://www.nba.com/draft/2026/draft-board)
+- [All Picks: 1-60](https://www.nba.com/news/2026-nba-draft-order)
+- [News](https://www.nba.com/draft/2026/news)
+- [Prospects](https://www.nba.com/draft/2026/prospects)
+- [Teams](https://www.nba.com/draft/2026/teams)
+- [AWS Draft Combine](https://combine.nba.com/)
+- [FAQ](https://www.nba.com/news/nba-draft-faq)
+- [Tickets](https://nbaexperiences.com/nba-draft-2026)
+- More
+
+
+  - [Trade Tracker](https://www.nba.com/news/2026-offseason-trade-tracker "")
+  - [Lottery](https://www.nba.com/news/nba-draft-lottery-explainer "")
+  - [Draft History](https://www.nba.com/news/history-draft "")
+  - [All-Time Picks](https://www.nba.com/stats/draft/history "")
+
 TueJun 23
 
 [1](https://www.nba.com/draft/2026/draft-board)
 
-[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
+[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
 
 WAS
 
 [2](https://www.nba.com/draft/2026/draft-board)
 
-[![Utah Jazz Logo](https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-utah-jazz)
+[![Utah Jazz Logo](https://cdn.nba.com/logos/nba/1610612762/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-utah-jazz)
 
 UTA
 
 [3](https://www.nba.com/draft/2026/draft-board)
 
-[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
+[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
 
 MEM
 
 [4](https://www.nba.com/draft/2026/draft-board)
 
-[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
+[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
 
 CHI
 
 [5](https://www.nba.com/draft/2026/draft-board)
 
-[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
+[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
 
 LAC
 
 [6](https://www.nba.com/draft/2026/draft-board)
 
-[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
+[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
 
 BKN
 
 [7](https://www.nba.com/draft/2026/draft-board)
 
-[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
+[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
 
 SAC
 
 [8](https://www.nba.com/draft/2026/draft-board)
 
-[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
+[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
 
 ATL
 
 [9](https://www.nba.com/draft/2026/draft-board)
 
-[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
+[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
 
 DAL
 
 [10](https://www.nba.com/draft/2026/draft-board)
 
-[![Milwaukee Bucks Logo](https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-milwaukee-bucks)
+[![Milwaukee Bucks Logo](https://cdn.nba.com/logos/nba/1610612749/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-milwaukee-bucks)
 
 MIL
 
 [11](https://www.nba.com/draft/2026/draft-board)
 
-[![Golden State Warriors Logo](https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors)
+[![Golden State Warriors Logo](https://cdn.nba.com/logos/nba/1610612744/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors)
 
 GSW
 
 [12](https://www.nba.com/draft/2026/draft-board)
 
-[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
+[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
 
 OKC
 
 [13](https://www.nba.com/draft/2026/draft-board)
 
-[![Miami Heat Logo](https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-miami-heat)
+[![Miami Heat Logo](https://cdn.nba.com/logos/nba/1610612748/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-miami-heat)
 
 MIA
 
 [14](https://www.nba.com/draft/2026/draft-board)
 
-[![Charlotte Hornets Logo](https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets)
+[![Charlotte Hornets Logo](https://cdn.nba.com/logos/nba/1610612766/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets)
 
 CHA
 
 [15](https://www.nba.com/draft/2026/draft-board)
 
-[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
+[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
 
 CHI
 
 [16](https://www.nba.com/draft/2026/draft-board)
 
-[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
+[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
 
 MEM
 
 [17](https://www.nba.com/draft/2026/draft-board)
 
-[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
+[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
 
 OKC
 
 [18](https://www.nba.com/draft/2026/draft-board)
 
-[![Charlotte Hornets Logo](https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets)
+[![Charlotte Hornets Logo](https://cdn.nba.com/logos/nba/1610612766/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-charlotte-hornets)
 
 CHA
 
 [19](https://www.nba.com/draft/2026/draft-board)
 
-[![Toronto Raptors Logo](https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors)
+[![Toronto Raptors Logo](https://cdn.nba.com/logos/nba/1610612761/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors)
 
 TOR
 
 [20](https://www.nba.com/draft/2026/draft-board)
 
-[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
+[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
 
 SAS
 
 [21](https://www.nba.com/draft/2026/draft-board)
 
-[![Detroit Pistons Logo](https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-detroit-pistons)
+[![Detroit Pistons Logo](https://cdn.nba.com/logos/nba/1610612765/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-detroit-pistons)
 
 DET
 
 [22](https://www.nba.com/draft/2026/draft-board)
 
-[![Philadelphia 76ers Logo](https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-philadelphia-76ers)
+[![Philadelphia 76ers Logo](https://cdn.nba.com/logos/nba/1610612755/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-philadelphia-76ers)
 
 PHI
 
 [23](https://www.nba.com/draft/2026/draft-board)
 
-[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
+[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
 
 ATL
 
 [24](https://www.nba.com/draft/2026/draft-board)
 
-[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
+[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
 
 NYK
 
 [25](https://www.nba.com/draft/2026/draft-board)
 
-[![Los Angeles Lakers Logo](https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-los-angeles-lakers)
+[![Los Angeles Lakers Logo](https://cdn.nba.com/logos/nba/1610612747/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-los-angeles-lakers)
 
 LAL
 
 [26](https://www.nba.com/draft/2026/draft-board)
 
-[![Denver Nuggets Logo](https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets)
+[![Denver Nuggets Logo](https://cdn.nba.com/logos/nba/1610612743/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets)
 
 DEN
 
 [27](https://www.nba.com/draft/2026/draft-board)
 
-[![Boston Celtics Logo](https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics)
+[![Boston Celtics Logo](https://cdn.nba.com/logos/nba/1610612738/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics)
 
 BOS
 
 [28](https://www.nba.com/draft/2026/draft-board)
 
-[![Minnesota Timberwolves Logo](https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves)
+[![Minnesota Timberwolves Logo](https://cdn.nba.com/logos/nba/1610612750/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves)
 
 MIN
 
 [29](https://www.nba.com/draft/2026/draft-board)
 
-[![Cleveland Cavaliers Logo](https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-cleveland-cavaliers)
+[![Cleveland Cavaliers Logo](https://cdn.nba.com/logos/nba/1610612739/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-cleveland-cavaliers)
 
 CLE
 
 [30](https://www.nba.com/draft/2026/draft-board)
 
-[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
+[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
 
 DAL
 
@@ -205,181 +502,181 @@ WedJun 24
 
 [31](https://www.nba.com/draft/2026/draft-board)
 
-[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
+[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
 
 NYK
 
 [32](https://www.nba.com/draft/2026/draft-board)
 
-[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
+[![Memphis Grizzlies Logo](https://cdn.nba.com/logos/nba/1610612763/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-memphis-grizzlies)
 
 MEM
 
 [33](https://www.nba.com/draft/2026/draft-board)
 
-[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
+[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
 
 BKN
 
 [34](https://www.nba.com/draft/2026/draft-board)
 
-[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
+[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
 
 SAC
 
 [35](https://www.nba.com/draft/2026/draft-board)
 
-[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
+[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
 
 SAS
 
 [36](https://www.nba.com/draft/2026/draft-board)
 
-[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
+[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
 
 LAC
 
 [37](https://www.nba.com/draft/2026/draft-board)
 
-[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
+[![Oklahoma City Thunder Logo](https://cdn.nba.com/logos/nba/1610612760/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-oklahoma-city-thunder)
 
 OKC
 
 [38](https://www.nba.com/draft/2026/draft-board)
 
-[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
+[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
 
 CHI
 
 [39](https://www.nba.com/draft/2026/draft-board)
 
-[![Houston Rockets Logo](https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets)
+[![Houston Rockets Logo](https://cdn.nba.com/logos/nba/1610612745/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets)
 
 HOU
 
 [40](https://www.nba.com/draft/2026/draft-board)
 
-[![Boston Celtics Logo](https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics)
+[![Boston Celtics Logo](https://cdn.nba.com/logos/nba/1610612738/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-boston-celtics)
 
 BOS
 
 [41](https://www.nba.com/draft/2026/draft-board)
 
-[![Miami Heat Logo](https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-miami-heat)
+[![Miami Heat Logo](https://cdn.nba.com/logos/nba/1610612748/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-miami-heat)
 
 MIA
 
 [42](https://www.nba.com/draft/2026/draft-board)
 
-[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
+[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
 
 SAS
 
 [43](https://www.nba.com/draft/2026/draft-board)
 
-[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
+[![Brooklyn Nets Logo](https://cdn.nba.com/logos/nba/1610612751/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-brooklyn-nets)
 
 BKN
 
 [44](https://www.nba.com/draft/2026/draft-board)
 
-[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
+[![San Antonio Spurs Logo](https://cdn.nba.com/logos/nba/1610612759/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-san-antonio-spurs)
 
 SAS
 
 [45](https://www.nba.com/draft/2026/draft-board)
 
-[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
+[![Sacramento Kings Logo](https://cdn.nba.com/logos/nba/1610612758/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-sacramento-kings)
 
 SAC
 
 [46](https://www.nba.com/draft/2026/draft-board)
 
-[![Orlando Magic Logo](https://cdn.nba.com/logos/nba/1610612753/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-orlando-magic)
+[![Orlando Magic Logo](https://cdn.nba.com/logos/nba/1610612753/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-orlando-magic)
 
 ORL
 
 [47](https://www.nba.com/draft/2026/draft-board)
 
-[![Phoenix Suns Logo](https://cdn.nba.com/logos/nba/1610612756/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-phoenix-suns)
+[![Phoenix Suns Logo](https://cdn.nba.com/logos/nba/1610612756/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-phoenix-suns)
 
 PHX
 
 [48](https://www.nba.com/draft/2026/draft-board)
 
-[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
+[![Dallas Mavericks Logo](https://cdn.nba.com/logos/nba/1610612742/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-dallas-mavericks)
 
 DAL
 
 [49](https://www.nba.com/draft/2026/draft-board)
 
-[![Denver Nuggets Logo](https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets)
+[![Denver Nuggets Logo](https://cdn.nba.com/logos/nba/1610612743/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-denver-nuggets)
 
 DEN
 
 [50](https://www.nba.com/draft/2026/draft-board)
 
-[![Toronto Raptors Logo](https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors)
+[![Toronto Raptors Logo](https://cdn.nba.com/logos/nba/1610612761/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-toronto-raptors)
 
 TOR
 
 [51](https://www.nba.com/draft/2026/draft-board)
 
-[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
+[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
 
 WAS
 
 [52](https://www.nba.com/draft/2026/draft-board)
 
-[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
+[![LA Clippers Logo](https://cdn.nba.com/logos/nba/1610612746/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-la-clippers)
 
 LAC
 
 [53](https://www.nba.com/draft/2026/draft-board)
 
-[![Houston Rockets Logo](https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets)
+[![Houston Rockets Logo](https://cdn.nba.com/logos/nba/1610612745/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-houston-rockets)
 
 HOU
 
 [54](https://www.nba.com/draft/2026/draft-board)
 
-[![Golden State Warriors Logo](https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors)
+[![Golden State Warriors Logo](https://cdn.nba.com/logos/nba/1610612744/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-golden-state-warriors)
 
 GSW
 
 [55](https://www.nba.com/draft/2026/draft-board)
 
-[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
+[![New York Knicks Logo](https://cdn.nba.com/logos/nba/1610612752/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-york-knicks)
 
 NYK
 
 [56](https://www.nba.com/draft/2026/draft-board)
 
-[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
+[![Chicago Bulls Logo](https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-chicago-bulls)
 
 CHI
 
 [57](https://www.nba.com/draft/2026/draft-board)
 
-[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
+[![Atlanta Hawks Logo](https://cdn.nba.com/logos/nba/1610612737/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-atlanta-hawks)
 
 ATL
 
 [58](https://www.nba.com/draft/2026/draft-board)
 
-[![New Orleans Pelicans Logo](https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-orleans-pelicans)
+[![New Orleans Pelicans Logo](https://cdn.nba.com/logos/nba/1610612740/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-new-orleans-pelicans)
 
 NOP
 
 [59](https://www.nba.com/draft/2026/draft-board)
 
-[![Minnesota Timberwolves Logo](https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves)
+[![Minnesota Timberwolves Logo](https://cdn.nba.com/logos/nba/1610612750/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-minnesota-timberwolves)
 
 MIN
 
 [60](https://www.nba.com/draft/2026/draft-board)
 
-[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
+[![Washington Wizards Logo](https://cdn.nba.com/logos/nba/1610612764/global/L/logo.svg)](https://www.nba.com/draft/2026/team-profiles/2026-washington-wizards)
 
 WAS
 
@@ -496,3 +793,56 @@ All PositionsForwardCenterGuard
 | [Caleb Wilson](https://www.nba.com/draft/2026/prospects/caleb-wilson) | F | 19 | North Carolina | 6-9 | 211 lbs | Freshman | United States |
 | [Noam Yaacov](https://www.nba.com/draft/2026/prospects/noam-yaacov) | G | 21 | Telenet BC Oostende (Belgium) | 6-0 | 190 lbs | International | Denmark |
 | [Reynan dos Santos](https://www.nba.com/draft/2026/prospects/reynan-dos-santos) | F | 22 | Mexico City Capitanes (G League) | 6-4 | 187 lbs | G League | Brazil |
+
+NBA Organization
+
+- [NBA ID Benefits](https://id.nba.com/)
+- [NBA Official](https://official.nba.com/)
+- [NBA Careers](https://careers.nba.com/)
+- [NBA Fan Code of Conduct](https://www.nba.com/nba-fan-code-of-conduct)
+
+NBA Social Impact
+
+- [NBA Total Health](http://totalhealth.nba.com/)
+- [NBA Cares](https://cares.nba.com/)
+- [Jr. NBA / Jr. WNBA](https://jr.nba.com/)
+- [NBA Foundation](https://nbafoundation.nba.com/)
+- [Social Justice Coalition](https://coalition.nba.com/)
+
+Across The League
+
+- [NBA Communications](https://pr.nba.com/)
+- [Lockervision](https://lockervision.nba.com/)
+- [NBA Transactions](https://www.nba.com/players/transactions)
+
+Shop
+
+- [Global Stores](https://global.nba.com/store-link-handler)
+- [NYC Store](https://store.nba.com/)
+- [NBA Auctions](https://auctions.nba.com/)
+- [NBA Photostore](https://photostore.nba.com/)
+
+Subscriptions
+
+- [League Pass](https://www.nba.com/watch/league-pass-stream)
+- [Customer Support](https://support.watch.nba.com/hc/en-us)
+
+* * *
+
+[Facebook](https://facebook.com/nba "Facebook")[Instagram](https://instagram.com/nba/?hl=en "Instagram")[Snapchat](https://snapchat.com/add/nba "Snapchat")[TikTok](https://www.tiktok.com/@nba "TikTok")[Twitter](https://twitter.com/NBA "Twitter")[Youtube](https://youtube.com/user/NBA "Youtube")[Twitch](https://www.twitch.tv/nba "Twitch")
+
+© 2026 NBA Media Ventures, LLC. All rights reserved.
+
+- [Privacy Policy](https://www.nba.com/privacy-policy)
+- [EEA/UK Privacy Statement](https://www.nba.com/eeaukprivacy)
+- [UK Tax Strategy Statement](https://www.nba.com/news/nba-uk-tax-strategy-statement)
+- [Brazil Privacy Statement](https://www.nba.com/brazilprivacy)
+- [Colorado Consumer Privacy Statement](https://www.nba.com/coprivacy)
+- [California Consumer Privacy Statement](https://www.nba.com/caprivacy)
+- [Terms of Use](https://www.nba.com/termsofuse)
+- [Cookie Policy](https://www.nba.com/cookiepolicy)
+- [Accessibility and Closed Captions](https://nba.com/accessibility)
+- [Customer Support](https://support.watch.nba.com/hc/en-us)
+- Manage Preferences
+
+If you are having difficulty accessing any content on this website, please visit our [Accessibility page.](https://www.nba.com/accessibility)

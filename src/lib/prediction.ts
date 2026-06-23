@@ -67,9 +67,15 @@ interface ScoredCandidate {
   prospect: Prospect;
   score: number;
   riskPenalty: number;
+  pickValueAdjustment: number;
   breakdown: DraftPick["breakdown"];
   effectiveWeights: Weights;
 }
+
+const TOP_FIVE_REACH_THRESHOLD = 5;
+const LOTTERY_REACH_THRESHOLD = 8;
+const VALUE_FALL_BONUS_THRESHOLD = 10;
+const NARROW_RACE_SCORE_EPSILON = 1.25;
 
 const normalizeTag = (value: string) => {
   const clean = value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -252,8 +258,31 @@ const getIntelScore = (team: TeamProfile, prospect: Prospect) => {
   const internationalBonus = prioritySignals.has("international") && prospect.international ? 8 : 0;
   const phasePenalty = team.phase === "contend" && prospect.profile.feel < 72 ? -7 : 0;
   const sourceBonus = Math.min(4, prospect.sourceNotes.length * 1.5);
-  const staleRiskPenalty = prospect.mockHeat < 45 && prospect.consensusRank > team.pick + 8 ? -5 : 0;
-  return clamp(prospect.mockHeat + internationalBonus + sourceBonus + phasePenalty + staleRiskPenalty);
+  const marketMovement = prospect.mockHeat - getMarketHeatBaseline(prospect.consensusRank);
+  const movementScore = 50 + marketMovement * 1.8;
+  const staleRiskPenalty = marketMovement < -8 && prospect.consensusRank > team.pick + 8 ? -5 : 0;
+  return clamp(movementScore + internationalBonus + sourceBonus + phasePenalty + staleRiskPenalty);
+};
+
+const getMarketHeatBaseline = (consensusRank: number) => {
+  if (consensusRank <= 5) return 100 - consensusRank * 2.4;
+  if (consensusRank <= 14) return 84 - (consensusRank - 6) * 3.2;
+  return 58 - (consensusRank - 15) * 1.7;
+};
+
+const getMedicalRiskPenalty = (team: TeamProfile, prospect: Prospect) => {
+  let penalty =
+    team.phase === "contend"
+      ? 12
+      : team.phase === "accelerate"
+        ? 7
+        : 6;
+
+  if (team.phase !== "contend" && team.riskTolerance >= 75) penalty -= 2;
+  if (team.phase !== "contend" && prospect.profile.upside >= 86) penalty -= 1;
+  if (team.phase === "contend" && team.riskTolerance < 50) penalty += 1;
+
+  return clamp(penalty, 4, 13);
 };
 
 const getRiskPenalty = (team: TeamProfile, prospect: Prospect) => {
@@ -262,7 +291,7 @@ const getRiskPenalty = (team: TeamProfile, prospect: Prospect) => {
   let penalty = 0;
 
   if (risks.some((risk) => risk.includes("medical") || risk.includes("health"))) {
-    penalty += team.phase === "contend" ? 10 : 7;
+    penalty += getMedicalRiskPenalty(team, prospect);
   }
   if (risks.some((risk) => risk.includes("shoot")) && teamSignals.has("shooting")) {
     penalty += 5;
@@ -280,6 +309,27 @@ const getRiskPenalty = (team: TeamProfile, prospect: Prospect) => {
   return clamp(penalty, 0, 18);
 };
 
+const getPickValueAdjustment = (team: TeamProfile, prospect: Prospect) => {
+  const reachDistance = prospect.consensusRank - team.pick;
+  const fallDistance = team.pick - prospect.consensusRank;
+  let adjustment = 0;
+
+  if (team.pick <= 5 && reachDistance > TOP_FIVE_REACH_THRESHOLD) {
+    adjustment -= Math.min(8, (reachDistance - TOP_FIVE_REACH_THRESHOLD) * 1.25);
+  } else if (team.pick <= 14 && reachDistance > LOTTERY_REACH_THRESHOLD) {
+    adjustment -= Math.min(5, (reachDistance - LOTTERY_REACH_THRESHOLD) * 0.9);
+  }
+
+  if (team.pick >= 10 && fallDistance >= VALUE_FALL_BONUS_THRESHOLD) {
+    adjustment += Math.min(5, (fallDistance - VALUE_FALL_BONUS_THRESHOLD + 1) * 0.8);
+  }
+  if (team.pick >= 10 && prospect.consensusRank <= 10 && fallDistance >= 2) {
+    adjustment += Math.min(6, (fallDistance - 1) * 1.35);
+  }
+
+  return clamp(adjustment, -8, 6);
+};
+
 const scoreProspect = (team: TeamProfile, prospect: Prospect, weights: Weights) => {
   const effectiveWeights = getEffectiveWeights(weights, team);
   const normalized = normalizeWeights(effectiveWeights);
@@ -291,15 +341,30 @@ const scoreProspect = (team: TeamProfile, prospect: Prospect, weights: Weights) 
     intel: getIntelScore(team, prospect),
   };
   const riskPenalty = getRiskPenalty(team, prospect);
+  const pickValueAdjustment = getPickValueAdjustment(team, prospect);
   const score =
     breakdown.consensus * normalized.consensus +
     breakdown.need * normalized.need +
     breakdown.player * normalized.player +
     breakdown.upside * normalized.upside +
     breakdown.intel * normalized.intel -
-    riskPenalty;
+    riskPenalty +
+    pickValueAdjustment;
 
-  return { score: clamp(score), breakdown, riskPenalty, effectiveWeights };
+  return { score: clamp(score), breakdown, riskPenalty, pickValueAdjustment, effectiveWeights };
+};
+
+const compareScoredCandidates = (left: ScoredCandidate, right: ScoredCandidate) => {
+  const scoreDelta = right.score - left.score;
+  if (Math.abs(scoreDelta) > NARROW_RACE_SCORE_EPSILON) return scoreDelta;
+
+  const consensusDelta = left.prospect.consensusRank - right.prospect.consensusRank;
+  if (consensusDelta !== 0) return consensusDelta;
+
+  const needDelta = right.breakdown.need - left.breakdown.need;
+  if (Math.abs(needDelta) > 0.01) return needDelta;
+
+  return right.breakdown.upside - left.breakdown.upside;
 };
 
 const getRoleFit = (team: TeamProfile, prospect: Prospect) => {
@@ -334,14 +399,48 @@ const getConfidence = (selected: ScoredCandidate, runnerUp: ScoredCandidate | un
 
 const getEvidence = (team: TeamProfile, prospect: Prospect, pick: number, selected: ScoredCandidate, runnerUp?: ScoredCandidate) => [
   `Consensus rank ${prospect.consensusRank} vs pick ${pick}; mock heat ${prospect.mockHeat}/100.`,
+  `Intel adjusted for consensus overlap: expected heat ${Math.round(getMarketHeatBaseline(prospect.consensusRank))}, adjusted intel ${Math.round(selected.breakdown.intel)}/100.`,
+  `Risk/value controls: ${Math.round(selected.riskPenalty)} risk penalty after ${team.phase} tolerance; pick-value adjustment ${formatSigned(selected.pickValueAdjustment)}.`,
+  ...getNarrowRaceEvidence(selected, runnerUp),
   "Agent parameter profile locked; risk and fit adjustments applied.",
   runnerUp
-    ? `Model margin over next candidate: ${Math.round(selected.score - runnerUp.score)} points vs ${runnerUp.prospect.name}.`
+    ? `Raw model margin over next candidate: ${Math.round(selected.score - runnerUp.score)} points vs ${runnerUp.prospect.name}.`
     : "Model margin: no remaining runner-up candidate.",
   `Team needs: ${team.needs.join(", ")}.`,
   `Role fit: ${getRoleFit(team, prospect)}; strengths: ${prospect.strengths.slice(0, 2).join(", ")}.`,
   ...prospect.sourceNotes.slice(0, 2),
 ];
+
+const getNarrowRaceEvidence = (selected: ScoredCandidate, runnerUp?: ScoredCandidate) => {
+  if (!runnerUp) return [];
+
+  const rawMargin = selected.score - runnerUp.score;
+  const selectedConsensus = selected.prospect.consensusRank;
+  const runnerUpConsensus = runnerUp.prospect.consensusRank;
+  const consensusEdge = selectedConsensus < runnerUpConsensus;
+
+  if (Math.abs(rawMargin) > NARROW_RACE_SCORE_EPSILON || !consensusEdge) return [];
+
+  if (rawMargin >= 0) {
+    return [
+      `Narrow-race check: raw score led by ${formatScoreMargin(rawMargin)} points; consensus rank ${selectedConsensus} over ${runnerUpConsensus} confirmed the pick.`,
+    ];
+  }
+
+  return [
+    `Narrow-race tiebreaker: raw score trailed by ${formatScoreMargin(Math.abs(rawMargin))} points; consensus rank ${selectedConsensus} over ${runnerUpConsensus} broke the tie.`,
+  ];
+};
+
+const formatScoreMargin = (value: number) => {
+  const rounded = Math.round(value * 10) / 10;
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+};
+
+const formatSigned = (value: number) => {
+  const rounded = Math.round(value);
+  return rounded > 0 ? `+${rounded}` : String(rounded);
+};
 
 const buildDraftPick = (
   team: TeamProfile,
@@ -360,7 +459,7 @@ const buildDraftPick = (
     prospect: selected.prospect,
     score: Math.round(selected.score),
     confidence: Math.round(getConfidence(selected, runnerUp, team, warnings)),
-    margin: Math.round(runnerUp ? selected.score - runnerUp.score : 12),
+    margin: Math.max(0, Math.round(runnerUp ? selected.score - runnerUp.score : 12)),
     zone: getDraftZone(team.pick),
     effectiveWeights: selected.effectiveWeights,
     roleFit: getRoleFit(team, selected.prospect),
@@ -394,7 +493,7 @@ export const generateBoard = (
     .map((team) => {
       const scored = available
         .map((prospect) => ({ prospect, ...scoreProspect(team, prospect, weights) }))
-        .sort((a, b) => b.score - a.score);
+        .sort(compareScoredCandidates);
       const selected = scored[0];
       const selectedIndex = available.findIndex((prospect) => prospect.id === selected.prospect.id);
       if (selectedIndex >= 0) available.splice(selectedIndex, 1);
@@ -420,7 +519,6 @@ export const generateMilestones = (board: DraftPick[]): MilestoneAnswer[] => {
     .filter((pick) => pick.prospect.positions.some((position) => position === "PG" || position === "SG"));
   const firstCenter = board.find((pick) => pick.prospect.positions.includes("C"));
   const freshmen = board.filter((pick) => pick.prospect.classYear === "Freshman");
-  const topConfidence = [...board].sort((a, b) => b.confidence - a.confidence)[0];
   const tradedPicks = board.filter((pick) => pick.acquiredFrom);
 
   return [
@@ -475,14 +573,6 @@ export const generateMilestones = (board: DraftPick[]): MilestoneAnswer[] => {
       answer: String(freshmen.length),
       confidence: 63,
       evidence: freshmen.slice(0, 8).map((pick) => `${pick.pick}. ${pick.prospect.name}`),
-    },
-    {
-      id: "highest-confidence",
-      prompt: "置信度最高的一组选秀预测是什么？",
-      type: "text",
-      answer: `${topConfidence.pick}. ${topConfidence.team} - ${topConfidence.prospect.name}`,
-      confidence: topConfidence.confidence,
-      evidence: topConfidence.evidence,
     },
     {
       id: "traded-picks",

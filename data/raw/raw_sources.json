@@ -1,6 +1,6 @@
 {
   "schema_version": "draftops.raw_sources.v1",
-  "generated_at": "2026-06-22T04:04:42+08:00",
+  "generated_at": "2026-06-23T11:00:43+08:00",
   "project_root": "C:\\Users\\24048\\Desktop\\AWS\\draftops",
   "source_policy": {
     "official_data_dir": "数据/",
@@ -9,8 +9,8 @@
     "external_policy": "Use NBA.com official pages first; use major media as weighted signals; ignore social/self-media for model input."
   },
   "counts": {
-    "total_sources": 39,
-    "official_user_provided": 8,
+    "total_sources": 42,
+    "official_user_provided": 11,
     "external_web": 29,
     "ignored_external": 8,
     "official_live_web": 2
@@ -39,22 +39,86 @@
     },
     {
       "id": "official-draft-combine-hackathon-archive",
-      "sourceName": "Official DraftCombine Hackathon archive",
+      "sourceName": "Official DraftCombine Hackathon extracted package",
       "url": null,
-      "localPath": "数据/DraftCombine_Hackathon.zip",
-      "sourceType": "official_archive",
+      "localPath": "数据/DraftCombine_Hackathon",
+      "sourceType": "official_archive_extracted",
       "originLayer": "official_user_provided",
       "collectedAt": "2026-06-22T03:31:27+08:00",
       "retrievedBy": "main-agent",
       "credibility": 1.0,
-      "rawArtifact": "数据/DraftCombine_Hackathon.zip",
-      "sizeBytes": 516065322,
+      "rawArtifact": "数据/DraftCombine_Hackathon",
+      "sizeBytes": null,
       "usableFor": [
-        "source archive",
+        "source package",
         "combine package provenance"
       ],
       "rawText": "",
-      "notes": "Official archive copy. Prefer extracted files for processing."
+      "notes": "Original zip is intentionally not present in this workspace; the extracted official package directory is the local source artifact used for processing."
+    },
+    {
+      "id": "official-2026-27-draft-event-data",
+      "sourceName": "Official NBA Draft 2026-27 event dataset workbook",
+      "url": null,
+      "localPath": "数据/NBA选秀大会_26-27赛季数据.xlsx",
+      "sourceType": "official_current_event_dataset",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-23T11:00:43+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/NBA选秀大会_26-27赛季数据.xlsx",
+      "sizeBytes": 30440,
+      "usableFor": [
+        "2026 participant list",
+        "current combine measurements",
+        "strength and agility testing",
+        "shooting drills"
+      ],
+      "rawText": "",
+      "notes": "Official/user-provided current event workbook. Sheets observed: 参选人名单, 人体测量数据, 力量与敏捷性, 投篮训练."
+    },
+    {
+      "id": "official-submission-answer-template",
+      "sourceName": "Official submission answer card template workbook",
+      "url": null,
+      "localPath": "数据/上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
+      "sourceType": "official_submission_template",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-23T11:00:43+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
+      "sizeBytes": 20184,
+      "usableFor": [
+        "submission format",
+        "team information fields",
+        "draft prediction answer card",
+        "milestone answer fields",
+        "player pool options"
+      ],
+      "rawText": "",
+      "notes": "Official answer-card template for final upload. Use for export shape validation, not as a predictive source."
+    },
+    {
+      "id": "official-pre-event-training-notes",
+      "sourceName": "Official pre-event training meeting notes",
+      "url": null,
+      "localPath": "数据/赛前培训直播-会议纪要 (1).md",
+      "sourceType": "official_training_notes",
+      "originLayer": "official_user_provided",
+      "collectedAt": "2026-06-23T11:00:43+08:00",
+      "retrievedBy": "main-agent",
+      "credibility": 1.0,
+      "rawArtifact": "数据/赛前培训直播-会议纪要 (1).md",
+      "sizeBytes": 7026,
+      "usableFor": [
+        "competition rules",
+        "workflow context",
+        "submission timing",
+        "presentation guidance"
+      ],
+      "rawText": "",
+      "notes": "Official/user-provided meeting notes. Use for workflow and submission interpretation; do not use as a player-scouting signal."
     },
     {
       "id": "official-combine-history-2000-2025",
@@ -934,7 +998,7 @@
       "localPath": "data/raw/nba-official-2026-prospects-live.md",
       "sourceType": "official_prospect_list",
       "originLayer": "external_web_official",
-      "collectedAt": "2026-06-22T04:04:42+08:00",
+      "collectedAt": "2026-06-23T11:00:43+08:00",
       "retrievedBy": "firecrawl-cli scrape",
       "credibility": 1.0,
       "rawArtifact": "data/raw/nba-official-2026-prospects-live.md",
@@ -949,7 +1013,7 @@
         "country"
       ],
       "rawText": "",
-      "notes": "Authoritative current NBA.com Prospects table used to reconcile final import bundle."
+      "notes": "Authoritative current NBA.com Prospects table refreshed on 2026-06-23 and used to reconcile final import bundle."
     },
     {
       "id": "nba-official-2026-draft-order-live",
@@ -958,7 +1022,7 @@
       "localPath": "data/raw/nba-official-2026-draft-order-live.md",
       "sourceType": "official_order",
       "originLayer": "external_web_official",
-      "collectedAt": "2026-06-22T04:04:42+08:00",
+      "collectedAt": "2026-06-23T11:00:43+08:00",
       "retrievedBy": "firecrawl-cli scrape",
       "credibility": 1.0,
       "rawArtifact": "data/raw/nba-official-2026-draft-order-live.md",
@@ -968,7 +1032,7 @@
         "acquired from notes"
       ],
       "rawText": "",
-      "notes": "Authoritative current NBA.com Draft Order used to verify first-round pick order."
+      "notes": "Authoritative current NBA.com Draft Order refreshed on 2026-06-23. The page reports Updated on June 22, 2026 2:10 PM."
     }
   ]
 }

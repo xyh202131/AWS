@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "vite",
     "dev:local": "vite --host 127.0.0.1 --port 3002",
+    "dev:agent": "node scripts/start-agent-dev.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "agent:deepseek": "node scripts/deepseek-agent.mjs",
+    "agent:deepseek:server": "node scripts/deepseek-chat-server.mjs",
+    "board:regen": "node scripts/regenerate-board.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

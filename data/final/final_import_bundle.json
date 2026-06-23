@@ -2068,12 +2068,13 @@
       },
       "rawSources": {
         "schemaVersion": "draftops.raw_sources.v1",
-        "generatedAt": "2026-06-22T03:31:27+08:00",
+        "generatedAt": "2026-06-23T11:00:43+08:00",
         "counts": {
-          "total_sources": 37,
-          "official_user_provided": 8,
+          "total_sources": 42,
+          "official_user_provided": 11,
           "external_web": 29,
-          "ignored_external": 8
+          "ignored_external": 8,
+          "official_live_web": 2
         },
         "policy": {
           "official_data_dir": "数据/",

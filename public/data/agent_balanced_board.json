@@ -1,17 +1,23 @@
 {
-  "schemaVersion": "draftops.parameter_test_board.v1",
-  "generatedAt": "2026-06-21T20:19:58.899Z",
-  "generatedBy": "DraftOps A7 Board Simulation Agent",
-  "method": "In-memory TypeScript transpile of src/lib/prediction.ts, then direct generateBoard call; no source files modified.",
+  "schemaVersion": "draftops.parameter_test_board.v2",
+  "generatedAt": "2026-06-22T10:08:34.676Z",
+  "generatedBy": "DraftOps Model V2 Regeneration Script",
+  "method": "Transpile src/lib/prediction.ts, then run generateBoard against public/data/final_import_bundle.json.",
   "inputFiles": [
-    "data/final/final_import_bundle.json",
+    "public/data/final_import_bundle.json",
     "data/reports/weight_scenarios.json",
     "src/lib/prediction.ts"
+  ],
+  "modelChanges": [
+    "intel score uses mockHeat movement against consensus-rank baseline",
+    "risk penalty is adjusted by team phase, risk tolerance, and prospect upside",
+    "pick-value guardrail penalizes large top-five/lottery reaches and rewards major value falls",
+    "near-tie candidate sorting uses consensus rank before need/upside tiebreakers",
+    "evidence text now explains intel overlap and risk/value controls"
   ],
   "scenario": {
     "id": "baseline",
     "label": "balanced baseline",
-    "outputAlias": "balanced",
     "weights": {
       "consensus": 35,
       "need": 25,
@@ -280,6 +286,67 @@
     "lowConfidence": 1,
     "ready": true
   },
+  "diagnostics": {
+    "topFourteenIntelDistribution": {
+      "min": 57,
+      "median": 68,
+      "max": 78,
+      "stddev": 6.6,
+      "values": [
+        57,
+        60,
+        61,
+        61,
+        62,
+        65,
+        67,
+        69,
+        69,
+        72,
+        74,
+        76,
+        76,
+        78
+      ]
+    },
+    "topFiveComparison": [
+      {
+        "pick": 1,
+        "team": "Washington Wizards",
+        "previousPlayer": "AJ Dybantsa",
+        "nextPlayer": "AJ Dybantsa",
+        "changed": false
+      },
+      {
+        "pick": 2,
+        "team": "Utah Jazz",
+        "previousPlayer": "Darryn Peterson",
+        "nextPlayer": "Darryn Peterson",
+        "changed": false
+      },
+      {
+        "pick": 3,
+        "team": "Memphis Grizzlies",
+        "previousPlayer": "Cameron Boozer",
+        "nextPlayer": "Cameron Boozer",
+        "changed": false
+      },
+      {
+        "pick": 4,
+        "team": "Chicago Bulls",
+        "previousPlayer": "Caleb Wilson",
+        "nextPlayer": "Caleb Wilson",
+        "changed": false
+      },
+      {
+        "pick": 5,
+        "team": "LA Clippers",
+        "previousPlayer": "Keaton Wagler",
+        "nextPlayer": "Keaton Wagler",
+        "changed": false
+      }
+    ]
+  },
   "summary": {
     "pickCount": 30,
     "uniqueProspects": 30,
@@ -290,7 +357,7 @@
         "pick": 30,
         "team": "Dallas Mavericks",
         "prospect": "Jayden Quaintance",
-        "confidence": 34
+        "confidence": 33
       }
     ]
   },
@@ -348,9 +415,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 1, most common 1 (10)."
         ]
       },
-      "score": 96,
-      "confidence": 98,
-      "margin": 4,
+      "score": 93,
+      "confidence": 96,
+      "margin": 5,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -365,32 +432,34 @@
         "need": 100,
         "player": 88,
         "upside": 100,
-        "intel": 100
+        "intel": 61
       },
       "alternatives": [
         {
-          "prospectId": "caleb-wilson",
-          "name": "Caleb Wilson",
-          "score": 92,
-          "roleFit": "two-way"
-        },
-        {
           "prospectId": "darryn-peterson",
           "name": "Darryn Peterson",
-          "score": 92,
+          "score": 88,
           "roleFit": "creation"
+        },
+        {
+          "prospectId": "caleb-wilson",
+          "name": "Caleb Wilson",
+          "score": 89,
+          "roleFit": "two-way"
         },
         {
           "prospectId": "cameron-boozer",
           "name": "Cameron Boozer",
-          "score": 91,
+          "score": 87,
           "roleFit": "size"
         }
       ],
       "evidence": [
         "Consensus rank 2 vs pick 1; mock heat 99/100.",
-        "Adaptive weights: C42/N22/P18/U22/I10; risk penalty 0.",
-        "Model margin over next candidate: 4 points vs Caleb Wilson.",
+        "Intel adjusted for consensus overlap: expected heat 95, adjusted intel 61/100.",
+        "Risk/value controls: 0 risk penalty after rebuild tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 5 points vs Darryn Peterson.",
         "Team needs: alpha scorer, wing creator, defensive size.",
         "Role fit: wing creator; strengths: Elite scoring wing, Top-pick media consensus.",
         "NBA.com official prospects: F, age 19, BYU, 6-9, 217 lbs, Freshman, United States",
@@ -450,9 +519,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 2, most common 2 (8)."
         ]
       },
-      "score": 96,
-      "confidence": 98,
-      "margin": 4,
+      "score": 92,
+      "confidence": 93,
+      "margin": 3,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -467,32 +536,34 @@
         "need": 100,
         "player": 84,
         "upside": 100,
-        "intel": 100
+        "intel": 57
       },
       "alternatives": [
         {
           "prospectId": "keaton-wagler",
           "name": "Keaton Wagler",
-          "score": 92,
+          "score": 89,
           "roleFit": "pull-up shooting"
         },
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 90,
+          "score": 87,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 85,
+          "score": 83,
           "roleFit": "primary guard"
         }
       ],
       "evidence": [
         "Consensus rank 1 vs pick 2; mock heat 99/100.",
-        "Adaptive weights: C42/N22/P18/U22/I10; risk penalty 0.",
-        "Model margin over next candidate: 4 points vs Keaton Wagler.",
+        "Intel adjusted for consensus overlap: expected heat 98, adjusted intel 57/100.",
+        "Risk/value controls: 0 risk penalty after rebuild tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 3 points vs Keaton Wagler.",
         "Team needs: lead guard, shot creation, late-clock offense.",
         "Role fit: primary guard; strengths: Lead-guard scoring, Pull-up shooting.",
         "NBA.com official prospects: G, age 19, Kansas, 6-5, 199 lbs, Freshman, United States",
@@ -553,7 +624,7 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 3, most common 3 (8)."
         ]
       },
-      "score": 97,
+      "score": 94,
       "confidence": 100,
       "margin": 15,
       "zone": "top-five",
@@ -570,32 +641,34 @@
         "need": 100,
         "player": 84,
         "upside": 100,
-        "intel": 100
+        "intel": 62
       },
       "alternatives": [
         {
           "prospectId": "caleb-wilson",
           "name": "Caleb Wilson",
-          "score": 82,
+          "score": 79,
           "roleFit": "wing depth"
-        },
-        {
-          "prospectId": "darius-acuff-jr",
-          "name": "Darius Acuff Jr.",
-          "score": 78,
-          "roleFit": "primary guard"
         },
         {
           "prospectId": "keaton-wagler",
           "name": "Keaton Wagler",
-          "score": 78,
+          "score": 75,
+          "roleFit": "primary guard"
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "score": 76,
           "roleFit": "primary guard"
         }
       ],
       "evidence": [
         "Consensus rank 3 vs pick 3; mock heat 97/100.",
-        "Adaptive weights: C40/N25/P20/U17/I10; risk penalty 0.",
-        "Model margin over next candidate: 15 points vs Caleb Wilson.",
+        "Intel adjusted for consensus overlap: expected heat 93, adjusted intel 62/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 15 points vs Caleb Wilson.",
         "Team needs: frontcourt scoring, rebounding, secondary passing.",
         "Role fit: frontcourt engine; strengths: Polished production, Rebounding and passing feel.",
         "NBA.com official prospects: F-C, age 18, Duke, 6-8, 253 lbs, Freshman, United States",
@@ -656,9 +729,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 4, most common 4 (8)."
         ]
       },
-      "score": 94,
+      "score": 90,
       "confidence": 100,
-      "margin": 10,
+      "margin": 9,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -673,32 +746,34 @@
         "need": 100,
         "player": 86,
         "upside": 100,
-        "intel": 98
+        "intel": 60
       },
       "alternatives": [
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 83,
+          "score": 81,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 83,
+          "score": 81,
           "roleFit": "defense"
         },
         {
-          "prospectId": "aday-mara",
-          "name": "Aday Mara",
-          "score": 82,
-          "roleFit": "frontcourt"
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "score": 79,
+          "roleFit": "big wing"
         }
       ],
       "evidence": [
         "Consensus rank 4 vs pick 4; mock heat 94/100.",
-        "Adaptive weights: C42/N22/P18/U22/I10; risk penalty 4.",
-        "Model margin over next candidate: 10 points vs Darius Acuff Jr..",
+        "Intel adjusted for consensus overlap: expected heat 90, adjusted intel 60/100.",
+        "Risk/value controls: 4 risk penalty after rebuild tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 9 points vs Darius Acuff Jr..",
         "Team needs: big wing, rim pressure, defensive playmaking.",
         "Role fit: big wing; strengths: Size and fluidity, Two-way forward tools.",
         "NBA.com official prospects: F, age 19, North Carolina, 6-9, 211 lbs, Freshman, United States",
@@ -759,8 +834,8 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 5, most common 5 (8)."
         ]
       },
-      "score": 97,
-      "confidence": 98,
+      "score": 93,
+      "confidence": 89,
       "margin": 2,
       "zone": "top-five",
       "effectiveWeights": {
@@ -776,32 +851,34 @@
         "need": 100,
         "player": 83,
         "upside": 100,
-        "intel": 96
+        "intel": 61
       },
       "alternatives": [
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 95,
+          "score": 91,
           "roleFit": "guard"
         },
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 93,
+          "score": 90,
           "roleFit": "pull-up shooting"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 90,
+          "score": 88,
           "roleFit": "guard"
         }
       ],
       "evidence": [
         "Consensus rank 5 vs pick 5; mock heat 92/100.",
-        "Adaptive weights: C40/N22/P18/U21/I13; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Darius Acuff Jr..",
+        "Intel adjusted for consensus overlap: expected heat 88, adjusted intel 61/100.",
+        "Risk/value controls: 0 risk penalty after asset tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 2 points vs Darius Acuff Jr..",
         "Team needs: young guard, shooting, pace.",
         "Role fit: combo guard; strengths: Big guard shooting, Rising lottery momentum.",
         "NBA.com official prospects: G, age 19, Illinois, 6-5, 188 lbs, Freshman, United States",
@@ -862,8 +939,8 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 6, most common 6 (5)."
         ]
       },
-      "score": 95,
-      "confidence": 96,
+      "score": 93,
+      "confidence": 89,
       "margin": 2,
       "zone": "lottery",
       "effectiveWeights": {
@@ -879,32 +956,34 @@
         "need": 100,
         "player": 80,
         "upside": 100,
-        "intel": 94
+        "intel": 65
       },
       "alternatives": [
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 93,
+          "score": 91,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 92,
+          "score": 90,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "brayden-burries",
           "name": "Brayden Burries",
-          "score": 81,
+          "score": 80,
           "roleFit": "shot creator"
         }
       ],
       "evidence": [
         "Consensus rank 6 vs pick 6; mock heat 90/100.",
-        "Adaptive weights: C34/N31/P23/U15/I10; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Mikel Brown Jr..",
+        "Intel adjusted for consensus overlap: expected heat 84, adjusted intel 65/100.",
+        "Risk/value controls: 0 risk penalty after rebuild tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 2 points vs Mikel Brown Jr..",
         "Team needs: primary guard, rim pressure, fan-facing upside.",
         "Role fit: primary guard; strengths: Rim pressure, Live-dribble playmaking.",
         "NBA.com official prospects: G, age 19, Arkansas, 6-2, 186 lbs, Freshman, United States",
@@ -964,9 +1043,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 7, most common 6 (4)."
         ]
       },
-      "score": 94,
-      "confidence": 88,
-      "margin": 1,
+      "score": 92,
+      "confidence": 86,
+      "margin": 0,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -981,32 +1060,35 @@
         "need": 100,
         "player": 79,
         "upside": 96,
-        "intel": 92
+        "intel": 67
       },
       "alternatives": [
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 94,
+          "score": 92,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "brayden-burries",
           "name": "Brayden Burries",
-          "score": 88,
+          "score": 87,
           "roleFit": "guard"
         },
         {
           "prospectId": "aday-mara",
           "name": "Aday Mara",
-          "score": 81,
+          "score": 79,
           "roleFit": "defense"
         }
       ],
       "evidence": [
         "Consensus rank 7 vs pick 7; mock heat 88/100.",
-        "Adaptive weights: C32/N34/P25/U10/I10; risk penalty 0.",
-        "Model margin over next candidate: 1 points vs Kingston Flemings.",
+        "Intel adjusted for consensus overlap: expected heat 81, adjusted intel 67/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Narrow-race check: raw score led by 0.4 points; consensus rank 7 over 8 confirmed the pick.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 0 points vs Kingston Flemings.",
         "Team needs: point guard depth, paint touch, defensive activity.",
         "Role fit: primary guard; strengths: Shooting off movement, Pick-and-roll feel.",
         "NBA.com official prospects: G, age 20, Louisville, 6-5, 180 lbs, Freshman, United States",
@@ -1067,9 +1149,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 10, most common 8 (4)."
         ]
       },
-      "score": 90,
-      "confidence": 95,
-      "margin": 6,
+      "score": 89,
+      "confidence": 94,
+      "margin": 7,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -1084,13 +1166,19 @@
         "need": 100,
         "player": 78,
         "upside": 93,
-        "intel": 85
+        "intel": 72
       },
       "alternatives": [
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 84,
+          "score": 82,
+          "roleFit": "size"
+        },
+        {
+          "prospectId": "yaxel-lendeborg",
+          "name": "Yaxel Lendeborg",
+          "score": 81,
           "roleFit": "size"
         },
         {
@@ -1098,18 +1186,14 @@
           "name": "Karim Lopez",
           "score": 82,
           "roleFit": "size"
-        },
-        {
-          "prospectId": "yaxel-lendeborg",
-          "name": "Yaxel Lendeborg",
-          "score": 82,
-          "roleFit": "size"
         }
       ],
       "evidence": [
         "Consensus rank 10 vs pick 8; mock heat 81/100.",
-        "Adaptive weights: C32/N31/P23/U14/I13; risk penalty 0.",
-        "Model margin over next candidate: 6 points vs Nate Ament.",
+        "Intel adjusted for consensus overlap: expected heat 71, adjusted intel 72/100.",
+        "Risk/value controls: 0 risk penalty after asset tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 7 points vs Nate Ament.",
         "Team needs: rim protection, frontcourt size, vertical spacing.",
         "Role fit: rim protector; strengths: Rare height, Shot blocking.",
         "NBA.com official prospects: C, age 21, Michigan, 7-3, 260 lbs, Junior, Spain",
@@ -1171,9 +1255,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 9, most common 9 (5)."
         ]
       },
-      "score": 91,
+      "score": 90,
       "confidence": 97,
-      "margin": 6,
+      "margin": 7,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -1188,19 +1272,19 @@
         "need": 100,
         "player": 81,
         "upside": 96,
-        "intel": 83
+        "intel": 74
       },
       "alternatives": [
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 85,
+          "score": 83,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 85,
+          "score": 83,
           "roleFit": "shooter"
         },
         {
@@ -1212,8 +1296,10 @@
       ],
       "evidence": [
         "Consensus rank 11 vs pick 9; mock heat 79/100.",
-        "Adaptive weights: C32/N35/P28/U4/I12; risk penalty 0.",
-        "Model margin over next candidate: 6 points vs Kingston Flemings.",
+        "Intel adjusted for consensus overlap: expected heat 68, adjusted intel 74/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 7 points vs Kingston Flemings.",
         "Team needs: two-way guard, shooting, secondary creation.",
         "Role fit: combo guard; strengths: Strong guard frame, Two-way tools.",
         "NBA.com official prospects: G, age 20, Arizona, 6-4, 215 lbs, Freshman, United States",
@@ -1273,9 +1359,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 8, most common 7, 9 (3)."
         ]
       },
-      "score": 91,
-      "confidence": 84,
-      "margin": 2,
+      "score": 90,
+      "confidence": 83,
+      "margin": 1,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -1290,13 +1376,13 @@
         "need": 100,
         "player": 80,
         "upside": 100,
-        "intel": 90
+        "intel": 69
       },
       "alternatives": [
         {
           "prospectId": "yaxel-lendeborg",
           "name": "Yaxel Lendeborg",
-          "score": 90,
+          "score": 89,
           "roleFit": "connector"
         },
         {
@@ -1308,14 +1394,16 @@
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 84,
+          "score": 82,
           "roleFit": "big wing"
         }
       ],
       "evidence": [
         "Consensus rank 8 vs pick 10; mock heat 86/100.",
-        "Adaptive weights: C32/N35/P28/U4/I12; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Yaxel Lendeborg.",
+        "Intel adjusted for consensus overlap: expected heat 78, adjusted intel 69/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment +1.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 1 points vs Yaxel Lendeborg.",
         "Team needs: connector forward, defense, rebounding.",
         "Role fit: defense; strengths: Speed and table setting, Point-of-attack pressure.",
         "NBA.com official prospects: G, age 19, Houston, 6-3, 183 lbs, Freshman, United States",
@@ -1375,8 +1463,8 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 11, most common 10, 12 (3)."
         ]
       },
-      "score": 82,
-      "confidence": 80,
+      "score": 81,
+      "confidence": 75,
       "margin": 2,
       "zone": "lottery",
       "effectiveWeights": {
@@ -1392,7 +1480,7 @@
         "need": 73,
         "player": 79,
         "upside": 99,
-        "intel": 87
+        "intel": 69
       },
       "alternatives": [
         {
@@ -1410,14 +1498,16 @@
         {
           "prospectId": "yaxel-lendeborg",
           "name": "Yaxel Lendeborg",
-          "score": 75,
+          "score": 74,
           "roleFit": "decision maker"
         }
       ],
       "evidence": [
         "Consensus rank 9 vs pick 11; mock heat 83/100.",
-        "Adaptive weights: C32/N35/P28/U4/I12; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Christian Anderson.",
+        "Intel adjusted for consensus overlap: expected heat 74, adjusted intel 69/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment +1.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 2 points vs Christian Anderson.",
         "Team needs: smart guard, movement shooting, decision making.",
         "Role fit: shooter; strengths: Tall shooting wing, Floor spacing.",
         "NBA.com official prospects: F, age 19, Tennessee, 6-10, 211 lbs, Freshman, United States",
@@ -1479,9 +1569,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4)."
         ]
       },
-      "score": 91,
-      "confidence": 95,
-      "margin": 5,
+      "score": 90,
+      "confidence": 94,
+      "margin": 4,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -1496,7 +1586,7 @@
         "need": 100,
         "player": 80,
         "upside": 76,
-        "intel": 81
+        "intel": 76
       },
       "alternatives": [
         {
@@ -1508,20 +1598,22 @@
         {
           "prospectId": "karim-lopez",
           "name": "Karim Lopez",
-          "score": 85,
+          "score": 86,
           "roleFit": "defense"
         },
         {
-          "prospectId": "allen-graves",
-          "name": "Allen Graves",
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
           "score": 84,
-          "roleFit": "versatile forward"
+          "roleFit": "defense"
         }
       ],
       "evidence": [
         "Consensus rank 12 vs pick 12; mock heat 77/100.",
-        "Adaptive weights: C32/N31/P23/U14/I13; risk penalty 0.",
-        "Model margin over next candidate: 5 points vs Hannes Steinbach.",
+        "Intel adjusted for consensus overlap: expected heat 65, adjusted intel 76/100.",
+        "Risk/value controls: 0 risk penalty after asset tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 4 points vs Hannes Steinbach.",
         "Team needs: frontcourt depth, versatility, long-term value.",
         "Role fit: feel; strengths: Older productive forward, Passing feel.",
         "NBA.com official prospects: F, age 23, Michigan, 6-9, 241 lbs, Senior, United States",
@@ -1583,8 +1675,8 @@
         ]
       },
       "score": 91,
-      "confidence": 83,
-      "margin": 2,
+      "confidence": 88,
+      "margin": 3,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -1599,13 +1691,13 @@
         "need": 100,
         "player": 79,
         "upside": 99,
-        "intel": 76
+        "intel": 78
       },
       "alternatives": [
         {
           "prospectId": "hannes-steinbach",
           "name": "Hannes Steinbach",
-          "score": 89,
+          "score": 88,
           "roleFit": "frontcourt"
         },
         {
@@ -1623,8 +1715,10 @@
       ],
       "evidence": [
         "Consensus rank 14 vs pick 13; mock heat 72/100.",
-        "Adaptive weights: C32/N35/P28/U4/I12; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Hannes Steinbach.",
+        "Intel adjusted for consensus overlap: expected heat 58, adjusted intel 78/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 3 points vs Hannes Steinbach.",
         "Team needs: physical wing, defense, self creation.",
         "Role fit: big wing; strengths: International wing size, Defensive tools.",
         "NBA.com official prospects: F, age 19, New Zealand Breakers (Australia), 6-8, 222 lbs, International, Mexico",
@@ -1687,7 +1781,7 @@
         ]
       },
       "score": 89,
-      "confidence": 92,
+      "confidence": 96,
       "margin": 5,
       "zone": "lottery",
       "effectiveWeights": {
@@ -1703,7 +1797,7 @@
         "need": 100,
         "player": 71,
         "upside": 92,
-        "intel": 74
+        "intel": 76
       },
       "alternatives": [
         {
@@ -1721,14 +1815,16 @@
         {
           "prospectId": "chris-cenac-jr",
           "name": "Chris Cenac Jr.",
-          "score": 79,
+          "score": 80,
           "roleFit": "rim protector"
         }
       ],
       "evidence": [
         "Consensus rank 15 vs pick 14; mock heat 70/100.",
-        "Adaptive weights: C32/N34/P25/U10/I10; risk penalty 0.",
-        "Model margin over next candidate: 5 points vs Hannes Steinbach.",
+        "Intel adjusted for consensus overlap: expected heat 58, adjusted intel 76/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 5 points vs Hannes Steinbach.",
         "Team needs: frontcourt defense, rebounding, finishing.",
         "Role fit: rim protector; strengths: Physical rebounding, Interior finishing.",
         "NBA.com official prospects: F-C, age 20, Michigan, 6-9, 250 lbs, Sophomore, United States",
@@ -1789,7 +1885,7 @@
         ]
       },
       "score": 88,
-      "confidence": 90,
+      "confidence": 94,
       "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
@@ -1805,7 +1901,7 @@
         "need": 100,
         "player": 76,
         "upside": 91,
-        "intel": 67
+        "intel": 69
       },
       "alternatives": [
         {
@@ -1821,16 +1917,18 @@
           "roleFit": "rebounder"
         },
         {
-          "prospectId": "christian-anderson",
-          "name": "Christian Anderson",
-          "score": 75,
-          "roleFit": "primary guard"
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "score": 77,
+          "roleFit": "rebounder"
         }
       ],
       "evidence": [
         "Consensus rank 17 vs pick 15; mock heat 63/100.",
-        "Adaptive weights: C33/N33/P25/U10/I10; risk penalty 0.",
-        "Model margin over next candidate: 5 points vs Hannes Steinbach.",
+        "Intel adjusted for consensus overlap: expected heat 55, adjusted intel 69/100.",
+        "Risk/value controls: 0 risk penalty after rebuild tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 5 points vs Hannes Steinbach.",
         "Team needs: frontcourt depth, shooting, upside.",
         "Role fit: stretch forward; strengths: Defensive events, Rebounding.",
         "NBA.com official prospects: F, age 19, Santa Clara, 6-8, 226 lbs, Freshman, United States",
@@ -1891,8 +1989,8 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
-      "score": 86,
-      "confidence": 83,
+      "score": 85,
+      "confidence": 82,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -1908,7 +2006,7 @@
         "need": 96,
         "player": 74,
         "upside": 87,
-        "intel": 76
+        "intel": 73
       },
       "alternatives": [
         {
@@ -1926,14 +2024,16 @@
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 73,
+          "score": 75,
           "roleFit": "rim protector"
         }
       ],
       "evidence": [
         "Consensus rank 13 vs pick 16; mock heat 72/100.",
-        "Adaptive weights: C31/N36/P27/U5/I10; risk penalty 0.",
-        "Model margin over next candidate: 4 points vs Chris Cenac Jr..",
+        "Intel adjusted for consensus overlap: expected heat 62, adjusted intel 73/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 4 points vs Chris Cenac Jr..",
         "Team needs: rim protection, bench size, defense.",
         "Role fit: size; strengths: Size and rebounding, Low-mistake frontcourt feel.",
         "NBA.com official prospects: F-C, age 20, Washington, 6-10, 248 lbs, Freshman, Germany",
@@ -1997,7 +2097,7 @@
         ]
       },
       "score": 78,
-      "confidence": 78,
+      "confidence": 79,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -2013,7 +2113,7 @@
         "need": 69,
         "player": 74,
         "upside": 99,
-        "intel": 62
+        "intel": 66
       },
       "alternatives": [
         {
@@ -2023,22 +2123,24 @@
           "roleFit": "primary guard"
         },
         {
-          "prospectId": "cameron-carr",
-          "name": "Cameron Carr",
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
           "score": 73,
           "roleFit": "primary guard"
         },
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 73,
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "score": 74,
           "roleFit": "primary guard"
         }
       ],
       "evidence": [
         "Consensus rank 19 vs pick 17; mock heat 58/100.",
-        "Adaptive weights: C31/N33/P25/U9/I13; risk penalty 0.",
-        "Model margin over next candidate: 4 points vs Christian Anderson.",
+        "Intel adjusted for consensus overlap: expected heat 51, adjusted intel 66/100.",
+        "Risk/value controls: 0 risk penalty after asset tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 4 points vs Christian Anderson.",
         "Team needs: big wing, shooting, stash optionality.",
         "Role fit: upside; strengths: Long frontcourt tools, Rebounding range.",
         "NBA.com official prospects: F-C, age 19, Houston, 6-11, 240 lbs, Freshman, United States",
@@ -2099,7 +2201,7 @@
         ]
       },
       "score": 88,
-      "confidence": 79,
+      "confidence": 78,
       "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
@@ -2115,7 +2217,7 @@
         "need": 100,
         "player": 76,
         "upside": 84,
-        "intel": 69
+        "intel": 70
       },
       "alternatives": [
         {
@@ -2127,20 +2229,23 @@
         {
           "prospectId": "bennett-stirtz",
           "name": "Bennett Stirtz",
-          "score": 86,
+          "score": 87,
           "roleFit": "combo guard"
         },
         {
           "prospectId": "cameron-carr",
           "name": "Cameron Carr",
-          "score": 80,
+          "score": 81,
           "roleFit": "shooter"
         }
       ],
       "evidence": [
         "Consensus rank 16 vs pick 18; mock heat 65/100.",
-        "Adaptive weights: C31/N36/P27/U5/I10; risk penalty 0.",
-        "Model margin over next candidate: 0 points vs Labaron Philon Jr..",
+        "Intel adjusted for consensus overlap: expected heat 56, adjusted intel 70/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Narrow-race tiebreaker: raw score trailed by 0.2 points; consensus rank 16 over 18 broke the tie.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 0 points vs Labaron Philon Jr..",
         "Team needs: guard depth, shooting, secondary creation.",
         "Role fit: combo guard; strengths: High assist pressure, Pick-and-roll pace.",
         "NBA.com official prospects: G, age 20, Texas Tech, 6-1, 180 lbs, Sophomore, United States",
@@ -2152,57 +2257,56 @@
       "pick": 19,
       "team": "Toronto Raptors",
       "prospect": {
-        "id": "dailyn-swain",
-        "name": "Dailyn Swain",
+        "id": "labaron-philon-jr",
+        "name": "Labaron Philon Jr.",
         "positions": [
-          "SF",
-          "PF"
+          "PG",
+          "SG"
         ],
-        "school": "Texas",
+        "school": "Alabama",
         "origin": "United States",
-        "classYear": "Junior",
-        "height": "6-7",
-        "weight": "211 lbs",
+        "classYear": "Sophomore",
+        "height": "6-3",
+        "weight": "176 lbs",
         "age": 20,
-        "consensusRank": 23,
-        "mockHeat": 50,
+        "consensusRank": 18,
+        "mockHeat": 61,
         "international": false,
         "roleTags": [
-          "big wing",
-          "defense",
-          "passing",
-          "connector",
-          "two-way"
+          "primary guard",
+          "pace",
+          "shot creator",
+          "playmaking"
         ],
         "strengths": [
-          "Wing size",
-          "Passing flashes",
-          "Defensive activity"
+          "Fast decision making",
+          "Scoring and passing balance",
+          "SEC production"
         ],
         "risks": [
-          "Pull-up shooting",
-          "Primary creation"
+          "Frame",
+          "Defensive matchups"
         ],
         "profile": {
-          "shooting": 74,
-          "creation": 70,
-          "defense": 83,
-          "athleticism": 81,
-          "feel": 82,
-          "size": 89,
-          "upside": 80
+          "shooting": 81,
+          "creation": 86,
+          "defense": 69,
+          "athleticism": 82,
+          "feel": 86,
+          "size": 68,
+          "upside": 82
         },
         "sourceNotes": [
-          "NBA.com official prospects: F, age 20, Texas, 6-7, 211 lbs, Junior, United States",
-          "Appears on NBA.com consensus boards",
-          "Tankathon No. 22 range",
-          "ESPN 2026 NBA draft big board top 100: normalized rank 23; source rank 23; confidence high.",
+          "NBA.com official prospects: G, age 20, Alabama, 6-3, 176 lbs, Sophomore, United States",
+          "Consensus fringe lottery candidate",
+          "Productive guard profile",
+          "ESPN 2026 NBA draft big board top 100: normalized rank 18; source rank 18; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
       "score": 79,
-      "confidence": 69,
-      "margin": 1,
+      "confidence": 71,
+      "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -2211,42 +2315,45 @@
         "upside": 5,
         "intel": 10
       },
-      "roleFit": "defense",
+      "roleFit": "creation",
       "breakdown": {
-        "consensus": 80,
-        "need": 100,
+        "consensus": 95,
+        "need": 66,
         "player": 79,
-        "upside": 90,
-        "intel": 54
+        "upside": 92,
+        "intel": 69
       },
       "alternatives": [
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 79,
-          "roleFit": "creation"
-        },
-        {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 77,
+          "score": 79,
+          "roleFit": "defense"
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "score": 80,
           "roleFit": "defense"
         },
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 77,
+          "score": 78,
           "roleFit": "creation"
         }
       ],
       "evidence": [
-        "Consensus rank 23 vs pick 19; mock heat 50/100.",
-        "Adaptive weights: C31/N36/P27/U5/I10; risk penalty 5.",
-        "Model margin over next candidate: 1 points vs Labaron Philon Jr..",
+        "Consensus rank 18 vs pick 19; mock heat 61/100.",
+        "Intel adjusted for consensus overlap: expected heat 53, adjusted intel 69/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Narrow-race tiebreaker: raw score trailed by 0.1 points; consensus rank 18 over 22 broke the tie.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 0 points vs Jayden Quaintance.",
         "Team needs: connector forward, length, team defense.",
-        "Role fit: defense; strengths: Wing size, Passing flashes.",
-        "NBA.com official prospects: F, age 20, Texas, 6-7, 211 lbs, Junior, United States",
-        "Appears on NBA.com consensus boards"
+        "Role fit: creation; strengths: Fast decision making, Scoring and passing balance.",
+        "NBA.com official prospects: G, age 20, Alabama, 6-3, 176 lbs, Sophomore, United States",
+        "Consensus fringe lottery candidate"
       ],
       "warnings": []
     },
@@ -2302,7 +2409,7 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
-      "score": 89,
+      "score": 90,
       "confidence": 84,
       "margin": 1,
       "zone": "late-first",
@@ -2319,7 +2426,7 @@
         "need": 100,
         "player": 76,
         "upside": 68,
-        "intel": 60
+        "intel": 66
       },
       "alternatives": [
         {
@@ -2331,20 +2438,23 @@
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 83,
+          "score": 84,
           "roleFit": "combo guard"
         },
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
           "score": 80,
-          "roleFit": "primary guard"
+          "roleFit": "decision maker"
         }
       ],
       "evidence": [
         "Consensus rank 20 vs pick 20; mock heat 56/100.",
-        "Adaptive weights: C31/N36/P27/U5/I10; risk penalty 0.",
-        "Model margin over next candidate: 1 points vs Cameron Carr.",
+        "Intel adjusted for consensus overlap: expected heat 50, adjusted intel 66/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Narrow-race check: raw score led by 1.1 points; consensus rank 20 over 21 confirmed the pick.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 1 points vs Cameron Carr.",
         "Team needs: shooting guard, secondary handler, spacing.",
         "Role fit: combo guard; strengths: Older guard production, Decision making.",
         "NBA.com official prospects: G, age 22, Iowa, 6-3, 186 lbs, Senior, United States",
@@ -2405,7 +2515,7 @@
         ]
       },
       "score": 90,
-      "confidence": 98,
+      "confidence": 99,
       "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
@@ -2421,32 +2531,34 @@
         "need": 100,
         "player": 78,
         "upside": 81,
-        "intel": 58
+        "intel": 65
       },
       "alternatives": [
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 84,
-          "roleFit": "guard"
-        },
-        {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 84,
+          "score": 85,
           "roleFit": "shooter"
         },
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 82,
+          "score": 83,
           "roleFit": "3-and-D"
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "score": 77,
+          "roleFit": "wing"
         }
       ],
       "evidence": [
         "Consensus rank 21 vs pick 21; mock heat 54/100.",
-        "Adaptive weights: C31/N36/P27/U5/I10; risk penalty 0.",
-        "Model margin over next candidate: 5 points vs Labaron Philon Jr..",
+        "Intel adjusted for consensus overlap: expected heat 48, adjusted intel 65/100.",
+        "Risk/value controls: 0 risk penalty after accelerate tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 5 points vs Ebuka Okorie.",
         "Team needs: wing shooting, defensive activity, floor spacing.",
         "Role fit: wing defender; strengths: Shotmaking guard, Length for position.",
         "NBA.com official prospects: G, age 21, Baylor, 6-5, 184 lbs, Sophomore, United States",
@@ -2459,55 +2571,56 @@
       "team": "Philadelphia 76ers",
       "acquiredFrom": "Houston via Oklahoma City",
       "prospect": {
-        "id": "labaron-philon-jr",
-        "name": "Labaron Philon Jr.",
+        "id": "dailyn-swain",
+        "name": "Dailyn Swain",
         "positions": [
-          "PG",
-          "SG"
+          "SF",
+          "PF"
         ],
-        "school": "Alabama",
+        "school": "Texas",
         "origin": "United States",
-        "classYear": "Sophomore",
-        "height": "6-3",
-        "weight": "176 lbs",
+        "classYear": "Junior",
+        "height": "6-7",
+        "weight": "211 lbs",
         "age": 20,
-        "consensusRank": 18,
-        "mockHeat": 61,
+        "consensusRank": 23,
+        "mockHeat": 50,
         "international": false,
         "roleTags": [
-          "primary guard",
-          "pace",
-          "shot creator",
-          "playmaking"
+          "big wing",
+          "defense",
+          "passing",
+          "connector",
+          "two-way"
         ],
         "strengths": [
-          "Fast decision making",
-          "Scoring and passing balance",
-          "SEC production"
+          "Wing size",
+          "Passing flashes",
+          "Defensive activity"
         ],
         "risks": [
-          "Frame",
-          "Defensive matchups"
+          "Pull-up shooting",
+          "Primary creation"
         ],
         "profile": {
-          "shooting": 81,
-          "creation": 86,
-          "defense": 69,
-          "athleticism": 82,
-          "feel": 86,
-          "size": 68,
-          "upside": 82
+          "shooting": 74,
+          "creation": 70,
+          "defense": 83,
+          "athleticism": 81,
+          "feel": 82,
+          "size": 89,
+          "upside": 80
         },
         "sourceNotes": [
-          "NBA.com official prospects: G, age 20, Alabama, 6-3, 176 lbs, Sophomore, United States",
-          "Consensus fringe lottery candidate",
-          "Productive guard profile",
-          "ESPN 2026 NBA draft big board top 100: normalized rank 18; source rank 18; confidence high.",
+          "NBA.com official prospects: F, age 20, Texas, 6-7, 211 lbs, Junior, United States",
+          "Appears on NBA.com consensus boards",
+          "Tankathon No. 22 range",
+          "ESPN 2026 NBA draft big board top 100: normalized rank 23; source rank 23; confidence high.",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
       "score": 84,
-      "confidence": 72,
+      "confidence": 74,
       "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
@@ -2517,42 +2630,45 @@
         "upside": 1,
         "intel": 12
       },
-      "roleFit": "primary guard",
+      "roleFit": "forward",
       "breakdown": {
-        "consensus": 82,
-        "need": 95,
-        "player": 79,
-        "upside": 90,
-        "intel": 65
+        "consensus": 93,
+        "need": 100,
+        "player": 80,
+        "upside": 88,
+        "intel": 64
       },
       "alternatives": [
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 83,
+          "score": 85,
           "roleFit": "shooter"
         },
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 80,
+          "score": 81,
           "roleFit": "shooter"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 74,
+          "score": 76,
           "roleFit": "shooter"
         }
       ],
       "evidence": [
-        "Consensus rank 18 vs pick 22; mock heat 61/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 0.",
-        "Model margin over next candidate: 0 points vs Isaiah Evans.",
+        "Consensus rank 23 vs pick 22; mock heat 50/100.",
+        "Intel adjusted for consensus overlap: expected heat 44, adjusted intel 64/100.",
+        "Risk/value controls: 5 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Narrow-race tiebreaker: raw score trailed by 0.9 points; consensus rank 23 over 25 broke the tie.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: -1 points vs Isaiah Evans.",
         "Team needs: ready guard, bench creation, shooting.",
-        "Role fit: primary guard; strengths: Fast decision making, Scoring and passing balance.",
-        "NBA.com official prospects: G, age 20, Alabama, 6-3, 176 lbs, Sophomore, United States",
-        "Consensus fringe lottery candidate"
+        "Role fit: forward; strengths: Wing size, Passing flashes.",
+        "NBA.com official prospects: F, age 20, Texas, 6-7, 211 lbs, Junior, United States",
+        "Appears on NBA.com consensus boards"
       ],
       "warnings": []
     },
@@ -2608,9 +2724,9 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
-      "score": 81,
-      "confidence": 89,
-      "margin": 9,
+      "score": 82,
+      "confidence": 91,
+      "margin": 7,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -2625,32 +2741,34 @@
         "need": 83,
         "player": 75,
         "upside": 89,
-        "intel": 51
+        "intel": 62
       },
       "alternatives": [
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 72,
+          "score": 75,
           "roleFit": "defense"
         },
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 70,
+          "score": 72,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 70,
+          "score": 71,
           "roleFit": "defense"
         }
       ],
       "evidence": [
         "Consensus rank 24 vs pick 23; mock heat 47/100.",
-        "Adaptive weights: C31/N33/P25/U9/I13; risk penalty 0.",
-        "Model margin over next candidate: 9 points vs Jayden Quaintance.",
+        "Intel adjusted for consensus overlap: expected heat 43, adjusted intel 62/100.",
+        "Risk/value controls: 0 risk penalty after asset tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 7 points vs Jayden Quaintance.",
         "Team needs: guard defense, playmaking, depth.",
         "Role fit: pace; strengths: Scoring punch, Freshman production.",
         "NBA.com official prospects: G, age 19, Stanford, 6-1, 186 lbs, Freshman, United States",
@@ -2661,6 +2779,110 @@
     {
       "pick": 24,
       "team": "New York Knicks",
+      "prospect": {
+        "id": "isaiah-evans",
+        "name": "Isaiah Evans",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "school": "Duke",
+        "origin": "United States",
+        "classYear": "Sophomore",
+        "height": "6-6",
+        "weight": "186 lbs",
+        "age": 20,
+        "consensusRank": 25,
+        "mockHeat": 45,
+        "international": false,
+        "roleTags": [
+          "3-and-D",
+          "big wing",
+          "shooter",
+          "off-ball"
+        ],
+        "strengths": [
+          "Wing shooting",
+          "Duke pedigree",
+          "Low-usage fit"
+        ],
+        "risks": [
+          "Strength",
+          "On-ball creation"
+        ],
+        "profile": {
+          "shooting": 86,
+          "creation": 66,
+          "defense": 76,
+          "athleticism": 75,
+          "feel": 73,
+          "size": 82,
+          "upside": 75
+        },
+        "sourceNotes": [
+          "NBA.com official prospects: G, age 20, Duke, 6-6, 186 lbs, Sophomore, United States",
+          "Tankathon No. 25 range",
+          "Late-first 3-and-D fit",
+          "ESPN 2026 NBA draft big board top 100: normalized rank 25; source rank 25; confidence high.",
+          "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
+        ]
+      },
+      "score": 82,
+      "confidence": 74,
+      "margin": 0,
+      "zone": "late-first",
+      "effectiveWeights": {
+        "consensus": 31,
+        "need": 37,
+        "player": 30,
+        "upside": 1,
+        "intel": 12
+      },
+      "roleFit": "shooter",
+      "breakdown": {
+        "consensus": 92,
+        "need": 98,
+        "player": 77,
+        "upside": 82,
+        "intel": 61
+      },
+      "alternatives": [
+        {
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "score": 83,
+          "roleFit": "maturity"
+        },
+        {
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "score": 79,
+          "roleFit": "frontcourt"
+        },
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "score": 79,
+          "roleFit": "shooter"
+        }
+      ],
+      "evidence": [
+        "Consensus rank 25 vs pick 24; mock heat 45/100.",
+        "Intel adjusted for consensus overlap: expected heat 41, adjusted intel 61/100.",
+        "Risk/value controls: 4 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Narrow-race tiebreaker: raw score trailed by 0.1 points; consensus rank 25 over 27 broke the tie.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 0 points vs Koa Peat.",
+        "Team needs: bench guard, shooting, toughness.",
+        "Role fit: shooter; strengths: Wing shooting, Duke pedigree.",
+        "NBA.com official prospects: G, age 20, Duke, 6-6, 186 lbs, Sophomore, United States",
+        "Tankathon No. 25 range"
+      ],
+      "warnings": []
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
       "prospect": {
         "id": "koa-peat",
         "name": "Koa Peat",
@@ -2710,8 +2932,8 @@
         ]
       },
       "score": 81,
-      "confidence": 71,
-      "margin": 0,
+      "confidence": 74,
+      "margin": 2,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -2720,143 +2942,44 @@
         "upside": 1,
         "intel": 12
       },
-      "roleFit": "maturity",
+      "roleFit": "frontcourt",
       "breakdown": {
-        "consensus": 81,
-        "need": 100,
+        "consensus": 86,
+        "need": 91,
         "player": 74,
-        "upside": 84,
-        "intel": 41
-      },
-      "alternatives": [
-        {
-          "prospectId": "isaiah-evans",
-          "name": "Isaiah Evans",
-          "score": 81,
-          "roleFit": "shooter"
-        },
-        {
-          "prospectId": "henri-veesaar",
-          "name": "Henri Veesaar",
-          "score": 78,
-          "roleFit": "frontcourt"
-        },
-        {
-          "prospectId": "sergio-de-larrea",
-          "name": "Sergio De Larrea",
-          "score": 77,
-          "roleFit": "shooter"
-        }
-      ],
-      "evidence": [
-        "Consensus rank 27 vs pick 24; mock heat 37/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 0.",
-        "Model margin over next candidate: 0 points vs Isaiah Evans.",
-        "Team needs: bench guard, shooting, toughness.",
-        "Role fit: maturity; strengths: Physical forward, Passing flashes.",
-        "NBA.com official prospects: F, age 19, Arizona, 6-7, 245 lbs, Freshman, United States",
-        "Tankathon No. 26 range"
-      ],
-      "warnings": []
-    },
-    {
-      "pick": 25,
-      "team": "Los Angeles Lakers",
-      "prospect": {
-        "id": "isaiah-evans",
-        "name": "Isaiah Evans",
-        "positions": [
-          "PG",
-          "SG"
-        ],
-        "school": "Duke",
-        "origin": "United States",
-        "classYear": "Sophomore",
-        "height": "6-6",
-        "weight": "186 lbs",
-        "age": 20,
-        "consensusRank": 25,
-        "mockHeat": 45,
-        "international": false,
-        "roleTags": [
-          "3-and-D",
-          "big wing",
-          "shooter",
-          "off-ball"
-        ],
-        "strengths": [
-          "Wing shooting",
-          "Duke pedigree",
-          "Low-usage fit"
-        ],
-        "risks": [
-          "Strength",
-          "On-ball creation"
-        ],
-        "profile": {
-          "shooting": 86,
-          "creation": 66,
-          "defense": 76,
-          "athleticism": 75,
-          "feel": 73,
-          "size": 82,
-          "upside": 75
-        },
-        "sourceNotes": [
-          "NBA.com official prospects: G, age 20, Duke, 6-6, 186 lbs, Sophomore, United States",
-          "Tankathon No. 25 range",
-          "Late-first 3-and-D fit",
-          "ESPN 2026 NBA draft big board top 100: normalized rank 25; source rank 25; confidence high.",
-          "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
-        ]
-      },
-      "score": 83,
-      "confidence": 88,
-      "margin": 5,
-      "zone": "late-first",
-      "effectiveWeights": {
-        "consensus": 31,
-        "need": 37,
-        "player": 30,
-        "upside": 1,
-        "intel": 12
-      },
-      "roleFit": "3-and-D",
-      "breakdown": {
-        "consensus": 97,
-        "need": 100,
-        "player": 77,
-        "upside": 83,
-        "intel": 49
+        "upside": 85,
+        "intel": 53
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 78,
+          "score": 79,
           "roleFit": "frontcourt"
         },
         {
           "prospectId": "tarris-reed-jr",
           "name": "Tarris Reed Jr.",
-          "score": 75,
+          "score": 77,
           "roleFit": "frontcourt"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 69,
+          "score": 70,
           "roleFit": "size"
         }
       ],
       "evidence": [
-        "Consensus rank 25 vs pick 25; mock heat 45/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 4.",
-        "Model margin over next candidate: 5 points vs Henri Veesaar.",
+        "Consensus rank 27 vs pick 25; mock heat 37/100.",
+        "Intel adjusted for consensus overlap: expected heat 38, adjusted intel 53/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 2 points vs Henri Veesaar.",
         "Team needs: wing shooting, size, low-usage defense.",
-        "Role fit: 3-and-D; strengths: Wing shooting, Duke pedigree.",
-        "NBA.com official prospects: G, age 20, Duke, 6-6, 186 lbs, Sophomore, United States",
-        "Tankathon No. 25 range"
+        "Role fit: frontcourt; strengths: Physical forward, Passing flashes.",
+        "NBA.com official prospects: F, age 19, Arizona, 6-7, 245 lbs, Freshman, United States",
+        "Tankathon No. 26 range"
       ],
       "warnings": []
     },
@@ -2912,8 +3035,8 @@
           "needs_review: normalized source did not provide age; neutral age placeholder 22.8 used."
         ]
       },
-      "score": 71,
-      "confidence": 65,
+      "score": 73,
+      "confidence": 68,
       "margin": 2,
       "zone": "late-first",
       "effectiveWeights": {
@@ -2929,32 +3052,34 @@
         "need": 81,
         "player": 68,
         "upside": 65,
-        "intel": 29
+        "intel": 43
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 69,
+          "score": 71,
           "roleFit": "frontcourt size"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 64,
+          "score": 66,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 61,
+          "score": 59,
           "roleFit": "rebounder"
         }
       ],
       "evidence": [
         "Consensus rank 29 vs pick 26; mock heat 32/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 0.",
-        "Model margin over next candidate: 2 points vs Henri Veesaar.",
+        "Intel adjusted for consensus overlap: expected heat 34, adjusted intel 43/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 2 points vs Henri Veesaar.",
         "Team needs: frontcourt depth, passing feel, rebounding.",
         "Role fit: rebounder; strengths: First-round media mock inclusion, Conservative frontcourt role projection.",
         "NBA.com official prospects: C, age 22, Connecticut, 6-10, 260 lbs, Senior, United States",
@@ -3016,8 +3141,8 @@
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 30 to Dallas Mavericks."
         ]
       },
-      "score": 70,
-      "confidence": 66,
+      "score": 71,
+      "confidence": 68,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -3033,32 +3158,34 @@
         "need": 66,
         "player": 78,
         "upside": 83,
-        "intel": 34
+        "intel": 50
       },
       "alternatives": [
         {
           "prospectId": "meleek-thomas",
           "name": "Meleek Thomas",
-          "score": 66,
+          "score": 67,
           "roleFit": "shooter"
         },
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 65,
+          "score": 66,
           "roleFit": "frontcourt size"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 50,
+          "score": 48,
           "roleFit": "frontcourt size"
         }
       ],
       "evidence": [
         "Consensus rank 30 vs pick 27; mock heat 30/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 0.",
-        "Model margin over next candidate: 4 points vs Meleek Thomas.",
+        "Intel adjusted for consensus overlap: expected heat 33, adjusted intel 50/100.",
+        "Risk/value controls: 0 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 4 points vs Meleek Thomas.",
         "Team needs: switchable forward, shooting, defensive depth.",
         "Role fit: shooter; strengths: Big guard passing, International experience.",
         "NBA.com official prospects: G, age 20, Vallodolid (Spain), 6-6, 205 lbs, International, Spain",
@@ -3120,9 +3247,9 @@
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 27 to Boston Celtics."
         ]
       },
-      "score": 75,
-      "confidence": 74,
-      "margin": 4,
+      "score": 77,
+      "confidence": 76,
+      "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -3137,26 +3264,28 @@
         "need": 100,
         "player": 75,
         "upside": 87,
-        "intel": 32
+        "intel": 45
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 71,
+          "score": 72,
           "roleFit": "defense"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 56,
+          "score": 53,
           "roleFit": "defense"
         }
       ],
       "evidence": [
         "Consensus rank 28 vs pick 28; mock heat 35/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 9.",
-        "Model margin over next candidate: 4 points vs Henri Veesaar.",
+        "Intel adjusted for consensus overlap: expected heat 36, adjusted intel 45/100.",
+        "Risk/value controls: 9 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 5 points vs Henri Veesaar.",
         "Team needs: combo guard, bench scoring, point-of-attack defense.",
         "Role fit: combo guard; strengths: Shot creation, Guard size.",
         "NBA.com official prospects: G-F, age 19, Arkansas, 6-3, 190 lbs, Freshman, United States",
@@ -3218,9 +3347,9 @@
           "Supplemental first-round candidate from ESPN final mock because ESPN Big Board ranks 26-100 were not visible. ESPN mock pick 24 to New York Knicks."
         ]
       },
-      "score": 77,
-      "confidence": 81,
-      "margin": 14,
+      "score": 78,
+      "confidence": 82,
+      "margin": 17,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -3235,20 +3364,22 @@
         "need": 100,
         "player": 72,
         "upside": 69,
-        "intel": 43
+        "intel": 53
       },
       "alternatives": [
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 63,
+          "score": 61,
           "roleFit": "rim protector"
         }
       ],
       "evidence": [
         "Consensus rank 26 vs pick 29; mock heat 39/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 4.",
-        "Model margin over next candidate: 14 points vs Jayden Quaintance.",
+        "Intel adjusted for consensus overlap: expected heat 39, adjusted intel 53/100.",
+        "Risk/value controls: 4 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
+        "Raw model margin over next candidate: 17 points vs Jayden Quaintance.",
         "Team needs: center depth, size, finishing.",
         "Role fit: rim protector; strengths: Seven-foot size, Finishing touch.",
         "NBA.com official prospects: C, age 22, North Carolina, 6-11, 227 lbs, Junior, Estonia",
@@ -3311,8 +3442,8 @@
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape."
         ]
       },
-      "score": 43,
-      "confidence": 34,
+      "score": 42,
+      "confidence": 33,
       "margin": 12,
       "zone": "late-first",
       "effectiveWeights": {
@@ -3328,12 +3459,14 @@
         "need": 44,
         "player": 71,
         "upside": 97,
-        "intel": 49
+        "intel": 58
       },
       "alternatives": [],
       "evidence": [
         "Consensus rank 22 vs pick 30; mock heat 52/100.",
-        "Adaptive weights: C31/N37/P30/U1/I12; risk penalty 14.",
+        "Intel adjusted for consensus overlap: expected heat 46, adjusted intel 58/100.",
+        "Risk/value controls: 16 risk penalty after contend tolerance; pick-value adjustment 0.",
+        "Agent parameter profile locked; risk and fit adjustments applied.",
         "Model margin: no remaining runner-up candidate.",
         "Team needs: big guard, shooting, secondary ball handling.",
         "Role fit: frontcourt size; strengths: Young for class, Defensive upside.",
@@ -3348,7 +3481,7 @@
       ]
     }
   ],
-  "firstRoundPrediction": [
+  "boardRows": [
     {
       "pick": 1,
       "team": "Washington Wizards",
@@ -3359,9 +3492,9 @@
       "origin": "United States",
       "position": "SF/PF",
       "consensusRank": 2,
-      "score": 96,
-      "confidence": 98,
-      "margin": 4,
+      "score": 93,
+      "confidence": 96,
+      "margin": 5,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -3376,25 +3509,25 @@
         "need": 100,
         "player": 88,
         "upside": 100,
-        "intel": 100
+        "intel": 61
       },
       "alternatives": [
         {
-          "prospectId": "caleb-wilson",
-          "name": "Caleb Wilson",
-          "score": 92,
-          "roleFit": "two-way"
-        },
-        {
           "prospectId": "darryn-peterson",
           "name": "Darryn Peterson",
-          "score": 92,
+          "score": 88,
           "roleFit": "creation"
+        },
+        {
+          "prospectId": "caleb-wilson",
+          "name": "Caleb Wilson",
+          "score": 89,
+          "roleFit": "two-way"
         },
         {
           "prospectId": "cameron-boozer",
           "name": "Cameron Boozer",
-          "score": 91,
+          "score": 87,
           "roleFit": "size"
         }
       ],
@@ -3410,9 +3543,9 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 1,
-      "score": 96,
-      "confidence": 98,
-      "margin": 4,
+      "score": 92,
+      "confidence": 93,
+      "margin": 3,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -3427,25 +3560,25 @@
         "need": 100,
         "player": 84,
         "upside": 100,
-        "intel": 100
+        "intel": 57
       },
       "alternatives": [
         {
           "prospectId": "keaton-wagler",
           "name": "Keaton Wagler",
-          "score": 92,
+          "score": 89,
           "roleFit": "pull-up shooting"
         },
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 90,
+          "score": 87,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 85,
+          "score": 83,
           "roleFit": "primary guard"
         }
       ],
@@ -3461,7 +3594,7 @@
       "origin": "United States",
       "position": "PF/C",
       "consensusRank": 3,
-      "score": 97,
+      "score": 94,
       "confidence": 100,
       "margin": 15,
       "zone": "top-five",
@@ -3478,25 +3611,25 @@
         "need": 100,
         "player": 84,
         "upside": 100,
-        "intel": 100
+        "intel": 62
       },
       "alternatives": [
         {
           "prospectId": "caleb-wilson",
           "name": "Caleb Wilson",
-          "score": 82,
+          "score": 79,
           "roleFit": "wing depth"
-        },
-        {
-          "prospectId": "darius-acuff-jr",
-          "name": "Darius Acuff Jr.",
-          "score": 78,
-          "roleFit": "primary guard"
         },
         {
           "prospectId": "keaton-wagler",
           "name": "Keaton Wagler",
-          "score": 78,
+          "score": 75,
+          "roleFit": "primary guard"
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "score": 76,
           "roleFit": "primary guard"
         }
       ],
@@ -3512,9 +3645,9 @@
       "origin": "United States",
       "position": "SF/PF",
       "consensusRank": 4,
-      "score": 94,
+      "score": 90,
       "confidence": 100,
-      "margin": 10,
+      "margin": 9,
       "zone": "top-five",
       "effectiveWeights": {
         "consensus": 42,
@@ -3529,26 +3662,26 @@
         "need": 100,
         "player": 86,
         "upside": 100,
-        "intel": 98
+        "intel": 60
       },
       "alternatives": [
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 83,
+          "score": 81,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 83,
+          "score": 81,
           "roleFit": "defense"
         },
         {
-          "prospectId": "aday-mara",
-          "name": "Aday Mara",
-          "score": 82,
-          "roleFit": "frontcourt"
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "score": 79,
+          "roleFit": "big wing"
         }
       ],
       "warnings": []
@@ -3563,8 +3696,8 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 5,
-      "score": 97,
-      "confidence": 98,
+      "score": 93,
+      "confidence": 89,
       "margin": 2,
       "zone": "top-five",
       "effectiveWeights": {
@@ -3580,25 +3713,25 @@
         "need": 100,
         "player": 83,
         "upside": 100,
-        "intel": 96
+        "intel": 61
       },
       "alternatives": [
         {
           "prospectId": "darius-acuff-jr",
           "name": "Darius Acuff Jr.",
-          "score": 95,
+          "score": 91,
           "roleFit": "guard"
         },
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 93,
+          "score": 90,
           "roleFit": "pull-up shooting"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 90,
+          "score": 88,
           "roleFit": "guard"
         }
       ],
@@ -3614,8 +3747,8 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 6,
-      "score": 95,
-      "confidence": 96,
+      "score": 93,
+      "confidence": 89,
       "margin": 2,
       "zone": "lottery",
       "effectiveWeights": {
@@ -3631,25 +3764,25 @@
         "need": 100,
         "player": 80,
         "upside": 100,
-        "intel": 94
+        "intel": 65
       },
       "alternatives": [
         {
           "prospectId": "mikel-brown-jr",
           "name": "Mikel Brown Jr.",
-          "score": 93,
+          "score": 91,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 92,
+          "score": 90,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "brayden-burries",
           "name": "Brayden Burries",
-          "score": 81,
+          "score": 80,
           "roleFit": "shot creator"
         }
       ],
@@ -3665,9 +3798,9 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 7,
-      "score": 94,
-      "confidence": 88,
-      "margin": 1,
+      "score": 92,
+      "confidence": 86,
+      "margin": 0,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3682,25 +3815,25 @@
         "need": 100,
         "player": 79,
         "upside": 96,
-        "intel": 92
+        "intel": 67
       },
       "alternatives": [
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 94,
+          "score": 92,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "brayden-burries",
           "name": "Brayden Burries",
-          "score": 88,
+          "score": 87,
           "roleFit": "guard"
         },
         {
           "prospectId": "aday-mara",
           "name": "Aday Mara",
-          "score": 81,
+          "score": 79,
           "roleFit": "defense"
         }
       ],
@@ -3716,9 +3849,9 @@
       "origin": "Spain",
       "position": "C",
       "consensusRank": 10,
-      "score": 90,
-      "confidence": 95,
-      "margin": 6,
+      "score": 89,
+      "confidence": 94,
+      "margin": 7,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3733,24 +3866,24 @@
         "need": 100,
         "player": 78,
         "upside": 93,
-        "intel": 85
+        "intel": 72
       },
       "alternatives": [
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 84,
-          "roleFit": "size"
-        },
-        {
-          "prospectId": "karim-lopez",
-          "name": "Karim Lopez",
           "score": 82,
           "roleFit": "size"
         },
         {
           "prospectId": "yaxel-lendeborg",
           "name": "Yaxel Lendeborg",
+          "score": 81,
+          "roleFit": "size"
+        },
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
           "score": 82,
           "roleFit": "size"
         }
@@ -3769,9 +3902,9 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 11,
-      "score": 91,
+      "score": 90,
       "confidence": 97,
-      "margin": 6,
+      "margin": 7,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3786,19 +3919,19 @@
         "need": 100,
         "player": 81,
         "upside": 96,
-        "intel": 83
+        "intel": 74
       },
       "alternatives": [
         {
           "prospectId": "kingston-flemings",
           "name": "Kingston Flemings",
-          "score": 85,
+          "score": 83,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 85,
+          "score": 83,
           "roleFit": "shooter"
         },
         {
@@ -3820,9 +3953,9 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 8,
-      "score": 91,
-      "confidence": 84,
-      "margin": 2,
+      "score": 90,
+      "confidence": 83,
+      "margin": 1,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3837,13 +3970,13 @@
         "need": 100,
         "player": 80,
         "upside": 100,
-        "intel": 90
+        "intel": 69
       },
       "alternatives": [
         {
           "prospectId": "yaxel-lendeborg",
           "name": "Yaxel Lendeborg",
-          "score": 90,
+          "score": 89,
           "roleFit": "connector"
         },
         {
@@ -3855,7 +3988,7 @@
         {
           "prospectId": "nate-ament",
           "name": "Nate Ament",
-          "score": 84,
+          "score": 82,
           "roleFit": "big wing"
         }
       ],
@@ -3871,8 +4004,8 @@
       "origin": "United States",
       "position": "SF/PF",
       "consensusRank": 9,
-      "score": 82,
-      "confidence": 80,
+      "score": 81,
+      "confidence": 75,
       "margin": 2,
       "zone": "lottery",
       "effectiveWeights": {
@@ -3888,7 +4021,7 @@
         "need": 73,
         "player": 79,
         "upside": 99,
-        "intel": 87
+        "intel": 69
       },
       "alternatives": [
         {
@@ -3906,7 +4039,7 @@
         {
           "prospectId": "yaxel-lendeborg",
           "name": "Yaxel Lendeborg",
-          "score": 75,
+          "score": 74,
           "roleFit": "decision maker"
         }
       ],
@@ -3922,9 +4055,9 @@
       "origin": "United States",
       "position": "SF/PF",
       "consensusRank": 12,
-      "score": 91,
-      "confidence": 95,
-      "margin": 5,
+      "score": 90,
+      "confidence": 94,
+      "margin": 4,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3939,7 +4072,7 @@
         "need": 100,
         "player": 80,
         "upside": 76,
-        "intel": 81
+        "intel": 76
       },
       "alternatives": [
         {
@@ -3951,14 +4084,14 @@
         {
           "prospectId": "karim-lopez",
           "name": "Karim Lopez",
-          "score": 85,
+          "score": 86,
           "roleFit": "defense"
         },
         {
-          "prospectId": "allen-graves",
-          "name": "Allen Graves",
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
           "score": 84,
-          "roleFit": "versatile forward"
+          "roleFit": "defense"
         }
       ],
       "warnings": []
@@ -3974,8 +4107,8 @@
       "position": "SF/PF",
       "consensusRank": 14,
       "score": 91,
-      "confidence": 83,
-      "margin": 2,
+      "confidence": 88,
+      "margin": 3,
       "zone": "lottery",
       "effectiveWeights": {
         "consensus": 32,
@@ -3990,13 +4123,13 @@
         "need": 100,
         "player": 79,
         "upside": 99,
-        "intel": 76
+        "intel": 78
       },
       "alternatives": [
         {
           "prospectId": "hannes-steinbach",
           "name": "Hannes Steinbach",
-          "score": 89,
+          "score": 88,
           "roleFit": "frontcourt"
         },
         {
@@ -4027,7 +4160,7 @@
       "position": "PF/C",
       "consensusRank": 15,
       "score": 89,
-      "confidence": 92,
+      "confidence": 96,
       "margin": 5,
       "zone": "lottery",
       "effectiveWeights": {
@@ -4043,7 +4176,7 @@
         "need": 100,
         "player": 71,
         "upside": 92,
-        "intel": 74
+        "intel": 76
       },
       "alternatives": [
         {
@@ -4061,7 +4194,7 @@
         {
           "prospectId": "chris-cenac-jr",
           "name": "Chris Cenac Jr.",
-          "score": 79,
+          "score": 80,
           "roleFit": "rim protector"
         }
       ],
@@ -4078,7 +4211,7 @@
       "position": "SF/PF",
       "consensusRank": 17,
       "score": 88,
-      "confidence": 90,
+      "confidence": 94,
       "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4094,7 +4227,7 @@
         "need": 100,
         "player": 76,
         "upside": 91,
-        "intel": 67
+        "intel": 69
       },
       "alternatives": [
         {
@@ -4110,10 +4243,10 @@
           "roleFit": "rebounder"
         },
         {
-          "prospectId": "christian-anderson",
-          "name": "Christian Anderson",
-          "score": 75,
-          "roleFit": "primary guard"
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "score": 77,
+          "roleFit": "rebounder"
         }
       ],
       "warnings": []
@@ -4128,8 +4261,8 @@
       "origin": "Germany",
       "position": "PF/C",
       "consensusRank": 13,
-      "score": 86,
-      "confidence": 83,
+      "score": 85,
+      "confidence": 82,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4145,7 +4278,7 @@
         "need": 96,
         "player": 74,
         "upside": 87,
-        "intel": 76
+        "intel": 73
       },
       "alternatives": [
         {
@@ -4163,7 +4296,7 @@
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 73,
+          "score": 75,
           "roleFit": "rim protector"
         }
       ],
@@ -4182,7 +4315,7 @@
       "position": "PF/C",
       "consensusRank": 19,
       "score": 78,
-      "confidence": 78,
+      "confidence": 79,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4198,7 +4331,7 @@
         "need": 69,
         "player": 74,
         "upside": 99,
-        "intel": 62
+        "intel": 66
       },
       "alternatives": [
         {
@@ -4208,15 +4341,15 @@
           "roleFit": "primary guard"
         },
         {
-          "prospectId": "cameron-carr",
-          "name": "Cameron Carr",
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
           "score": 73,
           "roleFit": "primary guard"
         },
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 73,
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "score": 74,
           "roleFit": "primary guard"
         }
       ],
@@ -4233,7 +4366,7 @@
       "position": "PG/SG",
       "consensusRank": 16,
       "score": 88,
-      "confidence": 79,
+      "confidence": 78,
       "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4249,7 +4382,7 @@
         "need": 100,
         "player": 76,
         "upside": 84,
-        "intel": 69
+        "intel": 70
       },
       "alternatives": [
         {
@@ -4261,13 +4394,13 @@
         {
           "prospectId": "bennett-stirtz",
           "name": "Bennett Stirtz",
-          "score": 86,
+          "score": 87,
           "roleFit": "combo guard"
         },
         {
           "prospectId": "cameron-carr",
           "name": "Cameron Carr",
-          "score": 80,
+          "score": 81,
           "roleFit": "shooter"
         }
       ],
@@ -4277,15 +4410,15 @@
       "pick": 19,
       "team": "Toronto Raptors",
       "acquiredFrom": null,
-      "player": "Dailyn Swain",
-      "prospectId": "dailyn-swain",
-      "school": "Texas",
+      "player": "Labaron Philon Jr.",
+      "prospectId": "labaron-philon-jr",
+      "school": "Alabama",
       "origin": "United States",
-      "position": "SF/PF",
-      "consensusRank": 23,
+      "position": "PG/SG",
+      "consensusRank": 18,
       "score": 79,
-      "confidence": 69,
-      "margin": 1,
+      "confidence": 71,
+      "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -4294,31 +4427,31 @@
         "upside": 5,
         "intel": 10
       },
-      "roleFit": "defense",
+      "roleFit": "creation",
       "breakdown": {
-        "consensus": 80,
-        "need": 100,
+        "consensus": 95,
+        "need": 66,
         "player": 79,
-        "upside": 90,
-        "intel": 54
+        "upside": 92,
+        "intel": 69
       },
       "alternatives": [
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 79,
-          "roleFit": "creation"
-        },
-        {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 77,
+          "score": 79,
+          "roleFit": "defense"
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "score": 80,
           "roleFit": "defense"
         },
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 77,
+          "score": 78,
           "roleFit": "creation"
         }
       ],
@@ -4334,7 +4467,7 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 20,
-      "score": 89,
+      "score": 90,
       "confidence": 84,
       "margin": 1,
       "zone": "late-first",
@@ -4351,7 +4484,7 @@
         "need": 100,
         "player": 76,
         "upside": 68,
-        "intel": 60
+        "intel": 66
       },
       "alternatives": [
         {
@@ -4363,14 +4496,14 @@
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 83,
+          "score": 84,
           "roleFit": "combo guard"
         },
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
           "score": 80,
-          "roleFit": "primary guard"
+          "roleFit": "decision maker"
         }
       ],
       "warnings": []
@@ -4386,7 +4519,7 @@
       "position": "PG/SG",
       "consensusRank": 21,
       "score": 90,
-      "confidence": 98,
+      "confidence": 99,
       "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4402,26 +4535,26 @@
         "need": 100,
         "player": 78,
         "upside": 81,
-        "intel": 58
+        "intel": 65
       },
       "alternatives": [
         {
-          "prospectId": "labaron-philon-jr",
-          "name": "Labaron Philon Jr.",
-          "score": 84,
-          "roleFit": "guard"
-        },
-        {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 84,
+          "score": 85,
           "roleFit": "shooter"
         },
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 82,
+          "score": 83,
           "roleFit": "3-and-D"
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "score": 77,
+          "roleFit": "wing"
         }
       ],
       "warnings": []
@@ -4430,14 +4563,14 @@
       "pick": 22,
       "team": "Philadelphia 76ers",
       "acquiredFrom": "Houston via Oklahoma City",
-      "player": "Labaron Philon Jr.",
-      "prospectId": "labaron-philon-jr",
-      "school": "Alabama",
+      "player": "Dailyn Swain",
+      "prospectId": "dailyn-swain",
+      "school": "Texas",
       "origin": "United States",
-      "position": "PG/SG",
-      "consensusRank": 18,
+      "position": "SF/PF",
+      "consensusRank": 23,
       "score": 84,
-      "confidence": 72,
+      "confidence": 74,
       "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4447,31 +4580,31 @@
         "upside": 1,
         "intel": 12
       },
-      "roleFit": "primary guard",
+      "roleFit": "forward",
       "breakdown": {
-        "consensus": 82,
-        "need": 95,
-        "player": 79,
-        "upside": 90,
-        "intel": 65
+        "consensus": 93,
+        "need": 100,
+        "player": 80,
+        "upside": 88,
+        "intel": 64
       },
       "alternatives": [
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 83,
+          "score": 85,
           "roleFit": "shooter"
         },
         {
           "prospectId": "ebuka-okorie",
           "name": "Ebuka Okorie",
-          "score": 80,
+          "score": 81,
           "roleFit": "shooter"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 74,
+          "score": 76,
           "roleFit": "shooter"
         }
       ],
@@ -4487,9 +4620,9 @@
       "origin": "United States",
       "position": "PG/SG",
       "consensusRank": 24,
-      "score": 81,
-      "confidence": 89,
-      "margin": 9,
+      "score": 82,
+      "confidence": 91,
+      "margin": 7,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -4504,25 +4637,25 @@
         "need": 83,
         "player": 75,
         "upside": 89,
-        "intel": 51
+        "intel": 62
       },
       "alternatives": [
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 72,
+          "score": 75,
           "roleFit": "defense"
         },
         {
           "prospectId": "isaiah-evans",
           "name": "Isaiah Evans",
-          "score": 70,
+          "score": 72,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 70,
+          "score": 71,
           "roleFit": "defense"
         }
       ],
@@ -4532,14 +4665,14 @@
       "pick": 24,
       "team": "New York Knicks",
       "acquiredFrom": null,
-      "player": "Koa Peat",
-      "prospectId": "koa-peat",
-      "school": "Arizona",
+      "player": "Isaiah Evans",
+      "prospectId": "isaiah-evans",
+      "school": "Duke",
       "origin": "United States",
-      "position": "SF/PF",
-      "consensusRank": 27,
-      "score": 81,
-      "confidence": 71,
+      "position": "PG/SG",
+      "consensusRank": 25,
+      "score": 82,
+      "confidence": 74,
       "margin": 0,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4549,31 +4682,31 @@
         "upside": 1,
         "intel": 12
       },
-      "roleFit": "maturity",
+      "roleFit": "shooter",
       "breakdown": {
-        "consensus": 81,
-        "need": 100,
-        "player": 74,
-        "upside": 84,
-        "intel": 41
+        "consensus": 92,
+        "need": 98,
+        "player": 77,
+        "upside": 82,
+        "intel": 61
       },
       "alternatives": [
         {
-          "prospectId": "isaiah-evans",
-          "name": "Isaiah Evans",
-          "score": 81,
-          "roleFit": "shooter"
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "score": 83,
+          "roleFit": "maturity"
         },
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 78,
+          "score": 79,
           "roleFit": "frontcourt"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 77,
+          "score": 79,
           "roleFit": "shooter"
         }
       ],
@@ -4583,15 +4716,15 @@
       "pick": 25,
       "team": "Los Angeles Lakers",
       "acquiredFrom": null,
-      "player": "Isaiah Evans",
-      "prospectId": "isaiah-evans",
-      "school": "Duke",
+      "player": "Koa Peat",
+      "prospectId": "koa-peat",
+      "school": "Arizona",
       "origin": "United States",
-      "position": "PG/SG",
-      "consensusRank": 25,
-      "score": 83,
-      "confidence": 88,
-      "margin": 5,
+      "position": "SF/PF",
+      "consensusRank": 27,
+      "score": 81,
+      "confidence": 74,
+      "margin": 2,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -4600,31 +4733,31 @@
         "upside": 1,
         "intel": 12
       },
-      "roleFit": "3-and-D",
+      "roleFit": "frontcourt",
       "breakdown": {
-        "consensus": 97,
-        "need": 100,
-        "player": 77,
-        "upside": 83,
-        "intel": 49
+        "consensus": 86,
+        "need": 91,
+        "player": 74,
+        "upside": 85,
+        "intel": 53
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 78,
+          "score": 79,
           "roleFit": "frontcourt"
         },
         {
           "prospectId": "tarris-reed-jr",
           "name": "Tarris Reed Jr.",
-          "score": 75,
+          "score": 77,
           "roleFit": "frontcourt"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 69,
+          "score": 70,
           "roleFit": "size"
         }
       ],
@@ -4640,8 +4773,8 @@
       "origin": "United States",
       "position": "C",
       "consensusRank": 29,
-      "score": 71,
-      "confidence": 65,
+      "score": 73,
+      "confidence": 68,
       "margin": 2,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4657,25 +4790,25 @@
         "need": 81,
         "player": 68,
         "upside": 65,
-        "intel": 29
+        "intel": 43
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 69,
+          "score": 71,
           "roleFit": "frontcourt size"
         },
         {
           "prospectId": "sergio-de-larrea",
           "name": "Sergio De Larrea",
-          "score": 64,
+          "score": 66,
           "roleFit": "primary guard"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 61,
+          "score": 59,
           "roleFit": "rebounder"
         }
       ],
@@ -4693,8 +4826,8 @@
       "origin": "Spain",
       "position": "PG/SG",
       "consensusRank": 30,
-      "score": 70,
-      "confidence": 66,
+      "score": 71,
+      "confidence": 68,
       "margin": 4,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4710,25 +4843,25 @@
         "need": 66,
         "player": 78,
         "upside": 83,
-        "intel": 34
+        "intel": 50
       },
       "alternatives": [
         {
           "prospectId": "meleek-thomas",
           "name": "Meleek Thomas",
-          "score": 66,
+          "score": 67,
           "roleFit": "shooter"
         },
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 65,
+          "score": 66,
           "roleFit": "frontcourt size"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 50,
+          "score": 48,
           "roleFit": "frontcourt size"
         }
       ],
@@ -4746,9 +4879,9 @@
       "origin": "United States",
       "position": "SG/SF",
       "consensusRank": 28,
-      "score": 75,
-      "confidence": 74,
-      "margin": 4,
+      "score": 77,
+      "confidence": 76,
+      "margin": 5,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -4763,19 +4896,19 @@
         "need": 100,
         "player": 75,
         "upside": 87,
-        "intel": 32
+        "intel": 45
       },
       "alternatives": [
         {
           "prospectId": "henri-veesaar",
           "name": "Henri Veesaar",
-          "score": 71,
+          "score": 72,
           "roleFit": "defense"
         },
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 56,
+          "score": 53,
           "roleFit": "defense"
         }
       ],
@@ -4794,9 +4927,9 @@
       "origin": "Estonia",
       "position": "C",
       "consensusRank": 26,
-      "score": 77,
-      "confidence": 81,
-      "margin": 14,
+      "score": 78,
+      "confidence": 82,
+      "margin": 17,
       "zone": "late-first",
       "effectiveWeights": {
         "consensus": 31,
@@ -4811,13 +4944,13 @@
         "need": 100,
         "player": 72,
         "upside": 69,
-        "intel": 43
+        "intel": 53
       },
       "alternatives": [
         {
           "prospectId": "jayden-quaintance",
           "name": "Jayden Quaintance",
-          "score": 63,
+          "score": 61,
           "roleFit": "rim protector"
         }
       ],
@@ -4835,8 +4968,8 @@
       "origin": "United States",
       "position": "PF/C",
       "consensusRank": 22,
-      "score": 43,
-      "confidence": 34,
+      "score": 42,
+      "confidence": 33,
       "margin": 12,
       "zone": "late-first",
       "effectiveWeights": {
@@ -4852,7 +4985,7 @@
         "need": 44,
         "player": 71,
         "upside": 97,
-        "intel": 49
+        "intel": 58
       },
       "alternatives": [],
       "warnings": [

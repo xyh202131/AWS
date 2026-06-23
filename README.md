@@ -26,16 +26,27 @@ Manual commands:
 
 ```powershell
 npm install
-npm run dev:local
+npm run dev:agent
 npm run build
+```
+
+## DeepSeek Agent
+
+The interactive window and local exam-answer agent call DeepSeek V4 Pro through an OpenAI-compatible chat completions request. This DeepSeek is a read-only Q&A agent: it can answer the current milestone/exam question set, explain milestone wording, field intent, and scoring rules from `data/documents/milestone-questions/DraftCode24里程碑事件预测.md`, and answer prediction-themed questions by reading the current locked board. It must not generate, change, reorder, or recommend changes to predicted players. The 30-pick board belongs to the designated locked prediction pipeline, which may be Codex, another DeepSeek, or another explicit module later, but not this read-only DeepSeek. The browser talks to the local proxy on `http://127.0.0.1:4318`; the proxy reads `.env.local`, so the API key is never sent to the frontend.
+
+Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY`. Keep `DEEPSEEK_MODEL=deepseek-v4-pro` for the API model id and `DEEPSEEK_MODEL_LABEL=deepseek-v4-pro[1m]` for reports, then run:
+
+```powershell
+npm run dev:agent
+npm run agent:deepseek
 ```
 
 ## Competition Workflow
 
-- Import Team Portal data as JSON when official files are available.
-- Use **Generate Board** after changing weights or replacing data.
+- Register official files and external sources into the Agent data pipeline.
+- Let A6/A7 regenerate the locked Agent board after changing parameters or replacing data.
 - Click any pick to inspect evidence, warnings, and scoring breakdown.
-- Use the dropdown in the evidence panel for manual overrides.
+- Do not manually override, replace, lock, or reorder predicted players.
 - Export `draftops-submission.json` before the 08:00 deadline.
 - Export `draftops-brief.md` for PPT and the 6-minute roadshow script.
 
@@ -49,6 +60,8 @@ Expected import shape:
 ```
 
 The seed data is intentionally replaceable. It is based on public order/consensus sources and should be refreshed with official Team Portal files during the event.
+
+Hard prediction rule: the 1-30 board must come from the designated locked prediction pipeline. Humans and helper agents may only change structured inputs, parameters, scoring guardrails, or source-quality rules, then rerun the board pipeline. This read-only DeepSeek may answer questions about the board but must not generate, change, reorder, or recommend changes to predicted players. Manual player selection, manual swaps, JSON edits to picks, or frontend overrides are prohibited.
 
 ## Method
 
@@ -67,7 +80,7 @@ The app prevents duplicate players during generation and surfaces low-confidence
 Recommended AWS mapping for the code-quality and presentation score:
 
 - S3: official data, external mock data, exported board snapshots.
-- DynamoDB: saved predictions, manual overrides, milestone answers.
+- DynamoDB: saved Agent board snapshots, parameter/audit state, milestone answers.
 - Bedrock: explanation summaries, milestone answer reasoning, evidence cleanup.
 - App Runner or ECS: web/API runtime.
 - CloudWatch: request logs, model-call cost tracking, final submission audit trail.
@@ -79,7 +92,8 @@ Keep Bedrock calls batched and cache summaries so the stack stays inside the $17
 - GitHub repository is **Private**.
 - Final push completes before **2026-06-24 08:00**.
 - Board has exactly 30 picks and no duplicate players.
-- Milestone answers are exported and manually reviewed.
+- Board provenance declares no manual overrides.
+- Milestone answers are exported and source-checked.
 - PPT and a video under 60 seconds are ready.
 - README explains data, method, AWS services, and how to run.
 

@@ -51,7 +51,7 @@ Seed prospects excluded by the current normalized board: Joshua Jefferson.
 - Some supplemental prospect rows do not include height and/or age; existing seed values were retained where available and generated rows are marked for review.
 - Prospect ranks 26-30 are supplemental ESPN mock-order rows because ESPN Big Board ranks 26-100 were not visible in the available extraction.
 - Raw source policy: Use NBA.com official pages first; use major media as weighted signals; ignore social/self-media for model input.
-- Raw source inventory counts: {"total_sources":37,"official_user_provided":8,"external_web":29,"ignored_external":8}
+- Raw source inventory counts: {"total_sources":42,"official_user_provided":11,"external_web":29,"ignored_external":8,"official_live_web":2}
 - Team need tags from rows marked needs_review were not appended to DraftOps priorityTags; seed needs were preserved to avoid inventing unsupported needs.
 
 ## Validation

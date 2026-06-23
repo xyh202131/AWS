@@ -1,0 +1,34 @@
+Generated: 2026-06-23T03:31:14.501Z
+Model: deepseek-v4-pro[1m]
+API model id: deepseek-v4-pro
+Usage: {"prompt_tokens":9741,"completion_tokens":2645,"total_tokens":12386,"prompt_tokens_details":{"cached_tokens":0},"completion_tokens_details":{"reasoning_tokens":1649},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":9741}
+
+基于当前锁定预测板回答
+
+前 5 位是否包含国际球员？
+否
+依据：第 1 顺位 AJ Dybantsa，United States；第 2 顺位 Darryn Peterson，United States；第 3 顺位 Cameron Boozer，United States；第 4 顺位 Caleb Wilson，United States；第 5 顺位 Keaton Wagler，United States
+
+第一位被选中的国际球员是几顺位？
+8
+依据：第 8 顺位 Aday Mara，Spain
+
+哪所学校贡献最多首轮秀？
+Michigan (3 人)
+依据：第 8 顺位 Aday Mara；第 12 顺位 Yaxel Lendeborg；第 14 顺位 Morez Johnson Jr.
+
+乐透区会有多少名后卫？
+6
+依据：第 2 顺位 Darryn Peterson，PG/SG；第 5 顺位 Keaton Wagler，PG/SG；第 6 顺位 Darius Acuff Jr.，PG/SG；第 7 顺位 Mikel Brown Jr.，PG/SG；第 9 顺位 Brayden Burries，PG/SG；第 10 顺位 Kingston Flemings，PG/SG
+
+第一位中锋是几顺位？
+3
+依据：第 3 顺位 Cameron Boozer
+
+首轮 Freshman 数量是多少？
+16
+依据：第 1 顺位 AJ Dybantsa；第 2 顺位 Darryn Peterson；第 3 顺位 Cameron Boozer；第 4 顺位 Caleb Wilson；第 5 顺位 Keaton Wagler；第 6 顺位 Darius Acuff Jr.；第 7 顺位 Mikel Brown Jr.；第 9 顺位 Brayden Burries；第 10 顺位 Kingston Flemings；第 11 顺位 Nate Ament；第 15 顺位 Allen Graves；第 16 顺位 Hannes Steinbach；第 17 顺位 Chris Cenac Jr.；第 23 顺位 Ebuka Okorie；第 25 顺位 Koa Peat；第 28 顺位 Meleek Thomas
+
+首轮来自交易的顺位数量是多少？
+14
+依据：第 5 顺位 LA Clippers from Indiana；第 8 顺位 Atlanta Hawks from New Orleans；第 12 顺位 Oklahoma City Thunder from LA Clippers；第 15 顺位 Chicago Bulls from Portland；第 16 顺位 Memphis Grizzlies from Phoenix via Orlando；第 17 顺位 Oklahoma City Thunder from Philadelphia；第 18 顺位 Charlotte Hornets from Orlando via Phoenix；第 20 顺位 San Antonio Spurs from Atlanta；第 21 顺位 Detroit Pistons from Minnesota；第 22 顺位 Philadelphia 76ers from Houston via Oklahoma City；第 23 顺位 Atlanta Hawks from Cleveland；第 28 顺位 Minnesota Timberwolves from Detroit；第 29 顺位 Cleveland Cavaliers from San Antonio via Atlanta；第 30 顺位 Dallas Mavericks from Oklahoma City via WAS and PHI

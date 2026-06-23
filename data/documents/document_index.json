@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "draftops.document_library.v1",
+  "updatedAt": "2026-06-23T11:20:00+08:00",
+  "documents": [
+    {
+      "id": "draftcode24-milestone-event-prediction",
+      "title": "DraftCode24里程碑事件预测",
+      "category": "milestone-questions",
+      "subcategory": "combine-value-positional-trends-global-pipeline",
+      "language": "zh-CN",
+      "documentType": "milestone_question_design_reference",
+      "sourcePath": "E:/下载/DraftCode24里程碑事件预测 .md",
+      "libraryPath": "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
+      "sha256": "D719FBF2EC2560019CAC0DA003A89A2FB02566EE06B865E1F8FBD08021EBE7E0",
+      "sizeBytes": 5341,
+      "classification": {
+        "domain": "NBA Draft prediction",
+        "task": "milestone event question design",
+        "primaryDataNeeds": [
+          "draft pick order",
+          "player position",
+          "nationality",
+          "school or club",
+          "combine measurements",
+          "combine athletic testing"
+        ],
+        "themes": [
+          "Combine to draft value",
+          "positional trends",
+          "talent pipeline",
+          "hidden physical edge"
+        ]
+      },
+      "usagePolicy": "Reference only. Do not treat as official result data or final milestone answers.",
+      "importedAt": "2026-06-23T11:20:00+08:00"
+    }
+  ]
+}

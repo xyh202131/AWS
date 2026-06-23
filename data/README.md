@@ -6,6 +6,7 @@ Agents should write structured intermediate outputs here instead of editing sour
 
 ```text
 raw/          original source captures and source metadata
+documents/    classified reference documents that support reasoning
 normalized/   standardized rows before final cleanup
 clean/        DraftOps-compatible prospects and teams
 reports/      audit reports, conflict notes, parameter notes
@@ -20,6 +21,11 @@ Do not place secrets, paid-account credentials, or private Team Portal tokens in
 Raw/source layer:
 
 - `raw/raw_sources.json`: unified registry for official local files and external web sources.
+- `documents/document_index.json`: classified document-library index.
+- `documents/milestone-questions/DraftCode24里程碑事件预测.md`: milestone-question design reference.
+- `../数据/NBA选秀大会_26-27赛季数据.xlsx`: official/user-provided current event workbook for participant list, measurements, strength/agility, and shooting drills.
+- `../数据/上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx`: official submission template and answer-card shape.
+- `../数据/赛前培训直播-会议纪要 (1).md`: official/user-provided training notes for workflow and submission context.
 - `raw/external_source_inventory.json`: classified external source inventory.
 - `raw/firecrawl-2026-*.json`: Firecrawl captures for 2026 big board, draft order, mock draft, and team needs.
 - `raw/nba-official-2026-prospects-live.md`: live NBA.com official Prospects capture used for final candidate reconciliation.
@@ -34,6 +40,7 @@ Normalized 2026 layer:
 Reports:
 
 - `reports/raw_sources_registry_report.md`
+- `reports/current_data_source_audit_20260623.md`
 - `reports/a1_web_source_inventory_report.md`
 - `reports/a2_web_mock_normalization_report.md`
 - `reports/a4_web_prospect_big_board_report.md`

@@ -19,6 +19,7 @@
 5. Supervisor 有权退回任何缺少来源、字段不完整、结构不合法的输出。
 6. 最终提交前必须通过 `npm run lint` 和 `npm run build`。
 7. 比赛最后 30 分钟只允许做检查、导出、提交，不做大改。
+8. 绝对禁止人工预测、人工指定球员、人工换人或人工重排 1-30 顺位；人只能提出可复现的参数、规则、数据修正或复核请求，最终 30 顺位必须由 A7/脚本基于文件输入重新生成。
 
 ## 2. 数据目录
 
@@ -123,6 +124,8 @@ data/final/final_import_bundle.json
 当前关键限制：
 
 - 前端只允许查看、搜索、切换证据和导出，不允许用户导入数据、生成 board、改权重或人工换人。
+- 1-30 顺位只能来自 Agent board 文件；禁止在聊天、前端、JSON、Excel 或提交模板中人工指定、替换、锁定某个球员。
+- A6/A11 的结论只能是可复现参数、护栏、数据修正或重跑请求；若结论影响预测，必须由 A7 重新生成完整 board，不能手工改单个 pick。
 - 权重参数只能在 Agent 内部使用，不允许出现在 UI、Evidence 或 Submission JSON。
 - 所有空字段必须由 Agent 或前端 fallback 明确说明，不能返回 `null`、`undefined`、`n/a`、空列表或空标签云。
 - 下一轮数据更新必须先写入 `data/`，再由 A0/A3/A10 审核，不能直接手改前端预测。
@@ -517,7 +520,8 @@ A0 Supervisor
 
 验收：
 - 每套权重必须包含 consensus、need、player、upside、intel。
-- 权重必须能被当前 App 的滑块和 generateBoard 使用。
+- 权重必须能被 A7 预测脚本和 generateBoard 使用；不得要求人工滑块或前端手动调参。
+- 不得输出“把第 X 顺位换成某球员”这类人工预测结论，只能输出参数、规则、护栏和需要重跑的原因。
 ```
 
 ### A7 预测生成 Agent
@@ -534,6 +538,7 @@ A0 Supervisor
 - 每套 board 正好 30 个 pick。
 - 没有重复球员。
 - 每个争议顺位必须说明冲突来源。
+- 输出必须声明 no-manual-override：没有人工指定、人工替换或人工重排任何 pick。
 ```
 
 ### A8 里程碑题 Agent
@@ -590,7 +595,7 @@ A0 Supervisor
 任务：
 1. 比较 A5 球队偏好、A6 权重方案、A7 多套 board。
 2. 标记共识选择 vs 球队适配选择的冲突。
-3. 输出 conflict_report.md，给人工最终决策用。
+3. 输出 conflict_report.md，给 A6/A7 转成可复现参数、护栏或重跑请求；不得给人工最终选人。
 ```
 
 ### A12 提交检查 Agent
@@ -618,7 +623,7 @@ A0 Supervisor
 3. 多来源一致优先于单一来源。
 4. 有明确球队新闻时，可以挑战 mock 共识。
 5. 医疗、退选、交易等硬事实优先于模型分数。
-6. 最终由人工和 Supervisor 放行。
+6. 最终只能放行 A7/脚本生成的完整 Agent board；Supervisor 只能检查来源、参数、规则和文件合法性，不能人工选择球员。
 
 冲突报告格式：
 
@@ -631,7 +636,7 @@ A0 Supervisor
 支持 A 的证据：
 支持 B 的证据：
 影响的里程碑题：
-建议人工确认点：
+建议 Agent 复核输入：
 ```
 
 ## 9. 最终交付链路
@@ -689,7 +694,7 @@ README 说明数据、方法、AWS 架构、运行方式
 下一轮优先级：
 
 1. A2/A3：把官方历史选秀、Combine 历史、指标字典标准化，作为 profile 和质量校准增强源。
-2. A4：人工复核 `Tarris Reed Jr.` 和 supplemental rank 26-30 的画像、标签和评分；基础身高、年龄、学校字段已按 NBA.com 官方 Prospects 修正。
+2. A4：复核 `Tarris Reed Jr.` 和 supplemental rank 26-30 的画像、标签和评分，若需要调整必须写入结构化数据后交给 A7 重跑；基础身高、年龄、学校字段已按 NBA.com 官方 Prospects 修正。
 3. A5：复核 `normalized_2026_team_context.json` 中 `needs_review` 和 `unknown` 的球队需求。
 4. A10：给所有 sourceId 做可信度评分，锁定哪些来源能进入下一版 final bundle。
 5. A7：基于 `data/final/final_import_bundle.json` 和权重方案生成多套 board。

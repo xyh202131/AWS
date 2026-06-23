@@ -10,16 +10,35 @@ import {
   Download,
   FileInput,
   Gauge,
+  Languages,
+  MessageCircle,
   Search,
+  Send,
   Server,
   ShieldCheck,
   TrendingUp,
+  X,
 } from "lucide-react";
 import "./App.css";
 import { defaultWeights, seedProspects, seedTeams, sourceLinks } from "./data/seedData";
 import { hideAgentParameters } from "./lib/evidence";
 import { buildMarkdownBrief, buildSubmissionPayload, downloadJson, downloadText } from "./lib/export";
-import { formatOptionalValue, formatPositions, NO_ALTERNATIVE_FALLBACK, ORIGINAL_PICK_LABEL, WARNING_FALLBACK, withTextFallback } from "./lib/fallbacks";
+import { formatOptionalValue, withTextFallback } from "./lib/fallbacks";
+import {
+  formatPositionsLocalized,
+  localizeCountryName,
+  localizeEvidenceText,
+  localizeMilestonePrompt,
+  localizeMilestoneType,
+  localizePhase,
+  localizePhrase,
+  localizeProspectName,
+  localizeSchoolName,
+  localizeTeamName,
+  localizeZone,
+  type Language,
+  UI_COPY,
+} from "./lib/i18n";
 import { generateBoard, generateMilestones, getBoardHealth } from "./lib/prediction";
 import type { DraftPick, ImportBundle, TeamProfile, Weights } from "./types";
 
@@ -28,21 +47,23 @@ gsap.registerPlugin(useGSAP);
 const deadline = new Date("2026-06-24T08:00:00+08:00");
 const agentBundleUrl = "/data/final_import_bundle.json";
 const agentBoardUrl = "/data/agent_balanced_board.json";
+const deepSeekChatUrl = "http://127.0.0.1:4318/api/deepseek/chat";
 
-const formatCountdown = () => {
+const formatCountdown = (language: Language) => {
   const diff = deadline.getTime() - Date.now();
-  if (diff <= 0) return "Submission window closed";
+  if (diff <= 0) return UI_COPY[language].countdownClosed;
   const hours = Math.floor(diff / 3_600_000);
   const minutes = Math.floor((diff % 3_600_000) / 60_000);
+  if (language === "zh") return `距 2026-06-24 08:00 还有 ${hours} 小时 ${minutes} 分钟`;
   return `${hours}h ${minutes}m to 2026-06-24 08:00`;
 };
 
-const weightLabels: Record<keyof Weights, string> = {
-  consensus: "Consensus",
-  need: "Team Need",
-  player: "Player Grade",
-  upside: "Upside",
-  intel: "Late Intel",
+const weightLabels: Record<keyof Weights, Record<Language, string>> = {
+  consensus: { en: "Consensus", zh: "共识" },
+  need: { en: "Team Need", zh: "球队需求" },
+  player: { en: "Player Grade", zh: "球员评分" },
+  upside: { en: "Upside", zh: "上限" },
+  intel: { en: "Late Intel", zh: "后期情报" },
 };
 
 interface AgentBoardArtifact {
@@ -56,8 +77,39 @@ interface AgentBoardArtifact {
   board?: DraftPick[];
 }
 
-const formatWeight = (weight: string | null | undefined) => {
-  const normalizedWeight = formatOptionalValue(weight, "Weight pending");
+interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+}
+
+interface DeepSeekChatResponse {
+  answer?: string;
+  modelLabel?: string;
+  error?: string;
+}
+
+type StatusState =
+  | { type: "loading" }
+  | { type: "applied"; label: string; teams: number; prospects: number }
+  | { type: "fallback" }
+  | { type: "submissionExported" }
+  | { type: "briefExported" };
+
+const formatStatus = (status: StatusState, language: Language) => {
+  const copy = UI_COPY[language];
+  if (status.type === "applied") return copy.appliedBoard(localizePhrase(status.label, language), status.teams, status.prospects);
+  if (status.type === "fallback") return copy.fallbackBoard;
+  if (status.type === "submissionExported") return copy.submissionExported;
+  if (status.type === "briefExported") return copy.briefExported;
+  return copy.loadingBoard;
+};
+
+const formatWeight = (weight: string | null | undefined, language: Language) => {
+  const fallback = UI_COPY[language].weightPending;
+  const normalizedWeight = formatOptionalValue(weight, fallback);
+  if (normalizedWeight === fallback) return normalizedWeight;
+  if (language === "zh") return `${normalizedWeight.replace(/\s*lbs?\.?/i, "")} 磅`;
   return normalizedWeight.toLowerCase().includes("lb") ? normalizedWeight : `${normalizedWeight} lbs`;
 };
 
@@ -69,6 +121,7 @@ function App() {
   const appRef = useRef<HTMLElement | null>(null);
   const boardRef = useRef<HTMLElement | null>(null);
   const insightRef = useRef<HTMLElement | null>(null);
+  const [language, setLanguage] = useState<Language>("zh");
   const [teamProfiles, setTeamProfiles] = useState<TeamProfile[]>(seedTeams);
   const [board, setBoard] = useState(() => generateBoard(seedTeams, seedProspects, defaultWeights));
   const [agentMeta, setAgentMeta] = useState({
@@ -79,24 +132,55 @@ function App() {
   const [isAgentLoading, setIsAgentLoading] = useState(true);
   const [selectedPickNumber, setSelectedPickNumber] = useState(1);
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("Loading official Agent board...");
+  const [statusState, setStatusState] = useState<StatusState>({ type: "loading" });
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: "deepseek-ready",
+      role: "assistant",
+      content: "DeepSeek V4 Pro[1m] 已接入。当前 DeepSeek 是只读问答 Agent，可回答应试题、参考口径和预测主题问题；预测结果只读取当前锁定预测板，不能参与改动。",
+    },
+  ]);
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [chatModelLabel, setChatModelLabel] = useState("deepseek-v4-pro[1m]");
 
+  const copy = UI_COPY[language];
+  const status = useMemo(() => formatStatus(statusState, language), [language, statusState]);
   const milestones = useMemo(() => generateMilestones(board), [board]);
   const health = useMemo(() => getBoardHealth(board), [board]);
   const selectedPick = board.find((pick) => pick.pick === selectedPickNumber) ?? board[0];
   const selectedTeam = findTeamProfile(teamProfiles, selectedPick);
   const prospectProfile = Object.entries(selectedPick.prospect.profile);
-  const selectedPositions = formatPositions(selectedPick.prospect.positions);
-  const playerRoleTags = withTextFallback(selectedPick.prospect.roleTags, "Agent role tags pending.");
-  const evidenceItems = withTextFallback(selectedPick.evidence, "No evidence text retained for this pick.");
-  const riskNotes = withTextFallback(selectedPick.prospect.risks, "No risk flag in current bundle.");
-  const warningNotes = withTextFallback(selectedPick.warnings, WARNING_FALLBACK);
-  const teamNeeds = withTextFallback(selectedTeam?.needs, "Agent team context pending.");
-  const priorityTags = withTextFallback(selectedTeam?.priorityTags, "Agent priority context pending.");
-  const strengthNotes = withTextFallback(selectedPick.prospect.strengths, "No strength tag in current bundle.");
-  const sourceNotes = withTextFallback(selectedPick.prospect.sourceNotes, "No extra source note in current bundle.");
-  const teamNote = formatOptionalValue(selectedTeam?.notes, "Agent team note pending for this slot.");
-  const tradeSlot = selectedPick.acquiredFrom ? `from ${selectedPick.acquiredFrom}` : ORIGINAL_PICK_LABEL;
+  const selectedPositions = formatPositionsLocalized(selectedPick.prospect.positions, language, copy.positionPending);
+  const playerRoleTags = withTextFallback(selectedPick.prospect.roleTags, copy.roleTagsPending).map((tag) =>
+    localizePhrase(tag, language),
+  );
+  const evidenceItems = withTextFallback(selectedPick.evidence, copy.evidenceFallback).map((item) =>
+    localizeEvidenceText(hideAgentParameters(item), language),
+  );
+  const riskNotes = withTextFallback(selectedPick.prospect.risks, copy.riskFallback).map((risk) =>
+    localizePhrase(risk, language),
+  );
+  const warningNotes = withTextFallback(selectedPick.warnings, copy.warningFallback).map((warning) =>
+    localizeEvidenceText(warning, language),
+  );
+  const teamNeeds = withTextFallback(selectedTeam?.needs, copy.teamNeedsPending).map((need) =>
+    localizePhrase(need, language),
+  );
+  const priorityTags = withTextFallback(selectedTeam?.priorityTags, copy.priorityPending).map((tag) =>
+    localizePhrase(tag, language),
+  );
+  const strengthNotes = withTextFallback(selectedPick.prospect.strengths, copy.strengthFallback).map((strength) =>
+    localizePhrase(strength, language),
+  );
+  const sourceNotes = withTextFallback(selectedPick.prospect.sourceNotes, copy.sourceFallback).map((note) =>
+    localizeEvidenceText(note, language),
+  );
+  const teamNote = localizeEvidenceText(formatOptionalValue(selectedTeam?.notes, copy.teamNotePending), language);
+  const tradeSlot = selectedPick.acquiredFrom
+    ? `${copy.fromTeam} ${localizeTeamName(selectedPick.acquiredFrom, language)}`
+    : copy.originalPick;
   const boardAverage = board.length
     ? Math.round(board.reduce((sum, pick) => sum + pick.confidence, 0) / board.length)
     : 0;
@@ -105,40 +189,53 @@ function App() {
   const filteredBoard = board.filter((pick) => {
     const query = search.trim().toLowerCase();
     if (!query) return true;
-    return [pick.team, pick.prospect.name, pick.prospect.school, pick.roleFit]
+    return [
+      pick.team,
+      localizeTeamName(pick.team, language),
+      localizeTeamName(pick.team, "zh"),
+      pick.prospect.name,
+      localizeProspectName(pick.prospect.name, language),
+      localizeProspectName(pick.prospect.name, "zh"),
+      pick.prospect.school,
+      localizeSchoolName(pick.prospect.school, language),
+      localizeSchoolName(pick.prospect.school, "zh"),
+      pick.roleFit,
+      localizePhrase(pick.roleFit, language),
+      localizePhrase(pick.roleFit, "zh"),
+    ]
       .join(" ")
       .toLowerCase()
       .includes(query);
   });
   const overviewMetrics = [
     {
-      label: "Official Audit",
-      value: health.hasThirtyPicks && health.noDuplicates ? "30/30 PASS" : "Review",
-      detail: "NBA.com prospect gate",
+      label: copy.officialAudit,
+      value: health.hasThirtyPicks && health.noDuplicates ? copy.pass : copy.review,
+      detail: copy.officialAuditDetail,
       icon: <ShieldCheck size={22} />,
     },
     {
-      label: "Board Confidence",
+      label: copy.boardConfidence,
       value: `${boardAverage}%`,
-      detail: "Average model confidence",
+      detail: copy.boardConfidenceDetail,
       icon: <Gauge size={22} />,
     },
     {
-      label: "Agent Control",
-      value: isAgentLoading ? "Loading" : "Locked",
-      detail: "No manual overrides",
+      label: copy.agentControl,
+      value: isAgentLoading ? copy.loading : copy.locked,
+      detail: copy.agentControlDetail,
       icon: <BrainCircuit size={22} />,
     },
     {
-      label: "Risk Watch",
+      label: copy.riskWatch,
       value: String(warningPickCount),
-      detail: "Picks with warning notes",
+      detail: copy.riskWatchDetail,
       icon: <AlertTriangle size={22} />,
     },
     {
-      label: "Traded Picks",
+      label: copy.tradedPicks,
       value: String(tradedPickCount),
-      detail: "Acquired-from slots",
+      detail: copy.tradedPicksDetail,
       icon: <TrendingUp size={22} />,
     },
   ];
@@ -164,21 +261,26 @@ function App() {
           Array.isArray(artifact.board) && artifact.board.length === importedTeams.length
             ? artifact.board
             : generateBoard(importedTeams, importedProspects, nextWeights);
-        const nextStatus = `Agent board applied: ${artifact.scenario?.label ?? "balanced baseline"} · ${importedTeams.length} teams · ${importedProspects.length} official prospects.`;
+        const scenarioLabel = artifact.scenario?.label ?? "balanced baseline";
 
         if (cancelled) return;
         setTeamProfiles(importedTeams);
         setBoard(artifactBoard);
         setSelectedPickNumber(artifactBoard[0]?.pick ?? 1);
         setAgentMeta({
-          label: artifact.scenario?.label ?? "balanced baseline",
+          label: scenarioLabel,
           generatedBy: artifact.generatedBy ?? "A7 Board Simulation Agent",
           generatedAt: artifact.generatedAt ?? "",
         });
-        setStatus(nextStatus);
+        setStatusState({
+          type: "applied",
+          label: scenarioLabel,
+          teams: importedTeams.length,
+          prospects: importedProspects.length,
+        });
       } catch {
         if (!cancelled) {
-          setStatus("Agent board could not be loaded from public/data. Fallback seed board is active.");
+          setStatusState({ type: "fallback" });
           setAgentMeta({
             label: "fallback seed",
             generatedBy: "src/data/seedData.ts",
@@ -199,12 +301,74 @@ function App() {
 
   const exportSubmission = () => {
     downloadJson("draftops-submission.json", buildSubmissionPayload(board, milestones));
-    setStatus("Submission JSON exported.");
+    setStatusState({ type: "submissionExported" });
   };
 
   const exportBrief = () => {
     downloadText("draftops-brief.md", buildMarkdownBrief(board, milestones));
-    setStatus("Markdown brief exported.");
+    setStatusState({ type: "briefExported" });
+  };
+
+  const askDeepSeek = async () => {
+    const question = chatInput.trim();
+    if (!question || isChatLoading) return;
+
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      role: "user",
+      content: question,
+    };
+    const nextMessages = [...chatMessages, userMessage];
+    setChatMessages(nextMessages);
+    setChatInput("");
+    setIsChatLoading(true);
+
+    try {
+      const response = await fetch(deepSeekChatUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
+          selectedPickNumber,
+          history: chatMessages.slice(-8).map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
+        }),
+      });
+      const payload = (await response.json()) as DeepSeekChatResponse;
+      if (!response.ok || payload.error) {
+        throw new Error(payload.error ?? "DeepSeek chat request failed.");
+      }
+
+      setChatMessages([
+        ...nextMessages,
+        {
+          id: `assistant-${Date.now()}`,
+          role: "assistant",
+          content: payload.answer ?? "DeepSeek returned an empty answer.",
+        },
+      ]);
+      if (payload.modelLabel) setChatModelLabel(payload.modelLabel);
+    } catch (error) {
+      setChatMessages([
+        ...nextMessages,
+        {
+          id: `assistant-error-${Date.now()}`,
+          role: "assistant",
+          content:
+            language === "zh"
+              ? error instanceof Error
+                ? `DeepSeek 窗口暂不可用：${error.message}`
+                : "DeepSeek 窗口暂不可用：未知错误。"
+              : error instanceof Error
+                ? `DeepSeek window is unavailable: ${error.message}`
+                : "DeepSeek window is unavailable: unknown error.",
+        },
+      ]);
+    } finally {
+      setIsChatLoading(false);
+    }
   };
 
   useGSAP(
@@ -272,22 +436,30 @@ function App() {
           <div className="brand-mark">D</div>
           <div>
             <strong>DraftOps</strong>
-            <span>2026 NBA Draft War Room</span>
+            <span>{copy.brandSubtitle}</span>
           </div>
         </div>
         <nav className="command-nav" aria-label="Page sections">
-          <a href="#board">Board</a>
-          <a href="#milestones">Milestones</a>
-          <a href="#aws">AWS</a>
+          <a href="#board">{copy.navBoard}</a>
+          <a href="#milestones">{copy.navMilestones}</a>
+          <a href="#aws">{copy.navAws}</a>
         </nav>
         <div className="topbar-actions">
-          <button className="button secondary" type="button" onClick={exportBrief} title="Export pitch brief">
-            <FileInput size={18} />
-            Brief
+          <button className="button secondary language-toggle" type="button" onClick={() => setLanguage((current) => (current === "zh" ? "en" : "zh"))} title={copy.languageToggleAria}>
+            <Languages size={18} />
+            {copy.languageSwitch}
           </button>
-          <button className="button primary" type="button" onClick={exportSubmission} title="Export submission JSON">
+          <button className="button secondary" type="button" onClick={() => setIsChatOpen(true)} title={copy.actionDeepSeek}>
+            <MessageCircle size={18} />
+            {copy.actionDeepSeek}
+          </button>
+          <button className="button secondary" type="button" onClick={exportBrief} title={copy.actionBrief}>
+            <FileInput size={18} />
+            {copy.actionBrief}
+          </button>
+          <button className="button primary" type="button" onClick={exportSubmission} title={copy.actionSubmission}>
             <Download size={18} />
-            Submission
+            {copy.actionSubmission}
           </button>
         </div>
       </header>
@@ -296,18 +468,19 @@ function App() {
         <div className="hero-copy">
           <div className="eyeline">
             <Clock3 size={18} />
-            <span>{formatCountdown()}</span>
+            <span>{formatCountdown(language)}</span>
           </div>
-          <h1>Official-data draft board, tuned by multi-agent debate.</h1>
+          <h1>{copy.heroTitle}</h1>
           <p className="hero-status" aria-live="polite">
             {status}
           </p>
         </div>
         <div className="scenario-card">
-          <span>Active scenario</span>
-          <strong>{isAgentLoading ? "Loading" : agentMeta.label}</strong>
-          <p>Agent-only board</p>
-          <small>{agentMeta.generatedBy}</small>
+          <span>{copy.activeScenario}</span>
+          <strong>{isAgentLoading ? copy.loading : localizePhrase(agentMeta.label, language)}</strong>
+          <p>{copy.agentOnlyBoard}</p>
+          <small>{localizePhrase(agentMeta.generatedBy, language)}</small>
+          <small>{copy.translationSource}</small>
         </div>
       </section>
 
@@ -329,8 +502,8 @@ function App() {
           <section id="board" className="panel board-panel" ref={boardRef}>
           <div className="panel-header">
             <div>
-              <span className="section-kicker">Round 1</span>
-              <h2>Prediction Board</h2>
+              <span className="section-kicker">{copy.roundOne}</span>
+              <h2>{copy.predictionBoard}</h2>
             </div>
             <div className="board-tools">
               <label className="search-box" htmlFor="board-search">
@@ -339,7 +512,7 @@ function App() {
                   id="board-search"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search team, player, fit"
+                  placeholder={copy.searchPlaceholder}
                 />
               </label>
             </div>
@@ -349,12 +522,12 @@ function App() {
             <table>
               <thead>
                 <tr>
-                  <th>Pick</th>
-                  <th>Team</th>
-                  <th>Player</th>
-                  <th>Market</th>
-                  <th>Fit</th>
-                  <th>Confidence</th>
+                  <th>{copy.pick}</th>
+                  <th>{copy.team}</th>
+                  <th>{copy.player}</th>
+                  <th>{copy.market}</th>
+                  <th>{copy.fit}</th>
+                  <th>{copy.confidence}</th>
                 </tr>
               </thead>
               <tbody>
@@ -366,20 +539,21 @@ function App() {
                   >
                     <td className="pick-number">{pick.pick}</td>
                     <td>
-                      <strong>{pick.team}</strong>
-                      {pick.acquiredFrom && <span>from {pick.acquiredFrom}</span>}
+                      <strong>{localizeTeamName(pick.team, language)}</strong>
+                      {pick.acquiredFrom && <span>{copy.fromTeam} {localizeTeamName(pick.acquiredFrom, language)}</span>}
                     </td>
                     <td>
-                      <strong>{pick.prospect.name}</strong>
+                      <strong>{localizeProspectName(pick.prospect.name, language)}</strong>
                       <span>
-                        {formatPositions(pick.prospect.positions)} · {pick.prospect.school}
+                        {formatPositionsLocalized(pick.prospect.positions, language, copy.positionPending)} ·{" "}
+                        {localizeSchoolName(pick.prospect.school, language)}
                       </span>
                     </td>
                     <td>
                       <strong>#{pick.prospect.consensusRank}</strong>
-                      <span>{pick.prospect.mockHeat}/100 heat</span>
+                      <span>{pick.prospect.mockHeat}/100 {copy.heat}</span>
                     </td>
-                    <td>{pick.roleFit}</td>
+                    <td>{localizePhrase(pick.roleFit, language)}</td>
                     <td>
                       <div className="confidence">
                         <span style={{ width: `${pick.confidence}%` }} />
@@ -397,17 +571,22 @@ function App() {
             <section id="milestones" className="panel">
               <div className="panel-header">
                 <div>
-                  <span className="section-kicker">Submission helpers</span>
-                  <h2>Milestones</h2>
+                  <span className="section-kicker">{copy.submissionHelpers}</span>
+                  <h2>{copy.milestones}</h2>
                 </div>
               </div>
               <div className="milestone-grid">
                 {milestones.map((milestone) => (
                   <article key={milestone.id} className="milestone">
-                    <span>{milestone.type.replace("_", "/")}</span>
-                    <h3>{milestone.prompt}</h3>
+                    <span>{localizeMilestoneType(milestone.type, language)}</span>
+                    <h3>{localizeMilestonePrompt(milestone.prompt, language)}</h3>
                     <strong>{milestone.answer}</strong>
-                    <p>{milestone.evidence.slice(0, 2).map(hideAgentParameters).join(" · ")}</p>
+                    <p>
+                      {milestone.evidence
+                        .slice(0, 2)
+                        .map((item) => localizeEvidenceText(hideAgentParameters(item), language))
+                        .join(" · ")}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -416,47 +595,44 @@ function App() {
             <section id="aws" className="panel aws-panel">
               <div className="panel-header">
                 <div>
-                  <span className="section-kicker">Architecture</span>
-                  <h2>AWS Plan</h2>
+                  <span className="section-kicker">{copy.architecture}</span>
+                  <h2>{copy.awsPlan}</h2>
                 </div>
               </div>
               <div className="aws-rail">
                 <div>
                   <Server size={22} />
-                  <strong>App Runner / ECS</strong>
-                  <span>Web API and static serving</span>
+                  <strong>{copy.appRunner}</strong>
+                  <span>{copy.appRunnerDetail}</span>
                 </div>
                 <div>
                   <Database size={22} />
-                  <strong>S3 + DynamoDB</strong>
-                  <span>Data files and board snapshots</span>
+                  <strong>{copy.storage}</strong>
+                  <span>{copy.storageDetail}</span>
                 </div>
                 <div>
                   <BrainCircuit size={22} />
-                  <strong>Bedrock</strong>
-                  <span>Evidence summaries and Q&A</span>
+                  <strong>{copy.bedrock}</strong>
+                  <span>{copy.bedrockDetail}</span>
                 </div>
               </div>
               <div className="cost-bar">
                 <span style={{ width: "32%" }} />
               </div>
-              <p className="cost-note">$170 credit target: keep model calls batched and cache generated summaries.</p>
+              <p className="cost-note">{copy.costNote}</p>
             </section>
           </section>
 
           <section id="brief" className="brief-band">
             <div>
-              <span className="section-kicker">Roadshow</span>
-              <h2>6-Minute Pitch Spine</h2>
-              <p>
-                Problem definition 40s · data 60s · scoring method 100s · demo 100s · AWS architecture 40s · final board
-                20s.
-              </p>
+              <span className="section-kicker">{copy.roadshow}</span>
+              <h2>{copy.pitchSpine}</h2>
+              <p>{copy.pitchCopy}</p>
             </div>
             <div className="source-list">
               {sourceLinks.map((source) => (
                 <a href={source.url} key={source.url} target="_blank" rel="noreferrer">
-                  {source.label}
+                  {localizePhrase(source.label, language)}
                 </a>
               ))}
             </div>
@@ -467,32 +643,33 @@ function App() {
           <section className="panel pick-panel">
             <div className="pick-hero">
               <div>
-                <span>Pick {selectedPick.pick}</span>
-                <h2>{selectedPick.prospect.name}</h2>
-                <p>{selectedPick.team}</p>
+                <span>{copy.pickLabel} {selectedPick.pick}</span>
+                <h2>{localizeProspectName(selectedPick.prospect.name, language)}</h2>
+                <p>{localizeTeamName(selectedPick.team, language)}</p>
               </div>
-              <strong>{selectedPick.score}</strong>
+              <strong>{selectedPick.score}{copy.scoreUnit}</strong>
             </div>
             <p className="player-line">
-              {selectedPositions} · {formatOptionalValue(selectedPick.prospect.height, "Height pending")} ·{" "}
-              {formatWeight(selectedPick.prospect.weight)} · {formatOptionalValue(selectedPick.prospect.origin, "Origin pending")}
+              {selectedPositions} · {formatOptionalValue(selectedPick.prospect.height, copy.heightPending)} ·{" "}
+              {formatWeight(selectedPick.prospect.weight, language)} ·{" "}
+              {localizeCountryName(formatOptionalValue(selectedPick.prospect.origin, copy.originPending), language)}
             </p>
-            <div className="lock-note">Agent locked pick · human override disabled</div>
+            <div className="lock-note">{copy.lockedPick}</div>
             <div className="profile-ribbon">
               <div>
-                <span>Consensus</span>
+                <span>{copy.consensus}</span>
                 <strong>#{selectedPick.prospect.consensusRank}</strong>
               </div>
               <div>
-                <span>Heat</span>
+                <span>{copy.heat}</span>
                 <strong>{selectedPick.prospect.mockHeat}</strong>
               </div>
               <div>
-                <span>Age</span>
+                <span>{copy.age}</span>
                 <strong>{selectedPick.prospect.age}</strong>
               </div>
               <div>
-                <span>Margin</span>
+                <span>{copy.margin}</span>
                 <strong>{selectedPick.margin}</strong>
               </div>
             </div>
@@ -506,15 +683,15 @@ function App() {
           <section className="panel evidence-panel expanded">
             <div className="panel-header compact">
               <div>
-                <span className="section-kicker">Why this pick</span>
-                <h2>Evidence</h2>
+                <span className="section-kicker">{copy.whyThisPick}</span>
+                <h2>{copy.evidence}</h2>
               </div>
               <Activity size={22} />
             </div>
             <div className="breakdown">
               {Object.entries(selectedPick.breakdown).map(([key, value]) => (
                 <div key={key}>
-                  <span>{weightLabels[key as keyof Weights]}</span>
+                  <span>{weightLabels[key as keyof Weights][language]}</span>
                   <strong>{value}</strong>
                 </div>
               ))}
@@ -525,7 +702,7 @@ function App() {
               ))}
             </ul>
             <div className="risk-strip">
-              <span>Risk notes</span>
+              <span>{copy.riskNotes}</span>
               <div>
                 {riskNotes.slice(0, 4).map((risk) => (
                   <strong key={risk}>{risk}</strong>
@@ -545,31 +722,31 @@ function App() {
           <section className="panel context-panel">
             <div className="panel-header compact">
               <div>
-                <span className="section-kicker">Team file</span>
-                <h2>Fit Context</h2>
+                <span className="section-kicker">{copy.teamFile}</span>
+                <h2>{copy.fitContext}</h2>
               </div>
               <BrainCircuit size={22} />
             </div>
             <div className="context-grid">
               <div>
-                <span>Draft zone</span>
-                <strong>{selectedPick.zone}</strong>
+                <span>{copy.draftZone}</span>
+                <strong>{localizeZone(selectedPick.zone, language)}</strong>
               </div>
               <div>
-                <span>Team phase</span>
-                <strong>{formatOptionalValue(selectedTeam?.phase, "agent inferred")}</strong>
+                <span>{copy.teamPhase}</span>
+                <strong>{localizePhase(formatOptionalValue(selectedTeam?.phase, language === "zh" ? "智能体推断" : "agent inferred"), language)}</strong>
               </div>
               <div>
-                <span>Risk tolerance</span>
-                <strong>{formatOptionalValue(selectedTeam?.riskTolerance, "agent pending")}</strong>
+                <span>{copy.riskTolerance}</span>
+                <strong>{formatOptionalValue(selectedTeam?.riskTolerance, language === "zh" ? "智能体待确认" : "agent pending")}</strong>
               </div>
               <div>
-                <span>Trade slot</span>
+                <span>{copy.tradeSlot}</span>
                 <strong>{tradeSlot}</strong>
               </div>
             </div>
             <div className="signal-section">
-              <span>Team needs</span>
+              <span>{copy.teamNeeds}</span>
               <div className="tag-cloud compact">
                 {teamNeeds.map((need) => (
                   <span key={need}>{need}</span>
@@ -577,7 +754,7 @@ function App() {
               </div>
             </div>
             <div className="signal-section">
-              <span>Priority tags</span>
+              <span>{copy.priorityTags}</span>
               <div className="tag-cloud compact">
                 {priorityTags.map((tag) => (
                   <span key={tag}>{tag}</span>
@@ -590,8 +767,8 @@ function App() {
           <section className="panel profile-panel">
             <div className="panel-header compact">
               <div>
-                <span className="section-kicker">Player file</span>
-                <h2>Profile Signals</h2>
+                <span className="section-kicker">{copy.playerFile}</span>
+                <h2>{copy.profileSignals}</h2>
               </div>
               <Gauge size={22} />
             </div>
@@ -599,7 +776,7 @@ function App() {
               {prospectProfile.map(([key, value]) => (
                 <div className="profile-bar" key={key}>
                   <span>
-                    {key} <strong>{value}</strong>
+                    {localizePhrase(key, language)} <strong>{value}</strong>
                   </span>
                   <div>
                     <i style={{ width: `${value}%` }} />
@@ -608,7 +785,7 @@ function App() {
               ))}
             </div>
             <div className="signal-section">
-              <span>Strengths</span>
+              <span>{copy.strengths}</span>
               <ul className="compact-list">
                 {strengthNotes.map((strength) => (
                   <li key={strength}>{strength}</li>
@@ -616,7 +793,7 @@ function App() {
               </ul>
             </div>
             <div className="signal-section">
-              <span>Source notes</span>
+              <span>{copy.sourceNotes}</span>
               <ul className="compact-list">
                 {sourceNotes.map((note) => (
                   <li key={note}>{hideAgentParameters(note)}</li>
@@ -628,8 +805,8 @@ function App() {
           <section className="panel alternatives-panel">
             <div className="panel-header compact">
               <div>
-                <span className="section-kicker">Runner-up check</span>
-                <h2>Alternatives</h2>
+                <span className="section-kicker">{copy.runnerUpCheck}</span>
+                <h2>{copy.alternatives}</h2>
               </div>
               <TrendingUp size={22} />
             </div>
@@ -638,21 +815,70 @@ function App() {
                 selectedPick.alternatives.map((candidate, index) => (
                   <div className="candidate-row" key={candidate.prospectId}>
                     <strong>{index + 2}</strong>
-                    <span>{candidate.name}</span>
-                    <small>{candidate.roleFit}</small>
+                    <span>{localizeProspectName(candidate.name, language)}</span>
+                    <small>{localizePhrase(candidate.roleFit, language)}</small>
                     <b>{candidate.score}</b>
                   </div>
                 ))
               ) : (
-                <div className="candidate-empty">{NO_ALTERNATIVE_FALLBACK}</div>
+                <div className="candidate-empty">{copy.noAlternativeFallback}</div>
               )}
             </div>
             <p className="context-note">
-              Agent margin: {selectedPick.margin} points. Confidence: {selectedPick.confidence}%.
+              {copy.agentMargin}: {selectedPick.margin}. {copy.confidence}: {selectedPick.confidence}%.
             </p>
           </section>
 
         </aside>
+      </section>
+
+      <section className={`deepseek-dock ${isChatOpen ? "open" : ""}`} aria-label="DeepSeek chat window">
+        <div className="deepseek-window" role="dialog" aria-modal="false" aria-labelledby="deepseek-title">
+          <header className="deepseek-header">
+            <div>
+              <span className="section-kicker">{copy.liveLlm}</span>
+              <h2 id="deepseek-title">{copy.deepSeekWindow}</h2>
+              <p>{chatModelLabel} · {copy.deepSeekSubtitle}</p>
+            </div>
+            <button className="icon-button" type="button" onClick={() => setIsChatOpen(false)} title={copy.closeDeepSeek}>
+              <X size={20} />
+            </button>
+          </header>
+
+          <div className="chat-log" aria-live="polite">
+            {chatMessages.map((message) => (
+              <article className={`chat-message ${message.role}`} key={message.id}>
+                <span>{message.role === "assistant" ? "DeepSeek" : copy.you}</span>
+                <p>{message.id === "deepseek-ready" ? copy.chatIntro : message.content}</p>
+              </article>
+            ))}
+            {isChatLoading && (
+              <article className="chat-message assistant">
+                <span>DeepSeek</span>
+                <p>{copy.chatThinking}</p>
+              </article>
+            )}
+          </div>
+
+          <form
+            className="chat-composer"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void askDeepSeek();
+            }}
+          >
+            <textarea
+              value={chatInput}
+              onChange={(event) => setChatInput(event.target.value)}
+              placeholder={copy.chatPlaceholder}
+              rows={3}
+            />
+            <button className="button primary" type="submit" disabled={isChatLoading || !chatInput.trim()}>
+              <Send size={18} />
+              {copy.send}
+            </button>
+          </form>
+        </div>
       </section>
 
     </main>

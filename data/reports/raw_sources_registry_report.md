@@ -1,6 +1,6 @@
 # Raw Sources Registry Report
 
-Generated at: 2026-06-22T03:31:27+08:00
+Generated at: 2026-06-23T11:00:43+08:00
 
 ## Scope
 
@@ -8,15 +8,19 @@ This registry combines the official local data package in `数据/` with the ext
 
 ## Counts
 
-- Total sources: 37
-- Official/user-provided sources: 8
+- Total sources: 42
+- Official/user-provided sources: 11
 - External web sources: 29
 - External sources marked ignore: 8
+- Official live web captures: 2
 
 ## Official Inputs
 
 - `official-draft-results-2000-2025`: `数据/2000-2025_NBA选秀结果_数据汇总.xlsx` (official_historical_draft_results)
-- `official-draft-combine-hackathon-archive`: `数据/DraftCombine_Hackathon.zip` (official_archive)
+- `official-draft-combine-hackathon-archive`: `数据/DraftCombine_Hackathon` (official_archive_extracted)
+- `official-2026-27-draft-event-data`: `数据/NBA选秀大会_26-27赛季数据.xlsx` (official_current_event_dataset)
+- `official-submission-answer-template`: `数据/上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx` (official_submission_template)
+- `official-pre-event-training-notes`: `数据/赛前培训直播-会议纪要 (1).md` (official_training_notes)
 - `official-combine-history-2000-2025`: `数据/DraftCombine_Hackathon/DraftCombineHistory2000_2025.csv` (official_combine_history)
 - `official-combine-metric-dictionary`: `数据/DraftCombine_Hackathon/NBA_Combine_Stat_Lab_指标中英文.xlsx` (official_metric_dictionary)
 - `official-combine-intro-cn`: `数据/DraftCombine_Hackathon/NBA_Draft_Combine_Intro_CN.pptx` (official_combine_intro)
@@ -34,5 +38,5 @@ This registry combines the official local data package in `数据/` with the ext
 ## Downstream Use
 
 - A2/A3 should read `data/raw/raw_sources.json` before normalizing external mock data.
-- Local official workbooks support field mapping, historical priors, and quality checks.
+- Local official workbooks support field mapping, historical priors, current event combine data, export-template validation, and quality checks.
 - 2026 prospect/order predictions should come from official 2026 pages and weighted media mocks, not from historical files alone.

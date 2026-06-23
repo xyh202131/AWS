@@ -29,8 +29,21 @@ Write-Host "Opening $url" -ForegroundColor Green
 Start-Process $url
 
 Write-Host ""
-Write-Host "Starting dev server. Keep this window open while using DraftOps." -ForegroundColor Yellow
+Write-Host "Starting dev server and DeepSeek chat proxy. Keep this window open while using DraftOps." -ForegroundColor Yellow
 Write-Host "If port 3002 is occupied, stop the other process or run: npm run dev -- --host 127.0.0.1 --port 3003"
 Write-Host ""
+
+$agentHealthy = $false
+try {
+  $health = Invoke-WebRequest -Uri "http://127.0.0.1:4318/api/deepseek/health" -UseBasicParsing -TimeoutSec 2
+  $agentHealthy = $health.StatusCode -eq 200
+} catch {
+  $agentHealthy = $false
+}
+
+if (-not $agentHealthy) {
+  Write-Host "Starting DeepSeek local proxy on http://127.0.0.1:4318" -ForegroundColor Yellow
+  Start-Process -FilePath node.exe -ArgumentList @("scripts/deepseek-chat-server.mjs") -WorkingDirectory $PSScriptRoot -WindowStyle Hidden
+}
 
 npm run dev:local
