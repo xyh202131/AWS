@@ -1019,7 +1019,7 @@ function App() {
       });
       const payload = (await response.json()) as DeepSeekChatResponse;
       if (!response.ok || payload.error) {
-        throw new Error(payload.error ?? "DeepSeek chat request failed.");
+        throw new Error(payload.error ?? "DeepSeek 问答请求失败。");
       }
 
       setChatMessages([
@@ -1027,7 +1027,7 @@ function App() {
         {
           id: nextChatMessageId("assistant"),
           role: "assistant",
-          content: payload.answer ?? "DeepSeek returned an empty answer.",
+          content: payload.answer ?? "DeepSeek 返回了空回答。",
         },
       ]);
       if (payload.modelLabel) setChatModelLabel(payload.modelLabel);
@@ -1289,7 +1289,7 @@ function App() {
           <div className="ops-command-status" aria-label={statusCopy.dataset}>
             <span>{d.dataUpdated}</span>
             <strong>{formatDataTime(agentMeta.generatedAt, uiLanguage)} (CT)</strong>
-            <em>{agentMeta.label}</em>
+            <em>{localizePhrase(agentMeta.label, uiLanguage)}</em>
             <b>{statusCopy.model} {draftOpsManifest.model.version}</b>
           </div>
 
@@ -1754,7 +1754,7 @@ function App() {
       {isChatOpen && (
         <section
           className={`deepseek-dock open ${chatDockPosition ? "is-floating" : ""} ${isChatDragging ? "is-dragging" : ""}`}
-          aria-label="DeepSeek chat window"
+          aria-label="DeepSeek 问答窗口"
           ref={chatDockRef}
           style={chatDockPosition ? { left: `${chatDockPosition.left}px`, top: `${chatDockPosition.top}px` } : undefined}
         >
