@@ -14,16 +14,6 @@ export interface ScoreProfile {
   upside: number;
 }
 
-export interface ProspectMedia {
-  photoUrl?: string;
-  remotePhotoUrl?: string;
-  sourceUrl?: string;
-  sourceLabel?: string;
-  provider?: string;
-  status?: "verified" | "fallback" | "needs_review";
-  updatedAt?: string;
-}
-
 export interface Prospect {
   id: string;
   name: string;
@@ -42,7 +32,6 @@ export interface Prospect {
   risks: string[];
   profile: ScoreProfile;
   sourceNotes: string[];
-  media?: ProspectMedia;
 }
 
 export interface TeamProfile {
