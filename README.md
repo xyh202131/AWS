@@ -20,6 +20,9 @@ public/data/agent_expanded_recommended_board.json
 Current artifact contract:
 
 - `expanded_import_bundle.json` contains 30 first-round teams and a 101-player official candidate pool.
+- `data/normalized/normalized_2026_local_player_pool_124.json` contains the 124-player local answer-card candidate pool extracted from the official workbook.
+- `data/normalized/normalized_2026_player_feature_reference_124.json` contains the 124-player feature/parameter reference built from local 26-27 participant, measurement, agility, shooting, and historical Combine data.
+- `data/normalized/normalized_2026_online_player_list_reverification_20260623.json` reconciles the live NBA.com Prospects, NBA China draft board, Combine invite, Stats Anthro, Early-entry, and local 124-player pool counts.
 - `agent_expanded_recommended_board.json` contains 30 picks, 30 unique selected prospects, no duplicate players, and `noManualOverride: true`.
 - The current recommended scenario is `baseline`.
 - The current board health gate is passing: exactly 30 picks, no duplicates, and 1 low-confidence pick.
@@ -67,6 +70,22 @@ npm run dev:agent
 npm run build
 ```
 
+Watch late-breaking team-change news and official 1-60 draft-order shifts once per minute:
+
+```powershell
+npm run news:watch
+```
+
+Useful monitor variants:
+
+```powershell
+npm run news:watch -- --once
+npm run news:watch -- --official-only
+npm run news:watch -- --interval 30
+```
+
+The watcher checks NBA official sources first, including the official 2026 Draft Order page. It hashes the full 1-60 pick sequence, team ownership, and `from/via` pick-rights notes so pick-order changes are reported even when they are not written as a normal trade headline.
+
 For a plain frontend-only run:
 
 ```powershell
@@ -99,6 +118,7 @@ Current implemented pieces:
 - Retrieval ranking: uses local hashed-token embeddings, lexical matching, source weighting, and MMR reranking by default.
 - Optional embedding rerank: supports Bedrock Titan embeddings or DashScope/Qwen embeddings, with fallback to local hash embeddings.
 - Offline embedding index: run `npm run rag:build` with `DASHSCOPE_API_KEY` available to pre-slice source data and store DashScope `text-embedding-v4` vectors in `data/rag/*.json`; Lambda then only computes the query embedding at request time.
+- Candidate-pool supplement: RAG also reads `data/normalized/normalized_2026_local_player_pool_124.json`, `data/normalized/normalized_2026_player_feature_reference_124.json`, and `data/normalized/normalized_2026_online_player_list_reverification_20260623.json` so questions about the full local answer-card pool, Combine-style parameters, and online 101/73/78/71 source counts are not limited to the 101-row NBA.com official prospects capture.
 - Model providers: supports DeepSeek through a secret/API key or Bedrock through `MODEL_PROVIDER=bedrock`.
 - Health route: `GET /api/deepseek/health`.
 - Chat route: `POST /api/deepseek/chat`.
@@ -151,6 +171,12 @@ Current source artifacts:
 
 ```text
 data/final/expanded_import_bundle.json
+data/normalized/normalized_2026_local_player_pool_124.json
+data/normalized/normalized_2026_player_feature_reference_124.json
+data/normalized/normalized_2026_online_player_list_reverification_20260623.json
+data/reports/player_feature_parameter_reference_124_20260623.md
+data/reports/player_feature_parameter_reference_124_20260623.csv
+data/reports/online_full_player_list_reverification_20260623.md
 data/boards/expanded_strategy_boards_20260623.json
 data/final/milestone_answers.json
 data/reports/expanded_strategy_full_rerun_20260623.md

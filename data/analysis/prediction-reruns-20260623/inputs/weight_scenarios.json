@@ -1,0 +1,66 @@
+{
+  "generatedBy": "A6",
+  "round": 1,
+  "notes": [
+    "Base weights are adjusted by draft zone and team phase inside prediction.ts before normalization.",
+    "Use baseline as the default board; compare other scenarios for disputed picks."
+  ],
+  "scenarios": [
+    {
+      "id": "baseline",
+      "label": "balanced baseline",
+      "weights": {
+        "consensus": 35,
+        "need": 25,
+        "player": 20,
+        "upside": 10,
+        "intel": 10
+      },
+      "whenToUse": "Default first board before late breaking news.",
+      "risk": "May underreact to last-hour intel.",
+      "expectedImpactRange": "1-30"
+    },
+    {
+      "id": "consensus-heavy",
+      "label": "media consensus heavy",
+      "weights": {
+        "consensus": 50,
+        "need": 20,
+        "player": 15,
+        "upside": 5,
+        "intel": 10
+      },
+      "whenToUse": "When latest mock drafts are stable and team-specific data is weak.",
+      "risk": "Misses team-specific reaches or late-breaking moves.",
+      "expectedImpactRange": "1-14"
+    },
+    {
+      "id": "team-need-heavy",
+      "label": "team need heavy",
+      "weights": {
+        "consensus": 28,
+        "need": 38,
+        "player": 21,
+        "upside": 8,
+        "intel": 5
+      },
+      "whenToUse": "When team needs and priorityTags have been reviewed by A5.",
+      "risk": "Bad tags can create cascading wrong picks.",
+      "expectedImpactRange": "6-30"
+    },
+    {
+      "id": "late-intel-heavy",
+      "label": "late intel heavy",
+      "weights": {
+        "consensus": 30,
+        "need": 18,
+        "player": 15,
+        "upside": 7,
+        "intel": 30
+      },
+      "whenToUse": "Final hours with reliable updated mockHeat, medical, workout, or trade signals.",
+      "risk": "Overweights stale or noisy intel if source data is not refreshed.",
+      "expectedImpactRange": "10-30"
+    }
+  ]
+}

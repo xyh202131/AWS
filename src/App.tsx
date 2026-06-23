@@ -653,17 +653,62 @@ function PlayerPhoto({ prospect, label, language, variant = "table" }: PlayerPho
 
 function DraftOpsMark({ className = "draftops-mark" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-      <path className="draftops-mark-glow" d="M7 5h20.9C38 5 44 12.7 44 24s-6 19-16.1 19H7V5Z" />
-      <path className="draftops-mark-face" d="M7 5h20.9C38 5 44 12.7 44 24s-6 19-16.1 19H7V5Z" />
+    <svg className={className} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="draftopsMarkShell" x1="8" x2="58" y1="6" y2="57" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#68f7ff" />
+          <stop offset="0.48" stopColor="#18b8ff" />
+          <stop offset="1" stopColor="#5dffbf" />
+        </linearGradient>
+        <linearGradient id="draftopsMarkCore" x1="18" x2="48" y1="15" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#041923" />
+          <stop offset="1" stopColor="#081014" />
+        </linearGradient>
+        <radialGradient id="draftopsMarkAura" cx="0" cy="0" r="1" gradientTransform="matrix(36 32 -32 36 22 13)" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#9dfff1" stopOpacity="0.92" />
+          <stop offset="0.45" stopColor="#21dfff" stopOpacity="0.34" />
+          <stop offset="1" stopColor="#21dfff" stopOpacity="0" />
+        </radialGradient>
+        <filter id="draftopsMarkGlow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="2.2" result="blur" />
+          <feColorMatrix
+            in="blur"
+            result="glow"
+            values="0 0 0 0 0.05 0 0 0 0 0.95 0 0 0 0 1 0 0 0 0.82 0"
+          />
+          <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path className="draftops-mark-aura" d="M6 8h29.4C50.1 8 59 17.7 59 32s-8.9 24-23.6 24H6V8Z" />
+      <path className="draftops-mark-shell" d="M8 7h27.1C49.3 7 58 17.1 58 32s-8.7 25-22.9 25H8V7Z" />
+      <path className="draftops-mark-core" d="M16 15h18.3C45.2 15 52 21.6 52 32s-6.8 17-17.7 17H16V15Z" />
       <path
-        className="draftops-mark-inner"
+        className="draftops-mark-d"
         fillRule="evenodd"
-        d="M15 13h12.1C33.4 13 37 17.2 37 24s-3.6 11-9.9 11H15V13Zm8 8v6h3.8c1.9 0 3.1-1.1 3.1-3s-1.2-3-3.1-3H23Z"
+        d="M21 20h13.1C41.9 20 47 24.7 47 32s-5.1 12-12.9 12H21V20Zm9 9v6h4.1c2.4 0 3.9-1.1 3.9-3s-1.5-3-3.9-3H30Z"
       />
-      <path className="draftops-mark-notch" d="M7 5h8L7 13V5Z" />
-      <path className="draftops-mark-edge" d="M7 43h20.9C38 43 44 35.3 44 24" />
-      <path className="draftops-mark-scan" d="M7 39h14" />
+      <path className="draftops-mark-corner" d="M8 7h12.5L8 19.5V7Z" />
+      <g className="draftops-mark-board">
+        <path d="M16 51h18.8" />
+        <path d="M16 46h10.8" />
+        <path d="M16 41h6.6" />
+      </g>
+      <path className="draftops-mark-orbit orbit-main" d="M10 43c7.9-13.8 23.4-25.9 43-28" />
+      <path className="draftops-mark-orbit orbit-secondary" d="M13 22c8.6 7.8 22.6 11.7 39 10.8" />
+      <g className="draftops-mark-ball">
+        <circle cx="48" cy="15" r="7.2" />
+        <path d="M41.5 12.3c4.2 1.3 7.1 4.2 8.4 8" />
+        <path d="M50.4 8.6c-2.1 3.9-2.1 8.2 0 12.8" />
+        <path d="M42.5 17.3h11" />
+      </g>
+      <g className="draftops-mark-nodes">
+        <circle cx="17" cy="42" r="1.9" />
+        <circle cx="33" cy="26" r="1.7" />
+        <circle cx="54" cy="32.5" r="1.8" />
+      </g>
     </svg>
   );
 }
@@ -730,6 +775,7 @@ function App() {
   const insightRef = useRef<HTMLElement | null>(null);
   const filterRowRef = useRef<HTMLElement | null>(null);
   const chatDockRef = useRef<HTMLElement | null>(null);
+  const chatLogRef = useRef<HTMLDivElement | null>(null);
   const chatDragRef = useRef<{ pointerId: number; offsetX: number; offsetY: number } | null>(null);
   const chatMessageIdRef = useRef(0);
   const [language, setLanguage] = useState<Language>("zh");
@@ -961,6 +1007,16 @@ function App() {
     return `${prefix}-${chatMessageIdRef.current}`;
   };
 
+  const scrollChatToLatest = () => {
+    const chatLog = chatLogRef.current;
+    if (!chatLog) return;
+
+    chatLog.scrollTo({
+      top: chatLog.scrollHeight,
+      behavior: "auto",
+    });
+  };
+
   const askDeepSeek = async () => {
     const question = chatInput.trim();
     if (!question || isChatLoading) return;
@@ -1119,6 +1175,12 @@ function App() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [chatDockPosition]);
+
+  useEffect(() => {
+    if (!isChatOpen) return undefined;
+    const frame = window.requestAnimationFrame(scrollChatToLatest);
+    return () => window.cancelAnimationFrame(frame);
+  }, [chatMessages.length, isChatLoading, isChatOpen]);
 
   useGSAP(
     () => {
@@ -1780,7 +1842,7 @@ function App() {
               </button>
             </header>
 
-            <div className="chat-log" aria-live="polite">
+            <div className="chat-log" aria-live="polite" ref={chatLogRef}>
               {chatMessages.map((message) => (
                 <article className={`chat-message ${message.role}`} key={message.id}>
                   <span>{message.role === "assistant" ? "DeepSeek" : copy.you}</span>

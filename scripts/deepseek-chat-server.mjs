@@ -22,6 +22,8 @@ const knowledgePaths = [
   "data/reports/d8_source_quality_debate.md",
   "data/reports/raw_sources_registry_report.md",
   "data/reports/china_nba_draft_scrape_report_20260623.md",
+  "data/reports/player_feature_parameter_reference_124_20260623.md",
+  "data/reports/online_full_player_list_reverification_20260623.md",
   "data/raw/nba-official-2026-prospects-live.md",
   "data/raw/nba-official-2026-draft-order-live.md",
   "data/raw/china-nba-draft-20260623.md",
@@ -39,6 +41,9 @@ const structuredKnowledgePaths = [
   "data/raw/china-nba-draft-links-20260623.json",
   "data/normalized/normalized_2026_mock_lottery.json",
   "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/normalized/normalized_2026_local_player_pool_124.json",
+  "data/normalized/normalized_2026_player_feature_reference_124.json",
+  "data/normalized/normalized_2026_online_player_list_reverification_20260623.json",
   "data/normalized/normalized_2026_official_prospects_101.json",
   "data/normalized/normalized_2026_official_team_profiles_30.json",
   "data/normalized/normalized_2026_team_context.json",
@@ -148,6 +153,42 @@ const includesAlias = (text, alias) => {
   return normalizedAlias.length >= 3 && text.includes(normalizedAlias);
 };
 
+const chineseNumberValue = (value) => {
+  const text = String(value ?? "").trim();
+  if (!text) return null;
+  const digits = {
+    一: 1,
+    二: 2,
+    两: 2,
+    三: 3,
+    四: 4,
+    五: 5,
+    六: 6,
+    七: 7,
+    八: 8,
+    九: 9,
+  };
+  if (text === "十") return 10;
+  if (/^十[一二两三四五六七八九]$/.test(text)) return 10 + digits[text[1]];
+  if (/^[一二两三四五六七八九]十$/.test(text)) return digits[text[0]] * 10;
+  if (/^[一二两三四五六七八九]十[一二两三四五六七八九]$/.test(text)) {
+    return digits[text[0]] * 10 + digits[text[2]];
+  }
+  return digits[text] ?? null;
+};
+
+const explicitPickNumberFromQuestion = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  const digitMatch = text.match(/(?:#|pick\s*)\s*(\d{1,2})|(?:第\s*)?(\d{1,2})\s*(?:顺位|签位|号签)/i);
+  if (digitMatch) {
+    const value = Number(digitMatch[1] ?? digitMatch[2]);
+    if (Number.isFinite(value) && value >= 1 && value <= 60) return value;
+  }
+  const chineseMatch = text.match(/第?\s*([一二两三四五六七八九十]{1,3})\s*(?:顺位|签位|号签)/);
+  const chineseValue = chineseNumberValue(chineseMatch?.[1]);
+  return Number.isFinite(chineseValue) && chineseValue >= 1 && chineseValue <= 60 ? chineseValue : null;
+};
+
 const selectedPickAliases = (selectedPick) => {
   if (!selectedPick) return [];
   const player = String(selectedPick.prospect?.name ?? "");
@@ -168,12 +209,8 @@ const questionNamesSelectedPick = (question, selectedPick) => {
   const text = String(question ?? "").toLowerCase();
   if (!selectedPick || !text) return false;
 
-  const explicitPickNumbers = [
-    ...text.matchAll(/(?:#|pick\s*)\s*(\d{1,2})|(?:第\s*)?(\d{1,2})\s*(?:顺位|签位|号签)/g),
-  ]
-    .map((match) => Number(match[1] ?? match[2]))
-    .filter(Number.isFinite);
-  if (explicitPickNumbers.includes(Number(selectedPick.pick))) return true;
+  const explicitPickNumber = explicitPickNumberFromQuestion(text);
+  if (explicitPickNumber === Number(selectedPick.pick)) return true;
 
   return selectedPickAliases(selectedPick).some((alias) => includesAlias(text, alias));
 };
@@ -947,6 +984,11 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
   const modelLabel = getModelLabel(model);
   const maxTokens = Number(process.env.DEEPSEEK_CHAT_MAX_TOKENS ?? 1800);
   const context = providedContext ?? (await buildContext(selectedPickNumber));
+  const explicitPickNumber = explicitPickNumberFromQuestion(question);
+  const selectedPickOverrideUsed =
+    Number.isFinite(explicitPickNumber) &&
+    explicitPickNumber > 0 &&
+    Number(selectedPickNumber) !== explicitPickNumber;
   const pickFocusMode = selectedPickFocusMode({ question, selectedPick: context.selectedPick, selectedPickFocusActive });
   const selectedPickAvailable = pickFocusMode !== "inactive";
   const useSelectedPickContext = pickFocusMode === "direct";
@@ -955,7 +997,9 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
     selectedPick: selectedPickAvailable ? toDeepSeekSelectedPick(context.selectedPick) : null,
     selectedPickFocusMode: pickFocusMode,
     selectedPickUsage:
-      pickFocusMode === "direct"
+      selectedPickOverrideUsed
+        ? `用户文本明确要求第 ${explicitPickNumber} 顺位；已覆盖旧点击顺位上下文，必须围绕第 ${explicitPickNumber} 顺位回答。`
+        : pickFocusMode === "direct"
         ? "当前问题直接指向 selectedPick；回答应围绕该顺位、球队、球员、需求和风险。"
         : pickFocusMode === "background"
           ? "当前有点击栏目，但它只是界面背景参考；不要把全局、统计、架构、规则、整体策略问题限制到 selectedPick。"
@@ -1082,7 +1126,9 @@ const server = http.createServer(async (request, response) => {
         return;
       }
 
-      const selectedPickNumber = Number(body.selectedPickNumber ?? 1);
+      const bodySelectedPickNumber = Number(body.selectedPickNumber ?? 1);
+      const explicitPickNumber = explicitPickNumberFromQuestion(question);
+      const selectedPickNumber = explicitPickNumber ?? bodySelectedPickNumber;
       const context = await buildContext(selectedPickNumber);
       const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
       const codeModificationRequest = isDirectCodeModificationRequest(question);
@@ -1112,7 +1158,7 @@ const server = http.createServer(async (request, response) => {
         question,
         history: body.history,
         selectedPickNumber,
-        selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
+        selectedPickFocusActive: Boolean(body.selectedPickFocusActive) || Boolean(explicitPickNumber),
         context,
       });
       sendJson(request, response, 200, result);

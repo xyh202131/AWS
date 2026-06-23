@@ -1,0 +1,1326 @@
+{
+  "schemaVersion": "draftops.local_player_pool_124.v1",
+  "generatedAt": "2026-06-23T12:37:01.665Z",
+  "generatedBy": "local xlsx XML extraction via Python standard library",
+  "scope": "DraftCode24 answer-card complete local player pool from sheet 球员池_勿修改; used as competition candidate-pool evidence, not as official NBA.com prospect publication.",
+  "sources": {
+    "primaryWorkbook": {
+      "path": "数据/上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
+      "sha256": "1160ED195D3229AAF591EF4087F223D41D7219B4EE1FBD8602BAAE80D4F63ABE",
+      "sheet": "球员池_勿修改",
+      "header": {
+        "1": "序号",
+        "2": "姓名",
+        "3": "位置",
+        "4": "学校/俱乐部",
+        "5": "国家/地区"
+      }
+    },
+    "predictionSheet": {
+      "sheet": "②选秀名单预测",
+      "prefilledPredictionCount": 2,
+      "prefilledPredictions": [
+        {
+          "pick": 1,
+          "team": "Washington Wizards",
+          "playerNameZh": "AJ 迪班萨",
+          "sourceRow": 3
+        },
+        {
+          "pick": 2,
+          "team": "Utah Jazz",
+          "playerNameZh": "达林 彼得森",
+          "sourceRow": 4
+        }
+      ]
+    }
+  },
+  "validation": {
+    "expectedPlayerCount": 124,
+    "actualPlayerCount": 124,
+    "headerRow": {
+      "1": "序号",
+      "2": "姓名",
+      "3": "位置",
+      "4": "学校/俱乐部",
+      "5": "国家/地区"
+    },
+    "firstOrdinal": 1,
+    "lastOrdinal": 124,
+    "missingOrdinalCount": 0,
+    "duplicateOrdinals": [],
+    "duplicateNames": [
+      "纳撒尼尔 阿门特"
+    ],
+    "missingRequiredFields": [],
+    "prefilledPredictionCoverage": {
+      "checked": 2,
+      "missingFromPlayerPool": []
+    },
+    "countryRegionDashCount": 44,
+    "duplicateNameRows": [
+      {
+        "nameZh": "纳撒尼尔 阿门特",
+        "occurrences": [
+          {
+            "ordinal": 67,
+            "sourceRow": 68,
+            "positionZh": "PF",
+            "schoolClubZh": "-",
+            "countryRegionZh": "-"
+          },
+          {
+            "ordinal": 84,
+            "sourceRow": 85,
+            "positionZh": "前锋",
+            "schoolClubZh": "田纳西大学",
+            "countryRegionZh": "美国"
+          }
+        ]
+      }
+    ],
+    "status": "CHECK_SOURCE_DUPLICATE_NAME"
+  },
+  "prospects": [
+    {
+      "ordinal": 1,
+      "nameZh": "AJ 迪班萨",
+      "positionZh": "前锋",
+      "schoolClubZh": "杨百翰大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 2,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 2,
+      "nameZh": "乌戈纳 奥尼恩索",
+      "positionZh": "中锋",
+      "schoolClubZh": "弗吉尼亚大学",
+      "countryRegionZh": "尼日利亚",
+      "sourceRow": 3,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 3,
+      "nameZh": "乔舒亚 杰弗森",
+      "positionZh": "前锋",
+      "schoolClubZh": "爱荷华州立大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 4,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 4,
+      "nameZh": "亚克塞尔 伦德伯格",
+      "positionZh": "前锋",
+      "schoolClubZh": "密歇根大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 5,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 5,
+      "nameZh": "亚历克斯 卡拉班",
+      "positionZh": "前锋",
+      "schoolClubZh": "康涅狄格大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 6,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 6,
+      "nameZh": "亨利 维萨尔",
+      "positionZh": "中锋",
+      "schoolClubZh": "北卡罗来纳大学",
+      "countryRegionZh": "爱沙尼亚",
+      "sourceRow": 7,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 7,
+      "nameZh": "以赛亚 埃文斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "杜克大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 8,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 8,
+      "nameZh": "以赛亚 尼尔森",
+      "positionZh": "前锋",
+      "schoolClubZh": "南佛罗里达大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 9,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 9,
+      "nameZh": "伊曼纽尔 夏普",
+      "positionZh": "后卫",
+      "schoolClubZh": "休斯顿大学",
+      "countryRegionZh": "以色列",
+      "sourceRow": 10,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 10,
+      "nameZh": "克里斯 塞纳克",
+      "positionZh": "前锋",
+      "schoolClubZh": "休斯顿大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 11,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 11,
+      "nameZh": "克里斯蒂安 安德森",
+      "positionZh": "后卫",
+      "schoolClubZh": "德克萨斯理工大学",
+      "countryRegionZh": "-",
+      "sourceRow": 12,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 12,
+      "nameZh": "凯兰 博斯韦尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "伊利诺伊大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 13,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 13,
+      "nameZh": "凯莱布 威尔逊",
+      "positionZh": "前锋",
+      "schoolClubZh": "北卡罗来纳大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 14,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 14,
+      "nameZh": "卡梅隆 卡尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "贝勒大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 15,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 15,
+      "nameZh": "卡梅隆 布泽尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "杜克大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 16,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 16,
+      "nameZh": "卡里姆 洛佩兹",
+      "positionZh": "前锋",
+      "schoolClubZh": "墨西哥",
+      "countryRegionZh": "-",
+      "sourceRow": 17,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 17,
+      "nameZh": "埃布卡 奥科里",
+      "positionZh": "后卫",
+      "schoolClubZh": "斯坦福大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 18,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 18,
+      "nameZh": "基肖恩 霍尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "奥本大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 19,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 19,
+      "nameZh": "基顿 瓦格勒",
+      "positionZh": "后卫",
+      "schoolClubZh": "伊利诺伊大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 20,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 20,
+      "nameZh": "奥泰加 奥韦",
+      "positionZh": "后卫",
+      "schoolClubZh": "肯塔基大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 21,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 21,
+      "nameZh": "小塔里斯 里德",
+      "positionZh": "中锋",
+      "schoolClubZh": "康涅狄格大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 22,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 22,
+      "nameZh": "小拉巴伦 菲隆",
+      "positionZh": "后卫",
+      "schoolClubZh": "阿拉巴马大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 23,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 23,
+      "nameZh": "小莫雷兹 约翰逊",
+      "positionZh": "前锋",
+      "schoolClubZh": "密歇根大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 24,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 24,
+      "nameZh": "尼克 博伊德",
+      "positionZh": "后卫",
+      "schoolClubZh": "威斯康星大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 25,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 25,
+      "nameZh": "尼克 马丁内利",
+      "positionZh": "前锋",
+      "schoolClubZh": "西北大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 26,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 26,
+      "nameZh": "巴巴 米勒",
+      "positionZh": "前锋",
+      "schoolClubZh": "辛辛那提大学",
+      "countryRegionZh": "西班牙",
+      "sourceRow": 27,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 27,
+      "nameZh": "布赖斯 霍普金斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "圣约翰大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 28,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 28,
+      "nameZh": "布雷登 伯里斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "亚利桑那大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 29,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 29,
+      "nameZh": "布雷登 史密斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "普渡大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 30,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 30,
+      "nameZh": "布鲁斯 索顿",
+      "positionZh": "后卫",
+      "schoolClubZh": "俄亥俄州立大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 31,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 31,
+      "nameZh": "彼得 祖德尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "迈阿密大学（俄亥俄州）",
+      "countryRegionZh": "美国",
+      "sourceRow": 32,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 32,
+      "nameZh": "戴林 斯温",
+      "positionZh": "后卫",
+      "schoolClubZh": "德克萨斯大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 33,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 33,
+      "nameZh": "托比 拉瓦尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "弗吉尼亚理工大学",
+      "countryRegionZh": "英国",
+      "sourceRow": 34,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 34,
+      "nameZh": "托比 阿瓦卡",
+      "positionZh": "前锋",
+      "schoolClubZh": "亚利桑那大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 35,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 35,
+      "nameZh": "拉斐尔 卡斯特罗",
+      "positionZh": "前锋",
+      "schoolClubZh": "乔治华盛顿大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 36,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 36,
+      "nameZh": "本内特 斯特茨",
+      "positionZh": "后卫",
+      "schoolClubZh": "爱荷华大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 37,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 37,
+      "nameZh": "杰登 布拉德利",
+      "positionZh": "后卫",
+      "schoolClubZh": "亚利桑那大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 38,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 38,
+      "nameZh": "杰登 昆坦斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "肯塔基大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 39,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 39,
+      "nameZh": "汉内斯 施泰因巴赫",
+      "positionZh": "前锋",
+      "schoolClubZh": "华盛顿大学",
+      "countryRegionZh": "德国",
+      "sourceRow": 40,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 40,
+      "nameZh": "泰勒 尼科尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "范德比尔特大学‌",
+      "countryRegionZh": "美国",
+      "sourceRow": 41,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 41,
+      "nameZh": "泰勒 比洛多",
+      "positionZh": "前锋",
+      "schoolClubZh": "UCLA",
+      "countryRegionZh": "美国",
+      "sourceRow": 42,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 42,
+      "nameZh": "特雷 考夫曼-雷恩",
+      "positionZh": "前锋",
+      "schoolClubZh": "普渡大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 43,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 43,
+      "nameZh": "特雷冯 布拉齐尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "阿肯色大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 44,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 44,
+      "nameZh": "狄龙 米切尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "圣约翰大学",
+      "countryRegionZh": "-",
+      "sourceRow": 45,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 45,
+      "nameZh": "祖比 埃吉奥福尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "圣约翰大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 46,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 46,
+      "nameZh": "科阿 皮特",
+      "positionZh": "前锋",
+      "schoolClubZh": "亚利桑那大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 47,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 47,
+      "nameZh": "米洛斯 尤赞",
+      "positionZh": "后卫",
+      "schoolClubZh": "休斯顿大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 48,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 48,
+      "nameZh": "莱恩 康韦尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "路易斯维尔大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 49,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 49,
+      "nameZh": "费利克斯 奥克帕拉",
+      "positionZh": "前锋",
+      "schoolClubZh": "田纳西大学",
+      "countryRegionZh": "尼日利亚",
+      "sourceRow": 50,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 50,
+      "nameZh": "贾科比 吉莱斯皮",
+      "positionZh": "后卫",
+      "schoolClubZh": "田纳西大学",
+      "countryRegionZh": "-",
+      "sourceRow": 51,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 51,
+      "nameZh": "达林 彼得森",
+      "positionZh": "后卫",
+      "schoolClubZh": "堪萨斯大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 52,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 52,
+      "nameZh": "达柳斯 阿卡夫",
+      "positionZh": "后卫",
+      "schoolClubZh": "阿肯色大学",
+      "countryRegionZh": "-",
+      "sourceRow": 53,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 53,
+      "nameZh": "金斯顿 弗莱明斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "休斯顿大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 54,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 54,
+      "nameZh": "阿伦 格雷夫斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "圣塔克拉拉大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 55,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 55,
+      "nameZh": "阿达伊 马拉",
+      "positionZh": "中锋",
+      "schoolClubZh": "密歇根大学",
+      "countryRegionZh": "西班牙",
+      "sourceRow": 56,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 56,
+      "nameZh": "马利克 托马斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "阿肯色大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 57,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 57,
+      "nameZh": "马利奇 布朗",
+      "positionZh": "前锋",
+      "schoolClubZh": "杜克大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 58,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 58,
+      "nameZh": "塞尔吉奥 德拉雷亚",
+      "positionZh": "前锋",
+      "schoolClubZh": "西班牙",
+      "countryRegionZh": "西班牙",
+      "sourceRow": 59,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 59,
+      "nameZh": "安德烈 斯托亚科维奇",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 60,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 60,
+      "nameZh": "小杰里米 费尔斯",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 61,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 61,
+      "nameZh": "小比利 里士满三世",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 62,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 62,
+      "nameZh": "弗洛里 比敦加",
+      "positionZh": "C",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 63,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 63,
+      "nameZh": "杰克 卡伊尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "德国",
+      "countryRegionZh": "德国",
+      "sourceRow": 64,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 64,
+      "nameZh": "泰勒 坦纳",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 65,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 65,
+      "nameZh": "米兰 莫姆契洛维奇",
+      "positionZh": "PF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 66,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 66,
+      "nameZh": "约翰 布莱克威尔",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 67,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 67,
+      "nameZh": "纳撒尼尔 阿门特",
+      "positionZh": "PF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 68,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 68,
+      "nameZh": "路易吉 苏伊戈",
+      "positionZh": "中锋",
+      "schoolClubZh": "意大利",
+      "countryRegionZh": "意大利",
+      "sourceRow": 69,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 69,
+      "nameZh": "通德 耶苏福",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 70,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 70,
+      "nameZh": "里奇 桑德斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "杨百翰大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 71,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 71,
+      "nameZh": "阿伦 恩克鲁玛",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 72,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 72,
+      "nameZh": "阿马里 阿伦",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 73,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 73,
+      "nameZh": "雅各布 科菲",
+      "positionZh": "PF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 74,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 74,
+      "nameZh": "马修 埃布尔",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 75,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 75,
+      "nameZh": "马拉奇 莫雷诺",
+      "positionZh": "C",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 76,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 76,
+      "nameZh": "鲁本 钦耶卢",
+      "positionZh": "C",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 77,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 77,
+      "nameZh": "小克里斯托弗 布朗",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 78,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 78,
+      "nameZh": "杰登 哈里斯",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-",
+      "sourceRow": 79,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 79,
+      "nameZh": "AJ 施托尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "密西西比大学",
+      "countryRegionZh": "-",
+      "sourceRow": 80,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 80,
+      "nameZh": "BJ 爱德华兹",
+      "positionZh": "后卫",
+      "schoolClubZh": "南卫理公会大学",
+      "countryRegionZh": "-",
+      "sourceRow": 81,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 81,
+      "nameZh": "亚当 阿塔姆纳",
+      "positionZh": "后卫",
+      "schoolClubZh": "法国",
+      "countryRegionZh": "-",
+      "sourceRow": 82,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 82,
+      "nameZh": "克肖恩 墨菲",
+      "positionZh": "前锋",
+      "schoolClubZh": "奥本大学",
+      "countryRegionZh": "-",
+      "sourceRow": 83,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 83,
+      "nameZh": "内特 比特尔",
+      "positionZh": "中锋",
+      "schoolClubZh": "俄勒冈大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 84,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 84,
+      "nameZh": "纳撒尼尔 阿门特",
+      "positionZh": "前锋",
+      "schoolClubZh": "田纳西大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 85,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 85,
+      "nameZh": "凯德 泰森",
+      "positionZh": "后卫",
+      "schoolClubZh": "明尼苏达大学",
+      "countryRegionZh": "-",
+      "sourceRow": 86,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 86,
+      "nameZh": "卡迪尔 科普兰",
+      "positionZh": "后卫",
+      "schoolClubZh": "北卡罗来纳州立大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 87,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 87,
+      "nameZh": "塔克 德弗里斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "印第安纳大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 88,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 88,
+      "nameZh": "塔明 利普西",
+      "positionZh": "后卫",
+      "schoolClubZh": "爱荷华州立大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 89,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 89,
+      "nameZh": "多诺万 登特",
+      "positionZh": "后卫",
+      "schoolClubZh": "UCLA",
+      "countryRegionZh": "-",
+      "sourceRow": 90,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 90,
+      "nameZh": "奥斯卡 克拉夫",
+      "positionZh": "中锋",
+      "schoolClubZh": "普渡大学",
+      "countryRegionZh": "澳大利亚",
+      "sourceRow": 91,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 91,
+      "nameZh": "奥格年 斯尔曾蒂奇",
+      "positionZh": "前锋",
+      "schoolClubZh": "塞尔维亚",
+      "countryRegionZh": "-",
+      "sourceRow": 92,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 92,
+      "nameZh": "威廉 凯尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "雪城大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 93,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 93,
+      "nameZh": "小梅尔文 康斯尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "堪萨斯大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 94,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 94,
+      "nameZh": "小欧内斯特 乌德",
+      "positionZh": "中锋",
+      "schoolClubZh": "迈阿密大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 95,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 95,
+      "nameZh": "小雅龙 皮埃尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "南卫理公会大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 96,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 96,
+      "nameZh": "布赖森 塔克",
+      "positionZh": "前锋",
+      "schoolClubZh": "华盛顿大学",
+      "countryRegionZh": "-",
+      "sourceRow": 97,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 97,
+      "nameZh": "帕夫莱 巴奇科",
+      "positionZh": "中锋",
+      "schoolClubZh": "塞尔维亚",
+      "countryRegionZh": "-",
+      "sourceRow": 98,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 98,
+      "nameZh": "弗塞沃落德 伊先科",
+      "positionZh": "后卫",
+      "schoolClubZh": "俄罗斯",
+      "countryRegionZh": "俄罗斯",
+      "sourceRow": 99,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 99,
+      "nameZh": "弗朗西斯科 法拉利",
+      "positionZh": "前锋",
+      "schoolClubZh": "意大利",
+      "countryRegionZh": "意大利",
+      "sourceRow": 100,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 100,
+      "nameZh": "弗莱彻 洛耶尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "普渡大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 101,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 101,
+      "nameZh": "戴米恩 科林斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "南佛罗里达大学",
+      "countryRegionZh": "-",
+      "sourceRow": 102,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 102,
+      "nameZh": "拉贾伊 琼斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "佛罗里达州立大学",
+      "countryRegionZh": "-",
+      "sourceRow": 103,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 103,
+      "nameZh": "拉马尔 威尔克森",
+      "positionZh": "后卫",
+      "schoolClubZh": "印第安纳大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 104,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 104,
+      "nameZh": "本 亨歇尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "澳大利亚",
+      "countryRegionZh": "-",
+      "sourceRow": 105,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 105,
+      "nameZh": "杰登 亨利",
+      "positionZh": "后卫",
+      "schoolClubZh": "大峡谷大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 106,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 106,
+      "nameZh": "泰恩 格兰特-福斯特",
+      "positionZh": "后卫",
+      "schoolClubZh": "冈萨加大学",
+      "countryRegionZh": "-",
+      "sourceRow": 107,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 107,
+      "nameZh": "泽维安 李",
+      "positionZh": "后卫",
+      "schoolClubZh": "佛罗里达大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 108,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 108,
+      "nameZh": "特伦斯 阿西诺",
+      "positionZh": "后卫",
+      "schoolClubZh": "北卡罗来纳州立大学",
+      "countryRegionZh": "-",
+      "sourceRow": 109,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 109,
+      "nameZh": "特雷 怀特",
+      "positionZh": "后卫",
+      "schoolClubZh": "堪萨斯大学",
+      "countryRegionZh": "-",
+      "sourceRow": 110,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 110,
+      "nameZh": "穆罕默德 费伊",
+      "positionZh": "中锋",
+      "schoolClubZh": "塞内加尔",
+      "countryRegionZh": "-",
+      "sourceRow": 111,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 111,
+      "nameZh": "穆罕默德 阿米尼",
+      "positionZh": "后卫",
+      "schoolClubZh": "伊朗",
+      "countryRegionZh": "伊朗",
+      "sourceRow": 112,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 112,
+      "nameZh": "米伊卡 穆里宁",
+      "positionZh": "前锋",
+      "schoolClubZh": "芬兰",
+      "countryRegionZh": "-",
+      "sourceRow": 113,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 113,
+      "nameZh": "约什 迪克斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "克雷顿大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 114,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 114,
+      "nameZh": "莱利 库格尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "中佛罗里达大学",
+      "countryRegionZh": "-",
+      "sourceRow": 115,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 115,
+      "nameZh": "蒂埃里 达尔兰",
+      "positionZh": "后卫",
+      "schoolClubZh": "圣塔克拉拉大学",
+      "countryRegionZh": "-",
+      "sourceRow": 116,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 116,
+      "nameZh": "赛斯 特林布尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "北卡罗来纳大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 117,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 117,
+      "nameZh": "达什 丹尼尔斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "澳大利亚",
+      "countryRegionZh": "-",
+      "sourceRow": 118,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 118,
+      "nameZh": "达里恩 威廉姆斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "北卡罗来纳州立大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 119,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 119,
+      "nameZh": "迈克尔 布朗",
+      "positionZh": "后卫",
+      "schoolClubZh": "路易斯维尔大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 120,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 120,
+      "nameZh": "迈克尔 阿贾伊",
+      "positionZh": "前锋",
+      "schoolClubZh": "巴特勒大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 121,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 121,
+      "nameZh": "迈克尔 鲁日奇",
+      "positionZh": "中锋",
+      "schoolClubZh": "克罗地亚",
+      "countryRegionZh": "-",
+      "sourceRow": 122,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 122,
+      "nameZh": "马克 米切尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "密苏里大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 123,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 123,
+      "nameZh": "马利克 尤因",
+      "positionZh": "前锋",
+      "schoolClubZh": "阿肯色大学",
+      "countryRegionZh": "-",
+      "sourceRow": 124,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    },
+    {
+      "ordinal": 124,
+      "nameZh": "马利克 雷诺",
+      "positionZh": "前锋",
+      "schoolClubZh": "迈阿密大学",
+      "countryRegionZh": "美国",
+      "sourceRow": 125,
+      "sourceSheet": "球员池_勿修改",
+      "sourceId": "draftcode24-answer-card-player-pool"
+    }
+  ]
+}

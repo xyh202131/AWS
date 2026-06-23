@@ -12,6 +12,13 @@ const dashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DAS
 const maxChunksPerSource = Number(process.env.DRAFTOPS_RAG_INDEX_MAX_CHUNKS_PER_SOURCE ?? "24");
 const chunkSize = Number(process.env.DRAFTOPS_RAG_INDEX_CHUNK_SIZE ?? "1100");
 const maxEmbeddingChars = Number(process.env.DRAFTOPS_RAG_DASHSCOPE_EMBEDDING_MAX_CHARS ?? "6000");
+const sourceChunkLimit = (relativePath) => {
+  if (/normalized_2026_local_player_pool_124\.json$/.test(relativePath)) return 160;
+  if (/normalized_2026_player_feature_reference_124\.json$/.test(relativePath)) return 180;
+  if (/normalized_2026_online_player_list_reverification_20260623\.json$/.test(relativePath)) return 180;
+  if (/normalized_2026_official_prospects_101\.json$/.test(relativePath)) return 130;
+  return maxChunksPerSource;
+};
 
 const indexSpecs = [
   {
@@ -54,6 +61,9 @@ const indexSpecs = [
     description: "Prospect boards, official reconciliation, media, and raw-source evidence.",
     sources: [
       "data/normalized/normalized_2026_official_prospects_101.json",
+      "data/normalized/normalized_2026_local_player_pool_124.json",
+      "data/normalized/normalized_2026_player_feature_reference_124.json",
+      "data/normalized/normalized_2026_online_player_list_reverification_20260623.json",
       "data/normalized/normalized_2026_prospect_big_board.json",
       "data/normalized/normalized_2026_mock_lottery.json",
       "data/normalized/normalized_china_nba_draft_board_20260623.json",
@@ -64,6 +74,8 @@ const indexSpecs = [
       "data/reports/official_double_agent_roster_audit_summary.md",
       "data/reports/nba_official_expanded_data_audit_20260623.md",
       "data/reports/china_nba_draft_scrape_report_20260623.md",
+      "data/reports/player_feature_parameter_reference_124_20260623.md",
+      "data/reports/online_full_player_list_reverification_20260623.md",
       "data/raw/nba-official-2026-prospects-live.md",
       "data/raw/china-nba-draft-20260623.md",
     ],
@@ -171,15 +183,15 @@ const structuredChunk = ({ source, category, path, value, label }) => ({
   text: [label ? `Record: ${label}` : null, `Path: ${path}`, compactJson(value)].filter(Boolean).join("\n"),
 });
 
-const collectStructuredChunks = (value, { source, category, path = "$", chunks = [], depth = 0 }) => {
-  if (chunks.length >= maxChunksPerSource || depth > 5 || value == null) return chunks;
+const collectStructuredChunks = (value, { source, category, path = "$", chunks = [], depth = 0, limit = maxChunksPerSource }) => {
+  if (chunks.length >= limit || depth > 5 || value == null) return chunks;
   if (Array.isArray(value)) {
     value.forEach((item, index) => {
-      if (chunks.length >= maxChunksPerSource) return;
+      if (chunks.length >= limit) return;
       if (item && typeof item === "object") {
         const itemPath = `${path}[${index}]`;
         chunks.push(structuredChunk({ source, category, path: itemPath, value: item, label: labelForRecord(item, itemPath) }));
-        collectStructuredChunks(item, { source, category, path: itemPath, chunks, depth: depth + 1 });
+        collectStructuredChunks(item, { source, category, path: itemPath, chunks, depth: depth + 1, limit });
       }
     });
     return chunks;
@@ -187,9 +199,9 @@ const collectStructuredChunks = (value, { source, category, path = "$", chunks =
   if (typeof value !== "object") return chunks;
 
   for (const [key, child] of Object.entries(value)) {
-    if (chunks.length >= maxChunksPerSource) break;
+    if (chunks.length >= limit) break;
     if (Array.isArray(child) || (child && typeof child === "object" && depth < 3)) {
-      collectStructuredChunks(child, { source, category, path: `${path}.${key}`, chunks, depth: depth + 1 });
+      collectStructuredChunks(child, { source, category, path: `${path}.${key}`, chunks, depth: depth + 1, limit });
     }
   }
   return chunks;
@@ -198,16 +210,17 @@ const collectStructuredChunks = (value, { source, category, path = "$", chunks =
 const readSourceChunks = async (relativePath, category) => {
   const absolutePath = resolve(rootDir, relativePath);
   if (!existsSync(absolutePath)) return [];
+  const limit = sourceChunkLimit(relativePath);
   const content = await readFile(absolutePath, "utf8");
   const trimmed = content.trim();
   if (!trimmed) return [];
 
   try {
     const parsed = JSON.parse(trimmed);
-    return collectStructuredChunks(parsed, { source: relativePath, category }).slice(0, maxChunksPerSource);
+    return collectStructuredChunks(parsed, { source: relativePath, category, limit }).slice(0, limit);
   } catch {
     return chunkText(content)
-      .slice(0, maxChunksPerSource)
+      .slice(0, limit)
       .map((text, index) => ({
         id: `${category}:${relativePath}:$text[${index}]`,
         category,

@@ -1,0 +1,5412 @@
+{
+  "schemaVersion": "draftops.online_player_list_reverification.v1",
+  "generatedAt": "2026-06-23T13:00:00.700Z",
+  "scope": "Live online re-verification of 2026 NBA player-list sources against the local 124-player answer-card pool. Raw local data is not modified.",
+  "sources": {
+    "nbaProspects": {
+      "label": "NBA.com 2026 Draft Prospects",
+      "url": "https://www.nba.com/draft/2026/prospects",
+      "path": ".firecrawl/online-reverify-20260623-nba-prospects.md",
+      "sha256": "A51DA400E31100E1FBD33F2AB20B3EED5792D3808F13368EB4100CD08A5C454A"
+    },
+    "chinaDraft": {
+      "label": "NBA China draft board",
+      "url": "https://china.nba.cn/draft/",
+      "path": ".firecrawl/online-reverify-20260623-china-draft.md",
+      "sha256": "4F19F446670BD813D172DD9E8CA9B62FEE22314F1F4D9BD0F81F3022DC974819"
+    },
+    "combineInvite": {
+      "label": "NBA.com 73-player AWS NBA Draft Combine invite article",
+      "url": "https://www.nba.com/news/nba-announces-73-players-invited-to-2026-nba-draft-combine",
+      "path": ".firecrawl/online-reverify-20260623-combine-invite-73.md",
+      "sha256": "FACADC47C717228AAA9EA4E2ABCBBE909D404B05E3D2B6653576AA283357F22A"
+    },
+    "combineDataHub": {
+      "label": "NBA.com AWS NBA Draft Combine Data Hub article",
+      "url": "https://www.nba.com/news/2026-aws-nba-draft-combine-data-hub-everything-you-need-to-know",
+      "path": ".firecrawl/online-reverify-20260623-combine-data-hub.md",
+      "sha256": "4FC03341EA2CCC50A4EB92F3B567196A2979EC7BD8516FED9BAD80BC29C439D8"
+    },
+    "statsCombine": {
+      "label": "NBA Stats Draft Combine summary",
+      "url": "https://www.nba.com/stats/draft/combine",
+      "path": ".firecrawl/online-reverify-20260623-nba-stats-combine.md",
+      "sha256": "A0F8653C38D48E58608CE785D065496C05CAECE4108B34BAC0124637EB69C428"
+    },
+    "statsAnthro": {
+      "label": "NBA Stats Draft Combine Anthro",
+      "url": "https://www.nba.com/stats/draft/combine-anthro",
+      "path": ".firecrawl/online-reverify-20260623-nba-stats-combine-anthro.md",
+      "sha256": "EA95591EE2DE9633EDBB7B6047296A67330F099AF817D03BD12CB8770905DE38"
+    },
+    "earlyEntry": {
+      "label": "NBA.com 2026 early entry candidates",
+      "url": "https://www.nba.com/news/2026-nba-draft-early-entry-candidates",
+      "path": ".firecrawl/online-reverify-20260623-early-entry-candidates.md",
+      "sha256": "8C200BEC8849AEDCA35746DD7FC1449E7336ED23101C214C8E0EC91F12382A7B"
+    },
+    "savedOfficialProspects": {
+      "label": "Saved normalized official prospects",
+      "path": "data/normalized/normalized_2026_official_prospects_101.json",
+      "sha256": "7FD569D675DD0983A37533E8F2E8F4AD2BC5BDC59C86028A1BD925301212196A"
+    },
+    "localPlayerPool": {
+      "label": "Local answer-card 124-player pool",
+      "path": "data/normalized/normalized_2026_local_player_pool_124.json",
+      "sha256": "B08C276C6EF8A64B2026EC12B88B317237DBBF57E2F471E76C3178A8F13598B7"
+    },
+    "localFeatureReference": {
+      "label": "Local 124-player feature reference",
+      "path": "data/normalized/normalized_2026_player_feature_reference_124.json",
+      "sha256": "294F30DFC7606B406D3941F54D0ADDEDA0DCBF18C9FB702E48EFA2E8EA037BB9"
+    }
+  },
+  "validation": {
+    "nbaProspects": {
+      "currentRowCount": 101,
+      "savedRowCount": 101,
+      "duplicateNames": [],
+      "missingRequiredFieldRows": [],
+      "addedVsSaved": [],
+      "removedVsSaved": []
+    },
+    "chinaDraft": {
+      "rowCount": 60,
+      "populatedPickCount": 3,
+      "top30PopulatedPickCount": 3,
+      "emptyTop30Picks": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "populatedPicks": [
+        {
+          "pick": 1,
+          "team": "华盛顿 奇才",
+          "pickTrade": "",
+          "draftDayTradeTo": "Atlanta Hawks",
+          "playerNameZh": "aj 迪班萨",
+          "playerUrl": "https://china.nba.cn/draft/player.htm?name=AJDybantsa",
+          "details": "前锋/BYU2.06米210",
+          "populated": true
+        },
+        {
+          "pick": 2,
+          "team": "犹他 爵士",
+          "pickTrade": "",
+          "draftDayTradeTo": "",
+          "playerNameZh": "达林 彼得森",
+          "playerUrl": "https://china.nba.cn/draft/player.htm?name=DarrynPeterson",
+          "details": "后卫/Kansas1.98米205",
+          "populated": true
+        },
+        {
+          "pick": 3,
+          "team": "孟菲斯 灰熊",
+          "pickTrade": "",
+          "draftDayTradeTo": "",
+          "playerNameZh": "卡梅隆 布泽尔",
+          "playerUrl": "https://china.nba.cn/draft/player.htm?name=CameronBoozer",
+          "details": "前锋/Duke2.06米250",
+          "populated": true
+        }
+      ],
+      "topThreeLocalCoverage": [
+        {
+          "pick": 1,
+          "playerNameZh": "aj 迪班萨",
+          "foundInLocalPool": true
+        },
+        {
+          "pick": 2,
+          "playerNameZh": "达林 彼得森",
+          "foundInLocalPool": true
+        },
+        {
+          "pick": 3,
+          "playerNameZh": "卡梅隆 布泽尔",
+          "foundInLocalPool": true
+        }
+      ]
+    },
+    "combineInvite": {
+      "rowCount": 73,
+      "duplicateNames": []
+    },
+    "statsAnthro": {
+      "rowCount": 78,
+      "duplicateNames": [],
+      "missingMeasurementRows": [
+        {
+          "ordinal": 24,
+          "name": "Sergio De Larrea"
+        },
+        {
+          "ordinal": 33,
+          "name": "Jaden Harris"
+        },
+        {
+          "ordinal": 39,
+          "name": "Jack Kayil"
+        }
+      ]
+    },
+    "statsCombineSummary": {
+      "uniqueLinkedPlayerCount": 49
+    },
+    "earlyEntry": {
+      "rowCount": 71,
+      "nonInternationalCount": 60,
+      "internationalCount": 11
+    },
+    "localPlayerPool": {
+      "rowCount": 124,
+      "duplicateNames": [
+        "纳撒尼尔 阿门特"
+      ],
+      "firstOrdinal": 1,
+      "lastOrdinal": 124,
+      "missingOrdinalCount": 0
+    },
+    "crossSource": {
+      "combineInviteNotInStatsAnthro": [
+        "Mikel Brown Jr.",
+        "Juke Harris"
+      ],
+      "statsAnthroNotInCombineInvite": [
+        "Christopher Brown Jr",
+        "Rafael Castro",
+        "Jacob Cofie",
+        "Jaden Harris",
+        "Bryce Hopkins",
+        "Trey Kaufman-Renn",
+        "Aaron Nkrumah"
+      ],
+      "earlyEntryNotInProspects": [
+        "Matt Able",
+        "Amari Allen",
+        "Alijah Arenas",
+        "Flory Bidunga",
+        "Finley Bizjack",
+        "John Blackwell",
+        "Shane Blakeney",
+        "Anton Bonke",
+        "Rowan Brumbaugh",
+        "Elliot Cadeau",
+        "Rueben Chinyelu",
+        "Jacob Cofie",
+        "Cruz Davis",
+        "Kennard Davis Jr.",
+        "Keanu Dawes",
+        "Gabe Dynes",
+        "Eian Elmer",
+        "Jeremy Fears Jr.",
+        "Colby Garland",
+        "Juke Harris",
+        "Isiah Harwell",
+        "Lou Hutchinson",
+        "Acaden Lewis",
+        "Milan Momcilovic",
+        "Paulius Murauskas",
+        "Dennis Parker Jr.",
+        "Sebastian Rancik",
+        "Billy Richmond III",
+        "Andrej Stojakovic",
+        "Tyler Tanner",
+        "Aiden Tobiason",
+        "Bryson Tucker",
+        "LeJuan Watts",
+        "Tounde Yessoufou",
+        "Pavle Backo",
+        "Francesco Ferrari",
+        "Alexandros Samodurov",
+        "Luigi Suigo"
+      ],
+      "prospectsNotInEarlyEntry": [
+        "Michael Ajayi",
+        "Donovan Atwell",
+        "Tobe Awaka",
+        "Chad Baker-Mazara",
+        "Tyler Bilodeau",
+        "Nate Bittle",
+        "Kylan Boswell",
+        "Nick Boyd",
+        "Jaden Bradley",
+        "Trevon Brazile",
+        "Maliq Brown",
+        "Tre Carroll",
+        "Rafael Castro",
+        "Oscar Cluff",
+        "Ryan Conwell",
+        "Quadir Copeland",
+        "Melvin Council Jr.",
+        "Tucker DeVries",
+        "Josh Dix",
+        "Tre Donaldson",
+        "Zuby Ejiofor",
+        "Ja’Kobi Gillespie",
+        "Keyshawn Hall",
+        "Jaden Henley",
+        "Bryce Hopkins",
+        "Graham Ike",
+        "Joshua Jefferson",
+        "Alex Karaban",
+        "Trey Kaufman-Renn",
+        "Jaxon Kohler",
+        "William Kyle III",
+        "Tobi Lawal",
+        "Xaivian Lee",
+        "Yaxel Lendeborg",
+        "Malique Lewis",
+        "Tamin Lipsey",
+        "Fletcher Loyer",
+        "Nick Martinelli",
+        "Rienk Mast",
+        "Isaac McKneely",
+        "Duke Miles",
+        "Baba Miller",
+        "Mark Mitchell",
+        "Kashie Natt",
+        "Izaiyah Nelson",
+        "Tyler Nickel",
+        "Aaron Nkrumah",
+        "Felix Okpara",
+        "Ugonna Onyenso",
+        "Otega Oweh",
+        "Jaron Pierre Jr.",
+        "Tarris Reed Jr.",
+        "Malik Reneau",
+        "Richie Saunders",
+        "Jaylin Sellers",
+        "Emanuel Sharp",
+        "Braden Smith",
+        "Bennett Stirtz",
+        "Peter Suder",
+        "Bruce Thornton",
+        "Seth Trimble",
+        "Ernest Udeh Jr.",
+        "Milos Uzan",
+        "Jalen Washington",
+        "Lamar Wilkerson",
+        "Darrion Williams",
+        "Noam Yaacov",
+        "Reynan dos Santos"
+      ],
+      "localFeatureToStatsAnthroByMeasurements": {
+        "localMeasuredCount": 76,
+        "localDistinctMeasurementKeyCount": 75,
+        "statsAnthroRowCount": 78,
+        "statsAnthroCompleteMeasurementRowCount": 75,
+        "statsAnthroDistinctMeasurementKeyCount": 75,
+        "statsAnthroCompleteRowsCoveredByLocal": 75,
+        "exactSingleMatches": 76,
+        "ambiguousMatches": 0,
+        "duplicateLocalMeasurementKeys": [
+          {
+            "measurementKey": "PF|6' 9.50''|210.8|6' 11.50''|9' 1.50''",
+            "players": [
+              {
+                "poolOrdinal": 67,
+                "nameZh": "纳撒尼尔 阿门特"
+              },
+              {
+                "poolOrdinal": 84,
+                "nameZh": "纳撒尼尔 阿门特"
+              }
+            ]
+          }
+        ],
+        "unmatchedLocalMeasured": [],
+        "unmatchedStatsAnthro": []
+      }
+    }
+  },
+  "lists": {
+    "nbaProspects": [
+      {
+        "ordinal": 1,
+        "name": "Darius Acuff Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/darius-acuff",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Arkansas",
+        "height": "6-2",
+        "weight": "186 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 2,
+        "name": "Michael Ajayi",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/michael-ajayi",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Butler",
+        "height": "6-7",
+        "weight": "228 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 3,
+        "name": "Nate Ament",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/nate-ament",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "Tennessee",
+        "height": "6-10",
+        "weight": "211 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 4,
+        "name": "Mohammad Amini",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/mohammad-amini",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Nancy Basket (France)",
+        "height": "6-7",
+        "weight": "176 lbs",
+        "status": "International",
+        "country": "Iran"
+      },
+      {
+        "ordinal": 5,
+        "name": "Christian Anderson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/christian-anderson",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Texas Tech",
+        "height": "6-1",
+        "weight": "180 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 6,
+        "name": "Donovan Atwell",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/donovan-atwell",
+        "position": "G",
+        "age": 23,
+        "schoolClub": "Texas Tech",
+        "height": "6-5",
+        "weight": "200 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 7,
+        "name": "Tobe Awaka",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tobe-awaka",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Arizona",
+        "height": "6-8",
+        "weight": "255 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 8,
+        "name": "Bassala Bagayoko",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/bassala-bagayoko",
+        "position": "C",
+        "age": 19,
+        "schoolClub": "Bilbao Basket (Spain)",
+        "height": "6-9",
+        "weight": "210 lbs",
+        "status": "International",
+        "country": "Mali"
+      },
+      {
+        "ordinal": 9,
+        "name": "Chad Baker-Mazara",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/chad-baker-mazara",
+        "position": "G-F",
+        "age": 26,
+        "schoolClub": "USC",
+        "height": "6-7",
+        "weight": "172 lbs",
+        "status": "Senior",
+        "country": "Dominican Republic"
+      },
+      {
+        "ordinal": 10,
+        "name": "Tyler Bilodeau",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tyler-bilodeau",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "UCLA",
+        "height": "6-8",
+        "weight": "228 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 11,
+        "name": "Nate Bittle",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/nate-bittle",
+        "position": "C",
+        "age": 23,
+        "schoolClub": "Oregon",
+        "height": "7-0",
+        "weight": "210 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 12,
+        "name": "Cameron Boozer",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/cameron-boozer",
+        "position": "F-C",
+        "age": 18,
+        "schoolClub": "Duke",
+        "height": "6-8",
+        "weight": "253 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 13,
+        "name": "Kylan Boswell",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/kylan-boswell",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Illinois",
+        "height": "6-1",
+        "weight": "226 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 14,
+        "name": "Nick Boyd",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/nick-boyd",
+        "position": "G",
+        "age": 25,
+        "schoolClub": "Wisconsin",
+        "height": "6-3",
+        "weight": "177 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 15,
+        "name": "Jaden Bradley",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jaden-bradley",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Arizona",
+        "height": "6-3",
+        "weight": "205 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 16,
+        "name": "Trevon Brazile",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/trevon-brazile",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Arkansas",
+        "height": "6-10",
+        "weight": "226 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 17,
+        "name": "Maliq Brown",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/maliq-brown",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Duke",
+        "height": "6-8",
+        "weight": "217 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 18,
+        "name": "Mikel Brown Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/mikel-brown",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Louisville",
+        "height": "6-5",
+        "weight": "180 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 19,
+        "name": "Brayden Burries",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/brayden-burries",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Arizona",
+        "height": "6-4",
+        "weight": "215 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 20,
+        "name": "Cameron Carr",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/cameron-carr",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Baylor",
+        "height": "6-5",
+        "weight": "184 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 21,
+        "name": "Tre Carroll",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tre-carroll",
+        "position": "C",
+        "age": 23,
+        "schoolClub": "Xavier",
+        "height": "6-8",
+        "weight": "235 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 22,
+        "name": "Rafael Castro",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/rafael-castro",
+        "position": "C",
+        "age": 23,
+        "schoolClub": "George Washington",
+        "height": "6-9",
+        "weight": "224 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 23,
+        "name": "Chris Cenac Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/chris-cenac-jr",
+        "position": "F-C",
+        "age": 19,
+        "schoolClub": "Houston",
+        "height": "6-11",
+        "weight": "240 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 24,
+        "name": "Oscar Cluff",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/oscar-cluff",
+        "position": "C",
+        "age": 24,
+        "schoolClub": "Purdue",
+        "height": "6-11",
+        "weight": "250 lbs",
+        "status": "Senior",
+        "country": "Australia"
+      },
+      {
+        "ordinal": 25,
+        "name": "Ryan Conwell",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/ryan-conwell",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Louisville",
+        "height": "6-4",
+        "weight": "215 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 26,
+        "name": "Quadir Copeland",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/quadir-copeland",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "N.C. State",
+        "height": "6-6",
+        "weight": "200 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 27,
+        "name": "Melvin Council Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/melvin-council-jr",
+        "position": "G",
+        "age": 24,
+        "schoolClub": "Kansas",
+        "height": "6-4",
+        "weight": "185 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 28,
+        "name": "Sergio De Larrea",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/sergio-de-larrea",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Vallodolid (Spain)",
+        "height": "6-6",
+        "weight": "205 lbs",
+        "status": "International",
+        "country": "Spain"
+      },
+      {
+        "ordinal": 29,
+        "name": "Tucker DeVries",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tucker-devries",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Indiana",
+        "height": "6-7",
+        "weight": "215 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 30,
+        "name": "Josh Dix",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/josh-dix",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Creighton",
+        "height": "6-6",
+        "weight": "205 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 31,
+        "name": "Tre Donaldson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tre-donaldson",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Miami (FL)",
+        "height": "6-3",
+        "weight": "198 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 32,
+        "name": "AJ Dybantsa",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/aj-dybantsa",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "BYU",
+        "height": "6-9",
+        "weight": "217 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 33,
+        "name": "Zuby Ejiofor",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/zuby-ejiofor",
+        "position": "F-C",
+        "age": 22,
+        "schoolClub": "St. John's",
+        "height": "6-8",
+        "weight": "245 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 34,
+        "name": "Isaiah Evans",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/isaiah-evans",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Duke",
+        "height": "6-6",
+        "weight": "186 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 35,
+        "name": "Kingston Flemings",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/kingston-flemings",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Houston",
+        "height": "6-3",
+        "weight": "183 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 36,
+        "name": "Marc-Owen Fodzo Dada",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/marc-owen-fodzo-dada",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Nancy Basket (France)",
+        "height": "6-2",
+        "weight": "180 lbs",
+        "status": "International",
+        "country": "France"
+      },
+      {
+        "ordinal": 37,
+        "name": "Ja’Kobi Gillespie",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jakobi-gillespie",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Tennessee",
+        "height": "6-0",
+        "weight": "182 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 38,
+        "name": "Allen Graves",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/allen-graves",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "Santa Clara",
+        "height": "6-8",
+        "weight": "226 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 39,
+        "name": "Keyshawn Hall",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/keyshawn-hall",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Auburn",
+        "height": "6-6",
+        "weight": "227 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 40,
+        "name": "Jaden Henley",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jaden-henley",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Grand Canyon",
+        "height": "6-7",
+        "weight": "210 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 41,
+        "name": "Bryce Hopkins",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/bryce-hopkins",
+        "position": "F",
+        "age": 24,
+        "schoolClub": "St. John's",
+        "height": "6-6",
+        "weight": "218 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 42,
+        "name": "Graham Ike",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/graham-ike",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Gonzaga",
+        "height": "6-9",
+        "weight": "250 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 43,
+        "name": "Vsevolod Ishchenko",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/vsevolod-ishchenko",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Lokomotiv Kuban (Russia)",
+        "height": "6-8",
+        "weight": "218 lbs",
+        "status": "International",
+        "country": "Russia"
+      },
+      {
+        "ordinal": 44,
+        "name": "Joshua Jefferson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/joshua-jefferson",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Iowa State",
+        "height": "6-8",
+        "weight": "246 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 45,
+        "name": "Morez Johnson Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/morez-johnson-jr",
+        "position": "F-C",
+        "age": 20,
+        "schoolClub": "Michigan",
+        "height": "6-9",
+        "weight": "250 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 46,
+        "name": "Alex Karaban",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/alex-karaban",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Connecticut",
+        "height": "6-7",
+        "weight": "225 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 47,
+        "name": "Trey Kaufman-Renn",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/trey-kaufman-renn",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Purdue",
+        "height": "6-9",
+        "weight": "240 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 48,
+        "name": "Jack Kayil",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jack-kayil",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Alba Berlin (Germany)",
+        "height": "6-5",
+        "weight": "185 lbs",
+        "status": "International",
+        "country": "Germany"
+      },
+      {
+        "ordinal": 49,
+        "name": "Jaxon Kohler",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jaxon-kohler",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Michigan State",
+        "height": "6-10",
+        "weight": "245 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 50,
+        "name": "William Kyle III",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/william-kyle-iii",
+        "position": "C",
+        "age": 22,
+        "schoolClub": "Syracuse",
+        "height": "6-9",
+        "weight": "230 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 51,
+        "name": "Tobi Lawal",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tobi-lawal",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Virginia Tech",
+        "height": "6-8",
+        "weight": "215 lbs",
+        "status": "Senior",
+        "country": "England"
+      },
+      {
+        "ordinal": 52,
+        "name": "Xaivian Lee",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/xaivian-lee",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Florida",
+        "height": "6-3",
+        "weight": "177 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 53,
+        "name": "Yaxel Lendeborg",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/yaxel-lendeborg",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Michigan",
+        "height": "6-9",
+        "weight": "241 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 54,
+        "name": "Malique Lewis",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/malique-lewis",
+        "position": "F",
+        "age": 21,
+        "schoolClub": "South East Melbourne (Australia)",
+        "height": "6-8",
+        "weight": "195 lbs",
+        "status": "International",
+        "country": "Trinidad and Tobago"
+      },
+      {
+        "ordinal": 55,
+        "name": "Tamin Lipsey",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tamin-lipsey",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Iowa State",
+        "height": "6-1",
+        "weight": "200 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 56,
+        "name": "Fletcher Loyer",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/fletcher-loyer",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Purdue",
+        "height": "6-3",
+        "weight": "180 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 57,
+        "name": "Karim López",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/karim-lopez",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "New Zealand Breakers (Australia)",
+        "height": "6-8",
+        "weight": "222 lbs",
+        "status": "International",
+        "country": "Mexico"
+      },
+      {
+        "ordinal": 58,
+        "name": "Aday Mara",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/aday-mara",
+        "position": "C",
+        "age": 21,
+        "schoolClub": "Michigan",
+        "height": "7-3",
+        "weight": "260 lbs",
+        "status": "Junior",
+        "country": "Spain"
+      },
+      {
+        "ordinal": 59,
+        "name": "Nick Martinelli",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/nick-martinelli",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Northwestern",
+        "height": "6-7",
+        "weight": "224 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 60,
+        "name": "Rienk Mast",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/rienk-mast",
+        "position": "C",
+        "age": 24,
+        "schoolClub": "Nebraska",
+        "height": "6-10",
+        "weight": "250 lbs",
+        "status": "Senior",
+        "country": "Netherlands"
+      },
+      {
+        "ordinal": 61,
+        "name": "Isaac McKneely",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/isaac-mckneely",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Louisville",
+        "height": "6-4",
+        "weight": "205 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 62,
+        "name": "Duke Miles",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/duke-miles",
+        "position": "G",
+        "age": 24,
+        "schoolClub": "Vanderbilt",
+        "height": "6-0",
+        "weight": "180 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 63,
+        "name": "Baba Miller",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/baba-miller",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Cincinnati",
+        "height": "6-11",
+        "weight": "208 lbs",
+        "status": "Senior",
+        "country": "Spain"
+      },
+      {
+        "ordinal": 64,
+        "name": "Mark Mitchell",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/mark-mitchell",
+        "position": "C",
+        "age": 19,
+        "schoolClub": "Missouri",
+        "height": "6-9",
+        "weight": "230 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 65,
+        "name": "Malachi Moreno",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/malachi-moreno",
+        "position": "C",
+        "age": 19,
+        "schoolClub": "Kentucky",
+        "height": "7-0",
+        "weight": "243 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 66,
+        "name": "Kashie Natt",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/kashie-natt",
+        "position": "G",
+        "age": 23,
+        "schoolClub": "Sam Houston State",
+        "height": "6-3",
+        "weight": "190 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 67,
+        "name": "Izaiyah Nelson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/izaiyah-nelson",
+        "position": "C",
+        "age": 22,
+        "schoolClub": "South Florida",
+        "height": "6-8",
+        "weight": "219 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 68,
+        "name": "Tyler Nickel",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tyler-nickel",
+        "position": "G-F",
+        "age": 22,
+        "schoolClub": "Vanderbilt",
+        "height": "6-8",
+        "weight": "217 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 69,
+        "name": "Aaron Nkrumah",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/aaron-nkrumah",
+        "position": "F",
+        "age": 24,
+        "schoolClub": "Tennessee State",
+        "height": "6-6",
+        "weight": "175 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 70,
+        "name": "Ebuka Okorie",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/ebuka-okorie",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Stanford",
+        "height": "6-1",
+        "weight": "186 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 71,
+        "name": "Felix Okpara",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/felix-okpara",
+        "position": "F-C",
+        "age": 22,
+        "schoolClub": "Tennessee",
+        "height": "6-10",
+        "weight": "237 lbs",
+        "status": "Senior",
+        "country": "Nigeria"
+      },
+      {
+        "ordinal": 72,
+        "name": "Ugonna Onyenso",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/ugonna-onyenso",
+        "position": "C",
+        "age": 21,
+        "schoolClub": "Virginia",
+        "height": "6-11",
+        "weight": "237 lbs",
+        "status": "Senior",
+        "country": "Nigeria"
+      },
+      {
+        "ordinal": 73,
+        "name": "Otega Oweh",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/otega-oweh",
+        "position": "G",
+        "age": 23,
+        "schoolClub": "Kentucky",
+        "height": "6-5",
+        "weight": "216 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 74,
+        "name": "Koa Peat",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/koa-peat",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "Arizona",
+        "height": "6-7",
+        "weight": "245 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 75,
+        "name": "Darryn Peterson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/darryn-peterson",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Kansas",
+        "height": "6-5",
+        "weight": "199 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 76,
+        "name": "Labaron Philon Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/labaron-philon",
+        "position": "G",
+        "age": 20,
+        "schoolClub": "Alabama",
+        "height": "6-3",
+        "weight": "176 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 77,
+        "name": "Jaron Pierre Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jaron-pierre-jr",
+        "position": "G-F",
+        "age": 23,
+        "schoolClub": "Southern Methodist",
+        "height": "6-6",
+        "weight": "210 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 78,
+        "name": "Jayden Quaintance",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jayden-quaintance",
+        "position": "F-C",
+        "age": 18,
+        "schoolClub": "Kentucky",
+        "height": "6-9",
+        "weight": "253 lbs",
+        "status": "Sophomore",
+        "country": "United States"
+      },
+      {
+        "ordinal": 79,
+        "name": "Tarris Reed Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/tarris-reed-jr",
+        "position": "C",
+        "age": 22,
+        "schoolClub": "Connecticut",
+        "height": "6-10",
+        "weight": "260 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 80,
+        "name": "Malik Reneau",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/malik-reneau",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "Miami (FL)",
+        "height": "6-9",
+        "weight": "238 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 81,
+        "name": "Richie Saunders",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/richie-saunders",
+        "position": "G",
+        "age": 24,
+        "schoolClub": "BYU",
+        "height": "6-5",
+        "weight": "205 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 82,
+        "name": "Jaylin Sellers",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jaylin-sellers",
+        "position": "G",
+        "age": 23,
+        "schoolClub": "Providence",
+        "height": "6-5",
+        "weight": "205 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 83,
+        "name": "Emanuel Sharp",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/emanuel-sharp",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Houston",
+        "height": "6-3",
+        "weight": "208 lbs",
+        "status": "Senior",
+        "country": "Israel"
+      },
+      {
+        "ordinal": 84,
+        "name": "Braden Smith",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/braden-smith",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Purdue",
+        "height": "5-10",
+        "weight": "167 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 85,
+        "name": "Hannes Steinbach",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/hannes-steinbach",
+        "position": "F-C",
+        "age": 20,
+        "schoolClub": "Washington",
+        "height": "6-10",
+        "weight": "248 lbs",
+        "status": "Freshman",
+        "country": "Germany"
+      },
+      {
+        "ordinal": 86,
+        "name": "Bennett Stirtz",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/bennett-stirtz",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Iowa",
+        "height": "6-3",
+        "weight": "186 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 87,
+        "name": "Peter Suder",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/peter-suder",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Miami (Ohio)",
+        "height": "6-4",
+        "weight": "213 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 88,
+        "name": "Dailyn Swain",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/dailyn-swain",
+        "position": "F",
+        "age": 20,
+        "schoolClub": "Texas",
+        "height": "6-7",
+        "weight": "211 lbs",
+        "status": "Junior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 89,
+        "name": "Meleek Thomas",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/meleek-thomas",
+        "position": "G-F",
+        "age": 19,
+        "schoolClub": "Arkansas",
+        "height": "6-3",
+        "weight": "190 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 90,
+        "name": "Bruce Thornton",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/bruce-thornton",
+        "position": "G",
+        "age": 22,
+        "schoolClub": "Ohio State",
+        "height": "6-0",
+        "weight": "223 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 91,
+        "name": "Seth Trimble",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/seth-trimble",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "North Carolina",
+        "height": "6-3",
+        "weight": "200 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 92,
+        "name": "Ernest Udeh Jr.",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/ernest-udeh-jr",
+        "position": "C",
+        "age": 22,
+        "schoolClub": "Miami (FL)",
+        "height": "6-11",
+        "weight": "266 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 93,
+        "name": "Milos Uzan",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/milos-uzan",
+        "position": "G",
+        "age": 23,
+        "schoolClub": "Houston",
+        "height": "6-3",
+        "weight": "185 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 94,
+        "name": "Henri Veesaar",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/henri-veesaar",
+        "position": "C",
+        "age": 22,
+        "schoolClub": "North Carolina",
+        "height": "6-11",
+        "weight": "227 lbs",
+        "status": "Junior",
+        "country": "Estonia"
+      },
+      {
+        "ordinal": 95,
+        "name": "Keaton Wagler",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/keaton-wagler",
+        "position": "G",
+        "age": 19,
+        "schoolClub": "Illinois",
+        "height": "6-5",
+        "weight": "188 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 96,
+        "name": "Jalen Washington",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/jalen-washington",
+        "position": "C",
+        "age": 23,
+        "schoolClub": "Vanderbilt",
+        "height": "6-10",
+        "weight": "240 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 97,
+        "name": "Lamar Wilkerson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/lamar-wilkerson",
+        "position": "G",
+        "age": 24,
+        "schoolClub": "Indiana",
+        "height": "6-6",
+        "weight": "206 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 98,
+        "name": "Darrion Williams",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/darrion-williams",
+        "position": "F",
+        "age": 23,
+        "schoolClub": "N.C. State",
+        "height": "6-6",
+        "weight": "225 lbs",
+        "status": "Senior",
+        "country": "United States"
+      },
+      {
+        "ordinal": 99,
+        "name": "Caleb Wilson",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/caleb-wilson",
+        "position": "F",
+        "age": 19,
+        "schoolClub": "North Carolina",
+        "height": "6-9",
+        "weight": "211 lbs",
+        "status": "Freshman",
+        "country": "United States"
+      },
+      {
+        "ordinal": 100,
+        "name": "Noam Yaacov",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/noam-yaacov",
+        "position": "G",
+        "age": 21,
+        "schoolClub": "Telenet BC Oostende (Belgium)",
+        "height": "6-0",
+        "weight": "190 lbs",
+        "status": "International",
+        "country": "Denmark"
+      },
+      {
+        "ordinal": 101,
+        "name": "Reynan dos Santos",
+        "profileUrl": "https://www.nba.com/draft/2026/prospects/reynan-dos-santos",
+        "position": "F",
+        "age": 22,
+        "schoolClub": "Mexico City Capitanes (G League)",
+        "height": "6-4",
+        "weight": "187 lbs",
+        "status": "G League",
+        "country": "Brazil"
+      }
+    ],
+    "chinaDraftBoard": [
+      {
+        "pick": 1,
+        "team": "华盛顿 奇才",
+        "pickTrade": "",
+        "draftDayTradeTo": "Atlanta Hawks",
+        "playerNameZh": "aj 迪班萨",
+        "playerUrl": "https://china.nba.cn/draft/player.htm?name=AJDybantsa",
+        "details": "前锋/BYU2.06米210",
+        "populated": true
+      },
+      {
+        "pick": 2,
+        "team": "犹他 爵士",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "达林 彼得森",
+        "playerUrl": "https://china.nba.cn/draft/player.htm?name=DarrynPeterson",
+        "details": "后卫/Kansas1.98米205",
+        "populated": true
+      },
+      {
+        "pick": 3,
+        "team": "孟菲斯 灰熊",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "卡梅隆 布泽尔",
+        "playerUrl": "https://china.nba.cn/draft/player.htm?name=CameronBoozer",
+        "details": "前锋/Duke2.06米250",
+        "populated": true
+      },
+      {
+        "pick": 4,
+        "team": "芝加哥 公牛",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 5,
+        "team": "洛杉矶 快船",
+        "pickTrade": "印第安纳->快船",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 6,
+        "team": "布鲁克林 篮网",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 7,
+        "team": "萨克拉门托 国王",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 8,
+        "team": "亚特兰大 老鹰",
+        "pickTrade": "新奥尔良->老鹰",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 9,
+        "team": "达拉斯 独行侠",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 10,
+        "team": "密尔沃基 雄鹿",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 11,
+        "team": "金州 勇士",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 12,
+        "team": "俄克拉荷马城 雷霆",
+        "pickTrade": "洛杉矶快船->雷霆",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 13,
+        "team": "迈阿密 热火",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 14,
+        "team": "夏洛特 黄蜂",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 15,
+        "team": "芝加哥 公牛",
+        "pickTrade": "波特兰->公牛",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 16,
+        "team": "孟菲斯 灰熊",
+        "pickTrade": "菲尼克斯->奥兰多->灰熊",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 17,
+        "team": "俄克拉荷马城 雷霆",
+        "pickTrade": "费城->雷霆",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 18,
+        "team": "夏洛特 黄蜂",
+        "pickTrade": "奥兰多->菲尼克斯->黄蜂",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 19,
+        "team": "多伦多 猛龙",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 20,
+        "team": "圣安东尼奥 马刺",
+        "pickTrade": "亚特兰大->马刺",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 21,
+        "team": "底特律 活塞",
+        "pickTrade": "明尼苏达->活塞",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 22,
+        "team": "费城 76人",
+        "pickTrade": "休斯顿->奥克拉荷马城->76人",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 23,
+        "team": "亚特兰大 老鹰",
+        "pickTrade": "克利夫兰->老鹰",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 24,
+        "team": "纽约 尼克斯",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 25,
+        "team": "洛杉矶 湖人",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 26,
+        "team": "丹佛 掘金",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 27,
+        "team": "波士顿 凯尔特人",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 28,
+        "team": "明尼苏达 森林狼",
+        "pickTrade": "底特律->森林狼",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 29,
+        "team": "克利夫兰 骑士",
+        "pickTrade": "圣安东尼奥->亚特兰大->骑士",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 30,
+        "team": "达拉斯 独行侠",
+        "pickTrade": "奥克拉荷马城->华盛顿和费城->独行侠",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 31,
+        "team": "纽约 尼克斯",
+        "pickTrade": "华盛顿->奥克拉荷马城和休斯顿->尼克斯",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 32,
+        "team": "孟菲斯 灰熊",
+        "pickTrade": "印第安纳->密尔沃基->灰熊",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 33,
+        "team": "布鲁克林 篮网",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 34,
+        "team": "萨克拉门托 国王",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 35,
+        "team": "圣安东尼奥 马刺",
+        "pickTrade": "犹他->明尼苏达->马刺",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 36,
+        "team": "洛杉矶 快船",
+        "pickTrade": "孟菲斯->亚特兰大和犹他->快船",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 37,
+        "team": "俄克拉荷马城 雷霆",
+        "pickTrade": "达拉斯->雷霆",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 38,
+        "team": "芝加哥 公牛",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 39,
+        "team": "休斯顿 火箭",
+        "pickTrade": "芝加哥->华盛顿->火箭",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 40,
+        "team": "波士顿 凯尔特人",
+        "pickTrade": "密尔沃基->奥兰多->凯尔特人",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 41,
+        "team": "迈阿密 热火",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 42,
+        "team": "圣安东尼奥 马刺",
+        "pickTrade": "波特兰->新奥尔良->马刺",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 43,
+        "team": "布鲁克林 篮网",
+        "pickTrade": "洛杉矶快船->休斯顿->篮网",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 44,
+        "team": "圣安东尼奥 马刺",
+        "pickTrade": "迈阿密->印第安纳->马刺",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 45,
+        "team": "萨克拉门托 国王",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 46,
+        "team": "奥兰多 魔术",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 47,
+        "team": "菲尼克斯 太阳",
+        "pickTrade": "费城->休斯顿和奥克拉荷马城->太阳",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 48,
+        "team": "达拉斯 独行侠",
+        "pickTrade": "菲尼克斯->华盛顿->独行侠",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 49,
+        "team": "丹佛 掘金",
+        "pickTrade": "亚特兰大->布鲁克林和金州->掘金",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 50,
+        "team": "多伦多 猛龙",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 51,
+        "team": "华盛顿 奇才",
+        "pickTrade": "明尼苏达->底特律和纽约->奇才",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 52,
+        "team": "洛杉矶 快船",
+        "pickTrade": "克利夫兰->快船",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 53,
+        "team": "休斯顿 火箭",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 54,
+        "team": "金州 勇士",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 55,
+        "team": "纽约 尼克斯",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 56,
+        "team": "芝加哥 公牛",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 57,
+        "team": "亚特兰大 老鹰",
+        "pickTrade": "波士顿->老鹰",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 58,
+        "team": "新奥尔良 鹈鹕",
+        "pickTrade": "",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 59,
+        "team": "明尼苏达 森林狼",
+        "pickTrade": "圣安东尼奥->印第安纳->森林狼",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      },
+      {
+        "pick": 60,
+        "team": "华盛顿 奇才",
+        "pickTrade": "奥克拉荷马城->圣安东尼奥和迈阿密->奇才",
+        "draftDayTradeTo": "",
+        "playerNameZh": "",
+        "playerUrl": null,
+        "details": "/",
+        "populated": false
+      }
+    ],
+    "combineInvitees": [
+      {
+        "ordinal": 1,
+        "name": "Matt Able",
+        "collegeClub": "North Carolina State"
+      },
+      {
+        "ordinal": 2,
+        "name": "Darius Acuff Jr.",
+        "collegeClub": "Arkansas"
+      },
+      {
+        "ordinal": 3,
+        "name": "Amari Allen",
+        "collegeClub": "Alabama"
+      },
+      {
+        "ordinal": 4,
+        "name": "Nate Ament",
+        "collegeClub": "Tennessee"
+      },
+      {
+        "ordinal": 5,
+        "name": "Christian Anderson Jr.",
+        "collegeClub": "Texas Tech"
+      },
+      {
+        "ordinal": 6,
+        "name": "Tobe Awaka",
+        "collegeClub": "Arizona"
+      },
+      {
+        "ordinal": 7,
+        "name": "Flory Bidunga",
+        "collegeClub": "Kansas"
+      },
+      {
+        "ordinal": 8,
+        "name": "Tyler Bilodeau",
+        "collegeClub": "UCLA"
+      },
+      {
+        "ordinal": 9,
+        "name": "John Blackwell",
+        "collegeClub": "Wisconsin"
+      },
+      {
+        "ordinal": 10,
+        "name": "Cameron Boozer",
+        "collegeClub": "Duke"
+      },
+      {
+        "ordinal": 11,
+        "name": "Kylan Boswell",
+        "collegeClub": "Illinois"
+      },
+      {
+        "ordinal": 12,
+        "name": "Nick Boyd",
+        "collegeClub": "Wisconsin"
+      },
+      {
+        "ordinal": 13,
+        "name": "Jaden Bradley",
+        "collegeClub": "Arizona"
+      },
+      {
+        "ordinal": 14,
+        "name": "Trevon Brazile",
+        "collegeClub": "Arkansas"
+      },
+      {
+        "ordinal": 15,
+        "name": "Maliq Brown",
+        "collegeClub": "Duke"
+      },
+      {
+        "ordinal": 16,
+        "name": "Mikel Brown Jr.",
+        "collegeClub": "Louisville"
+      },
+      {
+        "ordinal": 17,
+        "name": "Brayden Burries",
+        "collegeClub": "Arizona"
+      },
+      {
+        "ordinal": 18,
+        "name": "Cameron Carr",
+        "collegeClub": "Baylor"
+      },
+      {
+        "ordinal": 19,
+        "name": "Chris Cenac Jr.",
+        "collegeClub": "Houston"
+      },
+      {
+        "ordinal": 20,
+        "name": "Rueben Chinyelu",
+        "collegeClub": "Florida"
+      },
+      {
+        "ordinal": 21,
+        "name": "Ryan Conwell",
+        "collegeClub": "Louisville"
+      },
+      {
+        "ordinal": 22,
+        "name": "AJ Dybantsa",
+        "collegeClub": "BYU"
+      },
+      {
+        "ordinal": 23,
+        "name": "Zuby Ejiofor",
+        "collegeClub": "St. John’s"
+      },
+      {
+        "ordinal": 24,
+        "name": "Isaiah Evans",
+        "collegeClub": "Duke"
+      },
+      {
+        "ordinal": 25,
+        "name": "Jeremy Fears Jr.",
+        "collegeClub": "Michigan State"
+      },
+      {
+        "ordinal": 26,
+        "name": "Kingston Flemings",
+        "collegeClub": "Houston"
+      },
+      {
+        "ordinal": 27,
+        "name": "Ja’Kobi Gillespie",
+        "collegeClub": "Tennessee"
+      },
+      {
+        "ordinal": 28,
+        "name": "Allen Graves",
+        "collegeClub": "Santa Clara"
+      },
+      {
+        "ordinal": 29,
+        "name": "Keyshawn Hall",
+        "collegeClub": "Auburn"
+      },
+      {
+        "ordinal": 30,
+        "name": "Juke Harris",
+        "collegeClub": "Wake Forest"
+      },
+      {
+        "ordinal": 31,
+        "name": "Joshua Jefferson",
+        "collegeClub": "Iowa State"
+      },
+      {
+        "ordinal": 32,
+        "name": "Morez Johnson Jr.",
+        "collegeClub": "Michigan"
+      },
+      {
+        "ordinal": 33,
+        "name": "Alex Karaban",
+        "collegeClub": "UConn"
+      },
+      {
+        "ordinal": 34,
+        "name": "Jack Kayil",
+        "collegeClub": "Alba Berlin (Germany)"
+      },
+      {
+        "ordinal": 35,
+        "name": "Sergio de Larrea",
+        "collegeClub": "Valencia (Spain)"
+      },
+      {
+        "ordinal": 36,
+        "name": "Tobi Lawal",
+        "collegeClub": "Virginia Tech"
+      },
+      {
+        "ordinal": 37,
+        "name": "Yaxel Lendeborg",
+        "collegeClub": "Michigan"
+      },
+      {
+        "ordinal": 38,
+        "name": "Karim Lopez",
+        "collegeClub": "New Zealand Breakers (Australia)"
+      },
+      {
+        "ordinal": 39,
+        "name": "Aday Mara",
+        "collegeClub": "Michigan"
+      },
+      {
+        "ordinal": 40,
+        "name": "Nick Martinelli",
+        "collegeClub": "Northwestern"
+      },
+      {
+        "ordinal": 41,
+        "name": "Baba Miller",
+        "collegeClub": "Cincinnati"
+      },
+      {
+        "ordinal": 42,
+        "name": "Dillon Mitchell",
+        "collegeClub": "St. John’s"
+      },
+      {
+        "ordinal": 43,
+        "name": "Milan Momcilovic",
+        "collegeClub": "Iowa State"
+      },
+      {
+        "ordinal": 44,
+        "name": "Malachi Moreno",
+        "collegeClub": "Kentucky"
+      },
+      {
+        "ordinal": 45,
+        "name": "Izaiyah Nelson",
+        "collegeClub": "South Florida"
+      },
+      {
+        "ordinal": 46,
+        "name": "Tyler Nickel",
+        "collegeClub": "Vanderbilt"
+      },
+      {
+        "ordinal": 47,
+        "name": "Ebuka Okorie",
+        "collegeClub": "Stanford"
+      },
+      {
+        "ordinal": 48,
+        "name": "Felix Okpara",
+        "collegeClub": "Tennessee"
+      },
+      {
+        "ordinal": 49,
+        "name": "Ugonna Onyenso",
+        "collegeClub": "Virginia"
+      },
+      {
+        "ordinal": 50,
+        "name": "Otega Oweh",
+        "collegeClub": "Kentucky"
+      },
+      {
+        "ordinal": 51,
+        "name": "Koa Peat",
+        "collegeClub": "Arizona"
+      },
+      {
+        "ordinal": 52,
+        "name": "Darryn Peterson",
+        "collegeClub": "Kansas"
+      },
+      {
+        "ordinal": 53,
+        "name": "Labaron Philon Jr.",
+        "collegeClub": "Alabama"
+      },
+      {
+        "ordinal": 54,
+        "name": "Jayden Quaintance",
+        "collegeClub": "Kentucky"
+      },
+      {
+        "ordinal": 55,
+        "name": "Tarris Reed Jr.",
+        "collegeClub": "UConn"
+      },
+      {
+        "ordinal": 56,
+        "name": "Billy Richmond III",
+        "collegeClub": "Arkansas"
+      },
+      {
+        "ordinal": 57,
+        "name": "Richie Saunders",
+        "collegeClub": "BYU"
+      },
+      {
+        "ordinal": 58,
+        "name": "Emanuel Sharp",
+        "collegeClub": "Houston"
+      },
+      {
+        "ordinal": 59,
+        "name": "Braden Smith",
+        "collegeClub": "Purdue"
+      },
+      {
+        "ordinal": 60,
+        "name": "Hannes Steinbach",
+        "collegeClub": "Washington"
+      },
+      {
+        "ordinal": 61,
+        "name": "Bennett Stirtz",
+        "collegeClub": "Iowa"
+      },
+      {
+        "ordinal": 62,
+        "name": "Andrej Stojaković",
+        "collegeClub": "Illinois"
+      },
+      {
+        "ordinal": 63,
+        "name": "Peter Suder",
+        "collegeClub": "Miami (OH)"
+      },
+      {
+        "ordinal": 64,
+        "name": "Luigi Suigo",
+        "collegeClub": "Mega (Serbia)"
+      },
+      {
+        "ordinal": 65,
+        "name": "Dailyn Swain",
+        "collegeClub": "Texas"
+      },
+      {
+        "ordinal": 66,
+        "name": "Tyler Tanner",
+        "collegeClub": "Vanderbilt"
+      },
+      {
+        "ordinal": 67,
+        "name": "Meleek Thomas",
+        "collegeClub": "Arkansas"
+      },
+      {
+        "ordinal": 68,
+        "name": "Bruce Thornton",
+        "collegeClub": "Ohio State"
+      },
+      {
+        "ordinal": 69,
+        "name": "Milos Uzan",
+        "collegeClub": "Houston"
+      },
+      {
+        "ordinal": 70,
+        "name": "Henri Veesaar",
+        "collegeClub": "North Carolina"
+      },
+      {
+        "ordinal": 71,
+        "name": "Keaton Wagler",
+        "collegeClub": "Illinois"
+      },
+      {
+        "ordinal": 72,
+        "name": "Caleb Wilson",
+        "collegeClub": "North Carolina"
+      },
+      {
+        "ordinal": 73,
+        "name": "Tounde Yessoufou",
+        "collegeClub": "Baylor"
+      }
+    ],
+    "statsAnthro": [
+      {
+        "ordinal": 1,
+        "name": "Matthew Able",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "10.50",
+        "heightWithoutShoes": "6' 3.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 7.00''",
+        "weightLbs": "195.8",
+        "wingspan": "6' 8.25''"
+      },
+      {
+        "ordinal": 2,
+        "name": "Darius Acuff Jr.",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 2.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.50''",
+        "weightLbs": "185.8",
+        "wingspan": "6' 6.50''"
+      },
+      {
+        "ordinal": 3,
+        "name": "Amari Allen",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 5.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 3.50''",
+        "weightLbs": "204.6",
+        "wingspan": "6' 8.00''"
+      },
+      {
+        "ordinal": 4,
+        "name": "Nathaniel Ament",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 9.50''",
+        "heightWithShoes": "",
+        "standingReach": "9' 1.50''",
+        "weightLbs": "210.8",
+        "wingspan": "6' 11.50''"
+      },
+      {
+        "ordinal": 5,
+        "name": "Christian Anderson",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "8.25",
+        "heightWithoutShoes": "6' 1.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 0.50''",
+        "weightLbs": "180.4",
+        "wingspan": "6' 6.25''"
+      },
+      {
+        "ordinal": 6,
+        "name": "Tobe Awaka",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 8.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 9.00''",
+        "weightLbs": "261.4",
+        "wingspan": "7' 2.25''"
+      },
+      {
+        "ordinal": 7,
+        "name": "Flory Bidunga",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "10.50",
+        "heightWithoutShoes": "6' 7.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 10.50''",
+        "weightLbs": "228.6",
+        "wingspan": "7' 3.25''"
+      },
+      {
+        "ordinal": 8,
+        "name": "Tyler Bilodeau",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 7.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 11.00''",
+        "weightLbs": "228.2",
+        "wingspan": "7' 0.75''"
+      },
+      {
+        "ordinal": 9,
+        "name": "John Blackwell",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 3.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.00''",
+        "weightLbs": "199.6",
+        "wingspan": "6' 2.25''"
+      },
+      {
+        "ordinal": 10,
+        "name": "Cameron Boozer",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 8.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.00''",
+        "weightLbs": "252.8",
+        "wingspan": "7' 1.50''"
+      },
+      {
+        "ordinal": 11,
+        "name": "Kylan Boswell",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "8.50",
+        "heightWithoutShoes": "6' 1.25''",
+        "heightWithShoes": "",
+        "standingReach": "7' 11.00''",
+        "weightLbs": "226.0",
+        "wingspan": "6' 7.00''"
+      },
+      {
+        "ordinal": 12,
+        "name": "Nicholas Boyd",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "8.25",
+        "heightWithoutShoes": "6' 1.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 0.00''",
+        "weightLbs": "176.2",
+        "wingspan": "6' 2.50''"
+      },
+      {
+        "ordinal": 13,
+        "name": "Jaden Bradley",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 2.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 0.00''",
+        "weightLbs": "205.4",
+        "wingspan": "6' 6.25''"
+      },
+      {
+        "ordinal": 14,
+        "name": "Trevon Brazile",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.25",
+        "heightWithoutShoes": "6' 9.50''",
+        "heightWithShoes": "",
+        "standingReach": "9' 1.00''",
+        "weightLbs": "225.6",
+        "wingspan": "7' 3.75''"
+      },
+      {
+        "ordinal": 15,
+        "name": "Maliq Brown",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 8.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 11.00''",
+        "weightLbs": "216.6",
+        "wingspan": "7' 0.75''"
+      },
+      {
+        "ordinal": 16,
+        "name": "Christopher Brown Jr",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 3.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 4.50''",
+        "weightLbs": "190.2",
+        "wingspan": "6' 7.50''"
+      },
+      {
+        "ordinal": 17,
+        "name": "Brayden Burries",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 3.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.50''",
+        "weightLbs": "215.4",
+        "wingspan": "6' 6.00''"
+      },
+      {
+        "ordinal": 18,
+        "name": "Cameron Carr",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 4.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.00''",
+        "weightLbs": "184.4",
+        "wingspan": "7' 0.75''"
+      },
+      {
+        "ordinal": 19,
+        "name": "Rafael Castro",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 9.00''",
+        "heightWithShoes": "",
+        "standingReach": "9' 1.50''",
+        "weightLbs": "224.4",
+        "wingspan": "7' 1.25''"
+      },
+      {
+        "ordinal": 20,
+        "name": "Christopher Cenac Jr.",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 10.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.50''",
+        "weightLbs": "239.6",
+        "wingspan": "7' 5.00''"
+      },
+      {
+        "ordinal": 21,
+        "name": "Rueben Chinyelu",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "10.00",
+        "handWidthIn": "10.25",
+        "heightWithoutShoes": "6' 9.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 3.50''",
+        "weightLbs": "259.4",
+        "wingspan": "7' 7.50''"
+      },
+      {
+        "ordinal": 22,
+        "name": "Jacob Cofie",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 8.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 11.00''",
+        "weightLbs": "232.0",
+        "wingspan": "7' 0.00''"
+      },
+      {
+        "ordinal": 23,
+        "name": "Ryan Conwell",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 2.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 0.50''",
+        "weightLbs": "214.8",
+        "wingspan": "6' 7.00''"
+      },
+      {
+        "ordinal": 24,
+        "name": "Sergio De Larrea",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 6.00''",
+        "heightWithShoes": "",
+        "standingReach": "",
+        "weightLbs": "204.2",
+        "wingspan": "6' 9.00''"
+      },
+      {
+        "ordinal": 25,
+        "name": "Anicet Dybantsa",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 8.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 10.00''",
+        "weightLbs": "217.0",
+        "wingspan": "7' 0.50''"
+      },
+      {
+        "ordinal": 26,
+        "name": "Zuby Ejiofor",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 7.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 11.00''",
+        "weightLbs": "245.2",
+        "wingspan": "7' 2.00''"
+      },
+      {
+        "ordinal": 27,
+        "name": "Isaiah Evans",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 5.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "186.0",
+        "wingspan": "6' 8.75''"
+      },
+      {
+        "ordinal": 28,
+        "name": "Jeremy Fears Jr.",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 0.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 1.50''",
+        "weightLbs": "196.2",
+        "wingspan": "6' 4.00''"
+      },
+      {
+        "ordinal": 29,
+        "name": "Kingston Flemings",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 2.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.50''",
+        "weightLbs": "183.4",
+        "wingspan": "6' 3.50''"
+      },
+      {
+        "ordinal": 30,
+        "name": "Ja'Kobi Gillespie",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "5' 11.75''",
+        "heightWithShoes": "",
+        "standingReach": "7' 11.50''",
+        "weightLbs": "181.8",
+        "wingspan": "6' 4.00''"
+      },
+      {
+        "ordinal": 31,
+        "name": "Allen Graves",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 7.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 10.50''",
+        "weightLbs": "225.6",
+        "wingspan": "7' 0.00''"
+      },
+      {
+        "ordinal": 32,
+        "name": "Keyshawn Hall",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.50",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 6.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 9.00''",
+        "weightLbs": "227.4",
+        "wingspan": "6' 10.25''"
+      },
+      {
+        "ordinal": 33,
+        "name": "Jaden Harris",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "-",
+        "handWidthIn": "-",
+        "heightWithoutShoes": "",
+        "heightWithShoes": "",
+        "standingReach": "",
+        "weightLbs": "-",
+        "wingspan": ""
+      },
+      {
+        "ordinal": 34,
+        "name": "Bryce Hopkins",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 6.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 9.00''",
+        "weightLbs": "218.8",
+        "wingspan": "6' 10.50''"
+      },
+      {
+        "ordinal": 35,
+        "name": "Joshua Jefferson",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 7.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "246.2",
+        "wingspan": "6' 10.75''"
+      },
+      {
+        "ordinal": 36,
+        "name": "Morez Johnson",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.50",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 9.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 11.00''",
+        "weightLbs": "250.6",
+        "wingspan": "7' 3.50''"
+      },
+      {
+        "ordinal": 37,
+        "name": "Alex Karaban",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 6.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "225.2",
+        "wingspan": "6' 11.00''"
+      },
+      {
+        "ordinal": 38,
+        "name": "Trey Kaufman-Renn",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 7.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 9.50''",
+        "weightLbs": "241.2",
+        "wingspan": "6' 10.50''"
+      },
+      {
+        "ordinal": 39,
+        "name": "Jack Kayil",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "-",
+        "handWidthIn": "-",
+        "heightWithoutShoes": "",
+        "heightWithShoes": "",
+        "standingReach": "",
+        "weightLbs": "-",
+        "wingspan": ""
+      },
+      {
+        "ordinal": 40,
+        "name": "Tobi Lawal",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 7.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "214.4",
+        "wingspan": "6' 10.50''"
+      },
+      {
+        "ordinal": 41,
+        "name": "Yaxel Lendeborg",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 8.75''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.50''",
+        "weightLbs": "241.4",
+        "wingspan": "7' 3.25''"
+      },
+      {
+        "ordinal": 42,
+        "name": "Karim Lopez",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.50",
+        "handWidthIn": "11.00",
+        "heightWithoutShoes": "6' 8.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 9.50''",
+        "weightLbs": "221.8",
+        "wingspan": "6' 11.50''"
+      },
+      {
+        "ordinal": 43,
+        "name": "Aday Mara",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "7' 3.00''",
+        "heightWithShoes": "",
+        "standingReach": "9' 9.00''",
+        "weightLbs": "259.8",
+        "wingspan": "7' 6.00''"
+      },
+      {
+        "ordinal": 44,
+        "name": "Nick Martinelli",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 6.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "223.6",
+        "wingspan": "6' 10.00''"
+      },
+      {
+        "ordinal": 45,
+        "name": "Baba Miller",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 10.50''",
+        "heightWithShoes": "",
+        "standingReach": "9' 3.00''",
+        "weightLbs": "208.2",
+        "wingspan": "7' 1.75''"
+      },
+      {
+        "ordinal": 46,
+        "name": "Dillon Mitchell",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 6.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "202.2",
+        "wingspan": "6' 10.50''"
+      },
+      {
+        "ordinal": 47,
+        "name": "Milan Momcilovic",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 8.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 6.50''",
+        "weightLbs": "218.2",
+        "wingspan": "6' 9.25''"
+      },
+      {
+        "ordinal": 48,
+        "name": "Malachi Moreno",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 11.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 3.50''",
+        "weightLbs": "242.8",
+        "wingspan": "7' 1.50''"
+      },
+      {
+        "ordinal": 49,
+        "name": "Izaiyah Nelson",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 8.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.00''",
+        "weightLbs": "219.4",
+        "wingspan": "7' 2.50''"
+      },
+      {
+        "ordinal": 50,
+        "name": "Tyler Nickel",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 6.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 6.50''",
+        "weightLbs": "217.4",
+        "wingspan": "6' 8.50''"
+      },
+      {
+        "ordinal": 51,
+        "name": "Aaron Nkrumah",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "8.50",
+        "heightWithoutShoes": "6' 5.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.00''",
+        "weightLbs": "188.8",
+        "wingspan": "6' 10.25''"
+      },
+      {
+        "ordinal": 52,
+        "name": "Ebuka Okorie",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 1.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.00''",
+        "weightLbs": "186.0",
+        "wingspan": "6' 7.75''"
+      },
+      {
+        "ordinal": 53,
+        "name": "Felix Okpara",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 10.00''",
+        "heightWithShoes": "",
+        "standingReach": "9' 4.00''",
+        "weightLbs": "237.4",
+        "wingspan": "7' 2.00''"
+      },
+      {
+        "ordinal": 54,
+        "name": "Ugonna Onyenso",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.50",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 11.00''",
+        "heightWithShoes": "",
+        "standingReach": "9' 5.00''",
+        "weightLbs": "236.8",
+        "wingspan": "7' 4.75''"
+      },
+      {
+        "ordinal": 55,
+        "name": "Otega Oweh",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 4.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 5.00''",
+        "weightLbs": "216.0",
+        "wingspan": "6' 8.25''"
+      },
+      {
+        "ordinal": 56,
+        "name": "Koa Peat",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 7.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.00''",
+        "weightLbs": "245.0",
+        "wingspan": "6' 11.25''"
+      },
+      {
+        "ordinal": 57,
+        "name": "Darryn Peterson",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 4.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 7.00''",
+        "weightLbs": "198.8",
+        "wingspan": "6' 9.75''"
+      },
+      {
+        "ordinal": 58,
+        "name": "Labaron Philon",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 2.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 3.50''",
+        "weightLbs": "176.2",
+        "wingspan": "6' 6.25''"
+      },
+      {
+        "ordinal": 59,
+        "name": "Jayden Quaintance",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.50",
+        "handWidthIn": "11.00",
+        "heightWithoutShoes": "6' 9.00''",
+        "heightWithShoes": "",
+        "standingReach": "9' 1.00''",
+        "weightLbs": "253.4",
+        "wingspan": "7' 5.25''"
+      },
+      {
+        "ordinal": 60,
+        "name": "Tarris Reed Jr.",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 9.75''",
+        "heightWithShoes": "",
+        "standingReach": "9' 2.00''",
+        "weightLbs": "263.6",
+        "wingspan": "7' 4.25''"
+      },
+      {
+        "ordinal": 61,
+        "name": "Billy Richmond III",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 5.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 5.00''",
+        "weightLbs": "195.4",
+        "wingspan": "6' 8.00''"
+      },
+      {
+        "ordinal": 62,
+        "name": "Richie Saunders",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "10.25",
+        "heightWithoutShoes": "6' 5.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 6.50''",
+        "weightLbs": "204.8",
+        "wingspan": "6' 8.75''"
+      },
+      {
+        "ordinal": 63,
+        "name": "Emanuel Sharp",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "8.25",
+        "heightWithoutShoes": "6' 2.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.50''",
+        "weightLbs": "208.4",
+        "wingspan": "6' 3.00''"
+      },
+      {
+        "ordinal": 64,
+        "name": "Braden Smith",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "8.25",
+        "heightWithoutShoes": "5' 10.25''",
+        "heightWithShoes": "",
+        "standingReach": "7' 9.50''",
+        "weightLbs": "166.6",
+        "wingspan": "6' 3.25''"
+      },
+      {
+        "ordinal": 65,
+        "name": "Hannes Steinbach",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 10.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.00''",
+        "weightLbs": "248.0",
+        "wingspan": "7' 2.25''"
+      },
+      {
+        "ordinal": 66,
+        "name": "Bennett Stirtz",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 2.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.50''",
+        "weightLbs": "186.2",
+        "wingspan": "6' 6.00''"
+      },
+      {
+        "ordinal": 67,
+        "name": "Andrej Stojakovic",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "6' 5.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 4.00''",
+        "weightLbs": "206.0",
+        "wingspan": "6' 8.25''"
+      },
+      {
+        "ordinal": 68,
+        "name": "Peter Suder",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 3.75''",
+        "heightWithShoes": "",
+        "standingReach": "8' 3.50''",
+        "weightLbs": "213.4",
+        "wingspan": "6' 8.00''"
+      },
+      {
+        "ordinal": 69,
+        "name": "Luigi Suigo",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.25",
+        "handWidthIn": "10.50",
+        "heightWithoutShoes": "7' 2.75''",
+        "heightWithShoes": "",
+        "standingReach": "9' 6.00''",
+        "weightLbs": "289.0",
+        "wingspan": "7' 5.50''"
+      },
+      {
+        "ordinal": 70,
+        "name": "Dailyn Swain",
+        "position": "SF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 6.50''",
+        "heightWithShoes": "",
+        "standingReach": "8' 8.50''",
+        "weightLbs": "211.2",
+        "wingspan": "6' 10.00''"
+      },
+      {
+        "ordinal": 71,
+        "name": "Tyler Tanner",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.25",
+        "handWidthIn": "10.00",
+        "heightWithoutShoes": "5' 10.75''",
+        "heightWithShoes": "",
+        "standingReach": "7' 9.00''",
+        "weightLbs": "166.8",
+        "wingspan": "6' 4.25''"
+      },
+      {
+        "ordinal": 72,
+        "name": "Meleek Thomas",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "7.50",
+        "heightWithoutShoes": "6' 3.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 4.00''",
+        "weightLbs": "189.6",
+        "wingspan": "6' 6.75''"
+      },
+      {
+        "ordinal": 73,
+        "name": "Bruce Thornton",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 0.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 0.50''",
+        "weightLbs": "223.0",
+        "wingspan": "6' 5.00''"
+      },
+      {
+        "ordinal": 74,
+        "name": "Milos Uzan",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 3.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 2.00''",
+        "weightLbs": "185.0",
+        "wingspan": "6' 5.00''"
+      },
+      {
+        "ordinal": 75,
+        "name": "Henri Veesaar",
+        "position": "C",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.75",
+        "handWidthIn": "9.50",
+        "heightWithoutShoes": "6' 11.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 3.00''",
+        "weightLbs": "227.2",
+        "wingspan": "7' 2.00''"
+      },
+      {
+        "ordinal": 76,
+        "name": "Keaton Wagler",
+        "position": "PG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.00",
+        "handWidthIn": "9.25",
+        "heightWithoutShoes": "6' 5.00''",
+        "heightWithShoes": "",
+        "standingReach": "8' 4.00''",
+        "weightLbs": "188.0",
+        "wingspan": "6' 6.25''"
+      },
+      {
+        "ordinal": 77,
+        "name": "Caleb Wilson",
+        "position": "PF",
+        "bodyFatPct": "-%",
+        "handLengthIn": "9.00",
+        "handWidthIn": "9.75",
+        "heightWithoutShoes": "6' 9.25''",
+        "heightWithShoes": "",
+        "standingReach": "9' 0.00''",
+        "weightLbs": "210.8",
+        "wingspan": "7' 0.25''"
+      },
+      {
+        "ordinal": 78,
+        "name": "Tounde Yessoufou",
+        "position": "SG",
+        "bodyFatPct": "-%",
+        "handLengthIn": "8.50",
+        "handWidthIn": "9.00",
+        "heightWithoutShoes": "6' 4.25''",
+        "heightWithShoes": "",
+        "standingReach": "8' 7.00''",
+        "weightLbs": "219.8",
+        "wingspan": "6' 10.00''"
+      }
+    ],
+    "earlyEntryCandidates": [
+      {
+        "ordinal": 1,
+        "category": "nonInternationalCollege",
+        "name": "Matt Able",
+        "schoolOrTeam": "North Carolina State",
+        "height": "6-6",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 2,
+        "category": "nonInternationalCollege",
+        "name": "Darius Acuff Jr.",
+        "schoolOrTeam": "Arkansas",
+        "height": "6-3",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 3,
+        "category": "nonInternationalCollege",
+        "name": "Amari Allen",
+        "schoolOrTeam": "Alabama",
+        "height": "6-8",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 4,
+        "category": "nonInternationalCollege",
+        "name": "Nate Ament",
+        "schoolOrTeam": "Tennessee",
+        "height": "6-10",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 5,
+        "category": "nonInternationalCollege",
+        "name": "Christian Anderson Jr.",
+        "schoolOrTeam": "Texas Tech",
+        "height": "6-3",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 6,
+        "category": "nonInternationalCollege",
+        "name": "Alijah Arenas",
+        "schoolOrTeam": "USC",
+        "height": "6-6",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 7,
+        "category": "nonInternationalCollege",
+        "name": "Flory Bidunga",
+        "schoolOrTeam": "Kansas",
+        "height": "6-10",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 8,
+        "category": "nonInternationalCollege",
+        "name": "Finley Bizjack",
+        "schoolOrTeam": "Butler",
+        "height": "6-4",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 9,
+        "category": "nonInternationalCollege",
+        "name": "John Blackwell",
+        "schoolOrTeam": "Wisconsin",
+        "height": "6-4",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 10,
+        "category": "nonInternationalCollege",
+        "name": "Shane Blakeney",
+        "schoolOrTeam": "Drexel",
+        "height": "6-5",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 11,
+        "category": "nonInternationalCollege",
+        "name": "Anton Bonke",
+        "schoolOrTeam": "Charlotte",
+        "height": "7-2",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 12,
+        "category": "nonInternationalCollege",
+        "name": "Cameron Boozer",
+        "schoolOrTeam": "Duke",
+        "height": "6-9",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 13,
+        "category": "nonInternationalCollege",
+        "name": "Mikel Brown Jr.",
+        "schoolOrTeam": "Louisville",
+        "height": "6-5",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 14,
+        "category": "nonInternationalCollege",
+        "name": "Rowan Brumbaugh",
+        "schoolOrTeam": "Tulane",
+        "height": "6-4",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 15,
+        "category": "nonInternationalCollege",
+        "name": "Brayden Burries",
+        "schoolOrTeam": "Arizona",
+        "height": "6-4",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 16,
+        "category": "nonInternationalCollege",
+        "name": "Elliot Cadeau",
+        "schoolOrTeam": "Michigan",
+        "height": "6-1",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 17,
+        "category": "nonInternationalCollege",
+        "name": "Cameron Carr",
+        "schoolOrTeam": "Baylor",
+        "height": "6-5",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 18,
+        "category": "nonInternationalCollege",
+        "name": "Chris Cenac Jr.",
+        "schoolOrTeam": "Houston",
+        "height": "6-11",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 19,
+        "category": "nonInternationalCollege",
+        "name": "Rueben Chinyelu",
+        "schoolOrTeam": "Florida",
+        "height": "6-10",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 20,
+        "category": "nonInternationalCollege",
+        "name": "Jacob Cofie",
+        "schoolOrTeam": "USC",
+        "height": "6-10",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 21,
+        "category": "nonInternationalCollege",
+        "name": "Cruz Davis",
+        "schoolOrTeam": "Hofstra",
+        "height": "6-3",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 22,
+        "category": "nonInternationalCollege",
+        "name": "Kennard Davis Jr.",
+        "schoolOrTeam": "BYU",
+        "height": "6-6",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 23,
+        "category": "nonInternationalCollege",
+        "name": "Keanu Dawes",
+        "schoolOrTeam": "Utah",
+        "height": "6-9",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 24,
+        "category": "nonInternationalCollege",
+        "name": "AJ Dybantsa",
+        "schoolOrTeam": "BYU",
+        "height": "6-9",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 25,
+        "category": "nonInternationalCollege",
+        "name": "Gabe Dynes",
+        "schoolOrTeam": "USC",
+        "height": "7-5",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 26,
+        "category": "nonInternationalCollege",
+        "name": "Eian Elmer",
+        "schoolOrTeam": "Miami (OH)",
+        "height": "6-6",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 27,
+        "category": "nonInternationalCollege",
+        "name": "Isaiah Evans",
+        "schoolOrTeam": "Duke",
+        "height": "6-6",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 28,
+        "category": "nonInternationalCollege",
+        "name": "Jeremy Fears Jr.",
+        "schoolOrTeam": "Michigan State",
+        "height": "6-2",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 29,
+        "category": "nonInternationalCollege",
+        "name": "Kingston Flemings",
+        "schoolOrTeam": "Houston",
+        "height": "6-4",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 30,
+        "category": "nonInternationalCollege",
+        "name": "Colby Garland",
+        "schoolOrTeam": "San Jose State",
+        "height": "6-0",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 31,
+        "category": "nonInternationalCollege",
+        "name": "Allen Graves",
+        "schoolOrTeam": "Santa Clara",
+        "height": "6-9",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 32,
+        "category": "nonInternationalCollege",
+        "name": "Juke Harris",
+        "schoolOrTeam": "Wake Forest",
+        "height": "6-7",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 33,
+        "category": "nonInternationalCollege",
+        "name": "Isiah Harwell",
+        "schoolOrTeam": "Houston",
+        "height": "6-6",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 34,
+        "category": "nonInternationalCollege",
+        "name": "Lou Hutchinson",
+        "schoolOrTeam": "Alabama A&M",
+        "height": "6-7",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 35,
+        "category": "nonInternationalCollege",
+        "name": "Morez Johnson Jr.",
+        "schoolOrTeam": "Michigan",
+        "height": "6-9",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 36,
+        "category": "nonInternationalCollege",
+        "name": "Acaden Lewis",
+        "schoolOrTeam": "Villanova",
+        "height": "6-2",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 37,
+        "category": "nonInternationalCollege",
+        "name": "Aday Mara",
+        "schoolOrTeam": "Michigan",
+        "height": "7-3",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 38,
+        "category": "nonInternationalCollege",
+        "name": "Milan Momcilovic",
+        "schoolOrTeam": "Iowa State",
+        "height": "6-8",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 39,
+        "category": "nonInternationalCollege",
+        "name": "Malachi Moreno",
+        "schoolOrTeam": "Kentucky",
+        "height": "7-0",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 40,
+        "category": "nonInternationalCollege",
+        "name": "Paulius Murauskas",
+        "schoolOrTeam": "Saint Mary’s",
+        "height": "6-8",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 41,
+        "category": "nonInternationalCollege",
+        "name": "Ebuka Okorie",
+        "schoolOrTeam": "Stanford",
+        "height": "6-2",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 42,
+        "category": "nonInternationalCollege",
+        "name": "Dennis Parker Jr.",
+        "schoolOrTeam": "Radford",
+        "height": "6-6",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 43,
+        "category": "nonInternationalCollege",
+        "name": "Koa Peat",
+        "schoolOrTeam": "Arizona",
+        "height": "6-8",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 44,
+        "category": "nonInternationalCollege",
+        "name": "Darryn Peterson",
+        "schoolOrTeam": "Kansas",
+        "height": "6-6",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 45,
+        "category": "nonInternationalCollege",
+        "name": "Labaron Philon Jr.",
+        "schoolOrTeam": "Alabama",
+        "height": "6-4",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 46,
+        "category": "nonInternationalCollege",
+        "name": "Jayden Quaintance",
+        "schoolOrTeam": "Kentucky",
+        "height": "6-10",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 47,
+        "category": "nonInternationalCollege",
+        "name": "Sebastian Rancik",
+        "schoolOrTeam": "Colorado",
+        "height": "6-11",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 48,
+        "category": "nonInternationalCollege",
+        "name": "Billy Richmond III",
+        "schoolOrTeam": "Arkansas",
+        "height": "6-6",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 49,
+        "category": "nonInternationalCollege",
+        "name": "Hannes Steinbach",
+        "schoolOrTeam": "Washington",
+        "height": "6-11",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 50,
+        "category": "nonInternationalCollege",
+        "name": "Andrej Stojakovic",
+        "schoolOrTeam": "Illinois",
+        "height": "6-7",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 51,
+        "category": "nonInternationalCollege",
+        "name": "Dailyn Swain",
+        "schoolOrTeam": "Texas",
+        "height": "6-8",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 52,
+        "category": "nonInternationalCollege",
+        "name": "Tyler Tanner",
+        "schoolOrTeam": "Vanderbilt",
+        "height": "6-0",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 53,
+        "category": "nonInternationalCollege",
+        "name": "Meleek Thomas",
+        "schoolOrTeam": "Arkansas",
+        "height": "6-5",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 54,
+        "category": "nonInternationalCollege",
+        "name": "Aiden Tobiason",
+        "schoolOrTeam": "Temple",
+        "height": "6-5",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 55,
+        "category": "nonInternationalCollege",
+        "name": "Bryson Tucker",
+        "schoolOrTeam": "Washington",
+        "height": "6-7",
+        "status": "Sophomore"
+      },
+      {
+        "ordinal": 56,
+        "category": "nonInternationalCollege",
+        "name": "Henri Veesaar",
+        "schoolOrTeam": "North Carolina",
+        "height": "7-0",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 57,
+        "category": "nonInternationalCollege",
+        "name": "Keaton Wagler",
+        "schoolOrTeam": "Illinois",
+        "height": "6-6",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 58,
+        "category": "nonInternationalCollege",
+        "name": "LeJuan Watts",
+        "schoolOrTeam": "Texas Tech",
+        "height": "6-6",
+        "status": "Junior"
+      },
+      {
+        "ordinal": 59,
+        "category": "nonInternationalCollege",
+        "name": "Caleb Wilson",
+        "schoolOrTeam": "North Carolina",
+        "height": "6-10",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 60,
+        "category": "nonInternationalCollege",
+        "name": "Tounde Yessoufou",
+        "schoolOrTeam": "Baylor",
+        "height": "6-5",
+        "status": "Freshman"
+      },
+      {
+        "ordinal": 61,
+        "category": "international",
+        "name": "Mohammad Amini",
+        "schoolOrTeam": "Nancy (France)",
+        "height": "6-7",
+        "status": "2005 DOB"
+      },
+      {
+        "ordinal": 62,
+        "category": "international",
+        "name": "Pavle Backo",
+        "schoolOrTeam": "Mega (Serbia)",
+        "height": "7-0",
+        "status": "2007 DOB"
+      },
+      {
+        "ordinal": 63,
+        "category": "international",
+        "name": "Bassala Bagayoko",
+        "schoolOrTeam": "Bilbao (Spain)",
+        "height": "6-10",
+        "status": "2006 DOB"
+      },
+      {
+        "ordinal": 64,
+        "category": "international",
+        "name": "Francesco Ferrari",
+        "schoolOrTeam": "Virtus Bologna (Italy)",
+        "height": "6-9",
+        "status": "2005 DOB"
+      },
+      {
+        "ordinal": 65,
+        "category": "international",
+        "name": "Marc-Owen Fodzo Dada",
+        "schoolOrTeam": "Nancy (France)",
+        "height": "5-11",
+        "status": "2006 DOB"
+      },
+      {
+        "ordinal": 66,
+        "category": "international",
+        "name": "Vsevolod Ishchenko",
+        "schoolOrTeam": "Lokomotiv (Russia)",
+        "height": "6-3",
+        "status": "2005 DOB"
+      },
+      {
+        "ordinal": 67,
+        "category": "international",
+        "name": "Jack Kayil",
+        "schoolOrTeam": "Alba Berlin (Germany)",
+        "height": "6-3",
+        "status": "2006 DOB"
+      },
+      {
+        "ordinal": 68,
+        "category": "international",
+        "name": "Sergio de Larrea",
+        "schoolOrTeam": "Valencia (Spain)",
+        "height": "6-6",
+        "status": "2005 DOB"
+      },
+      {
+        "ordinal": 69,
+        "category": "international",
+        "name": "Karim Lopez",
+        "schoolOrTeam": "New Zealand Breakers (Australia)",
+        "height": "6-8",
+        "status": "2007 DOB"
+      },
+      {
+        "ordinal": 70,
+        "category": "international",
+        "name": "Alexandros Samodurov",
+        "schoolOrTeam": "Panathinaikos (Greece)",
+        "height": "6-11",
+        "status": "2005 DOB"
+      },
+      {
+        "ordinal": 71,
+        "category": "international",
+        "name": "Luigi Suigo",
+        "schoolOrTeam": "Mega (Serbia)",
+        "height": "7-2",
+        "status": "2007 DOB"
+      }
+    ],
+    "statsCombineSummaryUniqueLinkedNames": [
+      "Aaron Nkrumah",
+      "Aday Mara",
+      "Amari Allen",
+      "Andrej Stojakovic",
+      "Anicet Dybantsa",
+      "Baba Miller",
+      "Billy Richmond III",
+      "Brayden Burries",
+      "Bryce Hopkins",
+      "Caleb Wilson",
+      "Cameron Carr",
+      "Christian Anderson",
+      "Christopher Brown Jr",
+      "Christopher Cenac Jr.",
+      "Darius Acuff Jr.",
+      "Darryn Peterson",
+      "Emanuel Sharp",
+      "Felix Okpara",
+      "Flory Bidunga",
+      "Hannes Steinbach",
+      "Henri Veesaar",
+      "Isaiah Evans",
+      "Izaiyah Nelson",
+      "Ja'Kobi Gillespie",
+      "Jacob Cofie",
+      "Jayden Quaintance",
+      "Jeremy Fears Jr.",
+      "Keaton Wagler",
+      "Kingston Flemings",
+      "Koa Peat",
+      "Labaron Philon",
+      "Luigi Suigo",
+      "Malachi Moreno",
+      "Maliq Brown",
+      "Morez Johnson",
+      "Nathaniel Ament",
+      "Nicholas Boyd",
+      "Rafael Castro",
+      "Richie Saunders",
+      "Rueben Chinyelu",
+      "Sergio De Larrea",
+      "Tarris Reed Jr.",
+      "Tobe Awaka",
+      "Tobi Lawal",
+      "Tounde Yessoufou",
+      "Trevon Brazile",
+      "Ugonna Onyenso",
+      "Yaxel Lendeborg",
+      "Zuby Ejiofor"
+    ],
+    "localPlayerPool": [
+      {
+        "ordinal": 1,
+        "nameZh": "AJ 迪班萨",
+        "positionZh": "前锋",
+        "schoolClubZh": "杨百翰大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 2,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 2,
+        "nameZh": "乌戈纳 奥尼恩索",
+        "positionZh": "中锋",
+        "schoolClubZh": "弗吉尼亚大学",
+        "countryRegionZh": "尼日利亚",
+        "sourceRow": 3,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 3,
+        "nameZh": "乔舒亚 杰弗森",
+        "positionZh": "前锋",
+        "schoolClubZh": "爱荷华州立大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 4,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 4,
+        "nameZh": "亚克塞尔 伦德伯格",
+        "positionZh": "前锋",
+        "schoolClubZh": "密歇根大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 5,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 5,
+        "nameZh": "亚历克斯 卡拉班",
+        "positionZh": "前锋",
+        "schoolClubZh": "康涅狄格大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 6,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 6,
+        "nameZh": "亨利 维萨尔",
+        "positionZh": "中锋",
+        "schoolClubZh": "北卡罗来纳大学",
+        "countryRegionZh": "爱沙尼亚",
+        "sourceRow": 7,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 7,
+        "nameZh": "以赛亚 埃文斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "杜克大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 8,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 8,
+        "nameZh": "以赛亚 尼尔森",
+        "positionZh": "前锋",
+        "schoolClubZh": "南佛罗里达大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 9,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 9,
+        "nameZh": "伊曼纽尔 夏普",
+        "positionZh": "后卫",
+        "schoolClubZh": "休斯顿大学",
+        "countryRegionZh": "以色列",
+        "sourceRow": 10,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 10,
+        "nameZh": "克里斯 塞纳克",
+        "positionZh": "前锋",
+        "schoolClubZh": "休斯顿大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 11,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 11,
+        "nameZh": "克里斯蒂安 安德森",
+        "positionZh": "后卫",
+        "schoolClubZh": "德克萨斯理工大学",
+        "countryRegionZh": "-",
+        "sourceRow": 12,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 12,
+        "nameZh": "凯兰 博斯韦尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "伊利诺伊大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 13,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 13,
+        "nameZh": "凯莱布 威尔逊",
+        "positionZh": "前锋",
+        "schoolClubZh": "北卡罗来纳大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 14,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 14,
+        "nameZh": "卡梅隆 卡尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "贝勒大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 15,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 15,
+        "nameZh": "卡梅隆 布泽尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "杜克大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 16,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 16,
+        "nameZh": "卡里姆 洛佩兹",
+        "positionZh": "前锋",
+        "schoolClubZh": "墨西哥",
+        "countryRegionZh": "-",
+        "sourceRow": 17,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 17,
+        "nameZh": "埃布卡 奥科里",
+        "positionZh": "后卫",
+        "schoolClubZh": "斯坦福大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 18,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 18,
+        "nameZh": "基肖恩 霍尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "奥本大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 19,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 19,
+        "nameZh": "基顿 瓦格勒",
+        "positionZh": "后卫",
+        "schoolClubZh": "伊利诺伊大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 20,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 20,
+        "nameZh": "奥泰加 奥韦",
+        "positionZh": "后卫",
+        "schoolClubZh": "肯塔基大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 21,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 21,
+        "nameZh": "小塔里斯 里德",
+        "positionZh": "中锋",
+        "schoolClubZh": "康涅狄格大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 22,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 22,
+        "nameZh": "小拉巴伦 菲隆",
+        "positionZh": "后卫",
+        "schoolClubZh": "阿拉巴马大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 23,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 23,
+        "nameZh": "小莫雷兹 约翰逊",
+        "positionZh": "前锋",
+        "schoolClubZh": "密歇根大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 24,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 24,
+        "nameZh": "尼克 博伊德",
+        "positionZh": "后卫",
+        "schoolClubZh": "威斯康星大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 25,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 25,
+        "nameZh": "尼克 马丁内利",
+        "positionZh": "前锋",
+        "schoolClubZh": "西北大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 26,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 26,
+        "nameZh": "巴巴 米勒",
+        "positionZh": "前锋",
+        "schoolClubZh": "辛辛那提大学",
+        "countryRegionZh": "西班牙",
+        "sourceRow": 27,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 27,
+        "nameZh": "布赖斯 霍普金斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "圣约翰大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 28,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 28,
+        "nameZh": "布雷登 伯里斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "亚利桑那大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 29,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 29,
+        "nameZh": "布雷登 史密斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "普渡大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 30,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 30,
+        "nameZh": "布鲁斯 索顿",
+        "positionZh": "后卫",
+        "schoolClubZh": "俄亥俄州立大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 31,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 31,
+        "nameZh": "彼得 祖德尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "迈阿密大学（俄亥俄州）",
+        "countryRegionZh": "美国",
+        "sourceRow": 32,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 32,
+        "nameZh": "戴林 斯温",
+        "positionZh": "后卫",
+        "schoolClubZh": "德克萨斯大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 33,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 33,
+        "nameZh": "托比 拉瓦尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "弗吉尼亚理工大学",
+        "countryRegionZh": "英国",
+        "sourceRow": 34,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 34,
+        "nameZh": "托比 阿瓦卡",
+        "positionZh": "前锋",
+        "schoolClubZh": "亚利桑那大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 35,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 35,
+        "nameZh": "拉斐尔 卡斯特罗",
+        "positionZh": "前锋",
+        "schoolClubZh": "乔治华盛顿大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 36,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 36,
+        "nameZh": "本内特 斯特茨",
+        "positionZh": "后卫",
+        "schoolClubZh": "爱荷华大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 37,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 37,
+        "nameZh": "杰登 布拉德利",
+        "positionZh": "后卫",
+        "schoolClubZh": "亚利桑那大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 38,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 38,
+        "nameZh": "杰登 昆坦斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "肯塔基大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 39,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 39,
+        "nameZh": "汉内斯 施泰因巴赫",
+        "positionZh": "前锋",
+        "schoolClubZh": "华盛顿大学",
+        "countryRegionZh": "德国",
+        "sourceRow": 40,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 40,
+        "nameZh": "泰勒 尼科尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "范德比尔特大学‌",
+        "countryRegionZh": "美国",
+        "sourceRow": 41,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 41,
+        "nameZh": "泰勒 比洛多",
+        "positionZh": "前锋",
+        "schoolClubZh": "UCLA",
+        "countryRegionZh": "美国",
+        "sourceRow": 42,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 42,
+        "nameZh": "特雷 考夫曼-雷恩",
+        "positionZh": "前锋",
+        "schoolClubZh": "普渡大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 43,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 43,
+        "nameZh": "特雷冯 布拉齐尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "阿肯色大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 44,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 44,
+        "nameZh": "狄龙 米切尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "圣约翰大学",
+        "countryRegionZh": "-",
+        "sourceRow": 45,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 45,
+        "nameZh": "祖比 埃吉奥福尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "圣约翰大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 46,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 46,
+        "nameZh": "科阿 皮特",
+        "positionZh": "前锋",
+        "schoolClubZh": "亚利桑那大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 47,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 47,
+        "nameZh": "米洛斯 尤赞",
+        "positionZh": "后卫",
+        "schoolClubZh": "休斯顿大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 48,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 48,
+        "nameZh": "莱恩 康韦尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "路易斯维尔大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 49,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 49,
+        "nameZh": "费利克斯 奥克帕拉",
+        "positionZh": "前锋",
+        "schoolClubZh": "田纳西大学",
+        "countryRegionZh": "尼日利亚",
+        "sourceRow": 50,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 50,
+        "nameZh": "贾科比 吉莱斯皮",
+        "positionZh": "后卫",
+        "schoolClubZh": "田纳西大学",
+        "countryRegionZh": "-",
+        "sourceRow": 51,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 51,
+        "nameZh": "达林 彼得森",
+        "positionZh": "后卫",
+        "schoolClubZh": "堪萨斯大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 52,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 52,
+        "nameZh": "达柳斯 阿卡夫",
+        "positionZh": "后卫",
+        "schoolClubZh": "阿肯色大学",
+        "countryRegionZh": "-",
+        "sourceRow": 53,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 53,
+        "nameZh": "金斯顿 弗莱明斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "休斯顿大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 54,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 54,
+        "nameZh": "阿伦 格雷夫斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "圣塔克拉拉大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 55,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 55,
+        "nameZh": "阿达伊 马拉",
+        "positionZh": "中锋",
+        "schoolClubZh": "密歇根大学",
+        "countryRegionZh": "西班牙",
+        "sourceRow": 56,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 56,
+        "nameZh": "马利克 托马斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "阿肯色大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 57,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 57,
+        "nameZh": "马利奇 布朗",
+        "positionZh": "前锋",
+        "schoolClubZh": "杜克大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 58,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 58,
+        "nameZh": "塞尔吉奥 德拉雷亚",
+        "positionZh": "前锋",
+        "schoolClubZh": "西班牙",
+        "countryRegionZh": "西班牙",
+        "sourceRow": 59,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 59,
+        "nameZh": "安德烈 斯托亚科维奇",
+        "positionZh": "SF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 60,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 60,
+        "nameZh": "小杰里米 费尔斯",
+        "positionZh": "PG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 61,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 61,
+        "nameZh": "小比利 里士满三世",
+        "positionZh": "SF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 62,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 62,
+        "nameZh": "弗洛里 比敦加",
+        "positionZh": "C",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 63,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 63,
+        "nameZh": "杰克 卡伊尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "德国",
+        "countryRegionZh": "德国",
+        "sourceRow": 64,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 64,
+        "nameZh": "泰勒 坦纳",
+        "positionZh": "PG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 65,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 65,
+        "nameZh": "米兰 莫姆契洛维奇",
+        "positionZh": "PF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 66,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 66,
+        "nameZh": "约翰 布莱克威尔",
+        "positionZh": "SG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 67,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 67,
+        "nameZh": "纳撒尼尔 阿门特",
+        "positionZh": "PF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 68,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 68,
+        "nameZh": "路易吉 苏伊戈",
+        "positionZh": "中锋",
+        "schoolClubZh": "意大利",
+        "countryRegionZh": "意大利",
+        "sourceRow": 69,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 69,
+        "nameZh": "通德 耶苏福",
+        "positionZh": "SG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 70,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 70,
+        "nameZh": "里奇 桑德斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "杨百翰大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 71,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 71,
+        "nameZh": "阿伦 恩克鲁玛",
+        "positionZh": "SG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 72,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 72,
+        "nameZh": "阿马里 阿伦",
+        "positionZh": "SF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 73,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 73,
+        "nameZh": "雅各布 科菲",
+        "positionZh": "PF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 74,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 74,
+        "nameZh": "马修 埃布尔",
+        "positionZh": "SG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 75,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 75,
+        "nameZh": "马拉奇 莫雷诺",
+        "positionZh": "C",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 76,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 76,
+        "nameZh": "鲁本 钦耶卢",
+        "positionZh": "C",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 77,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 77,
+        "nameZh": "小克里斯托弗 布朗",
+        "positionZh": "PG",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 78,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 78,
+        "nameZh": "杰登 哈里斯",
+        "positionZh": "SF",
+        "schoolClubZh": "-",
+        "countryRegionZh": "-",
+        "sourceRow": 79,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 79,
+        "nameZh": "AJ 施托尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "密西西比大学",
+        "countryRegionZh": "-",
+        "sourceRow": 80,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 80,
+        "nameZh": "BJ 爱德华兹",
+        "positionZh": "后卫",
+        "schoolClubZh": "南卫理公会大学",
+        "countryRegionZh": "-",
+        "sourceRow": 81,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 81,
+        "nameZh": "亚当 阿塔姆纳",
+        "positionZh": "后卫",
+        "schoolClubZh": "法国",
+        "countryRegionZh": "-",
+        "sourceRow": 82,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 82,
+        "nameZh": "克肖恩 墨菲",
+        "positionZh": "前锋",
+        "schoolClubZh": "奥本大学",
+        "countryRegionZh": "-",
+        "sourceRow": 83,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 83,
+        "nameZh": "内特 比特尔",
+        "positionZh": "中锋",
+        "schoolClubZh": "俄勒冈大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 84,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 84,
+        "nameZh": "纳撒尼尔 阿门特",
+        "positionZh": "前锋",
+        "schoolClubZh": "田纳西大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 85,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 85,
+        "nameZh": "凯德 泰森",
+        "positionZh": "后卫",
+        "schoolClubZh": "明尼苏达大学",
+        "countryRegionZh": "-",
+        "sourceRow": 86,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 86,
+        "nameZh": "卡迪尔 科普兰",
+        "positionZh": "后卫",
+        "schoolClubZh": "北卡罗来纳州立大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 87,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 87,
+        "nameZh": "塔克 德弗里斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "印第安纳大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 88,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 88,
+        "nameZh": "塔明 利普西",
+        "positionZh": "后卫",
+        "schoolClubZh": "爱荷华州立大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 89,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 89,
+        "nameZh": "多诺万 登特",
+        "positionZh": "后卫",
+        "schoolClubZh": "UCLA",
+        "countryRegionZh": "-",
+        "sourceRow": 90,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 90,
+        "nameZh": "奥斯卡 克拉夫",
+        "positionZh": "中锋",
+        "schoolClubZh": "普渡大学",
+        "countryRegionZh": "澳大利亚",
+        "sourceRow": 91,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 91,
+        "nameZh": "奥格年 斯尔曾蒂奇",
+        "positionZh": "前锋",
+        "schoolClubZh": "塞尔维亚",
+        "countryRegionZh": "-",
+        "sourceRow": 92,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 92,
+        "nameZh": "威廉 凯尔",
+        "positionZh": "前锋",
+        "schoolClubZh": "雪城大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 93,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 93,
+        "nameZh": "小梅尔文 康斯尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "堪萨斯大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 94,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 94,
+        "nameZh": "小欧内斯特 乌德",
+        "positionZh": "中锋",
+        "schoolClubZh": "迈阿密大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 95,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 95,
+        "nameZh": "小雅龙 皮埃尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "南卫理公会大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 96,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 96,
+        "nameZh": "布赖森 塔克",
+        "positionZh": "前锋",
+        "schoolClubZh": "华盛顿大学",
+        "countryRegionZh": "-",
+        "sourceRow": 97,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 97,
+        "nameZh": "帕夫莱 巴奇科",
+        "positionZh": "中锋",
+        "schoolClubZh": "塞尔维亚",
+        "countryRegionZh": "-",
+        "sourceRow": 98,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 98,
+        "nameZh": "弗塞沃落德 伊先科",
+        "positionZh": "后卫",
+        "schoolClubZh": "俄罗斯",
+        "countryRegionZh": "俄罗斯",
+        "sourceRow": 99,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 99,
+        "nameZh": "弗朗西斯科 法拉利",
+        "positionZh": "前锋",
+        "schoolClubZh": "意大利",
+        "countryRegionZh": "意大利",
+        "sourceRow": 100,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 100,
+        "nameZh": "弗莱彻 洛耶尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "普渡大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 101,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 101,
+        "nameZh": "戴米恩 科林斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "南佛罗里达大学",
+        "countryRegionZh": "-",
+        "sourceRow": 102,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 102,
+        "nameZh": "拉贾伊 琼斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "佛罗里达州立大学",
+        "countryRegionZh": "-",
+        "sourceRow": 103,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 103,
+        "nameZh": "拉马尔 威尔克森",
+        "positionZh": "后卫",
+        "schoolClubZh": "印第安纳大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 104,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 104,
+        "nameZh": "本 亨歇尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "澳大利亚",
+        "countryRegionZh": "-",
+        "sourceRow": 105,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 105,
+        "nameZh": "杰登 亨利",
+        "positionZh": "后卫",
+        "schoolClubZh": "大峡谷大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 106,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 106,
+        "nameZh": "泰恩 格兰特-福斯特",
+        "positionZh": "后卫",
+        "schoolClubZh": "冈萨加大学",
+        "countryRegionZh": "-",
+        "sourceRow": 107,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 107,
+        "nameZh": "泽维安 李",
+        "positionZh": "后卫",
+        "schoolClubZh": "佛罗里达大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 108,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 108,
+        "nameZh": "特伦斯 阿西诺",
+        "positionZh": "后卫",
+        "schoolClubZh": "北卡罗来纳州立大学",
+        "countryRegionZh": "-",
+        "sourceRow": 109,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 109,
+        "nameZh": "特雷 怀特",
+        "positionZh": "后卫",
+        "schoolClubZh": "堪萨斯大学",
+        "countryRegionZh": "-",
+        "sourceRow": 110,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 110,
+        "nameZh": "穆罕默德 费伊",
+        "positionZh": "中锋",
+        "schoolClubZh": "塞内加尔",
+        "countryRegionZh": "-",
+        "sourceRow": 111,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 111,
+        "nameZh": "穆罕默德 阿米尼",
+        "positionZh": "后卫",
+        "schoolClubZh": "伊朗",
+        "countryRegionZh": "伊朗",
+        "sourceRow": 112,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 112,
+        "nameZh": "米伊卡 穆里宁",
+        "positionZh": "前锋",
+        "schoolClubZh": "芬兰",
+        "countryRegionZh": "-",
+        "sourceRow": 113,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 113,
+        "nameZh": "约什 迪克斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "克雷顿大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 114,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 114,
+        "nameZh": "莱利 库格尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "中佛罗里达大学",
+        "countryRegionZh": "-",
+        "sourceRow": 115,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 115,
+        "nameZh": "蒂埃里 达尔兰",
+        "positionZh": "后卫",
+        "schoolClubZh": "圣塔克拉拉大学",
+        "countryRegionZh": "-",
+        "sourceRow": 116,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 116,
+        "nameZh": "赛斯 特林布尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "北卡罗来纳大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 117,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 117,
+        "nameZh": "达什 丹尼尔斯",
+        "positionZh": "后卫",
+        "schoolClubZh": "澳大利亚",
+        "countryRegionZh": "-",
+        "sourceRow": 118,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 118,
+        "nameZh": "达里恩 威廉姆斯",
+        "positionZh": "前锋",
+        "schoolClubZh": "北卡罗来纳州立大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 119,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 119,
+        "nameZh": "迈克尔 布朗",
+        "positionZh": "后卫",
+        "schoolClubZh": "路易斯维尔大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 120,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 120,
+        "nameZh": "迈克尔 阿贾伊",
+        "positionZh": "前锋",
+        "schoolClubZh": "巴特勒大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 121,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 121,
+        "nameZh": "迈克尔 鲁日奇",
+        "positionZh": "中锋",
+        "schoolClubZh": "克罗地亚",
+        "countryRegionZh": "-",
+        "sourceRow": 122,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 122,
+        "nameZh": "马克 米切尔",
+        "positionZh": "后卫",
+        "schoolClubZh": "密苏里大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 123,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 123,
+        "nameZh": "马利克 尤因",
+        "positionZh": "前锋",
+        "schoolClubZh": "阿肯色大学",
+        "countryRegionZh": "-",
+        "sourceRow": 124,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      },
+      {
+        "ordinal": 124,
+        "nameZh": "马利克 雷诺",
+        "positionZh": "前锋",
+        "schoolClubZh": "迈阿密大学",
+        "countryRegionZh": "美国",
+        "sourceRow": 125,
+        "sourceSheet": "球员池_勿修改",
+        "sourceId": "draftcode24-answer-card-player-pool"
+      }
+    ]
+  }
+}
