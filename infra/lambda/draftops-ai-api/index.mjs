@@ -25,10 +25,52 @@ const unique = (items) => [...new Set(items)];
 const defaultRagS3Keys = [
   "public-data/expanded_import_bundle.json",
   "public-data/agent_expanded_recommended_board.json",
+  "public-data/agent_expanded_board.json",
   "public-data/agent_balanced_board.json",
+  "public-data/final_import_bundle.json",
   "data/final/milestone_answers.json",
-  "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/final/expanded_import_bundle.json",
+  "data/final/final_import_bundle.json",
   "public-data/prospect_media.json",
+  "data/documents/README.md",
+  "data/documents/document_index.json",
+  "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
+  "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/normalized/normalized_2026_official_prospects_101.json",
+  "data/normalized/normalized_2026_official_team_profiles_30.json",
+  "data/normalized/normalized_2026_team_context.json",
+  "data/normalized/normalized_2026_prospect_big_board.json",
+  "data/normalized/normalized_2026_mock_lottery.json",
+  "data/clean/data_quality_report.md",
+  "data/clean/clean_prospects.json",
+  "data/clean/clean_teams.json",
+  "data/clean/official_prospect_reconciliation.json",
+  "data/reports/milestone_prediction_evidence_20260623.json",
+  "data/reports/milestone_deepseek_discussion_20260623.json",
+  "data/reports/milestone_deepseek_discussion_20260623.md",
+  "data/reports/milestone_answer_card_write_report_20260623.json",
+  "data/reports/team_preference_research_20260623.json",
+  "data/reports/team_preference_research_20260623.md",
+  "data/reports/integrated_scoring_framework.json",
+  "data/reports/integrated_parameter_debate_summary.md",
+  "data/reports/main_parameter_board_simulation.json",
+  "data/reports/main_parameter_board_simulation_report.md",
+  "data/reports/multi_agent_top30_prediction_consensus_20260623.md",
+  "data/reports/prediction_strategy_audit_and_agent_rerun_20260623.md",
+  "data/reports/official_prospect_reconciliation_report.md",
+  "data/reports/official_double_agent_roster_audit_summary.md",
+  "data/reports/raw_sources_registry_report.md",
+  "data/reports/current_data_source_audit_20260623.md",
+  "data/reports/current_external_data_update_summary.md",
+  "data/reports/nba_official_expanded_data_audit_20260623.md",
+  "data/reports/nba_china_draft_verification_20260623.md",
+  "data/reports/china_nba_draft_scrape_report_20260623.md",
+  "data/reports/d8_source_quality_debate.md",
+  "data/raw/raw_sources.json",
+  "data/raw/external_source_inventory.json",
+  "data/raw/nba-official-2026-prospects-live.md",
+  "data/raw/nba-official-2026-draft-order-live.md",
+  "data/raw/china-nba-draft-20260623.md",
 ];
 const ragS3Bucket = process.env.DRAFTOPS_RAG_S3_BUCKET ?? "";
 const ragS3Keys = csv(process.env.DRAFTOPS_RAG_S3_KEYS ?? defaultRagS3Keys.join(","));
@@ -49,7 +91,10 @@ const ragDashScopeEmbeddingMaxChars = Number(process.env.DRAFTOPS_RAG_DASHSCOPE_
 const ragDashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DASHSCOPE_BATCH_SIZE ?? "10"), 1), 10);
 const ragEmbeddingDimensions = Number(process.env.DRAFTOPS_RAG_EMBEDDING_DIMENSIONS ?? "256");
 const ragRerankPoolSize = Number(process.env.DRAFTOPS_RAG_RERANK_POOL ?? "36");
+const ragRemoteEmbeddingPoolSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_REMOTE_EMBEDDING_POOL ?? "12"), 1), ragRerankPoolSize);
 const ragTopK = Number(process.env.DRAFTOPS_RAG_TOP_K ?? "12");
+const ragS3LoadConcurrency = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_S3_LOAD_CONCURRENCY ?? "8"), 1), 16);
+const ragMaxChunks = Math.max(Number(process.env.DRAFTOPS_RAG_MAX_CHUNKS ?? "5000"), ragTopK);
 const allowedOrigins = csv(process.env.CORS_ALLOWED_ORIGINS);
 
 let cachedSecret;
@@ -83,6 +128,7 @@ const systemPrompt = [
   "You are the DraftOps read-only AI assistant.",
   "You answer questions about the current DraftOps draft board, milestone answers, architecture, and presentation context.",
   "Use retrieved AWS RAG snippets first when they are provided. They may come from S3 objects or DynamoDB records in the deployed environment.",
+  "Selected pick context is a retrieval anchor, not a hard answer boundary. When focus mode is direct, answer around that pick/team/player. When focus mode is background, answer the user's global or broader question and mention the selected pick only if it helps.",
   "You must not create, modify, reorder, or replace draft predictions.",
   "If the user asks you to change the draft board, refuse briefly and explain that the deployed assistant is read-only.",
   "Do not reveal secrets, environment variables, credentials, or internal AWS policy details.",
@@ -248,6 +294,43 @@ const sourceBoostForRank = (sourceRank) =>
     "aws-s3-text": 0.09,
   })[sourceRank] ?? 0.04;
 
+const questionIntent = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return {
+    milestone: /里程碑|题目|答题|答案|字段|a\d|b\d|c\d|d\d|question|milestone|field|answer/.test(text),
+    team: /球队|适配|需求|阵容|签位|team|fit|need|roster|pick/.test(text),
+    prospect: /球员|候选|学校|身高|体重|位置|prospect|player|school|height|weight|position/.test(text),
+    evidence: /来源|证据|官方|验证|审计|source|evidence|official|audit|verify/.test(text),
+    board: /预测|榜单|首轮|顺位|board|mock|draft|rank/.test(text),
+  };
+};
+
+const sourceIntentBoost = (source, question) => {
+  const lower = String(source ?? "").toLowerCase();
+  const intent = questionIntent(question);
+  let boost = 0;
+
+  if (
+    intent.milestone &&
+    /milestone|documents|answer|deepseek_exam|draftcode24|答题|里程碑/.test(lower)
+  ) {
+    boost += 0.34;
+  }
+  if (intent.evidence && /audit|source|official|nba-official|raw_sources|reconciliation|verification/.test(lower)) {
+    boost += 0.22;
+  }
+  if (intent.team && /team|team_context|team_preference|official_team_profiles|needs/.test(lower)) {
+    boost += 0.2;
+  }
+  if (intent.prospect && /prospect|official_prospects|big_board|clean_prospects|china_nba_draft/.test(lower)) {
+    boost += 0.2;
+  }
+  if (intent.board && /board|bundle|mock|prediction|consensus|draft/.test(lower)) {
+    boost += 0.16;
+  }
+  return Math.min(boost, 0.42);
+};
+
 const hashToken = (token) => {
   let hash = 2166136261;
   for (let index = 0; index < token.length; index += 1) {
@@ -395,19 +478,32 @@ const getDashScopeChunkEmbeddings = async (chunks) => {
   return chunks.map((chunk) => dashScopeEmbeddingCache.get(dashScopeChunkCacheKey(chunk)));
 };
 
-const scoreChunkForRetrieval = (chunk, { terms, queryEmbedding }) => {
+const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusTerms = [], focusWeight = 0 }) => {
   const searchableText = [chunk.source, chunk.path, chunk.text].filter(Boolean).join("\n");
   const embedding = chunk.embedding ?? embedText(searchableText);
   chunk.embedding = embedding;
   const exactMatches = scoreText(searchableText, terms);
   const lexicalScore = terms.length ? Math.min(exactMatches / terms.length, 1) : 0;
+  const focusMatches = focusTerms.length ? scoreText(searchableText, focusTerms) : 0;
+  const focusScore = focusTerms.length ? Math.min(focusMatches / Math.min(focusTerms.length, 8), 1) : 0;
   const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
   const sourceBoost = sourceBoostForRank(chunk.sourceRank);
-  const score = semanticScore * 0.58 + lexicalScore * 0.32 + sourceBoost + (exactMatches >= 2 ? 0.05 : 0);
+  const intentBoost = sourceIntentBoost(chunk.source, question);
+  const score =
+    semanticScore * 0.46 +
+    lexicalScore * 0.24 +
+    focusScore * focusWeight +
+    sourceBoost +
+    intentBoost +
+    (exactMatches >= 2 ? 0.05 : 0);
 
   return {
     ...chunk,
     exactMatches,
+    focusMatches,
+    focusScore,
+    focusWeight,
+    intentBoost,
     lexicalScore,
     semanticScore,
     score,
@@ -446,11 +542,16 @@ const maybeRerankWithBedrockEmbeddings = async ({ question, terms, candidates })
   try {
     const queryEmbedding = await bedrockEmbedText([question, ...terms].join(" "));
     const rescored = [];
-    for (const candidate of candidates.slice(0, ragRerankPoolSize)) {
+    for (const candidate of candidates.slice(0, ragRemoteEmbeddingPoolSize)) {
       const embedding = await getBedrockChunkEmbedding(candidate);
       const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
       const sourceBoost = sourceBoostForRank(candidate.sourceRank);
-      const score = semanticScore * 0.66 + candidate.lexicalScore * 0.24 + sourceBoost + (candidate.exactMatches >= 2 ? 0.05 : 0);
+      const score =
+        semanticScore * 0.6 +
+        candidate.lexicalScore * 0.18 +
+        (candidate.focusScore ?? 0) * Math.min(candidate.focusWeight ?? 0, 0.18) +
+        sourceBoost +
+        (candidate.exactMatches >= 2 ? 0.05 : 0);
       rescored.push({
         ...candidate,
         embedding,
@@ -471,13 +572,18 @@ const maybeRerankWithDashScopeEmbeddings = async ({ question, terms, candidates 
 
   try {
     const [queryEmbedding] = await dashScopeEmbedTexts([[question, ...terms].join(" ")]);
-    const rerankCandidates = candidates.slice(0, ragRerankPoolSize);
+    const rerankCandidates = candidates.slice(0, ragRemoteEmbeddingPoolSize);
     const candidateEmbeddings = await getDashScopeChunkEmbeddings(rerankCandidates);
     const rescored = rerankCandidates.map((candidate, index) => {
       const embedding = candidateEmbeddings[index];
       const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
       const sourceBoost = sourceBoostForRank(candidate.sourceRank);
-      const score = semanticScore * 0.66 + candidate.lexicalScore * 0.24 + sourceBoost + (candidate.exactMatches >= 2 ? 0.05 : 0);
+      const score =
+        semanticScore * 0.6 +
+        candidate.lexicalScore * 0.18 +
+        (candidate.focusScore ?? 0) * Math.min(candidate.focusWeight ?? 0, 0.18) +
+        sourceBoost +
+        (candidate.exactMatches >= 2 ? 0.05 : 0);
       return {
         ...candidate,
         embedding,
@@ -493,13 +599,114 @@ const maybeRerankWithDashScopeEmbeddings = async ({ question, terms, candidates 
   }
 };
 
-const shouldUseSelectedPickNumber = (question) => {
+const compactString = (value, maxLength = 180) => String(value ?? "").trim().slice(0, maxLength);
+
+const compactStringArray = (value, limit = 8) =>
+  (Array.isArray(value) ? value : [])
+    .map((item) => compactString(item))
+    .filter(Boolean)
+    .slice(0, limit);
+
+const compactObjectArray = (value, limit = 4) =>
+  (Array.isArray(value) ? value : [])
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      name: compactString(item.name ?? item.player ?? item.prospectName),
+      score: Number.isFinite(Number(item.score)) ? Number(item.score) : null,
+      roleFit: compactString(item.roleFit),
+    }))
+    .filter((item) => item.name || item.roleFit)
+    .slice(0, limit);
+
+const normalizeSelectedPickContext = (value, selectedPickNumber) => {
+  if (!value || typeof value !== "object") {
+    const pick = Number(selectedPickNumber ?? 0);
+    return Number.isFinite(pick) && pick > 0 ? { pick } : null;
+  }
+
+  const pick = Number(value.pick ?? selectedPickNumber ?? 0);
+  const context = {
+    pick: Number.isFinite(pick) && pick > 0 ? pick : null,
+    team: compactString(value.team),
+    teamCode: compactString(value.teamCode),
+    acquiredFrom: compactString(value.acquiredFrom),
+    player: compactString(value.player ?? value.prospectName ?? value.name),
+    positions: compactStringArray(value.positions, 4),
+    school: compactString(value.school),
+    origin: compactString(value.origin),
+    classYear: compactString(value.classYear),
+    international: Boolean(value.international),
+    roleFit: compactString(value.roleFit, 360),
+    score: Number.isFinite(Number(value.score)) ? Number(value.score) : null,
+    confidence: Number.isFinite(Number(value.confidence)) ? Number(value.confidence) : null,
+    margin: Number.isFinite(Number(value.margin)) ? Number(value.margin) : null,
+    teamNeeds: compactStringArray(value.teamNeeds, 8),
+    teamPriorityTags: compactStringArray(value.teamPriorityTags, 8),
+    teamPhase: compactString(value.teamPhase),
+    teamNotes: compactString(value.teamNotes, 360),
+    evidence: compactStringArray(value.evidence, 6),
+    warnings: compactStringArray(value.warnings, 5),
+    alternatives: compactObjectArray(value.alternatives, 3),
+  };
+
+  return Object.fromEntries(Object.entries(context).filter(([, item]) => {
+    if (Array.isArray(item)) return item.length > 0;
+    return item !== null && item !== "" && item !== false;
+  }));
+};
+
+const selectedPickFocusValues = (context, selectedPickNumber) => {
+  if (!context) return [];
+  const pick = Number(context.pick ?? selectedPickNumber ?? 0);
+  return [
+    Number.isFinite(pick) && pick > 0 ? `pick ${pick}` : "",
+    Number.isFinite(pick) && pick > 0 ? `#${pick}` : "",
+    Number.isFinite(pick) && pick > 0 ? `第${pick}顺位` : "",
+    context.team,
+    context.teamCode,
+    context.acquiredFrom,
+    context.player,
+    context.school,
+    context.origin,
+    context.classYear,
+    context.roleFit,
+    context.teamPhase,
+    context.teamNotes,
+    ...(context.positions ?? []),
+    ...(context.teamNeeds ?? []),
+    ...(context.teamPriorityTags ?? []),
+    ...(context.evidence ?? []),
+    ...(context.warnings ?? []),
+    ...(context.alternatives ?? []).flatMap((item) => [item.name, item.roleFit]),
+  ].filter(Boolean);
+};
+
+const questionDirectlyTargetsSelectedPick = (question) => {
   const text = String(question ?? "").toLowerCase();
   const asksCurrentContext =
     /(当前|选中|这个|该|此|右侧|详情|栏目|selected|current|this)/.test(text) &&
     /(顺位|签位|球队|球员|pick|team|player|slot|panel|card)/.test(text);
   const namesExplicitSlot = /(?:#|pick\s*)\s*\d{1,2}|(?:第\s*)?\d{1,2}\s*(?:顺位|签位|号签)/i.test(text);
   return asksCurrentContext || namesExplicitSlot;
+};
+
+const questionAsksGlobalScope = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return /整体|全局|全部|所有|整轮|首轮|前\s*30|30\s*(顺位|签|队|人)|三十|排名|榜单|统计|数量|多少|几个|哪所|哪支|哪个大学|哪个学校|里程碑|答题卡|比赛|赛题|规则|提交|演示|视频|架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text);
+};
+
+const questionLooksLikeSelectedFollowUp = (question) => {
+  const text = String(question ?? "").toLowerCase().trim();
+  if (!text) return false;
+  return /^(为什么|为何|理由|依据|证据|风险|备选|替代|适配|fit|risk|why|reason|evidence|alternative|runner-up|详细|展开|分析|说明|解释)/.test(text) ||
+    /为什么.*(选|这样|这么)|这么选|这样选|适配吗|合适吗|风险呢|还有谁|备选是谁|理由是什么|依据是什么/.test(text);
+};
+
+const selectedPickFocusMode = ({ question, selectedPickFocusActive = false }) => {
+  if (questionDirectlyTargetsSelectedPick(question)) return "direct";
+  if (!selectedPickFocusActive) return "inactive";
+  if (questionLooksLikeSelectedFollowUp(question) && !questionAsksGlobalScope(question)) return "direct";
+  return "background";
 };
 
 const labelForRecord = (item, fallback) => {
@@ -599,19 +806,35 @@ const chunksFromDynamoDb = async (tableName) => {
   return chunks;
 };
 
+const mapWithConcurrency = async (items, limit, mapper) => {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await mapper(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+};
+
 const loadRagChunks = async () => {
   const now = Date.now();
   if (cachedRagChunks && now - cachedRagLoadedAt < ragCacheTtlMs) return cachedRagChunks;
 
   const chunks = [];
   if (ragS3Bucket && ragS3Keys.length) {
-    for (const key of ragS3Keys) {
+    const loadedObjects = await mapWithConcurrency(ragS3Keys, ragS3LoadConcurrency, async (key) => {
       try {
-        chunks.push(...(await chunksFromS3Object(key)));
+        return await chunksFromS3Object(key);
       } catch (error) {
         console.warn(`Failed to load RAG S3 object ${key}:`, error instanceof Error ? error.message : error);
+        return [];
       }
-    }
+    });
+    chunks.push(...loadedObjects.flat());
   }
 
   for (const tableName of ragDynamoTables) {
@@ -622,19 +845,34 @@ const loadRagChunks = async () => {
     }
   }
 
-  cachedRagChunks = chunks;
+  cachedRagChunks = chunks.slice(0, ragMaxChunks);
   cachedRagLoadedAt = now;
-  return chunks;
+  return cachedRagChunks;
 };
 
-const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
-  const selectedPickContextUsed = shouldUseSelectedPickNumber(question);
-  const terms = tokenize([question, selectedPickContextUsed ? `pick ${Number(selectedPickNumber ?? 1) || 1}` : ""].join(" "));
-  const queryEmbedding = embedText([question, ...terms].join(" "));
+const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
+  const normalizedSelectedPickContext = normalizeSelectedPickContext(selectedPickContext, selectedPickNumber);
+  const focusMode = selectedPickFocusMode({ question, selectedPickFocusActive });
+  const selectedPickContextUsed = focusMode !== "inactive";
+  const selectedPickDirectScope = focusMode === "direct";
+  const focusValues = selectedPickContextUsed ? selectedPickFocusValues(normalizedSelectedPickContext, selectedPickNumber) : [];
+  const focusTerms = selectedPickContextUsed ? tokenize(focusValues.join(" ")) : [];
+  const questionTerms = tokenize(question);
+  const terms = unique([...questionTerms, ...(selectedPickDirectScope ? focusTerms : [])]).slice(0, 48);
+  const queryEmbedding = embedText([question, ...(selectedPickDirectScope ? focusValues : [])].join(" "));
   const chunks = await loadRagChunks();
-  const scored = chunks.map((chunk) => scoreChunkForRetrieval(chunk, { terms, queryEmbedding }));
+  const focusWeight = selectedPickDirectScope ? 0.2 : selectedPickContextUsed ? 0.06 : 0;
+  const scored = chunks.map((chunk) => scoreChunkForRetrieval(chunk, { question, terms, queryEmbedding, focusTerms, focusWeight }));
+  const focused = selectedPickContextUsed ? scored.filter((chunk) => chunk.focusMatches > 0) : [];
   const matching = scored.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
-  const localCandidates = rerankChunks(matching.length ? matching : scored, ragRerankPoolSize, Math.max(ragRerankPoolSize, ragTopK));
+  const seedOrder = selectedPickDirectScope ? [...focused, ...matching, ...scored] : [...matching, ...focused, ...scored];
+  const candidateSeed = unique(seedOrder.map((chunk) => `${chunk.source}\n${chunk.path}`))
+    .map((key) => {
+      const [source, path] = key.split("\n");
+      return scored.find((chunk) => chunk.source === source && chunk.path === path);
+    })
+    .filter(Boolean);
+  const localCandidates = rerankChunks(candidateSeed.length ? candidateSeed : scored, ragRerankPoolSize, Math.max(ragRerankPoolSize, ragTopK));
   const finalRanked = (await maybeRerankWithBedrockEmbeddings({ question, terms, candidates: localCandidates })) ??
     (await maybeRerankWithDashScopeEmbeddings({ question, terms, candidates: localCandidates })) ??
     rerankChunks(localCandidates, ragTopK, ragRerankPoolSize);
@@ -647,7 +885,10 @@ const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
       retrievalScore: Number(chunk.score.toFixed(4)),
       semanticScore: Number(chunk.semanticScore.toFixed(4)),
       lexicalScore: Number(chunk.lexicalScore.toFixed(4)),
+      focusScore: Number((chunk.focusScore ?? 0).toFixed(4)),
+      intentBoost: Number((chunk.intentBoost ?? 0).toFixed(4)),
       exactMatches: chunk.exactMatches,
+      focusMatches: chunk.focusMatches ?? 0,
       text: String(chunk.text ?? "").slice(0, 1600),
     }));
 
@@ -659,11 +900,19 @@ const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
       dynamodb: ragDynamoTables.length > 0,
     },
     selectedPickContextUsed,
+    selectedPickFocusMode: focusMode,
+    selectedPickFocusActive: Boolean(selectedPickFocusActive),
+    selectedPickContext: selectedPickContextUsed ? normalizedSelectedPickContext : null,
+    focusTerms,
     embeddingProvider: embeddingProviderLabel(),
     bedrockEmbeddingModelId: ragEmbeddingProvider === "bedrock" ? ragBedrockEmbeddingModelId : null,
     dashScopeEmbeddingModel: isDashScopeEmbeddingProvider() ? ragDashScopeEmbeddingModel : null,
     embeddingDimensions: ragEmbeddingDimensions,
     rerankPoolSize: ragRerankPoolSize,
+    remoteEmbeddingPoolSize: ragRemoteEmbeddingPoolSize,
+    maxChunks: ragMaxChunks,
+    configuredS3KeyCount: ragS3Keys.length,
+    loadedChunkCount: chunks.length,
     snippetCount: snippets.length,
     snippets,
   };
@@ -672,16 +921,21 @@ const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
 const buildUserPrompt = ({ question, selectedPickNumber, retrievedKnowledge }) =>
   [
     `Selected pick number: ${Number(selectedPickNumber ?? 1) || 1}`,
-    retrievedKnowledge?.selectedPickContextUsed
-      ? "Selected pick scope: the user explicitly asked about the current/selected slot or an exact pick number."
-      : "Selected pick scope: front-end focus only; ignore it unless the user explicitly asks about the current/selected slot or an exact pick number.",
+    `Selected pick focus mode: ${retrievedKnowledge?.selectedPickFocusMode ?? "inactive"}`,
+    retrievedKnowledge?.selectedPickFocusMode === "direct"
+      ? "Selected pick scope: direct. The user is asking about this pick/team/player, so answer around the selected context and its evidence."
+      : retrievedKnowledge?.selectedPickFocusMode === "background"
+        ? "Selected pick scope: background. The user has a clicked context, but the answer must follow the question scope; do not limit global/aggregate/system questions to the selected pick."
+        : "Selected pick scope: inactive front-end default. Use global evidence unless the user explicitly asks about the current/selected slot or an exact pick number.",
+    "Selected pick context:",
+    JSON.stringify(retrievedKnowledge?.selectedPickContext ?? null),
     "Retrieved AWS RAG knowledge:",
     JSON.stringify(retrievedKnowledge),
     "User question:",
     String(question ?? "").slice(0, 3000),
   ].join("\n");
 
-const callDeepSeek = async ({ question, history, selectedPickNumber }) => {
+const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
   const apiKey = await readDeepSeekKey();
   if (!apiKey) {
     return {
@@ -693,7 +947,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber }) => {
       },
     };
   }
-  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber });
+  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
 
   const response = await fetch(`${deepSeekBaseUrl.replace(/\/$/, "")}/chat/completions`, {
     method: "POST",
@@ -736,8 +990,8 @@ const callDeepSeek = async ({ question, history, selectedPickNumber }) => {
   };
 };
 
-const callBedrock = async ({ question, history, selectedPickNumber }) => {
-  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber });
+const callBedrock = async ({ question, history, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
+  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
   const historyText = compactHistory(history)
     .map((message) => `${message.role}: ${message.content}`)
     .join("\n");
@@ -811,7 +1065,11 @@ export const handler = async (event) => {
           dashScopeEmbeddingConfigured,
           embeddingDimensions: ragEmbeddingDimensions,
           rerankPoolSize: ragRerankPoolSize,
+          remoteEmbeddingPoolSize: ragRemoteEmbeddingPoolSize,
           topK: ragTopK,
+          configuredS3KeyCount: ragS3Keys.length,
+          maxChunks: ragMaxChunks,
+          s3LoadConcurrency: ragS3LoadConcurrency,
           cacheTtlMs: ragCacheTtlMs,
         },
       });
@@ -829,6 +1087,8 @@ export const handler = async (event) => {
               question,
               history: body.history,
               selectedPickNumber: body.selectedPickNumber,
+              selectedPickContext: body.selectedPickContext,
+              selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
             });
       return json(event, result.statusCode, result.payload);
     }

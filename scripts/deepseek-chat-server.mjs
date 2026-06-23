@@ -190,6 +190,25 @@ const shouldUseSelectedPickContext = (question, selectedPick) => {
   return selectedContextPatterns.some((pattern) => pattern.test(text)) || questionNamesSelectedPick(question, selectedPick);
 };
 
+const questionAsksGlobalScope = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return /整体|全局|全部|所有|整轮|首轮|前\s*30|30\s*(顺位|签|队|人)|三十|排名|榜单|统计|数量|多少|几个|哪所|哪支|哪个大学|哪个学校|里程碑|答题卡|比赛|赛题|规则|提交|演示|视频|架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text);
+};
+
+const questionLooksLikeSelectedFollowUp = (question) => {
+  const text = String(question ?? "").toLowerCase().trim();
+  if (!text) return false;
+  return /^(为什么|为何|理由|依据|证据|风险|备选|替代|适配|fit|risk|why|reason|evidence|alternative|runner-up|详细|展开|分析|说明|解释)/.test(text) ||
+    /为什么.*(选|这样|这么)|这么选|这样选|适配吗|合适吗|风险呢|还有谁|备选是谁|理由是什么|依据是什么/.test(text);
+};
+
+const selectedPickFocusMode = ({ question, selectedPick, selectedPickFocusActive = false }) => {
+  if (shouldUseSelectedPickContext(question, selectedPick)) return "direct";
+  if (!selectedPickFocusActive) return "inactive";
+  if (questionLooksLikeSelectedFollowUp(question) && !questionAsksGlobalScope(question)) return "direct";
+  return "background";
+};
+
 const getSearchTerms = ({ question, selectedPick, useSelectedPickContext = false }) => {
   const selectedTerms = useSelectedPickContext && selectedPick
     ? [
@@ -767,7 +786,7 @@ const buildContext = async (selectedPickNumber) => {
   };
 };
 
-const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPickContext = false }) => {
+const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPickContext = false, selectedPickMode = "inactive" }) => {
   const local = await retrieveLocalKnowledge({ question, selectedPick, useSelectedPickContext });
   const officialWeb = local.hasStrongLocalMatch ? [] : await fetchOfficialWebKnowledge(local.terms);
 
@@ -775,9 +794,12 @@ const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPick
     retrievalPolicy:
       "优先使用本地知识库与官方本地数据；本地证据不足时才使用官方联网网页；官方数据优先于媒体和模型全局知识；模型全局知识只作最后兜底。",
     retrievalMode: local.retrievalMode,
+    selectedPickFocusMode: selectedPickMode,
     selectedPickRetrievalPolicy: useSelectedPickContext
-      ? "用户明确询问当前/这个/选中栏目或直接点名同一顺位、球队、球员；检索词可以使用当前选中栏目的球队和球员。"
-      : "用户没有明确询问当前/这个/选中栏目；检索词不得使用前端点击栏目的球队或球员，必须按全局比赛问题检索。",
+      ? "当前问题直接指向选中栏目；检索词使用当前选中栏目的顺位、球队、球员、学校、位置和球队需求。"
+      : selectedPickMode === "background"
+        ? "当前有点击栏目，但它只是背景参考；检索和回答优先服从用户问题的全局或更宽范围。"
+        : "当前没有明确点击焦点；按用户文字本身和全局比赛问题检索。",
     localSnippets: local.snippets.map(retrievalSnippet),
     officialWebSnippets: officialWeb.map(retrievalSnippet),
     usedWebFallback: officialWeb.length > 0,
@@ -895,7 +917,7 @@ const isDirectCodeModificationRequest = (question) => {
 const buildScopeGuardAnswer = () =>
   "当前 DeepSeek 可以回答比赛相关问题，但不能直接修改代码、写文件、运行命令、提交或推送仓库。";
 
-const callDeepSeek = async ({ question, history, selectedPickNumber, context: providedContext }) => {
+const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPickFocusActive = false, context: providedContext }) => {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     throw new Error("Missing DEEPSEEK_API_KEY. Put it in .env.local before using the chat window.");
@@ -906,18 +928,25 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
   const modelLabel = getModelLabel(model);
   const maxTokens = Number(process.env.DEEPSEEK_CHAT_MAX_TOKENS ?? 1800);
   const context = providedContext ?? (await buildContext(selectedPickNumber));
-  const useSelectedPickContext = shouldUseSelectedPickContext(question, context.selectedPick);
+  const pickFocusMode = selectedPickFocusMode({ question, selectedPick: context.selectedPick, selectedPickFocusActive });
+  const selectedPickAvailable = pickFocusMode !== "inactive";
+  const useSelectedPickContext = pickFocusMode === "direct";
   const deepSeekContext = {
     ...context.deepSeekContext,
-    selectedPick: useSelectedPickContext ? toDeepSeekSelectedPick(context.selectedPick) : null,
-    selectedPickUsage: useSelectedPickContext
-      ? "用户明确询问当前/这个/选中栏目，或直接点名同一顺位、球队、球员；可以使用 selectedPick。"
-      : "用户没有明确询问当前/这个/选中栏目，也没有直接点名同一顺位、球队、球员；必须忽略前端点击栏目，不要只回答当前球队或当前顺位。",
+    selectedPick: selectedPickAvailable ? toDeepSeekSelectedPick(context.selectedPick) : null,
+    selectedPickFocusMode: pickFocusMode,
+    selectedPickUsage:
+      pickFocusMode === "direct"
+        ? "当前问题直接指向 selectedPick；回答应围绕该顺位、球队、球员、需求和风险。"
+        : pickFocusMode === "background"
+          ? "当前有点击栏目，但它只是界面背景参考；不要把全局、统计、架构、规则、整体策略问题限制到 selectedPick。"
+          : "当前没有明确点击焦点；按用户文字本身和全局比赛问题回答。",
   };
   const retrievedKnowledge = await buildRetrievedKnowledge({
     question,
     selectedPick: context.selectedPick,
     useSelectedPickContext,
+    selectedPickMode: pickFocusMode,
   });
   const compactHistory = Array.isArray(history)
     ? history.slice(-8).map((message) => ({
@@ -937,9 +966,8 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
           "唯一硬边界：当前 DeepSeek 不能直接修改代码，不能写文件，不能运行命令，不能提交或推送仓库，不能声称已经完成了代码或文件改动。",
           "如果用户要求你直接改代码、写文件、运行命令、提交或推送，你只能说明当前 DeepSeek 不能直接执行，可以用文字解释思路、影响、步骤或让代码工作流处理。",
           "你可以讨论预测主题和可能的预测分析，但输出只是问答文本，不会直接改写锁定预测板、代码或提交文件。",
-          "前端可能有点击或选中的球队/顺位栏目，但这不是默认问题范围。只有用户明确说当前顺位、这个球队、选中球员、当前栏目，或直接点名同一顺位/球队/球员时，才能使用 selectedPick。",
-          "如果上下文里的 selectedPick 为 null，或 selectedPickUsage 表示必须忽略前端点击栏目，你必须按全局比赛问题回答，不要把答案限制到当前点击球队、当前点击顺位或当前点击球员。",
-          "重复规则：不要因为用户点了某个球队栏目就只回答该栏目；没有明确问当前栏目时，一律按用户文字本身和全局数据回答。",
+          "selectedPick 是界面上下文，不是硬性回答范围。selectedPickFocusMode 为 direct 时，围绕该顺位、球队、球员回答；为 background 时，按用户问题的全局或更宽范围回答，selectedPick 只作参考。",
+          "如果 selectedPick 为空，按用户文字本身和全局比赛数据回答。",
           "参考文档边界：DraftCode24里程碑事件预测.md 可用于回答题意、字段口径、评分口径和参考题目说明，不能当作官方赛果。",
           "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，优先使用当前本地 examFacts 和锁定预测板。",
           "必须按以下优先级回答：1 本地知识库、当前锁定预测板和当前应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
@@ -955,7 +983,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
         role: "user",
         content: [
           "执行边界重复说明：当前 DeepSeek 只能回答问题，不能直接修改代码、写文件、运行命令、提交或推送仓库。",
-          "栏目范围重复说明：只有用户明确说当前/这个/选中栏目，或直接点名同一顺位、球队、球员，才允许使用 selectedPick；否则 selectedPick 已置空，必须忽略前端点击栏目。",
+          "栏目范围重复说明：selectedPickFocusMode 为 direct 才聚焦当前顺位；为 background 时不要只回答当前顺位。",
           "当前比赛上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
           JSON.stringify(deepSeekContext),
           "已按优先级检索到的知识如下：",
@@ -1065,6 +1093,7 @@ const server = http.createServer(async (request, response) => {
         question,
         history: body.history,
         selectedPickNumber,
+        selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
         context,
       });
       sendJson(request, response, 200, result);

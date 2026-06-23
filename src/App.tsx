@@ -171,6 +171,12 @@ type SortKey = "pick" | "score" | "confidence" | "consensus" | "age";
 type DossierTab = "overview" | "evidence" | "risk" | "fit" | "alternatives";
 type MobileSection = "board" | "player" | "flow";
 type WorkflowMode = "flow" | "aws";
+type FilterMenu = "position" | "sort" | null;
+
+interface FilterOption<T extends string> {
+  value: T;
+  label: string;
+}
 
 const dashboardCopy = {
   zh: {
@@ -662,12 +668,70 @@ function DraftOpsMark({ className = "draftops-mark" }: { className?: string }) {
   );
 }
 
+interface FilterDropdownProps<T extends string> {
+  id: string;
+  label: string;
+  value: T;
+  options: Array<FilterOption<T>>;
+  isOpen: boolean;
+  onToggle: () => void;
+  onSelect: (value: T) => void;
+}
+
+function FilterDropdown<T extends string>({
+  id,
+  label,
+  value,
+  options,
+  isOpen,
+  onToggle,
+  onSelect,
+}: FilterDropdownProps<T>) {
+  const selectedOption = options.find((option) => option.value === value) ?? options[0];
+
+  return (
+    <div className={`ops-select ${isOpen ? "open" : ""}`}>
+      <button
+        className="ops-select-trigger"
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={`${id}-menu`}
+        onClick={onToggle}
+      >
+        <span>{label}</span>
+        <strong>{selectedOption.label}</strong>
+        <ChevronDown size={14} />
+      </button>
+      {isOpen && (
+        <div className="ops-select-menu" id={`${id}-menu`} role="listbox" aria-label={label}>
+          {options.map((option) => (
+            <button
+              className={option.value === value ? "selected" : ""}
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              key={option.value}
+              onClick={() => onSelect(option.value)}
+            >
+              <span>{option.label}</span>
+              {option.value === value && <CheckCircle2 size={14} />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function App() {
   const appRef = useRef<HTMLElement | null>(null);
   const boardRef = useRef<HTMLElement | null>(null);
   const insightRef = useRef<HTMLElement | null>(null);
+  const filterRowRef = useRef<HTMLElement | null>(null);
   const chatDockRef = useRef<HTMLElement | null>(null);
   const chatDragRef = useRef<{ pointerId: number; offsetX: number; offsetY: number } | null>(null);
+  const chatMessageIdRef = useRef(0);
   const [language, setLanguage] = useState<Language>("zh");
   const [teamProfiles, setTeamProfiles] = useState<TeamProfile[]>(seedTeams);
   const [board, setBoard] = useState(() => generateBoard(seedTeams, seedProspects, defaultWeights));
@@ -681,6 +745,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [positionFilter, setPositionFilter] = useState<PositionFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("pick");
+  const [openFilterMenu, setOpenFilterMenu] = useState<FilterMenu>(null);
   const [riskOnly, setRiskOnly] = useState(false);
   const [dossierTab, setDossierTab] = useState<DossierTab>("overview");
   const [mobileSection, setMobileSection] = useState<MobileSection>("board");
@@ -689,6 +754,7 @@ function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatDockPosition, setChatDockPosition] = useState<{ left: number; top: number } | null>(null);
   const [isChatDragging, setIsChatDragging] = useState(false);
+  const [selectedPickFocusActive, setSelectedPickFocusActive] = useState(false);
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
@@ -700,45 +766,45 @@ function App() {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatModelLabel, setChatModelLabel] = useState(draftOpsManifest.model.chatModelLabel);
 
-  const copy = UI_COPY[language];
-  const d = dashboardCopy[language];
-  const languageToggleLabel = language === "zh" ? "Switch to English" : "切换到中文";
+  const entityLanguage = language;
+  const uiLanguage: Language = "zh";
+  const copy = UI_COPY.zh;
+  const d = dashboardCopy.zh;
+  const languageToggleLabel =
+    entityLanguage === "zh" ? "切换球员、学校、球队为英文" : "切换球员、学校、球队为中文";
   const filterLabel = riskOnly ? d.filterRiskOnly : d.filter;
-  const status = useMemo(() => formatStatus(statusState, language), [language, statusState]);
+  const status = useMemo(() => formatStatus(statusState, uiLanguage), [statusState]);
   const milestones = useMemo(() => generateMilestones(board, draftOpsManifest.milestones), [board]);
   const health = useMemo(() => getBoardHealth(board), [board]);
   const selectedPick = board.find((pick) => pick.pick === selectedPickNumber) ?? board[0];
   const selectedTeam = findTeamProfile(teamProfiles, selectedPick);
   const prospectProfile = Object.entries(selectedPick.prospect.profile);
   const playerRoleTags = withTextFallback(selectedPick.prospect.roleTags, copy.roleTagsPending).map((tag) =>
-    localizePhrase(tag, language),
+    localizePhrase(tag, uiLanguage),
   );
   const evidenceItems = withTextFallback(selectedPick.evidence, copy.evidenceFallback).map((item) =>
-    localizeEvidenceText(hideAgentParameters(item), language),
+    localizeEvidenceText(hideAgentParameters(item), uiLanguage),
   );
   const riskNotes = withTextFallback(selectedPick.prospect.risks, copy.riskFallback).map((risk) =>
-    localizePhrase(risk, language),
+    localizePhrase(risk, uiLanguage),
   );
   const warningNotes = withTextFallback(selectedPick.warnings, copy.warningFallback).map((warning) =>
-    localizeEvidenceText(warning, language),
+    localizeEvidenceText(warning, uiLanguage),
   );
   const teamNeeds = withTextFallback(selectedTeam?.needs, copy.teamNeedsPending).map((need) =>
-    localizePhrase(need, language),
+    localizePhrase(need, uiLanguage),
   );
   const selectedNeedsReview = needsBoardReview(selectedPick);
   const selectedFallbackProfile = hasExpandedFallbackProfile(selectedPick.prospect);
-  const teamNote = localizeEvidenceText(formatOptionalValue(selectedTeam?.notes, copy.teamNotePending), language);
+  const teamNote = localizeEvidenceText(formatOptionalValue(selectedTeam?.notes, copy.teamNotePending), uiLanguage);
   const boardAverage = board.length
     ? Math.round(board.reduce((sum, pick) => sum + pick.confidence, 0) / board.length)
     : 0;
   const fallbackPickCount = agentMeta.fallbackPickCount ?? board.filter((pick) => hasExpandedFallbackProfile(pick.prospect)).length;
   const lowConfidenceCount = agentMeta.lowConfidenceCount ?? board.filter((pick) => pick.confidence < 70).length;
-  const agentReviewNote =
-    language === "zh"
-      ? `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 低置信 ${lowConfidenceCount} 个 · 回退入选 ${fallbackPickCount} 个`
-      : `Audit ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · ${lowConfidenceCount} low-confidence · ${fallbackPickCount} fallback pick`;
-  const selectedReviewLabel = language === "zh" ? "需复核" : "Review";
-  const fallbackProfileLabel = language === "zh" ? "扩展回退画像" : "Fallback profile";
+  const agentReviewNote = `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 低置信 ${lowConfidenceCount} 个 · 回退入选 ${fallbackPickCount} 个`;
+  const selectedReviewLabel = "需复核";
+  const fallbackProfileLabel = "扩展回退画像";
   const selectedUpsideGrade = gradeFromScore(selectedPick.prospect.profile.upside);
   const selectedReadinessScore = average([
     selectedPick.prospect.profile.shooting,
@@ -755,10 +821,10 @@ function App() {
     riskNotes,
     teamNeeds,
     teamNote,
-    prospectName: localizeProspectName(selectedPick.prospect.name, language),
-    teamName: localizeTeamName(selectedPick.team, language),
+    prospectName: localizeProspectName(selectedPick.prospect.name, entityLanguage),
+    teamName: localizeTeamName(selectedPick.team, entityLanguage),
     manifest: draftOpsManifest,
-    language,
+    language: uiLanguage,
   });
   const filteredBoard = board
     .filter((pick) => {
@@ -769,17 +835,17 @@ function App() {
       return [
         pick.team,
         getTeamCode(pick.team),
-        localizeTeamName(pick.team, language),
+        localizeTeamName(pick.team, entityLanguage),
         localizeTeamName(pick.team, "zh"),
         pick.prospect.name,
-        localizeProspectName(pick.prospect.name, language),
+        localizeProspectName(pick.prospect.name, entityLanguage),
         localizeProspectName(pick.prospect.name, "zh"),
         pick.prospect.school,
-        localizeSchoolName(pick.prospect.school, language),
+        localizeSchoolName(pick.prospect.school, entityLanguage),
         localizeSchoolName(pick.prospect.school, "zh"),
         pick.prospect.positions.join("/"),
         pick.roleFit,
-        localizePhrase(pick.roleFit, language),
+        localizePhrase(pick.roleFit, uiLanguage),
         localizePhrase(pick.roleFit, "zh"),
         ...pick.prospect.roleTags,
       ]
@@ -877,7 +943,7 @@ function App() {
   const exportSubmission = () => {
     downloadJson(
       draftOpsManifest.exportSettings.submissionFilename,
-      buildSubmissionPayload(board, milestones, draftOpsManifest.exportSettings, language),
+      buildSubmissionPayload(board, milestones, draftOpsManifest.exportSettings, uiLanguage),
     );
     setStatusState({ type: "submissionExported" });
   };
@@ -885,9 +951,14 @@ function App() {
   const exportBrief = () => {
     downloadText(
       draftOpsManifest.exportSettings.briefFilename,
-      buildMarkdownBrief(board, milestones, draftOpsManifest.exportSettings, language),
+      buildMarkdownBrief(board, milestones, draftOpsManifest.exportSettings, uiLanguage),
     );
     setStatusState({ type: "briefExported" });
+  };
+
+  const nextChatMessageId = (prefix: string) => {
+    chatMessageIdRef.current += 1;
+    return `${prefix}-${chatMessageIdRef.current}`;
   };
 
   const askDeepSeek = async () => {
@@ -895,7 +966,7 @@ function App() {
     if (!question || isChatLoading) return;
 
     const userMessage: ChatMessage = {
-      id: `user-${Date.now()}`,
+      id: nextChatMessageId("user"),
       role: "user",
       content: question,
     };
@@ -905,12 +976,41 @@ function App() {
     setIsChatLoading(true);
 
     try {
+      const selectedPickContext = {
+        pick: selectedPick.pick,
+        team: selectedPick.team,
+        teamCode: getTeamCode(selectedPick.team),
+        acquiredFrom: selectedPick.acquiredFrom ?? null,
+        player: selectedPick.prospect.name,
+        positions: selectedPick.prospect.positions,
+        school: selectedPick.prospect.school,
+        origin: selectedPick.prospect.origin,
+        classYear: selectedPick.prospect.classYear,
+        international: selectedPick.prospect.international,
+        roleFit: selectedPick.roleFit,
+        score: selectedPick.score,
+        confidence: selectedPick.confidence,
+        margin: selectedPick.margin,
+        teamNeeds: selectedTeam?.needs ?? [],
+        teamPriorityTags: selectedTeam?.priorityTags ?? [],
+        teamPhase: selectedTeam?.phase ?? null,
+        teamNotes: selectedTeam?.notes ?? null,
+        evidence: selectedPick.evidence.slice(0, 6),
+        warnings: selectedPick.warnings.slice(0, 5),
+        alternatives: selectedPick.alternatives.slice(0, 3).map((candidate) => ({
+          name: candidate.name,
+          score: candidate.score,
+          roleFit: candidate.roleFit,
+        })),
+      };
       const response = await fetch(deepSeekChatUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question,
           selectedPickNumber,
+          selectedPickFocusActive,
+          selectedPickContext,
           history: chatMessages.slice(-8).map((message) => ({
             role: message.role,
             content: message.content,
@@ -925,7 +1025,7 @@ function App() {
       setChatMessages([
         ...nextMessages,
         {
-          id: `assistant-${Date.now()}`,
+          id: nextChatMessageId("assistant"),
           role: "assistant",
           content: payload.answer ?? "DeepSeek returned an empty answer.",
         },
@@ -935,16 +1035,12 @@ function App() {
       setChatMessages([
         ...nextMessages,
         {
-          id: `assistant-error-${Date.now()}`,
+          id: nextChatMessageId("assistant-error"),
           role: "assistant",
           content:
-            language === "zh"
-              ? error instanceof Error
-                ? `DeepSeek 窗口暂不可用：${error.message}`
-                : "DeepSeek 窗口暂不可用：未知错误。"
-              : error instanceof Error
-                ? `DeepSeek window is unavailable: ${error.message}`
-                : "DeepSeek window is unavailable: unknown error.",
+            error instanceof Error
+              ? `DeepSeek 窗口暂不可用：${error.message}`
+              : "DeepSeek 窗口暂不可用：未知错误。",
         },
       ]);
     } finally {
@@ -994,6 +1090,26 @@ function App() {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
   };
+
+  useEffect(() => {
+    if (!openFilterMenu) return undefined;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!filterRowRef.current?.contains(event.target as Node)) {
+        setOpenFilterMenu(null);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpenFilterMenu(null);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [openFilterMenu]);
 
   useEffect(() => {
     if (!chatDockPosition) return undefined;
@@ -1064,57 +1180,57 @@ function App() {
   const workflowSteps = draftOpsManifest.workflowSteps.map((step) => ({
     ...step,
     icon: runtimeIcon(step.icon),
-    label: runtimeText(step.label, language),
+    label: runtimeText(step.label, uiLanguage),
     status: workflowStatusLabel(step, d),
   }));
 
   const awsSteps = draftOpsManifest.awsSteps.map((step) => ({
     ...step,
     icon: runtimeIcon(step.icon),
-    label: runtimeText(step.label, language),
-    detail: runtimeText(step.detail, language),
+    label: runtimeText(step.label, uiLanguage),
+    detail: runtimeText(step.detail, uiLanguage),
   }));
 
   const boardIntegrity = health.hasThirtyPicks && health.noDuplicates;
   const statusCopy = {
-    commandTitle: language === "zh" ? "Draft Board Command" : "Draft Board Command",
-    commandSubtitle: language === "zh" ? "首轮 30 签锁定工作台" : "Round-one lock desk",
-    mission: language === "zh" ? "任务" : "Mission",
-    playerTab: language === "zh" ? "球员" : "Player",
-    flowTab: language === "zh" ? "流程" : "Flow",
-    chatTab: language === "zh" ? "问答" : "Chat",
-    integrity: language === "zh" ? "完整性" : "Integrity",
-    lowConfidence: language === "zh" ? "低置信" : "Low confidence",
-    fallback: language === "zh" ? "回退画像" : "Fallbacks",
-    locked: language === "zh" ? "锁定状态" : "Lock state",
-    lockedValue: language === "zh" ? "候选板已载入" : "board loaded",
-    riskMode: language === "zh" ? "风险视图" : "Risk view",
-    normalMode: language === "zh" ? "全量视图" : "Full board",
-    dataset: language === "zh" ? "数据状态" : "Data state",
-    dossier: language === "zh" ? "Prospect Dossier" : "Prospect Dossier",
-    scenario: language === "zh" ? "情景" : "Scenario",
-    model: language === "zh" ? "模型" : "Model",
-    sources: language === "zh" ? "来源" : "Sources",
-    board: language === "zh" ? "看板" : "Board",
-    teams: language === "zh" ? "球队" : "Teams",
-    scenarios: language === "zh" ? "情景" : "Scenarios",
-    milestones: language === "zh" ? "里程碑" : "Milestones",
+    commandTitle: "选秀板指挥台",
+    commandSubtitle: "首轮 30 签锁定工作台",
+    mission: "任务",
+    playerTab: "球员",
+    flowTab: "流程",
+    chatTab: "问答",
+    integrity: "完整性",
+    lowConfidence: "低置信",
+    fallback: "回退画像",
+    locked: "锁定状态",
+    lockedValue: "候选板已载入",
+    riskMode: "风险视图",
+    normalMode: "全量视图",
+    dataset: "数据状态",
+    dossier: "球员档案",
+    scenario: "情景",
+    model: "模型",
+    sources: "来源",
+    board: "看板",
+    teams: "球队",
+    scenarios: "情景",
+    milestones: "里程碑",
     aws: "AWS",
-    sourceModule: language === "zh" ? "源" : "Source",
-    workflowDock: language === "zh" ? "Workflow Dock" : "Workflow Dock",
-    evidenceTab: language === "zh" ? "证据" : "Evidence",
-    riskTab: language === "zh" ? "风险" : "Risk",
-    fitTab: language === "zh" ? "匹配" : "Fit",
-    altTab: language === "zh" ? "备选" : "Alternatives",
-    overviewTab: language === "zh" ? "概览" : "Overview",
-    showFlow: language === "zh" ? "流程" : "Flow",
-    showAws: language === "zh" ? "数据链路" : "Data chain",
-    localDecision: language === "zh" ? "本地策略结论" : "Local strategy verdict",
-    localEvidence: language === "zh" ? "依据链" : "Evidence chain",
-    localRisk: language === "zh" ? "风险闸门" : "Risk gate",
-    localFit: language === "zh" ? "球队匹配依据" : "Team-fit basis",
-    evidenceSource: language === "zh" ? "来源字段" : "Source field",
-    dragDeepSeek: language === "zh" ? "拖动标题栏移动窗口" : "Drag the header to move",
+    sourceModule: "源",
+    workflowDock: "流程面板",
+    evidenceTab: "证据",
+    riskTab: "风险",
+    fitTab: "匹配",
+    altTab: "备选",
+    overviewTab: "概览",
+    showFlow: "流程",
+    showAws: "数据链路",
+    localDecision: "本地策略结论",
+    localEvidence: "依据链",
+    localRisk: "风险闸门",
+    localFit: "球队匹配依据",
+    evidenceSource: "来源字段",
+    dragDeepSeek: "拖动标题栏移动窗口",
   };
 
   const dossierTabs: Array<{ id: DossierTab; label: string }> = [
@@ -1123,6 +1239,21 @@ function App() {
     { id: "risk", label: statusCopy.riskTab },
     { id: "fit", label: statusCopy.fitTab },
     { id: "alternatives", label: statusCopy.altTab },
+  ];
+  const positionOptions: Array<FilterOption<PositionFilter>> = [
+    { value: "all", label: d.all },
+    { value: "PG", label: "PG" },
+    { value: "SG", label: "SG" },
+    { value: "SF", label: "SF" },
+    { value: "PF", label: "PF" },
+    { value: "C", label: "C" },
+  ];
+  const sortOptions: Array<FilterOption<SortKey>> = [
+    { value: "pick", label: d.sortPick },
+    { value: "score", label: d.sortScore },
+    { value: "confidence", label: d.sortConfidence },
+    { value: "consensus", label: d.sortConsensus },
+    { value: "age", label: d.sortAge },
   ];
   const boardVitals = [
     {
@@ -1142,7 +1273,7 @@ function App() {
   ];
 
   return (
-    <main className="app-shell ops-shell" ref={appRef} lang={language === "zh" ? "zh-CN" : "en"} translate="no">
+    <main className="app-shell ops-shell" ref={appRef} lang="zh-CN" translate="no">
       <div className={`ops-layout-v2 mobile-section-${mobileSection}`}>
         <header className="ops-command-bar">
           <div className="ops-command-brand">
@@ -1157,7 +1288,7 @@ function App() {
 
           <div className="ops-command-status" aria-label={statusCopy.dataset}>
             <span>{d.dataUpdated}</span>
-            <strong>{formatDataTime(agentMeta.generatedAt, language)} (CT)</strong>
+            <strong>{formatDataTime(agentMeta.generatedAt, uiLanguage)} (CT)</strong>
             <em>{agentMeta.label}</em>
             <b>{statusCopy.model} {draftOpsManifest.model.version}</b>
           </div>
@@ -1167,13 +1298,13 @@ function App() {
               className="ops-button ops-language-toggle"
               type="button"
               onClick={() => setLanguage((current) => (current === "zh" ? "en" : "zh"))}
-              aria-pressed={language === "en"}
+              aria-pressed={entityLanguage === "en"}
               {...buttonMeta(languageToggleLabel)}
             >
               <Globe2 size={16} />
-              <span className={language === "zh" ? "active" : ""}>中文</span>
+              <span className={entityLanguage === "zh" ? "active" : ""}>中文</span>
               <i aria-hidden="true" />
-              <span className={language === "en" ? "active" : ""}>EN</span>
+              <span className={entityLanguage === "en" ? "active" : ""}>EN</span>
             </button>
             <button className="ops-button" type="button" onClick={() => setIsChatOpen(true)} {...buttonMeta("DeepSeek")}>
               <BrainCircuit size={17} />
@@ -1193,7 +1324,7 @@ function App() {
         <section className="ops-board-workspace" id="board" ref={boardRef}>
           <div className="ops-board-header">
             <div>
-              <span>{statusCopy.scenario} · {isAgentLoading ? copy.loading : localizePhrase(agentMeta.label, language)}</span>
+              <span>{statusCopy.scenario} · {isAgentLoading ? copy.loading : localizePhrase(agentMeta.label, uiLanguage)}</span>
               <h1>{statusCopy.commandTitle}</h1>
               <p>{statusCopy.commandSubtitle} · {status}</p>
             </div>
@@ -1214,7 +1345,7 @@ function App() {
             ))}
           </section>
 
-          <section className="ops-filter-row">
+          <section className="ops-filter-row" ref={filterRowRef}>
             <label className="ops-search" htmlFor="ops-board-search">
               <Search size={18} />
               <input
@@ -1225,30 +1356,31 @@ function App() {
               />
             </label>
 
-            <div className="ops-select">
-              <span>{d.position}</span>
-              <select value={positionFilter} onChange={(event) => setPositionFilter(event.target.value as PositionFilter)}>
-                <option value="all">{d.all}</option>
-                <option value="PG">PG</option>
-                <option value="SG">SG</option>
-                <option value="SF">SF</option>
-                <option value="PF">PF</option>
-                <option value="C">C</option>
-              </select>
-              <ChevronDown size={14} />
-            </div>
+            <FilterDropdown
+              id="ops-position-filter"
+              label={d.position}
+              value={positionFilter}
+              options={positionOptions}
+              isOpen={openFilterMenu === "position"}
+              onToggle={() => setOpenFilterMenu((current) => (current === "position" ? null : "position"))}
+              onSelect={(value) => {
+                setPositionFilter(value);
+                setOpenFilterMenu(null);
+              }}
+            />
 
-            <div className="ops-select">
-              <span>{d.sort}</span>
-              <select value={sortKey} onChange={(event) => setSortKey(event.target.value as SortKey)}>
-                <option value="pick">{d.sortPick}</option>
-                <option value="score">{d.sortScore}</option>
-                <option value="confidence">{d.sortConfidence}</option>
-                <option value="consensus">{d.sortConsensus}</option>
-                <option value="age">{d.sortAge}</option>
-              </select>
-              <ChevronDown size={14} />
-            </div>
+            <FilterDropdown
+              id="ops-sort-filter"
+              label={d.sort}
+              value={sortKey}
+              options={sortOptions}
+              isOpen={openFilterMenu === "sort"}
+              onToggle={() => setOpenFilterMenu((current) => (current === "sort" ? null : "sort"))}
+              onSelect={(value) => {
+                setSortKey(value);
+                setOpenFilterMenu(null);
+              }}
+            />
 
             <button
               className={`ops-filter ${riskOnly ? "active" : ""}`}
@@ -1292,30 +1424,31 @@ function App() {
                       pick.prospect.profile.defense,
                       pick.prospect.profile.feel,
                     ]);
-                    const prospectName = localizeProspectName(pick.prospect.name, language);
+                    const prospectName = localizeProspectName(pick.prospect.name, entityLanguage);
                     return (
                       <tr
                         key={pick.pick}
                         className={`${pick.pick === selectedPick.pick ? "selected" : ""} ${pickNeedsReview ? "needs-review" : ""}`}
                         onClick={() => {
                           setSelectedPickNumber(pick.pick);
+                          setSelectedPickFocusActive(true);
                           setMobileSection("player");
                         }}
                       >
                         <td>{String(pick.pick).padStart(2, "0")}</td>
                         <td>
                           <span className="ops-team-cell">
-                            <strong title={localizeTeamName(pick.team, language)}>{localizeTeamName(pick.team, language)}</strong>
+                            <strong title={localizeTeamName(pick.team, entityLanguage)}>{localizeTeamName(pick.team, entityLanguage)}</strong>
                             {pick.acquiredFrom && (
-                              <small title={`${copy.fromTeam} ${localizeTeamName(pick.acquiredFrom, language)}`}>
-                                {copy.fromTeam} {localizeTeamName(pick.acquiredFrom, language)}
+                              <small title={`${copy.fromTeam} ${localizeTeamName(pick.acquiredFrom, entityLanguage)}`}>
+                                {copy.fromTeam} {localizeTeamName(pick.acquiredFrom, entityLanguage)}
                               </small>
                             )}
                           </span>
                         </td>
                         <td>
                           <span className="ops-player-cell">
-                            <PlayerPhoto prospect={pick.prospect} label={prospectName} language={language} />
+                            <PlayerPhoto prospect={pick.prospect} label={prospectName} language={uiLanguage} />
                             <span className="ops-player-name">{prospectName}</span>
                             {pickNeedsReview && (
                               <span className={`ops-review-icon ${fallbackProfile ? "is-fallback" : ""}`} title={reviewTitle} aria-label={reviewTitle}>
@@ -1325,7 +1458,7 @@ function App() {
                           </span>
                         </td>
                         <td>{pick.prospect.positions.join("/")}</td>
-                        <td>{localizeSchoolName(pick.prospect.school, language)}</td>
+                        <td>{localizeSchoolName(pick.prospect.school, entityLanguage)}</td>
                         <td>{formatOneDecimal(pick.prospect.age)}</td>
                         <td>{formatHeightDisplay(pick.prospect.height)}</td>
                         <td>{estimateWingspan(pick.prospect.height, pick.prospect.profile.size)}</td>
@@ -1353,20 +1486,20 @@ function App() {
             <div className="ops-player-summary">
               <PlayerPhoto
                 prospect={selectedPick.prospect}
-                label={localizeProspectName(selectedPick.prospect.name, language)}
-                language={language}
+                label={localizeProspectName(selectedPick.prospect.name, entityLanguage)}
+                language={uiLanguage}
                 variant="hero"
               />
               <div>
-                <h2>{localizeProspectName(selectedPick.prospect.name, language)}</h2>
+                <h2>{localizeProspectName(selectedPick.prospect.name, entityLanguage)}</h2>
                 <p>
-                  {selectedPick.prospect.positions.join("/")} | {localizeSchoolName(selectedPick.prospect.school, language)} |{" "}
+                  {selectedPick.prospect.positions.join("/")} | {localizeSchoolName(selectedPick.prospect.school, entityLanguage)} |{" "}
                   {formatOneDecimal(selectedPick.prospect.age)}
-                  {language === "zh" ? "岁" : ""}
+                  岁
                 </p>
                 <span className="ops-photo-meta">
                   <ShieldCheck size={12} />
-                  {formatPhotoSource(selectedPick.prospect, language)}
+                  {formatPhotoSource(selectedPick.prospect, uiLanguage)}
                 </span>
               </div>
               <div className="ops-score-badge">
@@ -1461,7 +1594,7 @@ function App() {
                 <div className="ops-profile-bars">
                   {prospectProfile.map(([key, value]) => (
                     <div className="ops-profile-bar" key={key}>
-                      <span>{profileLabelKeys[key]?.[language] ?? localizePhrase(key, language)}</span>
+                      <span>{profileLabelKeys[key]?.[uiLanguage] ?? localizePhrase(key, uiLanguage)}</span>
                       <i><b style={{ width: `${value}%` }} /></i>
                       <strong>{formatOneDecimal(value / 10)}</strong>
                     </div>
@@ -1494,9 +1627,7 @@ function App() {
                 </ul>
                 {selectedFallbackProfile && (
                   <p className="ops-source-note ops-source-warning">
-                    {language === "zh"
-                      ? `#${selectedPick.pick} 使用扩展候选池回退画像，锁定前需补强球探资料。`
-                      : `#${selectedPick.pick} uses an expanded-pool fallback profile; enrich scouting before final lock.`}
+                    #{selectedPick.pick} 使用扩展候选池回退画像，锁定前需补强球探资料。
                   </p>
                 )}
               </div>
@@ -1530,8 +1661,8 @@ function App() {
                   {selectedPick.alternatives.slice(0, 3).map((candidate, index) => (
                     <div key={candidate.prospectId}>
                       <strong>A{index + 1}</strong>
-                      <span>{localizeProspectName(candidate.name, language)}</span>
-                      <small>{localizePhrase(candidate.roleFit, language)}</small>
+                      <span>{localizeProspectName(candidate.name, entityLanguage)}</span>
+                      <small>{localizePhrase(candidate.roleFit, uiLanguage)}</small>
                       <b>{formatOneDecimal(candidate.score)}</b>
                     </div>
                   ))}
@@ -1544,11 +1675,11 @@ function App() {
             <h3>{d.dataSource}</h3>
             <p className="ops-source-note">{agentReviewNote}</p>
             <p className="ops-source-note">{d.sourcePrefix}</p>
-            <p className="ops-source-note">{formatModelNote(draftOpsManifest, language, boardAverage)}</p>
+            <p className="ops-source-note">{formatModelNote(draftOpsManifest, uiLanguage, boardAverage)}</p>
             <div className="ops-source-links">
               {draftOpsManifest.sourceLinks.slice(0, 3).map((source) => (
                 <a href={source.url} key={source.url} target="_blank" rel="noreferrer">
-                  {runtimeText(source.label, language)}
+                  {runtimeText(source.label, uiLanguage)}
                 </a>
               ))}
             </div>
