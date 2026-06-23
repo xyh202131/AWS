@@ -985,6 +985,34 @@ const buildUserPrompt = ({ question, selectedPickNumber, retrievedKnowledge }) =
     String(question ?? "").slice(0, 3000),
   ].join("\n");
 
+const buildEmptyAnswerFallback = ({ question, retrievedKnowledge }) => {
+  const isZh = /[\u4e00-\u9fff]/.test(String(question ?? ""));
+  const context = retrievedKnowledge?.selectedPickContext;
+  if (retrievedKnowledge?.selectedPickFocusMode === "direct" && context?.team && context?.player) {
+    const pick = context.pick ? `#${context.pick} ` : "";
+    const positions = Array.isArray(context.positions) && context.positions.length ? ` (${context.positions.join("/")})` : "";
+    const needs = Array.isArray(context.teamNeeds) && context.teamNeeds.length ? context.teamNeeds.join(", ") : "";
+    const roleFit = context.roleFit ? String(context.roleFit) : "";
+    if (isZh) {
+      return [
+        `当前点击项是 ${pick}${context.team} 选择 ${context.player}${positions}。`,
+        needs ? `球队需求侧重点：${needs}。` : "",
+        roleFit ? `角色匹配依据：${roleFit}。` : "",
+        "这是基于当前 DraftOps 已检索上下文生成的兜底回答；DeepSeek 本次返回了空内容。",
+      ].filter(Boolean).join("\n");
+    }
+    return [
+      `The selected slot is ${pick}${context.team} selecting ${context.player}${positions}.`,
+      needs ? `Team needs: ${needs}.` : "",
+      roleFit ? `Role fit: ${roleFit}.` : "",
+      "This fallback answer is based on the retrieved DraftOps context because DeepSeek returned empty content.",
+    ].filter(Boolean).join("\n");
+  }
+  return isZh
+    ? "已完成 RAG 检索，但 DeepSeek 本次返回了空内容。请换一种更具体的问法重试。"
+    : "RAG retrieval completed, but DeepSeek returned empty content. Please retry with a more specific question.";
+};
+
 const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
   const apiKey = await readDeepSeekKey();
   if (!apiKey) {
@@ -1035,7 +1063,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
   return {
     statusCode: 200,
     payload: {
-      answer: answer || "DeepSeek returned an empty answer.",
+      answer: answer || buildEmptyAnswerFallback({ question, retrievedKnowledge }),
       model: deepSeekModel,
       modelLabel: deepSeekModelLabel,
       mode: "deepseek-serverless",
