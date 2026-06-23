@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "draftops.trained_prediction_model_board.v1",
-  "generatedAt": "2026-06-23T18:30:20.414Z",
+  "schemaVersion": "draftops.trained_prediction_model_rerank.v1",
+  "generatedAt": "2026-06-23T18:31:08.180Z",
   "generatedBy": "scripts/train-prediction-model.mjs",
-  "method": "Train the scoring-layer weights using final delivery pickAudits.allScores. Objective: rank the final-delivery selection first within each recorded pick state.",
+  "method": "Diagnostic rerank artifact: boardRows keep the final-delivery selected player and attach that player's trained rank/winner diagnostics. It is not a new sequential board.",
   "scenario": {
     "id": "trained-audit-rerank",
     "label": "trained audit rerank",
@@ -43,10 +43,14 @@
       "player": "AJ Dybantsa",
       "localNameZh": "AJ 迪班萨",
       "trainedScore": 88.486,
-      "targetPlayer": "AJ Dybantsa",
-      "targetLocalNameZh": "AJ 迪班萨",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "aj-dybantsa",
+        "player": "AJ Dybantsa",
+        "localNameZh": "AJ 迪班萨",
+        "trainedScore": 88.486
+      },
       "topFive": [
         {
           "prospectId": "aj-dybantsa",
@@ -97,10 +101,14 @@
       "player": "Darryn Peterson",
       "localNameZh": "达林 彼得森",
       "trainedScore": 89.379,
-      "targetPlayer": "Darryn Peterson",
-      "targetLocalNameZh": "达林 彼得森",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "darryn-peterson",
+        "player": "Darryn Peterson",
+        "localNameZh": "达林 彼得森",
+        "trainedScore": 89.379
+      },
       "topFive": [
         {
           "prospectId": "darryn-peterson",
@@ -151,10 +159,14 @@
       "player": "Cameron Boozer",
       "localNameZh": "卡梅隆 布泽尔",
       "trainedScore": 82.519,
-      "targetPlayer": "Cameron Boozer",
-      "targetLocalNameZh": "卡梅隆 布泽尔",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "cameron-boozer",
+        "player": "Cameron Boozer",
+        "localNameZh": "卡梅隆 布泽尔",
+        "trainedScore": 82.519
+      },
       "topFive": [
         {
           "prospectId": "cameron-boozer",
@@ -205,10 +217,14 @@
       "player": "Caleb Wilson",
       "localNameZh": "凯莱布 威尔逊",
       "trainedScore": 89.073,
-      "targetPlayer": "Caleb Wilson",
-      "targetLocalNameZh": "凯莱布 威尔逊",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "caleb-wilson",
+        "player": "Caleb Wilson",
+        "localNameZh": "凯莱布 威尔逊",
+        "trainedScore": 89.073
+      },
       "topFive": [
         {
           "prospectId": "caleb-wilson",
@@ -259,10 +275,14 @@
       "player": "Keaton Wagler",
       "localNameZh": "基顿 瓦格勒",
       "trainedScore": 90.655,
-      "targetPlayer": "Keaton Wagler",
-      "targetLocalNameZh": "基顿 瓦格勒",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "keaton-wagler",
+        "player": "Keaton Wagler",
+        "localNameZh": "基顿 瓦格勒",
+        "trainedScore": 90.655
+      },
       "topFive": [
         {
           "prospectId": "keaton-wagler",
@@ -313,10 +333,14 @@
       "player": "Darius Acuff Jr.",
       "localNameZh": "达柳斯 阿卡夫",
       "trainedScore": 79.768,
-      "targetPlayer": "Darius Acuff Jr.",
-      "targetLocalNameZh": "达柳斯 阿卡夫",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "darius-acuff-jr",
+        "player": "Darius Acuff Jr.",
+        "localNameZh": "达柳斯 阿卡夫",
+        "trainedScore": 79.768
+      },
       "topFive": [
         {
           "prospectId": "darius-acuff-jr",
@@ -367,10 +391,14 @@
       "player": "Kingston Flemings",
       "localNameZh": "金斯顿 弗莱明斯",
       "trainedScore": 92.507,
-      "targetPlayer": "Kingston Flemings",
-      "targetLocalNameZh": "金斯顿 弗莱明斯",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "kingston-flemings",
+        "player": "Kingston Flemings",
+        "localNameZh": "金斯顿 弗莱明斯",
+        "trainedScore": 92.507
+      },
       "topFive": [
         {
           "prospectId": "kingston-flemings",
@@ -421,10 +449,14 @@
       "player": "Aday Mara",
       "localNameZh": "阿达伊 马拉",
       "trainedScore": 78.913,
-      "targetPlayer": "Aday Mara",
-      "targetLocalNameZh": "阿达伊 马拉",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "aday-mara",
+        "player": "Aday Mara",
+        "localNameZh": "阿达伊 马拉",
+        "trainedScore": 78.913
+      },
       "topFive": [
         {
           "prospectId": "aday-mara",
@@ -475,10 +507,14 @@
       "player": "Brayden Burries",
       "localNameZh": "布雷登 伯里斯",
       "trainedScore": 80.745,
-      "targetPlayer": "Brayden Burries",
-      "targetLocalNameZh": "布雷登 伯里斯",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "brayden-burries",
+        "player": "Brayden Burries",
+        "localNameZh": "布雷登 伯里斯",
+        "trainedScore": 80.745
+      },
       "topFive": [
         {
           "prospectId": "brayden-burries",
@@ -529,10 +565,14 @@
       "player": "Yaxel Lendeborg",
       "localNameZh": "亚克塞尔 伦德伯格",
       "trainedScore": 89.951,
-      "targetPlayer": "Yaxel Lendeborg",
-      "targetLocalNameZh": "亚克塞尔 伦德伯格",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "yaxel-lendeborg",
+        "player": "Yaxel Lendeborg",
+        "localNameZh": "亚克塞尔 伦德伯格",
+        "trainedScore": 89.951
+      },
       "topFive": [
         {
           "prospectId": "yaxel-lendeborg",
@@ -583,10 +623,14 @@
       "player": "Mikel Brown Jr.",
       "localNameZh": "迈克尔 布朗",
       "trainedScore": 78.026,
-      "targetPlayer": "Mikel Brown Jr.",
-      "targetLocalNameZh": "迈克尔 布朗",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "mikel-brown-jr",
+        "player": "Mikel Brown Jr.",
+        "localNameZh": "迈克尔 布朗",
+        "trainedScore": 78.026
+      },
       "topFive": [
         {
           "prospectId": "mikel-brown-jr",
@@ -637,10 +681,14 @@
       "player": "Hannes Steinbach",
       "localNameZh": "汉内斯 施泰因巴赫",
       "trainedScore": 80.838,
-      "targetPlayer": "Hannes Steinbach",
-      "targetLocalNameZh": "汉内斯 施泰因巴赫",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "hannes-steinbach",
+        "player": "Hannes Steinbach",
+        "localNameZh": "汉内斯 施泰因巴赫",
+        "trainedScore": 80.838
+      },
       "topFive": [
         {
           "prospectId": "hannes-steinbach",
@@ -691,10 +739,14 @@
       "player": "Karim Lopez",
       "localNameZh": "卡里姆 洛佩兹",
       "trainedScore": 94.396,
-      "targetPlayer": "Karim Lopez",
-      "targetLocalNameZh": "卡里姆 洛佩兹",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "karim-lopez",
+        "player": "Karim Lopez",
+        "localNameZh": "卡里姆 洛佩兹",
+        "trainedScore": 94.396
+      },
       "topFive": [
         {
           "prospectId": "karim-lopez",
@@ -745,10 +797,14 @@
       "player": "Morez Johnson Jr.",
       "localNameZh": "小莫雷兹 约翰逊",
       "trainedScore": 86.873,
-      "targetPlayer": "Morez Johnson Jr.",
-      "targetLocalNameZh": "小莫雷兹 约翰逊",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "morez-johnson-jr",
+        "player": "Morez Johnson Jr.",
+        "localNameZh": "小莫雷兹 约翰逊",
+        "trainedScore": 86.873
+      },
       "topFive": [
         {
           "prospectId": "morez-johnson-jr",
@@ -795,14 +851,18 @@
     {
       "pick": 15,
       "team": "Chicago Bulls",
-      "prospectId": "allen-graves",
-      "player": "Allen Graves",
-      "localNameZh": "阿伦 格雷夫斯",
-      "trainedScore": 87.972,
-      "targetPlayer": "Nate Ament",
-      "targetLocalNameZh": "纳撒尼尔 阿门特",
+      "prospectId": "nate-ament",
+      "player": "Nate Ament",
+      "localNameZh": "纳撒尼尔 阿门特",
+      "trainedScore": 86.581,
       "targetSelectedRank": 2,
       "exactTargetTop": false,
+      "trainedWinner": {
+        "prospectId": "allen-graves",
+        "player": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "trainedScore": 87.972
+      },
       "topFive": [
         {
           "prospectId": "allen-graves",
@@ -853,10 +913,14 @@
       "player": "Allen Graves",
       "localNameZh": "阿伦 格雷夫斯",
       "trainedScore": 81.129,
-      "targetPlayer": "Allen Graves",
-      "targetLocalNameZh": "阿伦 格雷夫斯",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "allen-graves",
+        "player": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "trainedScore": 81.129
+      },
       "topFive": [
         {
           "prospectId": "allen-graves",
@@ -907,10 +971,14 @@
       "player": "Chris Cenac Jr.",
       "localNameZh": "克里斯 塞纳克",
       "trainedScore": 73.662,
-      "targetPlayer": "Chris Cenac Jr.",
-      "targetLocalNameZh": "克里斯 塞纳克",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "chris-cenac-jr",
+        "player": "Chris Cenac Jr.",
+        "localNameZh": "克里斯 塞纳克",
+        "trainedScore": 73.662
+      },
       "topFive": [
         {
           "prospectId": "chris-cenac-jr",
@@ -961,10 +1029,14 @@
       "player": "Labaron Philon Jr.",
       "localNameZh": "小拉巴伦 菲隆",
       "trainedScore": 86.139,
-      "targetPlayer": "Labaron Philon Jr.",
-      "targetLocalNameZh": "小拉巴伦 菲隆",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "labaron-philon-jr",
+        "player": "Labaron Philon Jr.",
+        "localNameZh": "小拉巴伦 菲隆",
+        "trainedScore": 86.139
+      },
       "topFive": [
         {
           "prospectId": "labaron-philon-jr",
@@ -1015,10 +1087,14 @@
       "player": "Cameron Carr",
       "localNameZh": "卡梅隆 卡尔",
       "trainedScore": 83.512,
-      "targetPlayer": "Cameron Carr",
-      "targetLocalNameZh": "卡梅隆 卡尔",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "cameron-carr",
+        "player": "Cameron Carr",
+        "localNameZh": "卡梅隆 卡尔",
+        "trainedScore": 83.512
+      },
       "topFive": [
         {
           "prospectId": "cameron-carr",
@@ -1069,10 +1145,14 @@
       "player": "Bennett Stirtz",
       "localNameZh": "本内特 斯特茨",
       "trainedScore": 89.748,
-      "targetPlayer": "Bennett Stirtz",
-      "targetLocalNameZh": "本内特 斯特茨",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "bennett-stirtz",
+        "player": "Bennett Stirtz",
+        "localNameZh": "本内特 斯特茨",
+        "trainedScore": 89.748
+      },
       "topFive": [
         {
           "prospectId": "bennett-stirtz",
@@ -1123,10 +1203,14 @@
       "player": "Christian Anderson",
       "localNameZh": "克里斯蒂安 安德森",
       "trainedScore": 85.138,
-      "targetPlayer": "Christian Anderson",
-      "targetLocalNameZh": "克里斯蒂安 安德森",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "christian-anderson",
+        "player": "Christian Anderson",
+        "localNameZh": "克里斯蒂安 安德森",
+        "trainedScore": 85.138
+      },
       "topFive": [
         {
           "prospectId": "christian-anderson",
@@ -1177,10 +1261,14 @@
       "player": "Isaiah Evans",
       "localNameZh": "以赛亚 埃文斯",
       "trainedScore": 84.761,
-      "targetPlayer": "Isaiah Evans",
-      "targetLocalNameZh": "以赛亚 埃文斯",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "isaiah-evans",
+        "player": "Isaiah Evans",
+        "localNameZh": "以赛亚 埃文斯",
+        "trainedScore": 84.761
+      },
       "topFive": [
         {
           "prospectId": "isaiah-evans",
@@ -1231,10 +1319,14 @@
       "player": "Dailyn Swain",
       "localNameZh": "戴林 斯温",
       "trainedScore": 74.631,
-      "targetPlayer": "Dailyn Swain",
-      "targetLocalNameZh": "戴林 斯温",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "dailyn-swain",
+        "player": "Dailyn Swain",
+        "localNameZh": "戴林 斯温",
+        "trainedScore": 74.631
+      },
       "topFive": [
         {
           "prospectId": "dailyn-swain",
@@ -1285,10 +1377,14 @@
       "player": "Ebuka Okorie",
       "localNameZh": "埃布卡 奥科里",
       "trainedScore": 79.981,
-      "targetPlayer": "Ebuka Okorie",
-      "targetLocalNameZh": "埃布卡 奥科里",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "ebuka-okorie",
+        "player": "Ebuka Okorie",
+        "localNameZh": "埃布卡 奥科里",
+        "trainedScore": 79.981
+      },
       "topFive": [
         {
           "prospectId": "ebuka-okorie",
@@ -1339,10 +1435,14 @@
       "player": "Koa Peat",
       "localNameZh": "科阿 皮特",
       "trainedScore": 75.586,
-      "targetPlayer": "Koa Peat",
-      "targetLocalNameZh": "科阿 皮特",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "koa-peat",
+        "player": "Koa Peat",
+        "localNameZh": "科阿 皮特",
+        "trainedScore": 75.586
+      },
       "topFive": [
         {
           "prospectId": "koa-peat",
@@ -1393,10 +1493,14 @@
       "player": "Henri Veesaar",
       "localNameZh": "亨利 维萨尔",
       "trainedScore": 67.344,
-      "targetPlayer": "Henri Veesaar",
-      "targetLocalNameZh": "亨利 维萨尔",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "henri-veesaar",
+        "player": "Henri Veesaar",
+        "localNameZh": "亨利 维萨尔",
+        "trainedScore": 67.344
+      },
       "topFive": [
         {
           "prospectId": "henri-veesaar",
@@ -1447,10 +1551,14 @@
       "player": "Sergio De Larrea",
       "localNameZh": "塞尔吉奥 德拉雷亚",
       "trainedScore": 62.308,
-      "targetPlayer": "Sergio De Larrea",
-      "targetLocalNameZh": "塞尔吉奥 德拉雷亚",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "sergio-de-larrea",
+        "player": "Sergio De Larrea",
+        "localNameZh": "塞尔吉奥 德拉雷亚",
+        "trainedScore": 62.308
+      },
       "topFive": [
         {
           "prospectId": "sergio-de-larrea",
@@ -1501,10 +1609,14 @@
       "player": "Meleek Thomas",
       "localNameZh": "马利克 托马斯",
       "trainedScore": 73.7,
-      "targetPlayer": "Meleek Thomas",
-      "targetLocalNameZh": "马利克 托马斯",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "meleek-thomas",
+        "player": "Meleek Thomas",
+        "localNameZh": "马利克 托马斯",
+        "trainedScore": 73.7
+      },
       "topFive": [
         {
           "prospectId": "meleek-thomas",
@@ -1555,10 +1667,14 @@
       "player": "Tarris Reed Jr.",
       "localNameZh": "小塔里斯 里德",
       "trainedScore": 69.948,
-      "targetPlayer": "Tarris Reed Jr.",
-      "targetLocalNameZh": "小塔里斯 里德",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "tarris-reed-jr",
+        "player": "Tarris Reed Jr.",
+        "localNameZh": "小塔里斯 里德",
+        "trainedScore": 69.948
+      },
       "topFive": [
         {
           "prospectId": "tarris-reed-jr",
@@ -1609,10 +1725,14 @@
       "player": "Jack Kayil",
       "localNameZh": "杰克 卡伊尔",
       "trainedScore": 62.05,
-      "targetPlayer": "Jack Kayil",
-      "targetLocalNameZh": "杰克 卡伊尔",
       "targetSelectedRank": 1,
       "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "jack-kayil",
+        "player": "Jack Kayil",
+        "localNameZh": "杰克 卡伊尔",
+        "trainedScore": 62.05
+      },
       "topFive": [
         {
           "prospectId": "jack-kayil",

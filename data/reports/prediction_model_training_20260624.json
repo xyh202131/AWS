@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.prediction_model_training.v1",
-  "generatedAt": "2026-06-23T18:30:20.414Z",
+  "generatedAt": "2026-06-23T18:31:08.180Z",
   "generatedBy": "scripts/train-prediction-model.mjs",
   "scope": "Train the scoring-layer weights using final delivery pickAudits.allScores. Objective: rank the final-delivery selection first within each recorded pick state.",
   "trainingTarget": {
