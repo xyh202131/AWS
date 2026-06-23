@@ -37,6 +37,10 @@ const dashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DAS
 const maxChunksPerSource = Number(process.env.DRAFTOPS_RAG_INDEX_MAX_CHUNKS_PER_SOURCE ?? "24");
 const chunkSize = Number(process.env.DRAFTOPS_RAG_INDEX_CHUNK_SIZE ?? "1100");
 const maxEmbeddingChars = Number(process.env.DRAFTOPS_RAG_DASHSCOPE_EMBEDDING_MAX_CHARS ?? "6000");
+const reportStamp = new Date().toISOString().slice(0, 10).replaceAll("-", "");
+const reportsDir = resolve(rootDir, "data", "reports");
+const cleaningReportJsonPath = resolve(reportsDir, `rag_source_cleaning_${reportStamp}.json`);
+const cleaningReportMdPath = resolve(reportsDir, `rag_source_cleaning_${reportStamp}.md`);
 const sourceChunkLimit = (relativePath) => {
   if (/normalized_2026_local_player_pool_124\.json$/.test(relativePath)) return 160;
   if (/normalized_2026_player_feature_reference_124\.json$/.test(relativePath)) return 180;
@@ -44,6 +48,27 @@ const sourceChunkLimit = (relativePath) => {
   if (/normalized_2026_official_prospects_101\.json$/.test(relativePath)) return 130;
   return maxChunksPerSource;
 };
+
+const excludedRagSources = new Map([
+  [
+    "data/reports/deepseek_exam_answers.json",
+    "model-output-answer-file: final milestone_answers.json and evidence reports are the source of truth",
+  ],
+  [
+    "data/reports/deepseek_exam_answers.txt",
+    "model-output-answer-file: final milestone_answers.json and evidence reports are the source of truth",
+  ],
+  [
+    "data/reports/milestone_deepseek_discussion_20260623.json",
+    "superseded-model-discussion: final milestone_answers.json and tolerance reports are the source of truth",
+  ],
+  [
+    "data/reports/milestone_deepseek_discussion_20260623.md",
+    "superseded-model-discussion: final milestone_answers.json and tolerance reports are the source of truth",
+  ],
+]);
+
+const cleaningStats = [];
 
 const indexSpecs = [
   {
@@ -146,6 +171,113 @@ const normalizeText = (value) =>
     .replace(/[ \t]+/g, " ")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+
+const secretLikePatterns = [
+  /\bsk-[A-Za-z0-9_-]{16,}\b/g,
+  /\bAKIA[0-9A-Z]{16}\b/g,
+  /\bASIA[0-9A-Z]{16}\b/g,
+  /\b(?:api[_-]?key|secret|token|authorization|bearer)\s*[:=]\s*["']?[^"'\s,;]{12,}/gi,
+];
+
+const weakModelChatterPatterns = [
+  /\bas an ai\b/i,
+  /\bi (?:do not|don't) have (?:access|real-time access)\b/i,
+  /\bi cannot browse\b/i,
+  /\bi can't browse\b/i,
+  /无法访问(?:互联网|外部|实时)/,
+  /作为(?:一个)?ai/,
+];
+
+const hardNoisePatterns = [
+  /lorem ipsum/i,
+  /\bundefined\b/i,
+  /\bNaN\b/,
+  /待补充|占位符|placeholder/i,
+];
+
+const sourceTrustTier = (relativePath) => {
+  if (/^public\/data\/|^data\/final\//.test(relativePath)) return "locked-artifact";
+  if (/nba-official|official|online_player_list_reverification|china-nba-draft/i.test(relativePath)) return "official-or-reverified";
+  if (/^data\/normalized\/|^data\/clean\//.test(relativePath)) return "normalized-data";
+  if (/milestone_answers|milestone_prediction_evidence|answer_card|system_grounding_audit/i.test(relativePath)) {
+    return "evidence-report";
+  }
+  if (/deepseek|discussion|debate|consensus/i.test(relativePath)) return "model-discussion-secondary";
+  if (/README|document|raw_sources|external_source/i.test(relativePath)) return "architecture-or-source-registry";
+  return "project-report";
+};
+
+const redactSensitiveText = (text) => {
+  let redacted = String(text ?? "");
+  let count = 0;
+  for (const pattern of secretLikePatterns) {
+    redacted = redacted.replace(pattern, () => {
+      count += 1;
+      return "[REDACTED_SECRET]";
+    });
+  }
+  return { text: redacted, count };
+};
+
+const cleanModelChatterLines = (text) =>
+  String(text ?? "")
+    .split(/\r?\n/)
+    .filter((line) => !weakModelChatterPatterns.some((pattern) => pattern.test(line)))
+    .join("\n")
+    .trim();
+
+const evaluateChunkQuality = ({ text, source }) => {
+  const normalized = normalizeText(text);
+  if (!normalized || normalized.length < 40) return { keep: false, reason: "empty-or-too-short" };
+  if (hardNoisePatterns.some((pattern) => pattern.test(normalized))) return { keep: false, reason: "placeholder-or-invalid-token" };
+  if (weakModelChatterPatterns.some((pattern) => pattern.test(normalized)) && normalized.length < 260) {
+    return { keep: false, reason: "model-chatter-without-grounding" };
+  }
+  if (/deepseek_exam_answers/i.test(source)) return { keep: false, reason: "excluded-model-answer-file" };
+  return { keep: true, reason: "kept" };
+};
+
+const sanitizeChunk = (chunk) => {
+  const trustTier = sourceTrustTier(chunk.source);
+  const noChatter = cleanModelChatterLines(chunk.text);
+  const { text: redactedText, count: redactionCount } = redactSensitiveText(noChatter);
+  const quality = evaluateChunkQuality({ text: redactedText, source: chunk.source });
+  if (!quality.keep) {
+    return {
+      keep: false,
+      reason: quality.reason,
+      redactionCount,
+      chunk,
+    };
+  }
+
+  return {
+    keep: true,
+    reason: quality.reason,
+    redactionCount,
+    chunk: {
+      ...chunk,
+      text: [
+        `Source trust tier: ${trustTier}`,
+        `RAG cleaning: quality-gated${redactionCount ? "; secret-like tokens redacted" : ""}`,
+        redactedText,
+      ].join("\n"),
+      cleaningStatus: "cleaned",
+      sourceTrustTier: trustTier,
+      qualityTags: [
+        trustTier,
+        redactionCount ? "secret-like-token-redacted" : "no-secret-like-token",
+        "rag-quality-gated",
+      ],
+    },
+  };
+};
+
+const tallyReasons = (items) => {
+  const counts = {};
+  for (const item of items) counts[item.reason] = (counts[item.reason] ?? 0) + 1;
+  return counts;
+};
 
 const tokenize = (value) => {
   const normalized = String(value ?? "").toLowerCase();
@@ -280,16 +412,32 @@ const collectStructuredChunks = (value, { source, category, path = "$", chunks =
 const readSourceChunks = async (relativePath, category) => {
   const absolutePath = resolve(rootDir, relativePath);
   if (!existsSync(absolutePath)) return [];
+  if (excludedRagSources.has(relativePath)) {
+    cleaningStats.push({
+      source: relativePath,
+      category,
+      trustTier: sourceTrustTier(relativePath),
+      status: "excluded",
+      reason: excludedRagSources.get(relativePath),
+      rawChunks: 0,
+      keptChunks: 0,
+      droppedChunks: 0,
+      redactions: 0,
+      dropReasons: {},
+    });
+    return [];
+  }
   const limit = sourceChunkLimit(relativePath);
   const content = await readFile(absolutePath, "utf8");
   const trimmed = content.trim();
   if (!trimmed) return [];
 
+  let rawChunks = [];
   try {
     const parsed = JSON.parse(trimmed);
-    return collectStructuredChunks(parsed, { source: relativePath, category, limit }).slice(0, limit);
+    rawChunks = collectStructuredChunks(parsed, { source: relativePath, category, limit }).slice(0, limit);
   } catch {
-    return chunkText(content)
+    rawChunks = chunkText(content)
       .slice(0, limit)
       .map((text, index) => ({
         id: `${category}:${relativePath}:$text[${index}]`,
@@ -300,6 +448,38 @@ const readSourceChunks = async (relativePath, category) => {
         text,
       }));
   }
+
+  const seen = new Set();
+  const kept = [];
+  const dropped = [];
+  for (const rawChunk of rawChunks) {
+    const sanitized = sanitizeChunk(rawChunk);
+    if (!sanitized.keep) {
+      dropped.push(sanitized);
+      continue;
+    }
+    const dedupeKey = normalizeText(sanitized.chunk.text).toLowerCase();
+    if (seen.has(dedupeKey)) {
+      dropped.push({ ...sanitized, keep: false, reason: "duplicate-within-source" });
+      continue;
+    }
+    seen.add(dedupeKey);
+    kept.push(sanitized);
+  }
+
+  cleaningStats.push({
+    source: relativePath,
+    category,
+    trustTier: sourceTrustTier(relativePath),
+    status: "processed",
+    rawChunks: rawChunks.length,
+    keptChunks: kept.length,
+    droppedChunks: dropped.length,
+    redactions: kept.reduce((sum, item) => sum + item.redactionCount, 0),
+    dropReasons: tallyReasons(dropped),
+  });
+
+  return kept.map((item) => item.chunk);
 };
 
 const dashScopeEmbedTexts = async (texts) => {
@@ -346,6 +526,7 @@ const embedTexts = async (texts) => {
 };
 
 const buildIndex = async (spec) => {
+  const cleaningStart = cleaningStats.length;
   const sourceChunks = (
     await Promise.all(spec.sources.map((source) => readSourceChunks(source, spec.id)))
   ).flat();
@@ -370,6 +551,15 @@ const buildIndex = async (spec) => {
     embeddingDimensions,
     sourceCount: spec.sources.length,
     chunkCount: chunks.length,
+    cleaningSummary: {
+      qualityGate: "drop placeholders, short/noisy chunks, untrusted model answer files, duplicates, and redact secret-like tokens",
+      sourcesProcessed: cleaningStats.slice(cleaningStart).length,
+      rawChunks: cleaningStats.slice(cleaningStart).reduce((sum, item) => sum + Number(item.rawChunks ?? 0), 0),
+      keptChunks: chunks.length,
+      droppedChunks: cleaningStats.slice(cleaningStart).reduce((sum, item) => sum + Number(item.droppedChunks ?? 0), 0),
+      redactions: cleaningStats.slice(cleaningStart).reduce((sum, item) => sum + Number(item.redactions ?? 0), 0),
+      excludedSources: cleaningStats.slice(cleaningStart).filter((item) => item.status === "excluded").map((item) => item.source),
+    },
     sources: spec.sources,
     chunks,
   };
@@ -397,10 +587,62 @@ const run = async () => {
     schemaVersion: "draftops.rag.manifest.v1",
     generatedAt: new Date().toISOString(),
     generatedBy: "scripts/build-rag-index.mjs",
+    cleaningSummary: {
+      qualityGate: "enabled",
+      sourceCount: cleaningStats.length,
+      rawChunks: cleaningStats.reduce((sum, item) => sum + Number(item.rawChunks ?? 0), 0),
+      keptChunks: indexes.reduce((sum, item) => sum + item.chunkCount, 0),
+      droppedChunks: cleaningStats.reduce((sum, item) => sum + Number(item.droppedChunks ?? 0), 0),
+      redactions: cleaningStats.reduce((sum, item) => sum + Number(item.redactions ?? 0), 0),
+      excludedSources: cleaningStats.filter((item) => item.status === "excluded").map((item) => item.source),
+    },
     indexes,
   };
   await writeFile(resolve(outputDir, "rag-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  const cleaningReport = {
+    schemaVersion: "draftops.rag_source_cleaning.v1",
+    generatedAt: new Date().toISOString(),
+    generatedBy: "scripts/build-rag-index.mjs",
+    summary: manifest.cleaningSummary,
+    sources: cleaningStats,
+  };
+  const cleaningMarkdown = [
+    "# DraftOps RAG Source Cleaning",
+    "",
+    `Generated: ${cleaningReport.generatedAt}`,
+    "",
+    "## Summary",
+    "",
+    `- Quality gate: ${manifest.cleaningSummary.qualityGate}`,
+    `- Sources inspected: ${manifest.cleaningSummary.sourceCount}`,
+    `- Raw chunks: ${manifest.cleaningSummary.rawChunks}`,
+    `- Kept chunks: ${manifest.cleaningSummary.keptChunks}`,
+    `- Dropped chunks: ${manifest.cleaningSummary.droppedChunks}`,
+    `- Secret-like token redactions: ${manifest.cleaningSummary.redactions}`,
+    `- Excluded sources: ${manifest.cleaningSummary.excludedSources.length ? manifest.cleaningSummary.excludedSources.join(", ") : "none"}`,
+    "",
+    "## Sources",
+    "",
+    "| Source | Category | Trust tier | Raw | Kept | Dropped | Redactions | Drop reasons |",
+    "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
+    ...cleaningStats.map((item) =>
+      [
+        item.source,
+        item.category,
+        item.trustTier,
+        item.rawChunks,
+        item.keptChunks,
+        item.droppedChunks,
+        item.redactions,
+        Object.entries(item.dropReasons ?? {}).map(([reason, count]) => `${reason}:${count}`).join(", ") || item.reason || "none",
+      ].map((cell) => String(cell ?? "").replace(/\|/g, "/")).join(" | "),
+    ).map((row) => `| ${row} |`),
+  ].join("\n");
+  await mkdir(reportsDir, { recursive: true });
+  await writeFile(cleaningReportJsonPath, `${JSON.stringify(cleaningReport, null, 2)}\n`, "utf8");
+  await writeFile(cleaningReportMdPath, `${cleaningMarkdown}\n`, "utf8");
   console.log(`built rag-manifest.json with ${indexes.reduce((sum, item) => sum + item.chunkCount, 0)} chunks`);
+  console.log(`wrote ${cleaningReportMdPath}`);
 };
 
 run().catch((error) => {

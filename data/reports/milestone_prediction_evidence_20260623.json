@@ -2,7 +2,8 @@
   "sourceFiles": {
     "answerCard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
     "officialData": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\NBA选秀大会_26-27赛季数据.xlsx",
-    "currentBoard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json"
+    "currentBoard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+    "nbaOfficialNotes": "https://www.nba.com/news/2026-nba-draft-news-notes"
   },
   "currentBoardRows": [
     {
@@ -145,8 +146,8 @@
         "PF"
       ],
       "school": "Michigan",
-      "intl": false,
-      "origin": "United States"
+      "intl": true,
+      "origin": "Dominican Republic"
     },
     {
       "pick": 13,
@@ -352,15 +353,15 @@
     },
     {
       "pick": 30,
-      "name": "Marc-Owen Fodzo Dada",
-      "zh": "马克-欧文 福佐 达达",
+      "name": "Jack Kayil",
+      "zh": "杰克 卡伊尔",
       "positions": [
         "PG",
         "SG"
       ],
-      "school": "Nancy Basket (France)",
+      "school": "Alba Berlin (Germany)",
       "intl": true,
-      "origin": "France"
+      "origin": "Germany"
     }
   ],
   "questionEvidence": {
@@ -628,39 +629,62 @@
       ]
     },
     "Q5": {
-      "answer": 6,
-      "rule": "current board prospect.international true = non-US development/origin flag",
+      "answer": 7,
+      "rule": "current 124-player answer-card board + NBA official notes international-prospect override",
+      "previousAnswer": 6,
       "internationalPlayers": [
         {
           "pick": 8,
           "name": "阿达伊 马拉",
-          "origin": "Spain"
+          "english": "Aday Mara",
+          "origin": "Spain",
+          "source": "NBA official notes"
+        },
+        {
+          "pick": 12,
+          "name": "亚克塞尔 伦德伯格",
+          "english": "Yaxel Lendeborg",
+          "origin": "Dominican Republic",
+          "source": "NBA official notes"
         },
         {
           "pick": 13,
           "name": "卡里姆 洛佩兹",
-          "origin": "Mexico"
+          "english": "Karim Lopez",
+          "origin": "Mexico",
+          "source": "NBA official notes"
         },
         {
           "pick": 16,
           "name": "汉内斯 施泰因巴赫",
-          "origin": "Germany"
+          "english": "Hannes Steinbach",
+          "origin": "Germany",
+          "source": "local board origin"
         },
         {
           "pick": 27,
           "name": "塞尔吉奥 德拉雷亚",
-          "origin": "Spain"
+          "english": "Sergio De Larrea",
+          "origin": "Spain",
+          "source": "NBA official notes"
         },
         {
           "pick": 29,
           "name": "亨利 维萨尔",
-          "origin": "Estonia"
+          "english": "Henri Veesaar",
+          "origin": "Estonia",
+          "source": "NBA official notes"
         },
         {
           "pick": 30,
-          "name": "马克-欧文 福佐 达达",
-          "origin": "France"
+          "name": "杰克 卡伊尔",
+          "english": "Jack Kayil",
+          "origin": "Germany",
+          "source": "NBA official notes"
         }
+      ],
+      "changedBecause": [
+        "Yaxel Lendeborg is listed by NBA official notes as Dominican Republic among international prospects who played at U.S. colleges."
       ]
     },
     "Q6": {
@@ -888,12 +912,127 @@
     }
   },
   "proposedAnswers": {
+    "Q1": 3,
+    "Q2": 2,
+    "Q3": 4,
+    "Q4": 8,
+    "Q5": 7,
+    "Q6": "密歇根大学",
+    "Q7": 3
+  },
+  "machinePointEstimates": {
     "Q1": 2,
     "Q2": 1,
     "Q3": 3,
     "Q4": 8,
-    "Q5": 6,
+    "Q5": 7,
     "Q6": "密歇根大学",
     "Q7": 2
+  },
+  "strategyAdjustedAnswers": {
+    "Q1": 3,
+    "Q2": 2,
+    "Q3": 4,
+    "Q4": 8,
+    "Q5": 7,
+    "Q6": "密歇根大学",
+    "Q7": 3
+  },
+  "toleranceStrategy": {
+    "generatedAt": "2026-06-23T15:52:10.226575+00:00",
+    "rule": "For numeric tolerance questions, choose a value that still covers the machine point estimate while shifting toward the higher-probability uncertainty side.",
+    "items": {
+      "Q1": {
+        "questionId": "long-wingspan-picks-4-14",
+        "cell": "F3",
+        "machinePointEstimate": 2,
+        "strategicAnswer": 3,
+        "tolerance": 1,
+        "covers": [
+          2,
+          3,
+          4
+        ],
+        "reason": "点估计为2；Darius Acuff Jr. 臂展差4.5接近5英寸阈值，且Mikel Brown Jr.缺测量，向上不确定性大于向下风险。填3仍覆盖点估计2，并额外覆盖4。"
+      },
+      "Q2": {
+        "questionId": "max-vertical-top-three-first-round",
+        "cell": "F4",
+        "machinePointEstimate": 1,
+        "strategicAnswer": 2,
+        "tolerance": 1,
+        "covers": [
+          1,
+          2,
+          3
+        ],
+        "reason": "严格top3点估计为1；但助跑弹跳榜前列含多个潜在首轮边缘人，真实首轮命中数上行风险更大。填2仍覆盖1，并覆盖2/3。"
+      },
+      "Q3": {
+        "questionId": "primary-centers-round-one",
+        "cell": "F5",
+        "machinePointEstimate": 3,
+        "strategicAnswer": 4,
+        "tolerance": 1,
+        "covers": [
+          3,
+          4,
+          5
+        ],
+        "reason": "按答题卡主位置点估计为3；但PF/C副位置和实际选秀中锋口径可能上浮。填4仍覆盖3，并覆盖4/5。"
+      },
+      "Q4": {
+        "questionId": "first-center-pick-4-30",
+        "cell": "F6",
+        "machinePointEstimate": 8,
+        "strategicAnswer": 8,
+        "tolerance": 2,
+        "covers": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "reason": "第一个中锋点估计为8，±2已覆盖6-10；不需要偏移。"
+      },
+      "Q5": {
+        "questionId": "international-count-round-one",
+        "cell": "F7",
+        "machinePointEstimate": 7,
+        "strategicAnswer": 7,
+        "tolerance": 1,
+        "covers": [
+          6,
+          7,
+          8
+        ],
+        "reason": "NBA官方笔记修正后点估计为7；填7同时覆盖旧口径6和上行8。"
+      },
+      "Q6": {
+        "questionId": "school-most",
+        "cell": "F8",
+        "machinePointEstimate": "密歇根大学",
+        "strategicAnswer": "密歇根大学",
+        "tolerance": 0,
+        "covers": [
+          "密歇根大学"
+        ],
+        "reason": "机构名题无数值容错；Michigan三名首轮仍是最强证据。"
+      },
+      "Q7": {
+        "questionId": "hand-length-top-five-first-round",
+        "cell": "F9",
+        "machinePointEstimate": 2,
+        "strategicAnswer": 3,
+        "tolerance": 1,
+        "covers": [
+          2,
+          3,
+          4
+        ],
+        "reason": "严格top5点估计为2；但Ugonna Onyenso/Jayden Quaintance等手长前列球员存在首轮上行风险。填3仍覆盖2，并覆盖3/4。"
+      }
+    }
   }
 }

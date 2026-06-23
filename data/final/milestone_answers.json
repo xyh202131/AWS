@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.milestone_answers.v1",
-  "generatedAt": "2026-06-23T07:49:03.007Z",
+  "generatedAt": "2026-06-23T15:52:10.226575+00:00",
   "sourceEvidence": "data/reports/milestone_prediction_evidence_20260623.json",
   "deepSeekDiscussion": "data/reports/milestone_deepseek_discussion_20260623.json",
   "answerCardWriteReport": "data/reports/milestone_answer_card_write_report_20260623.json",
@@ -8,32 +8,68 @@
     {
       "id": "long-wingspan-picks-4-14",
       "question": "第 4–14 顺位（共11人）中，臂展减赤脚身高 >= 5 英寸（约12.7cm）的“超长臂展”球员有几人？",
-      "answer": 2,
-      "type": "integer",
-      "tolerance": "±1",
-      "evidence": [
-        "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。"
-      ]
-    },
-    {
-      "id": "max-vertical-top-three-first-round",
-      "question": "训练营“助跑最大弹跳”排名前 3 的球员中，有几人在首轮被选中？",
-      "answer": 1,
-      "type": "integer",
-      "tolerance": "0-3, ±1",
-      "evidence": [
-        "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。"
-      ]
-    },
-    {
-      "id": "primary-centers-round-one",
-      "question": "首轮 30 人中，主打位置为中锋（C）的球员总数？",
       "answer": 3,
       "type": "integer",
       "tolerance": "±1",
       "evidence": [
-        "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。"
-      ]
+        "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。",
+        "容错策略：点估计 2，提交值 3，覆盖 [2, 3, 4]。点估计为2；Darius Acuff Jr. 臂展差4.5接近5英寸阈值，且Mikel Brown Jr.缺测量，向上不确定性大于向下风险。填3仍覆盖点估计2，并额外覆盖4。"
+      ],
+      "machinePointEstimate": 2,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          2,
+          3,
+          4
+        ],
+        "reason": "点估计为2；Darius Acuff Jr. 臂展差4.5接近5英寸阈值，且Mikel Brown Jr.缺测量，向上不确定性大于向下风险。填3仍覆盖点估计2，并额外覆盖4。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
+    },
+    {
+      "id": "max-vertical-top-three-first-round",
+      "question": "训练营“助跑最大弹跳”排名前 3 的球员中，有几人在首轮被选中？",
+      "answer": 2,
+      "type": "integer",
+      "tolerance": "0-3, ±1",
+      "evidence": [
+        "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。",
+        "容错策略：点估计 1，提交值 2，覆盖 [1, 2, 3]。严格top3点估计为1；但助跑弹跳榜前列含多个潜在首轮边缘人，真实首轮命中数上行风险更大。填2仍覆盖1，并覆盖2/3。"
+      ],
+      "machinePointEstimate": 1,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          1,
+          2,
+          3
+        ],
+        "reason": "严格top3点估计为1；但助跑弹跳榜前列含多个潜在首轮边缘人，真实首轮命中数上行风险更大。填2仍覆盖1，并覆盖2/3。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
+    },
+    {
+      "id": "primary-centers-round-one",
+      "question": "首轮 30 人中，主打位置为中锋（C）的球员总数？",
+      "answer": 4,
+      "type": "integer",
+      "tolerance": "±1",
+      "evidence": [
+        "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。",
+        "容错策略：点估计 3，提交值 4，覆盖 [3, 4, 5]。按答题卡主位置点估计为3；但PF/C副位置和实际选秀中锋口径可能上浮。填4仍覆盖3，并覆盖4/5。"
+      ],
+      "machinePointEstimate": 3,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          3,
+          4,
+          5
+        ],
+        "reason": "按答题卡主位置点估计为3；但PF/C副位置和实际选秀中锋口径可能上浮。填4仍覆盖3，并覆盖4/5。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
     },
     {
       "id": "first-center-pick-4-30",
@@ -42,18 +78,46 @@
       "type": "pick_number",
       "tolerance": "±2",
       "evidence": [
-        "第4-30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。"
-      ]
+        "第4-30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。",
+        "容错策略：点估计 8，提交值 8，覆盖 [6, 7, 8, 9, 10]。第一个中锋点估计为8，±2已覆盖6-10；不需要偏移。"
+      ],
+      "machinePointEstimate": 8,
+      "toleranceStrategy": {
+        "applied": false,
+        "coveredTrueValues": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "reason": "第一个中锋点估计为8，±2已覆盖6-10；不需要偏移。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
     },
     {
       "id": "international-count-round-one",
       "question": "首轮 30 人中，国际球员（非美国本土成长）总数？",
-      "answer": 6,
+      "answer": 7,
       "type": "integer",
       "tolerance": "±1",
       "evidence": [
-        "当前首轮国际球员为第8、13、16、27、29、30顺位，共6人。"
-      ]
+        "按当前124人池版首轮，非美国本土成长/国际球员修订为第8、12、13、16、27、29、30顺位，共7人。",
+        "NBA官方2026 Draft News & Notes 将Yaxel Lendeborg列为Dominican Republic国际球员，修正本地origin字段误差。",
+        "容错策略：点估计 7，提交值 7，覆盖 [6, 7, 8]。NBA官方笔记修正后点估计为7；填7同时覆盖旧口径6和上行8。"
+      ],
+      "revisionSource": "data/reports/milestone_q5_nba_notes_recalculation_20260623.json",
+      "machinePointEstimate": 7,
+      "toleranceStrategy": {
+        "applied": false,
+        "coveredTrueValues": [
+          6,
+          7,
+          8
+        ],
+        "reason": "NBA官方笔记修正后点估计为7；填7同时覆盖旧口径6和上行8。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
     },
     {
       "id": "school-most",
@@ -61,18 +125,44 @@
       "answer": "密歇根大学",
       "type": "institution_name",
       "evidence": [
-        "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。"
-      ]
+        "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。",
+        "容错策略：点估计 密歇根大学，提交值 密歇根大学，覆盖 ['密歇根大学']。机构名题无数值容错；Michigan三名首轮仍是最强证据。"
+      ],
+      "machinePointEstimate": "密歇根大学",
+      "toleranceStrategy": {
+        "applied": false,
+        "coveredTrueValues": [
+          "密歇根大学"
+        ],
+        "reason": "机构名题无数值容错；Michigan三名首轮仍是最强证据。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
     },
     {
       "id": "hand-length-top-five-first-round",
       "question": "训练营“手掌长度”排名前 5 的球员中，有几人在首轮被选中？",
-      "answer": 2,
+      "answer": 3,
       "type": "integer",
       "tolerance": "0-5, ±1",
       "evidence": [
-        "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。"
-      ]
+        "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。",
+        "容错策略：点估计 2，提交值 3，覆盖 [2, 3, 4]。严格top5点估计为2；但Ugonna Onyenso/Jayden Quaintance等手长前列球员存在首轮上行风险。填3仍覆盖2，并覆盖3/4。"
+      ],
+      "machinePointEstimate": 2,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          2,
+          3,
+          4
+        ],
+        "reason": "严格top5点估计为2；但Ugonna Onyenso/Jayden Quaintance等手长前列球员存在首轮上行风险。填3仍覆盖2，并覆盖3/4。",
+        "sourceReport": "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
+      }
     }
+  ],
+  "revisionReports": [
+    "data/reports/milestone_q5_nba_notes_recalculation_20260623.json",
+    "data/reports/milestone_tolerance_strategy_adjustment_20260623.json"
   ]
 }

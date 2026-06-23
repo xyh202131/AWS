@@ -21,19 +21,7 @@
       "sqref": "C3:C32"
     }
   ],
-  "changesFromFrontendBoard": [
-    {
-      "pick": 30,
-      "team": "Dallas Mavericks",
-      "english": "Jack Kayil",
-      "optionValue": "杰克 卡伊尔",
-      "cell": "C32",
-      "score": 76,
-      "confidence": 60,
-      "frontendBoardPlayer": "Marc-Owen Fodzo Dada",
-      "changedFromFrontendBoard": true
-    }
-  ],
+  "changesFromFrontendBoard": [],
   "picks": [
     {
       "pick": 1,
@@ -376,5 +364,11 @@
       "formula1": "SchoolPool",
       "sqref": "F8"
     }
-  ]
+  ],
+  "frontendSyncStatus": {
+    "checkedAt": "2026-06-23T15:17:56.133552+00:00",
+    "boardPath": "public/data/agent_expanded_recommended_board.json",
+    "diffCount": 0,
+    "pick30": "Jack Kayil"
+  }
 }

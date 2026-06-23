@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "draftops.milestone_q5_nba_notes_recalculation.v1",
+  "generatedAt": "2026-06-23T15:14:46.107973+00:00",
+  "generatedBy": "Codex deterministic recalculation from current 124-player board + NBA official news notes",
+  "noManualPrediction": true,
+  "scope": "Recalculate Q5 international-player count only; no draft pick order or player selection changes.",
+  "sources": {
+    "currentBoard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+    "nbaOfficialNotes": "https://www.nba.com/news/2026-nba-draft-news-notes",
+    "scrapedNotes": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\.firecrawl\\nba-2026-draft-news-notes.md",
+    "answerCard": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx"
+  },
+  "rule": "Count first-round selected players with non-US development/origin evidence. Use current local 124-player board for picks, then apply NBA official notes as evidence overrides for international status.",
+  "previousQ5": 6,
+  "recalculatedQ5": 7,
+  "baselineInternationalPlayers": [
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "name": "Aday Mara",
+      "nameZh": "阿达伊 马拉",
+      "school": "Michigan",
+      "localOrigin": "Spain",
+      "baselineInternational": true,
+      "officialNotesCountry": "Spain",
+      "revisedInternational": true
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "name": "Karim Lopez",
+      "nameZh": "卡里姆 洛佩兹",
+      "school": "New Zealand Breakers (Australia)",
+      "localOrigin": "Mexico",
+      "baselineInternational": true,
+      "officialNotesCountry": "Mexico",
+      "revisedInternational": true
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "name": "Hannes Steinbach",
+      "nameZh": "汉内斯 施泰因巴赫",
+      "school": "Washington",
+      "localOrigin": "Germany",
+      "baselineInternational": true,
+      "officialNotesCountry": null,
+      "revisedInternational": true
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "name": "Sergio De Larrea",
+      "nameZh": "塞尔吉奥 德拉雷亚",
+      "school": "Vallodolid (Spain)",
+      "localOrigin": "Spain",
+      "baselineInternational": true,
+      "officialNotesCountry": "Spain",
+      "revisedInternational": true
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "name": "Henri Veesaar",
+      "nameZh": "亨利 维萨尔",
+      "school": "North Carolina",
+      "localOrigin": "Estonia",
+      "baselineInternational": true,
+      "officialNotesCountry": "Estonia",
+      "revisedInternational": true
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "name": "Jack Kayil",
+      "nameZh": "杰克 卡伊尔",
+      "school": "Alba Berlin (Germany)",
+      "localOrigin": "Germany",
+      "baselineInternational": true,
+      "officialNotesCountry": "Germany",
+      "revisedInternational": true
+    }
+  ],
+  "addedByNbaOfficialNotes": [
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "name": "Yaxel Lendeborg",
+      "nameZh": "亚克塞尔 伦德伯格",
+      "school": "Michigan",
+      "localOrigin": "United States",
+      "baselineInternational": false,
+      "officialNotesCountry": "Dominican Republic",
+      "revisedInternational": true
+    }
+  ],
+  "recalculatedInternationalPlayers": [
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "name": "Aday Mara",
+      "nameZh": "阿达伊 马拉",
+      "school": "Michigan",
+      "localOrigin": "Spain",
+      "baselineInternational": true,
+      "officialNotesCountry": "Spain",
+      "revisedInternational": true
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "name": "Yaxel Lendeborg",
+      "nameZh": "亚克塞尔 伦德伯格",
+      "school": "Michigan",
+      "localOrigin": "United States",
+      "baselineInternational": false,
+      "officialNotesCountry": "Dominican Republic",
+      "revisedInternational": true
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "name": "Karim Lopez",
+      "nameZh": "卡里姆 洛佩兹",
+      "school": "New Zealand Breakers (Australia)",
+      "localOrigin": "Mexico",
+      "baselineInternational": true,
+      "officialNotesCountry": "Mexico",
+      "revisedInternational": true
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "name": "Hannes Steinbach",
+      "nameZh": "汉内斯 施泰因巴赫",
+      "school": "Washington",
+      "localOrigin": "Germany",
+      "baselineInternational": true,
+      "officialNotesCountry": null,
+      "revisedInternational": true
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "name": "Sergio De Larrea",
+      "nameZh": "塞尔吉奥 德拉雷亚",
+      "school": "Vallodolid (Spain)",
+      "localOrigin": "Spain",
+      "baselineInternational": true,
+      "officialNotesCountry": "Spain",
+      "revisedInternational": true
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "name": "Henri Veesaar",
+      "nameZh": "亨利 维萨尔",
+      "school": "North Carolina",
+      "localOrigin": "Estonia",
+      "baselineInternational": true,
+      "officialNotesCountry": "Estonia",
+      "revisedInternational": true
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "name": "Jack Kayil",
+      "nameZh": "杰克 卡伊尔",
+      "school": "Alba Berlin (Germany)",
+      "localOrigin": "Germany",
+      "baselineInternational": true,
+      "officialNotesCountry": "Germany",
+      "revisedInternational": true
+    }
+  ],
+  "unchangedMilestones": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q6",
+    "Q7"
+  ],
+  "notesFoundInScrape": {
+    "mentionsYaxelAsInternational": true,
+    "mentionsJackKayilAsInternational": true,
+    "mentionsKarimLopezFirstMexicanBornFirstRound": true,
+    "mentionsMichiganThreeFirstRoundProspects": true
+  },
+  "fieldCorrectionsApplied": {
+    "Yaxel Lendeborg": {
+      "origin": "Dominican Republic",
+      "international": true,
+      "source": "https://www.nba.com/news/2026-nba-draft-news-notes",
+      "affectedArtifacts": [
+        "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+        "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\final\\local_pool_124_import_bundle.json",
+        "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json",
+        "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\expanded_import_bundle.json"
+      ]
+    }
+  }
+}

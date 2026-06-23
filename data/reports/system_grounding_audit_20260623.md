@@ -1,12 +1,12 @@
 # DraftOps System Grounding Audit
 
-Generated: 2026-06-23T14:31:27.105Z
+Generated: 2026-06-23T17:39:23.387Z
 
 Status: pass_with_warnings
 
 ## Summary
 
-- Checks: 10
+- Checks: 11
 - Blockers: 0
 - Warnings: 1
 - Board picks: 30
@@ -64,9 +64,9 @@ Severity: warning
 Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.
 
 Evidence:
-- lowConfidence=30:Marc-Owen Fodzo Dada:60
+- lowConfidence=30:Jack Kayil:60
 - thinEvidence=none
-- narrowMargins=7:Mikel Brown Jr.:margin=0, 10:Kingston Flemings:margin=1, 18:Christian Anderson:margin=0, 19:Labaron Philon Jr.:margin=0, 20:Bennett Stirtz:margin=1, 22:Dailyn Swain:margin=0, 24:Isaiah Evans:margin=0, 30:Marc-Owen Fodzo Dada:margin=0
+- narrowMargins=7:Mikel Brown Jr.:margin=0, 10:Kingston Flemings:margin=1, 18:Christian Anderson:margin=0, 19:Labaron Philon Jr.:margin=0, 20:Bennett Stirtz:margin=1, 22:Dailyn Swain:margin=0, 24:Isaiah Evans:margin=0, 30:Jack Kayil:margin=1
 
 Remediation: Treat these picks as explanation-review targets, not as manual replacement targets.
 
@@ -80,7 +80,7 @@ Evidence:
 - localPool=124
 - featureReference=124
 - onlineOfficialProspects=101
-- boardCandidatePool.officialProspectRows=101
+- boardCandidatePool.officialProspectRows=not recorded
 - selectedMissingFromOfficialList=none
 
 Remediation: Refresh normalized source files or regenerate the board from the verified pool.
@@ -120,11 +120,26 @@ RAG indexes exist and contain retrievable chunks.
 Evidence:
 - core-board: declared=231, actual=231, sources=12
 - team-preference: declared=134, actual=134, sources=8
-- prospect-evidence: declared=820, actual=820, sources=18
-- milestone: declared=68, actual=68, sources=8
-- architecture: declared=83, actual=83, sources=9
+- prospect-evidence: declared=819, actual=819, sources=18
+- milestone: declared=36, actual=36, sources=8
+- architecture: declared=84, actual=84, sources=9
 
 Remediation: Run npm run rag:build before relying on RAG answers.
+
+### PASS rag-cleaning-policy
+
+Severity: blocker
+
+RAG indexes are rebuilt through the data-cleaning quality gate before retrieval.
+
+Evidence:
+- core-board: cleaned=231/231, dropped=0, redactions=0, summary=true
+- team-preference: cleaned=134/134, dropped=0, redactions=0, summary=true
+- prospect-evidence: cleaned=819/819, dropped=1, redactions=0, summary=true
+- milestone: cleaned=36/36, dropped=0, redactions=0, summary=true
+- architecture: cleaned=84/84, dropped=0, redactions=0, summary=true
+
+Remediation: Run npm run rag:build so every RAG chunk carries cleaning metadata and the manifest records dropped/noisy sources.
 
 ### PASS runtime-answer-guardrails
 

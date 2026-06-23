@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "draftops.milestone_tolerance_strategy_adjustment.v1",
+  "generatedAt": "2026-06-23T15:52:10.226575+00:00",
+  "generatedBy": "Codex deterministic tolerance-window strategy",
+  "noManualDraftPrediction": true,
+  "scope": "Adjust milestone answer values only by tolerance-window strategy; no player or pick prediction changes.",
+  "strategyRule": "For numeric tolerance questions, keep the machine point estimate inside the accepted interval while shifting the submitted value toward plausible upside/downside uncertainty when useful.",
+  "previousWorkbookAnswers": {
+    "Q1": 2,
+    "Q2": 1,
+    "Q3": 3,
+    "Q4": 8,
+    "Q5": 7,
+    "Q6": "密歇根大学",
+    "Q7": 2
+  },
+  "previousFinalAnswers": {
+    "Q1": 2,
+    "Q2": 1,
+    "Q3": 3,
+    "Q4": 8,
+    "Q5": 7,
+    "Q6": "密歇根大学",
+    "Q7": 2
+  },
+  "newAnswers": {
+    "Q1": 3,
+    "Q2": 2,
+    "Q3": 4,
+    "Q4": 8,
+    "Q5": 7,
+    "Q6": "密歇根大学",
+    "Q7": 3
+  },
+  "items": {
+    "Q1": {
+      "questionId": "long-wingspan-picks-4-14",
+      "cell": "F3",
+      "machinePointEstimate": 2,
+      "strategicAnswer": 3,
+      "tolerance": 1,
+      "covers": [
+        2,
+        3,
+        4
+      ],
+      "reason": "点估计为2；Darius Acuff Jr. 臂展差4.5接近5英寸阈值，且Mikel Brown Jr.缺测量，向上不确定性大于向下风险。填3仍覆盖点估计2，并额外覆盖4。"
+    },
+    "Q2": {
+      "questionId": "max-vertical-top-three-first-round",
+      "cell": "F4",
+      "machinePointEstimate": 1,
+      "strategicAnswer": 2,
+      "tolerance": 1,
+      "covers": [
+        1,
+        2,
+        3
+      ],
+      "reason": "严格top3点估计为1；但助跑弹跳榜前列含多个潜在首轮边缘人，真实首轮命中数上行风险更大。填2仍覆盖1，并覆盖2/3。"
+    },
+    "Q3": {
+      "questionId": "primary-centers-round-one",
+      "cell": "F5",
+      "machinePointEstimate": 3,
+      "strategicAnswer": 4,
+      "tolerance": 1,
+      "covers": [
+        3,
+        4,
+        5
+      ],
+      "reason": "按答题卡主位置点估计为3；但PF/C副位置和实际选秀中锋口径可能上浮。填4仍覆盖3，并覆盖4/5。"
+    },
+    "Q4": {
+      "questionId": "first-center-pick-4-30",
+      "cell": "F6",
+      "machinePointEstimate": 8,
+      "strategicAnswer": 8,
+      "tolerance": 2,
+      "covers": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "reason": "第一个中锋点估计为8，±2已覆盖6-10；不需要偏移。"
+    },
+    "Q5": {
+      "questionId": "international-count-round-one",
+      "cell": "F7",
+      "machinePointEstimate": 7,
+      "strategicAnswer": 7,
+      "tolerance": 1,
+      "covers": [
+        6,
+        7,
+        8
+      ],
+      "reason": "NBA官方笔记修正后点估计为7；填7同时覆盖旧口径6和上行8。"
+    },
+    "Q6": {
+      "questionId": "school-most",
+      "cell": "F8",
+      "machinePointEstimate": "密歇根大学",
+      "strategicAnswer": "密歇根大学",
+      "tolerance": 0,
+      "covers": [
+        "密歇根大学"
+      ],
+      "reason": "机构名题无数值容错；Michigan三名首轮仍是最强证据。"
+    },
+    "Q7": {
+      "questionId": "hand-length-top-five-first-round",
+      "cell": "F9",
+      "machinePointEstimate": 2,
+      "strategicAnswer": 3,
+      "tolerance": 1,
+      "covers": [
+        2,
+        3,
+        4
+      ],
+      "reason": "严格top5点估计为2；但Ugonna Onyenso/Jayden Quaintance等手长前列球员存在首轮上行风险。填3仍覆盖2，并覆盖3/4。"
+    }
+  },
+  "updatedFiles": [
+    "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\final\\milestone_answers.json",
+    "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\reports\\milestone_prediction_evidence_20260623.json",
+    "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\reports\\milestone_answer_card_write_report_20260623.json",
+    "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx"
+  ]
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="endingGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#62B8FF" stop-opacity="0.90"/>
+      <stop offset="1" stop-color="#33E18A" stop-opacity="0.72"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#070B10"/>
+  <rect x="86" y="74" width="1108" height="572" rx="22" fill="#101820" stroke="#28455E"/>
+  <text x="132" y="158" font-family="Microsoft YaHei, Arial, sans-serif" font-size="46" fill="#E7F2FF" font-weight="800">最终交付不是“模型回答”，而是一套可提交资产</text>
+  <rect x="132" y="204" width="560" height="5" rx="2.5" fill="url(#endingGlow)"/>
+  <text x="132" y="276" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF">
+    <tspan x="132" dy="0">DraftOps 用数据可信链路、多 Agent 复核、可解释算法和 AWS/RAG 架构，</tspan>
+    <tspan x="132" dy="40">把 24 小时选秀预测任务变成一个可运行、可审计、可提交的智能预测系统。</tspan>
+  </text>
+  <rect x="132" y="372" width="286" height="122" rx="16" fill="#142231" stroke="#33E18A"/>
+  <text x="166" y="424" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#33E18A" font-weight="800">可信数据</text>
+  <text x="166" y="462" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">官方原始包 + 多层审计产物</text>
+  <rect x="498" y="372" width="286" height="122" rx="16" fill="#142231" stroke="#62B8FF"/>
+  <text x="532" y="424" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#62B8FF" font-weight="800">可解释预测</text>
+  <text x="532" y="462" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">证据、风险、适配、备选项</text>
+  <rect x="864" y="372" width="286" height="122" rx="16" fill="#142231" stroke="#FFD166"/>
+  <text x="898" y="424" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#FFD166" font-weight="800">可提交系统</text>
+  <text x="898" y="462" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">PPT、brief、JSON、答题卡</text>
+  <text x="132" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF" font-weight="700">收束句：</text>
+  <text x="232" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#94A8BC">我们把高不确定的预测题，拆成了可验证的数据工程、可复现的 Agent 流程和可演示的产品界面。</text>
+  <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">08 / 08</text>
+</svg>

@@ -10,7 +10,6 @@ const bundlePath = resolveManifestPath(draftOpsManifest.data?.bundlePath, "publi
 const documentIndexPath = resolve(rootDir, "data", "documents", "document_index.json");
 const milestoneReferencePath = resolve(rootDir, "data", "documents", "milestone-questions", "DraftCode24里程碑事件预测.md");
 const milestoneAnswersPath = resolve(rootDir, "data", "final", "milestone_answers.json");
-const examReportPath = resolve(rootDir, "data", "reports", "deepseek_exam_answers.json");
 const knowledgePaths = [
   "data/README.md",
   "data/documents/README.md",
@@ -51,7 +50,6 @@ const structuredKnowledgePaths = [
   "data/final/milestone_answers.json",
   "data/reports/team_preference_research_20260623.json",
   "data/reports/milestone_prediction_evidence_20260623.json",
-  "data/reports/milestone_deepseek_discussion_20260623.json",
   "data/reports/milestone_answer_card_write_report_20260623.json",
   "public/data/prospect_media.json",
   draftOpsManifest.data?.bundlePath ?? "public/data/final_import_bundle.json",
@@ -985,10 +983,9 @@ const buildExamFacts = (board = [], milestoneAnswers = null) => {
 };
 
 const buildContext = async (selectedPickNumber) => {
-  const [boardArtifact, bundle, previousExamRun, documentIndex, milestoneReference, milestoneAnswers] = await Promise.all([
+  const [boardArtifact, bundle, documentIndex, milestoneReference, milestoneAnswers] = await Promise.all([
     readJson(boardPath, {}),
     readJson(bundlePath, {}),
-    readJson(examReportPath, null),
     readJson(documentIndexPath, null),
     readFile(milestoneReferencePath, "utf8").catch(() => ""),
     readJson(milestoneAnswersPath, null),
@@ -1006,7 +1003,7 @@ const buildContext = async (selectedPickNumber) => {
         boardSummary: boardArtifact.summary,
         scenario: boardArtifact.scenario,
         sourceMetadata: boardArtifact.sourceMetadata ?? bundle.metadata,
-        previousDeepSeekExamGeneratedAt: previousExamRun?.generatedAt ?? null,
+        legacyDeepSeekExamAnswersIgnored: true,
         officialMilestoneAnswersGeneratedAt: milestoneAnswers?.generatedAt ?? null,
       },
       referenceDocuments: {
@@ -1228,6 +1225,13 @@ const isDirectCodeModificationRequest = (question) => {
 const buildScopeGuardAnswer = () =>
   "当前 DeepSeek 可以回答比赛相关问题，但不能直接修改代码、写文件、运行命令、提交或推送仓库。";
 
+const readPositiveInteger = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : fallback;
+};
+
+const localChatMaxTokens = () => readPositiveInteger(process.env.DEEPSEEK_CHAT_MAX_TOKENS, 8192);
+
 const callDeepSeek = async ({
   question,
   history,
@@ -1244,7 +1248,7 @@ const callDeepSeek = async ({
   const baseUrl = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com";
   const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
   const modelLabel = getModelLabel(model);
-  const maxTokens = Number(process.env.DEEPSEEK_CHAT_MAX_TOKENS ?? 1800);
+  const maxTokens = localChatMaxTokens();
   const context = providedContext ?? (await buildContext(selectedPickNumber));
   const explicitPickNumber = explicitPickNumberFromQuestion(question);
   const selectedPickOverrideUsed =
@@ -1348,7 +1352,9 @@ const callDeepSeek = async ({
   }
 
   const completion = JSON.parse(responseText);
-  const sanitizedAnswer = sanitizeAnswer(completion.choices?.[0]?.message?.content);
+  const choice = completion.choices?.[0];
+  const finishReason = choice?.finish_reason ?? null;
+  const sanitizedAnswer = sanitizeAnswer(choice?.message?.content);
   if (!sanitizedAnswer) throw new Error("DeepSeek response did not include message content.");
   const answer = attachGroundingStatus(sanitizedAnswer, retrievedKnowledge);
 
@@ -1357,6 +1363,9 @@ const callDeepSeek = async ({
     model,
     modelLabel,
     mode: "deepseek-competition",
+    finishReason,
+    truncated: finishReason === "length",
+    maxTokens,
     grounding: {
       status: groundingStatusLine(retrievedKnowledge),
       reflection: retrievedKnowledge?.agentic?.reflection ?? null,
@@ -1385,6 +1394,7 @@ const server = http.createServer(async (request, response) => {
         configured: Boolean(process.env.DEEPSEEK_API_KEY),
         model,
         modelLabel: getModelLabel(model),
+        maxTokens: localChatMaxTokens(),
         rag: {
           retrievalMode: "Agentic local loop: plan -> retrieve -> reflect -> optional second retrieve -> decide",
           embeddingDimensions: ragEmbeddingDimensions,

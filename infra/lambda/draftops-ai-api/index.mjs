@@ -55,8 +55,6 @@ const defaultRagS3Keys = [
   "data/clean/clean_teams.json",
   "data/clean/official_prospect_reconciliation.json",
   "data/reports/milestone_prediction_evidence_20260623.json",
-  "data/reports/milestone_deepseek_discussion_20260623.json",
-  "data/reports/milestone_deepseek_discussion_20260623.md",
   "data/reports/milestone_answer_card_write_report_20260623.json",
   "data/reports/team_preference_research_20260623.json",
   "data/reports/team_preference_research_20260623.md",

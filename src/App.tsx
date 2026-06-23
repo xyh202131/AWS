@@ -124,6 +124,9 @@ interface ChatMessage {
 interface DeepSeekChatResponse {
   answer?: string;
   modelLabel?: string;
+  finishReason?: string | null;
+  truncated?: boolean;
+  maxTokens?: number;
   error?: string;
 }
 
@@ -1165,12 +1168,16 @@ function App() {
         throw new Error(payload.error ?? "DeepSeek 问答请求失败。");
       }
 
+      const truncationNotice = payload.truncated
+        ? `\n\n本地代理提示：DeepSeek 返回 finish_reason=length，本次回答可能被 max_tokens=${payload.maxTokens ?? "未知"} 截断。可以提高 DEEPSEEK_CHAT_MAX_TOKENS 后重启本地代理，或把问题拆成多轮。`
+        : "";
+
       setChatMessages([
         ...nextMessages,
         {
           id: nextChatMessageId("assistant"),
           role: "assistant",
-          content: payload.answer ?? "DeepSeek 返回了空回答。",
+          content: `${payload.answer ?? "DeepSeek 返回了空回答。"}${truncationNotice}`,
         },
       ]);
       if (payload.modelLabel) setChatModelLabel(payload.modelLabel);

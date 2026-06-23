@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10" />
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">项目重点：数据、Agent、算法、产品</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">聚焦 DraftOps 如何把预测、证据和导出做成一个可运行系统。</text>
+  </g>
+  <g id="score-cards">
+    <path fill="#142231" stroke="#28455E" d="M86,164 H308 A14,14 0 0 1 322,178 V302 A14,14 0 0 1 308,316 H86 A14,14 0 0 1 72,302 V178 A14,14 0 0 1 86,164 Z" />
+
+  <g transform="translate(100, 190) scale(1.41667)" fill="none" stroke="#62B8FF" stroke-width="2">
+    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+    <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" />
+    <path d="M9 14l2 2l4 -4" />
+  </g>
+    <text x="100" y="260" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#62B8FF" font-weight="800">DATA</text>
+    <text x="198" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">数据底座</text>
+    <text x="100" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">101/124 双池与审计</text>
+    <path fill="#142231" stroke="#28455E" d="M386,164 H608 A14,14 0 0 1 622,178 V302 A14,14 0 0 1 608,316 H386 A14,14 0 0 1 372,302 V178 A14,14 0 0 1 386,164 Z" />
+
+  <g transform="translate(400, 190) scale(1.41667)" fill="none" stroke="#62B8FF" stroke-width="2">
+    <path d="M3 4l18 0" />
+    <path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10" />
+    <path d="M12 16l0 4" />
+    <path d="M9 20l6 0" />
+    <path d="M8 12l3 -3l2 2l3 -3" />
+  </g>
+    <text x="400" y="260" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#62B8FF" font-weight="800">FLOW</text>
+    <text x="498" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">Agent 流程</text>
+    <text x="400" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">文件交付 + Supervisor</text>
+    <path fill="#142231" stroke="#33E18A" d="M686,164 H908 A14,14 0 0 1 922,178 V302 A14,14 0 0 1 908,316 H686 A14,14 0 0 1 672,302 V178 A14,14 0 0 1 686,164 Z" />
+
+  <g transform="translate(700, 190) scale(1.41667)" fill="none" stroke="#33E18A" stroke-width="2">
+    <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M7 12a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" />
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+  </g>
+    <text x="700" y="260" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#33E18A" font-weight="800">PICK</text>
+    <text x="798" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">预测引擎</text>
+    <text x="700" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">打分、去重、低置信</text>
+    <path fill="#142231" stroke="#28455E" d="M986,164 H1194 A14,14 0 0 1 1208,178 V302 A14,14 0 0 1 1194,316 H986 A14,14 0 0 1 972,302 V178 A14,14 0 0 1 986,164 Z" />
+
+  <g transform="translate(1000, 190) scale(1.41667)" fill="none" stroke="#FFD166" stroke-width="2">
+    <path d="M20.942 13.021a9 9 0 1 0 -9.407 7.967" />
+    <path d="M12 7v5l3 3" />
+    <path d="M15 19l2 2l4 -4" />
+  </g>
+    <text x="1000" y="260" font-family="Consolas, 'Courier New', monospace" font-size="36" fill="#FFD166" font-weight="800">SHIP</text>
+    <text x="1096" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">产品交付</text>
+    <text x="1000" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">JSON / 项目摘要 / 答题卡</text>
+  </g>
+  <g id="difficulty-list">
+    <path fill="#101820" stroke="#28455E" d="M130,378 H1150 A18,18 0 0 1 1168,396 V538 A18,18 0 0 1 1150,556 H130 A18,18 0 0 1 112,538 V396 A18,18 0 0 1 130,378 Z" />
+    <text x="152" y="426" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" fill="#E7F2FF" font-weight="800">四个讲解重点</text>
+    <circle cx="160" cy="474" r="5" fill="#33E18A" />
+    <text x="178" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">数据层：来源、候选池、审计产物。</text>
+    <circle cx="160" cy="520" r="5" fill="#62B8FF" />
+    <text x="178" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">Agent 层：分工、退回、完整重跑。</text>
+    <line x1="636" y1="458" x2="636" y2="532" stroke="#28455E" stroke-width="1" />
+    <circle cx="692" cy="474" r="5" fill="#FFD166" />
+    <text x="710" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">每个 pick 都要解释风险和备选。</text>
+    <circle cx="692" cy="520" r="5" fill="#33E18A" />
+    <text x="710" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">交付层：JSON、项目摘要、答题卡可导出。</text>
+  </g>
+  <g id="footer">
+    <path fill="#142231" stroke="#33E18A" d="M310,602 H970 A10,10 0 0 1 980,612 V640 A10,10 0 0 1 970,650 H310 A10,10 0 0 1 300,640 V612 A10,10 0 0 1 310,602 Z" />
+    <text x="330" y="633" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#33E18A" font-weight="700">核心链路：数据从哪来、Agent 怎么跑、结果怎么交付。</text>
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">02 / 08</text>
+  </g>
+</svg>

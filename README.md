@@ -129,6 +129,7 @@ The interactive window calls DeepSeek through an OpenAI-compatible chat completi
 The assistant is read-only. It must not directly edit code, write files, run commands, commit, push, reorder picks, or replace players. Real code and board changes must go through the repository workflow and regenerated data artifacts.
 
 The browser talks to the local proxy from `DEEPSEEK_AGENT_PORT` or `4318`. The proxy reads `.env.local`, so the API key is never sent to the frontend.
+Local chat output is controlled by `DEEPSEEK_CHAT_MAX_TOKENS` and defaults to `8192`. If DeepSeek returns `finish_reason=length`, the chat window will show a local truncation notice; raise this value in `.env.local` and restart the local agent for longer answers.
 
 Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY` when local chat is needed:
 

@@ -1866,20 +1866,21 @@
           "PF"
         ],
         "school": "Michigan",
-        "origin": "United States",
+        "origin": "Dominican Republic",
         "classYear": "Senior",
         "height": "6-9",
         "weight": "241 lbs",
         "age": 23,
         "consensusRank": 12,
         "mockHeat": 77,
-        "international": false,
+        "international": true,
         "roleTags": [
           "connector",
           "rebounder",
           "defense",
           "maturity",
-          "feel"
+          "feel",
+          "international"
         ],
         "strengths": [
           "Older productive forward",
@@ -1907,7 +1908,8 @@
           "NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4).",
           "Visible ESPN Big Board profile entry extracted from local raw markdown. ESPN Top 100 ranks 26-100 were not exposed in local raw or supplemental scrape. NBA.com consensus lottery cross-check: pick 12, most common 11, 12 (4).",
           "Expanded pool: retained full DraftOps profile from original 30-player bundle; official row 53/101.",
-          "Local 124-player pool match: row 4, 亚克塞尔 伦德伯格; method=name-translation."
+          "Local 124-player pool match: row 4, 亚克塞尔 伦德伯格; method=name-translation.",
+          "NBA official 2026 Draft News & Notes lists Yaxel Lendeborg under international prospects who played at U.S. colleges: Dominican Republic."
         ],
         "media": {
           "photoUrl": "/data/media/prospects/yaxel-lendeborg.jpg",
@@ -1923,9 +1925,10 @@
           "nameZh": "亚克塞尔 伦德伯格",
           "positionZh": "前锋",
           "schoolClubZh": "密歇根大学",
-          "countryRegionZh": "美国",
+          "countryRegionZh": "多米尼加共和国",
           "matchStatus": "matched-current-profile",
-          "matchMethod": "name-translation"
+          "matchMethod": "name-translation",
+          "internationalOverrideSource": "NBA official 2026 Draft News & Notes"
         }
       },
       "score": 90,
@@ -1976,9 +1979,12 @@
         "Team needs: frontcourt depth, versatility, long-term value.",
         "Role fit: feel; strengths: Older productive forward, Passing feel.",
         "NBA.com official prospects: F, age 23, Michigan, 6-9, 241 lbs, Senior, United States",
-        "NBA.com consensus mid-first name"
+        "NBA.com consensus mid-first name",
+        "NBA official 2026 Draft News & Notes lists Yaxel Lendeborg under international prospects who played at U.S. colleges: Dominican Republic."
       ],
-      "warnings": []
+      "warnings": [
+        "International milestone impact: monitor first international slot."
+      ]
     },
     {
       "pick": 13,
@@ -4740,7 +4746,7 @@
       "localNameZh": "亚克塞尔 伦德伯格",
       "localOrdinal": 4,
       "school": "Michigan",
-      "origin": "United States",
+      "origin": "Dominican Republic",
       "position": "SF/PF",
       "consensusRank": 12,
       "score": 90,
@@ -4748,7 +4754,9 @@
       "margin": 4,
       "fallbackProfile": false,
       "matchStatus": "matched-current-profile",
-      "warnings": [],
+      "warnings": [
+        "International milestone impact: monitor first international slot."
+      ],
       "alternatives": [
         {
           "prospectId": "hannes-steinbach",
@@ -6431,5 +6439,15 @@
       "reynan-dos-santos"
     ]
   },
-  "noManualOverride": true
+  "noManualOverride": true,
+  "revisions": [
+    {
+      "generatedAt": "2026-06-23T15:17:21.657608+00:00",
+      "type": "field-correction",
+      "player": "Yaxel Lendeborg",
+      "field": "international/origin",
+      "source": "https://www.nba.com/news/2026-nba-draft-news-notes",
+      "note": "NBA official 2026 Draft News & Notes lists Yaxel Lendeborg under international prospects who played at U.S. colleges: Dominican Republic."
+    }
+  ]
 }

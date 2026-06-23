@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="76" font-family="Microsoft YaHei, Arial, sans-serif" font-size="40" fill="#E7F2FF" font-weight="800">产品界面佐证：预测、证据、导出</text>
+    <text x="64" y="114" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">三件事在同一驾驶舱完成；截图保留 raster，标注保持可编辑。</text>
+  </g>
+  <g id="screenshot-frame">
+    <rect x="62" y="150" width="738" height="496" rx="16" fill="#101820" stroke="#28455E"/>
+    <image href="../images/product-evidence.png" x="82" y="170" width="698" height="456" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+  <g id="proof-card-1">
+    <rect x="836" y="154" width="368" height="126" rx="14" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/checklist" x="864" y="184" width="36" height="36" fill="#33E18A" stroke-width="2"/>
+    <text x="918" y="210" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="800">30 顺位直接展开</text>
+    <text x="864" y="250" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">完整性、低置信、锁定状态在顶部可见。</text>
+  </g>
+  <g id="proof-card-2">
+    <rect x="836" y="314" width="368" height="126" rx="14" fill="#142231" stroke="#62B8FF"/>
+    <use data-icon="tabler-outline/eye" x="864" y="344" width="36" height="36" fill="#62B8FF" stroke-width="2"/>
+    <text x="918" y="370" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="800">单 pick 可解释</text>
+    <text x="864" y="410" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">证据、风险、适配、备选跟随球员切换。</text>
+  </g>
+  <g id="proof-card-3">
+    <rect x="836" y="474" width="368" height="126" rx="14" fill="#142231" stroke="#FFD166"/>
+    <use data-icon="tabler-outline/file-export" x="864" y="504" width="36" height="36" fill="#FFD166" stroke-width="2"/>
+    <text x="918" y="530" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="800">导出提交物</text>
+    <text x="864" y="570" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">submission JSON 与 roadshow brief 一键生成。</text>
+  </g>
+  <g id="connectors">
+    <line x1="836" y1="217" x2="780" y2="217" stroke="#33E18A" stroke-width="3"/>
+    <polygon points="780,217 794,209 794,225" fill="#33E18A"/>
+    <line x1="836" y1="377" x2="780" y2="377" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="780,377 794,369 794,385" fill="#62B8FF"/>
+    <line x1="836" y1="537" x2="780" y2="537" stroke="#FFD166" stroke-width="3"/>
+    <polygon points="780,537 794,529 794,545" fill="#FFD166"/>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">06 / 08</text>
+  </g>
+</svg>

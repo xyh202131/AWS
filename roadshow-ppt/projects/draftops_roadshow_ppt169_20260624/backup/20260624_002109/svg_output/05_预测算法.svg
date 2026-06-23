@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#070B10"/>
+  <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">预测算法：顺位贪心 + 风险校验</text>
+  <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">按真实选秀顺序依次选择，选中球员从候选池移除，天然避免重复</text>
+  <rect x="84" y="168" width="330" height="150" rx="14" fill="#142231" stroke="#28455E"/>
+  <text x="118" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="700">1. 构造候选池</text>
+  <text x="118" y="258" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" fill="#94A8BC">
+    <tspan x="118" dy="0">球队顺位 + 球员特征</tspan>
+    <tspan x="118" dy="30">官方名单 + 外部信号</tspan>
+  </text>
+  <rect x="474" y="168" width="330" height="150" rx="14" fill="#142231" stroke="#28455E"/>
+  <text x="508" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="700">2. 逐队逐人打分</text>
+  <text x="508" y="258" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" fill="#94A8BC">
+    <tspan x="508" dy="0">共识、需求、能力</tspan>
+    <tspan x="508" dy="30">潜力、热度、风险</tspan>
+  </text>
+  <rect x="864" y="168" width="330" height="150" rx="14" fill="#142231" stroke="#33E18A"/>
+  <text x="898" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="700">3. 输出锁定 board</text>
+  <text x="898" y="258" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" fill="#94A8BC">
+    <tspan x="898" dy="0">30 picks / 30 unique</tspan>
+    <tspan x="898" dy="30">证据、置信度、warning</tspan>
+  </text>
+  <line x1="414" y1="243" x2="474" y2="243" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="474,243 460,235 460,251" fill="#62B8FF"/>
+  <line x1="804" y1="243" x2="864" y2="243" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="864,243 850,235 850,251" fill="#62B8FF"/>
+  <rect x="122" y="390" width="1036" height="120" rx="18" fill="#101820" stroke="#28455E"/>
+  <text x="170" y="442" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="700">总分 = 共识 + 球队需求 + 球员能力 + 上限潜力 + 临场热度 - 风险惩罚</text>
+  <text x="170" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">PPT 只讲影响因子，不暴露内部权重参数；权重仍由 Agent/脚本内部使用。</text>
+  <rect x="156" y="560" width="210" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="184" y="604" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="700">无重复</text>
+  <text x="272" y="604" font-family="Consolas, 'Courier New', monospace" font-size="24" fill="#E7F2FF">30/30</text>
+  <rect x="408" y="560" width="210" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="436" y="604" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#FFD166" font-weight="700">低置信</text>
+  <text x="532" y="604" font-family="Consolas, 'Courier New', monospace" font-size="24" fill="#E7F2FF">1</text>
+  <rect x="660" y="560" width="210" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="688" y="604" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#62B8FF" font-weight="700">证据承载</text>
+  <text x="800" y="604" font-family="Consolas, 'Courier New', monospace" font-size="24" fill="#E7F2FF">PASS</text>
+  <rect x="912" y="560" width="210" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="940" y="604" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="700">人工换人</text>
+  <text x="1052" y="604" font-family="Consolas, 'Courier New', monospace" font-size="24" fill="#E7F2FF">0</text>
+  <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">05 / 08</text>
+</svg>

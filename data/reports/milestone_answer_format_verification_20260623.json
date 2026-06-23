@@ -1,0 +1,76 @@
+{
+  "workbook": "数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx",
+  "allOk": true,
+  "checks": [
+    {
+      "question": "Q1",
+      "cell": "F3",
+      "format": "整数（误差 ±1）",
+      "value": 3,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "integer"
+    },
+    {
+      "question": "Q2",
+      "cell": "F4",
+      "format": "整数 0–3（误差 ±1）",
+      "value": 2,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "integer 0-3"
+    },
+    {
+      "question": "Q3",
+      "cell": "F5",
+      "format": "整数（误差 ±1）",
+      "value": 4,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "integer"
+    },
+    {
+      "question": "Q4",
+      "cell": "F6",
+      "format": "顺位号（误差 ±2）",
+      "value": 8,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "pick number integer"
+    },
+    {
+      "question": "Q5",
+      "cell": "F7",
+      "format": "整数（误差 ±1）",
+      "value": 7,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "integer"
+    },
+    {
+      "question": "Q6",
+      "cell": "F8",
+      "format": "机构名（请从下拉选择）",
+      "value": "密歇根大学",
+      "excelDataType": "s",
+      "ok": true,
+      "reason": "SchoolPool dropdown value"
+    },
+    {
+      "question": "Q7",
+      "cell": "F9",
+      "format": "整数 0–5（误差 ±1）",
+      "value": 3,
+      "excelDataType": "n",
+      "ok": true,
+      "reason": "integer 0-5"
+    }
+  ],
+  "dataValidations": [
+    {
+      "type": "list",
+      "formula1": "SchoolPool",
+      "sqref": "F8"
+    }
+  ]
+}

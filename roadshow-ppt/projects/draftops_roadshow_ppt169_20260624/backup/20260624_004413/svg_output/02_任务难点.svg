@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">比赛任务不是“猜名单”</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">同一套系统要同时交付 30 顺位、7 个里程碑答案、工程质量和路演表达。</text>
+  </g>
+  <g id="score-cards">
+    <rect x="72" y="164" width="250" height="152" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/clipboard-check" x="100" y="190" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="100" y="260" font-family="Consolas, 'Courier New', monospace" font-size="42" fill="#62B8FF" font-weight="800">30%</text>
+    <text x="188" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">代码质量</text>
+    <text x="100" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">AWS 使用与 GitHub 提交</text>
+    <rect x="372" y="164" width="250" height="152" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/presentation" x="400" y="190" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="400" y="260" font-family="Consolas, 'Courier New', monospace" font-size="42" fill="#62B8FF" font-weight="800">30%</text>
+    <text x="488" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">现场路演</text>
+    <text x="400" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">6 分钟讲清方法与产品</text>
+    <rect x="672" y="164" width="250" height="152" rx="14" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/target" x="700" y="190" width="34" height="34" fill="#33E18A" stroke-width="2"/>
+    <text x="700" y="260" font-family="Consolas, 'Courier New', monospace" font-size="42" fill="#33E18A" font-weight="800">40%</text>
+    <text x="788" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">里程碑预测</text>
+    <text x="700" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">预测板 + 7 个客观答案</text>
+    <rect x="972" y="164" width="236" height="152" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/clock-check" x="1000" y="190" width="34" height="34" fill="#FFD166" stroke-width="2"/>
+    <text x="1000" y="260" font-family="Consolas, 'Courier New', monospace" font-size="42" fill="#FFD166" font-weight="800">24h</text>
+    <text x="1096" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#E7F2FF" font-weight="700">连续作战</text>
+    <text x="1000" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">变化监控与提交窗口</text>
+  </g>
+  <g id="difficulty-list">
+    <rect x="112" y="378" width="1056" height="178" rx="18" fill="#101820" stroke="#28455E"/>
+    <text x="152" y="426" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" fill="#E7F2FF" font-weight="800">四个设计难点</text>
+    <circle cx="160" cy="474" r="5" fill="#33E18A"/>
+    <text x="178" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">数据先统一成可验证证据。</text>
+    <circle cx="160" cy="520" r="5" fill="#62B8FF"/>
+    <text x="178" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">预测会随签位、名单、伤病变化。</text>
+    <line x1="636" y1="458" x2="636" y2="532" stroke="#28455E" stroke-width="1"/>
+    <circle cx="692" cy="474" r="5" fill="#FFD166"/>
+    <text x="710" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">每个 pick 都要解释风险和备选。</text>
+    <circle cx="692" cy="520" r="5" fill="#33E18A"/>
+    <text x="710" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">结果由 Agent/脚本生成，禁止人工换人。</text>
+  </g>
+  <g id="footer">
+    <rect x="314" y="602" width="652" height="48" rx="10" fill="#142231" stroke="#33E18A"/>
+    <text x="348" y="633" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#33E18A" font-weight="700">所以 PPT 要证明：数据可信、流程可复现、提交物完整。</text>
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">02 / 08</text>
+  </g>
+</svg>

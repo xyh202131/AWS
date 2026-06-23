@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#070B10"/>
+  <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">AWS/RAG：让系统能回答、能部署、能追溯</text>
+  <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">前端展示预测，Lambda/API 和 RAG 层负责只读问答与证据检索</text>
+  <rect x="92" y="172" width="220" height="100" rx="12" fill="#142231" stroke="#62B8FF"/>
+  <text x="126" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">DraftOps 前端</text>
+  <text x="126" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">预测板 / 证据 / 导出</text>
+  <line x1="312" y1="222" x2="412" y2="222" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="412,222 398,214 398,230" fill="#62B8FF"/>
+  <rect x="412" y="172" width="220" height="100" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="446" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">Agent Chat API</text>
+  <text x="446" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">Lambda / local proxy</text>
+  <line x1="632" y1="222" x2="732" y2="222" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="732,222 718,214 718,230" fill="#62B8FF"/>
+  <rect x="732" y="172" width="220" height="100" rx="12" fill="#142231" stroke="#33E18A"/>
+  <text x="766" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">RAG 检索层</text>
+  <text x="766" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">排名 / MMR / fallback</text>
+  <line x1="952" y1="222" x2="1052" y2="222" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="1052,222 1038,214 1038,230" fill="#62B8FF"/>
+  <rect x="1052" y="172" width="156" height="100" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="1084" y="214" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">模型</text>
+  <text x="1084" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">DeepSeek / Bedrock</text>
+  <rect x="150" y="360" width="280" height="156" rx="16" fill="#101820" stroke="#28455E"/>
+  <text x="184" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="700">S3 索引文件</text>
+  <text x="184" y="456" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#62B8FF" font-weight="700">5 indexes / 1336 chunks</text>
+  <text x="184" y="492" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">board、team、prospect、milestone、architecture</text>
+  <rect x="500" y="360" width="280" height="156" rx="16" fill="#101820" stroke="#28455E"/>
+  <text x="534" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="700">DynamoDB</text>
+  <text x="534" y="456" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="700">124 feature records</text>
+  <text x="534" y="492" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">身高、臂展、体重、参考评分和嵌套特征</text>
+  <rect x="850" y="360" width="280" height="156" rx="16" fill="#101820" stroke="#28455E"/>
+  <text x="884" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="700">只读护栏</text>
+  <text x="884" y="456" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#FFD166" font-weight="700">weak evidence aware</text>
+  <text x="884" y="492" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">不能直接改代码、换人、提交或覆盖 board</text>
+  <rect x="222" y="586" width="836" height="54" rx="10" fill="#142231" stroke="#33E18A"/>
+  <text x="252" y="621" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="700">路演表达：这是 deployable API layer；完整 IaC 栈未加入前，不夸大成全量云原生平台。</text>
+  <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">07 / 08</text>
+</svg>

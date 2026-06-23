@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#070B10"/>
+  <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">比赛任务不是“猜名单”</text>
+  <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">它同时考察预测、工程、路演和提交稳定性</text>
+  <rect x="64" y="154" width="1152" height="470" rx="14" fill="#101820" stroke="#28455E"/>
+  <rect x="92" y="190" width="250" height="150" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="116" y="236" font-family="Consolas, 'Courier New', monospace" font-size="44" fill="#62B8FF" font-weight="800">30%</text>
+  <text x="116" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">代码质量</text>
+  <text x="116" y="312" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">GitHub 提交与 AWS 使用</text>
+  <rect x="376" y="190" width="250" height="150" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="400" y="236" font-family="Consolas, 'Courier New', monospace" font-size="44" fill="#62B8FF" font-weight="800">30%</text>
+  <text x="400" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">现场路演</text>
+  <text x="400" y="312" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">6 分钟讲清方法和产品</text>
+  <rect x="660" y="190" width="250" height="150" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="684" y="236" font-family="Consolas, 'Courier New', monospace" font-size="44" fill="#33E18A" font-weight="800">40%</text>
+  <text x="684" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">里程碑预测</text>
+  <text x="684" y="312" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">名单命中与客观题答案</text>
+  <rect x="944" y="190" width="244" height="150" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="968" y="236" font-family="Consolas, 'Courier New', monospace" font-size="44" fill="#FFD166" font-weight="800">24h</text>
+  <text x="968" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">连续作战</text>
+  <text x="968" y="312" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">数据更新与现场提交</text>
+  <text x="106" y="404" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">核心难点</text>
+  <text x="106" y="454" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF">
+    <tspan x="106" dy="0">1. 数据来源多：官方 Excel、Combine、NBA.com、媒体 mock、球队需求</tspan>
+    <tspan x="106" dy="42">2. 信息会变化：签位、名单、伤病、热度和临场新闻都可能影响结果</tspan>
+    <tspan x="106" dy="42">3. 结果要可解释：每个 pick 都要能回到证据、风险和备选项</tspan>
+    <tspan x="106" dy="42">4. 不能靠人工改名单：结果必须来自文件、参数、脚本或 Agent 重跑</tspan>
+  </text>
+  <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">02 / 08</text>
+</svg>

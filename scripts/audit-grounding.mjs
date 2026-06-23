@@ -261,12 +261,21 @@ const ragIndexChecks = await Promise.all(
       key: index.key,
       declaredChunks: Number(index.chunkCount ?? 0),
       actualChunks: Array.isArray(artifact?.chunks) ? artifact.chunks.length : 0,
+      cleanedChunks: Array.isArray(artifact?.chunks)
+        ? artifact.chunks.filter((chunk) => chunk.cleaningStatus === "cleaned").length
+        : 0,
+      hasCleaningSummary: Boolean(artifact?.cleaningSummary),
+      redactions: Number(artifact?.cleaningSummary?.redactions ?? 0),
+      droppedChunks: Number(artifact?.cleaningSummary?.droppedChunks ?? 0),
       declaredSources: Number(index.sourceCount ?? 0),
       exists: await exists(path),
     };
   }),
 );
 const ragProblems = ragIndexChecks.filter((item) => !item.exists || item.declaredChunks <= 0 || item.actualChunks <= 0);
+const ragCleaningProblems = ragIndexChecks.filter(
+  (item) => !item.hasCleaningSummary || item.cleanedChunks !== item.actualChunks,
+);
 
 addCheck({
   id: "rag-grounding-indexes",
@@ -274,6 +283,17 @@ addCheck({
   summary: "RAG indexes exist and contain retrievable chunks.",
   evidence: ragIndexChecks.map((item) => `${item.id}: declared=${item.declaredChunks}, actual=${item.actualChunks}, sources=${item.declaredSources}`),
   remediation: "Run npm run rag:build before relying on RAG answers.",
+});
+
+addCheck({
+  id: "rag-cleaning-policy",
+  status: ragIndexChecks.length >= 5 && ragCleaningProblems.length === 0 ? "pass" : "fail",
+  summary: "RAG indexes are rebuilt through the data-cleaning quality gate before retrieval.",
+  evidence: ragIndexChecks.map(
+    (item) =>
+      `${item.id}: cleaned=${item.cleanedChunks}/${item.actualChunks}, dropped=${item.droppedChunks}, redactions=${item.redactions}, summary=${item.hasCleaningSummary}`,
+  ),
+  remediation: "Run npm run rag:build so every RAG chunk carries cleaning metadata and the manifest records dropped/noisy sources.",
 });
 
 addCheck({
