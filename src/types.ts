@@ -160,6 +160,10 @@ export interface RuntimeMilestoneDefinition {
   prompt: LocalizedText;
   type: MilestoneType;
   confidence: number;
+  answer?: string;
+  answerI18n?: LocalizedText;
+  evidence?: string[];
+  evidenceI18n?: LocalizedText[];
 }
 
 export interface RuntimeExportConfig {

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "draftops.milestone_answers.v1",
+  "generatedAt": "2026-06-23T07:49:03.007Z",
+  "sourceEvidence": "data/reports/milestone_prediction_evidence_20260623.json",
+  "deepSeekDiscussion": "data/reports/milestone_deepseek_discussion_20260623.json",
+  "answerCardWriteReport": "data/reports/milestone_answer_card_write_report_20260623.json",
+  "answers": [
+    {
+      "id": "long-wingspan-picks-4-14",
+      "question": "第 4–14 顺位（共11人）中，臂展减赤脚身高 >= 5 英寸（约12.7cm）的“超长臂展”球员有几人？",
+      "answer": 2,
+      "type": "integer",
+      "tolerance": "±1",
+      "evidence": [
+        "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。"
+      ]
+    },
+    {
+      "id": "max-vertical-top-three-first-round",
+      "question": "训练营“助跑最大弹跳”排名前 3 的球员中，有几人在首轮被选中？",
+      "answer": 1,
+      "type": "integer",
+      "tolerance": "0-3, ±1",
+      "evidence": [
+        "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。"
+      ]
+    },
+    {
+      "id": "primary-centers-round-one",
+      "question": "首轮 30 人中，主打位置为中锋（C）的球员总数？",
+      "answer": 3,
+      "type": "integer",
+      "tolerance": "±1",
+      "evidence": [
+        "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。"
+      ]
+    },
+    {
+      "id": "first-center-pick-4-30",
+      "question": "第 4–30 顺位中，第一个被选中的中锋落在第几顺位？",
+      "answer": 8,
+      "type": "pick_number",
+      "tolerance": "±2",
+      "evidence": [
+        "第4-30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。"
+      ]
+    },
+    {
+      "id": "international-count-round-one",
+      "question": "首轮 30 人中，国际球员（非美国本土成长）总数？",
+      "answer": 6,
+      "type": "integer",
+      "tolerance": "±1",
+      "evidence": [
+        "当前首轮国际球员为第8、13、16、27、29、30顺位，共6人。"
+      ]
+    },
+    {
+      "id": "school-most",
+      "question": "本届首轮贡献球员最多的大学 / 培养机构是哪一所/家？",
+      "answer": "密歇根大学",
+      "type": "institution_name",
+      "evidence": [
+        "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。"
+      ]
+    },
+    {
+      "id": "hand-length-top-five-first-round",
+      "question": "训练营“手掌长度”排名前 5 的球员中，有几人在首轮被选中？",
+      "answer": 2,
+      "type": "integer",
+      "tolerance": "0-5, ±1",
+      "evidence": [
+        "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。"
+      ]
+    }
+  ]
+}

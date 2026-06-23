@@ -13,6 +13,7 @@ import {
   Database,
   FileInput,
   Filter,
+  GripHorizontal,
   Globe2,
   MessageCircle,
   Minus,
@@ -41,7 +42,17 @@ import {
   UI_COPY,
 } from "./lib/i18n";
 import { generateBoard, generateMilestones, getBoardHealth } from "./lib/prediction";
-import type { DraftOpsManifest, DraftPick, ImportBundle, LocalizedText, Prospect, RuntimeWorkflowStep, TeamProfile, Weights } from "./types";
+import type {
+  DraftOpsManifest,
+  DraftPick,
+  ImportBundle,
+  LocalizedText,
+  Prospect,
+  RuntimeWorkflowStep,
+  ScoreProfile,
+  TeamProfile,
+  Weights,
+} from "./types";
 
 gsap.registerPlugin(useGSAP);
 
@@ -99,9 +110,7 @@ interface AgentMetaState {
   label: string;
   generatedBy: string;
   generatedAt: string;
-  candidatePool?: CandidatePoolSummary;
   auditScore?: number;
-  noManualOverride?: boolean;
   fallbackPickCount?: number;
   lowConfidenceCount?: number;
 }
@@ -118,9 +127,28 @@ interface DeepSeekChatResponse {
   error?: string;
 }
 
+interface LocalDecisionItem {
+  label: string;
+  value?: string;
+  text?: string;
+  source: string;
+  tone?: "good" | "watch" | "risk";
+}
+
+interface LocalDecisionReport {
+  tone: "good" | "watch" | "risk";
+  verdict: string;
+  summary: string;
+  metrics: LocalDecisionItem[];
+  evidenceChain: LocalDecisionItem[];
+  riskChain: LocalDecisionItem[];
+  fitChain: LocalDecisionItem[];
+  guardrail: string;
+}
+
 type StatusState =
   | { type: "loading" }
-  | { type: "applied"; label: string; teams: number; prospects: number; noManualOverride?: boolean }
+  | { type: "applied"; label: string; teams: number; prospects: number }
   | { type: "fallback" }
   | { type: "submissionExported" }
   | { type: "briefExported" };
@@ -387,6 +415,162 @@ const getTrend = (pick: DraftPick) => {
   return "flat";
 };
 
+const formatSignedOneDecimal = (value: number) => {
+  const rounded = formatOneDecimal(Math.abs(value));
+  if (value > 0) return `+${rounded}`;
+  if (value < 0) return `-${rounded}`;
+  return "0.0";
+};
+
+const decisionSourceLabels = {
+  zh: {
+    boardScore: "本地锁定预测板：selectedPick.score / confidence / margin",
+    breakdown: "本地策略拆分：selectedPick.breakdown",
+    evidence: "本地保留证据：selectedPick.evidence",
+    warnings: "本地风险闸门：selectedPick.warnings",
+    risks: "本地球员画像：prospect.risks",
+    fit: "本地球队档案：teamProfiles.needs / notes",
+    role: "本地角色适配：selectedPick.roleFit",
+    profile: "本地球员画像：prospect.profile",
+  },
+  en: {
+    boardScore: "Local locked board: selectedPick.score / confidence / margin",
+    breakdown: "Local strategy breakdown: selectedPick.breakdown",
+    evidence: "Local retained evidence: selectedPick.evidence",
+    warnings: "Local risk gate: selectedPick.warnings",
+    risks: "Local prospect profile: prospect.risks",
+    fit: "Local team file: teamProfiles.needs / notes",
+    role: "Local role fit: selectedPick.roleFit",
+    profile: "Local prospect profile: prospect.profile",
+  },
+} as const;
+
+const decisionBreakdownLabels: Record<keyof Weights, { zh: string; en: string }> = {
+  consensus: { zh: "共识", en: "Consensus" },
+  need: { zh: "需求适配", en: "Need fit" },
+  player: { zh: "球员质量", en: "Player grade" },
+  upside: { zh: "上限", en: "Upside" },
+  intel: { zh: "情报", en: "Intel" },
+};
+
+const formatDecisionScore = (value: number, language: Language) =>
+  language === "zh" ? `${Math.round(value)}分` : `${Math.round(value)}/100`;
+
+const getTopProfileSignals = (profile: ScoreProfile, language: Language) =>
+  (Object.entries(profile) as Array<[keyof ScoreProfile, number]>)
+    .sort(([, left], [, right]) => right - left)
+    .slice(0, 3)
+    .map(([key, value]) => `${profileLabelKeys[key]?.[language] ?? key} ${formatDecisionScore(value, language)}`)
+    .join(language === "zh" ? "，" : ", ");
+
+const buildLocalDecisionReport = ({
+  pick,
+  evidenceItems,
+  warningNotes,
+  riskNotes,
+  teamNeeds,
+  teamNote,
+  prospectName,
+  teamName,
+  manifest,
+  language,
+}: {
+  pick: DraftPick;
+  evidenceItems: string[];
+  warningNotes: string[];
+  riskNotes: string[];
+  teamNeeds: string[];
+  teamNote: string;
+  prospectName: string;
+  teamName: string;
+  manifest: DraftOpsManifest;
+  language: Language;
+}): LocalDecisionReport => {
+  const source = decisionSourceLabels[language];
+  const hasBlockingRisk = warningNotes.length > 0 || hasExpandedFallbackProfile(pick.prospect);
+  const hasNarrowMargin = Math.abs(pick.margin) < 1.5;
+  const tone: LocalDecisionReport["tone"] =
+    pick.confidence < 70 || hasBlockingRisk ? "risk" : pick.confidence < 82 || hasNarrowMargin ? "watch" : "good";
+  const strongestBreakdown = (Object.entries(pick.breakdown) as Array<[keyof Weights, number]>).sort(
+    ([, left], [, right]) => right - left,
+  )[0];
+  const strongestBreakdownLabel = strongestBreakdown
+    ? `${decisionBreakdownLabels[strongestBreakdown[0]][language]} ${formatDecisionScore(strongestBreakdown[1], language)}`
+    : language === "zh"
+      ? "暂无策略拆分"
+      : "No strategy breakdown";
+  const topSignals = getTopProfileSignals(pick.prospect.profile, language);
+  const verdict =
+    language === "zh"
+      ? tone === "good"
+        ? "建议锁定该签"
+        : tone === "watch"
+          ? "可锁定，但需盯紧分差"
+          : "先复核，再锁定"
+      : tone === "good"
+        ? "Lock recommendation"
+        : tone === "watch"
+          ? "Lockable, monitor the margin"
+          : "Review before lock";
+  const summary =
+    language === "zh"
+      ? `${teamName} 在 #${pick.pick} 选择 ${prospectName}：本地锁定板给出综合分 ${formatOneDecimal(pick.score)}、置信度 ${Math.round(pick.confidence)}%、相对下一候选分差 ${formatSignedOneDecimal(pick.margin)}。`
+      : `${teamName} at #${pick.pick} selects ${prospectName}: the local locked board gives ${formatOneDecimal(pick.score)}, ${Math.round(pick.confidence)}% confidence, and a ${formatSignedOneDecimal(pick.margin)} margin over the next candidate.`;
+  const firstEvidence = evidenceItems[0] ?? (language === "zh" ? "当前顺位没有保留证据文本。" : "No retained evidence text.");
+  const riskSource = warningNotes.length ? source.warnings : source.risks;
+  const riskTexts = warningNotes.length ? warningNotes : riskNotes;
+  const riskFallback = language === "zh" ? "本地风险闸门未给出阻塞性警告。" : "No blocking warning in the local risk gate.";
+  const needsText = teamNeeds.length
+    ? teamNeeds.slice(0, 3).join(language === "zh" ? "；" : "; ")
+    : language === "zh"
+      ? "球队需求待确认。"
+      : "Team needs pending.";
+  const evidenceChain: LocalDecisionItem[] = evidenceItems.length
+    ? evidenceItems.slice(0, 3).map((text, index) => ({
+        label: language === "zh" ? `证据 ${index + 1}` : `Evidence ${index + 1}`,
+        text,
+        source: source.evidence,
+      }))
+    : [{ label: language === "zh" ? "证据缺口" : "Evidence gap", text: firstEvidence, source: source.evidence, tone: "watch" }];
+
+  return {
+    tone,
+    verdict,
+    summary,
+    metrics: [
+      { label: language === "zh" ? "综合分" : "Score", value: formatOneDecimal(pick.score), source: source.boardScore, tone },
+      { label: language === "zh" ? "置信度" : "Confidence", value: `${Math.round(pick.confidence)}%`, source: source.boardScore, tone },
+      { label: language === "zh" ? "模型分差" : "Model margin", value: formatSignedOneDecimal(pick.margin), source: source.boardScore, tone: hasNarrowMargin ? "watch" : "good" },
+      { label: language === "zh" ? "最高策略项" : "Top strategy input", value: strongestBreakdownLabel, source: source.breakdown, tone: "good" },
+    ],
+    evidenceChain,
+    riskChain: (riskTexts.length ? riskTexts : [riskFallback]).slice(0, 3).map((text, index) => ({
+      label: language === "zh" ? `风险闸门 ${index + 1}` : `Risk gate ${index + 1}`,
+      text,
+      source: riskSource,
+      tone: warningNotes.length || hasExpandedFallbackProfile(pick.prospect) ? "risk" : "good",
+    })),
+    fitChain: [
+      { label: language === "zh" ? "球队需求" : "Team needs", text: needsText, source: source.fit },
+      { label: language === "zh" ? "角色适配" : "Role fit", text: localizePhrase(pick.roleFit, language), source: source.role },
+      {
+        label: language === "zh" ? "画像强项" : "Profile signals",
+        text: topSignals,
+        source: source.profile,
+      },
+      {
+        label: language === "zh" ? "球队备注" : "Team note",
+        text: teamNote,
+        source: source.fit,
+      },
+    ].filter((item) => item.text),
+    guardrail:
+      language === "zh"
+        ? `防幻觉边界：只汇总 ${manifest.data.boardPath}、${manifest.data.bundlePath} 与本地球队/球员字段；缺失信息显示待确认，不补写外部事实。`
+        : `Anti-hallucination guard: this summarizes only ${manifest.data.boardPath}, ${manifest.data.bundlePath}, and local team/prospect fields; missing facts stay pending.`,
+  };
+};
+
 const buttonMeta = (label: string) => ({
   "aria-label": label,
   "data-label": label,
@@ -482,6 +666,8 @@ function App() {
   const appRef = useRef<HTMLElement | null>(null);
   const boardRef = useRef<HTMLElement | null>(null);
   const insightRef = useRef<HTMLElement | null>(null);
+  const chatDockRef = useRef<HTMLElement | null>(null);
+  const chatDragRef = useRef<{ pointerId: number; offsetX: number; offsetY: number } | null>(null);
   const [language, setLanguage] = useState<Language>("zh");
   const [teamProfiles, setTeamProfiles] = useState<TeamProfile[]>(seedTeams);
   const [board, setBoard] = useState(() => generateBoard(seedTeams, seedProspects, defaultWeights));
@@ -501,6 +687,8 @@ function App() {
   const [workflowMode, setWorkflowMode] = useState<WorkflowMode>("flow");
   const [statusState, setStatusState] = useState<StatusState>({ type: "loading" });
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatDockPosition, setChatDockPosition] = useState<{ left: number; top: number } | null>(null);
+  const [isChatDragging, setIsChatDragging] = useState(false);
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
@@ -543,19 +731,8 @@ function App() {
   const boardAverage = board.length
     ? Math.round(board.reduce((sum, pick) => sum + pick.confidence, 0) / board.length)
     : 0;
-  const candidatePoolSize = agentMeta.candidatePool?.officialProspectRows ?? 0;
-  const fullProfileCount = agentMeta.candidatePool?.fullDraftOpsProfiles ?? 0;
-  const fallbackProfileCount = agentMeta.candidatePool?.fallbackProfiles ?? 0;
   const fallbackPickCount = agentMeta.fallbackPickCount ?? board.filter((pick) => hasExpandedFallbackProfile(pick.prospect)).length;
   const lowConfidenceCount = agentMeta.lowConfidenceCount ?? board.filter((pick) => pick.confidence < 70).length;
-  const agentPoolNote = [
-    candidatePoolSize ? (language === "zh" ? `${candidatePoolSize} 人候选池` : `${candidatePoolSize} prospects`) : "",
-    fullProfileCount ? (language === "zh" ? `${fullProfileCount} 份完整画像` : `${fullProfileCount} full profiles`) : "",
-    fallbackProfileCount ? (language === "zh" ? `${fallbackProfileCount} 份扩展回退画像` : `${fallbackProfileCount} fallback profiles`) : "",
-    agentMeta.noManualOverride ? (language === "zh" ? "无人工改签" : "no manual override") : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
   const agentReviewNote =
     language === "zh"
       ? `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 低置信 ${lowConfidenceCount} 个 · 回退入选 ${fallbackPickCount} 个`
@@ -570,6 +747,19 @@ function App() {
   ]);
   const selectedReadinessGrade = gradeFromScore(selectedReadinessScore);
   const selectedMatch = Math.min(98, Math.max(58, Math.round(average([selectedPick.breakdown.need, selectedPick.confidence, selectedPick.score]))));
+  const selectedRiskItems = (warningNotes.length ? warningNotes : riskNotes.length ? riskNotes : [d.fallbackNotes]).slice(0, 5);
+  const decisionReport = buildLocalDecisionReport({
+    pick: selectedPick,
+    evidenceItems,
+    warningNotes,
+    riskNotes,
+    teamNeeds,
+    teamNote,
+    prospectName: localizeProspectName(selectedPick.prospect.name, language),
+    teamName: localizeTeamName(selectedPick.team, language),
+    manifest: draftOpsManifest,
+    language,
+  });
   const filteredBoard = board
     .filter((pick) => {
       if (riskOnly && !needsBoardReview(pick)) return false;
@@ -649,9 +839,7 @@ function App() {
           label: scenarioLabel,
           generatedBy: artifact.generatedBy ?? "A7 Board Simulation Agent",
           generatedAt: artifact.generatedAt ?? "",
-          candidatePool: artifact.candidatePool,
           auditScore: artifact.auditScore,
-          noManualOverride: artifact.noManualOverride ?? artifact.candidatePool?.noManualOverride,
           fallbackPickCount:
             artifact.summary?.fallbackPicks?.length ??
             artifact.boardRows?.filter((row) => row.fallbackProfile).length ??
@@ -664,7 +852,6 @@ function App() {
           label: scenarioLabel,
           teams: importedTeams.length,
           prospects: importedProspects.length,
-          noManualOverride: artifact.noManualOverride ?? artifact.candidatePool?.noManualOverride,
         });
       } catch {
         if (!cancelled) {
@@ -673,7 +860,6 @@ function App() {
             label: "fallback seed",
             generatedBy: "src/data/seedData.ts",
             generatedAt: "",
-            noManualOverride: false,
           });
         }
       } finally {
@@ -766,6 +952,58 @@ function App() {
     }
   };
 
+  const clampChatDockPosition = (left: number, top: number) => {
+    const dock = chatDockRef.current;
+    const width = dock?.offsetWidth ?? 520;
+    const height = dock?.offsetHeight ?? 560;
+    const padding = 8;
+    return {
+      left: Math.min(Math.max(padding, left), Math.max(padding, window.innerWidth - width - padding)),
+      top: Math.min(Math.max(padding, top), Math.max(padding, window.innerHeight - height - padding)),
+    };
+  };
+
+  const startChatDrag = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.button !== 0) return;
+    if ((event.target as HTMLElement).closest("button, a, input, textarea")) return;
+    const rect = chatDockRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    chatDragRef.current = {
+      pointerId: event.pointerId,
+      offsetX: event.clientX - rect.left,
+      offsetY: event.clientY - rect.top,
+    };
+    setChatDockPosition({ left: rect.left, top: rect.top });
+    setIsChatDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  };
+
+  const moveChatDrag = (event: React.PointerEvent<HTMLElement>) => {
+    const drag = chatDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    setChatDockPosition(clampChatDockPosition(event.clientX - drag.offsetX, event.clientY - drag.offsetY));
+  };
+
+  const stopChatDrag = (event: React.PointerEvent<HTMLElement>) => {
+    const drag = chatDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    chatDragRef.current = null;
+    setIsChatDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  useEffect(() => {
+    if (!chatDockPosition) return undefined;
+    const handleResize = () => {
+      setChatDockPosition((position) => (position ? clampChatDockPosition(position.left, position.top) : position));
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [chatDockPosition]);
+
   useGSAP(
     () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -778,8 +1016,6 @@ function App() {
         .from(".ops-vital-card", { y: 14, duration: 0.34, stagger: 0.045 }, "-=0.2")
         .from(".ops-filter-row", { y: 12, duration: 0.3 }, "-=0.18")
         .from(".board-panel", { y: 24, duration: 0.45 }, "-=0.14")
-        .from(".ops-prospect-dossier", { opacity: 0, duration: 0.34 }, "-=0.28")
-        .from(".ops-workflow-dock", { opacity: 0, duration: 0.28 }, "-=0.2")
         .from(".board-panel tbody tr", { x: -14, duration: 0.28, stagger: 0.018 }, "-=0.18");
     },
     { scope: appRef },
@@ -873,6 +1109,12 @@ function App() {
     overviewTab: language === "zh" ? "概览" : "Overview",
     showFlow: language === "zh" ? "流程" : "Flow",
     showAws: language === "zh" ? "数据链路" : "Data chain",
+    localDecision: language === "zh" ? "本地策略结论" : "Local strategy verdict",
+    localEvidence: language === "zh" ? "依据链" : "Evidence chain",
+    localRisk: language === "zh" ? "风险闸门" : "Risk gate",
+    localFit: language === "zh" ? "球队匹配依据" : "Team-fit basis",
+    evidenceSource: language === "zh" ? "来源字段" : "Source field",
+    dragDeepSeek: language === "zh" ? "拖动标题栏移动窗口" : "Drag the header to move",
   };
 
   const dossierTabs: Array<{ id: DossierTab; label: string }> = [
@@ -890,7 +1132,7 @@ function App() {
       tone: boardIntegrity ? "good" : "risk",
     },
     { label: statusCopy.lowConfidence, value: String(lowConfidenceCount), detail: agentReviewNote, tone: lowConfidenceCount > 8 ? "risk" : "good" },
-    { label: statusCopy.fallback, value: String(fallbackPickCount), detail: agentPoolNote || "--", tone: fallbackPickCount ? "risk" : "good" },
+    { label: statusCopy.fallback, value: String(fallbackPickCount), detail: fallbackPickCount ? copy.review : copy.pass, tone: fallbackPickCount ? "risk" : "good" },
     { label: statusCopy.locked, value: statusCopy.lockedValue, detail: riskOnly ? statusCopy.riskMode : statusCopy.normalMode, tone: riskOnly ? "risk" : "good" },
   ];
   const mobileTabs = [
@@ -898,7 +1140,6 @@ function App() {
     { id: "player" as const, label: statusCopy.playerTab, icon: <UserRound size={18} /> },
     { id: "flow" as const, label: statusCopy.flowTab, icon: <CalendarDays size={18} /> },
   ];
-  const selectedRiskItems = (warningNotes.length ? warningNotes : riskNotes.length ? riskNotes : [d.fallbackNotes]).slice(0, 5);
 
   return (
     <main className="app-shell ops-shell" ref={appRef} lang={language === "zh" ? "zh-CN" : "en"} translate="no">
@@ -917,7 +1158,7 @@ function App() {
           <div className="ops-command-status" aria-label={statusCopy.dataset}>
             <span>{d.dataUpdated}</span>
             <strong>{formatDataTime(agentMeta.generatedAt, language)} (CT)</strong>
-            <em>{agentPoolNote || agentMeta.label}</em>
+            <em>{agentMeta.label}</em>
             <b>{statusCopy.model} {draftOpsManifest.model.version}</b>
           </div>
 
@@ -1063,8 +1304,14 @@ function App() {
                       >
                         <td>{String(pick.pick).padStart(2, "0")}</td>
                         <td>
-                          <strong>{getTeamCode(pick.team)}</strong>
-                          {pick.acquiredFrom && <small>({copy.fromTeam} {getTeamCode(pick.acquiredFrom)})</small>}
+                          <span className="ops-team-cell">
+                            <strong title={localizeTeamName(pick.team, language)}>{localizeTeamName(pick.team, language)}</strong>
+                            {pick.acquiredFrom && (
+                              <small title={`${copy.fromTeam} ${localizeTeamName(pick.acquiredFrom, language)}`}>
+                                {copy.fromTeam} {localizeTeamName(pick.acquiredFrom, language)}
+                              </small>
+                            )}
+                          </span>
                         </td>
                         <td>
                           <span className="ops-player-cell">
@@ -1158,6 +1405,55 @@ function App() {
           <section className="ops-dossier-body">
             {dossierTab === "overview" && (
               <>
+                <div className={`ops-decision-card ${decisionReport.tone}`}>
+                  <header>
+                    <span>{statusCopy.localDecision}</span>
+                    <strong>{decisionReport.verdict}</strong>
+                  </header>
+                  <p>{decisionReport.summary}</p>
+                  <div className="ops-decision-metrics">
+                    {decisionReport.metrics.map((item) => (
+                      <article className={item.tone ?? ""} key={item.label}>
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small title={item.source}>{statusCopy.evidenceSource}: {item.source}</small>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="ops-local-report-grid">
+                    <section>
+                      <h3>{statusCopy.localEvidence}</h3>
+                      {decisionReport.evidenceChain.map((item) => (
+                        <article key={`${item.label}-${item.text}`}>
+                          <b>{item.label}</b>
+                          <p>{item.text}</p>
+                          <small>{item.source}</small>
+                        </article>
+                      ))}
+                    </section>
+                    <section>
+                      <h3>{statusCopy.localRisk}</h3>
+                      {decisionReport.riskChain.map((item) => (
+                        <article className={item.tone ?? ""} key={`${item.label}-${item.text}`}>
+                          <b>{item.label}</b>
+                          <p>{item.text}</p>
+                          <small>{item.source}</small>
+                        </article>
+                      ))}
+                    </section>
+                    <section className="span-all">
+                      <h3>{statusCopy.localFit}</h3>
+                      {decisionReport.fitChain.slice(0, 4).map((item) => (
+                        <article key={`${item.label}-${item.text}`}>
+                          <b>{item.label}</b>
+                          <p>{item.text}</p>
+                          <small>{item.source}</small>
+                        </article>
+                      ))}
+                    </section>
+                  </div>
+                  <small className="ops-decision-guard">{decisionReport.guardrail}</small>
+                </div>
                 <div className="ops-grade-pair">
                   <span>{d.upside} <strong>{selectedUpsideGrade}</strong></span>
                   <span>{d.readiness} <strong className="warn">{selectedReadinessGrade}</strong></span>
@@ -1246,7 +1542,6 @@ function App() {
 
           <section className="ops-source-card" id="sources">
             <h3>{d.dataSource}</h3>
-            {agentPoolNote && <p className="ops-source-note ops-source-note-strong">{agentPoolNote}</p>}
             <p className="ops-source-note">{agentReviewNote}</p>
             <p className="ops-source-note">{d.sourcePrefix}</p>
             <p className="ops-source-note">{formatModelNote(draftOpsManifest, language, boardAverage)}</p>
@@ -1326,9 +1621,24 @@ function App() {
 
 
       {isChatOpen && (
-        <section className="deepseek-dock open" aria-label="DeepSeek chat window">
+        <section
+          className={`deepseek-dock open ${chatDockPosition ? "is-floating" : ""} ${isChatDragging ? "is-dragging" : ""}`}
+          aria-label="DeepSeek chat window"
+          ref={chatDockRef}
+          style={chatDockPosition ? { left: `${chatDockPosition.left}px`, top: `${chatDockPosition.top}px` } : undefined}
+        >
           <div className="deepseek-window" role="dialog" aria-modal="true" aria-labelledby="deepseek-title">
-            <header className="deepseek-header">
+            <header
+              className="deepseek-header"
+              title={statusCopy.dragDeepSeek}
+              onPointerDown={startChatDrag}
+              onPointerMove={moveChatDrag}
+              onPointerUp={stopChatDrag}
+              onPointerCancel={stopChatDrag}
+            >
+              <span className="deepseek-drag-handle" aria-hidden="true">
+                <GripHorizontal size={17} />
+              </span>
               <div>
                 <span className="section-kicker">{copy.liveLlm}</span>
                 <h2 id="deepseek-title">{copy.deepSeekWindow}</h2>

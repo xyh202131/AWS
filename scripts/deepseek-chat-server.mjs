@@ -9,26 +9,41 @@ const boardPath = resolveManifestPath(draftOpsManifest.data?.boardPath, "public/
 const bundlePath = resolveManifestPath(draftOpsManifest.data?.bundlePath, "public/data/final_import_bundle.json");
 const documentIndexPath = resolve(rootDir, "data", "documents", "document_index.json");
 const milestoneReferencePath = resolve(rootDir, "data", "documents", "milestone-questions", "DraftCode24里程碑事件预测.md");
+const milestoneAnswersPath = resolve(rootDir, "data", "final", "milestone_answers.json");
 const examReportPath = resolve(rootDir, "data", "reports", "deepseek_exam_answers.json");
 const knowledgePaths = [
   "data/README.md",
   "data/documents/README.md",
-  "data/documents/document_index.json",
   "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
-  "data/clean/data_quality_report.md",
-  "data/clean/official_prospect_reconciliation.json",
   "data/reports/official_prospect_reconciliation_report.md",
   "data/reports/official_double_agent_roster_audit_summary.md",
   "data/reports/a13_official_local_table_audit.md",
   "data/reports/a14_official_live_refresh_audit.md",
   "data/reports/d8_source_quality_debate.md",
   "data/reports/raw_sources_registry_report.md",
-  "data/raw/raw_sources.json",
+  "data/reports/china_nba_draft_scrape_report_20260623.md",
   "data/raw/nba-official-2026-prospects-live.md",
   "data/raw/nba-official-2026-draft-order-live.md",
+  "data/raw/china-nba-draft-20260623.md",
+];
+const structuredKnowledgePaths = [
+  "data/documents/document_index.json",
+  "data/clean/data_quality_report.md",
+  "data/clean/official_prospect_reconciliation.json",
+  "data/raw/raw_sources.json",
+  "data/raw/china-nba-draft-links-20260623.json",
   "data/normalized/normalized_2026_mock_lottery.json",
+  "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/normalized/normalized_2026_official_prospects_101.json",
+  "data/normalized/normalized_2026_official_team_profiles_30.json",
   "data/normalized/normalized_2026_team_context.json",
   "data/normalized/normalized_2026_prospect_big_board.json",
+  "data/final/milestone_answers.json",
+  "data/reports/team_preference_research_20260623.json",
+  "data/reports/milestone_prediction_evidence_20260623.json",
+  "data/reports/milestone_deepseek_discussion_20260623.json",
+  "data/reports/milestone_answer_card_write_report_20260623.json",
+  "public/data/prospect_media.json",
   draftOpsManifest.data?.bundlePath ?? "public/data/final_import_bundle.json",
   draftOpsManifest.data?.boardPath ?? "public/data/agent_balanced_board.json",
 ];
@@ -36,6 +51,9 @@ const officialWebSources = (draftOpsManifest.sourceLinks ?? []).map((source) => 
   name: source.label?.en ?? source.label?.zh ?? source.url,
   url: source.url,
 }));
+const ragEmbeddingDimensions = 256;
+const ragRerankPoolSize = 42;
+const ragSnippetLimit = 14;
 
 const loadEnvFile = async (path) => {
   const content = await readFile(path, "utf8").catch((error) => {
@@ -97,6 +115,11 @@ const tokenize = (value) => {
 
 const compactText = (value, maxLength = 9000) => {
   const text = String(value ?? "");
+  return text.length > maxLength ? `${text.slice(0, maxLength)}\n...[truncated]` : text;
+};
+
+const compactJson = (value, maxLength = 2200) => {
+  const text = JSON.stringify(value, null, 2);
   return text.length > maxLength ? `${text.slice(0, maxLength)}\n...[truncated]` : text;
 };
 
@@ -181,12 +204,42 @@ const getSearchTerms = ({ question, selectedPick, useSelectedPickContext = false
 };
 
 const chunkText = (text, size = 1100) => {
-  const clean = normalizeText(text);
+  const clean = String(text ?? "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
   if (!clean) return [];
   const chunks = [];
-  for (let index = 0; index < clean.length; index += size) {
-    chunks.push(clean.slice(index, index + size));
+  const paragraphs = clean.split(/(?:(?:\r?\n){2,}|(?=#+\s+))/).map((part) => part.trim()).filter(Boolean);
+  let current = "";
+
+  for (const paragraph of paragraphs.length ? paragraphs : [clean]) {
+    if (paragraph.length > size) {
+      if (current) {
+        chunks.push(current);
+        current = "";
+      }
+      const overlap = 180;
+      for (let index = 0; index < paragraph.length; index += size - overlap) {
+        chunks.push(paragraph.slice(index, index + size));
+      }
+      continue;
+    }
+
+    if (!current) {
+      current = paragraph;
+    } else if (`${current}\n\n${paragraph}`.length <= size) {
+      current = `${current}\n\n${paragraph}`;
+    } else {
+      chunks.push(current);
+      current = paragraph;
+    }
   }
+
+  if (current) chunks.push(current);
   return chunks;
 };
 
@@ -194,6 +247,107 @@ const scoreText = (text, terms) => {
   const lower = text.toLowerCase();
   return terms.reduce((score, term) => score + (lower.includes(term.toLowerCase()) ? 1 : 0), 0);
 };
+
+const sourceBoostForRank = (sourceRank) =>
+  ({
+    "official-local": 0.14,
+    "official-web": 0.14,
+    "structured-data": 0.12,
+    "milestone-data": 0.12,
+    "question-reference": 0.1,
+    "source-registry": 0.08,
+    "local-knowledge": 0.04,
+  })[sourceRank] ?? 0.04;
+
+const hashToken = (token) => {
+  let hash = 2166136261;
+  for (let index = 0; index < token.length; index += 1) {
+    hash ^= token.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+const embedText = (value, dimensions = ragEmbeddingDimensions) => {
+  const vector = new Float32Array(dimensions);
+  const terms = tokenize(value);
+  if (!terms.length) return vector;
+
+  for (const term of terms) {
+    const hash = hashToken(term);
+    const index = (hash >>> 1) % dimensions;
+    const sign = hash & 1 ? -1 : 1;
+    vector[index] += sign * (1 + Math.log2(term.length + 1));
+  }
+
+  let norm = 0;
+  for (const value of vector) norm += value * value;
+  norm = Math.sqrt(norm);
+  if (!norm) return vector;
+  for (let index = 0; index < vector.length; index += 1) vector[index] /= norm;
+  return vector;
+};
+
+const cosineSimilarity = (left, right) => {
+  const length = Math.min(left?.length ?? 0, right?.length ?? 0);
+  if (!length) return 0;
+  let score = 0;
+  for (let index = 0; index < length; index += 1) score += left[index] * right[index];
+  return score;
+};
+
+const scoreChunkForRetrieval = (chunk, { terms, queryEmbedding }) => {
+  const searchableText = [chunk.source, chunk.path, chunk.sourceName, chunk.text].filter(Boolean).join("\n");
+  const embedding = chunk.embedding ?? embedText(searchableText);
+  const exactMatches = scoreText(searchableText, terms);
+  const lexicalScore = terms.length ? Math.min(exactMatches / terms.length, 1) : 0;
+  const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
+  const sourceBoost = sourceBoostForRank(chunk.sourceRank);
+  const score = semanticScore * 0.58 + lexicalScore * 0.32 + sourceBoost + (exactMatches >= 2 ? 0.05 : 0);
+
+  return {
+    ...chunk,
+    embedding,
+    exactMatches,
+    lexicalScore,
+    semanticScore,
+    score,
+  };
+};
+
+const rerankChunks = (candidates, limit = ragSnippetLimit, poolSize = ragRerankPoolSize) => {
+  const pool = [...candidates].sort((left, right) => right.score - left.score).slice(0, poolSize);
+  const selected = [];
+
+  while (selected.length < limit && pool.length) {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+
+    for (let index = 0; index < pool.length; index += 1) {
+      const candidate = pool[index];
+      const redundancy = selected.length
+        ? Math.max(...selected.map((item) => cosineSimilarity(candidate.embedding, item.embedding)))
+        : 0;
+      const mmrScore = candidate.score * 0.78 - redundancy * 0.22;
+      if (mmrScore > bestScore) {
+        bestScore = mmrScore;
+        bestIndex = index;
+      }
+    }
+
+    selected.push(pool.splice(bestIndex, 1)[0]);
+  }
+
+  return selected;
+};
+
+const retrievalSnippet = ({ embedding, lexicalScore, semanticScore, score, exactMatches, ...chunk }) => ({
+  ...chunk,
+  retrievalScore: Number(score.toFixed(4)),
+  semanticScore: Number(semanticScore.toFixed(4)),
+  lexicalScore: Number(lexicalScore.toFixed(4)),
+  exactMatches,
+});
 
 const readKnowledgeFile = async (relativePath) => {
   const absolutePath = resolve(rootDir, relativePath);
@@ -216,27 +370,144 @@ const readKnowledgeFile = async (relativePath) => {
   }));
 };
 
+const sourceRankForStructuredPath = (relativePath) =>
+  relativePath.includes("board") || relativePath.includes("bundle") || relativePath.includes("normalized")
+    ? "structured-data"
+    : relativePath.includes("milestone")
+      ? "milestone-data"
+      : relativePath.includes("official") || relativePath.includes("nba-official")
+        ? "official-local"
+        : relativePath.includes("raw_sources") || relativePath.includes("source_quality")
+          ? "source-registry"
+          : "local-knowledge";
+
+const makeStructuredChunk = ({ source, sourceRank, path, value, label }) => ({
+  source,
+  sourceRank,
+  path,
+  text: [
+    label ? `Record: ${label}` : null,
+    `Path: ${path}`,
+    compactJson(value),
+  ]
+    .filter(Boolean)
+    .join("\n"),
+});
+
+const labelForRecord = (item, fallback) => {
+  if (!item || typeof item !== "object") return fallback;
+  const pick = item.pick ?? item.draft_pick ?? item.draftPick ?? item.rank ?? item.source_rank;
+  const team = item.team ?? item.team_name ?? item.teamName ?? item.team_abbreviation;
+  const player =
+    item.player ??
+    item.name ??
+    item.prospect?.name ??
+    item.prospect_name ??
+    item.prospectName ??
+    item.sourceName ??
+    item.title;
+  return [pick ? `pick/rank ${pick}` : null, team, player].filter(Boolean).join(" | ") || fallback;
+};
+
+const collectStructuredChunks = (value, { source, sourceRank, path = "$", chunks = [], depth = 0 }) => {
+  if (chunks.length >= 800 || depth > 6 || value == null) return chunks;
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      const itemPath = `${path}[${index}]`;
+      if (item && typeof item === "object") {
+        chunks.push(
+          makeStructuredChunk({
+            source,
+            sourceRank,
+            path: itemPath,
+            value: item,
+            label: labelForRecord(item, itemPath),
+          }),
+        );
+        collectStructuredChunks(item, { source, sourceRank, path: itemPath, chunks, depth: depth + 1 });
+      }
+    });
+    return chunks;
+  }
+
+  if (typeof value !== "object") return chunks;
+
+  const keys = Object.keys(value);
+  if (depth > 0 && keys.length <= 18 && JSON.stringify(value).length <= 2600) {
+    chunks.push(
+      makeStructuredChunk({
+        source,
+        sourceRank,
+        path,
+        value,
+        label: labelForRecord(value, path),
+      }),
+    );
+  }
+
+  for (const [key, child] of Object.entries(value)) {
+    if (Array.isArray(child)) {
+      collectStructuredChunks(child, { source, sourceRank, path: `${path}.${key}`, chunks, depth: depth + 1 });
+    } else if (child && typeof child === "object" && depth < 3) {
+      collectStructuredChunks(child, { source, sourceRank, path: `${path}.${key}`, chunks, depth: depth + 1 });
+    }
+  }
+
+  return chunks;
+};
+
+const readStructuredKnowledgeFile = async (relativePath) => {
+  const absolutePath = resolve(rootDir, relativePath);
+  const content = await readFile(absolutePath, "utf8").catch(() => "");
+  if (!content) return [];
+
+  const sourceRank = sourceRankForStructuredPath(relativePath);
+  const trimmed = content.trim();
+  if (!trimmed) return [];
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    return collectStructuredChunks(parsed, { source: relativePath, sourceRank });
+  } catch {
+    return chunkText(content).map((text, index) => ({
+      source: relativePath,
+      sourceRank,
+      path: `$text[${index}]`,
+      text,
+    }));
+  }
+};
+
 const retrieveLocalKnowledge = async ({ question, selectedPick, useSelectedPickContext = false }) => {
   const terms = getSearchTerms({ question, selectedPick, useSelectedPickContext });
-  const allChunks = (await Promise.all(knowledgePaths.map(readKnowledgeFile))).flat();
-  const ranked = allChunks
-    .map((chunk) => ({
-      ...chunk,
-      score: scoreText(chunk.text, terms) + (chunk.sourceRank === "official-local" ? 2 : 0),
-    }))
-    .filter((chunk) => chunk.score > 0)
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 10);
+  const queryEmbedding = embedText([question, ...terms].join(" "));
+  const allChunks = (
+    await Promise.all([
+      ...knowledgePaths.map(readKnowledgeFile),
+      ...structuredKnowledgePaths.map(readStructuredKnowledgeFile),
+    ])
+  ).flat();
+  const scored = allChunks.map((chunk) => scoreChunkForRetrieval(chunk, { terms, queryEmbedding }));
+  const matching = scored.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
+  const ranked = rerankChunks(matching.length ? matching : scored, ragSnippetLimit, ragRerankPoolSize);
 
   return {
     terms,
+    retrievalMode: "hashed-token-embedding + lexical hybrid score + MMR rerank",
     snippets: ranked,
-    hasStrongLocalMatch: ranked.some((item) => item.score >= 4 || item.sourceRank === "official-local"),
+    hasStrongLocalMatch: ranked.some(
+      (item) =>
+        item.exactMatches >= 3 ||
+        item.score >= 0.52 ||
+        (["official-local", "structured-data"].includes(item.sourceRank) && item.exactMatches > 0),
+    ),
   };
 };
 
 const fetchOfficialWebKnowledge = async (terms) => {
   const results = [];
+  const queryEmbedding = embedText(terms.join(" "));
   for (const source of officialWebSources) {
     try {
       const response = await fetch(source.url, {
@@ -247,23 +518,25 @@ const fetchOfficialWebKnowledge = async (terms) => {
       });
       if (!response.ok) continue;
       const text = await response.text();
-      const chunks = chunkText(text)
-        .map((chunk) => ({
+      const chunks = chunkText(text).map((chunk) =>
+        scoreChunkForRetrieval(
+          {
           source: source.url,
           sourceName: source.name,
           sourceRank: "official-web",
           text: chunk,
-          score: scoreText(chunk, terms) + 3,
-        }))
-        .filter((chunk) => chunk.score > 3)
-        .sort((left, right) => right.score - left.score)
-        .slice(0, 3);
+          },
+          { terms, queryEmbedding },
+        ),
+      );
       results.push(...chunks);
     } catch {
       // Network search is a fallback. If it fails, DeepSeek still receives local knowledge and the failure stays silent.
     }
   }
-  return results.slice(0, 6);
+
+  const matching = results.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
+  return rerankChunks(matching.length ? matching : results, 6, 18);
 };
 
 const defaultClientOrigin = process.env.DRAFTOPS_CLIENT_ORIGIN ?? "http://127.0.0.1:3002";
@@ -357,7 +630,19 @@ const schoolCounts = (board = []) => {
   );
 };
 
-const buildExamFacts = (board = []) => {
+const officialMilestoneQuestions = (milestoneAnswers) =>
+  Array.isArray(milestoneAnswers?.answers)
+    ? milestoneAnswers.answers.map((item) => ({
+        id: item.id,
+        prompt: item.question,
+        answer: String(item.answer),
+        type: item.type,
+        tolerance: item.tolerance ?? null,
+        evidence: item.evidence ?? [],
+      }))
+    : [];
+
+const buildExamFacts = (board = [], milestoneAnswers = null) => {
   const rows = boardRows(board);
   const firstFive = rows.slice(0, 5);
   const firstInternational = rows.find((pick) => pick.international) ?? null;
@@ -369,7 +654,7 @@ const buildExamFacts = (board = []) => {
   const firstCenter = rows.find((pick) => pick.positions.includes("C")) ?? null;
   const freshmen = rows.filter((pick) => pick.classYear === "Freshman");
   const tradedPicks = rows.filter((pick) => pick.acquiredFrom);
-  const examQuestions = [
+  const fallbackExamQuestions = [
     {
       id: "intl-top-five",
       prompt: "前 5 位是否包含国际球员？",
@@ -417,6 +702,8 @@ const buildExamFacts = (board = []) => {
       evidence: tradedPicks.map((pick) => `第 ${pick.pick} 顺位 ${pick.team} from ${pick.acquiredFrom}`),
     },
   ];
+  const examQuestions = officialMilestoneQuestions(milestoneAnswers);
+  const activeExamQuestions = examQuestions.length ? examQuestions : fallbackExamQuestions;
 
   return {
     scope: "当前 DeepSeek 是比赛相关只读问答 Agent：可回答比赛、数据、里程碑、预测板、AWS/提交、路演和代码说明类问题，但不能直接修改代码、文件或仓库。",
@@ -425,8 +712,9 @@ const buildExamFacts = (board = []) => {
       "当前 DeepSeek 的回答只是文本问答，不会直接改代码、写文件、提交仓库、运行命令或改写锁定预测板。",
       "如果用户要求直接修改代码、写文件、运行命令、提交或推送，必须说明当前 DeepSeek 不能直接执行，只能解释思路或交由代码工作流处理。",
     ],
-    questionCount: examQuestions.length,
-    examQuestions,
+    questionCount: activeExamQuestions.length,
+    examQuestions: activeExamQuestions,
+    officialMilestoneAnswers: milestoneAnswers?.answers ?? null,
     computedFacts: {
       firstFive,
       firstInternational,
@@ -442,16 +730,17 @@ const buildExamFacts = (board = []) => {
 };
 
 const buildContext = async (selectedPickNumber) => {
-  const [boardArtifact, bundle, previousExamRun, documentIndex, milestoneReference] = await Promise.all([
+  const [boardArtifact, bundle, previousExamRun, documentIndex, milestoneReference, milestoneAnswers] = await Promise.all([
     readJson(boardPath, {}),
     readJson(bundlePath, {}),
     readJson(examReportPath, null),
     readJson(documentIndexPath, null),
     readFile(milestoneReferencePath, "utf8").catch(() => ""),
+    readJson(milestoneAnswersPath, null),
   ]);
   const board = boardArtifact.board ?? [];
   const selectedPick = board.find((pick) => pick.pick === selectedPickNumber) ?? board[0] ?? null;
-  const examFacts = buildExamFacts(board);
+  const examFacts = buildExamFacts(board, milestoneAnswers);
 
   return {
     board,
@@ -463,6 +752,7 @@ const buildContext = async (selectedPickNumber) => {
         scenario: boardArtifact.scenario,
         sourceMetadata: boardArtifact.sourceMetadata ?? bundle.metadata,
         previousDeepSeekExamGeneratedAt: previousExamRun?.generatedAt ?? null,
+        officialMilestoneAnswersGeneratedAt: milestoneAnswers?.generatedAt ?? null,
       },
       referenceDocuments: {
         documentIndex,
@@ -484,16 +774,12 @@ const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPick
   return {
     retrievalPolicy:
       "优先使用本地知识库与官方本地数据；本地证据不足时才使用官方联网网页；官方数据优先于媒体和模型全局知识；模型全局知识只作最后兜底。",
+    retrievalMode: local.retrievalMode,
     selectedPickRetrievalPolicy: useSelectedPickContext
       ? "用户明确询问当前/这个/选中栏目或直接点名同一顺位、球队、球员；检索词可以使用当前选中栏目的球队和球员。"
       : "用户没有明确询问当前/这个/选中栏目；检索词不得使用前端点击栏目的球队或球员，必须按全局比赛问题检索。",
-    localSnippets: local.snippets.map(({ source, sourceRank, text }) => ({ source, sourceRank, text })),
-    officialWebSnippets: officialWeb.map(({ source, sourceName, sourceRank, text }) => ({
-      source,
-      sourceName,
-      sourceRank,
-      text,
-    })),
+    localSnippets: local.snippets.map(retrievalSnippet),
+    officialWebSnippets: officialWeb.map(retrievalSnippet),
     usedWebFallback: officialWeb.length > 0,
   };
 };
@@ -658,6 +944,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
           "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，优先使用当前本地 examFacts 和锁定预测板。",
           "必须按以下优先级回答：1 本地知识库、当前锁定预测板和当前应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
           "官方来源优先级高于媒体、社区、传闻和模型记忆。",
+          "防幻觉硬规则：涉及球员、球队、顺位、评分、证据、风险、图片、来源或提交字段时，必须能在当前 deepSeekContext 或 retrievedKnowledge 中找到依据；找不到就明确说本地资料未提供，不能用模型记忆补写。",
           "最终只输出当前问题最可能正确的答案。",
           "只回答用户当前问题，不要给额外建议，不要扩展无关背景，不要列来源清单，不要免责声明。",
           "不要输出 Markdown，不要标题，不要 # 号，不要项目符号，不要代码块。",
@@ -730,6 +1017,12 @@ const server = http.createServer(async (request, response) => {
         configured: Boolean(process.env.DEEPSEEK_API_KEY),
         model,
         modelLabel: getModelLabel(model),
+        rag: {
+          retrievalMode: "hashed-token-embedding + lexical hybrid score + MMR rerank",
+          embeddingDimensions: ragEmbeddingDimensions,
+          rerankPoolSize: ragRerankPoolSize,
+          topK: ragSnippetLimit,
+        },
       });
       return;
     }

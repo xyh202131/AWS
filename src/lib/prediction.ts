@@ -546,6 +546,15 @@ export const generateMilestones = (board: DraftPick[], definitions: RuntimeMiles
   const tradedPicks = board.filter((pick) => pick.acquiredFrom);
 
   return definitions.flatMap((definition) => {
+    if (definition.answer || definition.answerI18n) {
+      const answerI18n = definition.answerI18n ?? localized(definition.answer ?? "N/A", definition.answer ?? "N/A");
+      const evidenceI18n =
+        definition.evidenceI18n ??
+        (definition.evidence?.length ? definition.evidence.map((item) => localized(item, item)) : []);
+
+      return baseMilestone(definition, answerI18n, evidenceI18n);
+    }
+
     if (definition.id === "intl-top-five") {
       const hasInternational = firstFive.some((pick) => pick.prospect.international);
       return baseMilestone(

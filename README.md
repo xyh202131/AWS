@@ -41,6 +41,18 @@ npm run dev:agent
 npm run agent:deepseek
 ```
 
+### AWS-deployed Agent API
+
+The deployed chat API lives in `infra/lambda/draftops-ai-api`. It keeps the same read-only competition boundary, but retrieves deployed data before calling the model:
+
+- S3 RAG: set `DRAFTOPS_RAG_S3_BUCKET`. If `DRAFTOPS_RAG_S3_KEYS` is empty, the Lambda defaults to the deployed data-bucket objects: `public-data/expanded_import_bundle.json`, `public-data/agent_expanded_recommended_board.json`, `public-data/agent_balanced_board.json`, `data/final/milestone_answers.json`, `data/normalized/normalized_china_nba_draft_board_20260623.json`, and `public-data/prospect_media.json`.
+- DynamoDB RAG: set `DRAFTOPS_RAG_DYNAMODB_TABLES` to one or more comma-separated tables for board snapshots, audit state, parameter state, or milestone answers. The Lambda scans up to `DRAFTOPS_RAG_DYNAMODB_LIMIT` records per table and chunks each record with metadata.
+- Retrieval ranking: both local and deployed RAG use hashed-token embeddings, lexical matching, source weighting, and MMR reranking by default. On AWS, set `DRAFTOPS_RAG_EMBEDDING_PROVIDER=bedrock` to rerank the local candidate pool with Amazon Titan text embeddings through Bedrock, with automatic fallback to local hash embeddings if Bedrock embedding calls fail. Tune AWS with `DRAFTOPS_RAG_BEDROCK_EMBEDDING_MODEL_ID`, `DRAFTOPS_RAG_EMBEDDING_DIMENSIONS`, `DRAFTOPS_RAG_RERANK_POOL`, and `DRAFTOPS_RAG_TOP_K`.
+- Credentials: prefer the Lambda execution role. The role needs `s3:GetObject` for configured objects, `dynamodb:Scan` for configured tables, `bedrock:InvokeModel` when using Bedrock chat or Bedrock embeddings, and `secretsmanager:GetSecretValue` when `MODEL_PROVIDER=deepseek` uses `DEEPSEEK_SECRET_ID`.
+- Health: `GET /api/deepseek/health` returns whether S3/DynamoDB RAG is configured, retrieval mode, embedding dimensions, rerank pool size, topK, and the cache TTL.
+
+The local proxy in `scripts/deepseek-chat-server.mjs` mirrors the retrieval behavior with structured chunks from the repository's current JSON/report files, so local debugging uses the same data shape without touching the deployed AWS resources.
+
 ## Competition Workflow
 
 - Register official files and external sources into the Agent data pipeline.
@@ -82,6 +94,7 @@ Recommended AWS mapping for the code-quality and presentation score:
 - S3: official data, external mock data, exported board snapshots.
 - DynamoDB: saved Agent board snapshots, parameter/audit state, milestone answers.
 - Bedrock: explanation summaries, milestone answer reasoning, evidence cleanup.
+- Lambda: read-only chat API that retrieves S3/DynamoDB chunks before DeepSeek or Bedrock calls.
 - App Runner or ECS: web/API runtime.
 - CloudWatch: request logs, model-call cost tracking, final submission audit trail.
 
