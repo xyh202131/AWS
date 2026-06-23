@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "draftops.manifest.v1",
+  "data": {
+    "bundleUrl": "/data/expanded_import_bundle.json",
+    "boardUrl": "/data/agent_expanded_recommended_board.json",
+    "bundlePath": "public/data/expanded_import_bundle.json",
+    "boardPath": "public/data/agent_expanded_recommended_board.json"
+  },
+  "submission": {
+    "deadlineIso": "2026-06-24T08:00:00+08:00",
+    "deadlineLabel": {
+      "zh": "2026-06-24 08:00",
+      "en": "2026-06-24 08:00"
+    }
+  },
+  "model": {
+    "version": "V5.3.2",
+    "sampleWindow": "2024.04-2026.05",
+    "chatModelLabel": "deepseek-v4-pro[1m]"
+  },
+  "sourceLinks": [
+    {
+      "label": {
+        "zh": "NBA.com 官方 2026 首轮顺位",
+        "en": "NBA.com official 2026 first-round order"
+      },
+      "url": "https://www.nba.com/news/2026-nba-draft-order"
+    },
+    {
+      "label": {
+        "zh": "NBA.com 官方 2026 候选人",
+        "en": "NBA.com official 2026 prospects"
+      },
+      "url": "https://www.nba.com/draft/2026/prospects"
+    },
+    {
+      "label": {
+        "zh": "NBA.com 共识模拟选秀",
+        "en": "NBA.com consensus mock draft"
+      },
+      "url": "https://www.nba.com/news/2026-consensus-mock-draft"
+    },
+    {
+      "label": {
+        "zh": "Tankathon 2026 大榜",
+        "en": "Tankathon 2026 big board"
+      },
+      "url": "https://www.tankathon.com/big-board"
+    }
+  ],
+  "workflowSteps": [
+    {
+      "id": "combine",
+      "icon": "user",
+      "label": {
+        "zh": "联合试训",
+        "en": "Combine"
+      },
+      "date": "5/11-5/18",
+      "statusKey": "completed",
+      "tone": "done"
+    },
+    {
+      "id": "team-workouts",
+      "icon": "users",
+      "label": {
+        "zh": "球队试训",
+        "en": "Team workouts"
+      },
+      "date": "5/20-6/15",
+      "statusKey": "active",
+      "tone": "active"
+    },
+    {
+      "id": "interviews",
+      "icon": "message",
+      "label": {
+        "zh": "球队面试",
+        "en": "Interviews"
+      },
+      "date": "6/16-6/23",
+      "statusKey": "pendingShort",
+      "tone": "pending"
+    },
+    {
+      "id": "mock-draft",
+      "icon": "clipboard",
+      "label": {
+        "zh": "模拟选秀",
+        "en": "Mock draft"
+      },
+      "date": "6/24-6/28",
+      "statusKey": "pendingShort",
+      "tone": "pending"
+    },
+    {
+      "id": "draft-night",
+      "icon": "calendar",
+      "label": {
+        "zh": "选秀大会",
+        "en": "Draft night"
+      },
+      "date": "6/25 7:00PM",
+      "statusKey": "pending",
+      "tone": "pending"
+    }
+  ],
+  "awsSteps": [
+    {
+      "id": "source-s3",
+      "icon": "database",
+      "label": {
+        "zh": "S3",
+        "en": "S3"
+      },
+      "detail": {
+        "zh": "Second Spectrum / NBA.com / 球探报告",
+        "en": "Second Spectrum / NBA.com / scouting"
+      }
+    },
+    {
+      "id": "raw-lake",
+      "icon": "server",
+      "label": {
+        "zh": "Amazon S3",
+        "en": "Amazon S3"
+      },
+      "detail": {
+        "zh": "原始数据湖",
+        "en": "Raw data lake"
+      }
+    },
+    {
+      "id": "catalog-etl",
+      "icon": "brain",
+      "label": {
+        "zh": "AWS Glue",
+        "en": "AWS Glue"
+      },
+      "detail": {
+        "zh": "数据目录 / ETL",
+        "en": "Catalog / ETL"
+      }
+    },
+    {
+      "id": "warehouse",
+      "icon": "database",
+      "label": {
+        "zh": "Amazon Redshift",
+        "en": "Amazon Redshift"
+      },
+      "detail": {
+        "zh": "数据仓库",
+        "en": "Warehouse"
+      }
+    },
+    {
+      "id": "model",
+      "icon": "brain",
+      "label": {
+        "zh": "Amazon SageMaker",
+        "en": "Amazon SageMaker"
+      },
+      "detail": {
+        "zh": "模型训练与推理",
+        "en": "Training / inference"
+      }
+    },
+    {
+      "id": "analytics",
+      "icon": "trending",
+      "label": {
+        "zh": "Amazon QuickSight",
+        "en": "Amazon QuickSight"
+      },
+      "detail": {
+        "zh": "可视化分析",
+        "en": "Analytics"
+      }
+    },
+    {
+      "id": "app",
+      "icon": "calendar",
+      "label": {
+        "zh": "API / App",
+        "en": "API / App"
+      },
+      "detail": {
+        "zh": "前端应用",
+        "en": "Frontend app"
+      }
+    }
+  ],
+  "milestones": [
+    {
+      "id": "intl-top-five",
+      "prompt": {
+        "zh": "前 5 位是否包含国际球员？",
+        "en": "Does the top five include an international player?"
+      },
+      "type": "yes_no",
+      "confidence": 74
+    },
+    {
+      "id": "first-intl",
+      "prompt": {
+        "zh": "第一位被选中的国际球员是几顺位？",
+        "en": "What pick is the first international player?"
+      },
+      "type": "number",
+      "confidence": 48
+    },
+    {
+      "id": "school-most",
+      "prompt": {
+        "zh": "哪所学校贡献最多首轮秀？",
+        "en": "Which school contributes the most first-rounders?"
+      },
+      "type": "text",
+      "confidence": 68
+    },
+    {
+      "id": "lottery-guards",
+      "prompt": {
+        "zh": "乐透区会有多少名后卫？",
+        "en": "How many guards are in the lottery?"
+      },
+      "type": "number",
+      "confidence": 66
+    },
+    {
+      "id": "first-center",
+      "prompt": {
+        "zh": "第一位中锋是几顺位？",
+        "en": "What pick is the first center?"
+      },
+      "type": "number",
+      "confidence": 45
+    },
+    {
+      "id": "freshmen-count",
+      "prompt": {
+        "zh": "首轮 Freshman 数量是多少？",
+        "en": "How many freshmen are in the first round?"
+      },
+      "type": "number",
+      "confidence": 63
+    },
+    {
+      "id": "traded-picks",
+      "prompt": {
+        "zh": "首轮来自交易的顺位数量是多少？",
+        "en": "How many first-round picks are acquired from trades?"
+      },
+      "type": "number",
+      "confidence": 82
+    }
+  ],
+  "exportSettings": {
+    "product": {
+      "zh": "DraftOps 2026 NBA 选秀预测智能体",
+      "en": "DraftOps 2026 NBA Draft Prediction Agent"
+    },
+    "submissionFilename": "draftops-submission.json",
+    "briefFilename": "draftops-brief.md",
+    "originalPick": {
+      "zh": "原始签位",
+      "en": "Original pick"
+    },
+    "alternativeRetained": {
+      "zh": "已保留备选候选。",
+      "en": "Runner-up candidates retained."
+    },
+    "alternativeMissing": {
+      "zh": "当前顺位没有保留备选候选。",
+      "en": "No alternative retained for this slot."
+    },
+    "evidenceFallback": {
+      "zh": "当前顺位没有保留证据文本。",
+      "en": "No evidence text retained for this pick."
+    },
+    "warningFallback": {
+      "zh": "智能体没有给出阻塞性警告。",
+      "en": "No blocking warning from the agent."
+    },
+    "milestoneEvidenceFallback": {
+      "zh": "当前里程碑没有保留证据。",
+      "en": "No evidence retained for this milestone."
+    },
+    "briefTitle": {
+      "zh": "DraftOps 提交简报",
+      "en": "DraftOps Submission Brief"
+    },
+    "firstRoundTitle": {
+      "zh": "首轮预测",
+      "en": "First Round Prediction"
+    },
+    "milestonesTitle": {
+      "zh": "里程碑答案",
+      "en": "Milestones"
+    },
+    "talkTrackTitle": {
+      "zh": "路演讲述主线",
+      "en": "Talk Track"
+    },
+    "talkTrack": {
+      "zh": "我们把官方顺位、公开共识模拟、球队需求、球员画像评分和后期情报合并成一张可解释预测板。每个顺位都保留证据和风险说明，便于 6 分钟 Demo 解释为什么这样预测，而不是只展示名单。",
+      "en": "We combine official pick order, public consensus mocks, team needs, prospect profile scores, and late intel into one explainable board. Each pick keeps its evidence and warnings so the final 6-minute demo can defend changes instead of only showing a list."
+    }
+  }
+}

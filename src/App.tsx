@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
-  Activity,
   AlertTriangle,
   ArrowDown,
   ArrowUp,
@@ -11,14 +10,10 @@ import {
   CheckCircle2,
   ChevronDown,
   ClipboardList,
-  Clock3,
   Database,
-  Download,
   FileInput,
   Filter,
-  Gauge,
   Globe2,
-  Languages,
   MessageCircle,
   Minus,
   Search,
@@ -31,33 +26,26 @@ import {
   X,
 } from "lucide-react";
 import "./App.css";
-import { defaultWeights, seedProspects, seedTeams, sourceLinks } from "./data/seedData";
+import draftOpsManifestJson from "./config/draftops-manifest.json";
+import { defaultWeights, seedProspects, seedTeams } from "./data/seedData";
 import { hideAgentParameters } from "./lib/evidence";
 import { buildMarkdownBrief, buildSubmissionPayload, downloadJson, downloadText } from "./lib/export";
 import { formatOptionalValue, withTextFallback } from "./lib/fallbacks";
 import {
-  formatPositionsLocalized,
-  localizeCountryName,
   localizeEvidenceText,
-  localizeMilestonePrompt,
-  localizeMilestoneType,
-  localizePhase,
   localizePhrase,
   localizeProspectName,
   localizeSchoolName,
   localizeTeamName,
-  localizeZone,
   type Language,
   UI_COPY,
 } from "./lib/i18n";
 import { generateBoard, generateMilestones, getBoardHealth } from "./lib/prediction";
-import type { DraftPick, ImportBundle, Prospect, TeamProfile, Weights } from "./types";
+import type { DraftOpsManifest, DraftPick, ImportBundle, LocalizedText, Prospect, RuntimeWorkflowStep, TeamProfile, Weights } from "./types";
 
 gsap.registerPlugin(useGSAP);
 
-const deadline = new Date("2026-06-24T08:00:00+08:00");
-const agentBundleUrl = "/data/expanded_import_bundle.json";
-const agentBoardUrl = "/data/agent_expanded_recommended_board.json";
+const draftOpsManifest = draftOpsManifestJson as DraftOpsManifest;
 const deepSeekAgentPort = import.meta.env.VITE_DEEPSEEK_AGENT_PORT ?? "4318";
 const isLocalRuntime =
   typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname);
@@ -65,22 +53,7 @@ const deepSeekChatUrl =
   import.meta.env.VITE_DEEPSEEK_CHAT_URL ??
   (isLocalRuntime ? `http://127.0.0.1:${deepSeekAgentPort}/api/deepseek/chat` : "/api/deepseek/chat");
 
-const formatCountdown = (language: Language) => {
-  const diff = deadline.getTime() - Date.now();
-  if (diff <= 0) return UI_COPY[language].countdownClosed;
-  const hours = Math.floor(diff / 3_600_000);
-  const minutes = Math.floor((diff % 3_600_000) / 60_000);
-  if (language === "zh") return `距 2026-06-24 08:00 还有 ${hours} 小时 ${minutes} 分钟`;
-  return `${hours}h ${minutes}m to 2026-06-24 08:00`;
-};
-
-const weightLabels: Record<keyof Weights, Record<Language, string>> = {
-  consensus: { en: "Consensus", zh: "共识" },
-  need: { en: "Team Need", zh: "球队需求" },
-  player: { en: "Player Grade", zh: "球员评分" },
-  upside: { en: "Upside", zh: "上限" },
-  intel: { en: "Late Intel", zh: "后期情报" },
-};
+const runtimeText = (value: LocalizedText, language: Language) => value[language] || value.zh || value.en;
 
 interface AgentBoardArtifact {
   generatedAt?: string;
@@ -161,20 +134,15 @@ const formatStatus = (status: StatusState, language: Language) => {
   return copy.loadingBoard;
 };
 
-const formatWeight = (weight: string | null | undefined, language: Language) => {
-  const fallback = UI_COPY[language].weightPending;
-  const normalizedWeight = formatOptionalValue(weight, fallback);
-  if (normalizedWeight === fallback) return normalizedWeight;
-  if (language === "zh") return `${normalizedWeight.replace(/\s*lbs?\.?/i, "")} 磅`;
-  return normalizedWeight.toLowerCase().includes("lb") ? normalizedWeight : `${normalizedWeight} lbs`;
-};
-
 const findTeamProfile = (teams: TeamProfile[], pick: DraftPick) =>
   teams.find((team) => team.pick === pick.pick) ??
   teams.find((team) => team.team.toLowerCase() === pick.team.toLowerCase());
 
 type PositionFilter = "all" | "PG" | "SG" | "SF" | "PF" | "C";
 type SortKey = "pick" | "score" | "confidence" | "consensus" | "age";
+type DossierTab = "overview" | "evidence" | "risk" | "fit" | "alternatives";
+type MobileSection = "board" | "player" | "flow";
+type WorkflowMode = "flow" | "aws";
 
 const dashboardCopy = {
   zh: {
@@ -221,7 +189,6 @@ const dashboardCopy = {
     playerProfile: "球员画像",
     dataSource: "数据来源与备注",
     sourcePrefix: "来源：NBA.com / ESPN / 本地官方球员池 / 智能体预测板",
-    modelVersion: "备注：模型版本 V5.3.2 | 样本期 2024.04-2026.05 | 置信度",
     fallbackNotes: "当前风险说明较少，需继续跟踪体测、医疗和球队试训反馈。",
     alternativesIfMissed: "备选方案（如无法选中）",
     moreAlternatives: "更多备选",
@@ -277,7 +244,6 @@ const dashboardCopy = {
     playerProfile: "Player profile",
     dataSource: "Sources and notes",
     sourcePrefix: "Sources: NBA.com / ESPN / local official player pool / agent board",
-    modelVersion: "Note: Model V5.3.2 | Sample window 2024.04-2026.05 | Confidence",
     fallbackNotes: "Risk notes are limited; keep tracking measurements, medicals, and workouts.",
     alternativesIfMissed: "Alternatives if unavailable",
     moreAlternatives: "More alternatives",
@@ -290,6 +256,31 @@ const dashboardCopy = {
     locked: "Locked",
   },
 } as const;
+
+const runtimeIcon = (name: string, size = 22) => {
+  if (name === "user") return <UserRound size={size} />;
+  if (name === "users") return <Users size={size} />;
+  if (name === "message") return <MessageCircle size={size} />;
+  if (name === "clipboard") return <ClipboardList size={size} />;
+  if (name === "calendar") return <CalendarDays size={size} />;
+  if (name === "server") return <Server size={size} />;
+  if (name === "brain") return <BrainCircuit size={size} />;
+  if (name === "trending") return <TrendingUp size={size} />;
+  return <Database size={size} />;
+};
+
+const workflowStatusLabel = (step: RuntimeWorkflowStep, copy: (typeof dashboardCopy)[Language]) => {
+  if (step.statusKey === "completed") return copy.completed;
+  if (step.statusKey === "active") return copy.active;
+  if (step.statusKey === "pendingShort") return copy.pendingShort;
+  if (step.statusKey === "locked") return copy.locked;
+  return copy.pending;
+};
+
+const formatModelNote = (manifest: DraftOpsManifest, language: Language, confidence: number) =>
+  language === "zh"
+    ? `备注：模型版本 ${manifest.model.version} | 样本期 ${manifest.model.sampleWindow} | 置信度 ${confidence}%`
+    : `Note: Model ${manifest.model.version} | Sample window ${manifest.model.sampleWindow} | Confidence ${confidence}%`;
 
 const teamAbbrev: Record<string, string> = {
   "Washington Wizards": "WAS",
@@ -505,6 +496,9 @@ function App() {
   const [positionFilter, setPositionFilter] = useState<PositionFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("pick");
   const [riskOnly, setRiskOnly] = useState(false);
+  const [dossierTab, setDossierTab] = useState<DossierTab>("overview");
+  const [mobileSection, setMobileSection] = useState<MobileSection>("board");
+  const [workflowMode, setWorkflowMode] = useState<WorkflowMode>("flow");
   const [statusState, setStatusState] = useState<StatusState>({ type: "loading" });
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState("");
@@ -512,23 +506,22 @@ function App() {
     {
       id: "deepseek-ready",
       role: "assistant",
-      content: "DeepSeek V4 Pro[1m] 已接入。当前 DeepSeek 是只读问答 Agent，可回答应试题、参考口径和预测主题问题；预测结果只读取当前锁定预测板，不能参与改动。",
+      content: "",
     },
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
-  const [chatModelLabel, setChatModelLabel] = useState("deepseek-v4-pro[1m]");
+  const [chatModelLabel, setChatModelLabel] = useState(draftOpsManifest.model.chatModelLabel);
 
   const copy = UI_COPY[language];
   const d = dashboardCopy[language];
   const languageToggleLabel = language === "zh" ? "Switch to English" : "切换到中文";
   const filterLabel = riskOnly ? d.filterRiskOnly : d.filter;
   const status = useMemo(() => formatStatus(statusState, language), [language, statusState]);
-  const milestones = useMemo(() => generateMilestones(board), [board]);
+  const milestones = useMemo(() => generateMilestones(board, draftOpsManifest.milestones), [board]);
   const health = useMemo(() => getBoardHealth(board), [board]);
   const selectedPick = board.find((pick) => pick.pick === selectedPickNumber) ?? board[0];
   const selectedTeam = findTeamProfile(teamProfiles, selectedPick);
   const prospectProfile = Object.entries(selectedPick.prospect.profile);
-  const selectedPositions = formatPositionsLocalized(selectedPick.prospect.positions, language, copy.positionPending);
   const playerRoleTags = withTextFallback(selectedPick.prospect.roleTags, copy.roleTagsPending).map((tag) =>
     localizePhrase(tag, language),
   );
@@ -544,32 +537,12 @@ function App() {
   const teamNeeds = withTextFallback(selectedTeam?.needs, copy.teamNeedsPending).map((need) =>
     localizePhrase(need, language),
   );
-  const priorityTags = withTextFallback(selectedTeam?.priorityTags, copy.priorityPending).map((tag) =>
-    localizePhrase(tag, language),
-  );
-  const strengthNotes = withTextFallback(selectedPick.prospect.strengths, copy.strengthFallback).map((strength) =>
-    localizePhrase(strength, language),
-  );
-  const sourceNotes = withTextFallback(selectedPick.prospect.sourceNotes, copy.sourceFallback).map((note) =>
-    localizeEvidenceText(note, language),
-  );
   const selectedNeedsReview = needsBoardReview(selectedPick);
   const selectedFallbackProfile = hasExpandedFallbackProfile(selectedPick.prospect);
   const teamNote = localizeEvidenceText(formatOptionalValue(selectedTeam?.notes, copy.teamNotePending), language);
-  const tradeSlot = selectedPick.acquiredFrom
-    ? `${copy.fromTeam} ${localizeTeamName(selectedPick.acquiredFrom, language)}`
-    : copy.originalPick;
   const boardAverage = board.length
     ? Math.round(board.reduce((sum, pick) => sum + pick.confidence, 0) / board.length)
     : 0;
-  const averageScore = average(board.map((pick) => pick.score));
-  const highUpsideCount = board.filter((pick) => pick.prospect.profile.upside >= 87).length;
-  const internationalShare = board.length
-    ? Math.round((board.filter((pick) => pick.prospect.international).length / board.length) * 100)
-    : 0;
-  const averageAge = average(board.map((pick) => pick.prospect.age));
-  const tradedPickCount = board.filter((pick) => pick.acquiredFrom).length;
-  const reviewPickCount = board.filter(needsBoardReview).length;
   const candidatePoolSize = agentMeta.candidatePool?.officialProspectRows ?? 0;
   const fullProfileCount = agentMeta.candidatePool?.fullDraftOpsProfiles ?? 0;
   const fallbackProfileCount = agentMeta.candidatePool?.fallbackProfiles ?? 0;
@@ -631,44 +604,16 @@ function App() {
       if (sortKey === "score") return right.score - left.score || left.pick - right.pick;
       return left.pick - right.pick;
     });
-  const overviewMetrics = [
-    {
-      label: d.averageScore,
-      value: formatOneDecimal(averageScore),
-      detail: health.hasThirtyPicks && health.noDuplicates ? copy.pass : copy.review,
-      icon: <ShieldCheck size={22} />,
-    },
-    {
-      label: d.highUpside,
-      value: String(highUpsideCount),
-      detail: "20%",
-      icon: <Gauge size={22} />,
-    },
-    {
-      label: d.internationalShare,
-      value: `${internationalShare}%`,
-      detail: "+ 3%",
-      icon: <BrainCircuit size={22} />,
-    },
-    {
-      label: d.averageAge,
-      value: formatOneDecimal(averageAge),
-      detail: "v 0.1",
-      icon: <AlertTriangle size={22} />,
-    },
-    {
-      label: d.predictedTrades,
-      value: String(tradedPickCount),
-       detail: `${reviewPickCount} ${copy.riskWatch}`,
-      icon: <TrendingUp size={22} />,
-    },
-    {
-      label: d.modelConfidence,
-      value: `${boardAverage}%`,
-      detail: "+ 4%",
-      icon: <CheckCircle2 size={22} />,
-    },
-  ];
+  const onlyFilteredPickNumber = filteredBoard.length === 1 ? filteredBoard[0].pick : null;
+
+  useEffect(() => {
+    if (onlyFilteredPickNumber && onlyFilteredPickNumber !== selectedPickNumber) {
+      const syncSelection = window.requestAnimationFrame(() => {
+        setSelectedPickNumber(onlyFilteredPickNumber);
+      });
+      return () => window.cancelAnimationFrame(syncSelection);
+    }
+  }, [onlyFilteredPickNumber, selectedPickNumber]);
 
   useEffect(() => {
     let cancelled = false;
@@ -676,7 +621,10 @@ function App() {
     const loadAgentBoard = async () => {
       setIsAgentLoading(true);
       try {
-        const [bundleResponse, boardResponse] = await Promise.all([fetch(agentBundleUrl), fetch(agentBoardUrl)]);
+        const [bundleResponse, boardResponse] = await Promise.all([
+          fetch(draftOpsManifest.data.bundleUrl),
+          fetch(draftOpsManifest.data.boardUrl),
+        ]);
         if (!bundleResponse.ok || !boardResponse.ok) {
           throw new Error("Agent data request failed.");
         }
@@ -741,12 +689,18 @@ function App() {
   }, []);
 
   const exportSubmission = () => {
-    downloadJson("draftops-submission.json", buildSubmissionPayload(board, milestones));
+    downloadJson(
+      draftOpsManifest.exportSettings.submissionFilename,
+      buildSubmissionPayload(board, milestones, draftOpsManifest.exportSettings, language),
+    );
     setStatusState({ type: "submissionExported" });
   };
 
   const exportBrief = () => {
-    downloadText("draftops-brief.md", buildMarkdownBrief(board, milestones));
+    downloadText(
+      draftOpsManifest.exportSettings.briefFilename,
+      buildMarkdownBrief(board, milestones, draftOpsManifest.exportSettings, language),
+    );
     setStatusState({ type: "briefExported" });
   };
 
@@ -819,12 +773,13 @@ function App() {
 
       const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
       timeline
-        .from(".app-header", { y: -18, duration: 0.45 })
-        .from(".hero-copy", { y: 28, duration: 0.55 }, "-=0.18")
-        .from(".scenario-card", { x: 28, duration: 0.52 }, "-=0.38")
-        .from(".metric-card", { y: 18, duration: 0.4, stagger: 0.06 }, "-=0.2")
+        .from(".ops-command-bar", { y: -18, duration: 0.45 })
+        .from(".ops-board-header", { y: 20, duration: 0.46 }, "-=0.18")
+        .from(".ops-vital-card", { y: 14, duration: 0.34, stagger: 0.045 }, "-=0.2")
+        .from(".ops-filter-row", { y: 12, duration: 0.3 }, "-=0.18")
         .from(".board-panel", { y: 24, duration: 0.45 }, "-=0.14")
-        .from(".insight-rail > .panel", { x: 24, duration: 0.42, stagger: 0.08 }, "-=0.32")
+        .from(".ops-prospect-dossier", { opacity: 0, duration: 0.34 }, "-=0.28")
+        .from(".ops-workflow-dock", { opacity: 0, duration: 0.28 }, "-=0.2")
         .from(".board-panel tbody tr", { x: -14, duration: 0.28, stagger: 0.018 }, "-=0.18");
     },
     { scope: appRef },
@@ -857,7 +812,7 @@ function App() {
       if (!panel) return;
 
       gsap.fromTo(
-        panel.querySelectorAll(".pick-hero, .player-line, .profile-ribbon, .tag-cloud, .evidence-panel"),
+        panel.querySelectorAll(".ops-dossier-hero, .ops-dossier-tabs, .ops-dossier-body, .ops-source-card"),
         reduceMotion ? { y: 0 } : { y: 16 },
         {
           y: 0,
@@ -870,103 +825,103 @@ function App() {
     { dependencies: [selectedPickNumber], scope: insightRef },
   );
 
-  const workflowSteps = [
-    {
-      icon: <UserRound size={22} />,
-      label: language === "zh" ? "联合试训" : "Combine",
-      date: "5/11-5/18",
-      status: d.completed,
-      tone: "done",
-    },
-    {
-      icon: <Users size={22} />,
-      label: language === "zh" ? "球队试训" : "Team workouts",
-      date: "5/20-6/15",
-      status: d.active,
-      tone: "active",
-    },
-    {
-      icon: <MessageCircle size={22} />,
-      label: language === "zh" ? "球队面试" : "Interviews",
-      date: "6/16-6/23",
-      status: d.pendingShort,
-      tone: "pending",
-    },
-    {
-      icon: <ClipboardList size={22} />,
-      label: language === "zh" ? "模拟选秀" : "Mock draft",
-      date: "6/24-6/28",
-      status: d.pendingShort,
-      tone: "pending",
-    },
-    {
-      icon: <CalendarDays size={22} />,
-      label: language === "zh" ? "选秀大会" : "Draft night",
-      date: "6/25 7:00PM",
-      status: d.pending,
-      tone: "pending",
-    },
-  ];
+  const workflowSteps = draftOpsManifest.workflowSteps.map((step) => ({
+    ...step,
+    icon: runtimeIcon(step.icon),
+    label: runtimeText(step.label, language),
+    status: workflowStatusLabel(step, d),
+  }));
 
-  const awsSteps = [
-    {
-      icon: <Database size={22} />,
-      label: "S3",
-      detail: language === "zh" ? "Second Spectrum / NBA.com / 球探报告" : "Second Spectrum / NBA.com / scouting",
-    },
-    {
-      icon: <Server size={22} />,
-      label: "Amazon S3",
-      detail: language === "zh" ? "原始数据湖" : "Raw data lake",
-    },
-    {
-      icon: <BrainCircuit size={22} />,
-      label: "AWS Glue",
-      detail: language === "zh" ? "数据目录 / ETL" : "Catalog / ETL",
-    },
-    {
-      icon: <Database size={22} />,
-      label: "Amazon Redshift",
-      detail: language === "zh" ? "数据仓库" : "Warehouse",
-    },
-    {
-      icon: <BrainCircuit size={22} />,
-      label: "Amazon SageMaker",
-      detail: language === "zh" ? "模型训练与推理" : "Training / inference",
-    },
-    {
-      icon: <TrendingUp size={22} />,
-      label: "Amazon QuickSight",
-      detail: language === "zh" ? "可视化分析" : "Analytics",
-    },
-    {
-      icon: <CalendarDays size={22} />,
-      label: "API / App",
-      detail: language === "zh" ? "前端应用" : "Frontend app",
-    },
+  const awsSteps = draftOpsManifest.awsSteps.map((step) => ({
+    ...step,
+    icon: runtimeIcon(step.icon),
+    label: runtimeText(step.label, language),
+    detail: runtimeText(step.detail, language),
+  }));
+
+  const boardIntegrity = health.hasThirtyPicks && health.noDuplicates;
+  const statusCopy = {
+    commandTitle: language === "zh" ? "Draft Board Command" : "Draft Board Command",
+    commandSubtitle: language === "zh" ? "首轮 30 签锁定工作台" : "Round-one lock desk",
+    mission: language === "zh" ? "任务" : "Mission",
+    playerTab: language === "zh" ? "球员" : "Player",
+    flowTab: language === "zh" ? "流程" : "Flow",
+    chatTab: language === "zh" ? "问答" : "Chat",
+    integrity: language === "zh" ? "完整性" : "Integrity",
+    lowConfidence: language === "zh" ? "低置信" : "Low confidence",
+    fallback: language === "zh" ? "回退画像" : "Fallbacks",
+    locked: language === "zh" ? "锁定状态" : "Lock state",
+    lockedValue: language === "zh" ? "候选板已载入" : "board loaded",
+    riskMode: language === "zh" ? "风险视图" : "Risk view",
+    normalMode: language === "zh" ? "全量视图" : "Full board",
+    dataset: language === "zh" ? "数据状态" : "Data state",
+    dossier: language === "zh" ? "Prospect Dossier" : "Prospect Dossier",
+    scenario: language === "zh" ? "情景" : "Scenario",
+    model: language === "zh" ? "模型" : "Model",
+    sources: language === "zh" ? "来源" : "Sources",
+    board: language === "zh" ? "看板" : "Board",
+    teams: language === "zh" ? "球队" : "Teams",
+    scenarios: language === "zh" ? "情景" : "Scenarios",
+    milestones: language === "zh" ? "里程碑" : "Milestones",
+    aws: "AWS",
+    sourceModule: language === "zh" ? "源" : "Source",
+    workflowDock: language === "zh" ? "Workflow Dock" : "Workflow Dock",
+    evidenceTab: language === "zh" ? "证据" : "Evidence",
+    riskTab: language === "zh" ? "风险" : "Risk",
+    fitTab: language === "zh" ? "匹配" : "Fit",
+    altTab: language === "zh" ? "备选" : "Alternatives",
+    overviewTab: language === "zh" ? "概览" : "Overview",
+    showFlow: language === "zh" ? "流程" : "Flow",
+    showAws: language === "zh" ? "数据链路" : "Data chain",
+  };
+
+  const dossierTabs: Array<{ id: DossierTab; label: string }> = [
+    { id: "overview", label: statusCopy.overviewTab },
+    { id: "evidence", label: statusCopy.evidenceTab },
+    { id: "risk", label: statusCopy.riskTab },
+    { id: "fit", label: statusCopy.fitTab },
+    { id: "alternatives", label: statusCopy.altTab },
   ];
+  const boardVitals = [
+    {
+      label: statusCopy.integrity,
+      value: boardIntegrity ? "30/30" : `${board.length}/30`,
+      detail: boardIntegrity ? copy.pass : copy.review,
+      tone: boardIntegrity ? "good" : "risk",
+    },
+    { label: statusCopy.lowConfidence, value: String(lowConfidenceCount), detail: agentReviewNote, tone: lowConfidenceCount > 8 ? "risk" : "good" },
+    { label: statusCopy.fallback, value: String(fallbackPickCount), detail: agentPoolNote || "--", tone: fallbackPickCount ? "risk" : "good" },
+    { label: statusCopy.locked, value: statusCopy.lockedValue, detail: riskOnly ? statusCopy.riskMode : statusCopy.normalMode, tone: riskOnly ? "risk" : "good" },
+  ];
+  const mobileTabs = [
+    { id: "board" as const, label: statusCopy.board, icon: <ClipboardList size={18} /> },
+    { id: "player" as const, label: statusCopy.playerTab, icon: <UserRound size={18} /> },
+    { id: "flow" as const, label: statusCopy.flowTab, icon: <CalendarDays size={18} /> },
+  ];
+  const selectedRiskItems = (warningNotes.length ? warningNotes : riskNotes.length ? riskNotes : [d.fallbackNotes]).slice(0, 5);
 
   return (
     <main className="app-shell ops-shell" ref={appRef} lang={language === "zh" ? "zh-CN" : "en"} translate="no">
-      <div className="ops-layout">
-        <header className="ops-topbar">
-          <div className="ops-brand">
+      <div className={`ops-layout-v2 mobile-section-${mobileSection}`}>
+        <header className="ops-command-bar">
+          <div className="ops-command-brand">
             <div className="ops-logo">
               <DraftOpsMark />
             </div>
-            <strong>DRAFTOPS</strong>
-            <span>{d.systemTitle}</span>
-            <ChevronDown size={15} />
+            <div>
+              <strong>DRAFTOPS</strong>
+              <span>{d.systemTitle}</span>
+            </div>
           </div>
 
-          <div className="ops-clock">
+          <div className="ops-command-status" aria-label={statusCopy.dataset}>
             <span>{d.dataUpdated}</span>
             <strong>{formatDataTime(agentMeta.generatedAt, language)} (CT)</strong>
-            {agentPoolNote && <em>{agentPoolNote}</em>}
-            <ChevronDown size={14} />
+            <em>{agentPoolNote || agentMeta.label}</em>
+            <b>{statusCopy.model} {draftOpsManifest.model.version}</b>
           </div>
 
-          <div className="ops-actions">
+          <div className="ops-actions ops-command-actions">
             <button
               className="ops-button ops-language-toggle"
               type="button"
@@ -994,790 +949,432 @@ function App() {
           </div>
         </header>
 
-        <section className="ops-dashboard">
-          <div className="ops-mainframe">
-            <section className="ops-toolbar">
-              <label className="ops-search" htmlFor="ops-board-search">
-                <Search size={18} />
-                <input
-                  id="ops-board-search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder={d.searchPlaceholder}
-                />
-              </label>
-
-              <div className="ops-select">
-                <span>{d.position}</span>
-                <select value={positionFilter} onChange={(event) => setPositionFilter(event.target.value as PositionFilter)}>
-                  <option value="all">{d.all}</option>
-                  <option value="PG">PG</option>
-                  <option value="SG">SG</option>
-                  <option value="SF">SF</option>
-                  <option value="PF">PF</option>
-                  <option value="C">C</option>
-                </select>
-                <ChevronDown size={14} />
-              </div>
-
-              <div className="ops-select">
-                <span>{d.sort}</span>
-                <select value={sortKey} onChange={(event) => setSortKey(event.target.value as SortKey)}>
-                  <option value="pick">{d.sortPick}</option>
-                  <option value="score">{d.sortScore}</option>
-                  <option value="confidence">{d.sortConfidence}</option>
-                  <option value="consensus">{d.sortConsensus}</option>
-                  <option value="age">{d.sortAge}</option>
-                </select>
-                <ChevronDown size={14} />
-              </div>
-
-              <button
-                className={`ops-filter ${riskOnly ? "active" : ""}`}
-                type="button"
-                onClick={() => setRiskOnly((current) => !current)}
-                aria-pressed={riskOnly}
-                {...buttonMeta(filterLabel)}
-              >
-                <Filter size={16} />
-                {filterLabel}
-                <ChevronDown size={13} />
-              </button>
-            </section>
-
-            <section className="ops-metrics" aria-label={d.wholeBoard}>
-              <div className="ops-metric-title">{d.wholeBoard}</div>
-              {overviewMetrics.map((item, index) => (
-                <article className="ops-metric" key={item.label}>
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                  <small className={index % 2 === 0 ? "positive" : ""}>{item.detail}</small>
-                </article>
-              ))}
-            </section>
-
-            <section className="ops-table-shell board-panel" id="board">
-              <div className="ops-table-wrap">
-                <table className="ops-draft-table">
-                  <thead>
-                    <tr>
-                      <th>{d.rank}</th>
-                      <th>{d.teamProjected}</th>
-                      <th>{copy.player}</th>
-                      <th>{d.positionShort}</th>
-                      <th>{d.schoolTeam}</th>
-                      <th>{copy.age}</th>
-                      <th>{d.height}</th>
-                      <th>{d.wingspan}</th>
-                      <th>{d.totalScore}</th>
-                      <th>{d.potential}</th>
-                      <th>{d.immediate}</th>
-                      <th>{d.trend}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredBoard.map((pick) => {
-                      const trend = getTrend(pick);
-                      const pickNeedsReview = needsBoardReview(pick);
-                      const fallbackProfile = hasExpandedFallbackProfile(pick.prospect);
-                      const reviewTitle = fallbackProfile ? fallbackProfileLabel : selectedReviewLabel;
-                      const readiness = average([
-                        pick.prospect.profile.shooting,
-                        pick.prospect.profile.defense,
-                        pick.prospect.profile.feel,
-                      ]);
-                      const prospectName = localizeProspectName(pick.prospect.name, language);
-                      return (
-                        <tr
-                          key={pick.pick}
-                          className={`${pick.pick === selectedPick.pick ? "selected" : ""} ${pickNeedsReview ? "needs-review" : ""}`}
-                          onClick={() => setSelectedPickNumber(pick.pick)}
-                        >
-                          <td>{String(pick.pick).padStart(2, "0")}</td>
-                          <td>
-                            <strong>{getTeamCode(pick.team)}</strong>
-                            {pick.acquiredFrom && <small>({copy.fromTeam} {getTeamCode(pick.acquiredFrom)})</small>}
-                          </td>
-                          <td>
-                            <span className="ops-player-cell">
-                              <PlayerPhoto prospect={pick.prospect} label={prospectName} language={language} />
-                              <span className="ops-player-name">{prospectName}</span>
-                              {pickNeedsReview && (
-                                <span className={`ops-review-icon ${fallbackProfile ? "is-fallback" : ""}`} title={reviewTitle} aria-label={reviewTitle}>
-                                  <AlertTriangle size={11} />
-                                </span>
-                              )}
-                            </span>
-                          </td>
-                          <td>{pick.prospect.positions.join("/")}</td>
-                          <td>{localizeSchoolName(pick.prospect.school, language)}</td>
-                          <td>{formatOneDecimal(pick.prospect.age)}</td>
-                          <td>{formatHeightDisplay(pick.prospect.height)}</td>
-                          <td>{estimateWingspan(pick.prospect.height, pick.prospect.profile.size)}</td>
-                          <td className="score-cell">{formatOneDecimal(pick.score)}</td>
-                          <td className="grade-cell">{gradeFromScore(pick.prospect.profile.upside)}</td>
-                          <td className="grade-cell warn">{gradeFromScore(readiness)}</td>
-                          <td className={`trend-cell ${trend}`}>
-                            {trend === "up" ? <ArrowUp size={15} /> : trend === "down" ? <ArrowDown size={15} /> : <Minus size={15} />}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            <section className="ops-workflow" id="milestones">
-              <h2>{d.workflow}</h2>
-              <div className="ops-flow-list">
-                {workflowSteps.map((step, index) => (
-                  <article className={`ops-flow-step ${step.tone}`} key={step.label}>
-                    <span className="ops-flow-icon">{step.icon}</span>
-                    <div>
-                      <strong>{step.label}</strong>
-                      <small>{step.date}</small>
-                    </div>
-                    <b>{step.status}</b>
-                    {index < workflowSteps.length - 1 && <i />}
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section className="ops-aws" id="aws">
-              <h2>{d.awsData}</h2>
-              <div className="ops-aws-chain">
-                {awsSteps.map((step, index) => (
-                  <article key={step.label}>
-                    <span>{step.icon}</span>
-                    <div>
-                      <strong>{step.label}</strong>
-                      <small>{step.detail}</small>
-                    </div>
-                    {index < awsSteps.length - 1 && <i />}
-                  </article>
-                ))}
-              </div>
-            </section>
+        <section className="ops-board-workspace" id="board" ref={boardRef}>
+          <div className="ops-board-header">
+            <div>
+              <span>{statusCopy.scenario} · {isAgentLoading ? copy.loading : localizePhrase(agentMeta.label, language)}</span>
+              <h1>{statusCopy.commandTitle}</h1>
+              <p>{statusCopy.commandSubtitle} · {status}</p>
+            </div>
+            <div className="ops-board-lock">
+              <ShieldCheck size={18} />
+              <strong>{boardIntegrity ? copy.pass : copy.review}</strong>
+              <span>{riskOnly ? statusCopy.riskMode : statusCopy.normalMode}</span>
+            </div>
           </div>
 
-          <aside className="ops-intel insight-rail" ref={insightRef}>
-            <section className="ops-intel-card ops-player-card">
-              <header>
-                <span>{d.playerIntel}</span>
-                <b>#{String(selectedPick.pick).padStart(2, "0")} {d.focus}</b>
-              </header>
-              <div className="ops-player-summary">
-                <PlayerPhoto
-                  prospect={selectedPick.prospect}
-                  label={localizeProspectName(selectedPick.prospect.name, language)}
-                  language={language}
-                  variant="hero"
-                />
-                <div>
-                  <h2>{localizeProspectName(selectedPick.prospect.name, language)}</h2>
-                  <p>
-                    {selectedPick.prospect.positions.join("/")} | {localizeSchoolName(selectedPick.prospect.school, language)} |{" "}
-                    {formatOneDecimal(selectedPick.prospect.age)}
-                    {language === "zh" ? "岁" : ""}
-                  </p>
-                  <span className="ops-photo-meta">
-                    <ShieldCheck size={12} />
-                    {formatPhotoSource(selectedPick.prospect, language)}
-                  </span>
+          <section className="ops-board-vitals" aria-label={d.wholeBoard}>
+            {boardVitals.map((item) => (
+              <article className={`ops-vital-card ${item.tone}`} key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+                <small>{item.detail}</small>
+              </article>
+            ))}
+          </section>
+
+          <section className="ops-filter-row">
+            <label className="ops-search" htmlFor="ops-board-search">
+              <Search size={18} />
+              <input
+                id="ops-board-search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder={d.searchPlaceholder}
+              />
+            </label>
+
+            <div className="ops-select">
+              <span>{d.position}</span>
+              <select value={positionFilter} onChange={(event) => setPositionFilter(event.target.value as PositionFilter)}>
+                <option value="all">{d.all}</option>
+                <option value="PG">PG</option>
+                <option value="SG">SG</option>
+                <option value="SF">SF</option>
+                <option value="PF">PF</option>
+                <option value="C">C</option>
+              </select>
+              <ChevronDown size={14} />
+            </div>
+
+            <div className="ops-select">
+              <span>{d.sort}</span>
+              <select value={sortKey} onChange={(event) => setSortKey(event.target.value as SortKey)}>
+                <option value="pick">{d.sortPick}</option>
+                <option value="score">{d.sortScore}</option>
+                <option value="confidence">{d.sortConfidence}</option>
+                <option value="consensus">{d.sortConsensus}</option>
+                <option value="age">{d.sortAge}</option>
+              </select>
+              <ChevronDown size={14} />
+            </div>
+
+            <button
+              className={`ops-filter ${riskOnly ? "active" : ""}`}
+              type="button"
+              onClick={() => setRiskOnly((current) => !current)}
+              aria-pressed={riskOnly}
+              {...buttonMeta(filterLabel)}
+            >
+              <Filter size={16} />
+              {filterLabel}
+            </button>
+          </section>
+
+          <section className="ops-table-shell board-panel">
+            <div className="ops-table-wrap">
+              <table className="ops-draft-table">
+                <thead>
+                  <tr>
+                    <th>{d.rank}</th>
+                    <th>{d.teamProjected}</th>
+                    <th>{copy.player}</th>
+                    <th>{d.positionShort}</th>
+                    <th>{d.schoolTeam}</th>
+                    <th>{copy.age}</th>
+                    <th>{d.height}</th>
+                    <th>{d.wingspan}</th>
+                    <th>{d.totalScore}</th>
+                    <th>{d.potential}</th>
+                    <th>{d.immediate}</th>
+                    <th>{d.trend}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredBoard.map((pick) => {
+                    const trend = getTrend(pick);
+                    const pickNeedsReview = needsBoardReview(pick);
+                    const fallbackProfile = hasExpandedFallbackProfile(pick.prospect);
+                    const reviewTitle = fallbackProfile ? fallbackProfileLabel : selectedReviewLabel;
+                    const readiness = average([
+                      pick.prospect.profile.shooting,
+                      pick.prospect.profile.defense,
+                      pick.prospect.profile.feel,
+                    ]);
+                    const prospectName = localizeProspectName(pick.prospect.name, language);
+                    return (
+                      <tr
+                        key={pick.pick}
+                        className={`${pick.pick === selectedPick.pick ? "selected" : ""} ${pickNeedsReview ? "needs-review" : ""}`}
+                        onClick={() => {
+                          setSelectedPickNumber(pick.pick);
+                          setMobileSection("player");
+                        }}
+                      >
+                        <td>{String(pick.pick).padStart(2, "0")}</td>
+                        <td>
+                          <strong>{getTeamCode(pick.team)}</strong>
+                          {pick.acquiredFrom && <small>({copy.fromTeam} {getTeamCode(pick.acquiredFrom)})</small>}
+                        </td>
+                        <td>
+                          <span className="ops-player-cell">
+                            <PlayerPhoto prospect={pick.prospect} label={prospectName} language={language} />
+                            <span className="ops-player-name">{prospectName}</span>
+                            {pickNeedsReview && (
+                              <span className={`ops-review-icon ${fallbackProfile ? "is-fallback" : ""}`} title={reviewTitle} aria-label={reviewTitle}>
+                                <AlertTriangle size={11} />
+                              </span>
+                            )}
+                          </span>
+                        </td>
+                        <td>{pick.prospect.positions.join("/")}</td>
+                        <td>{localizeSchoolName(pick.prospect.school, language)}</td>
+                        <td>{formatOneDecimal(pick.prospect.age)}</td>
+                        <td>{formatHeightDisplay(pick.prospect.height)}</td>
+                        <td>{estimateWingspan(pick.prospect.height, pick.prospect.profile.size)}</td>
+                        <td className="score-cell">{formatOneDecimal(pick.score)}</td>
+                        <td className="grade-cell">{gradeFromScore(pick.prospect.profile.upside)}</td>
+                        <td className="grade-cell warn">{gradeFromScore(readiness)}</td>
+                        <td className={`trend-cell ${trend}`}>
+                          {trend === "up" ? <ArrowUp size={15} /> : trend === "down" ? <ArrowDown size={15} /> : <Minus size={15} />}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <aside className="ops-prospect-dossier" id="dossier" ref={insightRef}>
+          <section className="ops-dossier-hero">
+            <header>
+              <span>{statusCopy.dossier}</span>
+              <b>#{String(selectedPick.pick).padStart(2, "0")} {d.focus}</b>
+            </header>
+            <div className="ops-player-summary">
+              <PlayerPhoto
+                prospect={selectedPick.prospect}
+                label={localizeProspectName(selectedPick.prospect.name, language)}
+                language={language}
+                variant="hero"
+              />
+              <div>
+                <h2>{localizeProspectName(selectedPick.prospect.name, language)}</h2>
+                <p>
+                  {selectedPick.prospect.positions.join("/")} | {localizeSchoolName(selectedPick.prospect.school, language)} |{" "}
+                  {formatOneDecimal(selectedPick.prospect.age)}
+                  {language === "zh" ? "岁" : ""}
+                </p>
+                <span className="ops-photo-meta">
+                  <ShieldCheck size={12} />
+                  {formatPhotoSource(selectedPick.prospect, language)}
+                </span>
+              </div>
+              <div className="ops-score-badge">
+                <span>{d.compositeScore}</span>
+                <strong>{formatOneDecimal(selectedPick.score)}</strong>
+                <small>/100</small>
+              </div>
+            </div>
+            <div className="ops-player-tags">
+              {playerRoleTags.slice(0, 4).map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+              {selectedNeedsReview && (
+                <span className={`ops-review-tag ${selectedFallbackProfile ? "is-fallback" : ""}`}>
+                  <AlertTriangle size={13} />
+                  {selectedFallbackProfile ? fallbackProfileLabel : selectedReviewLabel}
+                </span>
+              )}
+            </div>
+          </section>
+
+          <nav className="ops-dossier-tabs" aria-label={statusCopy.dossier}>
+            {dossierTabs.map((tab) => (
+              <button
+                className={dossierTab === tab.id ? "active" : ""}
+                type="button"
+                key={tab.id}
+                onClick={() => setDossierTab(tab.id)}
+                aria-pressed={dossierTab === tab.id}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+
+          <section className="ops-dossier-body">
+            {dossierTab === "overview" && (
+              <>
+                <div className="ops-grade-pair">
+                  <span>{d.upside} <strong>{selectedUpsideGrade}</strong></span>
+                  <span>{d.readiness} <strong className="warn">{selectedReadinessGrade}</strong></span>
                 </div>
-                <div className="ops-score-badge">
-                  <span>{d.compositeScore}</span>
-                  <strong>{formatOneDecimal(selectedPick.score)}</strong>
-                  <small>/100</small>
+                <div className="ops-profile-bars">
+                  {prospectProfile.map(([key, value]) => (
+                    <div className="ops-profile-bar" key={key}>
+                      <span>{profileLabelKeys[key]?.[language] ?? localizePhrase(key, language)}</span>
+                      <i><b style={{ width: `${value}%` }} /></i>
+                      <strong>{formatOneDecimal(value / 10)}</strong>
+                    </div>
+                  ))}
                 </div>
-              </div>
-              <div className="ops-player-tags">
-                {playerRoleTags.slice(0, 4).map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-                {selectedNeedsReview && (
-                  <span className={`ops-review-tag ${selectedFallbackProfile ? "is-fallback" : ""}`}>
-                    <AlertTriangle size={13} />
-                    {selectedFallbackProfile ? fallbackProfileLabel : selectedReviewLabel}
-                  </span>
-                )}
-              </div>
-              <div className="ops-grade-pair">
-                <span>{d.upside} <strong>{selectedUpsideGrade}</strong></span>
-                <span>{d.readiness} <strong className="warn">{selectedReadinessGrade}</strong></span>
-              </div>
-            </section>
+              </>
+            )}
 
-            <section className="ops-intel-card">
-              <h3>{d.coreEvidence}</h3>
-              <ul className="ops-bullet-list">
-                {evidenceItems.slice(0, 5).map((item) => (
-                  <li key={item}>{hideAgentParameters(item)}</li>
-                ))}
-              </ul>
-            </section>
+            {dossierTab === "evidence" && (
+              <div className="ops-dossier-panel">
+                <h3>{d.coreEvidence}</h3>
+                <ul className="ops-bullet-list">
+                  {evidenceItems.slice(0, 5).map((item) => (
+                    <li key={item}>{hideAgentParameters(item)}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <section className="ops-intel-card">
-              <h3>{d.risks}</h3>
-              <ul className="ops-warning-list">
-                {(warningNotes.length ? warningNotes : riskNotes.length ? riskNotes : [d.fallbackNotes]).slice(0, 4).map((item) => (
-                  <li key={item}>
-                    <AlertTriangle size={16} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section className="ops-intel-card ops-fit-card">
-              <h3>{d.fitMatch}（{getTeamCode(selectedPick.team)}）</h3>
-              <div className="ops-fit-content">
-                <ul>
-                  {teamNeeds.slice(0, 3).map((need) => (
-                    <li key={need}>
-                      <CheckCircle2 size={16} />
-                      <span>{need}</span>
+            {dossierTab === "risk" && (
+              <div className="ops-dossier-panel">
+                <h3>{d.risks}</h3>
+                <ul className="ops-warning-list">
+                  {selectedRiskItems.map((item) => (
+                    <li key={item}>
+                      <AlertTriangle size={16} />
+                      {item}
                     </li>
                   ))}
                 </ul>
-                <div className="ops-ring" style={{ "--match": `${selectedMatch}%` } as React.CSSProperties}>
-                  <span>{d.match}</span>
-                  <strong>{selectedMatch}%</strong>
+                {selectedFallbackProfile && (
+                  <p className="ops-source-note ops-source-warning">
+                    {language === "zh"
+                      ? `#${selectedPick.pick} 使用扩展候选池回退画像，锁定前需补强球探资料。`
+                      : `#${selectedPick.pick} uses an expanded-pool fallback profile; enrich scouting before final lock.`}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {dossierTab === "fit" && (
+              <div className="ops-dossier-panel ops-fit-card">
+                <h3>{d.fitMatch} ({getTeamCode(selectedPick.team)})</h3>
+                <div className="ops-fit-content">
+                  <ul>
+                    {teamNeeds.slice(0, 3).map((need) => (
+                      <li key={need}>
+                        <CheckCircle2 size={16} />
+                        <span>{need}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="ops-ring" style={{ "--match": `${selectedMatch}%` } as React.CSSProperties}>
+                    <span>{d.match}</span>
+                    <strong>{selectedMatch}%</strong>
+                  </div>
+                </div>
+                <p className="ops-source-note">{teamNote}</p>
+              </div>
+            )}
+
+            {dossierTab === "alternatives" && (
+              <div className="ops-dossier-panel ops-alt-card">
+                <h3>{d.alternativesIfMissed}</h3>
+                <div className="ops-alt-list">
+                  {selectedPick.alternatives.slice(0, 3).map((candidate, index) => (
+                    <div key={candidate.prospectId}>
+                      <strong>A{index + 1}</strong>
+                      <span>{localizeProspectName(candidate.name, language)}</span>
+                      <small>{localizePhrase(candidate.roleFit, language)}</small>
+                      <b>{formatOneDecimal(candidate.score)}</b>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </section>
-
-            <section className="ops-intel-card">
-              <h3>{d.playerProfile}</h3>
-              <div className="ops-profile-bars">
-                {prospectProfile.map(([key, value]) => (
-                  <div className="ops-profile-bar" key={key}>
-                    <span>{profileLabelKeys[key]?.[language] ?? localizePhrase(key, language)}</span>
-                    <i><b style={{ width: `${value}%` }} /></i>
-                    <strong>{formatOneDecimal(value / 10)}</strong>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="ops-intel-card ops-source-card">
-              <h3>{d.dataSource}</h3>
-              {agentPoolNote && <p className="ops-source-note ops-source-note-strong">{agentPoolNote}</p>}
-              <p className="ops-source-note">{agentReviewNote}</p>
-              {selectedFallbackProfile && (
-                <p className="ops-source-note ops-source-warning">
-                  {language === "zh"
-                    ? `#${selectedPick.pick} 使用扩展候选池回退画像，锁定前需补强球探资料。`
-                    : `#${selectedPick.pick} uses an expanded-pool fallback profile; enrich scouting before final lock.`}
-                </p>
-              )}
-              <p className="ops-source-note">{d.sourcePrefix}</p>
-              <p className="ops-source-note">{d.modelVersion} {boardAverage}%</p>
-              <p className="ops-source-note">{teamNote}</p>
-              <div className="ops-source-links">
-                {sourceLinks.slice(0, 3).map((source) => (
-                  <a href={source.url} key={source.url} target="_blank" rel="noreferrer">
-                    {localizePhrase(source.label, language)}
-                  </a>
-                ))}
-              </div>
-            </section>
-
-            <section className="ops-intel-card ops-alt-card">
-              <h3>{d.alternativesIfMissed}</h3>
-              <div className="ops-alt-list">
-                {selectedPick.alternatives.slice(0, 3).map((candidate, index) => (
-                  <div key={candidate.prospectId}>
-                    <strong>A{index + 1}</strong>
-                    <span>{localizeProspectName(candidate.name, language)}</span>
-                    <small>{localizePhrase(candidate.roleFit, language)}</small>
-                    <b>{formatOneDecimal(candidate.score)}</b>
-                  </div>
-                ))}
-              </div>
-              <button type="button" {...buttonMeta(d.moreAlternatives)}>{d.moreAlternatives}<ChevronDown size={14} /></button>
-            </section>
-          </aside>
-        </section>
-      </div>
-
-      <div className="legacy-layout" hidden>
-      <header className="app-header">
-        <div className="brand-block">
-          <div className="brand-mark">
-            <DraftOpsMark />
-          </div>
-          <div>
-            <strong>DraftOps</strong>
-            <span>{copy.brandSubtitle}</span>
-          </div>
-        </div>
-        <nav className="command-nav" aria-label="Page sections">
-          <a href="#board">{copy.navBoard}</a>
-          <a href="#milestones">{copy.navMilestones}</a>
-          <a href="#aws">{copy.navAws}</a>
-        </nav>
-        <div className="topbar-actions">
-          <button
-            className="button secondary legacy-language-toggle"
-            type="button"
-            onClick={() => setLanguage((current) => (current === "zh" ? "en" : "zh"))}
-            {...buttonMeta(copy.languageToggleAria)}
-          >
-            <Languages size={18} />
-            {copy.languageSwitch}
-          </button>
-          <button className="button secondary" type="button" onClick={() => setIsChatOpen(true)} {...buttonMeta(copy.actionDeepSeek)}>
-            <MessageCircle size={18} />
-            {copy.actionDeepSeek}
-          </button>
-          <button className="button secondary" type="button" onClick={exportBrief} {...buttonMeta(copy.actionBrief)}>
-            <FileInput size={18} />
-            {copy.actionBrief}
-          </button>
-          <button className="button primary" type="button" onClick={exportSubmission} {...buttonMeta(copy.actionSubmission)}>
-            <Download size={18} />
-            {copy.actionSubmission}
-          </button>
-        </div>
-      </header>
-
-      <section className="hero-panel command-deck">
-        <div className="hero-copy">
-          <div className="eyeline">
-            <Clock3 size={18} />
-            <span>{formatCountdown(language)}</span>
-          </div>
-          <h1>{copy.predictionBoard}</h1>
-          <p className="hero-status" aria-live="polite">
-            {status}
-          </p>
-        </div>
-        <div className="scenario-card">
-          <span>{copy.activeScenario}</span>
-          <strong>{isAgentLoading ? copy.loading : localizePhrase(agentMeta.label, language)}</strong>
-          <p>{copy.agentOnlyBoard}</p>
-          <small>{localizePhrase(agentMeta.generatedBy, language)}</small>
-          <small>{copy.translationSource}</small>
-        </div>
-      </section>
-
-      <section className="overview-grid" aria-label="Board status">
-        {overviewMetrics.map((item) => (
-          <article className="metric-card" key={item.label}>
-            <span className="metric-icon">{item.icon}</span>
-            <div>
-              <p>{item.label}</p>
-              <strong>{item.value}</strong>
-              <small>{item.detail}</small>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="board-layout">
-        <div className="workspace-main">
-          <section id="board" className="panel board-panel" ref={boardRef}>
-          <div className="panel-header">
-            <div>
-              <span className="section-kicker">{copy.roundOne}</span>
-              <h2>{copy.predictionBoard}</h2>
-            </div>
-            <div className="board-tools">
-              <label className="search-box" htmlFor="board-search">
-                <Search size={18} />
-                <input
-                  id="board-search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder={copy.searchPlaceholder}
-                />
-              </label>
-            </div>
-          </div>
-
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>{copy.pick}</th>
-                  <th>{copy.team}</th>
-                  <th>{copy.player}</th>
-                  <th>{copy.market}</th>
-                  <th>{copy.fit}</th>
-                  <th>{copy.confidence}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredBoard.map((pick) => {
-                  const prospectName = localizeProspectName(pick.prospect.name, language);
-                  return (
-                    <tr
-                      key={pick.pick}
-                      className={pick.pick === selectedPick.pick ? "selected" : ""}
-                      onClick={() => setSelectedPickNumber(pick.pick)}
-                    >
-                      <td className="pick-number">{pick.pick}</td>
-                      <td>
-                        <strong>{localizeTeamName(pick.team, language)}</strong>
-                        {pick.acquiredFrom && <span>{copy.fromTeam} {localizeTeamName(pick.acquiredFrom, language)}</span>}
-                      </td>
-                      <td>
-                        <div className="table-player-cell">
-                          <PlayerPhoto prospect={pick.prospect} label={prospectName} language={language} variant="compact" />
-                          <div>
-                            <strong>{prospectName}</strong>
-                            <span>
-                              {formatPositionsLocalized(pick.prospect.positions, language, copy.positionPending)} ·{" "}
-                              {localizeSchoolName(pick.prospect.school, language)}
-                            </span>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <strong>#{pick.prospect.consensusRank}</strong>
-                        <span>{pick.prospect.mockHeat}/100 {copy.heat}</span>
-                      </td>
-                      <td>{localizePhrase(pick.roleFit, language)}</td>
-                      <td>
-                        <div className="confidence">
-                          <span style={{ width: `${pick.confidence}%` }} />
-                        </div>
-                        <small>{pick.confidence}%</small>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+            )}
           </section>
 
-          <section className="support-grid">
-            <section id="milestones" className="panel">
-              <div className="panel-header">
-                <div>
-                  <span className="section-kicker">{copy.submissionHelpers}</span>
-                  <h2>{copy.milestones}</h2>
-                </div>
-              </div>
-              <div className="milestone-grid">
-                {milestones.map((milestone) => (
-                  <article key={milestone.id} className="milestone">
-                    <span>{localizeMilestoneType(milestone.type, language)}</span>
-                    <h3>{localizeMilestonePrompt(milestone.prompt, language)}</h3>
-                    <strong>{milestone.answer}</strong>
-                    <p>
-                      {milestone.evidence
-                        .slice(0, 2)
-                        .map((item) => localizeEvidenceText(hideAgentParameters(item), language))
-                        .join(" · ")}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section id="aws" className="panel aws-panel">
-              <div className="panel-header">
-                <div>
-                  <span className="section-kicker">{copy.architecture}</span>
-                  <h2>{copy.awsPlan}</h2>
-                </div>
-              </div>
-              <div className="aws-rail">
-                <div>
-                  <Server size={22} />
-                  <strong>{copy.appRunner}</strong>
-                  <span>{copy.appRunnerDetail}</span>
-                </div>
-                <div>
-                  <Database size={22} />
-                  <strong>{copy.storage}</strong>
-                  <span>{copy.storageDetail}</span>
-                </div>
-                <div>
-                  <BrainCircuit size={22} />
-                  <strong>{copy.bedrock}</strong>
-                  <span>{copy.bedrockDetail}</span>
-                </div>
-              </div>
-              <div className="cost-bar">
-                <span style={{ width: "32%" }} />
-              </div>
-              <p className="cost-note">{copy.costNote}</p>
-            </section>
-          </section>
-
-          <section id="brief" className="brief-band">
-            <div>
-              <span className="section-kicker">{copy.roadshow}</span>
-              <h2>{copy.pitchSpine}</h2>
-              <p>{copy.pitchCopy}</p>
-            </div>
-            <div className="source-list">
-              {sourceLinks.map((source) => (
+          <section className="ops-source-card" id="sources">
+            <h3>{d.dataSource}</h3>
+            {agentPoolNote && <p className="ops-source-note ops-source-note-strong">{agentPoolNote}</p>}
+            <p className="ops-source-note">{agentReviewNote}</p>
+            <p className="ops-source-note">{d.sourcePrefix}</p>
+            <p className="ops-source-note">{formatModelNote(draftOpsManifest, language, boardAverage)}</p>
+            <div className="ops-source-links">
+              {draftOpsManifest.sourceLinks.slice(0, 3).map((source) => (
                 <a href={source.url} key={source.url} target="_blank" rel="noreferrer">
-                  {localizePhrase(source.label, language)}
+                  {runtimeText(source.label, language)}
                 </a>
               ))}
             </div>
           </section>
-        </div>
-
-        <aside className="insight-rail" ref={insightRef}>
-          <section className="panel pick-panel">
-            <div className="pick-hero">
-              <div className="pick-hero-main">
-                <PlayerPhoto
-                  prospect={selectedPick.prospect}
-                  label={localizeProspectName(selectedPick.prospect.name, language)}
-                  language={language}
-                  variant="panel"
-                />
-                <div>
-                  <span>{copy.pickLabel} {selectedPick.pick}</span>
-                  <h2>{localizeProspectName(selectedPick.prospect.name, language)}</h2>
-                  <p>{localizeTeamName(selectedPick.team, language)}</p>
-                  <small className="photo-source-line">{formatPhotoSource(selectedPick.prospect, language)}</small>
-                </div>
-              </div>
-              <strong>{selectedPick.score}{copy.scoreUnit}</strong>
-            </div>
-            <p className="player-line">
-              {selectedPositions} · {formatOptionalValue(selectedPick.prospect.height, copy.heightPending)} ·{" "}
-              {formatWeight(selectedPick.prospect.weight, language)} ·{" "}
-              {localizeCountryName(formatOptionalValue(selectedPick.prospect.origin, copy.originPending), language)}
-            </p>
-            <div className="lock-note">{copy.lockedPick}</div>
-            <div className="profile-ribbon">
-              <div>
-                <span>{copy.consensus}</span>
-                <strong>#{selectedPick.prospect.consensusRank}</strong>
-              </div>
-              <div>
-                <span>{copy.heat}</span>
-                <strong>{selectedPick.prospect.mockHeat}</strong>
-              </div>
-              <div>
-                <span>{copy.age}</span>
-                <strong>{selectedPick.prospect.age}</strong>
-              </div>
-              <div>
-                <span>{copy.margin}</span>
-                <strong>{selectedPick.margin}</strong>
-              </div>
-            </div>
-            <div className="tag-cloud" aria-label="Player role tags">
-              {playerRoleTags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel evidence-panel expanded">
-            <div className="panel-header compact">
-              <div>
-                <span className="section-kicker">{copy.whyThisPick}</span>
-                <h2>{copy.evidence}</h2>
-              </div>
-              <Activity size={22} />
-            </div>
-            <div className="breakdown">
-              {Object.entries(selectedPick.breakdown).map(([key, value]) => (
-                <div key={key}>
-                  <span>{weightLabels[key as keyof Weights][language]}</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
-            </div>
-            <ul className="evidence-list">
-              {evidenceItems.map((item) => (
-                <li key={item}>{hideAgentParameters(item)}</li>
-              ))}
-            </ul>
-            <div className="risk-strip">
-              <span>{copy.riskNotes}</span>
-              <div>
-                {riskNotes.slice(0, 4).map((risk) => (
-                  <strong key={risk}>{risk}</strong>
-                ))}
-              </div>
-            </div>
-            <div className="warning-stack">
-              {warningNotes.map((warning) => (
-                <div className="warning-box" key={warning}>
-                  <AlertTriangle size={18} />
-                  <span>{warning}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel context-panel">
-            <div className="panel-header compact">
-              <div>
-                <span className="section-kicker">{copy.teamFile}</span>
-                <h2>{copy.fitContext}</h2>
-              </div>
-              <BrainCircuit size={22} />
-            </div>
-            <div className="context-grid">
-              <div>
-                <span>{copy.draftZone}</span>
-                <strong>{localizeZone(selectedPick.zone, language)}</strong>
-              </div>
-              <div>
-                <span>{copy.teamPhase}</span>
-                <strong>{localizePhase(formatOptionalValue(selectedTeam?.phase, language === "zh" ? "智能体推断" : "agent inferred"), language)}</strong>
-              </div>
-              <div>
-                <span>{copy.riskTolerance}</span>
-                <strong>{formatOptionalValue(selectedTeam?.riskTolerance, language === "zh" ? "智能体待确认" : "agent pending")}</strong>
-              </div>
-              <div>
-                <span>{copy.tradeSlot}</span>
-                <strong>{tradeSlot}</strong>
-              </div>
-            </div>
-            <div className="signal-section">
-              <span>{copy.teamNeeds}</span>
-              <div className="tag-cloud compact">
-                {teamNeeds.map((need) => (
-                  <span key={need}>{need}</span>
-                ))}
-              </div>
-            </div>
-            <div className="signal-section">
-              <span>{copy.priorityTags}</span>
-              <div className="tag-cloud compact">
-                {priorityTags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-            <p className="context-note">{teamNote}</p>
-          </section>
-
-          <section className="panel profile-panel">
-            <div className="panel-header compact">
-              <div>
-                <span className="section-kicker">{copy.playerFile}</span>
-                <h2>{copy.profileSignals}</h2>
-              </div>
-              <Gauge size={22} />
-            </div>
-            <div className="profile-bars">
-              {prospectProfile.map(([key, value]) => (
-                <div className="profile-bar" key={key}>
-                  <span>
-                    {localizePhrase(key, language)} <strong>{value}</strong>
-                  </span>
-                  <div>
-                    <i style={{ width: `${value}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="signal-section">
-              <span>{copy.strengths}</span>
-              <ul className="compact-list">
-                {strengthNotes.map((strength) => (
-                  <li key={strength}>{strength}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="signal-section">
-              <span>{copy.sourceNotes}</span>
-              <ul className="compact-list">
-                {sourceNotes.map((note) => (
-                  <li key={note}>{hideAgentParameters(note)}</li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          <section className="panel alternatives-panel">
-            <div className="panel-header compact">
-              <div>
-                <span className="section-kicker">{copy.runnerUpCheck}</span>
-                <h2>{copy.alternatives}</h2>
-              </div>
-              <TrendingUp size={22} />
-            </div>
-            <div className="candidate-list">
-              {selectedPick.alternatives.length ? (
-                selectedPick.alternatives.map((candidate, index) => (
-                  <div className="candidate-row" key={candidate.prospectId}>
-                    <strong>{index + 2}</strong>
-                    <span>{localizeProspectName(candidate.name, language)}</span>
-                    <small>{localizePhrase(candidate.roleFit, language)}</small>
-                    <b>{candidate.score}</b>
-                  </div>
-                ))
-              ) : (
-                <div className="candidate-empty">{copy.noAlternativeFallback}</div>
-              )}
-            </div>
-            <p className="context-note">
-              {copy.agentMargin}: {selectedPick.margin}. {copy.confidence}: {selectedPick.confidence}%.
-            </p>
-          </section>
-
         </aside>
-      </section>
+
+        <section className="ops-workflow-dock" id="workflow">
+          <header>
+            <div>
+              <span>{statusCopy.workflowDock}</span>
+              <h2>{workflowMode === "flow" ? d.workflow : d.awsData}</h2>
+            </div>
+            <div className="ops-dock-switch">
+              <button className={workflowMode === "flow" ? "active" : ""} type="button" onClick={() => setWorkflowMode("flow")}>
+                {statusCopy.showFlow}
+              </button>
+              <button className={workflowMode === "aws" ? "active" : ""} type="button" onClick={() => setWorkflowMode("aws")}>
+                {statusCopy.showAws}
+              </button>
+            </div>
+          </header>
+          {workflowMode === "flow" ? (
+            <div className="ops-flow-list">
+              {workflowSteps.map((step, index) => (
+                <article className={`ops-flow-step ${step.tone}`} key={step.label}>
+                  <span className="ops-flow-icon">{step.icon}</span>
+                  <div>
+                    <strong>{step.label}</strong>
+                    <small>{step.date}</small>
+                  </div>
+                  <b>{step.status}</b>
+                  {index < workflowSteps.length - 1 && <i />}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="ops-aws-chain">
+              {awsSteps.map((step, index) => (
+                <article key={step.label}>
+                  <span>{step.icon}</span>
+                  <div>
+                    <strong>{step.label}</strong>
+                    <small>{step.detail}</small>
+                  </div>
+                  {index < awsSteps.length - 1 && <i />}
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <nav className="ops-mobile-tabs" aria-label="Mobile sections">
+          {mobileTabs.map((item) => (
+            <button
+              className={mobileSection === item.id ? "active" : ""}
+              type="button"
+              key={item.id}
+              onClick={() => setMobileSection(item.id)}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
+          ))}
+          <button className={isChatOpen ? "active" : ""} type="button" onClick={() => setIsChatOpen(true)} aria-pressed={isChatOpen}>
+            <MessageCircle size={18} />
+            <span>{statusCopy.chatTab}</span>
+          </button>
+        </nav>
       </div>
 
-      <section className={`deepseek-dock ${isChatOpen ? "open" : ""}`} aria-label="DeepSeek chat window">
-        <div className="deepseek-window" role="dialog" aria-modal="false" aria-labelledby="deepseek-title">
-          <header className="deepseek-header">
-            <div>
-              <span className="section-kicker">{copy.liveLlm}</span>
-              <h2 id="deepseek-title">{copy.deepSeekWindow}</h2>
-              <p>{chatModelLabel} · {copy.deepSeekSubtitle}</p>
+
+      {isChatOpen && (
+        <section className="deepseek-dock open" aria-label="DeepSeek chat window">
+          <div className="deepseek-window" role="dialog" aria-modal="true" aria-labelledby="deepseek-title">
+            <header className="deepseek-header">
+              <div>
+                <span className="section-kicker">{copy.liveLlm}</span>
+                <h2 id="deepseek-title">{copy.deepSeekWindow}</h2>
+                <p>{chatModelLabel} · {copy.deepSeekSubtitle}</p>
+              </div>
+              <button className="icon-button" type="button" onClick={() => setIsChatOpen(false)} {...buttonMeta(copy.closeDeepSeek)}>
+                <X size={20} />
+              </button>
+            </header>
+
+            <div className="chat-log" aria-live="polite">
+              {chatMessages.map((message) => (
+                <article className={`chat-message ${message.role}`} key={message.id}>
+                  <span>{message.role === "assistant" ? "DeepSeek" : copy.you}</span>
+                  <p>{message.id === "deepseek-ready" ? copy.chatIntro(chatModelLabel) : message.content}</p>
+                </article>
+              ))}
+              {isChatLoading && (
+                <article className="chat-message assistant">
+                  <span>DeepSeek</span>
+                  <p>{copy.chatThinking}</p>
+                </article>
+              )}
             </div>
-            <button className="icon-button" type="button" onClick={() => setIsChatOpen(false)} {...buttonMeta(copy.closeDeepSeek)}>
-              <X size={20} />
-            </button>
-          </header>
 
-          <div className="chat-log" aria-live="polite">
-            {chatMessages.map((message) => (
-              <article className={`chat-message ${message.role}`} key={message.id}>
-                <span>{message.role === "assistant" ? "DeepSeek" : copy.you}</span>
-                <p>{message.id === "deepseek-ready" ? copy.chatIntro : message.content}</p>
-              </article>
-            ))}
-            {isChatLoading && (
-              <article className="chat-message assistant">
-                <span>DeepSeek</span>
-                <p>{copy.chatThinking}</p>
-              </article>
-            )}
+            <form
+              className="chat-composer"
+              onSubmit={(event) => {
+                event.preventDefault();
+                void askDeepSeek();
+              }}
+            >
+              <textarea
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                placeholder={copy.chatPlaceholder}
+                rows={3}
+              />
+              <button className="button primary" type="submit" disabled={isChatLoading || !chatInput.trim()} {...buttonMeta(copy.send)}>
+                <Send size={18} />
+                {copy.send}
+              </button>
+            </form>
           </div>
-
-          <form
-            className="chat-composer"
-            onSubmit={(event) => {
-              event.preventDefault();
-              void askDeepSeek();
-            }}
-          >
-            <textarea
-              value={chatInput}
-              onChange={(event) => setChatInput(event.target.value)}
-              placeholder={copy.chatPlaceholder}
-              rows={3}
-            />
-            <button className="button primary" type="submit" disabled={isChatLoading || !chatInput.trim()} {...buttonMeta(copy.send)}>
-              <Send size={18} />
-              {copy.send}
-            </button>
-          </form>
-        </div>
-      </section>
+        </section>
+      )}
 
     </main>
   );

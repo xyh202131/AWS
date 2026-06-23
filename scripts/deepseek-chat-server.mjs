@@ -1,12 +1,12 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
+import { draftOpsManifest, resolveManifestPath, rootDir } from "./lib/draftops-manifest.mjs";
 
-const rootDir = process.cwd();
 const localEnvPath = resolve(rootDir, ".env.local");
 const envPath = resolve(rootDir, ".env");
-const boardPath = resolve(rootDir, "public", "data", "agent_balanced_board.json");
-const bundlePath = resolve(rootDir, "public", "data", "final_import_bundle.json");
+const boardPath = resolveManifestPath(draftOpsManifest.data?.boardPath, "public/data/agent_balanced_board.json");
+const bundlePath = resolveManifestPath(draftOpsManifest.data?.bundlePath, "public/data/final_import_bundle.json");
 const documentIndexPath = resolve(rootDir, "data", "documents", "document_index.json");
 const milestoneReferencePath = resolve(rootDir, "data", "documents", "milestone-questions", "DraftCode24里程碑事件预测.md");
 const examReportPath = resolve(rootDir, "data", "reports", "deepseek_exam_answers.json");
@@ -29,23 +29,13 @@ const knowledgePaths = [
   "data/normalized/normalized_2026_mock_lottery.json",
   "data/normalized/normalized_2026_team_context.json",
   "data/normalized/normalized_2026_prospect_big_board.json",
-  "public/data/final_import_bundle.json",
-  "public/data/agent_balanced_board.json",
+  draftOpsManifest.data?.bundlePath ?? "public/data/final_import_bundle.json",
+  draftOpsManifest.data?.boardPath ?? "public/data/agent_balanced_board.json",
 ];
-const officialWebSources = [
-  {
-    name: "NBA.com official 2026 Draft Order",
-    url: "https://www.nba.com/news/2026-nba-draft-order",
-  },
-  {
-    name: "NBA.com official 2026 Prospects",
-    url: "https://www.nba.com/draft/2026/prospects",
-  },
-  {
-    name: "NBA.com 2026 Consensus Mock Draft",
-    url: "https://www.nba.com/news/2026-consensus-mock-draft",
-  },
-];
+const officialWebSources = (draftOpsManifest.sourceLinks ?? []).map((source) => ({
+  name: source.label?.en ?? source.label?.zh ?? source.url,
+  url: source.url,
+}));
 
 const loadEnvFile = async (path) => {
   const content = await readFile(path, "utf8").catch((error) => {

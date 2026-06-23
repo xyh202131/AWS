@@ -1,20 +1,5 @@
 import type { Prospect, TeamProfile, Weights } from "../types";
 
-export const sourceLinks = [
-  {
-    label: "NBA.com official 2026 first-round order",
-    url: "https://www.nba.com/news/2026-nba-draft-order",
-  },
-  {
-    label: "NBA.com consensus mock draft",
-    url: "https://www.nba.com/news/2026-consensus-mock-draft",
-  },
-  {
-    label: "Tankathon 2026 big board",
-    url: "https://www.tankathon.com/big-board",
-  },
-];
-
 export const defaultWeights: Weights = {
   consensus: 35,
   need: 25,

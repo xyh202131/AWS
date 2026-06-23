@@ -20,7 +20,7 @@ Or from the parent `AWS` folder:
 .\start-draftops.bat
 ```
 
-The launcher checks dependencies, installs them if `node_modules` is missing, starts Vite on `http://127.0.0.1:3002/`, and opens the browser.
+The launcher checks dependencies, installs them if `node_modules` is missing, starts Vite from `DRAFTOPS_CLIENT_PORT` or `3002`, automatically moves to the next available port when needed, and opens the browser.
 
 Manual commands:
 
@@ -32,9 +32,9 @@ npm run build
 
 ## DeepSeek Agent
 
-The interactive window and local exam-answer agent call DeepSeek V4 Pro through an OpenAI-compatible chat completions request. This DeepSeek is a read-only Q&A agent: it can answer the current milestone/exam question set, explain milestone wording, field intent, and scoring rules from `data/documents/milestone-questions/DraftCode24里程碑事件预测.md`, and answer prediction-themed questions by reading the current locked board. It must not generate, change, reorder, or recommend changes to predicted players. The 30-pick board belongs to the designated locked prediction pipeline, which may be Codex, another DeepSeek, or another explicit module later, but not this read-only DeepSeek. The browser talks to the local proxy on `http://127.0.0.1:4318`; the proxy reads `.env.local`, so the API key is never sent to the frontend.
+The interactive window and local exam-answer agent call DeepSeek through an OpenAI-compatible chat completions request. This DeepSeek is a read-only Q&A agent: it can answer the current milestone/exam question set, explain milestone wording, field intent, and scoring rules from `data/documents/milestone-questions/DraftCode24里程碑事件预测.md`, and answer prediction-themed questions by reading the locked board declared in `src/config/draftops-manifest.json`. It must not generate, change, reorder, or recommend changes to predicted players. The 30-pick board belongs to the designated locked prediction pipeline, which may be Codex, another DeepSeek, or another explicit module later, but not this read-only DeepSeek. The browser talks to the local proxy from `DEEPSEEK_AGENT_PORT` or `4318`; the launcher automatically moves to the next available port when needed. The proxy reads `.env.local`, so the API key is never sent to the frontend.
 
-Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY`. Keep `DEEPSEEK_MODEL=deepseek-v4-pro` for the API model id and `DEEPSEEK_MODEL_LABEL=deepseek-v4-pro[1m]` for reports, then run:
+Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY`. Keep model, label, and preferred ports in `.env.local` when they need to differ from the defaults, then run:
 
 ```powershell
 npm run dev:agent
@@ -90,7 +90,7 @@ Keep Bedrock calls batched and cache summaries so the stack stays inside the $17
 ## Submission Checklist
 
 - GitHub repository is **Private**.
-- Final push completes before **2026-06-24 08:00**.
+- Final push completes before the deadline declared in `src/config/draftops-manifest.json`.
 - Board has exactly 30 picks and no duplicate players.
 - Board provenance declares no manual overrides.
 - Milestone answers are exported and source-checked.

@@ -36,6 +36,21 @@ function Get-AvailableLocalPort {
   throw "No available local port from $StartPort to $($StartPort + $Attempts - 1)."
 }
 
+function Get-PreferredPort {
+  param(
+    [Parameter(Mandatory = $true)][string]$Name,
+    [Parameter(Mandatory = $true)][int]$DefaultPort
+  )
+
+  $value = [Environment]::GetEnvironmentVariable($Name)
+  $port = 0
+  if ($value -and [int]::TryParse($value, [ref]$port) -and $port -gt 0 -and $port -lt 65536) {
+    return $port
+  }
+
+  return $DefaultPort
+}
+
 function Test-AgentHealthy {
   param(
     [Parameter(Mandatory = $true)][int]$Port,
@@ -131,15 +146,17 @@ if (-not (Test-Path -LiteralPath "node_modules")) {
   }
 }
 
-$clientPort = Get-AvailableLocalPort -StartPort 3002
+$preferredClientPort = Get-PreferredPort -Name "DRAFTOPS_CLIENT_PORT" -DefaultPort 3002
+$clientPort = Get-AvailableLocalPort -StartPort $preferredClientPort
 $clientOrigin = "http://127.0.0.1:$clientPort"
 $url = "$clientOrigin/"
 
-if ($clientPort -ne 3002) {
-  Write-Host "Port 3002 is occupied; using DraftOps frontend port $clientPort." -ForegroundColor Yellow
+if ($clientPort -ne $preferredClientPort) {
+  Write-Host "Port $preferredClientPort is occupied; using DraftOps frontend port $clientPort." -ForegroundColor Yellow
 }
 
-$agentPort = 4318
+$preferredAgentPort = Get-PreferredPort -Name "DEEPSEEK_AGENT_PORT" -DefaultPort 4318
+$agentPort = $preferredAgentPort
 $agentHealthy = Test-AgentHealthy -Port $agentPort -Origin $clientOrigin
 $agentProcess = $null
 
@@ -147,8 +164,8 @@ if ($agentHealthy) {
   Write-Host "Using existing DeepSeek local proxy on http://127.0.0.1:$agentPort" -ForegroundColor Green
 } else {
   if (-not (Test-LocalPortAvailable -Port $agentPort)) {
-    $agentPort = Get-AvailableLocalPort -StartPort 4319
-    Write-Host "Port 4318 is occupied by another process; using DeepSeek proxy port $agentPort." -ForegroundColor Yellow
+    $agentPort = Get-AvailableLocalPort -StartPort ($preferredAgentPort + 1)
+    Write-Host "Port $preferredAgentPort is occupied by another process; using DeepSeek proxy port $agentPort." -ForegroundColor Yellow
   }
 
   Write-Host "Starting DeepSeek local proxy on http://127.0.0.1:$agentPort" -ForegroundColor Yellow

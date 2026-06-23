@@ -89,7 +89,8 @@ export const UI_COPY = {
     liveLlm: "实时大模型",
     deepSeekWindow: "DeepSeek 问答窗口",
     deepSeekSubtitle: "只读问答 · 当前锁定预测板",
-    chatIntro: "DeepSeek V4 Pro[1m] 已接入。当前 DeepSeek 是只读问答 Agent，可回答应试题、参考口径和预测主题问题；预测结果只读取当前锁定预测板，不能参与改动。",
+    chatIntro: (modelLabel: string) =>
+      `${modelLabel} 已接入。当前 DeepSeek 是只读问答 Agent，可回答应试题、参考口径和预测主题问题；预测结果只读取当前锁定预测板，不能参与改动。`,
     closeDeepSeek: "关闭 DeepSeek 窗口",
     you: "你",
     chatThinking: "分析中...",
@@ -198,7 +199,8 @@ export const UI_COPY = {
     liveLlm: "Live LLM",
     deepSeekWindow: "DeepSeek Window",
     deepSeekSubtitle: "Read-only Q&A · locked board",
-    chatIntro: "DeepSeek V4 Pro[1m] is connected. This DeepSeek is a read-only Q&A agent for exam, reference, and prediction-themed questions; prediction answers only read the locked board and cannot change it.",
+    chatIntro: (modelLabel: string) =>
+      `${modelLabel} is connected. This DeepSeek is a read-only Q&A agent for exam, reference, and prediction-themed questions; prediction answers only read the locked board and cannot change it.`,
     closeDeepSeek: "Close DeepSeek window",
     you: "You",
     chatThinking: "Analyzing...",

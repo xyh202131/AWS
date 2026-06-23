@@ -1,4 +1,4 @@
-import type { DraftPick, DraftZone, MilestoneAnswer, Prospect, TeamProfile, Weights } from "../types";
+import type { DraftPick, DraftZone, LocalizedText, MilestoneAnswer, Prospect, RuntimeMilestoneDefinition, TeamProfile, Weights } from "../types";
 
 const clamp = (value: number, min = 0, max = 100) => Math.min(max, Math.max(min, value));
 
@@ -510,7 +510,31 @@ const getSchoolLeader = (board: DraftPick[]) => {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
 };
 
-export const generateMilestones = (board: DraftPick[]): MilestoneAnswer[] => {
+const localized = (zh: string, en: string): LocalizedText => ({ zh, en });
+
+const pickEvidence = (pick: DraftPick, suffix = ""): LocalizedText => ({
+  zh: `${pick.pick}. ${pick.prospect.name}${suffix}`,
+  en: `${pick.pick}. ${pick.prospect.name}${suffix}`,
+});
+
+const baseMilestone = (
+  definition: RuntimeMilestoneDefinition,
+  answerI18n: LocalizedText,
+  evidenceI18n: LocalizedText[],
+  confidence?: number,
+): MilestoneAnswer => ({
+  id: definition.id,
+  prompt: definition.prompt.zh,
+  promptI18n: definition.prompt,
+  type: definition.type,
+  answer: answerI18n.zh,
+  answerI18n,
+  confidence: confidence ?? definition.confidence,
+  evidence: evidenceI18n.map((item) => item.zh),
+  evidenceI18n,
+});
+
+export const generateMilestones = (board: DraftPick[], definitions: RuntimeMilestoneDefinition[]): MilestoneAnswer[] => {
   const firstFive = board.slice(0, 5);
   const firstInternational = board.find((pick) => pick.prospect.international);
   const schoolLeader = getSchoolLeader(board);
@@ -521,68 +545,74 @@ export const generateMilestones = (board: DraftPick[]): MilestoneAnswer[] => {
   const freshmen = board.filter((pick) => pick.prospect.classYear === "Freshman");
   const tradedPicks = board.filter((pick) => pick.acquiredFrom);
 
-  return [
-    {
-      id: "intl-top-five",
-      prompt: "前 5 位是否包含国际球员？",
-      type: "yes_no",
-      answer: firstFive.some((pick) => pick.prospect.international) ? "是" : "否",
-      confidence: 74,
-      evidence: firstFive.map((pick) => `${pick.pick}. ${pick.prospect.name} (${pick.prospect.origin})`),
-    },
-    {
-      id: "first-intl",
-      prompt: "第一位被选中的国际球员是几顺位？",
-      type: "number",
-      answer: firstInternational ? String(firstInternational.pick) : "首轮无国际球员",
-      confidence: firstInternational ? firstInternational.confidence : 48,
-      evidence: firstInternational
-        ? [`${firstInternational.pick}. ${firstInternational.prospect.name}, ${firstInternational.prospect.origin}`]
-        : ["Current board has no international player in round one."],
-    },
-    {
-      id: "school-most",
-      prompt: "哪所学校贡献最多首轮秀？",
-      type: "text",
-      answer: schoolLeader ? `${schoolLeader[0]} (${schoolLeader[1]} 人)` : "N/A",
-      confidence: 68,
-      evidence: board
-        .filter((pick) => pick.prospect.school === schoolLeader?.[0])
-        .map((pick) => `${pick.pick}. ${pick.prospect.name}`),
-    },
-    {
-      id: "lottery-guards",
-      prompt: "乐透区会有多少名后卫？",
-      type: "number",
-      answer: String(lotteryGuards.length),
-      confidence: 66,
-      evidence: lotteryGuards.map((pick) => `${pick.pick}. ${pick.prospect.name} (${pick.prospect.positions.join("/")})`),
-    },
-    {
-      id: "first-center",
-      prompt: "第一位中锋是几顺位？",
-      type: "number",
-      answer: firstCenter ? String(firstCenter.pick) : "首轮无中锋",
-      confidence: firstCenter ? firstCenter.confidence : 45,
-      evidence: firstCenter ? [`${firstCenter.pick}. ${firstCenter.prospect.name}`] : ["No center appears in current board."],
-    },
-    {
-      id: "freshmen-count",
-      prompt: "首轮 Freshman 数量是多少？",
-      type: "number",
-      answer: String(freshmen.length),
-      confidence: 63,
-      evidence: freshmen.slice(0, 8).map((pick) => `${pick.pick}. ${pick.prospect.name}`),
-    },
-    {
-      id: "traded-picks",
-      prompt: "首轮来自交易的顺位数量是多少？",
-      type: "number",
-      answer: String(tradedPicks.length),
-      confidence: 82,
-      evidence: tradedPicks.map((pick) => `${pick.pick}. ${pick.team} from ${pick.acquiredFrom}`),
-    },
-  ];
+  return definitions.flatMap((definition) => {
+    if (definition.id === "intl-top-five") {
+      const hasInternational = firstFive.some((pick) => pick.prospect.international);
+      return baseMilestone(
+        definition,
+        localized(hasInternational ? "是" : "否", hasInternational ? "Yes" : "No"),
+        firstFive.map((pick) => pickEvidence(pick, ` (${pick.prospect.origin})`)),
+      );
+    }
+
+    if (definition.id === "first-intl") {
+      return baseMilestone(
+        definition,
+        firstInternational
+          ? localized(String(firstInternational.pick), String(firstInternational.pick))
+          : localized("首轮无国际球员", "No international player in round one"),
+        firstInternational
+          ? [pickEvidence(firstInternational, `, ${firstInternational.prospect.origin}`)]
+          : [localized("当前预测板首轮没有国际球员。", "Current board has no international player in round one.")],
+        firstInternational ? firstInternational.confidence : definition.confidence,
+      );
+    }
+
+    if (definition.id === "school-most") {
+      return baseMilestone(
+        definition,
+        schoolLeader ? localized(`${schoolLeader[0]} (${schoolLeader[1]} 人)`, `${schoolLeader[0]} (${schoolLeader[1]})`) : localized("N/A", "N/A"),
+        board.filter((pick) => pick.prospect.school === schoolLeader?.[0]).map((pick) => pickEvidence(pick)),
+      );
+    }
+
+    if (definition.id === "lottery-guards") {
+      return baseMilestone(
+        definition,
+        localized(String(lotteryGuards.length), String(lotteryGuards.length)),
+        lotteryGuards.map((pick) => pickEvidence(pick, ` (${pick.prospect.positions.join("/")})`)),
+      );
+    }
+
+    if (definition.id === "first-center") {
+      return baseMilestone(
+        definition,
+        firstCenter ? localized(String(firstCenter.pick), String(firstCenter.pick)) : localized("首轮无中锋", "No center in round one"),
+        firstCenter ? [pickEvidence(firstCenter)] : [localized("当前预测板首轮没有中锋。", "No center appears in current board.")],
+        firstCenter ? firstCenter.confidence : definition.confidence,
+      );
+    }
+
+    if (definition.id === "freshmen-count") {
+      return baseMilestone(
+        definition,
+        localized(String(freshmen.length), String(freshmen.length)),
+        freshmen.slice(0, 8).map((pick) => pickEvidence(pick)),
+      );
+    }
+
+    if (definition.id === "traded-picks") {
+      return baseMilestone(
+        definition,
+        localized(String(tradedPicks.length), String(tradedPicks.length)),
+        tradedPicks.map((pick) =>
+          localized(`${pick.pick}. ${pick.team} 来自 ${pick.acquiredFrom}`, `${pick.pick}. ${pick.team} from ${pick.acquiredFrom}`),
+        ),
+      );
+    }
+
+    return [];
+  });
 };
 
 export const getBoardHealth = (board: DraftPick[]) => {
