@@ -12,6 +12,7 @@
     "agent:deepseek": "node scripts/deepseek-agent.mjs",
     "agent:deepseek:server": "node scripts/deepseek-chat-server.mjs",
     "media:sync": "node scripts/sync-prospect-media.mjs",
+    "rag:build": "node scripts/build-rag-index.mjs",
     "board:regen": "node scripts/regenerate-board.mjs",
     "board:regen:expanded": "node scripts/regenerate-board-expanded.mjs",
     "board:regen:expanded:all": "node scripts/regenerate-expanded-strategies.mjs",
