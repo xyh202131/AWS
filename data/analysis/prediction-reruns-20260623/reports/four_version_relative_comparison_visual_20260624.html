@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DraftOps 四版相对评分预测比对</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+      background: #f8fafc;
+      color: #111827;
+    }
+    body {
+      margin: 0;
+      padding: 28px;
+      background: #f8fafc;
+    }
+    .sheet {
+      max-width: 1680px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #dbe3ef;
+      border-radius: 10px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+    header {
+      padding: 24px 28px 18px;
+      border-bottom: 1px solid #e5e7eb;
+      background: linear-gradient(180deg, #ffffff, #f9fbff);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+    .pill {
+      border: 1px solid #d8e0eb;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #fff;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #334155;
+    }
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .table-wrap {
+      overflow: auto;
+      max-height: calc(100vh - 210px);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 1260px;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #0f172a;
+      color: #ffffff;
+      text-align: left;
+      padding: 12px 10px;
+      font-weight: 700;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    tbody td {
+      padding: 10px;
+      border-top: 1px solid #e5e7eb;
+      border-right: 1px solid #eef2f7;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    tbody tr:nth-child(even) {
+      background: #fbfdff;
+    }
+    .row-unanimous {
+      background: #f0fdf4;
+    }
+    tbody tr.row-soft {
+      background: #fffdf3;
+    }
+    tbody tr.row-split {
+      background: #fff7ed;
+    }
+    .pick {
+      width: 52px;
+      text-align: right;
+      color: #475569;
+      font-variant-numeric: tabular-nums;
+    }
+    .team {
+      min-width: 190px;
+      color: #0f172a;
+    }
+    .majority {
+      color: #111827;
+    }
+    .dissent,
+    .tie {
+      font-weight: 850;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    .agreement {
+      text-align: center;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .plurality {
+      color: #065f46;
+    }
+    .note {
+      padding: 14px 28px 22px;
+      color: #475569;
+      font-size: 13px;
+      border-top: 1px solid #e5e7eb;
+      background: #fbfdff;
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <h1>四版相对评分预测直观比对</h1>
+      <div class="meta">
+        <span class="pill">4/4 一致：8 个顺位</span>
+        <span class="pill">3/4 一致：19 个顺位</span>
+        <span class="pill">2/4 分歧：3 个顺位</span>
+        <span class="pill">校验：30 picks / 3255 reviews / 剩余 93</span>
+      </div>
+      <div class="legend">
+        <span><i class="dot" style="background:#111827"></i>多数一致</span>
+        <span><i class="dot" style="background:#dc2626"></i>DeepSeek LLM 不同</span>
+        <span><i class="dot" style="background:#7c3aed"></i>Codex LLM 不同</span>
+        <span><i class="dot" style="background:#2563eb"></i>Codex Agent 不同</span>
+        <span><i class="dot" style="background:#b45309"></i>原始相对版不同 / 2-2 分歧组</span>
+      </div>
+    </header>
+    <section class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>球队</th>
+            <th>Relative Original</th>
+            <th>DeepSeek LLM</th>
+            <th>Codex LLM</th>
+            <th>Codex Agent</th>
+            <th>一致度</th>
+            <th>多数结果</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr class="row-unanimous">
+  <td class="pick">1</td>
+  <td class="team">Washington Wizards</td>
+  <td class="majority" style="color:#111827">AJ Dybantsa</td>
+  <td class="majority" style="color:#111827">AJ Dybantsa</td>
+  <td class="majority" style="color:#111827">AJ Dybantsa</td>
+  <td class="majority" style="color:#111827">AJ Dybantsa</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">AJ Dybantsa</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">2</td>
+  <td class="team">Utah Jazz</td>
+  <td class="majority" style="color:#111827">Darryn Peterson</td>
+  <td class="majority" style="color:#111827">Darryn Peterson</td>
+  <td class="majority" style="color:#111827">Darryn Peterson</td>
+  <td class="majority" style="color:#111827">Darryn Peterson</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Darryn Peterson</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">3</td>
+  <td class="team">Memphis Grizzlies</td>
+  <td class="majority" style="color:#111827">Cameron Boozer</td>
+  <td class="majority" style="color:#111827">Cameron Boozer</td>
+  <td class="majority" style="color:#111827">Cameron Boozer</td>
+  <td class="majority" style="color:#111827">Cameron Boozer</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Cameron Boozer</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">4</td>
+  <td class="team">Chicago Bulls</td>
+  <td class="majority" style="color:#111827">Caleb Wilson</td>
+  <td class="majority" style="color:#111827">Caleb Wilson</td>
+  <td class="majority" style="color:#111827">Caleb Wilson</td>
+  <td class="majority" style="color:#111827">Caleb Wilson</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Caleb Wilson</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">5</td>
+  <td class="team">LA Clippers</td>
+  <td class="majority" style="color:#111827">Keaton Wagler</td>
+  <td class="majority" style="color:#111827">Keaton Wagler</td>
+  <td class="majority" style="color:#111827">Keaton Wagler</td>
+  <td class="majority" style="color:#111827">Keaton Wagler</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Keaton Wagler</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">6</td>
+  <td class="team">Brooklyn Nets</td>
+  <td class="majority" style="color:#111827">Kingston Flemings</td>
+  <td class="dissent" style="color:#dc2626">Darius Acuff Jr.</td>
+  <td class="majority" style="color:#111827">Kingston Flemings</td>
+  <td class="majority" style="color:#111827">Kingston Flemings</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Kingston Flemings</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">7</td>
+  <td class="team">Sacramento Kings</td>
+  <td class="majority" style="color:#111827">Darius Acuff Jr.</td>
+  <td class="dissent" style="color:#dc2626">Mikel Brown Jr.</td>
+  <td class="majority" style="color:#111827">Darius Acuff Jr.</td>
+  <td class="majority" style="color:#111827">Darius Acuff Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Darius Acuff Jr.</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">8</td>
+  <td class="team">Atlanta Hawks</td>
+  <td class="majority" style="color:#111827">Nate Ament</td>
+  <td class="dissent" style="color:#dc2626">Aday Mara</td>
+  <td class="majority" style="color:#111827">Nate Ament</td>
+  <td class="majority" style="color:#111827">Nate Ament</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Nate Ament</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">9</td>
+  <td class="team">Dallas Mavericks</td>
+  <td class="majority" style="color:#111827">Brayden Burries</td>
+  <td class="majority" style="color:#111827">Brayden Burries</td>
+  <td class="majority" style="color:#111827">Brayden Burries</td>
+  <td class="majority" style="color:#111827">Brayden Burries</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Brayden Burries</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">10</td>
+  <td class="team">Milwaukee Bucks</td>
+  <td class="majority" style="color:#111827">Karim Lopez</td>
+  <td class="dissent" style="color:#dc2626">Kingston Flemings</td>
+  <td class="majority" style="color:#111827">Karim Lopez</td>
+  <td class="majority" style="color:#111827">Karim Lopez</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Karim Lopez</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">11</td>
+  <td class="team">Golden State Warriors</td>
+  <td class="majority" style="color:#111827">Labaron Philon Jr.</td>
+  <td class="dissent" style="color:#dc2626">Bennett Stirtz</td>
+  <td class="majority" style="color:#111827">Labaron Philon Jr.</td>
+  <td class="majority" style="color:#111827">Labaron Philon Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Labaron Philon Jr.</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">12</td>
+  <td class="team">Oklahoma City Thunder</td>
+  <td class="majority" style="color:#111827">Aday Mara</td>
+  <td class="dissent" style="color:#dc2626">Yaxel Lendeborg</td>
+  <td class="majority" style="color:#111827">Aday Mara</td>
+  <td class="majority" style="color:#111827">Aday Mara</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Aday Mara</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">13</td>
+  <td class="team">Miami Heat</td>
+  <td class="majority" style="color:#111827">Yaxel Lendeborg</td>
+  <td class="dissent" style="color:#dc2626">Karim Lopez</td>
+  <td class="majority" style="color:#111827">Yaxel Lendeborg</td>
+  <td class="majority" style="color:#111827">Yaxel Lendeborg</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Yaxel Lendeborg</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">14</td>
+  <td class="team">Charlotte Hornets</td>
+  <td class="majority" style="color:#111827">Allen Graves</td>
+  <td class="dissent" style="color:#dc2626">Morez Johnson Jr.</td>
+  <td class="majority" style="color:#111827">Allen Graves</td>
+  <td class="majority" style="color:#111827">Allen Graves</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Allen Graves</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">15</td>
+  <td class="team">Chicago Bulls</td>
+  <td class="majority" style="color:#111827">Cameron Carr</td>
+  <td class="dissent" style="color:#dc2626">Allen Graves</td>
+  <td class="majority" style="color:#111827">Cameron Carr</td>
+  <td class="majority" style="color:#111827">Cameron Carr</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Cameron Carr</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">16</td>
+  <td class="team">Memphis Grizzlies</td>
+  <td class="majority" style="color:#111827">Dailyn Swain</td>
+  <td class="dissent" style="color:#dc2626">Chris Cenac Jr.</td>
+  <td class="majority" style="color:#111827">Dailyn Swain</td>
+  <td class="majority" style="color:#111827">Dailyn Swain</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Dailyn Swain</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">17</td>
+  <td class="team">Oklahoma City Thunder</td>
+  <td class="majority" style="color:#111827">Morez Johnson Jr.</td>
+  <td class="dissent" style="color:#dc2626">Nate Ament</td>
+  <td class="majority" style="color:#111827">Morez Johnson Jr.</td>
+  <td class="majority" style="color:#111827">Morez Johnson Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Morez Johnson Jr.</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">18</td>
+  <td class="team">Charlotte Hornets</td>
+  <td class="majority" style="color:#111827">Christian Anderson</td>
+  <td class="dissent" style="color:#dc2626">Labaron Philon Jr.</td>
+  <td class="majority" style="color:#111827">Christian Anderson</td>
+  <td class="majority" style="color:#111827">Christian Anderson</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Christian Anderson</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">19</td>
+  <td class="team">Toronto Raptors</td>
+  <td class="majority" style="color:#111827">Mikel Brown Jr.</td>
+  <td class="dissent" style="color:#dc2626">Dailyn Swain</td>
+  <td class="majority" style="color:#111827">Mikel Brown Jr.</td>
+  <td class="majority" style="color:#111827">Mikel Brown Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Mikel Brown Jr.</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">20</td>
+  <td class="team">San Antonio Spurs</td>
+  <td class="majority" style="color:#111827">Bennett Stirtz</td>
+  <td class="dissent" style="color:#dc2626">Cameron Carr</td>
+  <td class="majority" style="color:#111827">Bennett Stirtz</td>
+  <td class="majority" style="color:#111827">Bennett Stirtz</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Bennett Stirtz</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">21</td>
+  <td class="team">Detroit Pistons</td>
+  <td class="majority" style="color:#111827">Isaiah Evans</td>
+  <td class="majority" style="color:#111827">Isaiah Evans</td>
+  <td class="majority" style="color:#111827">Isaiah Evans</td>
+  <td class="majority" style="color:#111827">Isaiah Evans</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Isaiah Evans</td>
+</tr>
+<tr class="row-split">
+  <td class="pick">22</td>
+  <td class="team">Philadelphia 76ers</td>
+  <td class="majority" style="color:#111827">Hannes Steinbach</td>
+  <td class="dissent" style="color:#dc2626">Christian Anderson</td>
+  <td class="majority" style="color:#111827">Hannes Steinbach</td>
+  <td class="dissent" style="color:#2563eb">Sergio De Larrea</td>
+  <td class="agreement">2/4</td>
+  <td class="plurality">Hannes Steinbach</td>
+</tr>
+<tr class="row-split">
+  <td class="pick">23</td>
+  <td class="team">Atlanta Hawks</td>
+  <td class="tie" style="color:#0f766e">Sergio De Larrea</td>
+  <td class="tie" style="color:#b45309">Ebuka Okorie</td>
+  <td class="tie" style="color:#0f766e">Sergio De Larrea</td>
+  <td class="tie" style="color:#b45309">Ebuka Okorie</td>
+  <td class="agreement">2/4</td>
+  <td class="plurality">Ebuka Okorie</td>
+</tr>
+<tr class="row-split">
+  <td class="pick">24</td>
+  <td class="team">New York Knicks</td>
+  <td class="majority" style="color:#111827">Ebuka Okorie</td>
+  <td class="dissent" style="color:#dc2626">Koa Peat</td>
+  <td class="majority" style="color:#111827">Ebuka Okorie</td>
+  <td class="dissent" style="color:#2563eb">Hannes Steinbach</td>
+  <td class="agreement">2/4</td>
+  <td class="plurality">Ebuka Okorie</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">25</td>
+  <td class="team">Los Angeles Lakers</td>
+  <td class="majority" style="color:#111827">Koa Peat</td>
+  <td class="dissent" style="color:#dc2626">Jayden Quaintance</td>
+  <td class="majority" style="color:#111827">Koa Peat</td>
+  <td class="majority" style="color:#111827">Koa Peat</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Koa Peat</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">26</td>
+  <td class="team">Denver Nuggets</td>
+  <td class="majority" style="color:#111827">Henri Veesaar</td>
+  <td class="dissent" style="color:#dc2626">Hannes Steinbach</td>
+  <td class="majority" style="color:#111827">Henri Veesaar</td>
+  <td class="majority" style="color:#111827">Henri Veesaar</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Henri Veesaar</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">27</td>
+  <td class="team">Boston Celtics</td>
+  <td class="majority" style="color:#111827">Chris Cenac Jr.</td>
+  <td class="dissent" style="color:#dc2626">Sergio De Larrea</td>
+  <td class="majority" style="color:#111827">Chris Cenac Jr.</td>
+  <td class="majority" style="color:#111827">Chris Cenac Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Chris Cenac Jr.</td>
+</tr>
+<tr class="row-unanimous">
+  <td class="pick">28</td>
+  <td class="team">Minnesota Timberwolves</td>
+  <td class="majority" style="color:#111827">Meleek Thomas</td>
+  <td class="majority" style="color:#111827">Meleek Thomas</td>
+  <td class="majority" style="color:#111827">Meleek Thomas</td>
+  <td class="majority" style="color:#111827">Meleek Thomas</td>
+  <td class="agreement">4/4</td>
+  <td class="plurality">Meleek Thomas</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">29</td>
+  <td class="team">Cleveland Cavaliers</td>
+  <td class="majority" style="color:#111827">Tarris Reed Jr.</td>
+  <td class="dissent" style="color:#dc2626">Henri Veesaar</td>
+  <td class="majority" style="color:#111827">Tarris Reed Jr.</td>
+  <td class="majority" style="color:#111827">Tarris Reed Jr.</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Tarris Reed Jr.</td>
+</tr>
+<tr class="row-soft">
+  <td class="pick">30</td>
+  <td class="team">Dallas Mavericks</td>
+  <td class="majority" style="color:#111827">Tyler Bilodeau</td>
+  <td class="dissent" style="color:#dc2626">Jack Kayil</td>
+  <td class="majority" style="color:#111827">Tyler Bilodeau</td>
+  <td class="majority" style="color:#111827">Tyler Bilodeau</td>
+  <td class="agreement">3/4</td>
+  <td class="plurality">Tyler Bilodeau</td>
+</tr>
+        </tbody>
+      </table>
+    </section>
+    <p class="note">颜色规则：黑色为多数一致项；彩色加下划线代表该版本与多数不一致，或该顺位为 2-2 分歧组。所有版本均通过逐顺位相对评分链条校验。</p>
+  </main>
+</body>
+</html>
