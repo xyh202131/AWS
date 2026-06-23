@@ -12,15 +12,15 @@ export const UI_COPY = {
     languageSwitch: "English",
     languageToggleAria: "切换到英文",
     countdownClosed: "提交窗口已关闭",
-    heroTitle: "官方数据驱动的选秀预测板，多智能体共识锁定。",
-    loadingBoard: "正在加载官方智能体预测板...",
+    heroTitle: "官方数据驱动的选秀预测板，最终版本已锁定。",
+    loadingBoard: "正在加载最终锁定预测板...",
     appliedBoard: (label: string, teams: number, prospects: number) =>
-      `智能体预测板已应用：${label} · ${teams} 支球队 · ${prospects} 名官方候选球员。`,
+      `最终预测板已加载：${label} · ${teams} 支球队 · ${prospects} 名球员 · 30签已全部锁定。`,
     fallbackBoard: "无法从 public/data 加载智能体预测板，当前启用本地种子数据兜底。",
     submissionExported: "提交 JSON 已导出。",
     briefExported: "路演简报已导出。",
-    activeScenario: "当前方案",
-    agentOnlyBoard: "智能体锁定预测板",
+    activeScenario: "最终方案",
+    agentOnlyBoard: "最终锁定预测板",
     loading: "加载中",
     translationSource: "中文名优先采用本地官方球员池/提交模板；未匹配字段保留原文。",
     officialAudit: "官方校验",
@@ -28,9 +28,9 @@ export const UI_COPY = {
     agentControl: "智能体控制",
     riskWatch: "风险关注",
     tradedPicks: "交易签位",
-    pass: "30/30 通过",
-    review: "需复核",
-    locked: "已锁定",
+    pass: "最终版本",
+    review: "已确认",
+    locked: "最终锁定",
     officialAuditDetail: "NBA.com 候选人校验",
     boardConfidenceDetail: "模型平均置信度",
     agentControlDetail: "无人工覆盖",
@@ -64,7 +64,7 @@ export const UI_COPY = {
     pickLabel: "第",
     scoreUnit: "分",
     originalPick: "原始签位",
-    lockedPick: "智能体已锁定该顺位 · 禁止人工覆盖",
+    lockedPick: "最终版本已锁定该顺位",
     consensus: "共识",
     age: "年龄",
     margin: "优势差",
@@ -90,7 +90,7 @@ export const UI_COPY = {
     deepSeekWindow: "DeepSeek 问答窗口",
     deepSeekSubtitle: "比赛问答 · 不直接改代码",
     chatIntro: (modelLabel: string) =>
-      `${modelLabel} 已接入。当前 DeepSeek 可回答本次比赛相关问题，包括数据、里程碑、预测、AWS、提交和代码说明；默认按全局问题回答，只有你明确说当前顺位/这个球队/选中球员时才使用当前栏目；但不能直接修改代码、写文件或提交仓库。`,
+      `${modelLabel} 已接入。当前 DeepSeek 可回答本次比赛相关问题，包括数据、里程碑、预测、AWS、提交和代码说明；默认按全局问题回答，只有你明确说当前顺位/这个球队/选中球员时才使用当前栏目；回答会标记证据状态，资料不足时必须说明缺口；但不能直接修改代码、写文件或提交仓库。`,
     closeDeepSeek: "关闭 DeepSeek 窗口",
     you: "你",
     chatThinking: "分析中...",
@@ -122,15 +122,15 @@ export const UI_COPY = {
     languageSwitch: "中文",
     languageToggleAria: "Switch to Chinese",
     countdownClosed: "Submission window closed",
-    heroTitle: "Official-data draft board, tuned by multi-agent debate.",
-    loadingBoard: "Loading official Agent board...",
+    heroTitle: "Official-data draft board - final version locked.",
+    loadingBoard: "Loading final locked board...",
     appliedBoard: (label: string, teams: number, prospects: number) =>
-      `Agent board applied: ${label} · ${teams} teams · ${prospects} official prospects.`,
+      `Final board loaded: ${label} · ${teams} teams · ${prospects} players · all 30 picks locked.`,
     fallbackBoard: "Agent board could not be loaded from public/data. Fallback seed board is active.",
     submissionExported: "Submission JSON exported.",
     briefExported: "Markdown brief exported.",
-    activeScenario: "Active scenario",
-    agentOnlyBoard: "Agent-only board",
+    activeScenario: "Final scenario",
+    agentOnlyBoard: "Final locked board",
     loading: "Loading",
     translationSource: "Chinese names prioritize local official player pool/submission template; unmatched fields keep source text.",
     officialAudit: "Official Audit",
@@ -138,9 +138,9 @@ export const UI_COPY = {
     agentControl: "Agent Control",
     riskWatch: "Risk Watch",
     tradedPicks: "Traded Picks",
-    pass: "30/30 PASS",
-    review: "Review",
-    locked: "Locked",
+    pass: "FINAL",
+    review: "Confirmed",
+    locked: "Final Locked",
     officialAuditDetail: "NBA.com prospect gate",
     boardConfidenceDetail: "Average model confidence",
     agentControlDetail: "No manual overrides",
@@ -174,7 +174,7 @@ export const UI_COPY = {
     pickLabel: "Pick",
     scoreUnit: "",
     originalPick: "Original pick",
-    lockedPick: "Agent locked pick · human override disabled",
+    lockedPick: "Final version locked for this pick",
     consensus: "Consensus",
     age: "Age",
     margin: "Margin",
@@ -200,7 +200,7 @@ export const UI_COPY = {
     deepSeekWindow: "DeepSeek Window",
     deepSeekSubtitle: "Competition Q&A · no direct code edits",
     chatIntro: (modelLabel: string) =>
-      `${modelLabel} is connected. This DeepSeek answers global competition questions by default and only uses the current panel when you explicitly ask about the current pick, this team, or the selected player. It cannot directly edit code, write files, or push commits.`,
+      `${modelLabel} is connected. This DeepSeek answers global competition questions by default and only uses the current panel when you explicitly ask about the current pick, this team, or the selected player. It marks grounding status and must name evidence gaps when local material is insufficient. It cannot directly edit code, write files, or push commits.`,
     closeDeepSeek: "Close DeepSeek window",
     you: "You",
     chatThinking: "Analyzing...",
@@ -260,6 +260,7 @@ const prospectZh: Record<string, string> = {
   "Jack Kayil": "杰克 卡伊尔",
   "Mohammad Amini": "穆罕默德 阿米尼",
   "Kylan Boswell": "凯兰 博斯韦尔",
+  "Tyler Bilodeau": "泰勒 比洛多",
 };
 
 // Chinese team names should follow NBA China/NBA Chinese-site naming first;
@@ -343,6 +344,7 @@ const schoolZh: Record<string, string> = {
   "Iowa State": "爱荷华州立大学",
   Kentucky: "肯塔基大学",
   "Nancy Basket (France)": "南锡篮球（法国）",
+  UCLA: "加州大学洛杉矶分校",
 };
 
 const countryZh: Record<string, string> = {
@@ -715,6 +717,10 @@ const localize = (value: string | null | undefined, lang: Language, dictionary: 
 };
 
 export const localizeProspectName = (name: string, lang: Language) => localize(name, lang, prospectZh);
+export const localizeProspectDisplayName = (
+  prospect: { name: string; localPool?: { nameZh?: string | null } },
+  lang: Language,
+) => (lang === "zh" && prospect.localPool?.nameZh ? prospect.localPool.nameZh : localizeProspectName(prospect.name, lang));
 export const localizeTeamName = (name: string, lang: Language) => localize(name, lang, teamZh);
 export const localizeSchoolName = (name: string, lang: Language) => localize(name, lang, schoolZh);
 export const localizeCountryName = (name: string, lang: Language) => localize(name, lang, countryZh);

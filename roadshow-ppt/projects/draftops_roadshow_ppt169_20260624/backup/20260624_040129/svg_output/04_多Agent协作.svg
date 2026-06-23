@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">多 Agent 协作：分工，而不是群聊</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">每个 Agent 只交付结构化文件，Supervisor 用证据和规则统一验收。</text>
+  </g>
+  <g id="agent-row">
+    <rect x="137" y="164" width="166" height="126" rx="14" fill="#142231" stroke="#62B8FF"/>
+    <use data-icon="tabler-outline/database" x="163" y="190" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="163" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="800">A1 采集</text>
+    <text x="163" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#94A8BC">raw sources</text>
+    <rect x="347" y="164" width="166" height="126" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/layers-intersect" x="373" y="190" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="373" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="800">A2/A3 清洗</text>
+    <text x="373" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#94A8BC">normalized / clean</text>
+    <rect x="557" y="164" width="166" height="126" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/brain" x="583" y="190" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="583" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="800">A4/A5 画像</text>
+    <text x="583" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#94A8BC">球员与球队偏好</text>
+    <rect x="767" y="164" width="166" height="126" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/adjustments" x="793" y="190" width="34" height="34" fill="#FFD166" stroke-width="2"/>
+    <text x="793" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="800">A6 参数</text>
+    <text x="793" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#94A8BC">规则与场景</text>
+    <rect x="977" y="164" width="166" height="126" rx="14" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/chart-dots" x="1003" y="190" width="34" height="34" fill="#33E18A" stroke-width="2"/>
+    <text x="1003" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="800">A7 预测</text>
+    <text x="1003" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#94A8BC">locked board</text>
+    <line x1="303" y1="227" x2="347" y2="227" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="347,227 333,219 333,235" fill="#62B8FF"/>
+    <line x1="513" y1="227" x2="557" y2="227" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="557,227 543,219 543,235" fill="#62B8FF"/>
+    <line x1="723" y1="227" x2="767" y2="227" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="767,227 753,219 753,235" fill="#62B8FF"/>
+    <line x1="933" y1="227" x2="977" y2="227" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="977,227 963,219 963,235" fill="#62B8FF"/>
+  </g>
+  <g id="guardrails">
+    <rect x="126" y="374" width="470" height="176" rx="16" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/shield-check" x="162" y="410" width="40" height="40" fill="#33E18A" stroke-width="2"/>
+    <text x="222" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" fill="#E7F2FF" font-weight="800">Supervisor 守边界</text>
+    <text x="162" y="494" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF">缺来源、字段不完整、结构不合法，全部退回。</text>
+    <text x="162" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">预测变化只能来自数据、参数、护栏或完整重跑。</text>
+    <rect x="684" y="374" width="470" height="176" rx="16" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/file-export" x="720" y="410" width="40" height="40" fill="#62B8FF" stroke-width="2"/>
+    <text x="780" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" fill="#E7F2FF" font-weight="800">前端只展示与导出</text>
+    <text x="720" y="494" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF">查看证据、风险、备选项，导出 JSON 和项目摘要。</text>
+    <text x="720" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">不开放人工换人、人工调权、人工重排。</text>
+  </g>
+  <g id="takeaway">
+    <rect x="248" y="600" width="784" height="50" rx="10" fill="#142231" stroke="#33E18A"/>
+    <text x="282" y="632" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#33E18A" font-weight="700">这套流程把“模型可能胡说”的风险，压回到文件证据和脚本验证里。</text>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">04 / 08</text>
+  </g>
+</svg>

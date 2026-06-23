@@ -27,8 +27,18 @@ export interface ProspectMedia {
   sourceUrl?: string;
   sourceLabel?: string;
   provider?: string;
-  status?: "verified" | "fallback" | "needs_review";
+  status?: "verified" | "fallback" | "needs_review" | "missing";
   updatedAt?: string;
+}
+
+export interface ProspectLocalPool {
+  ordinal?: number;
+  nameZh?: string;
+  positionZh?: string;
+  schoolClubZh?: string;
+  countryRegionZh?: string;
+  matchStatus?: string;
+  matchMethod?: string;
 }
 
 export interface Prospect {
@@ -50,6 +60,7 @@ export interface Prospect {
   profile: ScoreProfile;
   sourceNotes: string[];
   media?: ProspectMedia;
+  localPool?: ProspectLocalPool;
 }
 
 export interface TeamProfile {

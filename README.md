@@ -8,6 +8,8 @@ Detailed algorithm guide: [算法指导.md](./算法指导.md)
 
 Multi-agent workflow guide: [多Agent协作指导.md](./多Agent协作指导.md)
 
+Codex operating constraints and anti-hallucination rules: [AGENTS.md](./AGENTS.md)
+
 ## Current Status
 
 The checked-in app is a local React + TypeScript + Vite application with a read-only Agent board. It currently loads the data paths declared in `src/config/draftops-manifest.json`:
@@ -20,6 +22,9 @@ public/data/agent_expanded_recommended_board.json
 Current artifact contract:
 
 - `expanded_import_bundle.json` contains 30 first-round teams and a 101-player official candidate pool.
+- `data/normalized/normalized_2026_local_player_pool_124.json` contains the 124-player local answer-card candidate pool extracted from the official workbook.
+- `data/normalized/normalized_2026_player_feature_reference_124.json` contains the 124-player feature/parameter reference built from local 26-27 participant, measurement, agility, shooting, and historical Combine data.
+- `data/normalized/normalized_2026_online_player_list_reverification_20260623.json` reconciles the live NBA.com Prospects, NBA China draft board, Combine invite, Stats Anthro, Early-entry, and local 124-player pool counts.
 - `agent_expanded_recommended_board.json` contains 30 picks, 30 unique selected prospects, no duplicate players, and `noManualOverride: true`.
 - The current recommended scenario is `baseline`.
 - The current board health gate is passing: exactly 30 picks, no duplicates, and 1 low-confidence pick.
@@ -63,9 +68,53 @@ Manual commands:
 ```powershell
 npm install
 npm run rag:build
+npm run rag:sync:aws
+npm run audit:grounding
 npm run dev:agent
 npm run build
 ```
+
+## System Grounding Audit
+
+Run the system-level anti-hallucination gate before demos, submission checks, or broad claims about the board, RAG, candidate pools, milestones, or Codex/DeepSeek behavior:
+
+```powershell
+npm run audit:grounding
+```
+
+The audit reads the current `AGENTS.md`, locked board, candidate-pool files, milestone answers, RAG manifest, frontend guardrails, and local/cloud DeepSeek guardrail text. It writes JSON and Markdown reports under `data/reports/` and fails only on blocker-level grounding problems.
+
+Watch late-breaking team-change news and official top-30 draft-order shifts once per minute:
+
+```powershell
+npm run news:watch
+```
+
+Useful monitor variants:
+
+```powershell
+npm run news:watch -- --once
+npm run news:watch -- --official-only
+npm run news:watch -- --interval 30
+```
+
+The watcher checks NBA official sources first, including the official 2026 Draft Order page. It hashes the top-30 pick sequence, team ownership, and `from/via` pick-rights notes so first-round pick-order changes are reported even when they are not written as a normal trade headline.
+
+Watch draft player-list and pick-board data once per minute:
+
+```powershell
+npm run draft:watch
+```
+
+Useful draft monitor variants:
+
+```powershell
+npm run draft:watch -- --once
+npm run draft:watch -- --full-firecrawl
+npm run draft:watch -- --refresh-on-direct-change
+```
+
+The draft watcher logs every pass to `.draftops-watch/online-player-list-watch.log`, including `无变动` when the parsed data is unchanged. Pick order, selected player, team, pick-trade notes, draft-day trade notes, source list counts, and source-list content are all treated as data changes. Default mode Firecrawl-scrapes the NBA China draft board every pass and parses other NBA.com sources from the latest verified snapshots while direct-fetching them only for health/hash observation. `--full-firecrawl` refreshes every monitored page with Firecrawl every pass and will consume credits much faster; `--refresh-on-direct-change` refreshes a non-China source when its raw direct-fetch hash changes.
 
 For a plain frontend-only run:
 
@@ -80,6 +129,7 @@ The interactive window calls DeepSeek through an OpenAI-compatible chat completi
 The assistant is read-only. It must not directly edit code, write files, run commands, commit, push, reorder picks, or replace players. Real code and board changes must go through the repository workflow and regenerated data artifacts.
 
 The browser talks to the local proxy from `DEEPSEEK_AGENT_PORT` or `4318`. The proxy reads `.env.local`, so the API key is never sent to the frontend.
+Local chat output is controlled by `DEEPSEEK_CHAT_MAX_TOKENS` and defaults to `8192`. If DeepSeek returns `finish_reason=length`, the chat window will show a local truncation notice; raise this value in `.env.local` and restart the local agent for longer answers.
 
 Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY` when local chat is needed:
 
@@ -98,7 +148,9 @@ Current implemented pieces:
 - DynamoDB RAG: scans configured tables for board snapshots, audit state, parameter state, or milestone answers.
 - Retrieval ranking: uses local hashed-token embeddings, lexical matching, source weighting, and MMR reranking by default.
 - Optional embedding rerank: supports Bedrock Titan embeddings or DashScope/Qwen embeddings, with fallback to local hash embeddings.
-- Offline embedding index: run `npm run rag:build` with `DASHSCOPE_API_KEY` available to pre-slice source data and store DashScope `text-embedding-v4` vectors in `data/rag/*.json`; Lambda then only computes the query embedding at request time.
+- Offline embedding index: run `npm run rag:build` to pre-slice source data and store vectors in `data/rag/*.json`; with `DASHSCOPE_API_KEY` it writes DashScope `text-embedding-v4` vectors, otherwise it writes local-hash 256-dimensional vectors compatible with the Lambda fallback.
+- External RAG sync: run `npm run rag:sync:aws` after rebuilding indexes to upload the current `data/rag/`, normalized source files, and verification reports to S3, then write the 124-player feature records into DynamoDB.
+- Candidate-pool supplement: RAG also reads `data/normalized/normalized_2026_local_player_pool_124.json`, `data/normalized/normalized_2026_player_feature_reference_124.json`, and `data/normalized/normalized_2026_online_player_list_reverification_20260623.json` so questions about the full local answer-card pool, Combine-style parameters, and online 101/73/78/71 source counts are not limited to the 101-row NBA.com official prospects capture.
 - Model providers: supports DeepSeek through a secret/API key or Bedrock through `MODEL_PROVIDER=bedrock`.
 - Health route: `GET /api/deepseek/health`.
 - Chat route: `POST /api/deepseek/chat`.
@@ -151,6 +203,12 @@ Current source artifacts:
 
 ```text
 data/final/expanded_import_bundle.json
+data/normalized/normalized_2026_local_player_pool_124.json
+data/normalized/normalized_2026_player_feature_reference_124.json
+data/normalized/normalized_2026_online_player_list_reverification_20260623.json
+data/reports/player_feature_parameter_reference_124_20260623.md
+data/reports/player_feature_parameter_reference_124_20260623.csv
+data/reports/online_full_player_list_reverification_20260623.md
 data/boards/expanded_strategy_boards_20260623.json
 data/final/milestone_answers.json
 data/reports/expanded_strategy_full_rerun_20260623.md

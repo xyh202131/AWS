@@ -1,6 +1,7 @@
 import type { DraftPick, LanguageCode, LocalizedText, MilestoneAnswer, RuntimeExportConfig } from "../types";
 import { hideAgentParameters } from "./evidence";
 import { withTextFallback } from "./fallbacks";
+import { localizeProspectDisplayName } from "./i18n";
 
 const text = (value: LocalizedText, language: LanguageCode) => value[language] || value.zh || value.en;
 
@@ -25,7 +26,7 @@ export const buildSubmissionPayload = (
     pick: pick.pick,
     team: pick.team,
     acquiredFrom: pick.acquiredFrom ?? text(exportSettings.originalPick, language),
-    player: pick.prospect.name,
+    player: localizeProspectDisplayName(pick.prospect, language),
     school: pick.prospect.school,
     origin: pick.prospect.origin,
     position: pick.prospect.positions.join("/"),
@@ -85,7 +86,7 @@ export const buildMarkdownBrief = (
   const picks = board
     .map(
       (pick) =>
-        `| ${pick.pick} | ${pick.team} | ${pick.prospect.name} | ${pick.prospect.positions.join("/")} | ${pick.zone} | ${pick.confidence}% | ${pick.margin} | ${pick.roleFit} |`,
+        `| ${pick.pick} | ${pick.team} | ${localizeProspectDisplayName(pick.prospect, language)} | ${pick.prospect.positions.join("/")} | ${pick.zone} | ${pick.confidence}% | ${pick.margin} | ${pick.roleFit} |`,
     )
     .join("\n");
   const answers = milestones

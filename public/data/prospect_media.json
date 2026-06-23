@@ -1,97 +1,17 @@
 {
   "schemaVersion": "draftops.prospect_media.v1",
-  "updatedAt": "2026-06-23T14:50:40+08:00",
-  "primaryRule": "Use official NBA.com prospect pages first. Use official school/team roster pages only when NBA.com did not expose a stable headshot.",
+  "updatedAt": "2026-06-24T10:45:00+08:00",
+  "primaryRule": "Use official NBA.com prospect pages first. Store every local candidate-pool player in the media database; if no stable headshot is extracted, keep a missing-status row instead of omitting media.",
   "players": [
     {
-      "id": "darryn-peterson",
-      "name": "Darryn Peterson",
-      "photoUrl": "/data/media/prospects/darryn-peterson.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/darryn-peterson",
+      "id": "aaron-nkrumah",
+      "name": "Aaron Nkrumah",
+      "photoUrl": "/data/media/prospects/aaron-nkrumah.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/aaron-nkrumah",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-13.png"
-    },
-    {
-      "id": "aj-dybantsa",
-      "name": "AJ Dybantsa",
-      "photoUrl": "/data/media/prospects/aj-dybantsa.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/aj-dybantsa",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/AJ_Dybantsa_2026.jpg"
-    },
-    {
-      "id": "cameron-boozer",
-      "name": "Cameron Boozer",
-      "photoUrl": "/data/media/prospects/cameron-boozer.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/cameron-boozer",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-12.png"
-    },
-    {
-      "id": "caleb-wilson",
-      "name": "Caleb Wilson",
-      "photoUrl": "/data/media/prospects/caleb-wilson.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/caleb-wilson",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Caleb_Wilson_2026.jpg"
-    },
-    {
-      "id": "keaton-wagler",
-      "name": "Keaton Wagler",
-      "photoUrl": "/data/media/prospects/keaton-wagler.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/keaton-wagler",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Keaton_Wagler_2026.jpg"
-    },
-    {
-      "id": "darius-acuff-jr",
-      "name": "Darius Acuff Jr.",
-      "photoUrl": "/data/media/prospects/darius-acuff-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/darius-acuff-jr",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-4.png"
-    },
-    {
-      "id": "mikel-brown-jr",
-      "name": "Mikel Brown Jr.",
-      "photoUrl": "/data/media/prospects/mikel-brown-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/mikel-brown-jr",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-3.png"
-    },
-    {
-      "id": "kingston-flemings",
-      "name": "Kingston Flemings",
-      "photoUrl": "/data/media/prospects/kingston-flemings.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/kingston-flemings",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/kingston-flemings.png"
-    },
-    {
-      "id": "nate-ament",
-      "name": "Nate Ament",
-      "photoUrl": "/data/media/prospects/nate-ament.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/nate-ament",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Nate_Ament_2026-1.png"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/GettyImages-2275165619-1.jpg"
     },
     {
       "id": "aday-mara",
@@ -104,64 +24,24 @@
       "remotePhotoUrl": "https://mgoblue.com/images/2025/7/28/15-Aday-Mara_1yHES.jpg"
     },
     {
-      "id": "brayden-burries",
-      "name": "Brayden Burries",
-      "photoUrl": "/data/media/prospects/brayden-burries.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/brayden-burries",
+      "id": "aj-dybantsa",
+      "name": "AJ Dybantsa",
+      "photoUrl": "/data/media/prospects/aj-dybantsa.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/aj-dybantsa",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Brayden_Burries_2026.png"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/AJ_Dybantsa_2026.jpg"
     },
     {
-      "id": "yaxel-lendeborg",
-      "name": "Yaxel Lendeborg",
-      "photoUrl": "/data/media/prospects/yaxel-lendeborg.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/yaxel-lendeborg",
+      "id": "alex-karaban",
+      "name": "Alex Karaban",
+      "photoUrl": "/data/media/prospects/alex-karaban.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/alex-karaban",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-6.png"
-    },
-    {
-      "id": "hannes-steinbach",
-      "name": "Hannes Steinbach",
-      "photoUrl": "/data/media/prospects/hannes-steinbach.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/hannes-steinbach",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Hannes_Steinbach_2026.jpg"
-    },
-    {
-      "id": "karim-lopez",
-      "name": "Karim Lopez",
-      "photoUrl": "/data/media/prospects/karim-lopez.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/karim-lopez",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Karim_Lopez_2026.png"
-    },
-    {
-      "id": "morez-johnson-jr",
-      "name": "Morez Johnson Jr.",
-      "photoUrl": "/data/media/prospects/morez-johnson-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/morez-johnson-jr",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Morez_Johnson_Jr_2026.jpg"
-    },
-    {
-      "id": "christian-anderson",
-      "name": "Christian Anderson",
-      "photoUrl": "/data/media/prospects/christian-anderson.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/christian-anderson",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Christian_Anderson_2026.png"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-10.png"
     },
     {
       "id": "allen-graves",
@@ -174,24 +54,14 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Allen_Graves_2006.png"
     },
     {
-      "id": "labaron-philon-jr",
-      "name": "Labaron Philon Jr.",
-      "photoUrl": "/data/media/prospects/labaron-philon-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/labaron-philon-jr",
+      "id": "baba-miller",
+      "name": "Baba Miller",
+      "photoUrl": "/data/media/prospects/baba-miller.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/baba-miller",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-7.png"
-    },
-    {
-      "id": "chris-cenac-jr",
-      "name": "Chris Cenac Jr.",
-      "photoUrl": "/data/media/prospects/chris-cenac-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/chris-cenac-jr",
-      "sourceLabel": "NBA.com 2026 Draft prospect profile",
-      "provider": "NBA.com",
-      "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Chris_Cenac_Jr_2026.jpg"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Miller-Baba.jpg"
     },
     {
       "id": "bennett-stirtz",
@@ -204,6 +74,66 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-8.png"
     },
     {
+      "id": "braden-smith",
+      "name": "Braden Smith",
+      "photoUrl": "/data/media/prospects/braden-smith.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/braden-smith",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Braden_smith_2026.png"
+    },
+    {
+      "id": "brayden-burries",
+      "name": "Brayden Burries",
+      "photoUrl": "/data/media/prospects/brayden-burries.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/brayden-burries",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Brayden_Burries_2026.png"
+    },
+    {
+      "id": "bruce-thornton",
+      "name": "Bruce Thornton",
+      "photoUrl": "/data/media/prospects/bruce-thornton.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/bruce-thornton",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-9.png"
+    },
+    {
+      "id": "bryce-hopkins",
+      "name": "Bryce Hopkins",
+      "photoUrl": "/data/media/prospects/bryce-hopkins.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/bryce-hopkins",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Bryce_Hopkins_216x216.jpg"
+    },
+    {
+      "id": "caleb-wilson",
+      "name": "Caleb Wilson",
+      "photoUrl": "/data/media/prospects/caleb-wilson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/caleb-wilson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Caleb_Wilson_2026.jpg"
+    },
+    {
+      "id": "cameron-boozer",
+      "name": "Cameron Boozer",
+      "photoUrl": "/data/media/prospects/cameron-boozer.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/cameron-boozer",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-12.png"
+    },
+    {
       "id": "cameron-carr",
       "name": "Cameron Carr",
       "photoUrl": "/data/media/prospects/cameron-carr.jpg",
@@ -214,14 +144,24 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Cameron_Carr_2026.png"
     },
     {
-      "id": "jayden-quaintance",
-      "name": "Jayden Quaintance",
-      "photoUrl": "/data/media/prospects/jayden-quaintance.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jayden-quaintance",
+      "id": "chris-cenac-jr",
+      "name": "Chris Cenac Jr.",
+      "photoUrl": "/data/media/prospects/chris-cenac-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/chris-cenac-jr",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Jayden_Quaintance_2026.jpg"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Chris_Cenac_Jr_2026.jpg"
+    },
+    {
+      "id": "christian-anderson",
+      "name": "Christian Anderson",
+      "photoUrl": "/data/media/prospects/christian-anderson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/christian-anderson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Christian_Anderson_2026.png"
     },
     {
       "id": "dailyn-swain",
@@ -234,6 +174,36 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Dailyn_Swain_2026.png"
     },
     {
+      "id": "darius-acuff-jr",
+      "name": "Darius Acuff Jr.",
+      "photoUrl": "/data/media/prospects/darius-acuff-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/darius-acuff-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-4.png"
+    },
+    {
+      "id": "darrion-williams",
+      "name": "Darrion Williams",
+      "photoUrl": "/data/media/prospects/darrion-williams.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/darrion-williams",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Darrion_Williams_2026.png"
+    },
+    {
+      "id": "darryn-peterson",
+      "name": "Darryn Peterson",
+      "photoUrl": "/data/media/prospects/darryn-peterson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/darryn-peterson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-13.png"
+    },
+    {
       "id": "ebuka-okorie",
       "name": "Ebuka Okorie",
       "photoUrl": "/data/media/prospects/ebuka-okorie.jpg",
@@ -244,14 +214,52 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Ebuka_Okorie_2026.png"
     },
     {
-      "id": "isaiah-evans",
-      "name": "Isaiah Evans",
-      "photoUrl": "/data/media/prospects/isaiah-evans.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/isaiah-evans",
+      "id": "emanuel-sharp",
+      "name": "Emanuel Sharp",
+      "photoUrl": "/data/media/prospects/emanuel-sharp.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/emanuel-sharp",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Isaiah_Evans_2026.png"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Emanuel_Sharp_2026.png"
+    },
+    {
+      "id": "ernest-udeh-jr",
+      "name": "Ernest Udeh Jr.",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/ernest-udeh-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile; no stable headshot extracted",
+      "provider": "NBA.com",
+      "status": "missing"
+    },
+    {
+      "id": "felix-okpara",
+      "name": "Felix Okpara",
+      "photoUrl": "/data/media/prospects/felix-okpara.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/felix-okpara",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Okpara-Felix.jpg"
+    },
+    {
+      "id": "fletcher-loyer",
+      "name": "Fletcher Loyer",
+      "photoUrl": "/data/media/prospects/fletcher-loyer.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/fletcher-loyer",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-7.jpg"
+    },
+    {
+      "id": "hannes-steinbach",
+      "name": "Hannes Steinbach",
+      "photoUrl": "/data/media/prospects/hannes-steinbach.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/hannes-steinbach",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Hannes_Steinbach_2026.jpg"
     },
     {
       "id": "henri-veesaar",
@@ -264,6 +272,146 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/veessaar.png"
     },
     {
+      "id": "isaiah-evans",
+      "name": "Isaiah Evans",
+      "photoUrl": "/data/media/prospects/isaiah-evans.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/isaiah-evans",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Isaiah_Evans_2026.png"
+    },
+    {
+      "id": "izaiyah-nelson",
+      "name": "Izaiyah Nelson",
+      "photoUrl": "/data/media/prospects/izaiyah-nelson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/izaiyah-nelson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Izaiyah_Nelson_216.jpg"
+    },
+    {
+      "id": "jack-kayil",
+      "name": "Jack Kayil",
+      "photoUrl": "/data/media/prospects/jack-kayil.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jack-kayil",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Jack-Kayil.jpg"
+    },
+    {
+      "id": "jaden-bradley",
+      "name": "Jaden Bradley",
+      "photoUrl": "/data/media/prospects/jaden-bradley.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jaden-bradley",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Jaden_Bradley_2026.png"
+    },
+    {
+      "id": "jaden-henley",
+      "name": "Jaden Henley",
+      "photoUrl": "/data/media/prospects/jaden-henley.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jaden-henley",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Henley-Jaden.jpg"
+    },
+    {
+      "id": "jakobi-gillespie",
+      "name": "Ja’Kobi Gillespie",
+      "photoUrl": "/data/media/prospects/jakobi-gillespie.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jakobi-gillespie",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Jakobi_Gillespie_2026.png"
+    },
+    {
+      "id": "jaron-pierre-jr",
+      "name": "Jaron Pierre Jr.",
+      "photoUrl": "/data/media/prospects/jaron-pierre-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jaron-pierre-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-4.jpg"
+    },
+    {
+      "id": "jayden-quaintance",
+      "name": "Jayden Quaintance",
+      "photoUrl": "/data/media/prospects/jayden-quaintance.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/jayden-quaintance",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Jayden_Quaintance_2026.jpg"
+    },
+    {
+      "id": "josh-dix",
+      "name": "Josh Dix",
+      "photoUrl": "/data/media/prospects/josh-dix.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/josh-dix",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-15.jpg"
+    },
+    {
+      "id": "joshua-jefferson",
+      "name": "Joshua Jefferson",
+      "photoUrl": "/data/media/prospects/joshua-jefferson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/joshua-jefferson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Joshua_Jefferson_2026.png"
+    },
+    {
+      "id": "karim-lopez",
+      "name": "Karim Lopez",
+      "photoUrl": "/data/media/prospects/karim-lopez.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/karim-lopez",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Karim_Lopez_2026.png"
+    },
+    {
+      "id": "keaton-wagler",
+      "name": "Keaton Wagler",
+      "photoUrl": "/data/media/prospects/keaton-wagler.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/keaton-wagler",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Keaton_Wagler_2026.jpg"
+    },
+    {
+      "id": "keyshawn-hall",
+      "name": "Keyshawn Hall",
+      "photoUrl": "/data/media/prospects/keyshawn-hall.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/keyshawn-hall",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Hall-Keyshawn.jpg"
+    },
+    {
+      "id": "kingston-flemings",
+      "name": "Kingston Flemings",
+      "photoUrl": "/data/media/prospects/kingston-flemings.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/kingston-flemings",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/kingston-flemings.png"
+    },
+    {
       "id": "koa-peat",
       "name": "Koa Peat",
       "photoUrl": "/data/media/prospects/koa-peat.jpg",
@@ -272,6 +420,349 @@
       "provider": "NBA.com",
       "status": "verified",
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Koa_Peat_2026.jpg"
+    },
+    {
+      "id": "kylan-boswell",
+      "name": "Kylan Boswell",
+      "photoUrl": "/data/media/prospects/kylan-boswell.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/kylan-boswell",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-11.png"
+    },
+    {
+      "id": "labaron-philon-jr",
+      "name": "Labaron Philon Jr.",
+      "photoUrl": "/data/media/prospects/labaron-philon-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/labaron-philon-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-7.png"
+    },
+    {
+      "id": "lamar-wilkerson",
+      "name": "Lamar Wilkerson",
+      "photoUrl": "/data/media/prospects/lamar-wilkerson.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/lamar-wilkerson",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Lamar-Wilkerson.jpg"
+    },
+    {
+      "id": "local-pool-124-044-prospect",
+      "name": "狄龙 米切尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-059-prospect",
+      "name": "安德烈 斯托亚科维奇",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-060-prospect",
+      "name": "小杰里米 费尔斯",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-061-prospect",
+      "name": "小比利 里士满三世",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-062-prospect",
+      "name": "弗洛里 比敦加",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-064-prospect",
+      "name": "泰勒 坦纳",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-065-prospect",
+      "name": "米兰 莫姆契洛维奇",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-066-prospect",
+      "name": "约翰 布莱克威尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-068-prospect",
+      "name": "路易吉 苏伊戈",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-069-prospect",
+      "name": "通德 耶苏福",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-072-prospect",
+      "name": "阿马里 阿伦",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-073-prospect",
+      "name": "雅各布 科菲",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-074-prospect",
+      "name": "马修 埃布尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-076-prospect",
+      "name": "鲁本 钦耶卢",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-077-prospect",
+      "name": "小克里斯托弗 布朗",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-078-prospect",
+      "name": "杰登 哈里斯",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-079-aj",
+      "name": "AJ 施托尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-080-bj",
+      "name": "BJ 爱德华兹",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-081-prospect",
+      "name": "亚当 阿塔姆纳",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-082-prospect",
+      "name": "克肖恩 墨菲",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-085-prospect",
+      "name": "凯德 泰森",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-089-prospect",
+      "name": "多诺万 登特",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-091-prospect",
+      "name": "奥格年 斯尔曾蒂奇",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-096-prospect",
+      "name": "布赖森 塔克",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-097-prospect",
+      "name": "帕夫莱 巴奇科",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-099-prospect",
+      "name": "弗朗西斯科 法拉利",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-101-prospect",
+      "name": "戴米恩 科林斯",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-102-prospect",
+      "name": "拉贾伊 琼斯",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-104-prospect",
+      "name": "本 亨歇尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-106-prospect",
+      "name": "泰恩 格兰特-福斯特",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-108-prospect",
+      "name": "特伦斯 阿西诺",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-109-prospect",
+      "name": "特雷 怀特",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-110-prospect",
+      "name": "穆罕默德 费伊",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-112-prospect",
+      "name": "米伊卡 穆里宁",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-114-prospect",
+      "name": "莱利 库格尔",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-115-prospect",
+      "name": "蒂埃里 达尔兰",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-117-prospect",
+      "name": "达什 丹尼尔斯",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-121-prospect",
+      "name": "迈克尔 鲁日奇",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "local-pool-124-123-prospect",
+      "name": "马利克 尤因",
+      "sourceLabel": "Local candidate pool row; no verified headshot source",
+      "provider": "DraftOps",
+      "status": "missing"
+    },
+    {
+      "id": "malachi-moreno",
+      "name": "Malachi Moreno",
+      "photoUrl": "/data/media/prospects/malachi-moreno.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/malachi-moreno",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Moreno-Malachi.jpg"
+    },
+    {
+      "id": "malik-reneau",
+      "name": "Malik Reneau",
+      "photoUrl": "/data/media/prospects/malik-reneau.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/malik-reneau",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Reneau-Malik.jpg"
+    },
+    {
+      "id": "maliq-brown",
+      "name": "Maliq Brown",
+      "photoUrl": "/data/media/prospects/maliq-brown.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/maliq-brown",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Brown-Maliq.jpg"
+    },
+    {
+      "id": "mark-mitchell",
+      "name": "Mark Mitchell",
+      "photoUrl": "/data/media/prospects/mark-mitchell.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/mark-mitchell",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/mark-mitchell.jpg"
     },
     {
       "id": "meleek-thomas",
@@ -284,14 +775,174 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/meleek-thomas.png"
     },
     {
-      "id": "tarris-reed-jr",
-      "name": "Tarris Reed Jr.",
-      "photoUrl": "/data/media/prospects/tarris-reed-jr.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tarris-reed-jr",
+      "id": "melvin-council-jr",
+      "name": "Melvin Council Jr.",
+      "photoUrl": "/data/media/prospects/melvin-council-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/melvin-council-jr",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Tarris_Reed_Jr_2026.png"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Melvin-Council-Jr.jpg"
+    },
+    {
+      "id": "michael-ajayi",
+      "name": "Michael Ajayi",
+      "photoUrl": "/data/media/prospects/michael-ajayi.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/michael-ajayi",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-1.jpg"
+    },
+    {
+      "id": "mikel-brown-jr",
+      "name": "Mikel Brown Jr.",
+      "photoUrl": "/data/media/prospects/mikel-brown-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/mikel-brown-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-3.png"
+    },
+    {
+      "id": "milos-uzan",
+      "name": "Milos Uzan",
+      "photoUrl": "/data/media/prospects/milos-uzan.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/milos-uzan",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Uzan-Milos.jpg"
+    },
+    {
+      "id": "mohammad-amini",
+      "name": "Mohammad Amini",
+      "photoUrl": "/data/media/prospects/mohammad-amini.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/mohammad-amini",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/webp-3.jpg"
+    },
+    {
+      "id": "morez-johnson-jr",
+      "name": "Morez Johnson Jr.",
+      "photoUrl": "/data/media/prospects/morez-johnson-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/morez-johnson-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Morez_Johnson_Jr_2026.jpg"
+    },
+    {
+      "id": "nate-ament",
+      "name": "Nate Ament",
+      "photoUrl": "/data/media/prospects/nate-ament.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/nate-ament",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Nate_Ament_2026-1.png"
+    },
+    {
+      "id": "nate-bittle",
+      "name": "Nate Bittle",
+      "photoUrl": "/data/media/prospects/nate-bittle.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/nate-bittle",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Nate_Bittle_2026.png"
+    },
+    {
+      "id": "nick-boyd",
+      "name": "Nick Boyd",
+      "photoUrl": "/data/media/prospects/nick-boyd.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/nick-boyd",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-9.jpg"
+    },
+    {
+      "id": "nick-martinelli",
+      "name": "Nick Martinelli",
+      "photoUrl": "/data/media/prospects/nick-martinelli.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/nick-martinelli",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Nick_Martinelli_2026.png"
+    },
+    {
+      "id": "oscar-cluff",
+      "name": "Oscar Cluff",
+      "photoUrl": "/data/media/prospects/oscar-cluff.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/oscar-cluff",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Oscar_Cluff_2026.png"
+    },
+    {
+      "id": "otega-oweh",
+      "name": "Otega Oweh",
+      "photoUrl": "/data/media/prospects/otega-oweh.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/otega-oweh",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Oweh-Otega.jpg"
+    },
+    {
+      "id": "peter-suder",
+      "name": "Peter Suder",
+      "photoUrl": "/data/media/prospects/peter-suder.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/peter-suder",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Suder-Peter.jpg"
+    },
+    {
+      "id": "quadir-copeland",
+      "name": "Quadir Copeland",
+      "photoUrl": "/data/media/prospects/quadir-copeland.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/quadir-copeland",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Quadir_Copeland_2026.png"
+    },
+    {
+      "id": "rafael-castro",
+      "name": "Rafael Castro",
+      "photoUrl": "/data/media/prospects/rafael-castro.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/rafael-castro",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Rafael_Castro_2026.png"
+    },
+    {
+      "id": "richie-saunders",
+      "name": "Richie Saunders",
+      "photoUrl": "/data/media/prospects/richie-saunders.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/richie-saunders",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Richie_Saunders_2026.png"
+    },
+    {
+      "id": "ryan-conwell",
+      "name": "Ryan Conwell",
+      "photoUrl": "/data/media/prospects/ryan-conwell.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/ryan-conwell",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Ryan_Conwell_2026.png"
     },
     {
       "id": "sergio-de-larrea",
@@ -304,14 +955,164 @@
       "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/de-Larrea-Sergio.jpg"
     },
     {
-      "id": "marc-owen-fodzo-dada",
-      "name": "Marc-Owen Fodzo Dada",
-      "photoUrl": "/data/media/prospects/marc-owen-fodzo-dada.jpg",
-      "sourceUrl": "https://www.nba.com/draft/2026/prospects/marc-owen-fodzo-dada",
+      "id": "seth-trimble",
+      "name": "Seth Trimble",
+      "photoUrl": "/data/media/prospects/seth-trimble.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/seth-trimble",
       "sourceLabel": "NBA.com 2026 Draft prospect profile",
       "provider": "NBA.com",
       "status": "verified",
-      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/marc-owen-fodzo-dada-1f059000-df6c-686a-9fd9-fb76db7d98d1.jpg"
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-8.jpg"
+    },
+    {
+      "id": "tamin-lipsey",
+      "name": "Tamin Lipsey",
+      "photoUrl": "/data/media/prospects/tamin-lipsey.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tamin-lipsey",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Tamin_Lipsey_2026.png"
+    },
+    {
+      "id": "tarris-reed-jr",
+      "name": "Tarris Reed Jr.",
+      "photoUrl": "/data/media/prospects/tarris-reed-jr.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tarris-reed-jr",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Tarris_Reed_Jr_2026.png"
+    },
+    {
+      "id": "tobe-awaka",
+      "name": "Tobe Awaka",
+      "photoUrl": "/data/media/prospects/tobe-awaka.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tobe-awaka",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/GettyImages-2275147585.jpg"
+    },
+    {
+      "id": "tobi-lawal",
+      "name": "Tobi Lawal",
+      "photoUrl": "/data/media/prospects/tobi-lawal.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tobi-lawal",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/GettyImages-2275154292.jpg"
+    },
+    {
+      "id": "trevon-brazile",
+      "name": "Trevon Brazile",
+      "photoUrl": "/data/media/prospects/trevon-brazile.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/trevon-brazile",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Brazile-Trevon.jpg"
+    },
+    {
+      "id": "trey-kaufman-renn",
+      "name": "Trey Kaufman-Renn",
+      "photoUrl": "/data/media/prospects/trey-kaufman-renn.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/trey-kaufman-renn",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Kaufman-Renn-Trey.jpg"
+    },
+    {
+      "id": "tucker-devries",
+      "name": "Tucker DeVries",
+      "photoUrl": "/data/media/prospects/tucker-devries.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tucker-devries",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/tucker-devries2.jpg"
+    },
+    {
+      "id": "tyler-bilodeau",
+      "name": "Tyler Bilodeau",
+      "photoUrl": "/data/media/prospects/tyler-bilodeau.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tyler-bilodeau",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Bilodeau-Tyler.jpg"
+    },
+    {
+      "id": "tyler-nickel",
+      "name": "Tyler Nickel",
+      "photoUrl": "/data/media/prospects/tyler-nickel.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/tyler-nickel",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/tyler-nickel.png"
+    },
+    {
+      "id": "ugonna-onyenso",
+      "name": "Ugonna Onyenso",
+      "photoUrl": "/data/media/prospects/ugonna-onyenso.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/ugonna-onyenso",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Onyenso-Ugonna.jpg"
+    },
+    {
+      "id": "vsevolod-ishchenko",
+      "name": "Vsevolod Ishchenko",
+      "photoUrl": "/data/media/prospects/vsevolod-ishchenko.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/vsevolod-ishchenko",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/2I8A7470_256x256_acf_cropped.jpg"
+    },
+    {
+      "id": "william-kyle-iii",
+      "name": "William Kyle III",
+      "photoUrl": "/data/media/prospects/william-kyle-iii.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/william-kyle-iii",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/i-13.jpg"
+    },
+    {
+      "id": "xaivian-lee",
+      "name": "Xaivian Lee",
+      "photoUrl": "/data/media/prospects/xaivian-lee.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/xaivian-lee",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/Xaivian-Lee-headshot-UF.jpg"
+    },
+    {
+      "id": "yaxel-lendeborg",
+      "name": "Yaxel Lendeborg",
+      "photoUrl": "/data/media/prospects/yaxel-lendeborg.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/yaxel-lendeborg",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Untitled-design-6.png"
+    },
+    {
+      "id": "zuby-ejiofor",
+      "name": "Zuby Ejiofor",
+      "photoUrl": "/data/media/prospects/zuby-ejiofor.jpg",
+      "sourceUrl": "https://www.nba.com/draft/2026/prospects/zuby-ejiofor",
+      "sourceLabel": "NBA.com 2026 Draft prospect profile",
+      "provider": "NBA.com",
+      "status": "verified",
+      "remotePhotoUrl": "https://cdn.nba.com/manage/2026/05/Zuby_Ejiofor_2026.png"
     }
   ]
 }

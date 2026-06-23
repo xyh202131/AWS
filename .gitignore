@@ -21,6 +21,7 @@ dist-ssr
 .edge-profile*/
 .verify-*.png
 .firecrawl/
+.draftops-watch/
 
 # Competition raw media kept outside git because of GitHub file limits
 数据/DraftCombine_Hackathon.zip
@@ -38,3 +39,5 @@ dist-ssr
 *.sln
 *.sw?
 ~$*.xlsx
+~$*.pptx
+*.corrupt.bak

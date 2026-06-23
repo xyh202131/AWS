@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="endingLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#62B8FF" />
+      <stop offset="1" stop-color="#33E18A" />
+    </linearGradient>
+  </defs>
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10" />
+    <path fill="#101820" stroke="#28455E" d="M104,72 H1176 A22,22 0 0 1 1198,94 V624 A22,22 0 0 1 1176,646 H104 A22,22 0 0 1 82,624 V94 A22,22 0 0 1 104,72 Z" />
+  </g>
+  <g id="closing-copy">
+    <text x="132" y="154" font-family="Microsoft YaHei, Arial, sans-serif" font-size="44" fill="#E7F2FF" font-weight="800">最终交付不是“模型回答”</text>
+    <text x="132" y="206" font-family="Microsoft YaHei, Arial, sans-serif" font-size="30" fill="#94A8BC">而是一套可提交、可复核、可交付的项目资产包。</text>
+    <path fill="url(#endingLine)" d="M134.50,238 H669.50 A2.50,2.50 0 0 1 672,240.50 V240.50 A2.50,2.50 0 0 1 669.50,243 H134.50 A2.50,2.50 0 0 1 132,240.50 V240.50 A2.50,2.50 0 0 1 134.50,238 Z" />
+    <text font-size="24" font-family="Microsoft YaHei, Arial, sans-serif" fill="#E7F2FF" x="132" y="304">DraftOps 把 30 顺位预测和 7 个里程碑答案，拆成</text><text font-size="24" font-family="Microsoft YaHei, Arial, sans-serif" fill="#E7F2FF" x="132" y="342">可信数据工程、可复现 Agent 流程和可导出产品界面。</text></g>
+  <g id="pillars">
+    <path fill="#142231" stroke="#33E18A" d="M148,400 H408 A16,16 0 0 1 424,416 V510 A16,16 0 0 1 408,526 H148 A16,16 0 0 1 132,510 V416 A16,16 0 0 1 148,400 Z" />
+
+  <g transform="translate(166, 430) scale(1.58333)" fill="none" stroke="#33E18A" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+    <text x="222" y="458" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#33E18A" font-weight="800">可信数据</text>
+    <text x="166" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">官方原始包 + 多层审计产物</text>
+    <path fill="#142231" stroke="#62B8FF" d="M510,400 H770 A16,16 0 0 1 786,416 V510 A16,16 0 0 1 770,526 H510 A16,16 0 0 1 494,510 V416 A16,16 0 0 1 510,400 Z" />
+
+  <g transform="translate(528, 430) scale(1.58333)" fill="none" stroke="#62B8FF" stroke-width="2">
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+  </g>
+    <text x="584" y="458" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#62B8FF" font-weight="800">可解释预测</text>
+    <text x="528" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">证据、风险、适配、备选项</text>
+    <path fill="#142231" stroke="#FFD166" d="M872,400 H1132 A16,16 0 0 1 1148,416 V510 A16,16 0 0 1 1132,526 H872 A16,16 0 0 1 856,510 V416 A16,16 0 0 1 872,400 Z" />
+
+  <g transform="translate(890, 430) scale(1.58333)" fill="none" stroke="#FFD166" stroke-width="2">
+    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+    <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3" />
+  </g>
+    <text x="946" y="458" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#FFD166" font-weight="800">可提交系统</text>
+    <text x="890" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">JSON、项目摘要、答题卡</text>
+  </g>
+  <g id="final-line">
+    <path fill="#142231" stroke="#28455E" d="M142,570 H1138 A10,10 0 0 1 1148,580 V610 A10,10 0 0 1 1138,620 H142 A10,10 0 0 1 132,610 V580 A10,10 0 0 1 142,570 Z" />
+    <text x="166" y="602" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#E7F2FF" font-weight="700">一句话总结：</text>
+    <text x="294" y="602" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#94A8BC">30 picks + 7 answers 能被解释、被审计，并稳定提交。</text>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">08 / 08</text>
+  </g>
+</svg>

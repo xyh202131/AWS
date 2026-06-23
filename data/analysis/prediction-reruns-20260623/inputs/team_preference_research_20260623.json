@@ -1,0 +1,2356 @@
+{
+  "schemaVersion": "draftops.team_preference_research.v1",
+  "summary": {
+    "generatedAt": "2026-06-23T16:00:00+08:00",
+    "scope": "read-only team preference research; no prediction-board changes",
+    "sourceFiles": [
+      "public/data/expanded_import_bundle.json",
+      "public/data/agent_expanded_recommended_board.json",
+      "data/normalized/normalized_2026_team_context.json",
+      "data/reports/a5_team_fit_parameter_debate.md",
+      "data/reports/d5_team_fit_confidence_debate.md"
+    ],
+    "pickCount": 30,
+    "strongOrFullPreferencePicks": [
+      2,
+      4,
+      5,
+      7,
+      10,
+      13,
+      15,
+      19,
+      20,
+      21,
+      22,
+      24,
+      28
+    ],
+    "weakOrDisabledPreferencePicks": [
+      6,
+      8,
+      9,
+      11,
+      23,
+      26,
+      27,
+      29,
+      30
+    ],
+    "needsReviewPicks": [
+      3,
+      6,
+      8,
+      9,
+      11,
+      12,
+      16,
+      17,
+      23,
+      26,
+      27,
+      29,
+      30
+    ],
+    "narrowMarginPicks": [
+      7,
+      10,
+      18,
+      19,
+      20,
+      22,
+      24,
+      30
+    ],
+    "multiPickTeams": [
+      {
+        "team": "Memphis Grizzlies",
+        "picks": [
+          3,
+          16
+        ],
+        "selectedPlayers": [
+          "Cameron Boozer",
+          "Hannes Steinbach"
+        ],
+        "selectedFamilyLabels": [
+          "锋线、前场/内线、创造/得分",
+          "锋线、前场/内线、尺寸"
+        ],
+        "repeatedFamilies": [
+          "wing",
+          "frontcourt"
+        ],
+        "repeatedFamilyLabel": "锋线、前场/内线",
+        "sequencingRisk": "高"
+      },
+      {
+        "team": "Chicago Bulls",
+        "picks": [
+          4,
+          15
+        ],
+        "selectedPlayers": [
+          "Caleb Wilson",
+          "Allen Graves"
+        ],
+        "selectedFamilyLabels": [
+          "锋线、前场/内线、防守",
+          "锋线、前场/内线、防守"
+        ],
+        "repeatedFamilies": [
+          "wing",
+          "frontcourt",
+          "defense"
+        ],
+        "repeatedFamilyLabel": "锋线、前场/内线、防守",
+        "sequencingRisk": "高"
+      },
+      {
+        "team": "Atlanta Hawks",
+        "picks": [
+          8,
+          23
+        ],
+        "selectedPlayers": [
+          "Aday Mara",
+          "Ebuka Okorie"
+        ],
+        "selectedFamilyLabels": [
+          "前场/内线、尺寸",
+          "后卫/持球、投射/空间、创造/得分"
+        ],
+        "repeatedFamilies": [],
+        "repeatedFamilyLabel": "无明确族群",
+        "sequencingRisk": "低"
+      },
+      {
+        "team": "Dallas Mavericks",
+        "picks": [
+          9,
+          30
+        ],
+        "selectedPlayers": [
+          "Brayden Burries",
+          "Marc-Owen Fodzo Dada"
+        ],
+        "selectedFamilyLabels": [
+          "后卫/持球、锋线、创造/得分、防守",
+          "后卫/持球、创造/得分"
+        ],
+        "repeatedFamilies": [
+          "guard",
+          "creation"
+        ],
+        "repeatedFamilyLabel": "后卫/持球、创造/得分",
+        "sequencingRisk": "高"
+      },
+      {
+        "team": "Oklahoma City Thunder",
+        "picks": [
+          12,
+          17
+        ],
+        "selectedPlayers": [
+          "Yaxel Lendeborg",
+          "Chris Cenac Jr."
+        ],
+        "selectedFamilyLabels": [
+          "锋线、前场/内线、防守",
+          "锋线、前场/内线、上限/资产、尺寸"
+        ],
+        "repeatedFamilies": [
+          "wing",
+          "frontcourt"
+        ],
+        "repeatedFamilyLabel": "锋线、前场/内线",
+        "sequencingRisk": "高"
+      },
+      {
+        "team": "Charlotte Hornets",
+        "picks": [
+          14,
+          18
+        ],
+        "selectedPlayers": [
+          "Morez Johnson Jr.",
+          "Christian Anderson"
+        ],
+        "selectedFamilyLabels": [
+          "锋线、前场/内线、尺寸",
+          "后卫/持球、创造/得分"
+        ],
+        "repeatedFamilies": [],
+        "repeatedFamilyLabel": "无明确族群",
+        "sequencingRisk": "低"
+      }
+    ],
+    "averageNeedCoefficient": 0.69
+  },
+  "entries": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "phase": "rebuild",
+      "needs": [
+        "alpha scorer",
+        "wing creator",
+        "defensive size"
+      ],
+      "priorityTags": [
+        "wing creator",
+        "star upside",
+        "two-way",
+        "wing",
+        "size",
+        "creation"
+      ],
+      "riskTolerance": 84,
+      "signalStatus": "fit_signal_supported",
+      "signalStatusCn": "有适配信号，但不是硬需求",
+      "needConfidenceCoefficient": 0.8,
+      "preferenceLevel": "中强偏好：可破平/小幅上调",
+      "sourceEvidenceNotes": [
+        "Athletic p1: wing/rim-pressure fit; ESPN p1: taller scoring wing profile."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p1 wing fit"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p1 scoring wing"
+        }
+      ],
+      "preferenceFamilies": [
+        "wing",
+        "creation",
+        "defense",
+        "upside_asset",
+        "size"
+      ],
+      "preferenceFamilyLabel": "锋线、创造/得分、防守、上限/资产、尺寸",
+      "selectedPlayer": "AJ Dybantsa",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "wing creator",
+      "selectedRoleTags": [
+        "wing creator",
+        "alpha scorer",
+        "star upside",
+        "two-way",
+        "transition"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "creation",
+        "defense",
+        "upside_asset"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、创造/得分、防守、上限/资产",
+      "overlapFamilies": [
+        "wing",
+        "creation",
+        "defense",
+        "upside_asset"
+      ],
+      "overlapFamilyLabel": "锋线、创造/得分、防守、上限/资产",
+      "needBreakdown": 100,
+      "confidence": 96,
+      "margin": 5,
+      "flags": []
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "phase": "rebuild",
+      "needs": [
+        "lead guard",
+        "shot creation",
+        "late-clock offense"
+      ],
+      "priorityTags": [
+        "primary guard",
+        "shot creator",
+        "pull-up shooting",
+        "guard",
+        "creation",
+        "shooting"
+      ],
+      "riskTolerance": 78,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p2: playmaking guard and dribble/pass/shoot need; ESPN p2: offense boost, loaded frontcourt fit issue."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p2 playmaking guard"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p2 offense/frontcourt fit"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "creation"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、创造/得分",
+      "selectedPlayer": "Darryn Peterson",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "primary guard",
+      "selectedRoleTags": [
+        "primary guard",
+        "shot creator",
+        "pull-up shooting",
+        "combo guard"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、创造/得分",
+      "overlapFamilies": [
+        "guard",
+        "shooting",
+        "creation"
+      ],
+      "overlapFamilyLabel": "后卫/持球、投射/空间、创造/得分",
+      "needBreakdown": 100,
+      "confidence": 93,
+      "margin": 3,
+      "flags": []
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "phase": "accelerate",
+      "needs": [
+        "frontcourt scoring",
+        "rebounding",
+        "secondary passing"
+      ],
+      "priorityTags": [
+        "frontcourt engine",
+        "rebounder",
+        "feel"
+      ],
+      "riskTolerance": 66,
+      "signalStatus": "multiple_pick_mixed_signal",
+      "signalStatusCn": "多签混合信号，必须排序",
+      "needConfidenceCoefficient": 0.55,
+      "preferenceLevel": "条件偏好：需排序或资产折扣",
+      "sourceEvidenceNotes": [
+        "Athletic p3: skilled forward/big fits team values; ESPN p16: younger point guard makes sense if Morant future is uncertain."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p3 forward/big values"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p16 point guard"
+        }
+      ],
+      "preferenceFamilies": [
+        "frontcourt",
+        "creation"
+      ],
+      "preferenceFamilyLabel": "前场/内线、创造/得分",
+      "selectedPlayer": "Cameron Boozer",
+      "selectedPositions": "PF/C",
+      "selectedRoleFit": "frontcourt engine",
+      "selectedRoleTags": [
+        "frontcourt engine",
+        "rebounder",
+        "feel",
+        "connector",
+        "interior scorer"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "creation"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、创造/得分",
+      "overlapFamilies": [
+        "frontcourt",
+        "creation"
+      ],
+      "overlapFamilyLabel": "前场/内线、创造/得分",
+      "needBreakdown": 100,
+      "confidence": 100,
+      "margin": 15,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求"
+      ]
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "phase": "rebuild",
+      "needs": [
+        "big wing",
+        "rim pressure",
+        "defensive playmaking"
+      ],
+      "priorityTags": [
+        "big wing",
+        "two-way",
+        "transition",
+        "forward",
+        "frontcourt",
+        "size",
+        "defense"
+      ],
+      "riskTolerance": 74,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p4: direct frontcourt need; Athletic p4/p15: four fit plus size, length, athleticism, defense."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p4 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p4 and p15 size/defense"
+        }
+      ],
+      "preferenceFamilies": [
+        "wing",
+        "frontcourt",
+        "creation",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "锋线、前场/内线、创造/得分、防守、尺寸",
+      "selectedPlayer": "Caleb Wilson",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "big wing",
+      "selectedRoleTags": [
+        "big wing",
+        "versatile forward",
+        "two-way",
+        "rim pressure",
+        "transition"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、防守",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线、防守",
+      "needBreakdown": 100,
+      "confidence": 100,
+      "margin": 9,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求"
+      ]
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "phase": "asset",
+      "needs": [
+        "young guard",
+        "shooting",
+        "pace"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "pull-up shooting",
+        "decision maker",
+        "guard",
+        "creation",
+        "shooting"
+      ],
+      "riskTolerance": 72,
+      "signalStatus": "explicit_fit_and_asset_signal_supported",
+      "signalStatusCn": "明确适配，同时保留资产价值",
+      "needConfidenceCoefficient": 0.9,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p5: top guard prospects and trade-down scenarios; ESPN p5: complement smaller guard with size/shooting/feel."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p5 guards/trade-down"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p5 guard complement"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "creation",
+        "upside_asset"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、创造/得分、上限/资产",
+      "selectedPlayer": "Keaton Wagler",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "combo guard",
+        "pull-up shooting",
+        "decision maker",
+        "shooter"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间",
+      "overlapFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "overlapFamilyLabel": "后卫/持球、投射/空间",
+      "needBreakdown": 100,
+      "confidence": 89,
+      "margin": 2,
+      "flags": [
+        "交易签：from Indiana"
+      ]
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "phase": "rebuild",
+      "needs": [
+        "primary guard",
+        "rim pressure",
+        "fan-facing upside"
+      ],
+      "priorityTags": [
+        "primary guard",
+        "shot creator",
+        "speed"
+      ],
+      "riskTolerance": 80,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "ESPN p6: no obvious fit, positional size preference, shot creator option; Athletic p6: contradictory guard/big/trade-down intel."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p6 mixed fit"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p6 contradictory intel"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "creation",
+        "upside_asset"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、创造/得分、上限/资产",
+      "selectedPlayer": "Darius Acuff Jr.",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "primary guard",
+      "selectedRoleTags": [
+        "primary guard",
+        "shot creator",
+        "pace",
+        "paint touch",
+        "playmaking"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、创造/得分",
+      "overlapFamilies": [
+        "guard",
+        "creation"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分",
+      "needBreakdown": 100,
+      "confidence": 89,
+      "margin": 2,
+      "flags": [
+        "偏好分高但证据弱，不能当强内幕"
+      ]
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "phase": "accelerate",
+      "needs": [
+        "point guard depth",
+        "paint touch",
+        "defensive activity"
+      ],
+      "priorityTags": [
+        "primary guard",
+        "pace",
+        "playmaking",
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "riskTolerance": 64,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p7: needs point guard to replace DeAaron Fox; ESPN p7: guard upside/shooting with limited extra assets."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p7 point guard"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p7 guard upside"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、创造/得分、防守",
+      "selectedPlayer": "Mikel Brown Jr.",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "primary guard",
+      "selectedRoleTags": [
+        "primary guard",
+        "pull-up shooting",
+        "decision maker",
+        "pace"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间",
+      "overlapFamilies": [
+        "guard"
+      ],
+      "overlapFamilyLabel": "后卫/持球",
+      "needBreakdown": 100,
+      "confidence": 86,
+      "margin": 0,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序"
+      ]
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "phase": "asset",
+      "needs": [
+        "rim protection",
+        "frontcourt size",
+        "vertical spacing"
+      ],
+      "priorityTags": [
+        "rim protector",
+        "size",
+        "interior finisher"
+      ],
+      "riskTolerance": 69,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p8: lead guard need but centers heard more, trade-down explored; ESPN p8/p23: center need and wing-shooter/flexibility clues."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p8 guard vs center"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p8/p23 center/wing shooting"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "frontcourt",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "投射/空间、前场/内线、防守、尺寸",
+      "selectedPlayer": "Aday Mara",
+      "selectedPositions": "C",
+      "selectedRoleFit": "rim protector",
+      "selectedRoleTags": [
+        "rim protector",
+        "size",
+        "interior finisher",
+        "passing",
+        "international"
+      ],
+      "selectedFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "selectedFamilyLabel": "前场/内线、尺寸",
+      "overlapFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "overlapFamilyLabel": "前场/内线、尺寸",
+      "needBreakdown": 100,
+      "confidence": 94,
+      "margin": 7,
+      "flags": [
+        "偏好分高但证据弱，不能当强内幕",
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from New Orleans"
+      ]
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "phase": "contend",
+      "needs": [
+        "two-way guard",
+        "shooting",
+        "secondary creation"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "shooter",
+        "two-way"
+      ],
+      "riskTolerance": 55,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p9: many positions and trade explored; Athletic p30: floor spacing around Cooper Flagg; ESPN p30: long-term point guard."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p9/p30 trade and shooting"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p30 point guard"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、创造/得分、防守",
+      "selectedPlayer": "Brayden Burries",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "combo guard",
+        "two-way",
+        "wing defender",
+        "shot creator"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "wing",
+        "creation",
+        "defense"
+      ],
+      "selectedFamilyLabel": "后卫/持球、锋线、创造/得分、防守",
+      "overlapFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分、防守",
+      "needBreakdown": 100,
+      "confidence": 97,
+      "margin": 7,
+      "flags": [
+        "偏好分高但证据弱，不能当强内幕",
+        "多首轮签，需防止重复满足同一需求"
+      ]
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "phase": "contend",
+      "needs": [
+        "connector forward",
+        "defense",
+        "rebounding"
+      ],
+      "priorityTags": [
+        "big wing",
+        "connector",
+        "defense",
+        "guard",
+        "creation"
+      ],
+      "riskTolerance": 53,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p10: obvious backcourt talent need; Athletic p10: lead guard due diligence and Giannis-contingent upside."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p10 backcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p10 lead guards"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "wing",
+        "frontcourt",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、锋线、前场/内线、创造/得分、防守",
+      "selectedPlayer": "Kingston Flemings",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "defense",
+      "selectedRoleTags": [
+        "primary guard",
+        "pace",
+        "playmaking",
+        "defense"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "selectedFamilyLabel": "后卫/持球、创造/得分、防守",
+      "overlapFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分、防守",
+      "needBreakdown": 100,
+      "confidence": 83,
+      "margin": 1,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序"
+      ]
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "phase": "contend",
+      "needs": [
+        "smart guard",
+        "movement shooting",
+        "decision making"
+      ],
+      "priorityTags": [
+        "shooter",
+        "decision maker",
+        "off-ball"
+      ],
+      "riskTolerance": 50,
+      "signalStatus": "fit_signal_needs_review",
+      "signalStatusCn": "适配线索弱，需复核",
+      "needConfidenceCoefficient": 0.4,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p11: 6-9 big fits via passing, cutting, corner spacing; ESPN p11 range: frontcourt size context."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p11 big fit"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p11 size context"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间",
+      "selectedPlayer": "Nate Ament",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "shooter",
+      "selectedRoleTags": [
+        "big wing",
+        "stretch forward",
+        "shooter",
+        "upside"
+      ],
+      "selectedFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "upside_asset"
+      ],
+      "selectedFamilyLabel": "投射/空间、锋线、前场/内线、上限/资产",
+      "overlapFamilies": [
+        "shooting"
+      ],
+      "overlapFamilyLabel": "投射/空间",
+      "needBreakdown": 73,
+      "confidence": 75,
+      "margin": 2,
+      "flags": []
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "phase": "asset",
+      "needs": [
+        "frontcourt depth",
+        "versatility",
+        "long-term value"
+      ],
+      "priorityTags": [
+        "versatile forward",
+        "feel",
+        "defense"
+      ],
+      "riskTolerance": 82,
+      "signalStatus": "asset_and_fit_signal_needs_review",
+      "signalStatusCn": "资产/适配混合，需复核",
+      "needConfidenceCoefficient": 0.45,
+      "preferenceLevel": "条件偏好：需排序或资产折扣",
+      "sourceEvidenceNotes": [
+        "ESPN p12: trade options and movable future assets; Athletic p17: Wembanyama matchup problem and future capital path."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p12 trade assets"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p17 big/future capital"
+        }
+      ],
+      "preferenceFamilies": [
+        "wing",
+        "frontcourt",
+        "defense",
+        "upside_asset"
+      ],
+      "preferenceFamilyLabel": "锋线、前场/内线、防守、上限/资产",
+      "selectedPlayer": "Yaxel Lendeborg",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "feel",
+      "selectedRoleTags": [
+        "connector",
+        "rebounder",
+        "defense",
+        "maturity",
+        "feel"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、防守",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线、防守",
+      "needBreakdown": 100,
+      "confidence": 94,
+      "margin": 4,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from the LA Clippers"
+      ]
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "phase": "contend",
+      "needs": [
+        "physical wing",
+        "defense",
+        "self creation"
+      ],
+      "priorityTags": [
+        "two-way",
+        "toughness",
+        "big wing",
+        "frontcourt",
+        "forward",
+        "size"
+      ],
+      "riskTolerance": 58,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p13: little frontcourt depth beyond Adebayo and Ware; pick may also be in star-trade scenario."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p13 frontcourt/trade"
+        }
+      ],
+      "preferenceFamilies": [
+        "wing",
+        "frontcourt",
+        "creation",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "锋线、前场/内线、创造/得分、防守、尺寸",
+      "selectedPlayer": "Karim Lopez",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "big wing",
+      "selectedRoleTags": [
+        "big wing",
+        "international",
+        "defense",
+        "transition",
+        "upside"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense",
+        "upside_asset"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、防守、上限/资产",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线、防守",
+      "needBreakdown": 100,
+      "confidence": 88,
+      "margin": 3,
+      "flags": []
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "phase": "accelerate",
+      "needs": [
+        "frontcourt defense",
+        "rebounding",
+        "finishing"
+      ],
+      "priorityTags": [
+        "rim protector",
+        "rebounder",
+        "finisher"
+      ],
+      "riskTolerance": 68,
+      "signalStatus": "explicit_need_with_trade_uncertainty",
+      "signalStatusCn": "明确需求，但有交易/排序不确定",
+      "needConfidenceCoefficient": 0.7,
+      "preferenceLevel": "中强偏好：可破平/小幅上调",
+      "sourceEvidenceNotes": [
+        "ESPN p14/p18: needs help at four and five, frontcourt upgrades, picks could move; Athletic p14: toughness and physicality."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p14/p18 frontcourt/trade"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p14 toughness"
+        }
+      ],
+      "preferenceFamilies": [
+        "frontcourt",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "前场/内线、防守",
+      "selectedPlayer": "Morez Johnson Jr.",
+      "selectedPositions": "PF/C",
+      "selectedRoleFit": "rim protector",
+      "selectedRoleTags": [
+        "rebounder",
+        "rim protector",
+        "finisher",
+        "size"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "size"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、尺寸",
+      "overlapFamilies": [
+        "frontcourt"
+      ],
+      "overlapFamilyLabel": "前场/内线",
+      "needBreakdown": 100,
+      "confidence": 96,
+      "margin": 5,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求"
+      ]
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "phase": "rebuild",
+      "needs": [
+        "frontcourt depth",
+        "shooting",
+        "upside"
+      ],
+      "priorityTags": [
+        "stretch forward",
+        "rebounder",
+        "upside",
+        "forward",
+        "frontcourt",
+        "size",
+        "defense"
+      ],
+      "riskTolerance": 76,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p4: direct frontcourt need; Athletic p4/p15: four fit plus size, length, athleticism, defense."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p4 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p4 and p15 size/defense"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "defense",
+        "upside_asset",
+        "size"
+      ],
+      "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、防守、上限/资产、尺寸",
+      "selectedPlayer": "Allen Graves",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "stretch forward",
+      "selectedRoleTags": [
+        "defense",
+        "rebounder",
+        "stretch forward",
+        "versatile forward"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、防守",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线、防守",
+      "needBreakdown": 100,
+      "confidence": 94,
+      "margin": 5,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Portland"
+      ]
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "phase": "accelerate",
+      "needs": [
+        "rim protection",
+        "bench size",
+        "defense"
+      ],
+      "priorityTags": [
+        "rim protector",
+        "size",
+        "rebounder"
+      ],
+      "riskTolerance": 62,
+      "signalStatus": "multiple_pick_mixed_signal",
+      "signalStatusCn": "多签混合信号，必须排序",
+      "needConfidenceCoefficient": 0.55,
+      "preferenceLevel": "条件偏好：需排序或资产折扣",
+      "sourceEvidenceNotes": [
+        "Athletic p3: skilled forward/big fits team values; ESPN p16: younger point guard makes sense if Morant future is uncertain."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p3 forward/big values"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p16 point guard"
+        }
+      ],
+      "preferenceFamilies": [
+        "frontcourt",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "前场/内线、防守、尺寸",
+      "selectedPlayer": "Hannes Steinbach",
+      "selectedPositions": "PF/C",
+      "selectedRoleFit": "size",
+      "selectedRoleTags": [
+        "rebounder",
+        "connector",
+        "international",
+        "size",
+        "feel"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "size"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、尺寸",
+      "overlapFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "overlapFamilyLabel": "前场/内线、尺寸",
+      "needBreakdown": 96,
+      "confidence": 82,
+      "margin": 4,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Phoenix via Orlando"
+      ]
+    },
+    {
+      "pick": 17,
+      "team": "Oklahoma City Thunder",
+      "phase": "asset",
+      "needs": [
+        "big wing",
+        "shooting",
+        "stash optionality"
+      ],
+      "priorityTags": [
+        "big wing",
+        "international",
+        "upside"
+      ],
+      "riskTolerance": 86,
+      "signalStatus": "asset_and_fit_signal_needs_review",
+      "signalStatusCn": "资产/适配混合，需复核",
+      "needConfidenceCoefficient": 0.45,
+      "preferenceLevel": "条件偏好：需排序或资产折扣",
+      "sourceEvidenceNotes": [
+        "ESPN p12: trade options and movable future assets; Athletic p17: Wembanyama matchup problem and future capital path."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p12 trade assets"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p17 big/future capital"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "upside_asset"
+      ],
+      "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、上限/资产",
+      "selectedPlayer": "Chris Cenac Jr.",
+      "selectedPositions": "PF/C",
+      "selectedRoleFit": "upside",
+      "selectedRoleTags": [
+        "rim protector",
+        "rebounder",
+        "size",
+        "upside",
+        "finisher"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "upside_asset",
+        "size"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、上限/资产、尺寸",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt",
+        "upside_asset"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线、上限/资产",
+      "needBreakdown": 69,
+      "confidence": 79,
+      "margin": 4,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Philadelphia"
+      ]
+    },
+    {
+      "pick": 18,
+      "team": "Charlotte Hornets",
+      "phase": "accelerate",
+      "needs": [
+        "guard depth",
+        "shooting",
+        "secondary creation"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "shooter",
+        "playmaking"
+      ],
+      "riskTolerance": 63,
+      "signalStatus": "explicit_need_with_trade_uncertainty",
+      "signalStatusCn": "明确需求，但有交易/排序不确定",
+      "needConfidenceCoefficient": 0.7,
+      "preferenceLevel": "中强偏好：可破平/小幅上调",
+      "sourceEvidenceNotes": [
+        "ESPN p14/p18: needs help at four and five, frontcourt upgrades, picks could move; Athletic p14: toughness and physicality."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p14/p18 frontcourt/trade"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p14 toughness"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "creation"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、创造/得分",
+      "selectedPlayer": "Christian Anderson",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "primary guard",
+        "playmaking",
+        "pace",
+        "bench guard"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、创造/得分",
+      "overlapFamilies": [
+        "guard",
+        "creation"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分",
+      "needBreakdown": 100,
+      "confidence": 78,
+      "margin": 0,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序",
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Orlando via Phoenix"
+      ]
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "phase": "accelerate",
+      "needs": [
+        "connector forward",
+        "length",
+        "team defense"
+      ],
+      "priorityTags": [
+        "versatile forward",
+        "defense",
+        "passing",
+        "frontcourt",
+        "creation",
+        "shooting"
+      ],
+      "riskTolerance": 61,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p19: long-term center, creation, and 3-point shooting; Athletic p19: veteran big market and another creator."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p19 center/creation/shooting"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p19 big/creator"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "creation",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、创造/得分、防守、尺寸",
+      "selectedPlayer": "Labaron Philon Jr.",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "creation",
+      "selectedRoleTags": [
+        "primary guard",
+        "pace",
+        "shot creator",
+        "playmaking"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、创造/得分",
+      "overlapFamilies": [
+        "creation"
+      ],
+      "overlapFamilyLabel": "创造/得分",
+      "needBreakdown": 66,
+      "confidence": 71,
+      "margin": 0,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序",
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 20,
+      "team": "San Antonio Spurs",
+      "phase": "accelerate",
+      "needs": [
+        "shooting guard",
+        "secondary handler",
+        "spacing"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "shooter",
+        "decision maker",
+        "frontcourt",
+        "size",
+        "shooting"
+      ],
+      "riskTolerance": 60,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p20: bigger frontcourt fit beside Wembanyama; Athletic p20: best shooter and lineup versatility."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p20 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p20 shooting"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "frontcourt",
+        "size"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、前场/内线、尺寸",
+      "selectedPlayer": "Bennett Stirtz",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "maturity",
+        "decision maker",
+        "shooter",
+        "bench guard"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间",
+      "overlapFamilies": [
+        "guard",
+        "shooting"
+      ],
+      "overlapFamilyLabel": "后卫/持球、投射/空间",
+      "needBreakdown": 100,
+      "confidence": 84,
+      "margin": 1,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序",
+        "交易签：from Atlanta"
+      ]
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "phase": "accelerate",
+      "needs": [
+        "wing shooting",
+        "defensive activity",
+        "floor spacing"
+      ],
+      "priorityTags": [
+        "3-and-D",
+        "wing defender",
+        "shooter",
+        "guard",
+        "wing",
+        "shooting",
+        "creation"
+      ],
+      "riskTolerance": 57,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p21: offense-minded target and glaring shooting need; Athletic p21: lead guards or wings/forwards who shoot/create."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p21 shooting"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p21 guard/wing creation"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、锋线、创造/得分、防守",
+      "selectedPlayer": "Cameron Carr",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "wing defender",
+      "selectedRoleTags": [
+        "shooter",
+        "two-way",
+        "wing defender",
+        "off-ball"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "defense"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、锋线、防守",
+      "overlapFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "defense"
+      ],
+      "overlapFamilyLabel": "后卫/持球、投射/空间、锋线、防守",
+      "needBreakdown": 100,
+      "confidence": 99,
+      "margin": 5,
+      "flags": [
+        "交易签：from Minnesota"
+      ]
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "phase": "contend",
+      "needs": [
+        "ready guard",
+        "bench creation",
+        "shooting"
+      ],
+      "priorityTags": [
+        "primary guard",
+        "shooter",
+        "maturity",
+        "forward",
+        "size",
+        "defense"
+      ],
+      "riskTolerance": 48,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p22: powerful four with athleticism/strength/defense; ESPN p22: downhill and defensive upside."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p22 powerful four"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p22 defense"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "creation",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、锋线、创造/得分、防守、尺寸",
+      "selectedPlayer": "Dailyn Swain",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "forward",
+      "selectedRoleTags": [
+        "big wing",
+        "defense",
+        "passing",
+        "connector",
+        "two-way"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线、防守",
+      "overlapFamilies": [
+        "wing",
+        "defense"
+      ],
+      "overlapFamilyLabel": "锋线、防守",
+      "needBreakdown": 100,
+      "confidence": 74,
+      "margin": 0,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序",
+        "交易签：from Houston via Oklahoma City",
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "phase": "asset",
+      "needs": [
+        "guard defense",
+        "playmaking",
+        "depth"
+      ],
+      "priorityTags": [
+        "primary guard",
+        "defense",
+        "pace"
+      ],
+      "riskTolerance": 64,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p8: lead guard need but centers heard more, trade-down explored; ESPN p8/p23: center need and wing-shooter/flexibility clues."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p8 guard vs center"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p8/p23 center/wing shooting"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、创造/得分、防守",
+      "selectedPlayer": "Ebuka Okorie",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "pace",
+      "selectedRoleTags": [
+        "shot creator",
+        "pace",
+        "bench guard",
+        "pull-up shooting"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、创造/得分",
+      "overlapFamilies": [
+        "guard",
+        "creation"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分",
+      "needBreakdown": 83,
+      "confidence": 91,
+      "margin": 7,
+      "flags": [
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Cleveland"
+      ]
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "phase": "contend",
+      "needs": [
+        "bench guard",
+        "shooting",
+        "toughness"
+      ],
+      "priorityTags": [
+        "shooter",
+        "maturity",
+        "decision maker",
+        "frontcourt",
+        "size",
+        "defense"
+      ],
+      "riskTolerance": 42,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "Athletic p24: backup center with toughness; ESPN p24: center depth via size/shooting."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p24 backup center"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p24 center depth"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "frontcourt",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、前场/内线、防守、尺寸",
+      "selectedPlayer": "Isaiah Evans",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "shooter",
+      "selectedRoleTags": [
+        "3-and-D",
+        "big wing",
+        "shooter",
+        "off-ball"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "frontcourt"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、锋线、前场/内线",
+      "overlapFamilies": [
+        "guard",
+        "shooting",
+        "frontcourt"
+      ],
+      "overlapFamilyLabel": "后卫/持球、投射/空间、前场/内线",
+      "needBreakdown": 98,
+      "confidence": 74,
+      "margin": 0,
+      "flags": [
+        "分差极窄，偏好口径可能改变排序",
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
+      "phase": "contend",
+      "needs": [
+        "wing shooting",
+        "size",
+        "low-usage defense"
+      ],
+      "priorityTags": [
+        "3-and-D",
+        "big wing",
+        "off-ball",
+        "frontcourt",
+        "size"
+      ],
+      "riskTolerance": 49,
+      "signalStatus": "explicit_need_supported_from_single_source",
+      "signalStatusCn": "单来源明确需求，需折扣",
+      "needConfidenceCoefficient": 0.75,
+      "preferenceLevel": "中强偏好：可破平/小幅上调",
+      "sourceEvidenceNotes": [
+        "ESPN p25: lob option up front; Athletic p25 is prospect-fit oriented but not a strong separate need."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p25 lob option"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p25 developmental big"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "defense",
+        "size"
+      ],
+      "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、防守、尺寸",
+      "selectedPlayer": "Koa Peat",
+      "selectedPositions": "SF/PF",
+      "selectedRoleFit": "frontcourt",
+      "selectedRoleTags": [
+        "rebounder",
+        "connector",
+        "toughness",
+        "frontcourt"
+      ],
+      "selectedFamilies": [
+        "wing",
+        "frontcourt"
+      ],
+      "selectedFamilyLabel": "锋线、前场/内线",
+      "overlapFamilies": [
+        "wing",
+        "frontcourt"
+      ],
+      "overlapFamilyLabel": "锋线、前场/内线",
+      "needBreakdown": 91,
+      "confidence": 74,
+      "margin": 2,
+      "flags": [
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "phase": "contend",
+      "needs": [
+        "frontcourt depth",
+        "passing feel",
+        "rebounding"
+      ],
+      "priorityTags": [
+        "connector",
+        "rebounder",
+        "feel"
+      ],
+      "riskTolerance": 46,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p26: second ballhandler behind Jamal Murray; ESPN p26: more athletic along frontline."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p26 second ballhandler"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p26 athletic frontline"
+        }
+      ],
+      "preferenceFamilies": [
+        "frontcourt"
+      ],
+      "preferenceFamilyLabel": "前场/内线",
+      "selectedPlayer": "Tarris Reed Jr.",
+      "selectedPositions": "C",
+      "selectedRoleFit": "rebounder",
+      "selectedRoleTags": [
+        "center depth",
+        "size",
+        "rebounder",
+        "needs_review"
+      ],
+      "selectedFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "selectedFamilyLabel": "前场/内线、尺寸",
+      "overlapFamilies": [
+        "frontcourt"
+      ],
+      "overlapFamilyLabel": "前场/内线",
+      "needBreakdown": 81,
+      "confidence": 68,
+      "margin": 2,
+      "flags": [
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "phase": "contend",
+      "needs": [
+        "switchable forward",
+        "shooting",
+        "defensive depth"
+      ],
+      "priorityTags": [
+        "two-way",
+        "big wing",
+        "shooter"
+      ],
+      "riskTolerance": 44,
+      "signalStatus": "no_clear_need_source",
+      "signalStatusCn": "无清晰来源，禁用球队需求",
+      "needConfidenceCoefficient": 0.0,
+      "preferenceLevel": "禁用偏好：不作为选人依据",
+      "sourceEvidenceNotes": [
+        "ESPN p27 frames Boston as a luxury pick with roster depth; no clear priority need in provided raw."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p27 luxury pick"
+        }
+      ],
+      "preferenceFamilies": [
+        "shooting",
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、防守",
+      "selectedPlayer": "Sergio De Larrea",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "shooter",
+      "selectedRoleTags": [
+        "combo guard",
+        "international",
+        "shooter",
+        "playmaking",
+        "size"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "creation",
+        "size"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、创造/得分、尺寸",
+      "overlapFamilies": [
+        "shooting"
+      ],
+      "overlapFamilyLabel": "投射/空间",
+      "needBreakdown": 66,
+      "confidence": 68,
+      "margin": 4,
+      "flags": [
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 28,
+      "team": "Minnesota Timberwolves",
+      "phase": "contend",
+      "needs": [
+        "combo guard",
+        "bench scoring",
+        "point-of-attack defense"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "shot creator",
+        "defense",
+        "guard",
+        "creation"
+      ],
+      "riskTolerance": 47,
+      "signalStatus": "explicit_need_supported",
+      "signalStatusCn": "明确需求，有证据支持",
+      "needConfidenceCoefficient": 1.0,
+      "preferenceLevel": "强偏好：可推动同档选择",
+      "sourceEvidenceNotes": [
+        "ESPN p28: another ball handler and long-term backcourt depth; Athletic p28: point guard options."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p28 ballhandler"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p28 point guard"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "creation",
+        "defense"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、创造/得分、防守",
+      "selectedPlayer": "Meleek Thomas",
+      "selectedPositions": "SG/SF",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "combo guard",
+        "shot creator",
+        "bench scoring",
+        "pull-up shooting"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "shooting",
+        "wing",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、投射/空间、锋线、创造/得分",
+      "overlapFamilies": [
+        "guard",
+        "creation"
+      ],
+      "overlapFamilyLabel": "后卫/持球、创造/得分",
+      "needBreakdown": 100,
+      "confidence": 76,
+      "margin": 5,
+      "flags": [
+        "交易签：from Detroit"
+      ]
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "phase": "contend",
+      "needs": [
+        "center depth",
+        "size",
+        "finishing"
+      ],
+      "priorityTags": [
+        "rim protector",
+        "size",
+        "finisher"
+      ],
+      "riskTolerance": 45,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "ESPN p29: frontcourt depth; Athletic p29: bench offense/shooting if guard salary is cut."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p29 frontcourt"
+        },
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p29 bench offense"
+        }
+      ],
+      "preferenceFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "preferenceFamilyLabel": "前场/内线、尺寸",
+      "selectedPlayer": "Henri Veesaar",
+      "selectedPositions": "C",
+      "selectedRoleFit": "rim protector",
+      "selectedRoleTags": [
+        "rim protector",
+        "international",
+        "size",
+        "finisher"
+      ],
+      "selectedFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "selectedFamilyLabel": "前场/内线、尺寸",
+      "overlapFamilies": [
+        "frontcourt",
+        "size"
+      ],
+      "overlapFamilyLabel": "前场/内线、尺寸",
+      "needBreakdown": 100,
+      "confidence": 74,
+      "margin": 3,
+      "flags": [
+        "偏好分高但证据弱，不能当强内幕",
+        "交易签：from San Antonio via Atlanta",
+        "低置信度选择，需复核"
+      ]
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "phase": "contend",
+      "needs": [
+        "big guard",
+        "shooting",
+        "secondary ball handling"
+      ],
+      "priorityTags": [
+        "combo guard",
+        "international",
+        "shooter"
+      ],
+      "riskTolerance": 52,
+      "signalStatus": "mixed_signal_needs_review",
+      "signalStatusCn": "信号冲突，只能破平",
+      "needConfidenceCoefficient": 0.35,
+      "preferenceLevel": "弱偏好：只能作为破平项",
+      "sourceEvidenceNotes": [
+        "Athletic p9: many positions and trade explored; Athletic p30: floor spacing around Cooper Flagg; ESPN p30: long-term point guard."
+      ],
+      "sourceClues": [
+        {
+          "source_id": "the-athletic-via-nba-mock",
+          "clue": "p9/p30 trade and shooting"
+        },
+        {
+          "source_id": "espn-final-mock-60",
+          "clue": "p30 point guard"
+        }
+      ],
+      "preferenceFamilies": [
+        "guard",
+        "shooting",
+        "frontcourt"
+      ],
+      "preferenceFamilyLabel": "后卫/持球、投射/空间、前场/内线",
+      "selectedPlayer": "Marc-Owen Fodzo Dada",
+      "selectedPositions": "PG/SG",
+      "selectedRoleFit": "combo guard",
+      "selectedRoleTags": [
+        "combo guard",
+        "developmental guard",
+        "scoring guard profile",
+        "secondary creation",
+        "international"
+      ],
+      "selectedFamilies": [
+        "guard",
+        "creation"
+      ],
+      "selectedFamilyLabel": "后卫/持球、创造/得分",
+      "overlapFamilies": [
+        "guard"
+      ],
+      "overlapFamilyLabel": "后卫/持球",
+      "needBreakdown": 100,
+      "confidence": 60,
+      "margin": 0,
+      "flags": [
+        "偏好分高但证据弱，不能当强内幕",
+        "分差极窄，偏好口径可能改变排序",
+        "多首轮签，需防止重复满足同一需求",
+        "交易签：from Oklahoma City via WAS and PHI",
+        "低置信度选择，需复核"
+      ]
+    }
+  ],
+  "sequencingAudit": [
+    {
+      "team": "Memphis Grizzlies",
+      "picks": [
+        3,
+        16
+      ],
+      "selectedPlayers": [
+        "Cameron Boozer",
+        "Hannes Steinbach"
+      ],
+      "selectedFamilyLabels": [
+        "锋线、前场/内线、创造/得分",
+        "锋线、前场/内线、尺寸"
+      ],
+      "repeatedFamilies": [
+        "wing",
+        "frontcourt"
+      ],
+      "repeatedFamilyLabel": "锋线、前场/内线",
+      "sequencingRisk": "高"
+    },
+    {
+      "team": "Chicago Bulls",
+      "picks": [
+        4,
+        15
+      ],
+      "selectedPlayers": [
+        "Caleb Wilson",
+        "Allen Graves"
+      ],
+      "selectedFamilyLabels": [
+        "锋线、前场/内线、防守",
+        "锋线、前场/内线、防守"
+      ],
+      "repeatedFamilies": [
+        "wing",
+        "frontcourt",
+        "defense"
+      ],
+      "repeatedFamilyLabel": "锋线、前场/内线、防守",
+      "sequencingRisk": "高"
+    },
+    {
+      "team": "Atlanta Hawks",
+      "picks": [
+        8,
+        23
+      ],
+      "selectedPlayers": [
+        "Aday Mara",
+        "Ebuka Okorie"
+      ],
+      "selectedFamilyLabels": [
+        "前场/内线、尺寸",
+        "后卫/持球、投射/空间、创造/得分"
+      ],
+      "repeatedFamilies": [],
+      "repeatedFamilyLabel": "无明确族群",
+      "sequencingRisk": "低"
+    },
+    {
+      "team": "Dallas Mavericks",
+      "picks": [
+        9,
+        30
+      ],
+      "selectedPlayers": [
+        "Brayden Burries",
+        "Marc-Owen Fodzo Dada"
+      ],
+      "selectedFamilyLabels": [
+        "后卫/持球、锋线、创造/得分、防守",
+        "后卫/持球、创造/得分"
+      ],
+      "repeatedFamilies": [
+        "guard",
+        "creation"
+      ],
+      "repeatedFamilyLabel": "后卫/持球、创造/得分",
+      "sequencingRisk": "高"
+    },
+    {
+      "team": "Oklahoma City Thunder",
+      "picks": [
+        12,
+        17
+      ],
+      "selectedPlayers": [
+        "Yaxel Lendeborg",
+        "Chris Cenac Jr."
+      ],
+      "selectedFamilyLabels": [
+        "锋线、前场/内线、防守",
+        "锋线、前场/内线、上限/资产、尺寸"
+      ],
+      "repeatedFamilies": [
+        "wing",
+        "frontcourt"
+      ],
+      "repeatedFamilyLabel": "锋线、前场/内线",
+      "sequencingRisk": "高"
+    },
+    {
+      "team": "Charlotte Hornets",
+      "picks": [
+        14,
+        18
+      ],
+      "selectedPlayers": [
+        "Morez Johnson Jr.",
+        "Christian Anderson"
+      ],
+      "selectedFamilyLabels": [
+        "锋线、前场/内线、尺寸",
+        "后卫/持球、创造/得分"
+      ],
+      "repeatedFamilies": [],
+      "repeatedFamilyLabel": "无明确族群",
+      "sequencingRisk": "低"
+    }
+  ]
+}

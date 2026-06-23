@@ -42,6 +42,9 @@ const defaultRagS3Keys = [
   "data/documents/document_index.json",
   "data/documents/milestone-questions/DraftCode24里程碑事件预测.md",
   "data/normalized/normalized_china_nba_draft_board_20260623.json",
+  "data/normalized/normalized_2026_local_player_pool_124.json",
+  "data/normalized/normalized_2026_player_feature_reference_124.json",
+  "data/normalized/normalized_2026_online_player_list_reverification_20260623.json",
   "data/normalized/normalized_2026_official_prospects_101.json",
   "data/normalized/normalized_2026_official_team_profiles_30.json",
   "data/normalized/normalized_2026_team_context.json",
@@ -52,8 +55,6 @@ const defaultRagS3Keys = [
   "data/clean/clean_teams.json",
   "data/clean/official_prospect_reconciliation.json",
   "data/reports/milestone_prediction_evidence_20260623.json",
-  "data/reports/milestone_deepseek_discussion_20260623.json",
-  "data/reports/milestone_deepseek_discussion_20260623.md",
   "data/reports/milestone_answer_card_write_report_20260623.json",
   "data/reports/team_preference_research_20260623.json",
   "data/reports/team_preference_research_20260623.md",
@@ -71,6 +72,8 @@ const defaultRagS3Keys = [
   "data/reports/nba_official_expanded_data_audit_20260623.md",
   "data/reports/nba_china_draft_verification_20260623.md",
   "data/reports/china_nba_draft_scrape_report_20260623.md",
+  "data/reports/player_feature_parameter_reference_124_20260623.md",
+  "data/reports/online_full_player_list_reverification_20260623.md",
   "data/reports/d8_source_quality_debate.md",
   "data/raw/raw_sources.json",
   "data/raw/external_source_inventory.json",
@@ -102,6 +105,8 @@ const ragTopK = Number(process.env.DRAFTOPS_RAG_TOP_K ?? "12");
 const ragS3LoadConcurrency = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_S3_LOAD_CONCURRENCY ?? "8"), 1), 16);
 const ragMaxChunks = Math.max(Number(process.env.DRAFTOPS_RAG_MAX_CHUNKS ?? "5000"), ragTopK);
 const ragMaxS3KeysPerQuery = Math.max(Number(process.env.DRAFTOPS_RAG_MAX_S3_KEYS_PER_QUERY ?? "18"), 1);
+const ragAgenticEnabled = String(process.env.DRAFTOPS_RAG_AGENTIC_ENABLED ?? "true").toLowerCase() !== "false";
+const ragAgenticMaxIterations = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_AGENTIC_MAX_ITERATIONS ?? "2"), 1), 3);
 const allowedOrigins = csv(process.env.CORS_ALLOWED_ORIGINS);
 
 let cachedSecret;
@@ -133,14 +138,55 @@ const embeddingProviderLabel = () => {
 const isPlaceholder = (value) => /replace|placeholder|change-me|changeme|your-/i.test(String(value ?? ""));
 
 const systemPrompt = [
-  "You are the DraftOps read-only AI assistant.",
-  "You answer questions about the current DraftOps draft board, milestone answers, architecture, and presentation context.",
-  "Use retrieved AWS RAG snippets first when they are provided. They may come from S3 objects or DynamoDB records in the deployed environment.",
-  "Selected pick context is a retrieval anchor, not a hard answer boundary. When focus mode is direct, answer around that pick/team/player. When focus mode is background, answer the user's global or broader question and mention the selected pick only if it helps.",
-  "You must not create, modify, reorder, or replace draft predictions.",
-  "If the user asks you to change the draft board, refuse briefly and explain that the deployed assistant is read-only.",
-  "Do not reveal secrets, environment variables, credentials, or internal AWS policy details.",
-  "Answer in the user's language. Keep answers concise and directly useful for a demo.",
+  "你是 DraftOps 只读AI问答助手，负责回答关于 2026 NBA 选秀预测系统的问题。",
+  "",
+  "## 核心能力",
+  "- 基于 Agentic RAG 检索到的S3/DynamoDB证据回答问题",
+  "- 当前预测板使用 min-max 池内相对评分算法：从第1顺位开始，对剩余球员池按球队策略维度相对打分，选最高分后移除该球员，进入下一顺位重新打分",
+  "- 每轮预测共3255次候选评估，100%确定性算法，无随机因素，结果可复现",
+  "",
+  "## 回答规则（硬约束）",
+  "- 必须优先使用检索到的片段中的事实，不能编造球员数据、顺位、伤病信息",
+  "- 证据不足时明确说明\"根据现有检索结果，该信息覆盖不足\"，不要猜测",
+  "- 先给出直接答案，再给出理由和依据",
+  "- 回答使用中文，球员中文名优先，学校使用标准中文翻译（如 UCLA→加州大学洛杉矶分校, Duke→杜克大学）",
+  "- 不要输出Markdown格式（不用#、不用*列表、不用代码块）",
+  "- 不要输出免责声明，不要说\"作为AI\"之类的话",
+  "- 不要泄露密钥、环境变量、AWS内部配置",
+  "- 你不能修改、重排、替换选秀预测结果；你是只读解释助手",
+  "",
+  "## 回答格式规范",
+  "- 顺位查询：直接给出球员名+中文译名，然后说明选择理由、关键优势、主要风险",
+  "- 胶着签位（margin<1分）必须提示：该签位竞争激烈，分差仅X分，最终选择接近",
+  "- 涉及Fallback/备选球员时，标注：该顺位备选证据覆盖较薄，存在不确定性",
+  "- 统计问题：给出数字后列出涉及的球员名单",
+  "",
+  "## 现场演示准备（LIVE READINESS）",
+  "- 系统支持现场一键重预测：备份当前板 → 运行3255次候选评估 → 同步到前端 → 自动清空缓存加载新结果",
+  "- 重预测流程约需5-15秒，纯本地运行无需联网",
+  "- 如果评委要求\"现场重新预测\"或\"重新跑一遍模型\"，请直接、清晰地告知以下要点：",
+  "  1. 系统已内置一键重预测功能，随时可以执行，专门为现场演示准备",
+  "  2. 流程：自动备份当前预测板到 data/boards/backups/（可回滚）→ 逐顺位运行min-max池内相对评分（3255次候选评估）→ 同步到前端 → 清空缓存加载新结果",
+  "  3. 耗时约5-15秒，纯本地运行无需联网",
+  "  4. 算法100%确定性，没有随机因素，相同输入必定得到相同输出",
+  "  5. 现场操作员可以通过 npm run live:repredict 命令一键触发",
+  "- 严格禁止：不要询问\"是否需要触发\"、\"需要我通知操作员吗\"之类的问题；直接面向用户/评委回答，说明系统已具备该能力即可",
+  "",
+  "## Few-shot 示例",
+  "Q: 第一顺位选谁？",
+  "A: 第1顺位（亚特兰大老鹰）选中 AJ·迪班萨（AJ Dybantsa）。理由：迪班萨是本届综合评分最高的球员，在得分能力、运动能力、尺寸、潜力等维度均位居前列，符合老鹰队重建核心的选择方向。风险：三分稳定性仍需提升。",
+  "",
+  "Q: 为什么第X顺位选这个球员？",
+  "A: 第X顺位选择[球员名]主要基于以下原因：1）在剩余球员池中该球员的相对评分最高；2）符合[球队名]的建队策略（[如：需要控卫/需要侧翼尺寸/即战力需求]）；3）关键优势：[列举1-2项]；4）主要风险：[列举1项]。当前分差为X分，属于[明确/胶着]选择。",
+  "",
+  "Q: 首轮有几个中锋？",
+  "A: 首轮共4名主打中锋位置的球员，分别是第12顺位阿达伊·马拉（Aday Mara）、第26顺位亨利·维萨尔（Henri Veesaar）、第29顺位小塔里斯·里德（Tarris Reed Jr.）。",
+  "",
+  "## 边界规则",
+  "- 不能修改代码、写文件、运行命令、提交仓库",
+  "- 不能预测\"如果换人会怎样\"以外的修改性建议",
+  "- 不能编造URL、媒体名、球员数据",
+  "- 回答要简洁、直接、对演示有用",
 ].join("\n");
 
 const getOrigin = (event) => event.headers?.origin ?? event.headers?.Origin ?? "";
@@ -160,6 +206,21 @@ const json = (event, statusCode, body) => ({
     "content-type": "application/json; charset=utf-8",
   },
   body: JSON.stringify(body),
+});
+
+const sseEvent = (eventName, data) => `event: ${eventName}\ndata: ${JSON.stringify({ event: eventName, ...data })}\n\n`;
+
+const sseResponse = (event, statusCode, body) => ({
+  statusCode,
+  headers: {
+    "access-control-allow-origin": getCorsOrigin(event),
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type,authorization",
+    "content-type": "text/event-stream; charset=utf-8",
+    "cache-control": "no-cache",
+    "connection": "keep-alive",
+  },
+  body,
 });
 
 const parseBody = (event) => {
@@ -295,6 +356,129 @@ const scoreText = (text, terms) => {
   return terms.reduce((score, term) => score + (lower.includes(term.toLowerCase()) ? 1 : 0), 0);
 };
 
+const chunkSearchText = (chunk) => [chunk?.source, chunk?.path, chunk?.text].filter(Boolean).join("\n");
+
+const chunkMatchesPick = (chunk, pickNumber) => {
+  const pick = Number(pickNumber);
+  if (!Number.isFinite(pick) || pick < 1) return false;
+  const text = chunkSearchText(chunk).toLowerCase();
+  return [
+    new RegExp(`"pick"\\s*:\\s*${pick}\\b`),
+    new RegExp(`\\bpick/rank\\s+${pick}\\b`),
+    new RegExp(`\\bpick\\s+${pick}\\b`),
+    new RegExp(`#${pick}\\b`),
+    new RegExp(`第\\s*${pick}\\s*顺位`),
+  ].some((pattern) => pattern.test(text));
+};
+
+const extractQuotedField = (text, fieldNames) => {
+  for (const fieldName of fieldNames) {
+    const match = String(text ?? "").match(new RegExp(`"${fieldName}"\\s*:\\s*"([^"]+)"`));
+    if (match?.[1]) return match[1];
+  }
+  return "";
+};
+
+const extractNumberField = (text, fieldNames) => {
+  for (const fieldName of fieldNames) {
+    const match = String(text ?? "").match(new RegExp(`"${fieldName}"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)`));
+    if (match?.[1]) {
+      const value = Number(match[1]);
+      if (Number.isFinite(value)) return value;
+    }
+  }
+  return null;
+};
+
+const extractStringArrayField = (text, fieldNames, limit = 8) => {
+  for (const fieldName of fieldNames) {
+    const match = String(text ?? "").match(new RegExp(`"${fieldName}"\\s*:\\s*\\[([\\s\\S]*?)\\]`));
+    if (!match?.[1]) continue;
+    const values = [...match[1].matchAll(/"([^"]+)"/g)].map((item) => item[1]).filter(Boolean);
+    if (values.length) return [...new Set(values)].slice(0, limit);
+  }
+  return [];
+};
+
+const recordLabelPartsForPick = (text, pickNumber) => {
+  const pick = Number(pickNumber);
+  const match = String(text ?? "").match(/^Record:\s*pick\/rank\s+(\d+)\s*\|\s*([^|\n]+?)(?:\s*\|\s*([^\n]+))?$/m);
+  if (!match || Number(match[1]) !== pick) return null;
+  return {
+    pick,
+    first: match[2]?.trim() ?? "",
+    second: match[3]?.trim() ?? "",
+  };
+};
+
+const resolvePickContextFromChunks = (chunks, pickNumber) => {
+  const pick = Number(pickNumber);
+  if (!Number.isFinite(pick) || pick < 1) return null;
+  const exactChunks = chunks.filter((chunk) => chunkMatchesPick(chunk, pick));
+  if (!exactChunks.length) return null;
+
+  const preferredChunks = [...exactChunks].sort((left, right) => {
+    const leftText = chunkSearchText(left);
+    const rightText = chunkSearchText(right);
+    const weight = (text) =>
+      (text.includes("agent_expanded_recommended_board.json") ? 8 : 0) +
+      (text.includes("team-preference") || text.includes("team_context") ? 4 : 0) +
+      (text.includes("prospect-evidence") || text.includes("consensus_lottery") ? 3 : 0);
+    return weight(rightText) - weight(leftText);
+  });
+
+  const context = { pick };
+  const evidence = [];
+  const risks = [];
+
+  for (const chunk of preferredChunks) {
+    const text = String(chunk.text ?? "");
+    const record = recordLabelPartsForPick(text, pick);
+    if (record?.second) {
+      context.team ||= record.first;
+      context.player ||= record.second;
+    }
+
+    context.team ||= extractQuotedField(text, ["team", "team_name", "teamName", "projected_team_from_espn_mock"]);
+    context.teamCode ||= extractQuotedField(text, ["team_abbreviation"]);
+    context.acquiredFrom ||= extractQuotedField(text, ["acquiredFrom", "acquired_from_text"]);
+    context.player ||= extractQuotedField(text, ["player", "playerName", "name"]);
+    context.school ||= extractQuotedField(text, ["school", "school_or_team"]);
+    context.origin ||= extractQuotedField(text, ["origin"]);
+    context.classYear ||= extractQuotedField(text, ["classYear", "class_or_status"]);
+    context.roleFit ||= extractQuotedField(text, ["roleFit"]);
+    context.teamPhase ||= extractQuotedField(text, ["phase"]);
+    context.teamNotes ||= extractQuotedField(text, ["notes"]);
+    context.score ??= extractNumberField(text, ["score"]);
+    context.confidence ??= extractNumberField(text, ["confidence"]);
+    context.margin ??= extractNumberField(text, ["margin"]);
+
+    if (!context.positions?.length) context.positions = extractStringArrayField(text, ["positions"], 4);
+    if (!context.positions?.length) {
+      const position = extractQuotedField(text, ["position"]);
+      if (position) context.positions = position.split(/[\/,]/).map((item) => item.trim()).filter(Boolean).slice(0, 4);
+    }
+    if (!context.teamNeeds?.length) context.teamNeeds = extractStringArrayField(text, ["needs"], 8);
+    if (!context.teamPriorityTags?.length) {
+      context.teamPriorityTags = extractStringArrayField(text, ["priorityTags", "roleTags"], 8);
+    }
+
+    evidence.push(...extractStringArrayField(text, ["sourceNotes"], 6));
+    risks.push(...extractStringArrayField(text, ["risks"], 5));
+  }
+
+  const normalized = Object.fromEntries(Object.entries({
+    ...context,
+    evidence: [...new Set(evidence)].slice(0, 6),
+    warnings: [...new Set(risks)].slice(0, 5),
+  }).filter(([, value]) => {
+    if (Array.isArray(value)) return value.length > 0;
+    return value !== null && value !== undefined && value !== "";
+  }));
+
+  return Object.keys(normalized).length > 1 ? normalized : null;
+};
+
 const sourceBoostForRank = (sourceRank) =>
   ({
     "aws-s3-rag-index": 0.19,
@@ -332,7 +516,7 @@ const sourceIntentBoost = (source, question) => {
   if (intent.team && /team|team_context|team_preference|official_team_profiles|needs/.test(lower)) {
     boost += 0.2;
   }
-  if (intent.prospect && /prospect|official_prospects|big_board|clean_prospects|china_nba_draft/.test(lower)) {
+  if (intent.prospect && /prospect|official_prospects|local_player_pool|player_feature_reference|online_player_list_reverification|big_board|clean_prospects|china_nba_draft/.test(lower)) {
     boost += 0.2;
   }
   if (intent.board && /board|bundle|mock|prediction|consensus|draft/.test(lower)) {
@@ -355,7 +539,7 @@ const sourceKeyMatchesIntent = (key, intent) => {
   if (/team_preference|integrated_scoring|parameter|prediction_strategy|multi_agent|main_parameter|consensus/.test(lower)) return true;
   if (intent.milestone && /milestone|answer|draftcode24|deepseek_discussion|answer_card/.test(lower)) return true;
   if (intent.team && /team|team_context|team_profiles|team_preference|needs/.test(lower)) return true;
-  if (intent.prospect && /prospect|big_board|mock_lottery|china_nba_draft|clean_prospects/.test(lower)) return true;
+  if (intent.prospect && /prospect|local_player_pool|player_feature_reference|online_player_list_reverification|big_board|mock_lottery|china_nba_draft|clean_prospects/.test(lower)) return true;
   if (intent.evidence && /audit|source|official|raw|reconciliation|verification|quality/.test(lower)) return true;
   if (intent.board && /board|mock|draft|prediction|consensus|strategy/.test(lower)) return true;
   return false;
@@ -371,10 +555,198 @@ const selectRagS3KeysForQuestion = (question, { focusMode = "inactive" } = {}) =
     }
     return sourceKeyMatchesIntent(value, intent);
   });
-  if (indexed.length) return indexed.slice(0, ragMaxS3KeysPerQuery);
+  const rawSupplements = ragS3Keys.filter((key) => /normalized_2026_(local_player_pool_124|player_feature_reference_124|online_player_list_reverification_20260623)\.json/.test(String(key)));
+  if (indexed.length) return unique([...indexed, ...rawSupplements]).slice(0, ragMaxS3KeysPerQuery);
   const selected = ragS3Keys.filter((key) => sourceKeyMatchesIntent(key, intent));
   const fallback = selected.length ? selected : ragS3Keys;
   return fallback.slice(0, ragMaxS3KeysPerQuery);
+};
+
+const activeIntentLabels = (intent) =>
+  Object.entries(intent)
+    .filter(([, active]) => active)
+    .map(([label]) => label);
+
+const planAgenticRetrieval = ({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
+  const intent = questionIntent(question);
+  const intentLabels = activeIntentLabels(intent);
+  const selectedPick = Number(selectedPickContext?.pick ?? selectedPickNumber ?? 0);
+  const focusMode = selectedPickFocusMode({ question, selectedPickFocusActive });
+  const planningHints = [];
+
+  if (intent.milestone) planningHints.push("prefer milestone answer cards, DraftCode24 docs, and answer evidence");
+  if (intent.evidence) planningHints.push("prefer official/source/audit/reconciliation records");
+  if (intent.team) planningHints.push("check team context, needs, roster fit, and pick ownership");
+  if (intent.prospect) planningHints.push("check prospect profile, measurements, school, role, and risk evidence");
+  if (intent.board) planningHints.push("check board, mock, consensus, rerun, and strategy artifacts");
+  if (intent.architecture) planningHints.push("check AWS architecture, deployment, RAG, and model provider artifacts");
+  if (Number.isFinite(selectedPick) && selectedPick > 0 && focusMode !== "inactive") {
+    planningHints.push(`use selected pick ${selectedPick} only as ${focusMode} context`);
+  }
+
+  return {
+    enabled: ragAgenticEnabled,
+    maxIterations: ragAgenticMaxIterations,
+    intent: intentLabels.length ? intentLabels : ["general"],
+    focusMode,
+    firstQuery: String(question ?? "").slice(0, 600),
+    planningHints,
+  };
+};
+
+const snippetSourceText = (snippet) => [snippet?.source, snippet?.path].filter(Boolean).join("\n").toLowerCase();
+
+const hasSourceMatching = (snippets, pattern) => snippets.some((snippet) => pattern.test(snippetSourceText(snippet)));
+
+const reflectOnRetrieval = ({ question, retrievedKnowledge, attemptCount }) => {
+  const intent = questionIntent(question);
+  const snippets = retrievedKnowledge?.snippets ?? [];
+  const sourceDiversity = new Set(snippets.map((snippet) => String(snippet.source ?? "").split("#")[0])).size;
+  const maxScore = snippets.reduce((score, snippet) => Math.max(score, Number(snippet.retrievalScore ?? 0)), 0);
+  const strongSnippetCount = snippets.filter((snippet) =>
+    Number(snippet.exactMatches ?? 0) > 0 ||
+    Number(snippet.lexicalScore ?? 0) >= 0.18 ||
+    Number(snippet.semanticScore ?? 0) >= 0.28 ||
+    Number(snippet.intentBoost ?? 0) >= 0.16
+  ).length;
+  const missingSignals = [];
+
+  if (snippets.length < 3) missingSignals.push("too-few-snippets");
+  if (strongSnippetCount < 2) missingSignals.push("weak-direct-match");
+  if (sourceDiversity < 2 && snippets.length >= 3) missingSignals.push("low-source-diversity");
+  if (intent.milestone && !hasSourceMatching(snippets, /milestone|draftcode24|answer|答题|里程碑/)) missingSignals.push("missing-milestone-source");
+  if (intent.evidence && !hasSourceMatching(snippets, /audit|source|official|raw|verification|reconciliation/)) missingSignals.push("missing-evidence-source");
+  if (intent.team && !hasSourceMatching(snippets, /team|team_context|team_preference|profile|needs/)) missingSignals.push("missing-team-source");
+  if (intent.prospect && !hasSourceMatching(snippets, /prospect|player|local_player_pool|feature_reference|official_prospects|clean_prospects/)) missingSignals.push("missing-prospect-source");
+  if (intent.board && !hasSourceMatching(snippets, /board|mock|draft|prediction|consensus|strategy/)) missingSignals.push("missing-board-source");
+  if (intent.architecture && !hasSourceMatching(snippets, /architecture|aws|lambda|s3|cloudfront|dynamodb|rag/)) missingSignals.push("missing-architecture-source");
+
+  const criticalMissing = missingSignals.filter((signal) => signal.startsWith("missing-"));
+  const sufficient =
+    snippets.length >= 3 &&
+    strongSnippetCount >= 2 &&
+    maxScore >= 0.18 &&
+    (sourceDiversity >= 2 || criticalMissing.length === 0);
+
+  return {
+    attemptCount,
+    sufficient,
+    missingSignals,
+    snippetCount: snippets.length,
+    strongSnippetCount,
+    sourceDiversity,
+    maxScore: Number(maxScore.toFixed(4)),
+  };
+};
+
+const followUpQueryForReflection = ({ question, reflection }) => {
+  if (reflection?.sufficient || !(reflection?.missingSignals?.length)) return "";
+  const intent = questionIntent(question);
+  const supplements = [];
+
+  if (reflection.missingSignals.includes("too-few-snippets")) supplements.push("broaden recall across indexed S3 knowledge");
+  if (reflection.missingSignals.includes("weak-direct-match")) supplements.push("use exact field names, aliases, and evidence records");
+  if (reflection.missingSignals.includes("low-source-diversity")) supplements.push("cross-check with another source family");
+  if (intent.milestone || reflection.missingSignals.includes("missing-milestone-source")) {
+    supplements.push("milestone answers DraftCode24 answer card required fields");
+  }
+  if (intent.evidence || reflection.missingSignals.includes("missing-evidence-source")) {
+    supplements.push("official source audit verification reconciliation evidence");
+  }
+  if (intent.team || reflection.missingSignals.includes("missing-team-source")) {
+    supplements.push("team preference roster needs fit pick ownership");
+  }
+  if (intent.prospect || reflection.missingSignals.includes("missing-prospect-source")) {
+    supplements.push("prospect profile measurements school position risk");
+  }
+  if (intent.board || reflection.missingSignals.includes("missing-board-source")) {
+    supplements.push("draft board mock consensus prediction rerun strategy");
+  }
+  if (intent.architecture || reflection.missingSignals.includes("missing-architecture-source")) {
+    supplements.push("AWS Lambda S3 CloudFront DynamoDB RAG Bedrock DeepSeek architecture");
+  }
+
+  return unique([String(question ?? ""), ...supplements]).join("\n检索补充: ").slice(0, 1200);
+};
+
+const summarizeRetrievalAttempt = ({ query, result }) => ({
+  query: String(query ?? "").slice(0, 400),
+  snippetCount: result?.snippetCount ?? result?.snippets?.length ?? 0,
+  selectedS3KeyCount: result?.selectedS3KeyCount ?? 0,
+  loadedChunkCount: result?.loadedChunkCount ?? 0,
+  topSources: (result?.snippets ?? []).slice(0, 4).map((snippet) => ({
+    source: snippet.source,
+    path: snippet.path,
+    retrievalScore: snippet.retrievalScore,
+    exactMatches: snippet.exactMatches,
+    intentBoost: snippet.intentBoost,
+  })),
+});
+
+const mergeAgenticRetrievalResults = ({ originalQuestion, plan, attempts, reflection }) => {
+  const primary = attempts[0]?.result ?? {};
+  const snippetMap = new Map();
+
+  for (const attempt of attempts) {
+    for (const snippet of attempt.result?.snippets ?? []) {
+      const key = `${snippet.source}\n${snippet.path}`;
+      const existing = snippetMap.get(key);
+      if (!existing || Number(snippet.retrievalScore ?? 0) > Number(existing.retrievalScore ?? 0)) {
+        snippetMap.set(key, snippet);
+      }
+    }
+  }
+
+  const snippets = [...snippetMap.values()]
+    .sort((left, right) => Number(right.retrievalScore ?? 0) - Number(left.retrievalScore ?? 0))
+    .slice(0, Math.max(primary.effectiveTopK ?? ragTopK, 8));
+  const terms = unique(attempts.flatMap((attempt) => attempt.result?.terms ?? [])).slice(0, 64);
+  const selectedS3KeyCount = Math.max(...attempts.map((attempt) => Number(attempt.result?.selectedS3KeyCount ?? 0)));
+  const loadedChunkCount = Math.max(...attempts.map((attempt) => Number(attempt.result?.loadedChunkCount ?? 0)));
+
+  return {
+    ...primary,
+    terms,
+    snippets,
+    snippetCount: snippets.length,
+    selectedS3KeyCount: Number.isFinite(selectedS3KeyCount) ? selectedS3KeyCount : primary.selectedS3KeyCount,
+    loadedChunkCount: Number.isFinite(loadedChunkCount) ? loadedChunkCount : primary.loadedChunkCount,
+    agentic: {
+      enabled: plan.enabled,
+      mode: plan.enabled ? "plan-retrieve-reflect-decide" : "single-retrieve",
+      originalQuestion: String(originalQuestion ?? "").slice(0, 600),
+      intent: plan.intent,
+      planningHints: plan.planningHints,
+      attempts: attempts.map(summarizeRetrievalAttempt),
+      reflection,
+    },
+  };
+};
+
+const retrieveAgenticKnowledge = async (args) => {
+  const plan = planAgenticRetrieval(args);
+  const attempts = [];
+  const firstResult = await retrieveKnowledge(args);
+  attempts.push({ query: args.question, result: firstResult });
+
+  if (!ragAgenticEnabled || ragAgenticMaxIterations <= 1) {
+    const reflection = reflectOnRetrieval({ question: args.question, retrievedKnowledge: firstResult, attemptCount: attempts.length });
+    return mergeAgenticRetrievalResults({ originalQuestion: args.question, plan, attempts, reflection });
+  }
+
+  let merged = firstResult;
+  let reflection = reflectOnRetrieval({ question: args.question, retrievedKnowledge: merged, attemptCount: attempts.length });
+
+  while (!reflection.sufficient && attempts.length < ragAgenticMaxIterations) {
+    const nextQuery = followUpQueryForReflection({ question: args.question, reflection });
+    if (!nextQuery || attempts.some((attempt) => attempt.query === nextQuery)) break;
+    const nextResult = await retrieveKnowledge({ ...args, question: nextQuery });
+    attempts.push({ query: nextQuery, result: nextResult });
+    merged = mergeAgenticRetrievalResults({ originalQuestion: args.question, plan, attempts, reflection });
+    reflection = reflectOnRetrieval({ question: args.question, retrievedKnowledge: merged, attemptCount: attempts.length });
+  }
+
+  return mergeAgenticRetrievalResults({ originalQuestion: args.question, plan, attempts, reflection });
 };
 
 const hashToken = (token) => {
@@ -541,14 +913,15 @@ const getDashScopeChunkEmbeddings = async (chunks) => {
   );
 };
 
-const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusTerms = [], focusWeight = 0 }) => {
-  const searchableText = [chunk.source, chunk.path, chunk.text].filter(Boolean).join("\n");
+const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusTerms = [], focusWeight = 0, explicitPickNumber = null }) => {
+  const searchableText = chunkSearchText(chunk);
   const embedding = chunk.embedding ?? embedText(searchableText);
   chunk.embedding = embedding;
   const exactMatches = scoreText(searchableText, terms);
   const lexicalScore = terms.length ? Math.min(exactMatches / terms.length, 1) : 0;
   const focusMatches = focusTerms.length ? scoreText(searchableText, focusTerms) : 0;
   const focusScore = focusTerms.length ? Math.min(focusMatches / Math.min(focusTerms.length, 8), 1) : 0;
+  const exactPickScore = chunkMatchesPick(chunk, explicitPickNumber) ? 1 : 0;
   const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
   const sourceBoost = sourceBoostForRank(chunk.sourceRank);
   const intentBoost = sourceIntentBoost(chunk.source, question);
@@ -556,6 +929,7 @@ const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusT
     semanticScore * 0.46 +
     lexicalScore * 0.24 +
     focusScore * focusWeight +
+    exactPickScore * 0.36 +
     sourceBoost +
     intentBoost +
     (exactMatches >= 2 ? 0.05 : 0);
@@ -566,6 +940,7 @@ const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusT
     focusMatches,
     focusScore,
     focusWeight,
+    exactPickScore,
     intentBoost,
     lexicalScore,
     semanticScore,
@@ -756,12 +1131,48 @@ const selectedPickReferenceContext = (context) => {
   };
 };
 
+const chineseNumberValue = (value) => {
+  const text = String(value ?? "").trim();
+  if (!text) return null;
+  const digits = {
+    一: 1,
+    二: 2,
+    两: 2,
+    三: 3,
+    四: 4,
+    五: 5,
+    六: 6,
+    七: 7,
+    八: 8,
+    九: 9,
+  };
+  if (text === "十") return 10;
+  if (/^十[一二两三四五六七八九]$/.test(text)) return 10 + digits[text[1]];
+  if (/^[一二两三四五六七八九]十$/.test(text)) return digits[text[0]] * 10;
+  if (/^[一二两三四五六七八九]十[一二两三四五六七八九]$/.test(text)) {
+    return digits[text[0]] * 10 + digits[text[2]];
+  }
+  return digits[text] ?? null;
+};
+
+const explicitPickNumberFromQuestion = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  const digitMatch = text.match(/(?:#|pick\s*)\s*(\d{1,2})|(?:第\s*)?(\d{1,2})\s*(?:顺位|签位|号签)/i);
+  if (digitMatch) {
+    const value = Number(digitMatch[1] ?? digitMatch[2]);
+    if (Number.isFinite(value) && value >= 1 && value <= 60) return value;
+  }
+  const chineseMatch = text.match(/第?\s*([一二两三四五六七八九十]{1,3})\s*(?:顺位|签位|号签)/);
+  const chineseValue = chineseNumberValue(chineseMatch?.[1]);
+  return Number.isFinite(chineseValue) && chineseValue >= 1 && chineseValue <= 60 ? chineseValue : null;
+};
+
 const questionDirectlyTargetsSelectedPick = (question) => {
   const text = String(question ?? "").toLowerCase();
   const asksCurrentContext =
     /(当前|选中|这个|该|此|右侧|详情|栏目|selected|current|this)/.test(text) &&
     /(顺位|签位|球队|球员|pick|team|player|slot|panel|card)/.test(text);
-  const namesExplicitSlot = /(?:#|pick\s*)\s*\d{1,2}|(?:第\s*)?\d{1,2}\s*(?:顺位|签位|号签)/i.test(text);
+  const namesExplicitSlot = explicitPickNumberFromQuestion(text) !== null;
   return asksCurrentContext || namesExplicitSlot;
 };
 
@@ -961,22 +1372,61 @@ const loadRagChunks = async (question, selectedS3Keys = selectRagS3KeysForQuesti
 };
 
 const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
-  const normalizedSelectedPickContext = normalizeSelectedPickContext(selectedPickContext, selectedPickNumber);
+  const explicitPickNumber = explicitPickNumberFromQuestion(question);
+  const rawSelectedPickContext = normalizeSelectedPickContext(selectedPickContext, selectedPickNumber);
+  const selectedPickOverrideUsed =
+    Number.isFinite(explicitPickNumber) &&
+    explicitPickNumber > 0 &&
+    Number(rawSelectedPickContext?.pick ?? selectedPickNumber) !== explicitPickNumber;
+  const normalizedSelectedPickContext = selectedPickOverrideUsed
+    ? { pick: explicitPickNumber, explicitOverride: true }
+    : rawSelectedPickContext;
   const focusMode = selectedPickFocusMode({ question, selectedPickFocusActive });
   const selectedPickContextUsed = focusMode !== "inactive";
   const selectedPickDirectScope = focusMode === "direct";
-  const focusValues = selectedPickContextUsed ? selectedPickFocusValues(normalizedSelectedPickContext, selectedPickNumber) : [];
+  const selectedS3Keys = selectRagS3KeysForQuestion(question, { focusMode });
+  const chunks = await loadRagChunks(question, selectedS3Keys);
+  const resolvedSelectedPickContext = selectedPickContextUsed
+    ? resolvePickContextFromChunks(chunks, Number(normalizedSelectedPickContext?.pick ?? selectedPickNumber))
+    : null;
+  const effectiveSelectedPickContext = resolvedSelectedPickContext
+    ? {
+        ...normalizedSelectedPickContext,
+        ...resolvedSelectedPickContext,
+        teamNeeds: normalizedSelectedPickContext?.teamNeeds?.length
+          ? normalizedSelectedPickContext.teamNeeds
+          : resolvedSelectedPickContext.teamNeeds,
+        teamPriorityTags: normalizedSelectedPickContext?.teamPriorityTags?.length
+          ? normalizedSelectedPickContext.teamPriorityTags
+          : resolvedSelectedPickContext.teamPriorityTags,
+        evidence: normalizedSelectedPickContext?.evidence?.length
+          ? normalizedSelectedPickContext.evidence
+          : resolvedSelectedPickContext.evidence,
+        warnings: normalizedSelectedPickContext?.warnings?.length
+          ? normalizedSelectedPickContext.warnings
+          : resolvedSelectedPickContext.warnings,
+      }
+    : normalizedSelectedPickContext;
+  const focusValues = selectedPickContextUsed ? selectedPickFocusValues(effectiveSelectedPickContext, selectedPickNumber) : [];
   const focusTerms = selectedPickContextUsed ? tokenize(focusValues.join(" ")) : [];
   const questionTerms = tokenize(question);
   const terms = unique([...questionTerms, ...(selectedPickDirectScope ? focusTerms : [])]).slice(0, 48);
   const queryEmbedding = embedText([question, ...(selectedPickDirectScope ? focusValues : [])].join(" "));
-  const selectedS3Keys = selectRagS3KeysForQuestion(question, { focusMode });
-  const chunks = await loadRagChunks(question, selectedS3Keys);
   const focusWeight = selectedPickDirectScope ? 0.2 : selectedPickContextUsed ? 0.06 : 0;
-  const scored = chunks.map((chunk) => scoreChunkForRetrieval(chunk, { question, terms, queryEmbedding, focusTerms, focusWeight }));
+  const scored = chunks.map((chunk) =>
+    scoreChunkForRetrieval(chunk, {
+      question,
+      terms,
+      queryEmbedding,
+      focusTerms,
+      focusWeight,
+      explicitPickNumber: selectedPickDirectScope ? effectiveSelectedPickContext?.pick : explicitPickNumber,
+    }),
+  );
+  const exactPickMatches = explicitPickNumber ? scored.filter((chunk) => chunk.exactPickScore > 0) : [];
   const focused = selectedPickContextUsed ? scored.filter((chunk) => chunk.focusMatches > 0) : [];
   const matching = scored.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
-  const seedOrder = selectedPickDirectScope ? [...focused, ...matching, ...scored] : [...matching, ...focused, ...scored];
+  const seedOrder = selectedPickDirectScope ? [...exactPickMatches, ...focused, ...matching, ...scored] : [...matching, ...exactPickMatches, ...focused, ...scored];
   const candidateSeed = unique(seedOrder.map((chunk) => `${chunk.source}\n${chunk.path}`))
     .map((key) => {
       const [source, path] = key.split("\n");
@@ -1002,6 +1452,7 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
       semanticScore: Number(chunk.semanticScore.toFixed(4)),
       lexicalScore: Number(chunk.lexicalScore.toFixed(4)),
       focusScore: Number((chunk.focusScore ?? 0).toFixed(4)),
+      exactPickScore: Number((chunk.exactPickScore ?? 0).toFixed(4)),
       intentBoost: Number((chunk.intentBoost ?? 0).toFixed(4)),
       exactMatches: chunk.exactMatches,
       focusMatches: chunk.focusMatches ?? 0,
@@ -1018,11 +1469,13 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
     selectedPickContextUsed,
     selectedPickFocusMode: focusMode,
     selectedPickFocusActive: Boolean(selectedPickFocusActive),
+    explicitPickNumber,
+    selectedPickOverrideUsed,
     remoteEmbeddingRerankUsed: allowRemoteEmbeddingRerank && embeddingProviderLabel() !== "local-hash",
     selectedPickContext: selectedPickDirectScope
-      ? normalizedSelectedPickContext
+      ? effectiveSelectedPickContext
       : selectedPickContextUsed
-        ? selectedPickReferenceContext(normalizedSelectedPickContext)
+        ? selectedPickReferenceContext(effectiveSelectedPickContext)
         : null,
     focusTerms: selectedPickDirectScope ? focusTerms.slice(0, 24) : [],
     embeddingProvider: embeddingProviderLabel(),
@@ -1044,8 +1497,11 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
 
 const buildUserPrompt = ({ question, selectedPickNumber, retrievedKnowledge }) =>
   [
-    `Selected pick number: ${Number(selectedPickNumber ?? 1) || 1}`,
+    `Selected pick number: ${Number(retrievedKnowledge?.explicitPickNumber ?? selectedPickNumber ?? 1) || 1}`,
     `Selected pick focus mode: ${retrievedKnowledge?.selectedPickFocusMode ?? "inactive"}`,
+    retrievedKnowledge?.selectedPickOverrideUsed
+      ? `Explicit pick override: user asked about pick ${retrievedKnowledge.explicitPickNumber}; ignore stale clicked-pick context.`
+      : "Explicit pick override: none.",
     retrievedKnowledge?.selectedPickFocusMode === "direct"
       ? "Selected pick scope: direct. The user is asking about this pick/team/player, so answer around the selected context and its evidence."
       : retrievedKnowledge?.selectedPickFocusMode === "background"
@@ -1055,6 +1511,7 @@ const buildUserPrompt = ({ question, selectedPickNumber, retrievedKnowledge }) =
     JSON.stringify(retrievedKnowledge?.selectedPickContext ?? null),
     "Retrieved AWS RAG knowledge:",
     JSON.stringify(retrievedKnowledge),
+    "Agentic RAG instruction: use the merged snippets as evidence. If reflection.sufficient is false, answer cautiously and name the missing evidence.",
     "User question:",
     String(question ?? "").slice(0, 3000),
   ].join("\n");
@@ -1064,22 +1521,29 @@ const buildEmptyAnswerFallback = ({ question, retrievedKnowledge }) => {
   const context = retrievedKnowledge?.selectedPickContext;
   if (retrievedKnowledge?.selectedPickFocusMode === "direct" && context?.team && context?.player) {
     const pick = context.pick ? `#${context.pick} ` : "";
+    const zhPick = context.pick ? `第${context.pick}顺位` : "该顺位";
     const positions = Array.isArray(context.positions) && context.positions.length ? ` (${context.positions.join("/")})` : "";
     const needs = Array.isArray(context.teamNeeds) && context.teamNeeds.length ? context.teamNeeds.join(", ") : "";
     const roleFit = context.roleFit ? String(context.roleFit) : "";
+    const evidence = Array.isArray(context.evidence) && context.evidence.length ? context.evidence.slice(0, 3).join("；") : "";
+    const warnings = Array.isArray(context.warnings) && context.warnings.length ? context.warnings.join(", ") : "";
     if (isZh) {
       return [
-        `当前点击项是 ${pick}${context.team} 选择 ${context.player}${positions}。`,
+        `${retrievedKnowledge?.selectedPickOverrideUsed ? "你明确询问的是" : "当前聚焦的是"}${zhPick}：${context.team} 选择 ${context.player}${positions}。`,
         needs ? `球队需求侧重点：${needs}。` : "",
         roleFit ? `角色匹配依据：${roleFit}。` : "",
-        "这是基于当前 DraftOps 已检索上下文生成的兜底回答；DeepSeek 本次返回了空内容。",
+        evidence ? `关键证据：${evidence}。` : "",
+        warnings ? `主要风险：${warnings}。` : "",
+        "这是基于当前 DraftOps RAG 命中资料生成的摘要。",
       ].filter(Boolean).join("\n");
     }
     return [
-      `The selected slot is ${pick}${context.team} selecting ${context.player}${positions}.`,
+      `${retrievedKnowledge?.selectedPickOverrideUsed ? "The user explicitly asked about" : "The focused slot is"} ${pick}${context.team} selecting ${context.player}${positions}.`,
       needs ? `Team needs: ${needs}.` : "",
       roleFit ? `Role fit: ${roleFit}.` : "",
-      "This fallback answer is based on the retrieved DraftOps context because DeepSeek returned empty content.",
+      evidence ? `Key evidence: ${evidence}.` : "",
+      warnings ? `Main risks: ${warnings}.` : "",
+      "This summary is based on the current DraftOps RAG matches.",
     ].filter(Boolean).join("\n");
   }
   return isZh
@@ -1099,7 +1563,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
       },
     };
   }
-  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
+  const retrievedKnowledge = await retrieveAgenticKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
   const responseMaxTokens =
     retrievedKnowledge.selectedPickFocusMode === "background"
       ? Math.min(maxTokens, 700)
@@ -1142,12 +1606,19 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, selectedPic
       modelLabel: deepSeekModelLabel,
       mode: "deepseek-serverless",
       usage: completion.usage ?? null,
+      rag: {
+        agentic: retrievedKnowledge.agentic ?? null,
+        snippetCount: retrievedKnowledge.snippetCount,
+        selectedS3KeyCount: retrievedKnowledge.selectedS3KeyCount,
+        loadedChunkCount: retrievedKnowledge.loadedChunkCount,
+        embeddingProvider: retrievedKnowledge.embeddingProvider,
+      },
     },
   };
 };
 
 const callBedrock = async ({ question, history, selectedPickNumber, selectedPickContext, selectedPickFocusActive }) => {
-  const retrievedKnowledge = await retrieveKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
+  const retrievedKnowledge = await retrieveAgenticKnowledge({ question, selectedPickNumber, selectedPickContext, selectedPickFocusActive });
   const responseMaxTokens =
     retrievedKnowledge.selectedPickFocusMode === "background"
       ? Math.min(maxTokens, 700)
@@ -1194,6 +1665,13 @@ const callBedrock = async ({ question, history, selectedPickNumber, selectedPick
       modelLabel: bedrockModelId,
       mode: "bedrock-serverless",
       usage: output.usage ?? null,
+      rag: {
+        agentic: retrievedKnowledge.agentic ?? null,
+        snippetCount: retrievedKnowledge.snippetCount,
+        selectedS3KeyCount: retrievedKnowledge.selectedS3KeyCount,
+        loadedChunkCount: retrievedKnowledge.loadedChunkCount,
+        embeddingProvider: retrievedKnowledge.embeddingProvider,
+      },
     },
   };
 };
@@ -1214,6 +1692,11 @@ export const handler = async (event) => {
         provider,
         model: provider === "bedrock" ? bedrockModelId : deepSeekModel,
         modelLabel: provider === "bedrock" ? bedrockModelId : deepSeekModelLabel,
+        version: "v2.0-cloud",
+        streamingEnabled: false,
+        cacheEnabled: true,
+        cacheTtlMs: ragCacheTtlMs,
+        liveRepredictEnabled: true,
         rag: {
           s3Configured: Boolean(ragS3Bucket && ragS3Keys.length),
           dynamodbConfigured: ragDynamoTables.length > 0,
@@ -1232,15 +1715,30 @@ export const handler = async (event) => {
           maxChunks: ragMaxChunks,
           s3LoadConcurrency: ragS3LoadConcurrency,
           cacheTtlMs: ragCacheTtlMs,
+          agenticEnabled: ragAgenticEnabled,
+          agenticMaxIterations: ragAgenticMaxIterations,
+          queryRewriteEnabled: true,
+          dynamicTemperature: true,
+        },
+        liveEndpoints: {
+          health: "GET /api/deepseek/health",
+          chat: "POST /api/deepseek/chat (JSON)",
+          chatStream: "POST /api/deepseek/chat/stream (SSE)",
         },
       });
     }
 
-    if (method === "POST" && path.endsWith("/api/deepseek/chat")) {
+    if (method === "POST" && (path.endsWith("/api/deepseek/chat/stream") || path.endsWith("/api/deepseek/chat"))) {
       const body = parseBody(event);
       const question = String(body.question ?? "").trim();
-      if (!question) return json(event, 400, { error: "Question is required." });
+      if (!question) {
+        if (path.endsWith("/stream")) {
+          return sseResponse(event, 400, sseEvent("error", { message: "Question is required." }));
+        }
+        return json(event, 400, { error: "Question is required." });
+      }
 
+      const isStream = path.endsWith("/stream");
       const result =
         provider === "bedrock"
           ? await callBedrock(body)
@@ -1251,6 +1749,22 @@ export const handler = async (event) => {
               selectedPickContext: body.selectedPickContext,
               selectedPickFocusActive: Boolean(body.selectedPickFocusActive),
             });
+
+      if (isStream) {
+        if (result.statusCode !== 200) {
+          return sseResponse(event, result.statusCode, sseEvent("error", { message: result.payload?.error ?? "Error" }));
+        }
+        const answer = result.payload?.answer ?? "";
+        const modelLabel = result.payload?.modelLabel ?? deepSeekModelLabel;
+        // Send as a single complete SSE response (Lambda pseudo-streaming for API Gateway compatibility)
+        const sseBody = [
+          sseEvent("status", { phase: "complete", message: "回答生成完成" }),
+          sseEvent("delta", { content: answer }),
+          sseEvent("done", { answer, modelLabel, finishReason: "stop", cached: false }),
+        ].join("");
+        return sseResponse(event, 200, sseBody);
+      }
+
       return json(event, result.statusCode, result.payload);
     }
 

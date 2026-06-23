@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "draftops.yaxel_international_field_correction.v1",
+  "generatedAt": "2026-06-23T15:17:21.657608+00:00",
+  "generatedBy": "Codex deterministic field correction from NBA official news notes",
+  "noManualPrediction": true,
+  "scope": "Correct Yaxel Lendeborg international/origin fields and sync frontend board/bundle to existing 124-player Agent artifacts. No pick order, score, confidence, or alternatives were manually changed.",
+  "source": "https://www.nba.com/news/2026-nba-draft-news-notes",
+  "changed": [
+    {
+      "path": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+      "section": "board",
+      "pick": 12,
+      "player": "Yaxel Lendeborg"
+    },
+    {
+      "path": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\local_pool_124_baseline_board.json",
+      "section": "boardRows",
+      "pick": 12,
+      "player": "Yaxel Lendeborg"
+    },
+    {
+      "path": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\final\\local_pool_124_import_bundle.json",
+      "section": "prospects",
+      "player": "Yaxel Lendeborg"
+    },
+    {
+      "path": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json",
+      "section": "whole-file",
+      "source": "data/boards/local_pool_124_baseline_board.json"
+    },
+    {
+      "path": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\expanded_import_bundle.json",
+      "section": "whole-file",
+      "source": "data/final/local_pool_124_import_bundle.json"
+    }
+  ],
+  "frontendSync": {
+    "board": "public/data/agent_expanded_recommended_board.json now mirrors data/boards/local_pool_124_baseline_board.json",
+    "bundle": "public/data/expanded_import_bundle.json now mirrors data/final/local_pool_124_import_bundle.json"
+  }
+}

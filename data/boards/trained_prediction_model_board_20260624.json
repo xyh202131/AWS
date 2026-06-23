@@ -1,0 +1,1781 @@
+{
+  "schemaVersion": "draftops.trained_prediction_model_rerank.v1",
+  "generatedAt": "2026-06-23T18:31:08.180Z",
+  "generatedBy": "scripts/train-prediction-model.mjs",
+  "method": "Diagnostic rerank artifact: boardRows keep the final-delivery selected player and attach that player's trained rank/winner diagnostics. It is not a new sequential board.",
+  "scenario": {
+    "id": "trained-audit-rerank",
+    "label": "trained audit rerank",
+    "weights": {
+      "consensus": 30,
+      "need": 30,
+      "player": 15,
+      "upside": 1,
+      "intel": 24
+    },
+    "adjustmentCoefficients": {
+      "preference": 1,
+      "feature": 1,
+      "sequencing": 1,
+      "schoolState": 1,
+      "pickValue": 1,
+      "risk": 1
+    },
+    "whenToUse": "Offline reranking of recorded sequential candidate states. Use as a calibrated scoring-layer result, not as official draft-result training.",
+    "risk": "Training labels are the final delivery board and recorded candidate states; it does not regenerate new candidate states from scratch."
+  },
+  "metrics": {
+    "objective": 3666,
+    "exactTop": 29,
+    "selectedTopFive": 30,
+    "selectedTopTen": 30,
+    "rankPenalty": 1,
+    "averageSelectedRank": 1.033,
+    "topFiveExact": 5,
+    "lotteryExact": 14,
+    "lateFirstExact": 15
+  },
+  "boardRows": [
+    {
+      "pick": 1,
+      "team": "Washington Wizards",
+      "prospectId": "aj-dybantsa",
+      "player": "AJ Dybantsa",
+      "localNameZh": "AJ 迪班萨",
+      "trainedScore": 88.486,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "aj-dybantsa",
+        "player": "AJ Dybantsa",
+        "localNameZh": "AJ 迪班萨",
+        "trainedScore": 88.486
+      },
+      "topFive": [
+        {
+          "prospectId": "aj-dybantsa",
+          "name": "AJ Dybantsa",
+          "localNameZh": "AJ 迪班萨",
+          "trainedScore": 88.486,
+          "originalFinalScore": 95.114,
+          "consensusRank": 2
+        },
+        {
+          "prospectId": "caleb-wilson",
+          "name": "Caleb Wilson",
+          "localNameZh": "凯莱布 威尔逊",
+          "trainedScore": 85.223,
+          "originalFinalScore": 91.255,
+          "consensusRank": 4
+        },
+        {
+          "prospectId": "cameron-boozer",
+          "name": "Cameron Boozer",
+          "localNameZh": "卡梅隆 布泽尔",
+          "trainedScore": 79.308,
+          "originalFinalScore": 87.526,
+          "consensusRank": 3
+        },
+        {
+          "prospectId": "darryn-peterson",
+          "name": "Darryn Peterson",
+          "localNameZh": "达林 彼得森",
+          "trainedScore": 78.569,
+          "originalFinalScore": 87.848,
+          "consensusRank": 1
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "localNameZh": "达柳斯 阿卡夫",
+          "trainedScore": 71.198,
+          "originalFinalScore": 77.198,
+          "consensusRank": 6
+        }
+      ]
+    },
+    {
+      "pick": 2,
+      "team": "Utah Jazz",
+      "prospectId": "darryn-peterson",
+      "player": "Darryn Peterson",
+      "localNameZh": "达林 彼得森",
+      "trainedScore": 89.379,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "darryn-peterson",
+        "player": "Darryn Peterson",
+        "localNameZh": "达林 彼得森",
+        "trainedScore": 89.379
+      },
+      "topFive": [
+        {
+          "prospectId": "darryn-peterson",
+          "name": "Darryn Peterson",
+          "localNameZh": "达林 彼得森",
+          "trainedScore": 89.379,
+          "originalFinalScore": 95.561,
+          "consensusRank": 1
+        },
+        {
+          "prospectId": "keaton-wagler",
+          "name": "Keaton Wagler",
+          "localNameZh": "基顿 瓦格勒",
+          "trainedScore": 88.216,
+          "originalFinalScore": 93.042,
+          "consensusRank": 5
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "localNameZh": "达柳斯 阿卡夫",
+          "trainedScore": 87.318,
+          "originalFinalScore": 91.261,
+          "consensusRank": 6
+        },
+        {
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "trainedScore": 83.101,
+          "originalFinalScore": 85.354,
+          "consensusRank": 8
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 83.056,
+          "originalFinalScore": 85.942,
+          "consensusRank": 7
+        }
+      ]
+    },
+    {
+      "pick": 3,
+      "team": "Memphis Grizzlies",
+      "prospectId": "cameron-boozer",
+      "player": "Cameron Boozer",
+      "localNameZh": "卡梅隆 布泽尔",
+      "trainedScore": 82.519,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "cameron-boozer",
+        "player": "Cameron Boozer",
+        "localNameZh": "卡梅隆 布泽尔",
+        "trainedScore": 82.519
+      },
+      "topFive": [
+        {
+          "prospectId": "cameron-boozer",
+          "name": "Cameron Boozer",
+          "localNameZh": "卡梅隆 布泽尔",
+          "trainedScore": 82.519,
+          "originalFinalScore": 89.576,
+          "consensusRank": 3
+        },
+        {
+          "prospectId": "caleb-wilson",
+          "name": "Caleb Wilson",
+          "localNameZh": "凯莱布 威尔逊",
+          "trainedScore": 71.944,
+          "originalFinalScore": 80.646,
+          "consensusRank": 4
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "localNameZh": "达柳斯 阿卡夫",
+          "trainedScore": 68.226,
+          "originalFinalScore": 76.226,
+          "consensusRank": 6
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 67.491,
+          "originalFinalScore": 74.678,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "aday-mara",
+          "name": "Aday Mara",
+          "localNameZh": "阿达伊 马拉",
+          "trainedScore": 66.492,
+          "originalFinalScore": 70,
+          "consensusRank": 10
+        }
+      ]
+    },
+    {
+      "pick": 4,
+      "team": "Chicago Bulls",
+      "prospectId": "caleb-wilson",
+      "player": "Caleb Wilson",
+      "localNameZh": "凯莱布 威尔逊",
+      "trainedScore": 89.073,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "caleb-wilson",
+        "player": "Caleb Wilson",
+        "localNameZh": "凯莱布 威尔逊",
+        "trainedScore": 89.073
+      },
+      "topFive": [
+        {
+          "prospectId": "caleb-wilson",
+          "name": "Caleb Wilson",
+          "localNameZh": "凯莱布 威尔逊",
+          "trainedScore": 89.073,
+          "originalFinalScore": 94.979,
+          "consensusRank": 4
+        },
+        {
+          "prospectId": "aday-mara",
+          "name": "Aday Mara",
+          "localNameZh": "阿达伊 马拉",
+          "trainedScore": 80.902,
+          "originalFinalScore": 82.198,
+          "consensusRank": 10
+        },
+        {
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "trainedScore": 80.741,
+          "originalFinalScore": 85.318,
+          "consensusRank": 8
+        },
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 79.572,
+          "originalFinalScore": 80.804,
+          "consensusRank": 11
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 79.301,
+          "originalFinalScore": 81.802,
+          "consensusRank": 9
+        }
+      ]
+    },
+    {
+      "pick": 5,
+      "team": "LA Clippers",
+      "prospectId": "keaton-wagler",
+      "player": "Keaton Wagler",
+      "localNameZh": "基顿 瓦格勒",
+      "trainedScore": 90.655,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "keaton-wagler",
+        "player": "Keaton Wagler",
+        "localNameZh": "基顿 瓦格勒",
+        "trainedScore": 90.655
+      },
+      "topFive": [
+        {
+          "prospectId": "keaton-wagler",
+          "name": "Keaton Wagler",
+          "localNameZh": "基顿 瓦格勒",
+          "trainedScore": 90.655,
+          "originalFinalScore": 95.947,
+          "consensusRank": 5
+        },
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "localNameZh": "达柳斯 阿卡夫",
+          "trainedScore": 89.617,
+          "originalFinalScore": 94.194,
+          "consensusRank": 6
+        },
+        {
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "trainedScore": 88.45,
+          "originalFinalScore": 92.023,
+          "consensusRank": 8
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 87.211,
+          "originalFinalScore": 91.283,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 82.515,
+          "originalFinalScore": 84.498,
+          "consensusRank": 11
+        }
+      ]
+    },
+    {
+      "pick": 6,
+      "team": "Brooklyn Nets",
+      "prospectId": "darius-acuff-jr",
+      "player": "Darius Acuff Jr.",
+      "localNameZh": "达柳斯 阿卡夫",
+      "trainedScore": 79.768,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "darius-acuff-jr",
+        "player": "Darius Acuff Jr.",
+        "localNameZh": "达柳斯 阿卡夫",
+        "trainedScore": 79.768
+      },
+      "topFive": [
+        {
+          "prospectId": "darius-acuff-jr",
+          "name": "Darius Acuff Jr.",
+          "localNameZh": "达柳斯 阿卡夫",
+          "trainedScore": 79.768,
+          "originalFinalScore": 84.859,
+          "consensusRank": 6
+        },
+        {
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "trainedScore": 78.541,
+          "originalFinalScore": 83.043,
+          "consensusRank": 8
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 77.836,
+          "originalFinalScore": 82.474,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 73.332,
+          "originalFinalScore": 77.353,
+          "consensusRank": 11
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 70.081,
+          "originalFinalScore": 74.863,
+          "consensusRank": 9
+        }
+      ]
+    },
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "prospectId": "kingston-flemings",
+      "player": "Kingston Flemings",
+      "localNameZh": "金斯顿 弗莱明斯",
+      "trainedScore": 92.507,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "kingston-flemings",
+        "player": "Kingston Flemings",
+        "localNameZh": "金斯顿 弗莱明斯",
+        "trainedScore": 92.507
+      },
+      "topFive": [
+        {
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "trainedScore": 92.507,
+          "originalFinalScore": 95.785,
+          "consensusRank": 8
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 89.543,
+          "originalFinalScore": 92.66,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 89.442,
+          "originalFinalScore": 91.964,
+          "consensusRank": 11
+        },
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "trainedScore": 83.231,
+          "originalFinalScore": 85.233,
+          "consensusRank": 14
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 77.689,
+          "originalFinalScore": 79.944,
+          "consensusRank": 16
+        }
+      ]
+    },
+    {
+      "pick": 8,
+      "team": "Atlanta Hawks",
+      "prospectId": "aday-mara",
+      "player": "Aday Mara",
+      "localNameZh": "阿达伊 马拉",
+      "trainedScore": 78.913,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "aday-mara",
+        "player": "Aday Mara",
+        "localNameZh": "阿达伊 马拉",
+        "trainedScore": 78.913
+      },
+      "topFive": [
+        {
+          "prospectId": "aday-mara",
+          "name": "Aday Mara",
+          "localNameZh": "阿达伊 马拉",
+          "trainedScore": 78.913,
+          "originalFinalScore": 81.523,
+          "consensusRank": 10
+        },
+        {
+          "prospectId": "yaxel-lendeborg",
+          "name": "Yaxel Lendeborg",
+          "localNameZh": "亚克塞尔 伦德伯格",
+          "trainedScore": 75.918,
+          "originalFinalScore": 76.15,
+          "consensusRank": 12
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 74.635,
+          "originalFinalScore": 78.482,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "trainedScore": 74.014,
+          "originalFinalScore": 77.054,
+          "consensusRank": 14
+        },
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 73.727,
+          "originalFinalScore": 77.339,
+          "consensusRank": 11
+        }
+      ]
+    },
+    {
+      "pick": 9,
+      "team": "Dallas Mavericks",
+      "prospectId": "brayden-burries",
+      "player": "Brayden Burries",
+      "localNameZh": "布雷登 伯里斯",
+      "trainedScore": 80.745,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "brayden-burries",
+        "player": "Brayden Burries",
+        "localNameZh": "布雷登 伯里斯",
+        "trainedScore": 80.745
+      },
+      "topFive": [
+        {
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "trainedScore": 80.745,
+          "originalFinalScore": 81.79,
+          "consensusRank": 11
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 77.665,
+          "originalFinalScore": 78.857,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 76.234,
+          "originalFinalScore": 77.986,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 71.393,
+          "originalFinalScore": 72.452,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "yaxel-lendeborg",
+          "name": "Yaxel Lendeborg",
+          "localNameZh": "亚克塞尔 伦德伯格",
+          "trainedScore": 68.017,
+          "originalFinalScore": 68.061,
+          "consensusRank": 12
+        }
+      ]
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "prospectId": "yaxel-lendeborg",
+      "player": "Yaxel Lendeborg",
+      "localNameZh": "亚克塞尔 伦德伯格",
+      "trainedScore": 89.951,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "yaxel-lendeborg",
+        "player": "Yaxel Lendeborg",
+        "localNameZh": "亚克塞尔 伦德伯格",
+        "trainedScore": 89.951
+      },
+      "topFive": [
+        {
+          "prospectId": "yaxel-lendeborg",
+          "name": "Yaxel Lendeborg",
+          "localNameZh": "亚克塞尔 伦德伯格",
+          "trainedScore": 89.951,
+          "originalFinalScore": 90.614,
+          "consensusRank": 12
+        },
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "trainedScore": 89.408,
+          "originalFinalScore": 90.274,
+          "consensusRank": 14
+        },
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 85.821,
+          "originalFinalScore": 88.071,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "hannes-steinbach",
+          "name": "Hannes Steinbach",
+          "localNameZh": "汉内斯 施泰因巴赫",
+          "trainedScore": 82.744,
+          "originalFinalScore": 83.343,
+          "consensusRank": 13
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 79.614,
+          "originalFinalScore": 81.019,
+          "consensusRank": 9
+        }
+      ]
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "prospectId": "mikel-brown-jr",
+      "player": "Mikel Brown Jr.",
+      "localNameZh": "迈克尔 布朗",
+      "trainedScore": 78.026,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "mikel-brown-jr",
+        "player": "Mikel Brown Jr.",
+        "localNameZh": "迈克尔 布朗",
+        "trainedScore": 78.026
+      },
+      "topFive": [
+        {
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "trainedScore": 78.026,
+          "originalFinalScore": 79.92,
+          "consensusRank": 7
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 76.959,
+          "originalFinalScore": 78.256,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 73.91,
+          "originalFinalScore": 74.816,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "trainedScore": 68.321,
+          "originalFinalScore": 69.816,
+          "consensusRank": 18
+        },
+        {
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "trainedScore": 67.988,
+          "originalFinalScore": 69.403,
+          "consensusRank": 20
+        }
+      ]
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "prospectId": "hannes-steinbach",
+      "player": "Hannes Steinbach",
+      "localNameZh": "汉内斯 施泰因巴赫",
+      "trainedScore": 80.838,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "hannes-steinbach",
+        "player": "Hannes Steinbach",
+        "localNameZh": "汉内斯 施泰因巴赫",
+        "trainedScore": 80.838
+      },
+      "topFive": [
+        {
+          "prospectId": "hannes-steinbach",
+          "name": "Hannes Steinbach",
+          "localNameZh": "汉内斯 施泰因巴赫",
+          "trainedScore": 80.838,
+          "originalFinalScore": 83.082,
+          "consensusRank": 13
+        },
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "trainedScore": 80.452,
+          "originalFinalScore": 83.166,
+          "consensusRank": 14
+        },
+        {
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
+          "localNameZh": "小莫雷兹 约翰逊",
+          "trainedScore": 78.655,
+          "originalFinalScore": 80.645,
+          "consensusRank": 15
+        },
+        {
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "trainedScore": 74.33,
+          "originalFinalScore": 77.467,
+          "consensusRank": 17
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 72.635,
+          "originalFinalScore": 76.73,
+          "consensusRank": 9
+        }
+      ]
+    },
+    {
+      "pick": 13,
+      "team": "Miami Heat",
+      "prospectId": "karim-lopez",
+      "player": "Karim Lopez",
+      "localNameZh": "卡里姆 洛佩兹",
+      "trainedScore": 94.396,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "karim-lopez",
+        "player": "Karim Lopez",
+        "localNameZh": "卡里姆 洛佩兹",
+        "trainedScore": 94.396
+      },
+      "topFive": [
+        {
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "trainedScore": 94.396,
+          "originalFinalScore": 95.121,
+          "consensusRank": 14
+        },
+        {
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
+          "localNameZh": "小莫雷兹 约翰逊",
+          "trainedScore": 89.075,
+          "originalFinalScore": 90.081,
+          "consensusRank": 15
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 86.419,
+          "originalFinalScore": 88.475,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "trainedScore": 85.43,
+          "originalFinalScore": 87.131,
+          "consensusRank": 17
+        },
+        {
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "trainedScore": 73.452,
+          "originalFinalScore": 76.137,
+          "consensusRank": 19
+        }
+      ]
+    },
+    {
+      "pick": 14,
+      "team": "Charlotte Hornets",
+      "prospectId": "morez-johnson-jr",
+      "player": "Morez Johnson Jr.",
+      "localNameZh": "小莫雷兹 约翰逊",
+      "trainedScore": 86.873,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "morez-johnson-jr",
+        "player": "Morez Johnson Jr.",
+        "localNameZh": "小莫雷兹 约翰逊",
+        "trainedScore": 86.873
+      },
+      "topFive": [
+        {
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
+          "localNameZh": "小莫雷兹 约翰逊",
+          "trainedScore": 86.873,
+          "originalFinalScore": 87.638,
+          "consensusRank": 15
+        },
+        {
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "trainedScore": 77.866,
+          "originalFinalScore": 80.11,
+          "consensusRank": 17
+        },
+        {
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "trainedScore": 75.208,
+          "originalFinalScore": 78.154,
+          "consensusRank": 19
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 73.187,
+          "originalFinalScore": 76.088,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 68.565,
+          "originalFinalScore": 70.152,
+          "consensusRank": 16
+        }
+      ]
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "prospectId": "nate-ament",
+      "player": "Nate Ament",
+      "localNameZh": "纳撒尼尔 阿门特",
+      "trainedScore": 86.581,
+      "targetSelectedRank": 2,
+      "exactTargetTop": false,
+      "trainedWinner": {
+        "prospectId": "allen-graves",
+        "player": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "trainedScore": 87.972
+      },
+      "topFive": [
+        {
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "trainedScore": 87.972,
+          "originalFinalScore": 90.119,
+          "consensusRank": 17
+        },
+        {
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "trainedScore": 86.581,
+          "originalFinalScore": 89.679,
+          "consensusRank": 9
+        },
+        {
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "trainedScore": 80.727,
+          "originalFinalScore": 83.613,
+          "consensusRank": 19
+        },
+        {
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "trainedScore": 78.046,
+          "originalFinalScore": 80.517,
+          "consensusRank": 21
+        },
+        {
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "trainedScore": 74.393,
+          "originalFinalScore": 77.758,
+          "consensusRank": 22
+        }
+      ]
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "prospectId": "allen-graves",
+      "player": "Allen Graves",
+      "localNameZh": "阿伦 格雷夫斯",
+      "trainedScore": 81.129,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "allen-graves",
+        "player": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "trainedScore": 81.129
+      },
+      "topFive": [
+        {
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "trainedScore": 81.129,
+          "originalFinalScore": 82.354,
+          "consensusRank": 17
+        },
+        {
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "trainedScore": 75.095,
+          "originalFinalScore": 76.593,
+          "consensusRank": 19
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 71.931,
+          "originalFinalScore": 71.943,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 70.548,
+          "originalFinalScore": 73.161,
+          "consensusRank": 23
+        },
+        {
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "trainedScore": 68.845,
+          "originalFinalScore": 69.712,
+          "consensusRank": 18
+        }
+      ]
+    },
+    {
+      "pick": 17,
+      "team": "Oklahoma City Thunder",
+      "prospectId": "chris-cenac-jr",
+      "player": "Chris Cenac Jr.",
+      "localNameZh": "克里斯 塞纳克",
+      "trainedScore": 73.662,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "chris-cenac-jr",
+        "player": "Chris Cenac Jr.",
+        "localNameZh": "克里斯 塞纳克",
+        "trainedScore": 73.662
+      },
+      "topFive": [
+        {
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "trainedScore": 73.662,
+          "originalFinalScore": 76.049,
+          "consensusRank": 19
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 73.648,
+          "originalFinalScore": 74.893,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "trainedScore": 72.626,
+          "originalFinalScore": 74.833,
+          "consensusRank": 18
+        },
+        {
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "trainedScore": 70.885,
+          "originalFinalScore": 73.066,
+          "consensusRank": 21
+        },
+        {
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "trainedScore": 70.515,
+          "originalFinalScore": 71.214,
+          "consensusRank": 20
+        }
+      ]
+    },
+    {
+      "pick": 18,
+      "team": "Charlotte Hornets",
+      "prospectId": "labaron-philon-jr",
+      "player": "Labaron Philon Jr.",
+      "localNameZh": "小拉巴伦 菲隆",
+      "trainedScore": 86.139,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "labaron-philon-jr",
+        "player": "Labaron Philon Jr.",
+        "localNameZh": "小拉巴伦 菲隆",
+        "trainedScore": 86.139
+      },
+      "topFive": [
+        {
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "trainedScore": 86.139,
+          "originalFinalScore": 87.815,
+          "consensusRank": 18
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 85.654,
+          "originalFinalScore": 86.976,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "trainedScore": 82.941,
+          "originalFinalScore": 84.266,
+          "consensusRank": 20
+        },
+        {
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "trainedScore": 77.573,
+          "originalFinalScore": 79.381,
+          "consensusRank": 21
+        },
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 76.719,
+          "originalFinalScore": 79.508,
+          "consensusRank": 24
+        }
+      ]
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "prospectId": "cameron-carr",
+      "player": "Cameron Carr",
+      "localNameZh": "卡梅隆 卡尔",
+      "trainedScore": 83.512,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "cameron-carr",
+        "player": "Cameron Carr",
+        "localNameZh": "卡梅隆 卡尔",
+        "trainedScore": 83.512
+      },
+      "topFive": [
+        {
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "trainedScore": 83.512,
+          "originalFinalScore": 85.687,
+          "consensusRank": 21
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 79.191,
+          "originalFinalScore": 82.464,
+          "consensusRank": 23
+        },
+        {
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "trainedScore": 78.04,
+          "originalFinalScore": 80.615,
+          "consensusRank": 22
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 77.534,
+          "originalFinalScore": 78.583,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "trainedScore": 76.07,
+          "originalFinalScore": 76.737,
+          "consensusRank": 20
+        }
+      ]
+    },
+    {
+      "pick": 20,
+      "team": "San Antonio Spurs",
+      "prospectId": "bennett-stirtz",
+      "player": "Bennett Stirtz",
+      "localNameZh": "本内特 斯特茨",
+      "trainedScore": 89.748,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "bennett-stirtz",
+        "player": "Bennett Stirtz",
+        "localNameZh": "本内特 斯特茨",
+        "trainedScore": 89.748
+      },
+      "topFive": [
+        {
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "trainedScore": 89.748,
+          "originalFinalScore": 91.367,
+          "consensusRank": 20
+        },
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 85.352,
+          "originalFinalScore": 87.254,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 81.938,
+          "originalFinalScore": 85.02,
+          "consensusRank": 24
+        },
+        {
+          "prospectId": "isaiah-evans",
+          "name": "Isaiah Evans",
+          "localNameZh": "以赛亚 埃文斯",
+          "trainedScore": 78.09,
+          "originalFinalScore": 81.27,
+          "consensusRank": 25
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 77.319,
+          "originalFinalScore": 80.334,
+          "consensusRank": 23
+        }
+      ]
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "prospectId": "christian-anderson",
+      "player": "Christian Anderson",
+      "localNameZh": "克里斯蒂安 安德森",
+      "trainedScore": 85.138,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "christian-anderson",
+        "player": "Christian Anderson",
+        "localNameZh": "克里斯蒂安 安德森",
+        "trainedScore": 85.138
+      },
+      "topFive": [
+        {
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "trainedScore": 85.138,
+          "originalFinalScore": 87.094,
+          "consensusRank": 16
+        },
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 84.483,
+          "originalFinalScore": 87.476,
+          "consensusRank": 24
+        },
+        {
+          "prospectId": "isaiah-evans",
+          "name": "Isaiah Evans",
+          "localNameZh": "以赛亚 埃文斯",
+          "trainedScore": 82.835,
+          "originalFinalScore": 85.927,
+          "consensusRank": 25
+        },
+        {
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "trainedScore": 76.824,
+          "originalFinalScore": 81.606,
+          "consensusRank": 28
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 74.974,
+          "originalFinalScore": 77.567,
+          "consensusRank": 23
+        }
+      ]
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "prospectId": "isaiah-evans",
+      "player": "Isaiah Evans",
+      "localNameZh": "以赛亚 埃文斯",
+      "trainedScore": 84.761,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "isaiah-evans",
+        "player": "Isaiah Evans",
+        "localNameZh": "以赛亚 埃文斯",
+        "trainedScore": 84.761
+      },
+      "topFive": [
+        {
+          "prospectId": "isaiah-evans",
+          "name": "Isaiah Evans",
+          "localNameZh": "以赛亚 埃文斯",
+          "trainedScore": 84.761,
+          "originalFinalScore": 87.475,
+          "consensusRank": 25
+        },
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 82.666,
+          "originalFinalScore": 85.123,
+          "consensusRank": 23
+        },
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 81.4,
+          "originalFinalScore": 83.594,
+          "consensusRank": 24
+        },
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "trainedScore": 72.565,
+          "originalFinalScore": 77.452,
+          "consensusRank": 30
+        },
+        {
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "trainedScore": 71.018,
+          "originalFinalScore": 74.192,
+          "consensusRank": 27
+        }
+      ]
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "prospectId": "dailyn-swain",
+      "player": "Dailyn Swain",
+      "localNameZh": "戴林 斯温",
+      "trainedScore": 74.631,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "dailyn-swain",
+        "player": "Dailyn Swain",
+        "localNameZh": "戴林 斯温",
+        "trainedScore": 74.631
+      },
+      "topFive": [
+        {
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "trainedScore": 74.631,
+          "originalFinalScore": 77.001,
+          "consensusRank": 23
+        },
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 73.841,
+          "originalFinalScore": 76.164,
+          "consensusRank": 24
+        },
+        {
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "trainedScore": 67.556,
+          "originalFinalScore": 70.079,
+          "consensusRank": 22
+        },
+        {
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "trainedScore": 65.777,
+          "originalFinalScore": 67.914,
+          "consensusRank": 26
+        },
+        {
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "trainedScore": 63.173,
+          "originalFinalScore": 67.21,
+          "consensusRank": 28
+        }
+      ]
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "prospectId": "ebuka-okorie",
+      "player": "Ebuka Okorie",
+      "localNameZh": "埃布卡 奥科里",
+      "trainedScore": 79.981,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "ebuka-okorie",
+        "player": "Ebuka Okorie",
+        "localNameZh": "埃布卡 奥科里",
+        "trainedScore": 79.981
+      },
+      "topFive": [
+        {
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "trainedScore": 79.981,
+          "originalFinalScore": 81.652,
+          "consensusRank": 24
+        },
+        {
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "trainedScore": 78.848,
+          "originalFinalScore": 82.366,
+          "consensusRank": 27
+        },
+        {
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "trainedScore": 78.788,
+          "originalFinalScore": 81.841,
+          "consensusRank": 26
+        },
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "trainedScore": 75.035,
+          "originalFinalScore": 79.732,
+          "consensusRank": 30
+        },
+        {
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "trainedScore": 71.143,
+          "originalFinalScore": 75.118,
+          "consensusRank": 29
+        }
+      ]
+    },
+    {
+      "pick": 25,
+      "team": "Los Angeles Lakers",
+      "prospectId": "koa-peat",
+      "player": "Koa Peat",
+      "localNameZh": "科阿 皮特",
+      "trainedScore": 75.586,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "koa-peat",
+        "player": "Koa Peat",
+        "localNameZh": "科阿 皮特",
+        "trainedScore": 75.586
+      },
+      "topFive": [
+        {
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "trainedScore": 75.586,
+          "originalFinalScore": 78.367,
+          "consensusRank": 27
+        },
+        {
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "trainedScore": 75.061,
+          "originalFinalScore": 77.502,
+          "consensusRank": 26
+        },
+        {
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "trainedScore": 70.716,
+          "originalFinalScore": 74.445,
+          "consensusRank": 29
+        },
+        {
+          "prospectId": "felix-okpara",
+          "name": "Felix Okpara",
+          "localNameZh": "费利克斯 奥克帕拉",
+          "trainedScore": 64.148,
+          "originalFinalScore": 62.224,
+          "consensusRank": 65
+        },
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "trainedScore": 63.966,
+          "originalFinalScore": 67.425,
+          "consensusRank": 30
+        }
+      ]
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "prospectId": "henri-veesaar",
+      "player": "Henri Veesaar",
+      "localNameZh": "亨利 维萨尔",
+      "trainedScore": 67.344,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "henri-veesaar",
+        "player": "Henri Veesaar",
+        "localNameZh": "亨利 维萨尔",
+        "trainedScore": 67.344
+      },
+      "topFive": [
+        {
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "trainedScore": 67.344,
+          "originalFinalScore": 68.726,
+          "consensusRank": 26
+        },
+        {
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "trainedScore": 65.074,
+          "originalFinalScore": 67.92,
+          "consensusRank": 29
+        },
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "trainedScore": 60.337,
+          "originalFinalScore": 63.222,
+          "consensusRank": 30
+        },
+        {
+          "prospectId": "felix-okpara",
+          "name": "Felix Okpara",
+          "localNameZh": "费利克斯 奥克帕拉",
+          "trainedScore": 57.091,
+          "originalFinalScore": 54.501,
+          "consensusRank": 65
+        },
+        {
+          "prospectId": "baba-miller",
+          "name": "Baba Miller",
+          "localNameZh": "巴巴 米勒",
+          "trainedScore": 56.94,
+          "originalFinalScore": 54.448,
+          "consensusRank": 62
+        }
+      ]
+    },
+    {
+      "pick": 27,
+      "team": "Boston Celtics",
+      "prospectId": "sergio-de-larrea",
+      "player": "Sergio De Larrea",
+      "localNameZh": "塞尔吉奥 德拉雷亚",
+      "trainedScore": 62.308,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "sergio-de-larrea",
+        "player": "Sergio De Larrea",
+        "localNameZh": "塞尔吉奥 德拉雷亚",
+        "trainedScore": 62.308
+      },
+      "topFive": [
+        {
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "trainedScore": 62.308,
+          "originalFinalScore": 65.053,
+          "consensusRank": 30
+        },
+        {
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "trainedScore": 61.716,
+          "originalFinalScore": 64.105,
+          "consensusRank": 29
+        },
+        {
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "trainedScore": 56.666,
+          "originalFinalScore": 59.4,
+          "consensusRank": 28
+        },
+        {
+          "prospectId": "trevon-brazile",
+          "name": "Trevon Brazile",
+          "localNameZh": "特雷冯 布拉齐尔",
+          "trainedScore": 51.424,
+          "originalFinalScore": 48.336,
+          "consensusRank": 73
+        },
+        {
+          "prospectId": "kylan-boswell",
+          "name": "Kylan Boswell",
+          "localNameZh": "凯兰 博斯韦尔",
+          "trainedScore": 51.306,
+          "originalFinalScore": 53.18,
+          "consensusRank": 37
+        }
+      ]
+    },
+    {
+      "pick": 28,
+      "team": "Minnesota Timberwolves",
+      "prospectId": "meleek-thomas",
+      "player": "Meleek Thomas",
+      "localNameZh": "马利克 托马斯",
+      "trainedScore": 73.7,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "meleek-thomas",
+        "player": "Meleek Thomas",
+        "localNameZh": "马利克 托马斯",
+        "trainedScore": 73.7
+      },
+      "topFive": [
+        {
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "trainedScore": 73.7,
+          "originalFinalScore": 78.006,
+          "consensusRank": 28
+        },
+        {
+          "prospectId": "kylan-boswell",
+          "name": "Kylan Boswell",
+          "localNameZh": "凯兰 博斯韦尔",
+          "trainedScore": 69.091,
+          "originalFinalScore": 72.536,
+          "consensusRank": 37
+        },
+        {
+          "prospectId": "tyler-nickel",
+          "name": "Tyler Nickel",
+          "localNameZh": "泰勒 尼科尔",
+          "trainedScore": 68.8,
+          "originalFinalScore": 67.291,
+          "consensusRank": 64
+        },
+        {
+          "prospectId": "jack-kayil",
+          "name": "Jack Kayil",
+          "localNameZh": "杰克 卡伊尔",
+          "trainedScore": 68.389,
+          "originalFinalScore": 73.303,
+          "consensusRank": 35
+        },
+        {
+          "prospectId": "jaron-pierre-jr",
+          "name": "Jaron Pierre Jr.",
+          "localNameZh": "小雅龙 皮埃尔",
+          "trainedScore": 67.782,
+          "originalFinalScore": 66.161,
+          "consensusRank": 100
+        }
+      ]
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "prospectId": "tarris-reed-jr",
+      "player": "Tarris Reed Jr.",
+      "localNameZh": "小塔里斯 里德",
+      "trainedScore": 69.948,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "tarris-reed-jr",
+        "player": "Tarris Reed Jr.",
+        "localNameZh": "小塔里斯 里德",
+        "trainedScore": 69.948
+      },
+      "topFive": [
+        {
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "trainedScore": 69.948,
+          "originalFinalScore": 72.589,
+          "consensusRank": 29
+        },
+        {
+          "prospectId": "mark-mitchell",
+          "name": "Mark Mitchell",
+          "localNameZh": "马克 米切尔",
+          "trainedScore": 57.466,
+          "originalFinalScore": 61.96,
+          "consensusRank": 33
+        },
+        {
+          "prospectId": "izaiyah-nelson",
+          "name": "Izaiyah Nelson",
+          "localNameZh": "以赛亚 尼尔森",
+          "trainedScore": 57.26,
+          "originalFinalScore": 54.406,
+          "consensusRank": 63
+        },
+        {
+          "prospectId": "felix-okpara",
+          "name": "Felix Okpara",
+          "localNameZh": "费利克斯 奥克帕拉",
+          "trainedScore": 57.089,
+          "originalFinalScore": 54.499,
+          "consensusRank": 65
+        },
+        {
+          "prospectId": "rafael-castro",
+          "name": "Rafael Castro",
+          "localNameZh": "拉斐尔 卡斯特罗",
+          "trainedScore": 56.739,
+          "originalFinalScore": 53.931,
+          "consensusRank": 75
+        }
+      ]
+    },
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "prospectId": "jack-kayil",
+      "player": "Jack Kayil",
+      "localNameZh": "杰克 卡伊尔",
+      "trainedScore": 62.05,
+      "targetSelectedRank": 1,
+      "exactTargetTop": true,
+      "trainedWinner": {
+        "prospectId": "jack-kayil",
+        "player": "Jack Kayil",
+        "localNameZh": "杰克 卡伊尔",
+        "trainedScore": 62.05
+      },
+      "topFive": [
+        {
+          "prospectId": "jack-kayil",
+          "name": "Jack Kayil",
+          "localNameZh": "杰克 卡伊尔",
+          "trainedScore": 62.05,
+          "originalFinalScore": 64.634,
+          "consensusRank": 35
+        },
+        {
+          "prospectId": "mohammad-amini",
+          "name": "Mohammad Amini",
+          "localNameZh": "穆罕默德 阿米尼",
+          "trainedScore": 61.157,
+          "originalFinalScore": 63.48,
+          "consensusRank": 36
+        },
+        {
+          "prospectId": "kylan-boswell",
+          "name": "Kylan Boswell",
+          "localNameZh": "凯兰 博斯韦尔",
+          "trainedScore": 60.622,
+          "originalFinalScore": 62.769,
+          "consensusRank": 37
+        },
+        {
+          "prospectId": "josh-dix",
+          "name": "Josh Dix",
+          "localNameZh": "约什 迪克斯",
+          "trainedScore": 59.146,
+          "originalFinalScore": 61.142,
+          "consensusRank": 38
+        },
+        {
+          "prospectId": "vsevolod-ishchenko",
+          "name": "Vsevolod Ishchenko",
+          "localNameZh": "弗塞沃落德 伊先科",
+          "trainedScore": 58.74,
+          "originalFinalScore": 60.302,
+          "consensusRank": 39
+        }
+      ]
+    }
+  ],
+  "noManualOverride": true
+}

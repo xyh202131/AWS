@@ -1,0 +1,5293 @@
+{
+  "schemaVersion": "draftops.deepseek_board_change_discussion.v1",
+  "generatedAt": "2026-06-23T13:10:38.479Z",
+  "generatedBy": "DeepSeek API board-change discussion script",
+  "inputFiles": [
+    "data/boards/sequential_dynamic_board_123_audit.json",
+    "data/boards/local_pool_124_baseline_board.json",
+    "data/reports/team_preference_research_20260623.json"
+  ],
+  "model": "deepseek-v4-pro",
+  "modelLabel": "deepseek-v4-pro[1m]",
+  "roundCount": 3,
+  "changedCases": [
+    {
+      "pick": 7,
+      "team": "Sacramento Kings",
+      "baselinePlayer": "Mikel Brown Jr.",
+      "baselineProspectId": "mikel-brown-jr",
+      "dynamicPlayer": "Kingston Flemings",
+      "dynamicProspectId": "kingston-flemings",
+      "scoreGapVsNext": 2.775,
+      "confidence": 96,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "point guard depth",
+          "paint touch",
+          "defensive activity"
+        ],
+        "priorityTags": [
+          "primary guard",
+          "pace",
+          "playmaking",
+          "guard",
+          "creation",
+          "defense"
+        ],
+        "riskTolerance": 64,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "guard",
+          "creation",
+          "defense"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、创造/得分、防守",
+        "sourceEvidenceNotes": [
+          "Athletic p7: needs point guard to replace DeAaron Fox; ESPN p7: guard upside/shooting with limited extra assets."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "kingston-flemings",
+        "name": "Kingston Flemings",
+        "localNameZh": "金斯顿 弗莱明斯",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 8,
+        "finalScore": 95.785,
+        "rawModelScore": 91.685,
+        "dynamicPreferenceAdjustment": 3.55,
+        "featureAdjustment": 0.55,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "creation",
+          "defense"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "creation",
+          "defense",
+          "guard",
+          "shooting",
+          "upside_asset"
+        ],
+        "featureReference": {
+          "referenceScore": 73.8,
+          "referenceTier": "B-positive-parameter-reference",
+          "physicalToolsScore": 25.7,
+          "explosivenessScore": 88,
+          "shootingDrillScore": 89.7,
+          "tags": [
+            "顶级助跑弹跳",
+            "强原地爆发",
+            "冲刺快",
+            "灵敏度好",
+            "投篮训练高效",
+            "三分训练高效",
+            "低年级"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "mikel-brown-jr",
+        "name": "Mikel Brown Jr.",
+        "localNameZh": "迈克尔 布朗",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 7,
+        "finalScore": 93.01,
+        "rawModelScore": 92.06,
+        "dynamicPreferenceAdjustment": 1.4,
+        "featureAdjustment": -0.45,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "creation"
+        ],
+        "missingPreferenceFamilies": [
+          "defense"
+        ],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 4,
+          "referenceTier": "D-incomplete-signal",
+          "physicalToolsScore": null,
+          "explosivenessScore": null,
+          "shootingDrillScore": null,
+          "tags": [
+            "低年级",
+            "数据不足"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "kingston-flemings",
+          "name": "Kingston Flemings",
+          "localNameZh": "金斯顿 弗莱明斯",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 8,
+          "finalScore": 95.785,
+          "rawModelScore": 91.685,
+          "dynamicPreferenceAdjustment": 3.55,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "creation",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "defense",
+            "guard",
+            "shooting",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 73.8,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 25.7,
+            "explosivenessScore": 88,
+            "shootingDrillScore": 89.7,
+            "tags": [
+              "顶级助跑弹跳",
+              "强原地爆发",
+              "冲刺快",
+              "灵敏度好",
+              "投篮训练高效",
+              "三分训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 7,
+          "finalScore": 93.01,
+          "rawModelScore": 92.06,
+          "dynamicPreferenceAdjustment": 1.4,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "低年级",
+              "数据不足"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "brayden-burries",
+          "name": "Brayden Burries",
+          "localNameZh": "布雷登 伯里斯",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 11,
+          "finalScore": 91.964,
+          "rawModelScore": 87.864,
+          "dynamicPreferenceAdjustment": 3.55,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "creation",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "defense",
+            "guard",
+            "shooting",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 66.2,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 23.7,
+            "explosivenessScore": 85.9,
+            "shootingDrillScore": 85.8,
+            "tags": [
+              "强原地爆发",
+              "灵敏度好",
+              "投篮训练高效",
+              "三分训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 14,
+          "finalScore": 85.233,
+          "rawModelScore": 83.983,
+          "dynamicPreferenceAdjustment": 0.7,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "creation",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard"
+          ],
+          "families": [
+            "creation",
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.6,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 74.7,
+            "explosivenessScore": 69.7,
+            "shootingDrillScore": 63.9,
+            "tags": [
+              "强原地爆发"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "aday-mara",
+          "name": "Aday Mara",
+          "localNameZh": "阿达伊 马拉",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 10,
+          "finalScore": 79.429,
+          "rawModelScore": 79.479,
+          "dynamicPreferenceAdjustment": -0.7,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 49.7,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 94.7,
+            "explosivenessScore": 1.4,
+            "shootingDrillScore": 53.5,
+            "tags": [
+              "高摸高",
+              "三分训练高效",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 16,
+          "finalScore": 79.944,
+          "rawModelScore": 77.994,
+          "dynamicPreferenceAdjustment": 1.4,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": -0.9,
+          "overlapFamilies": [
+            "guard",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 66.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 23.6,
+            "explosivenessScore": 72.5,
+            "shootingDrillScore": 94.9,
+            "tags": [
+              "超长臂展",
+              "顶级助跑弹跳",
+              "灵敏度好",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 10,
+      "team": "Milwaukee Bucks",
+      "baselinePlayer": "Kingston Flemings",
+      "baselineProspectId": "kingston-flemings",
+      "dynamicPlayer": "Yaxel Lendeborg",
+      "dynamicProspectId": "yaxel-lendeborg",
+      "scoreGapVsNext": 1.34,
+      "confidence": 84,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "connector forward",
+          "defense",
+          "rebounding"
+        ],
+        "priorityTags": [
+          "big wing",
+          "connector",
+          "defense",
+          "guard",
+          "creation"
+        ],
+        "riskTolerance": 53,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "guard",
+          "wing",
+          "frontcourt",
+          "creation",
+          "defense"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、锋线、前场/内线、创造/得分、防守",
+        "sourceEvidenceNotes": [
+          "ESPN p10: obvious backcourt talent need; Athletic p10: lead guard due diligence and Giannis-contingent upside."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "yaxel-lendeborg",
+        "name": "Yaxel Lendeborg",
+        "localNameZh": "亚克塞尔 伦德伯格",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 12,
+        "finalScore": 91.614,
+        "rawModelScore": 89.094,
+        "dynamicPreferenceAdjustment": 1.87,
+        "featureAdjustment": 0.65,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "wing",
+          "frontcourt",
+          "defense"
+        ],
+        "missingPreferenceFamilies": [
+          "guard",
+          "creation"
+        ],
+        "families": [
+          "defense",
+          "feel",
+          "frontcourt",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 59.5,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 82,
+          "explosivenessScore": 6.3,
+          "shootingDrillScore": 60.5,
+          "tags": [
+            "超长臂展",
+            "高摸高",
+            "灵敏度好"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "yaxel-lendeborg",
+          "name": "Yaxel Lendeborg",
+          "localNameZh": "亚克塞尔 伦德伯格",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 12,
+          "finalScore": 91.614,
+          "rawModelScore": 89.094,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 59.5,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 82,
+            "explosivenessScore": 6.3,
+            "shootingDrillScore": 60.5,
+            "tags": [
+              "超长臂展",
+              "高摸高",
+              "灵敏度好"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 14,
+          "finalScore": 90.274,
+          "rawModelScore": 87.014,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "creation",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard"
+          ],
+          "families": [
+            "creation",
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.6,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 74.7,
+            "explosivenessScore": 69.7,
+            "shootingDrillScore": 63.9,
+            "tags": [
+              "强原地爆发"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 7,
+          "finalScore": 88.421,
+          "rawModelScore": 88.591,
+          "dynamicPreferenceAdjustment": 0.28,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 2.7,
+          "overlapFamilies": [
+            "guard",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "低年级",
+              "数据不足"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "hannes-steinbach",
+          "name": "Hannes Steinbach",
+          "localNameZh": "汉内斯 施泰因巴赫",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 13,
+          "finalScore": 83.393,
+          "rawModelScore": 80.323,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 1.2,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 60.5,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 84,
+            "explosivenessScore": 40.8,
+            "shootingDrillScore": 42.1,
+            "tags": [
+              "高摸高",
+              "灵敏度好",
+              "低年级",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 9,
+          "finalScore": 81.019,
+          "rawModelScore": 80.189,
+          "dynamicPreferenceAdjustment": 0.28,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation",
+            "defense"
+          ],
+          "families": [
+            "frontcourt",
+            "shooting",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.4,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 72.3,
+            "explosivenessScore": 54.9,
+            "shootingDrillScore": 79.8,
+            "tags": [
+              "高摸高",
+              "投篮训练高效",
+              "低年级",
+              "源表重复姓名需人工确认"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
+          "localNameZh": "小莫雷兹 约翰逊",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 15,
+          "finalScore": 80.623,
+          "rawModelScore": 76.853,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 1.9,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 78.9,
+            "referenceTier": "A-elite-parameter-reference",
+            "physicalToolsScore": 86,
+            "explosivenessScore": 83.1,
+            "shootingDrillScore": 57.4,
+            "tags": [
+              "超长臂展",
+              "强原地爆发",
+              "灵敏度好",
+              "三分训练高效"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 11,
+      "team": "Golden State Warriors",
+      "baselinePlayer": "Nate Ament",
+      "baselineProspectId": "nate-ament",
+      "dynamicPlayer": "Mikel Brown Jr.",
+      "dynamicProspectId": "mikel-brown-jr",
+      "scoreGapVsNext": 2.664,
+      "confidence": 77,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "smart guard",
+          "movement shooting",
+          "decision making"
+        ],
+        "priorityTags": [
+          "shooter",
+          "decision maker",
+          "off-ball"
+        ],
+        "riskTolerance": 50,
+        "needConfidenceCoefficient": 0.4,
+        "preferenceLevel": "弱偏好：只能作为破平项",
+        "preferenceFamilies": [
+          "guard",
+          "shooting"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、投射/空间",
+        "sourceEvidenceNotes": [
+          "Athletic p11: 6-9 big fits via passing, cutting, corner spacing; ESPN p11 range: frontcourt size context."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "mikel-brown-jr",
+        "name": "Mikel Brown Jr.",
+        "localNameZh": "迈克尔 布朗",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 7,
+        "finalScore": 81.07,
+        "rawModelScore": 80.4,
+        "dynamicPreferenceAdjustment": 1.12,
+        "featureAdjustment": -0.45,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 4.05,
+        "overlapFamilies": [
+          "guard",
+          "shooting"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 4,
+          "referenceTier": "D-incomplete-signal",
+          "physicalToolsScore": null,
+          "explosivenessScore": null,
+          "shootingDrillScore": null,
+          "tags": [
+            "低年级",
+            "数据不足"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "nate-ament",
+        "name": "Nate Ament",
+        "localNameZh": "纳撒尼尔 阿门特",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 9,
+        "finalScore": 78.406,
+        "rawModelScore": 77.106,
+        "dynamicPreferenceAdjustment": 0,
+        "featureAdjustment": 1.3,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 1.35,
+        "overlapFamilies": [
+          "shooting"
+        ],
+        "missingPreferenceFamilies": [
+          "guard"
+        ],
+        "families": [
+          "frontcourt",
+          "shooting",
+          "size",
+          "upside_asset",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 67.4,
+          "referenceTier": "B-positive-parameter-reference",
+          "physicalToolsScore": 72.3,
+          "explosivenessScore": 54.9,
+          "shootingDrillScore": 79.8,
+          "tags": [
+            "高摸高",
+            "投篮训练高效",
+            "低年级",
+            "源表重复姓名需人工确认"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "mikel-brown-jr",
+          "name": "Mikel Brown Jr.",
+          "localNameZh": "迈克尔 布朗",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 7,
+          "finalScore": 81.07,
+          "rawModelScore": 80.4,
+          "dynamicPreferenceAdjustment": 1.12,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 4.05,
+          "overlapFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "低年级",
+              "数据不足"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 9,
+          "finalScore": 78.406,
+          "rawModelScore": 77.106,
+          "dynamicPreferenceAdjustment": 0,
+          "featureAdjustment": 1.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 1.35,
+          "overlapFamilies": [
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [
+            "guard"
+          ],
+          "families": [
+            "frontcourt",
+            "shooting",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.4,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 72.3,
+            "explosivenessScore": 54.9,
+            "shootingDrillScore": 79.8,
+            "tags": [
+              "高摸高",
+              "投篮训练高效",
+              "低年级",
+              "源表重复姓名需人工确认"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 16,
+          "finalScore": 74.966,
+          "rawModelScore": 72.546,
+          "dynamicPreferenceAdjustment": 1.12,
+          "featureAdjustment": 1.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 66.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 23.6,
+            "explosivenessScore": 72.5,
+            "shootingDrillScore": 94.9,
+            "tags": [
+              "超长臂展",
+              "顶级助跑弹跳",
+              "灵敏度好",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 18,
+          "finalScore": 69.816,
+          "rawModelScore": 67.946,
+          "dynamicPreferenceAdjustment": 1.12,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 30.3,
+            "explosivenessScore": 41.5,
+            "shootingDrillScore": 82.1,
+            "tags": [
+              "冲刺快",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 20,
+          "finalScore": 69.553,
+          "rawModelScore": 67.133,
+          "dynamicPreferenceAdjustment": 1.12,
+          "featureAdjustment": 1.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": -0.9,
+          "overlapFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 60.8,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 28,
+            "explosivenessScore": 55.6,
+            "shootingDrillScore": 96.7,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "hannes-steinbach",
+          "name": "Hannes Steinbach",
+          "localNameZh": "汉内斯 施泰因巴赫",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 13,
+          "finalScore": 68.013,
+          "rawModelScore": 68.623,
+          "dynamicPreferenceAdjustment": -1.16,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 60.5,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 84,
+            "explosivenessScore": 40.8,
+            "shootingDrillScore": 42.1,
+            "tags": [
+              "高摸高",
+              "灵敏度好",
+              "低年级",
+              "国际/非美国地区"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 12,
+      "team": "Oklahoma City Thunder",
+      "baselinePlayer": "Yaxel Lendeborg",
+      "baselineProspectId": "yaxel-lendeborg",
+      "dynamicPlayer": "Hannes Steinbach",
+      "dynamicProspectId": "hannes-steinbach",
+      "scoreGapVsNext": -0.034,
+      "confidence": 75,
+      "tieBreakApplied": true,
+      "dynamicParameters": {
+        "needs": [
+          "frontcourt depth",
+          "versatility",
+          "long-term value"
+        ],
+        "priorityTags": [
+          "versatile forward",
+          "feel",
+          "defense"
+        ],
+        "riskTolerance": 82,
+        "needConfidenceCoefficient": 0.45,
+        "preferenceLevel": "条件偏好：需排序或资产折扣",
+        "preferenceFamilies": [
+          "wing",
+          "frontcourt",
+          "defense",
+          "upside_asset"
+        ],
+        "preferenceFamilyLabel": "锋线、前场/内线、防守、上限/资产",
+        "sourceEvidenceNotes": [
+          "ESPN p12: trade options and movable future assets; Athletic p17: Wembanyama matchup problem and future capital path."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "hannes-steinbach",
+        "name": "Hannes Steinbach",
+        "localNameZh": "汉内斯 施泰因巴赫",
+        "positions": [
+          "PF",
+          "C"
+        ],
+        "consensusRank": 13,
+        "finalScore": 83.132,
+        "rawModelScore": 80.335,
+        "dynamicPreferenceAdjustment": 1.598,
+        "featureAdjustment": 1.2,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "wing",
+          "frontcourt",
+          "defense"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "feel",
+          "frontcourt",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 60.5,
+          "referenceTier": "B-positive-parameter-reference",
+          "physicalToolsScore": 84,
+          "explosivenessScore": 40.8,
+          "shootingDrillScore": 42.1,
+          "tags": [
+            "高摸高",
+            "灵敏度好",
+            "低年级",
+            "国际/非美国地区"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "hannes-steinbach",
+          "name": "Hannes Steinbach",
+          "localNameZh": "汉内斯 施泰因巴赫",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 13,
+          "finalScore": 83.132,
+          "rawModelScore": 80.335,
+          "dynamicPreferenceAdjustment": 1.598,
+          "featureAdjustment": 1.2,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 60.5,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 84,
+            "explosivenessScore": 40.8,
+            "shootingDrillScore": 42.1,
+            "tags": [
+              "高摸高",
+              "灵敏度好",
+              "低年级",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "karim-lopez",
+          "name": "Karim Lopez",
+          "localNameZh": "卡里姆 洛佩兹",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 14,
+          "finalScore": 83.166,
+          "rawModelScore": 81.018,
+          "dynamicPreferenceAdjustment": 1.598,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "creation",
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.6,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 74.7,
+            "explosivenessScore": 69.7,
+            "shootingDrillScore": 63.9,
+            "tags": [
+              "强原地爆发"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "morez-johnson-jr",
+          "name": "Morez Johnson Jr.",
+          "localNameZh": "小莫雷兹 约翰逊",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 15,
+          "finalScore": 81.395,
+          "rawModelScore": 77.897,
+          "dynamicPreferenceAdjustment": 1.598,
+          "featureAdjustment": 1.9,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 78.9,
+            "referenceTier": "A-elite-parameter-reference",
+            "physicalToolsScore": 86,
+            "explosivenessScore": 83.1,
+            "shootingDrillScore": 57.4,
+            "tags": [
+              "超长臂展",
+              "强原地爆发",
+              "灵敏度好",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 17,
+          "finalScore": 77.817,
+          "rawModelScore": 76.67,
+          "dynamicPreferenceAdjustment": 1.598,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "shooting",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 44.4,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 69.7,
+            "explosivenessScore": 21.9,
+            "shootingDrillScore": 43,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 9,
+          "finalScore": 76.73,
+          "rawModelScore": 75.55,
+          "dynamicPreferenceAdjustment": 0.63,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 2.7,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "frontcourt",
+            "shooting",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.4,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 72.3,
+            "explosivenessScore": 54.9,
+            "shootingDrillScore": 79.8,
+            "tags": [
+              "高摸高",
+              "投篮训练高效",
+              "低年级",
+              "源表重复姓名需人工确认"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 19,
+          "finalScore": 71.423,
+          "rawModelScore": 68.626,
+          "dynamicPreferenceAdjustment": 1.598,
+          "featureAdjustment": 1.2,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 68.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 67.6,
+            "shootingDrillScore": 33.8,
+            "tags": [
+              "超长臂展",
+              "高摸高",
+              "强原地爆发",
+              "灵敏度好",
+              "低年级"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 15,
+      "team": "Chicago Bulls",
+      "baselinePlayer": "Allen Graves",
+      "baselineProspectId": "allen-graves",
+      "dynamicPlayer": "Nate Ament",
+      "dynamicProspectId": "nate-ament",
+      "scoreGapVsNext": -0.64,
+      "confidence": 75,
+      "tieBreakApplied": true,
+      "dynamicParameters": {
+        "needs": [
+          "frontcourt depth",
+          "shooting",
+          "upside"
+        ],
+        "priorityTags": [
+          "stretch forward",
+          "rebounder",
+          "upside",
+          "forward",
+          "frontcourt",
+          "size",
+          "defense"
+        ],
+        "riskTolerance": 76,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "shooting",
+          "wing",
+          "frontcourt",
+          "defense",
+          "upside_asset",
+          "size"
+        ],
+        "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、防守、上限/资产、尺寸",
+        "sourceEvidenceNotes": [
+          "ESPN p4: direct frontcourt need; Athletic p4/p15: four fit plus size, length, athleticism, defense."
+        ],
+        "previousTeamSelections": [
+          {
+            "pick": 4,
+            "prospectId": "caleb-wilson",
+            "name": "Caleb Wilson",
+            "positions": [
+              "SF",
+              "PF"
+            ],
+            "families": [
+              "creation",
+              "defense",
+              "frontcourt",
+              "size",
+              "upside_asset",
+              "wing"
+            ]
+          }
+        ],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "nate-ament",
+        "name": "Nate Ament",
+        "localNameZh": "纳撒尼尔 阿门特",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 9,
+        "finalScore": 89.829,
+        "rawModelScore": 86.399,
+        "dynamicPreferenceAdjustment": 2.71,
+        "featureAdjustment": 1.3,
+        "sequencingAdjustment": -0.58,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 4,
+        "pickValueAdjustment": 6,
+        "overlapFamilies": [
+          "shooting",
+          "wing",
+          "frontcourt",
+          "size"
+        ],
+        "missingPreferenceFamilies": [
+          "defense"
+        ],
+        "families": [
+          "frontcourt",
+          "shooting",
+          "size",
+          "upside_asset",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 67.4,
+          "referenceTier": "B-positive-parameter-reference",
+          "physicalToolsScore": 72.3,
+          "explosivenessScore": 54.9,
+          "shootingDrillScore": 79.8,
+          "tags": [
+            "高摸高",
+            "投篮训练高效",
+            "低年级",
+            "源表重复姓名需人工确认"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "allen-graves",
+        "name": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 17,
+        "finalScore": 90.469,
+        "rawModelScore": 88.299,
+        "dynamicPreferenceAdjustment": 3.55,
+        "featureAdjustment": -0.45,
+        "sequencingAdjustment": -0.93,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "shooting",
+          "wing",
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "frontcourt",
+          "shooting",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 44.4,
+          "referenceTier": "D-low-parameter-signal",
+          "physicalToolsScore": 69.7,
+          "explosivenessScore": 21.9,
+          "shootingDrillScore": 43,
+          "tags": [
+            "低年级"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "nate-ament",
+          "name": "Nate Ament",
+          "localNameZh": "纳撒尼尔 阿门特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 9,
+          "finalScore": 89.829,
+          "rawModelScore": 86.399,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": 1.3,
+          "sequencingAdjustment": -0.58,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 6,
+          "overlapFamilies": [
+            "shooting",
+            "wing",
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "frontcourt",
+            "shooting",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 67.4,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 72.3,
+            "explosivenessScore": 54.9,
+            "shootingDrillScore": 79.8,
+            "tags": [
+              "高摸高",
+              "投篮训练高效",
+              "低年级",
+              "源表重复姓名需人工确认"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 17,
+          "finalScore": 90.469,
+          "rawModelScore": 88.299,
+          "dynamicPreferenceAdjustment": 3.55,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": -0.93,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting",
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "shooting",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 44.4,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 69.7,
+            "explosivenessScore": 21.9,
+            "shootingDrillScore": 43,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 19,
+          "finalScore": 83.613,
+          "rawModelScore": 81.253,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": 0.7,
+          "sequencingAdjustment": -1.05,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 68.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 67.6,
+            "shootingDrillScore": 33.8,
+            "tags": [
+              "超长臂展",
+              "高摸高",
+              "强原地爆发",
+              "灵敏度好",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 21,
+          "finalScore": 80.617,
+          "rawModelScore": 78.657,
+          "dynamicPreferenceAdjustment": 1.17,
+          "featureAdjustment": 1.25,
+          "sequencingAdjustment": -0.46,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting",
+            "wing",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "families": [
+            "defense",
+            "guard",
+            "shooting",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 75,
+            "referenceTier": "A-elite-parameter-reference",
+            "physicalToolsScore": 54.7,
+            "explosivenessScore": 98.6,
+            "shootingDrillScore": 55.3,
+            "tags": [
+              "超长臂展",
+              "顶级助跑弹跳",
+              "强原地爆发",
+              "灵敏度好"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 22,
+          "finalScore": 78.108,
+          "rawModelScore": 76.748,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": -0.3,
+          "sequencingAdjustment": -1.05,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 40.8,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": null,
+            "shootingDrillScore": 25.1,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 76.759,
+          "rawModelScore": 74.979,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": -0.93,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 16,
+      "team": "Memphis Grizzlies",
+      "baselinePlayer": "Hannes Steinbach",
+      "baselineProspectId": "hannes-steinbach",
+      "dynamicPlayer": "Allen Graves",
+      "dynamicProspectId": "allen-graves",
+      "scoreGapVsNext": 6.061,
+      "confidence": 91,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "rim protection",
+          "bench size",
+          "defense"
+        ],
+        "priorityTags": [
+          "rim protector",
+          "size",
+          "rebounder"
+        ],
+        "riskTolerance": 62,
+        "needConfidenceCoefficient": 0.55,
+        "preferenceLevel": "条件偏好：需排序或资产折扣",
+        "preferenceFamilies": [
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "preferenceFamilyLabel": "前场/内线、防守、尺寸",
+        "sourceEvidenceNotes": [
+          "Athletic p3: skilled forward/big fits team values; ESPN p16: younger point guard makes sense if Morant future is uncertain."
+        ],
+        "previousTeamSelections": [
+          {
+            "pick": 3,
+            "prospectId": "cameron-boozer",
+            "name": "Cameron Boozer",
+            "positions": [
+              "PF",
+              "C"
+            ],
+            "families": [
+              "defense",
+              "feel",
+              "frontcourt",
+              "shooting",
+              "size",
+              "upside_asset",
+              "wing"
+            ]
+          }
+        ],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "allen-graves",
+        "name": "Allen Graves",
+        "localNameZh": "阿伦 格雷夫斯",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 17,
+        "finalScore": 82.704,
+        "rawModelScore": 81.971,
+        "dynamicPreferenceAdjustment": 1.953,
+        "featureAdjustment": -0.45,
+        "sequencingAdjustment": -0.77,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "frontcourt",
+          "shooting",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 44.4,
+          "referenceTier": "D-low-parameter-signal",
+          "physicalToolsScore": 69.7,
+          "explosivenessScore": 21.9,
+          "shootingDrillScore": 43,
+          "tags": [
+            "低年级"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "allen-graves",
+          "name": "Allen Graves",
+          "localNameZh": "阿伦 格雷夫斯",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 17,
+          "finalScore": 82.704,
+          "rawModelScore": 81.971,
+          "dynamicPreferenceAdjustment": 1.953,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": -0.77,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "shooting",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 44.4,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 69.7,
+            "explosivenessScore": 21.9,
+            "shootingDrillScore": 43,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "chris-cenac-jr",
+          "name": "Chris Cenac Jr.",
+          "localNameZh": "克里斯 塞纳克",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 19,
+          "finalScore": 76.643,
+          "rawModelScore": 74.068,
+          "dynamicPreferenceAdjustment": 1.953,
+          "featureAdjustment": 1.2,
+          "sequencingAdjustment": -0.577,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 68.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 67.6,
+            "shootingDrillScore": 33.8,
+            "tags": [
+              "超长臂展",
+              "高摸高",
+              "强原地爆发",
+              "灵敏度好",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 73.161,
+          "rawModelScore": 71.786,
+          "dynamicPreferenceAdjustment": 1.953,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": -0.577,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "christian-anderson",
+          "name": "Christian Anderson",
+          "localNameZh": "克里斯蒂安 安德森",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 16,
+          "finalScore": 71.943,
+          "rawModelScore": 73.048,
+          "dynamicPreferenceAdjustment": -1.595,
+          "featureAdjustment": 0.55,
+          "sequencingAdjustment": -0.06,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 66.9,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 23.6,
+            "explosivenessScore": 72.5,
+            "shootingDrillScore": 94.9,
+            "tags": [
+              "超长臂展",
+              "顶级助跑弹跳",
+              "灵敏度好",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 18,
+          "finalScore": 69.712,
+          "rawModelScore": 71.367,
+          "dynamicPreferenceAdjustment": -1.595,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": -0.06,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 30.3,
+            "explosivenessScore": 41.5,
+            "shootingDrillScore": 82.1,
+            "tags": [
+              "冲刺快",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 22,
+          "finalScore": 69.342,
+          "rawModelScore": 67.766,
+          "dynamicPreferenceAdjustment": 1.953,
+          "featureAdjustment": 0.2,
+          "sequencingAdjustment": -0.577,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 6,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 40.8,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": null,
+            "shootingDrillScore": 25.1,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 19,
+      "team": "Toronto Raptors",
+      "baselinePlayer": "Labaron Philon Jr.",
+      "baselineProspectId": "labaron-philon-jr",
+      "dynamicPlayer": "Cameron Carr",
+      "dynamicProspectId": "cameron-carr",
+      "scoreGapVsNext": 3.323,
+      "confidence": 85,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "connector forward",
+          "length",
+          "team defense"
+        ],
+        "priorityTags": [
+          "versatile forward",
+          "defense",
+          "passing",
+          "frontcourt",
+          "creation",
+          "shooting"
+        ],
+        "riskTolerance": 61,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "shooting",
+          "wing",
+          "frontcourt",
+          "creation",
+          "defense",
+          "size"
+        ],
+        "preferenceFamilyLabel": "投射/空间、锋线、前场/内线、创造/得分、防守、尺寸",
+        "sourceEvidenceNotes": [
+          "ESPN p19: long-term center, creation, and 3-point shooting; Athletic p19: veteran big market and another creator."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "cameron-carr",
+        "name": "Cameron Carr",
+        "localNameZh": "卡梅隆 卡尔",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 21,
+        "finalScore": 85.787,
+        "rawModelScore": 83.787,
+        "dynamicPreferenceAdjustment": 0.75,
+        "featureAdjustment": 1.25,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "shooting",
+          "wing",
+          "defense"
+        ],
+        "missingPreferenceFamilies": [
+          "frontcourt",
+          "creation",
+          "size"
+        ],
+        "families": [
+          "defense",
+          "guard",
+          "shooting",
+          "upside_asset",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 75,
+          "referenceTier": "A-elite-parameter-reference",
+          "physicalToolsScore": 54.7,
+          "explosivenessScore": 98.6,
+          "shootingDrillScore": 55.3,
+          "tags": [
+            "超长臂展",
+            "顶级助跑弹跳",
+            "强原地爆发",
+            "灵敏度好"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 4,
+        "prospectId": "labaron-philon-jr",
+        "name": "Labaron Philon Jr.",
+        "localNameZh": "小拉巴伦 菲隆",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 18,
+        "finalScore": 79.092,
+        "rawModelScore": 79.042,
+        "dynamicPreferenceAdjustment": -0.7,
+        "featureAdjustment": 0.75,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "shooting",
+          "creation"
+        ],
+        "missingPreferenceFamilies": [
+          "wing",
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 52.4,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 30.3,
+          "explosivenessScore": 41.5,
+          "shootingDrillScore": 82.1,
+          "tags": [
+            "冲刺快",
+            "投篮训练高效",
+            "三分训练高效"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "cameron-carr",
+          "name": "Cameron Carr",
+          "localNameZh": "卡梅隆 卡尔",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 21,
+          "finalScore": 85.787,
+          "rawModelScore": 83.787,
+          "dynamicPreferenceAdjustment": 0.75,
+          "featureAdjustment": 1.25,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting",
+            "wing",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "creation",
+            "size"
+          ],
+          "families": [
+            "defense",
+            "guard",
+            "shooting",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 75,
+            "referenceTier": "A-elite-parameter-reference",
+            "physicalToolsScore": 54.7,
+            "explosivenessScore": 98.6,
+            "shootingDrillScore": 55.3,
+            "tags": [
+              "超长臂展",
+              "顶级助跑弹跳",
+              "强原地爆发",
+              "灵敏度好"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 82.464,
+          "rawModelScore": 80.314,
+          "dynamicPreferenceAdjustment": 2.15,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "shooting",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 22,
+          "finalScore": 80.965,
+          "rawModelScore": 79.115,
+          "dynamicPreferenceAdjustment": 2.15,
+          "featureAdjustment": -0.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 6,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "shooting",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 40.8,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": null,
+            "shootingDrillScore": 25.1,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 18,
+          "finalScore": 79.092,
+          "rawModelScore": 79.042,
+          "dynamicPreferenceAdjustment": -0.7,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 30.3,
+            "explosivenessScore": 41.5,
+            "shootingDrillScore": 82.1,
+            "tags": [
+              "冲刺快",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 24,
+          "finalScore": 78.356,
+          "rawModelScore": 78.306,
+          "dynamicPreferenceAdjustment": -0.7,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 59.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 34.6,
+            "explosivenessScore": 63.4,
+            "shootingDrillScore": 75.2,
+            "tags": [
+              "超长臂展",
+              "灵敏度好",
+              "投篮训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "bennett-stirtz",
+          "name": "Bennett Stirtz",
+          "localNameZh": "本内特 斯特茨",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 20,
+          "finalScore": 76.887,
+          "rawModelScore": 76.987,
+          "dynamicPreferenceAdjustment": -1.4,
+          "featureAdjustment": 1.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "frontcourt",
+            "creation",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 60.8,
+            "referenceTier": "B-positive-parameter-reference",
+            "physicalToolsScore": 28,
+            "explosivenessScore": 55.6,
+            "shootingDrillScore": 96.7,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 21,
+      "team": "Detroit Pistons",
+      "baselinePlayer": "Cameron Carr",
+      "baselineProspectId": "cameron-carr",
+      "dynamicPlayer": "Labaron Philon Jr.",
+      "dynamicProspectId": "labaron-philon-jr",
+      "scoreGapVsNext": -0.203,
+      "confidence": 76,
+      "tieBreakApplied": true,
+      "dynamicParameters": {
+        "needs": [
+          "wing shooting",
+          "defensive activity",
+          "floor spacing"
+        ],
+        "priorityTags": [
+          "3-and-D",
+          "wing defender",
+          "shooter",
+          "guard",
+          "wing",
+          "shooting",
+          "creation"
+        ],
+        "riskTolerance": 57,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "guard",
+          "shooting",
+          "wing",
+          "creation",
+          "defense"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、投射/空间、锋线、创造/得分、防守",
+        "sourceEvidenceNotes": [
+          "ESPN p21: offense-minded target and glaring shooting need; Athletic p21: lead guards or wings/forwards who shoot/create."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "labaron-philon-jr",
+        "name": "Labaron Philon Jr.",
+        "localNameZh": "小拉巴伦 菲隆",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 18,
+        "finalScore": 87.273,
+        "rawModelScore": 84.653,
+        "dynamicPreferenceAdjustment": 1.87,
+        "featureAdjustment": 0.75,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "shooting",
+          "creation"
+        ],
+        "missingPreferenceFamilies": [
+          "wing",
+          "defense"
+        ],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 52.4,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 30.3,
+          "explosivenessScore": 41.5,
+          "shootingDrillScore": 82.1,
+          "tags": [
+            "冲刺快",
+            "投篮训练高效",
+            "三分训练高效"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "labaron-philon-jr",
+          "name": "Labaron Philon Jr.",
+          "localNameZh": "小拉巴伦 菲隆",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 18,
+          "finalScore": 87.273,
+          "rawModelScore": 84.653,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 30.3,
+            "explosivenessScore": 41.5,
+            "shootingDrillScore": 82.1,
+            "tags": [
+              "冲刺快",
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 24,
+          "finalScore": 87.476,
+          "rawModelScore": 84.856,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 59.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 34.6,
+            "explosivenessScore": 63.4,
+            "shootingDrillScore": 75.2,
+            "tags": [
+              "超长臂展",
+              "灵敏度好",
+              "投篮训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "isaiah-evans",
+          "name": "Isaiah Evans",
+          "localNameZh": "以赛亚 埃文斯",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 25,
+          "finalScore": 85.927,
+          "rawModelScore": 83.307,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "wing"
+          ],
+          "missingPreferenceFamilies": [
+            "creation",
+            "defense"
+          ],
+          "families": [
+            "guard",
+            "shooting",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 56.7,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 48.6,
+            "explosivenessScore": 26,
+            "shootingDrillScore": 84.3,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "positions": [
+            "SG",
+            "SF"
+          ],
+          "consensusRank": 28,
+          "finalScore": 81.606,
+          "rawModelScore": 78.146,
+          "dynamicPreferenceAdjustment": 2.71,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "wing",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 24,
+            "explosivenessScore": 66.9,
+            "shootingDrillScore": 73.5,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 77.567,
+          "rawModelScore": 77.287,
+          "dynamicPreferenceAdjustment": 0.28,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 30,
+          "finalScore": 76.77,
+          "rawModelScore": 75.35,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 8.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 22,
+      "team": "Philadelphia 76ers",
+      "baselinePlayer": "Dailyn Swain",
+      "baselineProspectId": "dailyn-swain",
+      "dynamicPlayer": "Isaiah Evans",
+      "dynamicProspectId": "isaiah-evans",
+      "scoreGapVsNext": 2.352,
+      "confidence": 84,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "ready guard",
+          "bench creation",
+          "shooting"
+        ],
+        "priorityTags": [
+          "primary guard",
+          "shooter",
+          "maturity",
+          "forward",
+          "size",
+          "defense"
+        ],
+        "riskTolerance": 48,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "guard",
+          "shooting",
+          "wing",
+          "creation",
+          "defense",
+          "size"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、投射/空间、锋线、创造/得分、防守、尺寸",
+        "sourceEvidenceNotes": [
+          "Athletic p22: powerful four with athleticism/strength/defense; ESPN p22: downhill and defensive upside."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "isaiah-evans",
+        "name": "Isaiah Evans",
+        "localNameZh": "以赛亚 埃文斯",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 25,
+        "finalScore": 87.475,
+        "rawModelScore": 84.575,
+        "dynamicPreferenceAdjustment": 2.15,
+        "featureAdjustment": 0.75,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "shooting",
+          "wing",
+          "size"
+        ],
+        "missingPreferenceFamilies": [
+          "creation",
+          "defense"
+        ],
+        "families": [
+          "guard",
+          "shooting",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 56.7,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 48.6,
+          "explosivenessScore": 26,
+          "shootingDrillScore": 84.3,
+          "tags": [
+            "投篮训练高效",
+            "三分训练高效"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "dailyn-swain",
+        "name": "Dailyn Swain",
+        "localNameZh": "戴林 斯温",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 23,
+        "finalScore": 85.123,
+        "rawModelScore": 83.673,
+        "dynamicPreferenceAdjustment": 1.45,
+        "featureAdjustment": 0,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 5,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "wing",
+          "defense",
+          "size"
+        ],
+        "missingPreferenceFamilies": [
+          "guard",
+          "shooting",
+          "creation"
+        ],
+        "families": [
+          "defense",
+          "feel",
+          "frontcourt",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 51.2,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 43.3,
+          "explosivenessScore": 37.3,
+          "shootingDrillScore": 69.5,
+          "tags": [
+            "投篮训练高效",
+            "三分训练高效"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "isaiah-evans",
+          "name": "Isaiah Evans",
+          "localNameZh": "以赛亚 埃文斯",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 25,
+          "finalScore": 87.475,
+          "rawModelScore": 84.575,
+          "dynamicPreferenceAdjustment": 2.15,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "wing",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "creation",
+            "defense"
+          ],
+          "families": [
+            "guard",
+            "shooting",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 56.7,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 48.6,
+            "explosivenessScore": 26,
+            "shootingDrillScore": 84.3,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 85.123,
+          "rawModelScore": 83.673,
+          "dynamicPreferenceAdjustment": 1.45,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 24,
+          "finalScore": 83.594,
+          "rawModelScore": 81.394,
+          "dynamicPreferenceAdjustment": 1.45,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 59.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 34.6,
+            "explosivenessScore": 63.4,
+            "shootingDrillScore": 75.2,
+            "tags": [
+              "超长臂展",
+              "灵敏度好",
+              "投篮训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 30,
+          "finalScore": 77.802,
+          "rawModelScore": 76.102,
+          "dynamicPreferenceAdjustment": 2.15,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "creation",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "wing",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 8.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 27,
+          "finalScore": 74.192,
+          "rawModelScore": 74.692,
+          "dynamicPreferenceAdjustment": 0,
+          "featureAdjustment": -0.5,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "wing",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting",
+            "creation",
+            "defense"
+          ],
+          "families": [
+            "feel",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 58.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 61,
+            "explosivenessScore": 78.9,
+            "shootingDrillScore": 26.5,
+            "tags": [
+              "强原地爆发",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 26,
+          "finalScore": 72.744,
+          "rawModelScore": 72.094,
+          "dynamicPreferenceAdjustment": 0,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting",
+            "wing",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 58,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 83.3,
+            "explosivenessScore": 16.9,
+            "shootingDrillScore": 67.6,
+            "tags": [
+              "高摸高",
+              "国际/非美国地区"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 23,
+      "team": "Atlanta Hawks",
+      "baselinePlayer": "Ebuka Okorie",
+      "baselineProspectId": "ebuka-okorie",
+      "dynamicPlayer": "Dailyn Swain",
+      "dynamicProspectId": "dailyn-swain",
+      "scoreGapVsNext": 0.837,
+      "confidence": 71,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "guard defense",
+          "playmaking",
+          "depth"
+        ],
+        "priorityTags": [
+          "primary guard",
+          "defense",
+          "pace"
+        ],
+        "riskTolerance": 64,
+        "needConfidenceCoefficient": 0.35,
+        "preferenceLevel": "弱偏好：只能作为破平项",
+        "preferenceFamilies": [
+          "guard",
+          "creation",
+          "defense"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、创造/得分、防守",
+        "sourceEvidenceNotes": [
+          "Athletic p8: lead guard need but centers heard more, trade-down explored; ESPN p8/p23: center need and wing-shooter/flexibility clues."
+        ],
+        "previousTeamSelections": [
+          {
+            "pick": 8,
+            "prospectId": "aday-mara",
+            "name": "Aday Mara",
+            "positions": [
+              "C"
+            ],
+            "families": [
+              "defense",
+              "frontcourt",
+              "size"
+            ]
+          }
+        ],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "dailyn-swain",
+        "name": "Dailyn Swain",
+        "localNameZh": "戴林 斯温",
+        "positions": [
+          "SF",
+          "PF"
+        ],
+        "consensusRank": 23,
+        "finalScore": 77.001,
+        "rawModelScore": 77.407,
+        "dynamicPreferenceAdjustment": -0.245,
+        "featureAdjustment": 0,
+        "sequencingAdjustment": -0.161,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "defense"
+        ],
+        "missingPreferenceFamilies": [
+          "guard",
+          "creation"
+        ],
+        "families": [
+          "defense",
+          "feel",
+          "frontcourt",
+          "size",
+          "wing"
+        ],
+        "featureReference": {
+          "referenceScore": 51.2,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 43.3,
+          "explosivenessScore": 37.3,
+          "shootingDrillScore": 69.5,
+          "tags": [
+            "投篮训练高效",
+            "三分训练高效"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "ebuka-okorie",
+        "name": "Ebuka Okorie",
+        "localNameZh": "埃布卡 奥科里",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 24,
+        "finalScore": 76.164,
+        "rawModelScore": 75.548,
+        "dynamicPreferenceAdjustment": 0.49,
+        "featureAdjustment": 0,
+        "sequencingAdjustment": 0.126,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "creation"
+        ],
+        "missingPreferenceFamilies": [
+          "defense"
+        ],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 59.3,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 34.6,
+          "explosivenessScore": 63.4,
+          "shootingDrillScore": 75.2,
+          "tags": [
+            "超长臂展",
+            "灵敏度好",
+            "投篮训练高效",
+            "低年级"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "dailyn-swain",
+          "name": "Dailyn Swain",
+          "localNameZh": "戴林 斯温",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 23,
+          "finalScore": 77.001,
+          "rawModelScore": 77.407,
+          "dynamicPreferenceAdjustment": -0.245,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": -0.161,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "feel",
+            "frontcourt",
+            "size",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 51.2,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 43.3,
+            "explosivenessScore": 37.3,
+            "shootingDrillScore": 69.5,
+            "tags": [
+              "投篮训练高效",
+              "三分训练高效"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 24,
+          "finalScore": 76.164,
+          "rawModelScore": 75.548,
+          "dynamicPreferenceAdjustment": 0.49,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0.126,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 59.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 34.6,
+            "explosivenessScore": 63.4,
+            "shootingDrillScore": 75.2,
+            "tags": [
+              "超长臂展",
+              "灵敏度好",
+              "投篮训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 22,
+          "finalScore": 70.429,
+          "rawModelScore": 70.635,
+          "dynamicPreferenceAdjustment": -0.245,
+          "featureAdjustment": 0.2,
+          "sequencingAdjustment": -0.161,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 5,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 40.8,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": null,
+            "shootingDrillScore": 25.1,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 26,
+          "finalScore": 67.914,
+          "rawModelScore": 67.754,
+          "dynamicPreferenceAdjustment": -0.245,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": -0.245,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "defense"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 58,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 83.3,
+            "explosivenessScore": 16.9,
+            "shootingDrillScore": 67.6,
+            "tags": [
+              "高摸高",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "positions": [
+            "SG",
+            "SF"
+          ],
+          "consensusRank": 28,
+          "finalScore": 67.21,
+          "rawModelScore": 66.552,
+          "dynamicPreferenceAdjustment": 0.49,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0.168,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "creation"
+          ],
+          "missingPreferenceFamilies": [
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 24,
+            "explosivenessScore": 66.9,
+            "shootingDrillScore": 73.5,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 27,
+          "finalScore": 64.711,
+          "rawModelScore": 65.722,
+          "dynamicPreferenceAdjustment": -1.015,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0.004,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "guard",
+            "creation",
+            "defense"
+          ],
+          "families": [
+            "feel",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 58.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 61,
+            "explosivenessScore": 78.9,
+            "shootingDrillScore": 26.5,
+            "tags": [
+              "强原地爆发",
+              "低年级"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 24,
+      "team": "New York Knicks",
+      "baselinePlayer": "Isaiah Evans",
+      "baselineProspectId": "isaiah-evans",
+      "dynamicPlayer": "Ebuka Okorie",
+      "dynamicProspectId": "ebuka-okorie",
+      "scoreGapVsNext": -0.189,
+      "confidence": 74,
+      "tieBreakApplied": true,
+      "dynamicParameters": {
+        "needs": [
+          "bench guard",
+          "shooting",
+          "toughness"
+        ],
+        "priorityTags": [
+          "shooter",
+          "maturity",
+          "decision maker",
+          "frontcourt",
+          "size",
+          "defense"
+        ],
+        "riskTolerance": 42,
+        "needConfidenceCoefficient": 1,
+        "preferenceLevel": "强偏好：可推动同档选择",
+        "preferenceFamilies": [
+          "guard",
+          "shooting",
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "preferenceFamilyLabel": "后卫/持球、投射/空间、前场/内线、防守、尺寸",
+        "sourceEvidenceNotes": [
+          "Athletic p24: backup center with toughness; ESPN p24: center depth via size/shooting."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "ebuka-okorie",
+        "name": "Ebuka Okorie",
+        "localNameZh": "埃布卡 奥科里",
+        "positions": [
+          "PG",
+          "SG"
+        ],
+        "consensusRank": 24,
+        "finalScore": 81.652,
+        "rawModelScore": 80.622,
+        "dynamicPreferenceAdjustment": 0.28,
+        "featureAdjustment": 0.75,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 4,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "guard",
+          "shooting"
+        ],
+        "missingPreferenceFamilies": [
+          "frontcourt",
+          "defense",
+          "size"
+        ],
+        "families": [
+          "creation",
+          "guard",
+          "shooting"
+        ],
+        "featureReference": {
+          "referenceScore": 59.3,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 34.6,
+          "explosivenessScore": 63.4,
+          "shootingDrillScore": 75.2,
+          "tags": [
+            "超长臂展",
+            "灵敏度好",
+            "投篮训练高效",
+            "低年级"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "ebuka-okorie",
+          "name": "Ebuka Okorie",
+          "localNameZh": "埃布卡 奥科里",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 24,
+          "finalScore": 81.652,
+          "rawModelScore": 80.622,
+          "dynamicPreferenceAdjustment": 0.28,
+          "featureAdjustment": 0.75,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 59.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 34.6,
+            "explosivenessScore": 63.4,
+            "shootingDrillScore": 75.2,
+            "tags": [
+              "超长臂展",
+              "灵敏度好",
+              "投篮训练高效",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 26,
+          "finalScore": 81.841,
+          "rawModelScore": 79.321,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 58,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 83.3,
+            "explosivenessScore": 16.9,
+            "shootingDrillScore": 67.6,
+            "tags": [
+              "高摸高",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "koa-peat",
+          "name": "Koa Peat",
+          "localNameZh": "科阿 皮特",
+          "positions": [
+            "SF",
+            "PF"
+          ],
+          "consensusRank": 27,
+          "finalScore": 82.366,
+          "rawModelScore": 82.586,
+          "dynamicPreferenceAdjustment": 0.28,
+          "featureAdjustment": -0.5,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting",
+            "defense"
+          ],
+          "families": [
+            "feel",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 58.3,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 61,
+            "explosivenessScore": 78.9,
+            "shootingDrillScore": 26.5,
+            "tags": [
+              "强原地爆发",
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 30,
+          "finalScore": 80.082,
+          "rawModelScore": 78.662,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "guard",
+            "shooting",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "defense"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 8.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 29,
+          "finalScore": 75.118,
+          "rawModelScore": 73.098,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": 0.15,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 57.5,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 28.1,
+            "shootingDrillScore": 25,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "jayden-quaintance",
+          "name": "Jayden Quaintance",
+          "localNameZh": "杰登 昆坦斯",
+          "positions": [
+            "PF",
+            "C"
+          ],
+          "consensusRank": 22,
+          "finalScore": 69.144,
+          "rawModelScore": 67.574,
+          "dynamicPreferenceAdjustment": 1.87,
+          "featureAdjustment": -0.3,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 17,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "defense",
+            "size"
+          ],
+          "missingPreferenceFamilies": [
+            "guard",
+            "shooting"
+          ],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 40.8,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": null,
+            "shootingDrillScore": 25.1,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 26,
+      "team": "Denver Nuggets",
+      "baselinePlayer": "Tarris Reed Jr.",
+      "baselineProspectId": "tarris-reed-jr",
+      "dynamicPlayer": "Henri Veesaar",
+      "dynamicProspectId": "henri-veesaar",
+      "scoreGapVsNext": 0.806,
+      "confidence": 63,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "frontcourt depth",
+          "passing feel",
+          "rebounding"
+        ],
+        "priorityTags": [
+          "connector",
+          "rebounder",
+          "feel"
+        ],
+        "riskTolerance": 46,
+        "needConfidenceCoefficient": 0.35,
+        "preferenceLevel": "弱偏好：只能作为破平项",
+        "preferenceFamilies": [
+          "frontcourt"
+        ],
+        "preferenceFamilyLabel": "前场/内线",
+        "sourceEvidenceNotes": [
+          "Athletic p26: second ballhandler behind Jamal Murray; ESPN p26: more athletic along frontline."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "henri-veesaar",
+        "name": "Henri Veesaar",
+        "localNameZh": "亨利 维萨尔",
+        "positions": [
+          "C"
+        ],
+        "consensusRank": 26,
+        "finalScore": 68.726,
+        "rawModelScore": 67.096,
+        "dynamicPreferenceAdjustment": 0.98,
+        "featureAdjustment": 0.65,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 4,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "frontcourt"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "frontcourt",
+          "size"
+        ],
+        "featureReference": {
+          "referenceScore": 58,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 83.3,
+          "explosivenessScore": 16.9,
+          "shootingDrillScore": 67.6,
+          "tags": [
+            "高摸高",
+            "国际/非美国地区"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": {
+        "rankWithinPick": 2,
+        "prospectId": "tarris-reed-jr",
+        "name": "Tarris Reed Jr.",
+        "localNameZh": "小塔里斯 里德",
+        "positions": [
+          "C"
+        ],
+        "consensusRank": 29,
+        "finalScore": 67.92,
+        "rawModelScore": 66.29,
+        "dynamicPreferenceAdjustment": 0.98,
+        "featureAdjustment": 0.65,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "frontcourt"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "frontcourt",
+          "size"
+        ],
+        "featureReference": {
+          "referenceScore": 57.5,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 90.3,
+          "explosivenessScore": 28.1,
+          "shootingDrillScore": 25,
+          "tags": [
+            "超长臂展",
+            "高摸高"
+          ]
+        }
+      },
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "henri-veesaar",
+          "name": "Henri Veesaar",
+          "localNameZh": "亨利 维萨尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 26,
+          "finalScore": 68.726,
+          "rawModelScore": 67.096,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 58,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 83.3,
+            "explosivenessScore": 16.9,
+            "shootingDrillScore": 67.6,
+            "tags": [
+              "高摸高",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 29,
+          "finalScore": 67.92,
+          "rawModelScore": 66.29,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 57.5,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 28.1,
+            "shootingDrillScore": 25,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "sergio-de-larrea",
+          "name": "Sergio De Larrea",
+          "localNameZh": "塞尔吉奥 德拉雷亚",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 30,
+          "finalScore": 63.572,
+          "rawModelScore": 65.037,
+          "dynamicPreferenceAdjustment": -1.015,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 8.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "meleek-thomas",
+          "name": "Meleek Thomas",
+          "localNameZh": "马利克 托马斯",
+          "positions": [
+            "SG",
+            "SF"
+          ],
+          "consensusRank": 28,
+          "finalScore": 55.654,
+          "rawModelScore": 56.669,
+          "dynamicPreferenceAdjustment": -1.015,
+          "featureAdjustment": 0,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 9,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "wing"
+          ],
+          "featureReference": {
+            "referenceScore": 52.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 24,
+            "explosivenessScore": 66.9,
+            "shootingDrillScore": 73.5,
+            "tags": [
+              "低年级"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "mark-mitchell",
+          "name": "Mark Mitchell",
+          "localNameZh": "马克 米切尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 33,
+          "finalScore": 56.24,
+          "rawModelScore": 55.71,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "数据不足"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "malachi-moreno",
+          "name": "Malachi Moreno",
+          "localNameZh": "马拉奇 莫雷诺",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 34,
+          "finalScore": 55.927,
+          "rawModelScore": 54.747,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.2,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 42.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90,
+            "explosivenessScore": 3.5,
+            "shootingDrillScore": 30.6,
+            "tags": [
+              "高摸高"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pick": 29,
+      "team": "Cleveland Cavaliers",
+      "baselinePlayer": "Henri Veesaar",
+      "baselineProspectId": "henri-veesaar",
+      "dynamicPlayer": "Tarris Reed Jr.",
+      "dynamicProspectId": "tarris-reed-jr",
+      "scoreGapVsNext": 10.279,
+      "confidence": 83,
+      "tieBreakApplied": false,
+      "dynamicParameters": {
+        "needs": [
+          "center depth",
+          "size",
+          "finishing"
+        ],
+        "priorityTags": [
+          "rim protector",
+          "size",
+          "finisher"
+        ],
+        "riskTolerance": 45,
+        "needConfidenceCoefficient": 0.35,
+        "preferenceLevel": "弱偏好：只能作为破平项",
+        "preferenceFamilies": [
+          "frontcourt",
+          "size"
+        ],
+        "preferenceFamilyLabel": "前场/内线、尺寸",
+        "sourceEvidenceNotes": [
+          "ESPN p29: frontcourt depth; Athletic p29: bench offense/shooting if guard salary is cut."
+        ],
+        "previousTeamSelections": [],
+        "schoolStatePreferenceApplied": false,
+        "schoolStatePreferenceReason": "no data-backed team school/state priors configured"
+      },
+      "selectedDynamicCandidate": {
+        "rankWithinPick": 1,
+        "prospectId": "tarris-reed-jr",
+        "name": "Tarris Reed Jr.",
+        "localNameZh": "小塔里斯 里德",
+        "positions": [
+          "C"
+        ],
+        "consensusRank": 29,
+        "finalScore": 72.589,
+        "rawModelScore": 70.959,
+        "dynamicPreferenceAdjustment": 0.98,
+        "featureAdjustment": 0.65,
+        "sequencingAdjustment": 0,
+        "schoolStateAdjustment": 0,
+        "riskPenalty": 0,
+        "pickValueAdjustment": 0,
+        "overlapFamilies": [
+          "frontcourt",
+          "size"
+        ],
+        "missingPreferenceFamilies": [],
+        "families": [
+          "defense",
+          "frontcourt",
+          "size"
+        ],
+        "featureReference": {
+          "referenceScore": 57.5,
+          "referenceTier": "C-watch-parameter-reference",
+          "physicalToolsScore": 90.3,
+          "explosivenessScore": 28.1,
+          "shootingDrillScore": 25,
+          "tags": [
+            "超长臂展",
+            "高摸高"
+          ]
+        }
+      },
+      "previousBaselineCandidateScoreUnderDynamicModel": null,
+      "topCandidates": [
+        {
+          "rankWithinPick": 1,
+          "prospectId": "tarris-reed-jr",
+          "name": "Tarris Reed Jr.",
+          "localNameZh": "小塔里斯 里德",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 29,
+          "finalScore": 72.589,
+          "rawModelScore": 70.959,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 57.5,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 90.3,
+            "explosivenessScore": 28.1,
+            "shootingDrillScore": 25,
+            "tags": [
+              "超长臂展",
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 2,
+          "prospectId": "mark-mitchell",
+          "name": "Mark Mitchell",
+          "localNameZh": "马克 米切尔",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 33,
+          "finalScore": 62.31,
+          "rawModelScore": 61.78,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "数据不足"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 3,
+          "prospectId": "malachi-moreno",
+          "name": "Malachi Moreno",
+          "localNameZh": "马拉奇 莫雷诺",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 34,
+          "finalScore": 61.996,
+          "rawModelScore": 60.816,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.2,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 4,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 42.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": 90,
+            "explosivenessScore": 3.5,
+            "shootingDrillScore": 30.6,
+            "tags": [
+              "高摸高"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 4,
+          "prospectId": "ugonna-onyenso",
+          "name": "Ugonna Onyenso",
+          "localNameZh": "乌戈纳 奥尼恩索",
+          "positions": [
+            "C"
+          ],
+          "consensusRank": 41,
+          "finalScore": 58.642,
+          "rawModelScore": 57.012,
+          "dynamicPreferenceAdjustment": 0.98,
+          "featureAdjustment": 0.65,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "missingPreferenceFamilies": [],
+          "families": [
+            "defense",
+            "frontcourt",
+            "size"
+          ],
+          "featureReference": {
+            "referenceScore": 54.4,
+            "referenceTier": "C-watch-parameter-reference",
+            "physicalToolsScore": 96,
+            "explosivenessScore": 9.9,
+            "shootingDrillScore": 55.1,
+            "tags": [
+              "超长臂展",
+              "高摸高",
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 5,
+          "prospectId": "jack-kayil",
+          "name": "Jack Kayil",
+          "localNameZh": "杰克 卡伊尔",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 35,
+          "finalScore": 55.153,
+          "rawModelScore": 56.618,
+          "dynamicPreferenceAdjustment": -1.015,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting",
+            "upside_asset"
+          ],
+          "featureReference": {
+            "referenceScore": 8.5,
+            "referenceTier": "D-low-parameter-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区"
+            ]
+          }
+        },
+        {
+          "rankWithinPick": 6,
+          "prospectId": "mohammad-amini",
+          "name": "Mohammad Amini",
+          "localNameZh": "穆罕默德 阿米尼",
+          "positions": [
+            "PG",
+            "SG"
+          ],
+          "consensusRank": 36,
+          "finalScore": 53.999,
+          "rawModelScore": 55.464,
+          "dynamicPreferenceAdjustment": -1.015,
+          "featureAdjustment": -0.45,
+          "sequencingAdjustment": 0,
+          "schoolStateAdjustment": 0,
+          "riskPenalty": 0,
+          "pickValueAdjustment": 0,
+          "overlapFamilies": [],
+          "missingPreferenceFamilies": [
+            "frontcourt",
+            "size"
+          ],
+          "families": [
+            "creation",
+            "guard",
+            "shooting"
+          ],
+          "featureReference": {
+            "referenceScore": 4,
+            "referenceTier": "D-incomplete-signal",
+            "physicalToolsScore": null,
+            "explosivenessScore": null,
+            "shootingDrillScore": null,
+            "tags": [
+              "国际/非美国地区",
+              "数据不足"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "model": "deepseek-v4-pro",
+      "modelLabel": "deepseek-v4-pro[1m]",
+      "usage": {
+        "prompt_tokens": 6062,
+        "completion_tokens": 3361,
+        "total_tokens": 9423,
+        "prompt_tokens_details": {
+          "cached_tokens": 6016
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2101
+        },
+        "prompt_cache_hit_tokens": 6016,
+        "prompt_cache_miss_tokens": 46
+      },
+      "rawContent": "{\n  \"round\": 1,\n  \"title\": \"动态选秀审计：第7、10、11、12顺位变动分析\",\n  \"overallVerdict\": \"动态变动部分合理，但部分顺位依赖不完整数据或过高参数权重，存在脆弱性。第7顺位合理，第10顺位因前面选秀导致连锁反应合理但选择存疑，第11顺位因参数风险而不稳定，第12顺位数据缺失无法审计。\",\n  \"caseReviews\": [\n    {\n      \"pick\": 7,\n      \"team\": \"Sacramento Kings\",\n      \"changedFrom\": \"Mikel Brown Jr.\",\n      \"changedTo\": \"Kingston Flemings\",\n      \"reasonability\": \"reasonable\",\n      \"evidence\": [\n        \"Flemings完全匹配球队偏好家族(guard, creation, defense)，而Brown Jr.缺失defense标签。\",\n        \"Flemings体测和投篮数据完整(B级参数参考)，Brown Jr.数据严重不足(D级)，模型给予Flemings正向特征调整，Brown Jr.负向调整。\",\n        \"偏好调整分差(3.55 vs 1.4)合理反映了对防守能力的重视。\",\n        \"最终分差2.775，置信度96%，选择稳定。\"\n      ],\n      \"parameterConcern\": \"Brown Jr.的D级参考数据导致其分数依赖大量空缺值，可能在不同数据补全策略下产生波动。\",\n      \"rerunSuggestion\": \"测试Brown Jr.若补充完整数据(例如选秀后体测)后的分数变化，评估模型对缺失数据的敏感性。\"\n    },\n    {\n      \"pick\": 10,\n      \"team\": \"Milwaukee Bucks\",\n      \"changedFrom\": \"Kingston Flemings\",\n      \"changedTo\": \"Yaxel Lendeborg\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Flemings已在第7顺位被选走，动态板正确排除，变动源于连锁反应。\",\n        \"Lendeborg与Lopez分数接近(91.614 vs 90.274)，分差仅1.34，置信度84%。\",\n        \"Lendeborg缺失球队偏好的guard和creation家族，但提供了wing/frontcourt/defense。\",\n        \"Lendeborg爆发力得分极低(6.3)，与球队风险承受度(53)可能不匹配，但模型未施加显式风险惩罚。\"\n      ],\n      \"parameterConcern\": \"未针对极端身体素质不平衡(如极低爆发力)施加风险惩罚；偏好调整仅基于家族重叠，可能未充分量化球队对即战力的需求。\",\n      \"rerunSuggestion\": \"为低爆发力或位置适配度不足的球员引入风险惩罚项，或将非核心偏好家族的权重降低。\"\n    },\n    {\n      \"pick\": 11,\n      \"team\": \"Golden State Warriors\",\n      \"changedFrom\": \"Nate Ament\",\n      \"changedTo\": \"Mikel Brown Jr.\",\n      \"reasonability\": \"parameter-risk\",\n      \"evidence\": [\n        \"球队偏好权重仅0.4(弱偏好)，但Brown Jr.获得的选秀价值调整(pickValueAdjustment)高达4.05，成为反超主因。\",\n        \"Brown Jr.数据完整度极低(D级参考)，负特征调整(-0.45)，而Ament有稳定数据(B级)和正向特征调整。\",\n        \"Brown Jr.的原始模型分低于Ament(80.4 vs 77.106)，调整后总分81.07 vs 78.406，分差2.664，但置信度仅77%。\",\n        \"弱偏好下过大调整可能扭曲模型，使结果过度依赖受限信号。\"\n      ],\n      \"parameterConcern\": \"pickValueAdjustment在弱偏好情形下权重过高，且对数据不完整球员缺乏下限保护。\",\n      \"rerunSuggestion\": \"当偏好等级为‘弱偏好’时，限制pickValueAdjustment上限；增加数据完整度门槛，如D级参考球员的调整项可设上限。\"\n    },\n    {\n      \"pick\": 12,\n      \"team\": \"Unknown\",\n      \"changedFrom\": \"\",\n      \"changedTo\": \"\",\n      \"reasonability\": \"needs-rerun\",\n      \"evidence\": [\n        \"输入数据截断，未提供第12顺位的完整候选及变动信息，无法审计。\"\n      ],\n      \"parameterConcern\": \"N/A\",\n      \"rerunSuggestion\": \"重新生成完整输入数据，确保包含第12顺位动态选择详情。\"\n    }\n  ],\n  \"parameterRecommendations\": [\n    {\n      \"scope\": \"pickValueAdjustment\",\n      \"recommendation\": \"当球队偏好权重低于0.5时，将pickValueAdjustment幅度限制在2.0以内，避免弱信号过度放大。\",\n      \"reason\": \"第11顺位中4.05的调整在弱偏好下不合理，需防止因空缺数据或位置稀缺导致的非理性选择。\"\n    },\n    {\n      \"scope\": \"riskPenalty\",\n      \"recommendation\": \"引入身体素质风险惩罚项，例如对爆发力得分低于10%分位的球员施加-1.5～-3.0的调整，尤其在前场球员中。\",\n      \"reason\": \"第10顺位Lendeborg爆发力极低，可能与球队风险偏好冲突，但模型未体现。\"\n    },\n    {\n      \"scope\": \"featureReferenceCompleteness\",\n      \"recommendation\": \"对特征参考层级为D的球员施加额外不确定性惩罚，或在偏好调整中考虑数据置信因子。\",\n      \"reason\": \"Brown Jr.的D级数据在第7和11顺位均产生显著影响，缺乏稳健性。\"\n    }\n  ],\n  \"noManualPredictionConfirmation\": true\n}",
+      "parseError": null,
+      "parsed": {
+        "round": 1,
+        "title": "动态选秀审计：第7、10、11、12顺位变动分析",
+        "overallVerdict": "动态变动部分合理，但部分顺位依赖不完整数据或过高参数权重，存在脆弱性。第7顺位合理，第10顺位因前面选秀导致连锁反应合理但选择存疑，第11顺位因参数风险而不稳定，第12顺位数据缺失无法审计。",
+        "caseReviews": [
+          {
+            "pick": 7,
+            "team": "Sacramento Kings",
+            "changedFrom": "Mikel Brown Jr.",
+            "changedTo": "Kingston Flemings",
+            "reasonability": "reasonable",
+            "evidence": [
+              "Flemings完全匹配球队偏好家族(guard, creation, defense)，而Brown Jr.缺失defense标签。",
+              "Flemings体测和投篮数据完整(B级参数参考)，Brown Jr.数据严重不足(D级)，模型给予Flemings正向特征调整，Brown Jr.负向调整。",
+              "偏好调整分差(3.55 vs 1.4)合理反映了对防守能力的重视。",
+              "最终分差2.775，置信度96%，选择稳定。"
+            ],
+            "parameterConcern": "Brown Jr.的D级参考数据导致其分数依赖大量空缺值，可能在不同数据补全策略下产生波动。",
+            "rerunSuggestion": "测试Brown Jr.若补充完整数据(例如选秀后体测)后的分数变化，评估模型对缺失数据的敏感性。"
+          },
+          {
+            "pick": 10,
+            "team": "Milwaukee Bucks",
+            "changedFrom": "Kingston Flemings",
+            "changedTo": "Yaxel Lendeborg",
+            "reasonability": "fragile",
+            "evidence": [
+              "Flemings已在第7顺位被选走，动态板正确排除，变动源于连锁反应。",
+              "Lendeborg与Lopez分数接近(91.614 vs 90.274)，分差仅1.34，置信度84%。",
+              "Lendeborg缺失球队偏好的guard和creation家族，但提供了wing/frontcourt/defense。",
+              "Lendeborg爆发力得分极低(6.3)，与球队风险承受度(53)可能不匹配，但模型未施加显式风险惩罚。"
+            ],
+            "parameterConcern": "未针对极端身体素质不平衡(如极低爆发力)施加风险惩罚；偏好调整仅基于家族重叠，可能未充分量化球队对即战力的需求。",
+            "rerunSuggestion": "为低爆发力或位置适配度不足的球员引入风险惩罚项，或将非核心偏好家族的权重降低。"
+          },
+          {
+            "pick": 11,
+            "team": "Golden State Warriors",
+            "changedFrom": "Nate Ament",
+            "changedTo": "Mikel Brown Jr.",
+            "reasonability": "parameter-risk",
+            "evidence": [
+              "球队偏好权重仅0.4(弱偏好)，但Brown Jr.获得的选秀价值调整(pickValueAdjustment)高达4.05，成为反超主因。",
+              "Brown Jr.数据完整度极低(D级参考)，负特征调整(-0.45)，而Ament有稳定数据(B级)和正向特征调整。",
+              "Brown Jr.的原始模型分低于Ament(80.4 vs 77.106)，调整后总分81.07 vs 78.406，分差2.664，但置信度仅77%。",
+              "弱偏好下过大调整可能扭曲模型，使结果过度依赖受限信号。"
+            ],
+            "parameterConcern": "pickValueAdjustment在弱偏好情形下权重过高，且对数据不完整球员缺乏下限保护。",
+            "rerunSuggestion": "当偏好等级为‘弱偏好’时，限制pickValueAdjustment上限；增加数据完整度门槛，如D级参考球员的调整项可设上限。"
+          },
+          {
+            "pick": 12,
+            "team": "Unknown",
+            "changedFrom": "",
+            "changedTo": "",
+            "reasonability": "needs-rerun",
+            "evidence": [
+              "输入数据截断，未提供第12顺位的完整候选及变动信息，无法审计。"
+            ],
+            "parameterConcern": "N/A",
+            "rerunSuggestion": "重新生成完整输入数据，确保包含第12顺位动态选择详情。"
+          }
+        ],
+        "parameterRecommendations": [
+          {
+            "scope": "pickValueAdjustment",
+            "recommendation": "当球队偏好权重低于0.5时，将pickValueAdjustment幅度限制在2.0以内，避免弱信号过度放大。",
+            "reason": "第11顺位中4.05的调整在弱偏好下不合理，需防止因空缺数据或位置稀缺导致的非理性选择。"
+          },
+          {
+            "scope": "riskPenalty",
+            "recommendation": "引入身体素质风险惩罚项，例如对爆发力得分低于10%分位的球员施加-1.5～-3.0的调整，尤其在前场球员中。",
+            "reason": "第10顺位Lendeborg爆发力极低，可能与球队风险偏好冲突，但模型未体现。"
+          },
+          {
+            "scope": "featureReferenceCompleteness",
+            "recommendation": "对特征参考层级为D的球员施加额外不确定性惩罚，或在偏好调整中考虑数据置信因子。",
+            "reason": "Brown Jr.的D级数据在第7和11顺位均产生显著影响，缺乏稳健性。"
+          }
+        ],
+        "noManualPredictionConfirmation": true
+      }
+    },
+    {
+      "round": 2,
+      "model": "deepseek-v4-pro",
+      "modelLabel": "deepseek-v4-pro[1m]",
+      "usage": {
+        "prompt_tokens": 6129,
+        "completion_tokens": 4448,
+        "total_tokens": 10577,
+        "prompt_tokens_details": {
+          "cached_tokens": 6016
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3273
+        },
+        "prompt_cache_hit_tokens": 6016,
+        "prompt_cache_miss_tokens": 113
+      },
+      "rawContent": "{\n  \"round\": 1,\n  \"title\": \"Middle and Late First Round Audit (Picks 15–29)\",\n  \"overallVerdict\": \"Most changes follow sequential removal logically, but picks 15 and 19 exhibit fragility due to over‑weighting of pick‑value and feature adjustments, causing selections that contradict team needs or marginal score advantages. Cascade effects (Graves falling to 16) are mathematically sound given the earlier change.\",\n  \"caseReviews\": [\n    {\n      \"pick\": 15,\n      \"team\": \"Chicago Bulls\",\n      \"changedFrom\": \"Allen Graves\",\n      \"changedTo\": \"Nate Ament\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Score gap vs next candidate only -0.64, tie‑break applied; Graves had higher final model score but lost due to pick‑value adjustment (+6 for consensus rank 9 vs 0 for rank 17).\",\n        \"Bulls already drafted Caleb Wilson (frontcourt/defense) at pick 4; adding another forward may create redundancy despite shooting/upside need.\",\n        \"Need for shooting and upside is reasonable, but defensive needs might be under‑prioritised; Ament misses the ‘defense’ preference family.\"\n      ],\n      \"parameterConcern\": \"Pick‑value adjustment heavily favours higher consensus rank, overriding a better fit score; tie‑break logic may be too sensitive to consensus rank differences.\",\n      \"rerunSuggestion\": \"Review pick‑value adjustment weight; consider capping or reducing its influence when score gap is minimal. Test tie‑break logic to prefer fit score over consensus rank.\"\n    },\n    {\n      \"pick\": 16,\n      \"team\": \"Memphis Grizzlies\",\n      \"changedFrom\": \"Hannes Steinbach\",\n      \"changedTo\": \"Allen Graves\",\n      \"reasonability\": \"reasonable\",\n      \"evidence\": [\n        \"Score gap 6.061 to next candidate indicates clear preference; baseline Steinbach not in dynamic top six.\",\n        \"Graves matches all preference families (frontcourt, defence, size) and fits alongside previous pick Cameron Boozer.\",\n        \"Team needs rim protection/bench size/defence are partially met by Graves’ defence and frontcourt families, even if not a pure rim protector.\"\n      ],\n      \"parameterConcern\": \"None; dynamic model shows consistent fit and scoring.\",\n      \"rerunSuggestion\": \"No rerun needed unless overall scoring weights change.\"\n    },\n    {\n      \"pick\": 19,\n      \"team\": \"Toronto Raptors\",\n      \"changedFrom\": \"Labaron Philon Jr.\",\n      \"changedTo\": \"Cameron Carr\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Team needs include creation and frontcourt; Carr does not match ‘creation’ family, while higher‑scoring wing Dailyn Swain (final 82.464) matches more families.\",\n        \"Carr’s selection driven by elite physical tools (feature adjustment +1.25 from A‑elite tier) and high raw score, yet he is neither a traditional big nor a primary creator.\",\n        \"Evidence notes explicitly mention long‑term center and creation; Carr’s profile (guard, wing, defence) covers length but not creation or frontcourt.\"\n      ],\n      \"parameterConcern\": \"Feature adjustment from A‑elite reference may overshadow need fit; need‑confidence coefficient of 1 might not sufficiently weight ‘creation’ for guards. Swain’s dynamic preference boost (+2.15) was not enough to overcome Carr’s raw/physical advantage.\",\n      \"rerunSuggestion\": \"Calibrate creation/frontcourt need weights; test whether Swain or a true forward gets a higher dynamic boost. Re‑evaluate feature adjustment cap to prevent physical outliers from dominating positional logic.\"\n    }\n  ],\n  \"parameterRecommendations\": [\n    {\n      \"scope\": \"pick-value-adjustment\",\n      \"recommendation\": \"Reduce weight or introduce a cap to prevent consensus ranking from overriding fit score in close calls.\",\n      \"reason\": \"Picks 15 and 19 show sensitivity to pick‑value adjustment; at 15, a higher consensus rank won despite a lower fit score, caused a cascade.\"\n    },\n    {\n      \"scope\": \"need-confidence-weighting\",\n      \"recommendation\": \"Re‑evaluate need vectors for teams like Toronto where stated needs (creation, frontcourt) may be under‑represented in guard prospects; consider increasing weight for missing critical needs.\",\n      \"reason\": \"Pick 19 shows Carr not covering creation, a primary need per sources, yet wins due to physical tools; dynamic preference boost for Swain (matching more needs) was insufficient.\"\n    },\n    {\n      \"scope\": \"feature-adjustment\",\n      \"recommendation\": \"Audit feature adjustment distribution; elite physical scores may over‑favour athletic prospects regardless of positional fit.\",\n      \"reason\": \"Carr’s selection benefited from an A‑elite reference tier adjustment of +1.25, which may not be proportional to other prospect scores and can distort team‑need alignment.\"\n    },\n    {\n      \"scope\": \"school-state-priors\",\n      \"recommendation\": \"Collect reliable data on team biases for schools/regions to enable future priors, as no such data is currently configured.\",\n      \"reason\": \"Guardrail policy mandates only data‑backed priors; currently none exist, limiting model’s ability to reflect known team tendencies.\"\n    }\n  ],\n  \"noManualPredictionConfirmation\": true\n}",
+      "parseError": null,
+      "parsed": {
+        "round": 1,
+        "title": "Middle and Late First Round Audit (Picks 15–29)",
+        "overallVerdict": "Most changes follow sequential removal logically, but picks 15 and 19 exhibit fragility due to over‑weighting of pick‑value and feature adjustments, causing selections that contradict team needs or marginal score advantages. Cascade effects (Graves falling to 16) are mathematically sound given the earlier change.",
+        "caseReviews": [
+          {
+            "pick": 15,
+            "team": "Chicago Bulls",
+            "changedFrom": "Allen Graves",
+            "changedTo": "Nate Ament",
+            "reasonability": "fragile",
+            "evidence": [
+              "Score gap vs next candidate only -0.64, tie‑break applied; Graves had higher final model score but lost due to pick‑value adjustment (+6 for consensus rank 9 vs 0 for rank 17).",
+              "Bulls already drafted Caleb Wilson (frontcourt/defense) at pick 4; adding another forward may create redundancy despite shooting/upside need.",
+              "Need for shooting and upside is reasonable, but defensive needs might be under‑prioritised; Ament misses the ‘defense’ preference family."
+            ],
+            "parameterConcern": "Pick‑value adjustment heavily favours higher consensus rank, overriding a better fit score; tie‑break logic may be too sensitive to consensus rank differences.",
+            "rerunSuggestion": "Review pick‑value adjustment weight; consider capping or reducing its influence when score gap is minimal. Test tie‑break logic to prefer fit score over consensus rank."
+          },
+          {
+            "pick": 16,
+            "team": "Memphis Grizzlies",
+            "changedFrom": "Hannes Steinbach",
+            "changedTo": "Allen Graves",
+            "reasonability": "reasonable",
+            "evidence": [
+              "Score gap 6.061 to next candidate indicates clear preference; baseline Steinbach not in dynamic top six.",
+              "Graves matches all preference families (frontcourt, defence, size) and fits alongside previous pick Cameron Boozer.",
+              "Team needs rim protection/bench size/defence are partially met by Graves’ defence and frontcourt families, even if not a pure rim protector."
+            ],
+            "parameterConcern": "None; dynamic model shows consistent fit and scoring.",
+            "rerunSuggestion": "No rerun needed unless overall scoring weights change."
+          },
+          {
+            "pick": 19,
+            "team": "Toronto Raptors",
+            "changedFrom": "Labaron Philon Jr.",
+            "changedTo": "Cameron Carr",
+            "reasonability": "fragile",
+            "evidence": [
+              "Team needs include creation and frontcourt; Carr does not match ‘creation’ family, while higher‑scoring wing Dailyn Swain (final 82.464) matches more families.",
+              "Carr’s selection driven by elite physical tools (feature adjustment +1.25 from A‑elite tier) and high raw score, yet he is neither a traditional big nor a primary creator.",
+              "Evidence notes explicitly mention long‑term center and creation; Carr’s profile (guard, wing, defence) covers length but not creation or frontcourt."
+            ],
+            "parameterConcern": "Feature adjustment from A‑elite reference may overshadow need fit; need‑confidence coefficient of 1 might not sufficiently weight ‘creation’ for guards. Swain’s dynamic preference boost (+2.15) was not enough to overcome Carr’s raw/physical advantage.",
+            "rerunSuggestion": "Calibrate creation/frontcourt need weights; test whether Swain or a true forward gets a higher dynamic boost. Re‑evaluate feature adjustment cap to prevent physical outliers from dominating positional logic."
+          }
+        ],
+        "parameterRecommendations": [
+          {
+            "scope": "pick-value-adjustment",
+            "recommendation": "Reduce weight or introduce a cap to prevent consensus ranking from overriding fit score in close calls.",
+            "reason": "Picks 15 and 19 show sensitivity to pick‑value adjustment; at 15, a higher consensus rank won despite a lower fit score, caused a cascade."
+          },
+          {
+            "scope": "need-confidence-weighting",
+            "recommendation": "Re‑evaluate need vectors for teams like Toronto where stated needs (creation, frontcourt) may be under‑represented in guard prospects; consider increasing weight for missing critical needs.",
+            "reason": "Pick 19 shows Carr not covering creation, a primary need per sources, yet wins due to physical tools; dynamic preference boost for Swain (matching more needs) was insufficient."
+          },
+          {
+            "scope": "feature-adjustment",
+            "recommendation": "Audit feature adjustment distribution; elite physical scores may over‑favour athletic prospects regardless of positional fit.",
+            "reason": "Carr’s selection benefited from an A‑elite reference tier adjustment of +1.25, which may not be proportional to other prospect scores and can distort team‑need alignment."
+          },
+          {
+            "scope": "school-state-priors",
+            "recommendation": "Collect reliable data on team biases for schools/regions to enable future priors, as no such data is currently configured.",
+            "reason": "Guardrail policy mandates only data‑backed priors; currently none exist, limiting model’s ability to reflect known team tendencies."
+          }
+        ],
+        "noManualPredictionConfirmation": true
+      }
+    },
+    {
+      "round": 3,
+      "model": "deepseek-v4-pro",
+      "modelLabel": "deepseek-v4-pro[1m]",
+      "usage": {
+        "prompt_tokens": 5473,
+        "completion_tokens": 3357,
+        "total_tokens": 8830,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1588
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5473
+      },
+      "rawContent": "{\n  \"round\": 3,\n  \"title\": \"Final parameter verdict\",\n  \"overallVerdict\": \"Thirteen changes vs baseline, driven by sequential removal and dynamic adjustments, are only partially sound. Pick-value adjustment and physical-tools over-weighting create fragile outcomes at picks 11, 15, and 19. Missing risk penalties for athletic outliers (pick 10) and low-confidence selections (picks 12, 26) further erode reliability. Parameter recalibration is essential before finalizing the board.\",\n  \"caseReviews\": [\n    {\n      \"pick\": 7,\n      \"team\": \"Sacramento Kings\",\n      \"changedFrom\": \"Mikel Brown Jr.\",\n      \"changedTo\": \"Kingston Flemings\",\n      \"reasonability\": \"reasonable\",\n      \"evidence\": [\n        \"Flemings fully matches preference families (guard, creation, defense) while Brown Jr. lacks defense.\",\n        \"High confidence (96%) and clear score gap (2.775) indicate robust outcome.\"\n      ],\n      \"parameterConcern\": \"Brown Jr.'s D‑level data causes score volatility under different imputation strategies.\",\n      \"rerunSuggestion\": \"Re‑run with completed data (post‑combine proxies) for Brown Jr. to test sensitivity.\"\n    },\n    {\n      \"pick\": 10,\n      \"team\": \"Milwaukee Bucks\",\n      \"changedFrom\": \"Kingston Flemings\",\n      \"changedTo\": \"Yaxel Lendeborg\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Lendeborg has extremely low explosiveness (6.3) yet no risk penalty is applied.\",\n        \"Score gap (1.34) and missing guard/creation families make selection dependent on defence-only fit.\"\n      ],\n      \"parameterConcern\": \"No penalty for severe athletic deficiencies; fitness with team risk tolerance (53) unverified.\",\n      \"rerunSuggestion\": \"Add a risk penalty for sub‑10th percentile athletic scores, especially for frontcourt players.\"\n    },\n    {\n      \"pick\": 11,\n      \"team\": \"Golden State Warriors\",\n      \"changedFrom\": \"Nate Ament\",\n      \"changedTo\": \"Mikel Brown Jr.\",\n      \"reasonability\": \"parameter-risk\",\n      \"evidence\": [\n        \"Pick‑value adjustment (+4.05) overwhelmed a weak team preference (0.4), flipping the choice.\",\n        \"Brown Jr. had incomplete data (D‑reference) and negative feature adjustment, yet won with 77% confidence.\"\n      ],\n      \"parameterConcern\": \"Pick‑value adjustment magnitude is unbounded; incomplete data candidates gain unrealistic boosts.\",\n      \"rerunSuggestion\": \"Cap pick‑value adjustment to 2.0 when preference weight < 0.5; introduce completeness penalty for D‑tier prospects.\"\n    },\n    {\n      \"pick\": 12,\n      \"team\": \"Oklahoma City Thunder\",\n      \"changedFrom\": \"Yaxel Lendeborg\",\n      \"changedTo\": \"Hannes Steinbach\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Score gap vs next candidate is negative (−0.034), tie‑break needed to justify selection.\",\n        \"Confidence only 75%; dynamic preference and feature adjustments barely push Steinbach ahead.\"\n      ],\n      \"parameterConcern\": \"Tie‑break logic may overvalue marginal feature/dynamic gains; selection near random noise.\",\n      \"rerunSuggestion\": \"Examine tie‑break weighting and re‑run with smoothed feature adjustments to see if choice holds.\"\n    },\n    {\n      \"pick\": 15,\n      \"team\": \"Chicago Bulls\",\n      \"changedFrom\": \"Allen Graves\",\n      \"changedTo\": \"Nate Ament\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Pick‑value adjustment (+6 for consensus rank) flipped a −0.64 tie‑break despite Graves’ higher raw fit.\",\n        \"Ament lacks the ‘defence’ family, creating redundancy with previous frontcourt pick (Caleb Wilson).\"\n      ],\n      \"parameterConcern\": \"Consensus rank dominates fit score in close calls; need‑confidence not sufficiently weighted.\",\n      \"rerunSuggestion\": \"Reduce pick‑value weight or cap it; test fit‑first tie‑break logic.\"\n    },\n    {\n      \"pick\": 16,\n      \"team\": \"Memphis Grizzlies\",\n      \"changedFrom\": \"Hannes Steinbach\",\n      \"changedTo\": \"Allen Graves\",\n      \"reasonability\": \"reasonable\",\n      \"evidence\": [\n        \"Score gap 6.061 and 91% confidence indicate a clear preference; Graves matches all desired families.\",\n        \"Selection follows naturally from pick 15’s cascade; no parameter concern.\"\n      ],\n      \"parameterConcern\": \"None.\",\n      \"rerunSuggestion\": \"No rerun needed unless overarching parameter weights change.\"\n    },\n    {\n      \"pick\": 19,\n      \"team\": \"Toronto Raptors\",\n      \"changedFrom\": \"Labaron Philon Jr.\",\n      \"changedTo\": \"Cameron Carr\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Carr does not meet primary needs (creation, frontcourt) but won via A‑elite physical tools (+1.25).\",\n        \"High‑fit prospect Dailyn Swain’s dynamic boost (+2.15) was insufficient to overcome Carr’s raw advantage.\"\n      ],\n      \"parameterConcern\": \"Feature adjustment for elite testing overshadows need alignment; creation need weight too low.\",\n      \"rerunSuggestion\": \"Increase creation/frontcourt need weights; cap feature adjustment to avoid physical outliers dominating.\"\n    },\n    {\n      \"pick\": 26,\n      \"team\": \"Denver Nuggets\",\n      \"changedFrom\": \"Tarris Reed Jr.\",\n      \"changedTo\": \"Henri Veesaar\",\n      \"reasonability\": \"fragile\",\n      \"evidence\": [\n        \"Confidence only 63%, score gap just 0.806; selection hinges on small dynamic/fitness bonuses.\",\n        \"No clear frontcourt need advantage: both candidates cover ‘frontcourt’ only.\"\n      ],\n      \"parameterConcern\": \"Low confidence and minimal separation suggest model noise; fragile outcome.\",\n      \"rerunSuggestion\": \"Re‑run with tightened adjustment bounds and check if choice remains stable across sensitivity tests.\"\n    }\n  ],\n  \"parameterRecommendations\": [\n    {\n      \"scope\": \"pick-value-adjustment\",\n      \"recommendation\": \"Reduce weight or impose a hard cap (e.g., 2.0) when team preference strength is below 0.5.\",\n      \"reason\": \"Picks 11 and 15 show pick‑value adjustment overriding fit score in close calls, creating cascade effects.\"\n    },\n    {\n      \"scope\": \"risk-penalty-athletic-deficits\",\n      \"recommendation\": \"Add an automatic penalty for prospects with explosiveness or speed below the 10th percentile, especially for frontcourt/wing roles.\",\n      \"reason\": \"Pick 10’s selection of Lendeborg (6.3 explosiveness) ignores team risk tolerance and could be a poor fit.\"\n    },\n    {\n      \"scope\": \"feature-adjustment-cap\",\n      \"recommendation\": \"Cap elite‑physical‑tool feature adjustments at +1.0 and re‑scale distribution.\",\n      \"reason\": \"Pick 19’s Carr selection benefited from an outsized +1.25 that drowned out need alignment.\"\n    },\n    {\n      \"scope\": \"data-completeness-penalty\",\n      \"recommendation\": \"Apply a completeness penalty for prospects with D‑level data reference (e.g., −1.0 to −2.0) in dynamic scoring.\",\n      \"reason\": \"Brown Jr.’s incomplete profile (picks 7, 11) creates volatile scores and unrealistic boosts.\"\n    },\n    {\n      \"scope\": \"school-state-priors-data-collection\",\n      \"recommendation\": \"Gather real data on team biases for universities/regions and store as priors for future runs.\",\n      \"reason\": \"Current policy forbids unbacked priors; only data‑driven school/state adjustments can improve model accuracy.\"\n    }\n  ],\n  \"noManualPredictionConfirmation\": true\n}",
+      "parseError": null,
+      "parsed": {
+        "round": 3,
+        "title": "Final parameter verdict",
+        "overallVerdict": "Thirteen changes vs baseline, driven by sequential removal and dynamic adjustments, are only partially sound. Pick-value adjustment and physical-tools over-weighting create fragile outcomes at picks 11, 15, and 19. Missing risk penalties for athletic outliers (pick 10) and low-confidence selections (picks 12, 26) further erode reliability. Parameter recalibration is essential before finalizing the board.",
+        "caseReviews": [
+          {
+            "pick": 7,
+            "team": "Sacramento Kings",
+            "changedFrom": "Mikel Brown Jr.",
+            "changedTo": "Kingston Flemings",
+            "reasonability": "reasonable",
+            "evidence": [
+              "Flemings fully matches preference families (guard, creation, defense) while Brown Jr. lacks defense.",
+              "High confidence (96%) and clear score gap (2.775) indicate robust outcome."
+            ],
+            "parameterConcern": "Brown Jr.'s D‑level data causes score volatility under different imputation strategies.",
+            "rerunSuggestion": "Re‑run with completed data (post‑combine proxies) for Brown Jr. to test sensitivity."
+          },
+          {
+            "pick": 10,
+            "team": "Milwaukee Bucks",
+            "changedFrom": "Kingston Flemings",
+            "changedTo": "Yaxel Lendeborg",
+            "reasonability": "fragile",
+            "evidence": [
+              "Lendeborg has extremely low explosiveness (6.3) yet no risk penalty is applied.",
+              "Score gap (1.34) and missing guard/creation families make selection dependent on defence-only fit."
+            ],
+            "parameterConcern": "No penalty for severe athletic deficiencies; fitness with team risk tolerance (53) unverified.",
+            "rerunSuggestion": "Add a risk penalty for sub‑10th percentile athletic scores, especially for frontcourt players."
+          },
+          {
+            "pick": 11,
+            "team": "Golden State Warriors",
+            "changedFrom": "Nate Ament",
+            "changedTo": "Mikel Brown Jr.",
+            "reasonability": "parameter-risk",
+            "evidence": [
+              "Pick‑value adjustment (+4.05) overwhelmed a weak team preference (0.4), flipping the choice.",
+              "Brown Jr. had incomplete data (D‑reference) and negative feature adjustment, yet won with 77% confidence."
+            ],
+            "parameterConcern": "Pick‑value adjustment magnitude is unbounded; incomplete data candidates gain unrealistic boosts.",
+            "rerunSuggestion": "Cap pick‑value adjustment to 2.0 when preference weight < 0.5; introduce completeness penalty for D‑tier prospects."
+          },
+          {
+            "pick": 12,
+            "team": "Oklahoma City Thunder",
+            "changedFrom": "Yaxel Lendeborg",
+            "changedTo": "Hannes Steinbach",
+            "reasonability": "fragile",
+            "evidence": [
+              "Score gap vs next candidate is negative (−0.034), tie‑break needed to justify selection.",
+              "Confidence only 75%; dynamic preference and feature adjustments barely push Steinbach ahead."
+            ],
+            "parameterConcern": "Tie‑break logic may overvalue marginal feature/dynamic gains; selection near random noise.",
+            "rerunSuggestion": "Examine tie‑break weighting and re‑run with smoothed feature adjustments to see if choice holds."
+          },
+          {
+            "pick": 15,
+            "team": "Chicago Bulls",
+            "changedFrom": "Allen Graves",
+            "changedTo": "Nate Ament",
+            "reasonability": "fragile",
+            "evidence": [
+              "Pick‑value adjustment (+6 for consensus rank) flipped a −0.64 tie‑break despite Graves’ higher raw fit.",
+              "Ament lacks the ‘defence’ family, creating redundancy with previous frontcourt pick (Caleb Wilson)."
+            ],
+            "parameterConcern": "Consensus rank dominates fit score in close calls; need‑confidence not sufficiently weighted.",
+            "rerunSuggestion": "Reduce pick‑value weight or cap it; test fit‑first tie‑break logic."
+          },
+          {
+            "pick": 16,
+            "team": "Memphis Grizzlies",
+            "changedFrom": "Hannes Steinbach",
+            "changedTo": "Allen Graves",
+            "reasonability": "reasonable",
+            "evidence": [
+              "Score gap 6.061 and 91% confidence indicate a clear preference; Graves matches all desired families.",
+              "Selection follows naturally from pick 15’s cascade; no parameter concern."
+            ],
+            "parameterConcern": "None.",
+            "rerunSuggestion": "No rerun needed unless overarching parameter weights change."
+          },
+          {
+            "pick": 19,
+            "team": "Toronto Raptors",
+            "changedFrom": "Labaron Philon Jr.",
+            "changedTo": "Cameron Carr",
+            "reasonability": "fragile",
+            "evidence": [
+              "Carr does not meet primary needs (creation, frontcourt) but won via A‑elite physical tools (+1.25).",
+              "High‑fit prospect Dailyn Swain’s dynamic boost (+2.15) was insufficient to overcome Carr’s raw advantage."
+            ],
+            "parameterConcern": "Feature adjustment for elite testing overshadows need alignment; creation need weight too low.",
+            "rerunSuggestion": "Increase creation/frontcourt need weights; cap feature adjustment to avoid physical outliers dominating."
+          },
+          {
+            "pick": 26,
+            "team": "Denver Nuggets",
+            "changedFrom": "Tarris Reed Jr.",
+            "changedTo": "Henri Veesaar",
+            "reasonability": "fragile",
+            "evidence": [
+              "Confidence only 63%, score gap just 0.806; selection hinges on small dynamic/fitness bonuses.",
+              "No clear frontcourt need advantage: both candidates cover ‘frontcourt’ only."
+            ],
+            "parameterConcern": "Low confidence and minimal separation suggest model noise; fragile outcome.",
+            "rerunSuggestion": "Re‑run with tightened adjustment bounds and check if choice remains stable across sensitivity tests."
+          }
+        ],
+        "parameterRecommendations": [
+          {
+            "scope": "pick-value-adjustment",
+            "recommendation": "Reduce weight or impose a hard cap (e.g., 2.0) when team preference strength is below 0.5.",
+            "reason": "Picks 11 and 15 show pick‑value adjustment overriding fit score in close calls, creating cascade effects."
+          },
+          {
+            "scope": "risk-penalty-athletic-deficits",
+            "recommendation": "Add an automatic penalty for prospects with explosiveness or speed below the 10th percentile, especially for frontcourt/wing roles.",
+            "reason": "Pick 10’s selection of Lendeborg (6.3 explosiveness) ignores team risk tolerance and could be a poor fit."
+          },
+          {
+            "scope": "feature-adjustment-cap",
+            "recommendation": "Cap elite‑physical‑tool feature adjustments at +1.0 and re‑scale distribution.",
+            "reason": "Pick 19’s Carr selection benefited from an outsized +1.25 that drowned out need alignment."
+          },
+          {
+            "scope": "data-completeness-penalty",
+            "recommendation": "Apply a completeness penalty for prospects with D‑level data reference (e.g., −1.0 to −2.0) in dynamic scoring.",
+            "reason": "Brown Jr.’s incomplete profile (picks 7, 11) creates volatile scores and unrealistic boosts."
+          },
+          {
+            "scope": "school-state-priors-data-collection",
+            "recommendation": "Gather real data on team biases for universities/regions and store as priors for future runs.",
+            "reason": "Current policy forbids unbacked priors; only data‑driven school/state adjustments can improve model accuracy."
+          }
+        ],
+        "noManualPredictionConfirmation": true
+      }
+    }
+  ]
+}

@@ -1,78 +1,168 @@
 {
   "schemaVersion": "draftops.milestone_answers.v1",
-  "generatedAt": "2026-06-23T07:49:03.007Z",
-  "sourceEvidence": "data/reports/milestone_prediction_evidence_20260623.json",
+  "generatedAt": "2026-06-23T19:47:05.225Z",
+  "sourceEvidence": "data/reports/codex_llm_final_frontend_sync_20260624.json",
   "deepSeekDiscussion": "data/reports/milestone_deepseek_discussion_20260623.json",
   "answerCardWriteReport": "data/reports/milestone_answer_card_write_report_20260623.json",
   "answers": [
     {
       "id": "long-wingspan-picks-4-14",
-      "question": "第 4–14 顺位（共11人）中，臂展减赤脚身高 >= 5 英寸（约12.7cm）的“超长臂展”球员有几人？",
+      "question": "第 4–14 顺位（共11人）中，臂展减赤脚身高 ≥ 5 英寸（约12.7cm）的“超长臂展”球员有几人？",
       "answer": 2,
       "type": "integer",
       "tolerance": "±1",
       "evidence": [
-        "第12顺位亚克塞尔 伦德伯格和第14顺位小莫雷兹 约翰逊臂展差均为6.5英寸。"
-      ]
+        "Codex LLM最终板第4-14顺位中，臂展差>=5英寸的球员为第13顺位亚克塞尔 伦德伯格，点估计1人。",
+        "容错策略：提交值2，覆盖1-3；第7顺位达柳斯 阿卡夫臂展差4.5英寸接近阈值，保留上行空间。"
+      ],
+      "machinePointEstimate": 1,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          1,
+          2,
+          3
+        ],
+        "reason": "容错策略：提交值2，覆盖1-3；第7顺位达柳斯 阿卡夫臂展差4.5英寸接近阈值，保留上行空间。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "max-vertical-top-three-first-round",
       "question": "训练营“助跑最大弹跳”排名前 3 的球员中，有几人在首轮被选中？",
-      "answer": 1,
+      "answer": 2,
       "type": "integer",
       "tolerance": "0-3, ±1",
       "evidence": [
-        "助跑弹跳前三为托比 拉瓦尔、卡梅隆 卡尔、阿马里 阿伦，其中只有卡梅隆 卡尔进入首轮。"
-      ]
+        "助跑最大弹跳前三含并列为托比 拉瓦尔、阿马里 阿伦、卡梅隆 卡尔；其中进入Codex LLM首轮的是第15顺位卡梅隆 卡尔，点估计1人。",
+        "容错策略：提交值2，覆盖1-3。"
+      ],
+      "machinePointEstimate": 1,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          1,
+          2,
+          3
+        ],
+        "reason": "容错策略：提交值2，覆盖1-3。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "primary-centers-round-one",
       "question": "首轮 30 人中，主打位置为中锋（C）的球员总数？",
-      "answer": 3,
+      "answer": 4,
       "type": "integer",
       "tolerance": "±1",
       "evidence": [
-        "按答题卡主位置口径，中锋为第8顺位阿达伊 马拉、第26顺位小塔里斯 里德、第29顺位亨利 维萨尔。"
-      ]
+        "按答题卡主位置口径，Codex LLM首轮中锋为第12顺位阿达伊 马拉、第26顺位亨利 维萨尔、第29顺位小塔里斯 里德，点估计3人。",
+        "容错策略：提交值4，覆盖3-5；PF/C副位置仍有上浮空间。"
+      ],
+      "machinePointEstimate": 3,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          3,
+          4,
+          5
+        ],
+        "reason": "容错策略：提交值4，覆盖3-5；PF/C副位置仍有上浮空间。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "first-center-pick-4-30",
       "question": "第 4–30 顺位中，第一个被选中的中锋落在第几顺位？",
-      "answer": 8,
+      "answer": 12,
       "type": "pick_number",
       "tolerance": "±2",
       "evidence": [
-        "第4-30顺位中第一个主位置中锋是第8顺位阿达伊 马拉。"
-      ]
+        "Codex LLM最终板第4-30顺位中，第一个答题卡主位置中锋是第12顺位阿达伊 马拉。",
+        "容错策略：提交值12，±2覆盖第10-14顺位。"
+      ],
+      "machinePointEstimate": 12,
+      "toleranceStrategy": {
+        "applied": false,
+        "coveredTrueValues": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "reason": "容错策略：提交值12，±2覆盖第10-14顺位。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "international-count-round-one",
       "question": "首轮 30 人中，国际球员（非美国本土成长）总数？",
-      "answer": 6,
+      "answer": 7,
       "type": "integer",
       "tolerance": "±1",
       "evidence": [
-        "当前首轮国际球员为第8、13、16、27、29、30顺位，共6人。"
-      ]
+        "Codex LLM首轮国际球员为第10顺位卡里姆 洛佩兹、第12顺位阿达伊 马拉、第13顺位亚克塞尔 伦德伯格、第22顺位汉内斯 施泰因巴赫、第23顺位塞尔吉奥 德拉雷亚、第26顺位亨利 维萨尔，点估计6人。",
+        "容错策略：提交值7，覆盖6-8；国际身份口径保留上行空间。"
+      ],
+      "machinePointEstimate": 6,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          6,
+          7,
+          8
+        ],
+        "reason": "容错策略：提交值7，覆盖6-8；国际身份口径保留上行空间。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "school-most",
       "question": "本届首轮贡献球员最多的大学 / 培养机构是哪一所/家？",
       "answer": "密歇根大学",
       "type": "institution_name",
+      "tolerance": "exact option",
       "evidence": [
-        "密歇根大学有第8、12、14顺位3名首轮球员，领先其他机构。"
-      ]
+        "Codex LLM首轮中，密歇根大学有3名球员：第12顺位阿达伊 马拉、第13顺位亚克塞尔 伦德伯格、第17顺位小莫雷兹 约翰逊。",
+        "机构名题无数值容错；提交答题卡下拉项：密歇根大学。"
+      ],
+      "machinePointEstimate": "Michigan",
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          "密歇根大学"
+        ],
+        "reason": "机构名题无数值容错；提交答题卡下拉项：密歇根大学。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     },
     {
       "id": "hand-length-top-five-first-round",
       "question": "训练营“手掌长度”排名前 5 的球员中，有几人在首轮被选中？",
-      "answer": 2,
+      "answer": 3,
       "type": "integer",
       "tolerance": "0-5, ±1",
       "evidence": [
-        "手掌长度前5中，首轮球员为小莫雷兹 约翰逊和卡里姆 洛佩兹，共2人。"
-      ]
+        "手掌长度前5含并列为鲁本 钦耶卢、基肖恩 霍尔、杰登 昆坦斯、卡里姆 洛佩兹、乌戈纳 奥尼恩索、小莫雷兹 约翰逊；其中Codex LLM首轮球员为第10顺位卡里姆 洛佩兹、第17顺位小莫雷兹 约翰逊，点估计2人。",
+        "容错策略：提交值3，覆盖2-4。"
+      ],
+      "machinePointEstimate": 2,
+      "toleranceStrategy": {
+        "applied": true,
+        "coveredTrueValues": [
+          2,
+          3,
+          4
+        ],
+        "reason": "容错策略：提交值3，覆盖2-4。",
+        "sourceReport": "data/reports/codex_llm_final_frontend_sync_20260624.json"
+      }
     }
+  ],
+  "revisionReports": [
+    "data/reports/milestone_q5_nba_notes_recalculation_20260623.json",
+    "data/reports/milestone_tolerance_strategy_adjustment_20260623.json",
+    "data/reports/codex_llm_final_frontend_sync_20260624.json"
   ]
 }

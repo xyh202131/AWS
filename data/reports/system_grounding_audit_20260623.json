@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "draftops.system_grounding_audit.v1",
+  "generatedAt": "2026-06-23T22:32:46.656Z",
+  "generatedBy": "scripts/audit-grounding.mjs",
+  "status": "pass_with_warnings",
+  "summary": {
+    "checks": 11,
+    "blockers": 0,
+    "warnings": 1,
+    "boardPickCount": 30,
+    "selectedProspects": 30,
+    "localPoolCount": 124,
+    "featureReferenceCount": 124,
+    "onlineOfficialProspectCount": 101,
+    "milestoneAnswerCount": 7,
+    "ragIndexCount": 5
+  },
+  "evidenceFiles": {
+    "agents": "AGENTS.md",
+    "readme": "README.md",
+    "collaborationGuide": "多Agent协作指导.md",
+    "board": "public/data/agent_expanded_recommended_board.json",
+    "bundle": "public/data/expanded_import_bundle.json",
+    "localPool": "data/normalized/normalized_2026_local_player_pool_124.json",
+    "featureReference": "data/normalized/normalized_2026_player_feature_reference_124.json",
+    "onlineVerification": "data/normalized/normalized_2026_online_player_list_reverification_20260623.json",
+    "milestoneAnswers": "data/final/milestone_answers.json",
+    "ragManifest": "data/rag/rag-manifest.json"
+  },
+  "checks": [
+    {
+      "id": "codex-policy-file",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "Root AGENTS.md defines Codex anti-hallucination and no-manual-prediction rules.",
+      "evidence": [
+        "AGENTS.md"
+      ],
+      "remediation": "Create or repair AGENTS.md before Codex analysis or prediction work."
+    },
+    {
+      "id": "policy-linked-from-docs",
+      "status": "pass",
+      "severity": "info",
+      "summary": "README and multi-agent guide expose the Codex grounding policy.",
+      "evidence": [
+        "README.md",
+        "多Agent协作指导.md"
+      ],
+      "remediation": "Link AGENTS.md from user-facing docs and keep the multi-agent guide aligned."
+    },
+    {
+      "id": "locked-board-contract",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "Locked board is generated, top-30 sequential, duplicate-free, and evidence-bearing.",
+      "evidence": [
+        "path=public/data/agent_expanded_recommended_board.json",
+        "pickCount=30",
+        "noManualOverride=true",
+        "duplicates=0",
+        "missingEvidence=0"
+      ],
+      "remediation": "Regenerate the board through scripts/agents; do not hand-edit picks or evidence."
+    },
+    {
+      "id": "board-review-surface",
+      "status": "warn",
+      "severity": "warning",
+      "summary": "Low-confidence, thin-evidence, and narrow-margin picks are exposed for review.",
+      "evidence": [
+        "lowConfidence=none",
+        "thinEvidence=none",
+        "narrowMargins=10:Karim Lopez:margin=0.22, 11:Labaron Philon Jr.:margin=0.11, 14:Allen Graves:margin=0.43, 15:Cameron Carr:margin=0.71, 16:Dailyn Swain:margin=0.52, 18:Christian Anderson:margin=0.94, 21:Isaiah Evans:margin=0.78, 22:Hannes Steinbach:margin=0.08, 23:Sergio De Larrea:margin=0.76"
+      ],
+      "remediation": "Treat these picks as explanation-review targets, not as manual replacement targets."
+    },
+    {
+      "id": "candidate-pool-counts",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "Candidate-pool counts are read from current files and selected players are present in the online official prospect list.",
+      "evidence": [
+        "localPool=124",
+        "featureReference=124",
+        "onlineOfficialProspects=101",
+        "boardCandidatePool.officialProspectRows=not recorded",
+        "selectedMissingFromOfficialList=none"
+      ],
+      "remediation": "Refresh normalized source files or regenerate the board from the verified pool."
+    },
+    {
+      "id": "official-result-boundary",
+      "status": "pass",
+      "severity": "info",
+      "summary": "Online draft-board verification is recorded as a source boundary, not silently treated as official results.",
+      "evidence": [
+        "chinaDraft.rowCount=60",
+        "chinaDraft.top30PopulatedPickCount=0",
+        "No populated top-30 player picks in the China board snapshot; do not cite it as actual selected-player results."
+      ],
+      "remediation": "If official result rows appear, rerun source reconciliation before changing any prediction artifacts."
+    },
+    {
+      "id": "milestone-grounding",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "Milestone answer count and evidence are grounded in current answer files.",
+      "evidence": [
+        "manifestMilestones=7",
+        "answerRows=7",
+        "withoutEvidence=none"
+      ],
+      "remediation": "Regenerate milestone answers from the locked board and evidence files."
+    },
+    {
+      "id": "rag-grounding-indexes",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "RAG indexes exist and contain retrievable chunks.",
+      "evidence": [
+        "core-board: declared=231, actual=231, sources=12",
+        "team-preference: declared=134, actual=134, sources=8",
+        "prospect-evidence: declared=819, actual=819, sources=18",
+        "milestone: declared=36, actual=36, sources=8",
+        "architecture: declared=84, actual=84, sources=9"
+      ],
+      "remediation": "Run npm run rag:build before relying on RAG answers."
+    },
+    {
+      "id": "rag-cleaning-policy",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "RAG indexes are rebuilt through the data-cleaning quality gate before retrieval.",
+      "evidence": [
+        "core-board: cleaned=231/231, dropped=0, redactions=0, summary=true",
+        "team-preference: cleaned=134/134, dropped=0, redactions=0, summary=true",
+        "prospect-evidence: cleaned=819/819, dropped=1, redactions=0, summary=true",
+        "milestone: cleaned=36/36, dropped=0, redactions=0, summary=true",
+        "architecture: cleaned=84/84, dropped=0, redactions=0, summary=true"
+      ],
+      "remediation": "Run npm run rag:build so every RAG chunk carries cleaning metadata and the manifest records dropped/noisy sources."
+    },
+    {
+      "id": "runtime-answer-guardrails",
+      "status": "pass",
+      "severity": "blocker",
+      "summary": "Frontend and local DeepSeek proxy carry anti-hallucination guardrails into chat answers.",
+      "evidence": [
+        "src/App.tsx",
+        "scripts/deepseek-chat-server.mjs"
+      ],
+      "remediation": "Restore request guardrails and answer grounding status before enabling chat demos."
+    },
+    {
+      "id": "cloud-answer-guardrail-visibility",
+      "status": "pass",
+      "severity": "info",
+      "summary": "Lambda source contains retrieval-reflection or weak-evidence guardrail wording.",
+      "evidence": [
+        "infra/lambda/draftops-ai-api/index.mjs"
+      ],
+      "remediation": "Keep cloud prompt and local proxy aligned before the next deploy."
+    }
+  ]
+}

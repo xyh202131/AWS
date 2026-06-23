@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">预测算法：顺位贪心 + 风险校验</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">对每个“球队-球员”组合打分，再按真实选秀顺序依次选择。</text>
+  </g>
+  <g id="steps">
+    <rect x="110" y="176" width="300" height="140" rx="16" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/database" x="144" y="206" width="38" height="38" fill="#62B8FF" stroke-width="2"/>
+    <text x="200" y="234" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="800">构造候选池</text>
+    <text x="144" y="280" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">101 官方池、124 本地池、球队顺位。</text>
+    <line x1="410" y1="246" x2="490" y2="246" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="490,246 476,238 476,254" fill="#62B8FF"/>
+    <rect x="490" y="176" width="300" height="140" rx="16" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/adjustments" x="524" y="206" width="38" height="38" fill="#FFD166" stroke-width="2"/>
+    <text x="580" y="234" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="800">逐队逐人打分</text>
+    <text x="524" y="280" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">共识、需求、能力、潜力、热度，扣风险。</text>
+    <line x1="790" y1="246" x2="870" y2="246" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="870,246 856,238 856,254" fill="#62B8FF"/>
+    <rect x="870" y="176" width="300" height="140" rx="16" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/chart-dots" x="904" y="206" width="38" height="38" fill="#33E18A" stroke-width="2"/>
+    <text x="960" y="234" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF" font-weight="800">输出 locked board</text>
+    <text x="904" y="280" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">30 picks、无重复、含证据和 warning。</text>
+  </g>
+  <g id="formula">
+    <rect x="120" y="382" width="1040" height="104" rx="18" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/target" x="154" y="412" width="42" height="42" fill="#62B8FF" stroke-width="2"/>
+    <text x="220" y="444" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#E7F2FF" font-weight="800">总分 = 共识 + 需求 + 能力 + 潜力 + 热度 - 风险</text>
+    <text x="220" y="476" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#94A8BC">代码使用 35/25/20/10/10 权重；路演只讲因素、护栏和结果校验。</text>
+  </g>
+  <g id="validation-chips">
+    <rect x="176" y="548" width="214" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/checklist" x="202" y="566" width="30" height="30" fill="#33E18A" stroke-width="2"/>
+    <text x="246" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="700">无重复</text>
+    <text x="318" y="590" font-family="Consolas, 'Courier New', monospace" font-size="22" fill="#33E18A">30/30</text>
+    <rect x="424" y="548" width="214" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/eye" x="450" y="566" width="30" height="30" fill="#FFD166" stroke-width="2"/>
+    <text x="494" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="700">低置信</text>
+    <text x="566" y="590" font-family="Consolas, 'Courier New', monospace" font-size="22" fill="#FFD166">1</text>
+    <rect x="672" y="548" width="214" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/shield-check" x="698" y="566" width="30" height="30" fill="#62B8FF" stroke-width="2"/>
+    <text x="742" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="700">证据承载</text>
+    <text x="836" y="590" font-family="Consolas, 'Courier New', monospace" font-size="22" fill="#62B8FF">PASS</text>
+    <rect x="920" y="548" width="214" height="70" rx="12" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/lock" x="946" y="566" width="30" height="30" fill="#33E18A" stroke-width="2"/>
+    <text x="990" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#E7F2FF" font-weight="700">人工换人</text>
+    <text x="1084" y="590" font-family="Consolas, 'Courier New', monospace" font-size="22" fill="#33E18A">0</text>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">05 / 08</text>
+  </g>
+</svg>

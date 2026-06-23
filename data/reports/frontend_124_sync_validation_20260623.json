@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "draftops.frontend_124_sync_validation.v1",
+  "generatedAt": "2026-06-23T15:17:56.136563+00:00",
+  "frontendBoard": "public/data/agent_expanded_recommended_board.json",
+  "frontendBundle": "public/data/expanded_import_bundle.json",
+  "boardPickCount": 30,
+  "uniqueBoardProspects": 30,
+  "bundleProspectCount": 123,
+  "pick30": "Jack Kayil",
+  "answerCardDiffCount": 0,
+  "answerCardDiffs": [],
+  "yaxel": {
+    "pick": 12,
+    "origin": "Dominican Republic",
+    "warnings": [
+      "International milestone impact: monitor first international slot."
+    ]
+  },
+  "q5Expected": 7
+}

@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1650" height="1243" viewBox="0 0 1650 1243">
+<style>
+  .title { font: 800 30px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+  .meta { font: 600 15px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #475569; }
+  .head { font: 800 14px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #fff; }
+  text { font: 700 14px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #111827; }
+  .muted { fill: #64748b; }
+  .team { fill: #0f172a; font-weight: 800; }
+  .dissent, .tie { font-weight: 900; text-decoration: underline; }
+  .agreement { fill: #0f172a; font-weight: 900; }
+  .plurality { fill: #065f46; font-weight: 900; }
+</style>
+<rect width="1650" height="1243" fill="#f8fafc"/>
+<rect x="18" y="18" width="1614" height="1207" rx="12" fill="#fff" stroke="#dbe3ef"/>
+<text x="34" y="58" class="title">四版相对评分预测直观比对</text>
+<text x="34" y="88" class="meta">黑色为多数一致；彩色加下划线为不同项或 2-2 分歧组。4/4=8，3/4=19，2/4=3。</text>
+<rect x="18" y="118" width="1614" height="34" fill="#0f172a"/>
+<text x="28" y="140" text-anchor="end" class="head">#</text>
+<text x="78" y="140" class="head">球队</text>
+<text x="300" y="140" class="head">Relative Original</text>
+<text x="560" y="140" class="head">DeepSeek LLM</text>
+<text x="810" y="140" class="head">Codex LLM</text>
+<text x="1060" y="140" class="head">Codex Agent</text>
+<text x="1310" y="140" text-anchor="middle" class="head">一致</text>
+<text x="1410" y="140" class="head">多数结果</text>
+<rect x="18" y="160" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="183" text-anchor="end" class="muted">1</text>
+<text x="78" y="183" class="team">Washington Wizards</text>
+<text x="300" y="183" fill="#111827" class="majority">AJ Dybantsa</text>
+<text x="560" y="183" fill="#111827" class="majority">AJ Dybantsa</text>
+<text x="810" y="183" fill="#111827" class="majority">AJ Dybantsa</text>
+<text x="1060" y="183" fill="#111827" class="majority">AJ Dybantsa</text>
+<text x="1310" y="183" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="183" class="plurality">AJ Dybantsa</text>
+<rect x="18" y="193" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="216" text-anchor="end" class="muted">2</text>
+<text x="78" y="216" class="team">Utah Jazz</text>
+<text x="300" y="216" fill="#111827" class="majority">Darryn Peterson</text>
+<text x="560" y="216" fill="#111827" class="majority">Darryn Peterson</text>
+<text x="810" y="216" fill="#111827" class="majority">Darryn Peterson</text>
+<text x="1060" y="216" fill="#111827" class="majority">Darryn Peterson</text>
+<text x="1310" y="216" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="216" class="plurality">Darryn Peterson</text>
+<rect x="18" y="226" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="249" text-anchor="end" class="muted">3</text>
+<text x="78" y="249" class="team">Memphis Grizzlies</text>
+<text x="300" y="249" fill="#111827" class="majority">Cameron Boozer</text>
+<text x="560" y="249" fill="#111827" class="majority">Cameron Boozer</text>
+<text x="810" y="249" fill="#111827" class="majority">Cameron Boozer</text>
+<text x="1060" y="249" fill="#111827" class="majority">Cameron Boozer</text>
+<text x="1310" y="249" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="249" class="plurality">Cameron Boozer</text>
+<rect x="18" y="259" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="282" text-anchor="end" class="muted">4</text>
+<text x="78" y="282" class="team">Chicago Bulls</text>
+<text x="300" y="282" fill="#111827" class="majority">Caleb Wilson</text>
+<text x="560" y="282" fill="#111827" class="majority">Caleb Wilson</text>
+<text x="810" y="282" fill="#111827" class="majority">Caleb Wilson</text>
+<text x="1060" y="282" fill="#111827" class="majority">Caleb Wilson</text>
+<text x="1310" y="282" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="282" class="plurality">Caleb Wilson</text>
+<rect x="18" y="292" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="315" text-anchor="end" class="muted">5</text>
+<text x="78" y="315" class="team">LA Clippers</text>
+<text x="300" y="315" fill="#111827" class="majority">Keaton Wagler</text>
+<text x="560" y="315" fill="#111827" class="majority">Keaton Wagler</text>
+<text x="810" y="315" fill="#111827" class="majority">Keaton Wagler</text>
+<text x="1060" y="315" fill="#111827" class="majority">Keaton Wagler</text>
+<text x="1310" y="315" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="315" class="plurality">Keaton Wagler</text>
+<rect x="18" y="325" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="348" text-anchor="end" class="muted">6</text>
+<text x="78" y="348" class="team">Brooklyn Nets</text>
+<text x="300" y="348" fill="#111827" class="majority">Kingston Flemings</text>
+<text x="560" y="348" fill="#dc2626" class="dissent">Darius Acuff Jr.</text>
+<text x="810" y="348" fill="#111827" class="majority">Kingston Flemings</text>
+<text x="1060" y="348" fill="#111827" class="majority">Kingston Flemings</text>
+<text x="1310" y="348" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="348" class="plurality">Kingston Flemings</text>
+<rect x="18" y="358" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="381" text-anchor="end" class="muted">7</text>
+<text x="78" y="381" class="team">Sacramento Kings</text>
+<text x="300" y="381" fill="#111827" class="majority">Darius Acuff Jr.</text>
+<text x="560" y="381" fill="#dc2626" class="dissent">Mikel Brown Jr.</text>
+<text x="810" y="381" fill="#111827" class="majority">Darius Acuff Jr.</text>
+<text x="1060" y="381" fill="#111827" class="majority">Darius Acuff Jr.</text>
+<text x="1310" y="381" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="381" class="plurality">Darius Acuff Jr.</text>
+<rect x="18" y="391" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="414" text-anchor="end" class="muted">8</text>
+<text x="78" y="414" class="team">Atlanta Hawks</text>
+<text x="300" y="414" fill="#111827" class="majority">Nate Ament</text>
+<text x="560" y="414" fill="#dc2626" class="dissent">Aday Mara</text>
+<text x="810" y="414" fill="#111827" class="majority">Nate Ament</text>
+<text x="1060" y="414" fill="#111827" class="majority">Nate Ament</text>
+<text x="1310" y="414" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="414" class="plurality">Nate Ament</text>
+<rect x="18" y="424" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="447" text-anchor="end" class="muted">9</text>
+<text x="78" y="447" class="team">Dallas Mavericks</text>
+<text x="300" y="447" fill="#111827" class="majority">Brayden Burries</text>
+<text x="560" y="447" fill="#111827" class="majority">Brayden Burries</text>
+<text x="810" y="447" fill="#111827" class="majority">Brayden Burries</text>
+<text x="1060" y="447" fill="#111827" class="majority">Brayden Burries</text>
+<text x="1310" y="447" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="447" class="plurality">Brayden Burries</text>
+<rect x="18" y="457" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="480" text-anchor="end" class="muted">10</text>
+<text x="78" y="480" class="team">Milwaukee Bucks</text>
+<text x="300" y="480" fill="#111827" class="majority">Karim Lopez</text>
+<text x="560" y="480" fill="#dc2626" class="dissent">Kingston Flemings</text>
+<text x="810" y="480" fill="#111827" class="majority">Karim Lopez</text>
+<text x="1060" y="480" fill="#111827" class="majority">Karim Lopez</text>
+<text x="1310" y="480" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="480" class="plurality">Karim Lopez</text>
+<rect x="18" y="490" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="513" text-anchor="end" class="muted">11</text>
+<text x="78" y="513" class="team">Golden State Warriors</text>
+<text x="300" y="513" fill="#111827" class="majority">Labaron Philon Jr.</text>
+<text x="560" y="513" fill="#dc2626" class="dissent">Bennett Stirtz</text>
+<text x="810" y="513" fill="#111827" class="majority">Labaron Philon Jr.</text>
+<text x="1060" y="513" fill="#111827" class="majority">Labaron Philon Jr.</text>
+<text x="1310" y="513" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="513" class="plurality">Labaron Philon Jr.</text>
+<rect x="18" y="523" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="546" text-anchor="end" class="muted">12</text>
+<text x="78" y="546" class="team">Oklahoma City Thunder</text>
+<text x="300" y="546" fill="#111827" class="majority">Aday Mara</text>
+<text x="560" y="546" fill="#dc2626" class="dissent">Yaxel Lendeborg</text>
+<text x="810" y="546" fill="#111827" class="majority">Aday Mara</text>
+<text x="1060" y="546" fill="#111827" class="majority">Aday Mara</text>
+<text x="1310" y="546" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="546" class="plurality">Aday Mara</text>
+<rect x="18" y="556" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="579" text-anchor="end" class="muted">13</text>
+<text x="78" y="579" class="team">Miami Heat</text>
+<text x="300" y="579" fill="#111827" class="majority">Yaxel Lendeborg</text>
+<text x="560" y="579" fill="#dc2626" class="dissent">Karim Lopez</text>
+<text x="810" y="579" fill="#111827" class="majority">Yaxel Lendeborg</text>
+<text x="1060" y="579" fill="#111827" class="majority">Yaxel Lendeborg</text>
+<text x="1310" y="579" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="579" class="plurality">Yaxel Lendeborg</text>
+<rect x="18" y="589" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="612" text-anchor="end" class="muted">14</text>
+<text x="78" y="612" class="team">Charlotte Hornets</text>
+<text x="300" y="612" fill="#111827" class="majority">Allen Graves</text>
+<text x="560" y="612" fill="#dc2626" class="dissent">Morez Johnson Jr.</text>
+<text x="810" y="612" fill="#111827" class="majority">Allen Graves</text>
+<text x="1060" y="612" fill="#111827" class="majority">Allen Graves</text>
+<text x="1310" y="612" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="612" class="plurality">Allen Graves</text>
+<rect x="18" y="622" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="645" text-anchor="end" class="muted">15</text>
+<text x="78" y="645" class="team">Chicago Bulls</text>
+<text x="300" y="645" fill="#111827" class="majority">Cameron Carr</text>
+<text x="560" y="645" fill="#dc2626" class="dissent">Allen Graves</text>
+<text x="810" y="645" fill="#111827" class="majority">Cameron Carr</text>
+<text x="1060" y="645" fill="#111827" class="majority">Cameron Carr</text>
+<text x="1310" y="645" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="645" class="plurality">Cameron Carr</text>
+<rect x="18" y="655" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="678" text-anchor="end" class="muted">16</text>
+<text x="78" y="678" class="team">Memphis Grizzlies</text>
+<text x="300" y="678" fill="#111827" class="majority">Dailyn Swain</text>
+<text x="560" y="678" fill="#dc2626" class="dissent">Chris Cenac Jr.</text>
+<text x="810" y="678" fill="#111827" class="majority">Dailyn Swain</text>
+<text x="1060" y="678" fill="#111827" class="majority">Dailyn Swain</text>
+<text x="1310" y="678" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="678" class="plurality">Dailyn Swain</text>
+<rect x="18" y="688" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="711" text-anchor="end" class="muted">17</text>
+<text x="78" y="711" class="team">Oklahoma City Thunder</text>
+<text x="300" y="711" fill="#111827" class="majority">Morez Johnson Jr.</text>
+<text x="560" y="711" fill="#dc2626" class="dissent">Nate Ament</text>
+<text x="810" y="711" fill="#111827" class="majority">Morez Johnson Jr.</text>
+<text x="1060" y="711" fill="#111827" class="majority">Morez Johnson Jr.</text>
+<text x="1310" y="711" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="711" class="plurality">Morez Johnson Jr.</text>
+<rect x="18" y="721" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="744" text-anchor="end" class="muted">18</text>
+<text x="78" y="744" class="team">Charlotte Hornets</text>
+<text x="300" y="744" fill="#111827" class="majority">Christian Anderson</text>
+<text x="560" y="744" fill="#dc2626" class="dissent">Labaron Philon Jr.</text>
+<text x="810" y="744" fill="#111827" class="majority">Christian Anderson</text>
+<text x="1060" y="744" fill="#111827" class="majority">Christian Anderson</text>
+<text x="1310" y="744" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="744" class="plurality">Christian Anderson</text>
+<rect x="18" y="754" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="777" text-anchor="end" class="muted">19</text>
+<text x="78" y="777" class="team">Toronto Raptors</text>
+<text x="300" y="777" fill="#111827" class="majority">Mikel Brown Jr.</text>
+<text x="560" y="777" fill="#dc2626" class="dissent">Dailyn Swain</text>
+<text x="810" y="777" fill="#111827" class="majority">Mikel Brown Jr.</text>
+<text x="1060" y="777" fill="#111827" class="majority">Mikel Brown Jr.</text>
+<text x="1310" y="777" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="777" class="plurality">Mikel Brown Jr.</text>
+<rect x="18" y="787" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="810" text-anchor="end" class="muted">20</text>
+<text x="78" y="810" class="team">San Antonio Spurs</text>
+<text x="300" y="810" fill="#111827" class="majority">Bennett Stirtz</text>
+<text x="560" y="810" fill="#dc2626" class="dissent">Cameron Carr</text>
+<text x="810" y="810" fill="#111827" class="majority">Bennett Stirtz</text>
+<text x="1060" y="810" fill="#111827" class="majority">Bennett Stirtz</text>
+<text x="1310" y="810" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="810" class="plurality">Bennett Stirtz</text>
+<rect x="18" y="820" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="843" text-anchor="end" class="muted">21</text>
+<text x="78" y="843" class="team">Detroit Pistons</text>
+<text x="300" y="843" fill="#111827" class="majority">Isaiah Evans</text>
+<text x="560" y="843" fill="#111827" class="majority">Isaiah Evans</text>
+<text x="810" y="843" fill="#111827" class="majority">Isaiah Evans</text>
+<text x="1060" y="843" fill="#111827" class="majority">Isaiah Evans</text>
+<text x="1310" y="843" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="843" class="plurality">Isaiah Evans</text>
+<rect x="18" y="853" width="1614" height="33" fill="#fff7ed" stroke="#e5e7eb"/>
+<text x="28" y="876" text-anchor="end" class="muted">22</text>
+<text x="78" y="876" class="team">Philadelphia 76ers</text>
+<text x="300" y="876" fill="#111827" class="majority">Hannes Steinbach</text>
+<text x="560" y="876" fill="#dc2626" class="dissent">Christian Anderson</text>
+<text x="810" y="876" fill="#111827" class="majority">Hannes Steinbach</text>
+<text x="1060" y="876" fill="#2563eb" class="dissent">Sergio De Larrea</text>
+<text x="1310" y="876" text-anchor="middle" class="agreement">2/4</text>
+<text x="1410" y="876" class="plurality">Hannes Steinbach</text>
+<rect x="18" y="886" width="1614" height="33" fill="#fff7ed" stroke="#e5e7eb"/>
+<text x="28" y="909" text-anchor="end" class="muted">23</text>
+<text x="78" y="909" class="team">Atlanta Hawks</text>
+<text x="300" y="909" fill="#0f766e" class="tie">Sergio De Larrea</text>
+<text x="560" y="909" fill="#b45309" class="tie">Ebuka Okorie</text>
+<text x="810" y="909" fill="#0f766e" class="tie">Sergio De Larrea</text>
+<text x="1060" y="909" fill="#b45309" class="tie">Ebuka Okorie</text>
+<text x="1310" y="909" text-anchor="middle" class="agreement">2/4</text>
+<text x="1410" y="909" class="plurality">Ebuka Okorie</text>
+<rect x="18" y="919" width="1614" height="33" fill="#fff7ed" stroke="#e5e7eb"/>
+<text x="28" y="942" text-anchor="end" class="muted">24</text>
+<text x="78" y="942" class="team">New York Knicks</text>
+<text x="300" y="942" fill="#111827" class="majority">Ebuka Okorie</text>
+<text x="560" y="942" fill="#dc2626" class="dissent">Koa Peat</text>
+<text x="810" y="942" fill="#111827" class="majority">Ebuka Okorie</text>
+<text x="1060" y="942" fill="#2563eb" class="dissent">Hannes Steinbach</text>
+<text x="1310" y="942" text-anchor="middle" class="agreement">2/4</text>
+<text x="1410" y="942" class="plurality">Ebuka Okorie</text>
+<rect x="18" y="952" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="975" text-anchor="end" class="muted">25</text>
+<text x="78" y="975" class="team">Los Angeles Lakers</text>
+<text x="300" y="975" fill="#111827" class="majority">Koa Peat</text>
+<text x="560" y="975" fill="#dc2626" class="dissent">Jayden Quaintance</text>
+<text x="810" y="975" fill="#111827" class="majority">Koa Peat</text>
+<text x="1060" y="975" fill="#111827" class="majority">Koa Peat</text>
+<text x="1310" y="975" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="975" class="plurality">Koa Peat</text>
+<rect x="18" y="985" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="1008" text-anchor="end" class="muted">26</text>
+<text x="78" y="1008" class="team">Denver Nuggets</text>
+<text x="300" y="1008" fill="#111827" class="majority">Henri Veesaar</text>
+<text x="560" y="1008" fill="#dc2626" class="dissent">Hannes Steinbach</text>
+<text x="810" y="1008" fill="#111827" class="majority">Henri Veesaar</text>
+<text x="1060" y="1008" fill="#111827" class="majority">Henri Veesaar</text>
+<text x="1310" y="1008" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="1008" class="plurality">Henri Veesaar</text>
+<rect x="18" y="1018" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="1041" text-anchor="end" class="muted">27</text>
+<text x="78" y="1041" class="team">Boston Celtics</text>
+<text x="300" y="1041" fill="#111827" class="majority">Chris Cenac Jr.</text>
+<text x="560" y="1041" fill="#dc2626" class="dissent">Sergio De Larrea</text>
+<text x="810" y="1041" fill="#111827" class="majority">Chris Cenac Jr.</text>
+<text x="1060" y="1041" fill="#111827" class="majority">Chris Cenac Jr.</text>
+<text x="1310" y="1041" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="1041" class="plurality">Chris Cenac Jr.</text>
+<rect x="18" y="1051" width="1614" height="33" fill="#ecfdf5" stroke="#e5e7eb"/>
+<text x="28" y="1074" text-anchor="end" class="muted">28</text>
+<text x="78" y="1074" class="team">Minnesota Timberwolves</text>
+<text x="300" y="1074" fill="#111827" class="majority">Meleek Thomas</text>
+<text x="560" y="1074" fill="#111827" class="majority">Meleek Thomas</text>
+<text x="810" y="1074" fill="#111827" class="majority">Meleek Thomas</text>
+<text x="1060" y="1074" fill="#111827" class="majority">Meleek Thomas</text>
+<text x="1310" y="1074" text-anchor="middle" class="agreement">4/4</text>
+<text x="1410" y="1074" class="plurality">Meleek Thomas</text>
+<rect x="18" y="1084" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="1107" text-anchor="end" class="muted">29</text>
+<text x="78" y="1107" class="team">Cleveland Cavaliers</text>
+<text x="300" y="1107" fill="#111827" class="majority">Tarris Reed Jr.</text>
+<text x="560" y="1107" fill="#dc2626" class="dissent">Henri Veesaar</text>
+<text x="810" y="1107" fill="#111827" class="majority">Tarris Reed Jr.</text>
+<text x="1060" y="1107" fill="#111827" class="majority">Tarris Reed Jr.</text>
+<text x="1310" y="1107" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="1107" class="plurality">Tarris Reed Jr.</text>
+<rect x="18" y="1117" width="1614" height="33" fill="#fffbeb" stroke="#e5e7eb"/>
+<text x="28" y="1140" text-anchor="end" class="muted">30</text>
+<text x="78" y="1140" class="team">Dallas Mavericks</text>
+<text x="300" y="1140" fill="#111827" class="majority">Tyler Bilodeau</text>
+<text x="560" y="1140" fill="#dc2626" class="dissent">Jack Kayil</text>
+<text x="810" y="1140" fill="#111827" class="majority">Tyler Bilodeau</text>
+<text x="1060" y="1140" fill="#111827" class="majority">Tyler Bilodeau</text>
+<text x="1310" y="1140" text-anchor="middle" class="agreement">3/4</text>
+<text x="1410" y="1140" class="plurality">Tyler Bilodeau</text>
+</svg>

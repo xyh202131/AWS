@@ -1,0 +1,858 @@
+[
+  {
+    "name": "祖比 埃吉奥福尔",
+    "postion": "前锋",
+    "age": 22,
+    "school": "圣约翰大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "泽维安 李",
+    "postion": "后卫",
+    "age": 22,
+    "school": "佛罗里达大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "约什 迪克斯",
+    "postion": "后卫",
+    "age": 21,
+    "school": "克雷顿大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "以赛亚 尼尔森",
+    "postion": "前锋",
+    "age": 22,
+    "school": "南佛罗里达大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "以赛亚 埃文斯",
+    "postion": "后卫",
+    "age": 20,
+    "school": "杜克大学",
+    "grade": "大二",
+    "country": "美国"
+  },
+  {
+    "name": "伊曼纽尔 夏普",
+    "postion": "后卫",
+    "age": 22,
+    "school": "休斯顿大学",
+    "grade": "大四",
+    "country": "以色列"
+  },
+  {
+    "name": "亚历克斯 卡拉班",
+    "postion": "前锋",
+    "age": 23,
+    "school": "康涅狄格大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "亚克塞尔 伦德伯格",
+    "postion": "前锋",
+    "age": 23,
+    "school": "密歇根大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "亚当 阿塔姆纳",
+    "postion": "后卫",
+    "age": "-",
+    "school": "法国",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "小雅龙 皮埃尔",
+    "postion": "后卫",
+    "age": 23,
+    "school": "南卫理公会大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "小塔里斯 里德",
+    "postion": "中锋",
+    "age": 22,
+    "school": "康涅狄格大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "小欧内斯特 乌德",
+    "postion": "中锋",
+    "age": 22,
+    "school": "迈阿密大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "小莫雷兹 约翰逊",
+    "postion": "前锋",
+    "age": 20,
+    "school": "密歇根大学",
+    "grade": "大二",
+    "country": "美国"
+  },
+  {
+    "name": "小梅尔文 康斯尔",
+    "postion": "后卫",
+    "age": 24,
+    "school": "堪萨斯大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "小拉巴伦 菲隆",
+    "postion": "后卫",
+    "age": 20,
+    "school": "阿拉巴马大学",
+    "grade": "大二",
+    "country": "美国"
+  },
+  {
+    "name": "乌戈纳 奥尼恩索",
+    "postion": "中锋",
+    "age": 21,
+    "school": "弗吉尼亚大学",
+    "grade": "大四",
+    "country": "尼日利亚"
+  },
+  {
+    "name": "威廉 凯尔",
+    "postion": "前锋",
+    "age": 22,
+    "school": "雪城大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "托比 拉瓦尔",
+    "postion": "前锋",
+    "age": 23,
+    "school": "弗吉尼亚理工大学",
+    "grade": "大四",
+    "country": "英国"
+  },
+  {
+    "name": "托比 阿瓦卡",
+    "postion": "前锋",
+    "age": 22,
+    "school": "亚利桑那大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "特伦斯 阿西诺",
+    "postion": "后卫",
+    "age": "-",
+    "school": "北卡罗来纳州立大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "特雷冯 布拉齐尔",
+    "postion": "前锋",
+    "age": 23,
+    "school": "阿肯色大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "特雷 考夫曼-雷恩",
+    "postion": "前锋",
+    "age": 23,
+    "school": "普渡大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "特雷 怀特",
+    "postion": "后卫",
+    "age": "-",
+    "school": "堪萨斯大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "泰勒 尼科尔",
+    "postion": "前锋",
+    "age": 22,
+    "school": "范德比尔特大学‌",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "泰勒 比洛多",
+    "postion": "前锋",
+    "age": 22,
+    "school": "UCLA",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "泰恩 格兰特-福斯特",
+    "postion": "后卫",
+    "age": "-",
+    "school": "冈萨加大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "塔明 利普西",
+    "postion": "后卫",
+    "age": 22,
+    "school": "爱荷华州立大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "塔克 德弗里斯",
+    "postion": "前锋",
+    "age": 23,
+    "school": "印第安纳大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "赛斯 特林布尔",
+    "postion": "后卫",
+    "age": 21,
+    "school": "北卡罗来纳大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "塞尔吉奥 德拉雷亚",
+    "postion": "前锋",
+    "age": 20,
+    "school": "西班牙",
+    "grade": "国际",
+    "country": "西班牙"
+  },
+  {
+    "name": "乔舒亚 杰弗森",
+    "postion": "前锋",
+    "age": 22,
+    "school": "爱荷华州立大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "帕夫莱 巴奇科",
+    "postion": "中锋",
+    "age": "-",
+    "school": "塞尔维亚",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "尼克 马丁内利",
+    "postion": "前锋",
+    "age": 22,
+    "school": "西北大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "尼克 博伊德",
+    "postion": "后卫",
+    "age": 25,
+    "school": "威斯康星大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "内特 比特尔",
+    "postion": "中锋",
+    "age": 23,
+    "school": "俄勒冈大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "内特 阿门特",
+    "postion": "前锋",
+    "age": 19,
+    "school": "田纳西大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "穆罕默德 费伊",
+    "postion": "中锋",
+    "age": "-",
+    "school": "塞内加尔",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "穆罕默德 阿米尼",
+    "postion": "后卫",
+    "age": 21,
+    "school": "伊朗",
+    "grade": "国际",
+    "country": "伊朗"
+  },
+  {
+    "name": "米伊卡 穆里宁",
+    "postion": "前锋",
+    "age": "-",
+    "school": "芬兰",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "米洛斯 尤赞",
+    "postion": "后卫",
+    "age": 23,
+    "school": "休斯顿大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "迈克尔 鲁日奇",
+    "postion": "中锋",
+    "age": "-",
+    "school": "克罗地亚",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "迈克尔 布朗",
+    "postion": "后卫",
+    "age": 20,
+    "school": "路易斯维尔大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "迈克尔 阿贾伊",
+    "postion": "前锋",
+    "age": 22,
+    "school": "巴特勒大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "马利奇 布朗",
+    "postion": "前锋",
+    "age": 22,
+    "school": "杜克大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "马利克 尤因",
+    "postion": "前锋",
+    "age": "-",
+    "school": "阿肯色大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "马利克 托马斯",
+    "postion": "后卫",
+    "age": 19,
+    "school": "阿肯色大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "马利克 雷诺",
+    "postion": "前锋",
+    "age": 23,
+    "school": "迈阿密大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "马克 米切尔",
+    "postion": "后卫",
+    "age": 19,
+    "school": "密苏里大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "路易吉 苏伊戈",
+    "postion": "中锋",
+    "age": 19,
+    "school": "意大利",
+    "grade": "国际",
+    "country": "意大利"
+  },
+  {
+    "name": "里奇 桑德斯",
+    "postion": "后卫",
+    "age": 24,
+    "school": "杨百翰大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "莱利 库格尔",
+    "postion": "后卫",
+    "age": "-",
+    "school": "中佛罗里达大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "莱恩 康韦尔",
+    "postion": "后卫",
+    "age": 21,
+    "school": "路易斯维尔大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "拉马尔 威尔克森",
+    "postion": "后卫",
+    "age": 24,
+    "school": "印第安纳大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "拉贾伊 琼斯",
+    "postion": "后卫",
+    "age": "-",
+    "school": "佛罗里达州立大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "拉斐尔 卡斯特罗",
+    "postion": "前锋",
+    "age": 23,
+    "school": "乔治华盛顿大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "克肖恩 墨菲",
+    "postion": "前锋",
+    "age": "-",
+    "school": "奥本大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "克里斯蒂安 安德森",
+    "postion": "后卫",
+    "age": "-",
+    "school": "德克萨斯理工大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "克里斯 塞纳克",
+    "postion": "前锋",
+    "age": 19,
+    "school": "休斯顿大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "科阿 皮特",
+    "postion": "前锋",
+    "age": 19,
+    "school": "亚利桑那大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "凯兰 博斯韦尔",
+    "postion": "后卫",
+    "age": 21,
+    "school": "伊利诺伊大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "凯莱布 威尔逊",
+    "postion": "前锋",
+    "age": 19,
+    "school": "北卡罗来纳大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "凯德 泰森",
+    "postion": "后卫",
+    "age": "-",
+    "school": "明尼苏达大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "卡梅隆 卡尔",
+    "postion": "后卫",
+    "age": 21,
+    "school": "贝勒大学",
+    "grade": "大二",
+    "country": "美国"
+  },
+  {
+    "name": "卡梅隆 布泽尔",
+    "postion": "前锋",
+    "age": 18,
+    "school": "杜克大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "卡里姆 洛佩兹",
+    "postion": "前锋",
+    "age": "-",
+    "school": "墨西哥",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "卡迪尔 科普兰",
+    "postion": "后卫",
+    "age": 22,
+    "school": "北卡罗来纳州立大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "金斯顿 弗莱明斯",
+    "postion": "后卫",
+    "age": 19,
+    "school": "休斯顿大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "杰克 卡伊尔",
+    "postion": "后卫",
+    "age": 20,
+    "school": "德国",
+    "grade": "国际",
+    "country": "德国"
+  },
+  {
+    "name": "杰登 昆坦斯",
+    "postion": "前锋",
+    "age": 18,
+    "school": "肯塔基大学",
+    "grade": "大二",
+    "country": "美国"
+  },
+  {
+    "name": "杰登 亨利",
+    "postion": "后卫",
+    "age": 22,
+    "school": "大峡谷大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "杰登 布拉德利",
+    "postion": "后卫",
+    "age": 22,
+    "school": "亚利桑那大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "贾科比 吉莱斯皮",
+    "postion": "后卫",
+    "age": "-",
+    "school": "田纳西大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "基肖恩 霍尔",
+    "postion": "前锋",
+    "age": 23,
+    "school": "奥本大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "基顿 瓦格勒",
+    "postion": "后卫",
+    "age": 19,
+    "school": "伊利诺伊大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "亨利 维萨尔",
+    "postion": "中锋",
+    "age": 22,
+    "school": "北卡罗来纳大学",
+    "grade": "大三",
+    "country": "爱沙尼亚"
+  },
+  {
+    "name": "汉内斯 施泰因巴赫",
+    "postion": "前锋",
+    "age": 20,
+    "school": "华盛顿大学",
+    "grade": "大一",
+    "country": "德国"
+  },
+  {
+    "name": "弗塞沃落德 伊先科",
+    "postion": "后卫",
+    "age": 21,
+    "school": "俄罗斯",
+    "grade": "国际",
+    "country": "俄罗斯"
+  },
+  {
+    "name": "弗朗西斯科 法拉利",
+    "postion": "前锋",
+    "age": 20,
+    "school": "意大利",
+    "grade": "国际",
+    "country": "意大利"
+  },
+  {
+    "name": "弗莱彻 洛耶尔",
+    "postion": "后卫",
+    "age": 22,
+    "school": "普渡大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "费利克斯 奥克帕拉",
+    "postion": "前锋",
+    "age": 22,
+    "school": "田纳西大学",
+    "grade": "大四",
+    "country": "尼日利亚"
+  },
+  {
+    "name": "多诺万 登特",
+    "postion": "后卫",
+    "age": "-",
+    "school": "UCLA",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "蒂埃里 达尔兰",
+    "postion": "后卫",
+    "age": "-",
+    "school": "圣塔克拉拉大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "狄龙 米切尔",
+    "postion": "前锋",
+    "age": "-",
+    "school": "圣约翰大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "戴米恩 科林斯",
+    "postion": "前锋",
+    "age": "-",
+    "school": "南佛罗里达大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "戴林 斯温",
+    "postion": "后卫",
+    "age": 20,
+    "school": "德克萨斯大学",
+    "grade": "大三",
+    "country": "美国"
+  },
+  {
+    "name": "达什 丹尼尔斯",
+    "postion": "后卫",
+    "age": "-",
+    "school": "澳大利亚",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "达柳斯 阿卡夫",
+    "postion": "后卫",
+    "age": "-",
+    "school": "阿肯色大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "达林 彼得森",
+    "postion": "后卫",
+    "age": 19,
+    "school": "堪萨斯大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "达里恩 威廉姆斯",
+    "postion": "前锋",
+    "age": 23,
+    "school": "北卡罗来纳州立大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "布鲁斯 索顿",
+    "postion": "后卫",
+    "age": 22,
+    "school": "俄亥俄州立大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "布雷登 史密斯",
+    "postion": "后卫",
+    "age": 22,
+    "school": "普渡大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "布雷登 伯里斯",
+    "postion": "后卫",
+    "age": 20,
+    "school": "亚利桑那大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "布赖斯 霍普金斯",
+    "postion": "前锋",
+    "age": 24,
+    "school": "圣约翰大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "布赖森 塔克",
+    "postion": "前锋",
+    "age": "-",
+    "school": "华盛顿大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "彼得 祖德尔",
+    "postion": "后卫",
+    "age": 22,
+    "school": "迈阿密大学（俄亥俄州）",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "本内特 斯特茨",
+    "postion": "后卫",
+    "age": 22,
+    "school": "爱荷华大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "本 亨歇尔",
+    "postion": "后卫",
+    "age": "-",
+    "school": "澳大利亚",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "巴巴 米勒",
+    "postion": "前锋",
+    "age": 22,
+    "school": "辛辛那提大学",
+    "grade": "大四",
+    "country": "西班牙"
+  },
+  {
+    "name": "奥泰加 奥韦",
+    "postion": "后卫",
+    "age": 22,
+    "school": "肯塔基大学",
+    "grade": "大四",
+    "country": "美国"
+  },
+  {
+    "name": "奥斯卡 克拉夫",
+    "postion": "中锋",
+    "age": 24,
+    "school": "普渡大学",
+    "grade": "大四",
+    "country": "澳大利亚"
+  },
+  {
+    "name": "奥格年 斯尔曾蒂奇",
+    "postion": "前锋",
+    "age": "-",
+    "school": "塞尔维亚",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "埃布卡 奥科里",
+    "postion": "后卫",
+    "age": 19,
+    "school": "斯坦福大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "阿伦 格雷夫斯",
+    "postion": "前锋",
+    "age": 19,
+    "school": "圣塔克拉拉大学",
+    "grade": "大一",
+    "country": "美国"
+  },
+  {
+    "name": "阿达伊 马拉",
+    "postion": "中锋",
+    "age": 21,
+    "school": "密歇根大学",
+    "grade": "大三",
+    "country": "西班牙"
+  },
+  {
+    "name": "BJ 爱德华兹",
+    "postion": "后卫",
+    "age": "-",
+    "school": "南卫理公会大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "AJ 施托尔",
+    "postion": "后卫",
+    "age": "-",
+    "school": "密西西比大学",
+    "grade": "-",
+    "country": "-"
+  },
+  {
+    "name": "AJ 迪班萨",
+    "postion": "前锋",
+    "age": 19,
+    "school": "杨百翰大学",
+    "grade": "大一",
+    "country": "美国"
+  }
+]

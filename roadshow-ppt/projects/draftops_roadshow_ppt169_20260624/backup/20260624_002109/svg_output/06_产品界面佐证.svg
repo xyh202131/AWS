@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#070B10"/>
+  <text x="64" y="76" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">产品界面佐证：预测、证据、导出都在同一个驾驶舱</text>
+  <text x="64" y="114" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">截图保留为真实 raster；页面标题、标注、解释仍为可编辑对象</text>
+  <rect x="64" y="150" width="700" height="486" rx="14" fill="#101820" stroke="#28455E"/>
+  <image href="../images/product-evidence.png" x="82" y="168" width="664" height="461" preserveAspectRatio="xMidYMid meet"/>
+  <rect x="792" y="150" width="424" height="142" rx="14" fill="#142231" stroke="#33E18A"/>
+  <text x="824" y="194" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">1. 30 顺位直接展开</text>
+  <text x="824" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">
+    <tspan x="824" dy="0">完整性、低置信、锁定状态</tspan>
+    <tspan x="824" dy="28">在页面顶部实时露出</tspan>
+  </text>
+  <rect x="792" y="316" width="424" height="142" rx="14" fill="#142231" stroke="#62B8FF"/>
+  <text x="824" y="360" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">2. 每个 pick 可解释</text>
+  <text x="824" y="398" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">
+    <tspan x="824" dy="0">证据、风险、适配、备选</tspan>
+    <tspan x="824" dy="28">跟随选中球员切换</tspan>
+  </text>
+  <rect x="792" y="482" width="424" height="142" rx="14" fill="#142231" stroke="#FFD166"/>
+  <text x="824" y="526" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="700">3. 现场可导出</text>
+  <text x="824" y="564" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">
+    <tspan x="824" dy="0">提交 JSON 与路演 brief</tspan>
+    <tspan x="824" dy="28">都从当前锁定 board 生成</tspan>
+  </text>
+  <line x1="792" y1="220" x2="728" y2="220" stroke="#33E18A" stroke-width="3"/>
+  <polygon points="728,220 742,212 742,228" fill="#33E18A"/>
+  <line x1="792" y1="386" x2="728" y2="386" stroke="#62B8FF" stroke-width="3"/>
+  <polygon points="728,386 742,378 742,394" fill="#62B8FF"/>
+  <line x1="792" y1="552" x2="728" y2="552" stroke="#FFD166" stroke-width="3"/>
+  <polygon points="728,552 742,544 742,560" fill="#FFD166"/>
+  <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">06 / 08</text>
+</svg>

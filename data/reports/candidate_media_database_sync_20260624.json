@@ -1,0 +1,226 @@
+{
+  "generatedAt": "2026-06-24T10:45:00+08:00",
+  "primaryRule": "Use official NBA.com prospect pages first. Store every local candidate-pool player in the media database; if no stable headshot is extracted, keep a missing-status row instead of omitting media.",
+  "candidatePoolRows": 123,
+  "mediaRows": 123,
+  "localPhotoRows": 83,
+  "verifiedRows": 82,
+  "fallbackRows": 1,
+  "missingMediaRows": 40,
+  "reusedRows": 83,
+  "discoveredRows": 0,
+  "discovered": [],
+  "missing": [
+    {
+      "id": "ernest-udeh-jr",
+      "name": "Ernest Udeh Jr.",
+      "attempts": [
+        {
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/ernest-udeh-jr",
+          "ok": true,
+          "remotePhotoUrl": "https://cdn.nba.com/manage/2026/06/13344137.png"
+        },
+        {
+          "sourceUrl": "https://www.nba.com/draft/2026/prospects/ernest-udeh-jr",
+          "ok": false,
+          "reason": "Could not download ernest-udeh-jr: 403 Forbidden"
+        }
+      ]
+    },
+    {
+      "id": "local-pool-124-044-prospect",
+      "name": "狄龙 米切尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-059-prospect",
+      "name": "安德烈 斯托亚科维奇",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-060-prospect",
+      "name": "小杰里米 费尔斯",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-061-prospect",
+      "name": "小比利 里士满三世",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-062-prospect",
+      "name": "弗洛里 比敦加",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-064-prospect",
+      "name": "泰勒 坦纳",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-065-prospect",
+      "name": "米兰 莫姆契洛维奇",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-066-prospect",
+      "name": "约翰 布莱克威尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-068-prospect",
+      "name": "路易吉 苏伊戈",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-069-prospect",
+      "name": "通德 耶苏福",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-072-prospect",
+      "name": "阿马里 阿伦",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-073-prospect",
+      "name": "雅各布 科菲",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-074-prospect",
+      "name": "马修 埃布尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-076-prospect",
+      "name": "鲁本 钦耶卢",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-077-prospect",
+      "name": "小克里斯托弗 布朗",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-078-prospect",
+      "name": "杰登 哈里斯",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-079-aj",
+      "name": "AJ 施托尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-080-bj",
+      "name": "BJ 爱德华兹",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-081-prospect",
+      "name": "亚当 阿塔姆纳",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-082-prospect",
+      "name": "克肖恩 墨菲",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-085-prospect",
+      "name": "凯德 泰森",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-089-prospect",
+      "name": "多诺万 登特",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-091-prospect",
+      "name": "奥格年 斯尔曾蒂奇",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-096-prospect",
+      "name": "布赖森 塔克",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-097-prospect",
+      "name": "帕夫莱 巴奇科",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-099-prospect",
+      "name": "弗朗西斯科 法拉利",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-101-prospect",
+      "name": "戴米恩 科林斯",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-102-prospect",
+      "name": "拉贾伊 琼斯",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-104-prospect",
+      "name": "本 亨歇尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-106-prospect",
+      "name": "泰恩 格兰特-福斯特",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-108-prospect",
+      "name": "特伦斯 阿西诺",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-109-prospect",
+      "name": "特雷 怀特",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-110-prospect",
+      "name": "穆罕默德 费伊",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-112-prospect",
+      "name": "米伊卡 穆里宁",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-114-prospect",
+      "name": "莱利 库格尔",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-115-prospect",
+      "name": "蒂埃里 达尔兰",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-117-prospect",
+      "name": "达什 丹尼尔斯",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-121-prospect",
+      "name": "迈克尔 鲁日奇",
+      "attempts": []
+    },
+    {
+      "id": "local-pool-124-123-prospect",
+      "name": "马利克 尤因",
+      "attempts": []
+    }
+  ]
+}

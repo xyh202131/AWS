@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">数据先可信，预测才可信</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">原始材料不被直接改写，所有派生产物都进入可追溯链路。</text>
+  </g>
+  <g id="pipeline">
+    <rect x="113" y="178" width="218" height="126" rx="14" fill="#142231" stroke="#62B8FF"/>
+    <use data-icon="tabler-outline/database" x="145" y="206" width="38" height="38" fill="#62B8FF" stroke-width="2"/>
+    <text x="199" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="800">官方数据包</text>
+    <text x="145" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">数据/ 只读原始区</text>
+    <line x1="331" y1="241" x2="401" y2="241" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="401,241 387,233 387,249" fill="#62B8FF"/>
+    <rect x="401" y="178" width="218" height="126" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/route" x="433" y="206" width="38" height="38" fill="#62B8FF" stroke-width="2"/>
+    <text x="487" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="800">raw 登记</text>
+    <text x="433" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">来源、时间、可信度</text>
+    <line x1="619" y1="241" x2="689" y2="241" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="689,241 675,233 675,249" fill="#62B8FF"/>
+    <rect x="689" y="178" width="218" height="126" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/layers-intersect" x="721" y="206" width="38" height="38" fill="#62B8FF" stroke-width="2"/>
+    <text x="775" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="800">normalized</text>
+    <text x="721" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">名单、字段、口径统一</text>
+    <line x1="907" y1="241" x2="977" y2="241" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="977,241 963,233 963,249" fill="#62B8FF"/>
+    <rect x="977" y="178" width="218" height="126" rx="14" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/clipboard-check" x="1009" y="206" width="38" height="38" fill="#33E18A" stroke-width="2"/>
+    <text x="1063" y="232" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#E7F2FF" font-weight="800">clean/final</text>
+    <text x="1009" y="274" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">质检后进入预测</text>
+  </g>
+  <g id="verified-facts">
+    <rect x="110" y="394" width="1060" height="146" rx="18" fill="#101820" stroke="#28455E"/>
+    <text x="148" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" fill="#E7F2FF" font-weight="800">当前验证状态</text>
+    <rect x="148" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
+    <text x="170" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#33E18A" font-weight="700">30 picks / 0 重复</text>
+    <rect x="410" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
+    <text x="432" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">124 本地候选池</text>
+    <rect x="672" y="468" width="236" height="42" rx="8" fill="#142231" stroke="#28455E"/>
+    <text x="694" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">124 球员特征</text>
+    <rect x="934" y="468" width="198" height="42" rx="8" fill="#142231" stroke="#28455E"/>
+    <text x="956" y="496" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#FFD166" font-weight="700">5 个 RAG 索引</text>
+  </g>
+  <g id="takeaway">
+    <rect x="214" y="590" width="852" height="54" rx="10" fill="#142231" stroke="#33E18A"/>
+    <text x="244" y="625" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="700">模型回答前，先有证据结构；预测输出后，还能回到证据结构。</text>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">03 / 08</text>
+  </g>
+</svg>

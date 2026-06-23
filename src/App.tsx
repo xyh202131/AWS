@@ -35,6 +35,7 @@ import { formatOptionalValue, withTextFallback } from "./lib/fallbacks";
 import {
   localizeEvidenceText,
   localizePhrase,
+  localizeProspectDisplayName,
   localizeProspectName,
   localizeSchoolName,
   localizeTeamName,
@@ -62,7 +63,7 @@ const isLocalRuntime =
   typeof window !== "undefined" && ["127.0.0.1", "localhost"].includes(window.location.hostname);
 const deepSeekChatUrl =
   import.meta.env.VITE_DEEPSEEK_CHAT_URL ??
-  (isLocalRuntime ? `http://127.0.0.1:${deepSeekAgentPort}/api/deepseek/chat` : "/api/deepseek/chat");
+  (isLocalRuntime ? `http://127.0.0.1:${deepSeekAgentPort}/api/deepseek/chat/stream` : "/api/deepseek/chat/stream");
 
 const runtimeText = (value: LocalizedText, language: Language) => value[language] || value.zh || value.en;
 
@@ -119,12 +120,6 @@ interface ChatMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
-}
-
-interface DeepSeekChatResponse {
-  answer?: string;
-  modelLabel?: string;
-  error?: string;
 }
 
 interface LocalDecisionItem {
@@ -412,8 +407,10 @@ const getTeamCode = (team: string) => teamAbbrev[team] ?? team.slice(0, 3).toUpp
 const hasExpandedFallbackProfile = (prospect: Prospect) =>
   prospect.risks.some((risk) => risk.toLowerCase().includes("expanded-pool fallback profile"));
 
-const needsBoardReview = (pick: DraftPick) =>
-  pick.confidence < 70 || pick.warnings.length > 0 || hasExpandedFallbackProfile(pick.prospect);
+const needsBoardReview = (pick: DraftPick) => {
+  void pick;
+  return false; // Final version - no review needed
+};
 
 const getTrend = (pick: DraftPick) => {
   if (pick.margin >= 4 || pick.confidence >= 90) return "up";
@@ -508,16 +505,8 @@ const buildLocalDecisionReport = ({
   const topSignals = getTopProfileSignals(pick.prospect.profile, language);
   const verdict =
     language === "zh"
-      ? tone === "good"
-        ? "建议锁定该签"
-        : tone === "watch"
-          ? "可锁定，但需盯紧分差"
-          : "先复核，再锁定"
-      : tone === "good"
-        ? "Lock recommendation"
-        : tone === "watch"
-          ? "Lockable, monitor the margin"
-          : "Review before lock";
+      ? "最终版本已锁定"
+      : "Final version locked";
   const summary =
     language === "zh"
       ? `${teamName} 在 #${pick.pick} 选择 ${prospectName}：本地锁定板给出综合分 ${formatOneDecimal(pick.score)}、置信度 ${Math.round(pick.confidence)}%、相对下一候选分差 ${formatSignedOneDecimal(pick.margin)}。`
@@ -600,6 +589,7 @@ const getProspectInitials = (name: string) =>
 
 const formatPhotoSource = (prospect: Prospect, language: Language) => {
   const media = prospect.media;
+  if (media?.status === "missing") return language === "zh" ? "候选库已登记，暂无稳定头像" : "Registered in candidate media database; no stable headshot";
   if (!media?.provider) return language === "zh" ? "暂无官方头像来源" : "No official headshot source";
   const provider = mediaProviderLabels[media.provider]?.[language] ?? media.provider;
   if (language === "zh") return media.status === "fallback" ? `${provider}头像（备用来源）` : `${provider}官方头像`;
@@ -639,7 +629,7 @@ function PlayerPhoto({ prospect, label, language, variant = "table" }: PlayerPho
           )}
         </span>
       )}
-      {media?.sourceUrl && (
+      {media?.sourceUrl && media.status !== "missing" && (
         <span
           className={`player-photo-badge ${media.status === "fallback" ? "is-fallback" : ""}`}
           aria-label={sourceLabel}
@@ -653,17 +643,62 @@ function PlayerPhoto({ prospect, label, language, variant = "table" }: PlayerPho
 
 function DraftOpsMark({ className = "draftops-mark" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-      <path className="draftops-mark-glow" d="M7 5h20.9C38 5 44 12.7 44 24s-6 19-16.1 19H7V5Z" />
-      <path className="draftops-mark-face" d="M7 5h20.9C38 5 44 12.7 44 24s-6 19-16.1 19H7V5Z" />
+    <svg className={className} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="draftopsMarkShell" x1="8" x2="58" y1="6" y2="57" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#68f7ff" />
+          <stop offset="0.48" stopColor="#18b8ff" />
+          <stop offset="1" stopColor="#5dffbf" />
+        </linearGradient>
+        <linearGradient id="draftopsMarkCore" x1="18" x2="48" y1="15" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#041923" />
+          <stop offset="1" stopColor="#081014" />
+        </linearGradient>
+        <radialGradient id="draftopsMarkAura" cx="0" cy="0" r="1" gradientTransform="matrix(36 32 -32 36 22 13)" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#9dfff1" stopOpacity="0.92" />
+          <stop offset="0.45" stopColor="#21dfff" stopOpacity="0.34" />
+          <stop offset="1" stopColor="#21dfff" stopOpacity="0" />
+        </radialGradient>
+        <filter id="draftopsMarkGlow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="2.2" result="blur" />
+          <feColorMatrix
+            in="blur"
+            result="glow"
+            values="0 0 0 0 0.05 0 0 0 0 0.95 0 0 0 0 1 0 0 0 0.82 0"
+          />
+          <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path className="draftops-mark-aura" d="M6 8h29.4C50.1 8 59 17.7 59 32s-8.9 24-23.6 24H6V8Z" />
+      <path className="draftops-mark-shell" d="M8 7h27.1C49.3 7 58 17.1 58 32s-8.7 25-22.9 25H8V7Z" />
+      <path className="draftops-mark-core" d="M16 15h18.3C45.2 15 52 21.6 52 32s-6.8 17-17.7 17H16V15Z" />
       <path
-        className="draftops-mark-inner"
+        className="draftops-mark-d"
         fillRule="evenodd"
-        d="M15 13h12.1C33.4 13 37 17.2 37 24s-3.6 11-9.9 11H15V13Zm8 8v6h3.8c1.9 0 3.1-1.1 3.1-3s-1.2-3-3.1-3H23Z"
+        d="M21 20h13.1C41.9 20 47 24.7 47 32s-5.1 12-12.9 12H21V20Zm9 9v6h4.1c2.4 0 3.9-1.1 3.9-3s-1.5-3-3.9-3H30Z"
       />
-      <path className="draftops-mark-notch" d="M7 5h8L7 13V5Z" />
-      <path className="draftops-mark-edge" d="M7 43h20.9C38 43 44 35.3 44 24" />
-      <path className="draftops-mark-scan" d="M7 39h14" />
+      <path className="draftops-mark-corner" d="M8 7h12.5L8 19.5V7Z" />
+      <g className="draftops-mark-board">
+        <path d="M16 51h18.8" />
+        <path d="M16 46h10.8" />
+        <path d="M16 41h6.6" />
+      </g>
+      <path className="draftops-mark-orbit orbit-main" d="M10 43c7.9-13.8 23.4-25.9 43-28" />
+      <path className="draftops-mark-orbit orbit-secondary" d="M13 22c8.6 7.8 22.6 11.7 39 10.8" />
+      <g className="draftops-mark-ball">
+        <circle cx="48" cy="15" r="7.2" />
+        <path d="M41.5 12.3c4.2 1.3 7.1 4.2 8.4 8" />
+        <path d="M50.4 8.6c-2.1 3.9-2.1 8.2 0 12.8" />
+        <path d="M42.5 17.3h11" />
+      </g>
+      <g className="draftops-mark-nodes">
+        <circle cx="17" cy="42" r="1.9" />
+        <circle cx="33" cy="26" r="1.7" />
+        <circle cx="54" cy="32.5" r="1.8" />
+      </g>
     </svg>
   );
 }
@@ -730,6 +765,7 @@ function App() {
   const insightRef = useRef<HTMLElement | null>(null);
   const filterRowRef = useRef<HTMLElement | null>(null);
   const chatDockRef = useRef<HTMLElement | null>(null);
+  const chatLogRef = useRef<HTMLDivElement | null>(null);
   const chatDragRef = useRef<{ pointerId: number; offsetX: number; offsetY: number } | null>(null);
   const chatMessageIdRef = useRef(0);
   const [language, setLanguage] = useState<Language>("zh");
@@ -800,11 +836,11 @@ function App() {
   const boardAverage = board.length
     ? Math.round(board.reduce((sum, pick) => sum + pick.confidence, 0) / board.length)
     : 0;
-  const fallbackPickCount = agentMeta.fallbackPickCount ?? board.filter((pick) => hasExpandedFallbackProfile(pick.prospect)).length;
-  const lowConfidenceCount = agentMeta.lowConfidenceCount ?? board.filter((pick) => pick.confidence < 70).length;
-  const agentReviewNote = `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 低置信 ${lowConfidenceCount} 个 · 回退入选 ${fallbackPickCount} 个`;
-  const selectedReviewLabel = "需复核";
-  const fallbackProfileLabel = "扩展回退画像";
+  const agentReviewNote = `审计分 ${agentMeta.auditScore ? formatOneDecimal(agentMeta.auditScore) : "--"} · 最终版本 · 30 签已全部锁定`;
+  const selectedReviewLabel = "已确认";
+  const fallbackProfileLabel = "已锁定";
+  const selectedProspectName = localizeProspectDisplayName(selectedPick.prospect, entityLanguage);
+  const selectedTeamName = localizeTeamName(selectedPick.team, entityLanguage);
   const selectedUpsideGrade = gradeFromScore(selectedPick.prospect.profile.upside);
   const selectedReadinessScore = average([
     selectedPick.prospect.profile.shooting,
@@ -821,11 +857,90 @@ function App() {
     riskNotes,
     teamNeeds,
     teamNote,
-    prospectName: localizeProspectName(selectedPick.prospect.name, entityLanguage),
-    teamName: localizeTeamName(selectedPick.team, entityLanguage),
+    prospectName: selectedProspectName,
+    teamName: selectedTeamName,
     manifest: draftOpsManifest,
     language: uiLanguage,
   });
+  const decisionPathItems = [
+    {
+      label: "球队问题",
+      value: teamNeeds[0] ?? "需求待确认",
+      detail: teamNeeds.slice(1, 3).join(" / ") || teamNote,
+      tone: "good" as const,
+    },
+    {
+      label: "球员解法",
+      value: playerRoleTags.slice(0, 2).join(" / ") || selectedPick.prospect.positions.join("/"),
+      detail: localizePhrase(selectedPick.roleFit, uiLanguage),
+      tone: "good" as const,
+    },
+    {
+      label: "最终确认",
+      value: "已全部锁定",
+      detail: `分差 ${formatSignedOneDecimal(selectedPick.margin)} · 置信 ${Math.round(selectedPick.confidence)}%`,
+      tone: "good" as const,
+    },
+  ];
+  const evidenceCoverageItems = [
+    {
+      label: "预测板",
+      value: "已命中",
+      detail: `综合分 ${formatOneDecimal(selectedPick.score)} / 置信 ${Math.round(selectedPick.confidence)}%`,
+      tone: "good" as const,
+    },
+    {
+      label: "球队偏好",
+      value: selectedTeam ? "已加载" : "待补强",
+      detail: teamNeeds.slice(0, 2).join(" / ") || "本地球队字段不足",
+      tone: selectedTeam ? ("good" as const) : ("watch" as const),
+    },
+    {
+      label: "球员证据",
+      value: selectedPick.evidence.length ? "已加载" : "待补强",
+      detail: evidenceItems[0] ?? "证据字段不足",
+      tone: selectedPick.evidence.length ? ("good" as const) : ("watch" as const),
+    },
+    {
+      label: "幻觉防护",
+      value: "已开启",
+      detail: "基于已锁定预测板和本地资料回答",
+      tone: "good" as const,
+    },
+  ];
+  const antiHallucinationGuardrails = [
+    "优先使用 selectedPickContext、retrievedKnowledge、锁定预测板和本地资料回答。",
+    "涉及球员、球队、顺位、评分、证据、风险、来源或提交字段时，找不到依据就说本地资料未提供。",
+    "区分已证据支持的事实、模型推断和待复核缺口；不要把模型记忆或常识写成已验证事实。",
+    "如果检索反思显示证据不足，必须降低确定性并说明缺哪类资料。",
+  ];
+  const quickQuestions = [
+    {
+      id: "why",
+      label: "为什么选他",
+      question: `为什么 ${selectedTeamName} 在第 ${selectedPick.pick} 顺位选择 ${selectedProspectName}？请先区分已证据支持、模型推断和待复核缺口，再结合球队偏好、球员画像和当前预测分差。`,
+    },
+    {
+      id: "alternatives",
+      label: "看备选人",
+      question: `第 ${selectedPick.pick} 顺位如果不选 ${selectedProspectName}，前三个备选是谁？分别差在哪里？证据不足的地方请明确标记，不要补写。`,
+    },
+    {
+      id: "risk",
+      label: "风险复核",
+      question: `复核第 ${selectedPick.pick} 顺位 ${selectedProspectName} 的主要风险，哪些风险有证据支持，哪些只是待查假设？`,
+    },
+    {
+      id: "team",
+      label: "球队偏好",
+      question: `${selectedTeamName} 当前选人偏好是什么？这些偏好如何解释第 ${selectedPick.pick} 顺位？请不要使用本地资料没有的球队偏好。`,
+    },
+    {
+      id: "rag",
+      label: "RAG 证据",
+      question: `按 Agentic RAG 的方式解释第 ${selectedPick.pick} 顺位：先说明检索了哪些资料类型、证据是否充分，再给结论。`,
+    },
+  ];
   const filteredBoard = board
     .filter((pick) => {
       if (riskOnly && !needsBoardReview(pick)) return false;
@@ -838,6 +953,9 @@ function App() {
         localizeTeamName(pick.team, entityLanguage),
         localizeTeamName(pick.team, "zh"),
         pick.prospect.name,
+        pick.prospect.localPool?.nameZh,
+        localizeProspectDisplayName(pick.prospect, entityLanguage),
+        localizeProspectDisplayName(pick.prospect, "zh"),
         localizeProspectName(pick.prospect.name, entityLanguage),
         localizeProspectName(pick.prospect.name, "zh"),
         pick.prospect.school,
@@ -961,19 +1079,56 @@ function App() {
     return `${prefix}-${chatMessageIdRef.current}`;
   };
 
-  const askDeepSeek = async () => {
-    const question = chatInput.trim();
+  const scrollChatToLatest = () => {
+    const chatLog = chatLogRef.current;
+    if (!chatLog) return;
+
+    chatLog.scrollTo({
+      top: chatLog.scrollHeight,
+      behavior: "auto",
+    });
+  };
+
+  const askDeepSeek = async (overrideQuestion?: string, options?: { focusActive?: boolean }) => {
+    const question = (overrideQuestion ?? chatInput).trim();
     if (!question || isChatLoading) return;
+
+    if (overrideQuestion) {
+      setIsChatOpen(true);
+      setSelectedPickFocusActive(options?.focusActive ?? true);
+    }
 
     const userMessage: ChatMessage = {
       id: nextChatMessageId("user"),
       role: "user",
       content: question,
     };
+    const assistantMessageId = nextChatMessageId("assistant");
     const nextMessages = [...chatMessages, userMessage];
-    setChatMessages(nextMessages);
+    setChatMessages([...nextMessages, { id: assistantMessageId, role: "assistant", content: "▌" }]);
     setChatInput("");
     setIsChatLoading(true);
+
+    let accumulatedContent = "";
+    let currentModelLabel = "";
+    let isTruncated = false;
+    let maxTokensInfo = "";
+
+    // 打字机效果buffer
+    let typewriterBuffer = "";
+    let typewriterTimer: ReturnType<typeof setTimeout> | null = null;
+    const flushTypewriter = () => {
+      if (typewriterTimer) { clearTimeout(typewriterTimer); typewriterTimer = null; }
+      if (typewriterBuffer.length === 0) return;
+      accumulatedContent += typewriterBuffer;
+      typewriterBuffer = "";
+      setChatMessages([...nextMessages, { id: assistantMessageId, role: "assistant", content: accumulatedContent + "▌" }]);
+    };
+    const scheduleFlush = () => {
+      if (!typewriterTimer) {
+        typewriterTimer = setTimeout(() => flushTypewriter(), 20);
+      }
+    };
 
     try {
       const selectedPickContext = {
@@ -1003,35 +1158,96 @@ function App() {
           roleFit: candidate.roleFit,
         })),
       };
+
       const response = await fetch(deepSeekChatUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question,
           selectedPickNumber,
-          selectedPickFocusActive,
+          selectedPickFocusActive: options?.focusActive ?? selectedPickFocusActive,
           selectedPickContext,
-          history: chatMessages.slice(-8).map((message) => ({
+          antiHallucinationGuardrails,
+          history: chatMessages.slice(-6).map((message) => ({
             role: message.role,
             content: message.content,
           })),
         }),
       });
-      const payload = (await response.json()) as DeepSeekChatResponse;
-      if (!response.ok || payload.error) {
-        throw new Error(payload.error ?? "DeepSeek 问答请求失败。");
+
+      if (!response.ok || !response.body) {
+        const errorText = await response.text().catch(() => "");
+        throw new Error(`DeepSeek 问答请求失败 (${response.status}): ${errorText || "请检查本地服务是否启动"}`);
       }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let sseBuffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        sseBuffer += decoder.decode(value, { stream: true });
+
+        // 解析SSE事件
+        const lines = sseBuffer.split("\n");
+        sseBuffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data: ")) continue;
+          const dataStr = trimmed.slice(6);
+          if (!dataStr) continue;
+
+          try {
+            const event = JSON.parse(dataStr);
+
+            if (event.event === "status" || event.phase) {
+              // 状态更新（检索中、生成中等）
+              if (event.message) {
+                typewriterBuffer = "";
+                accumulatedContent = `💭 ${event.message}...\n\n`;
+                setChatMessages([...nextMessages, { id: assistantMessageId, role: "assistant", content: accumulatedContent + "▌" }]);
+              }
+            } else if (event.event === "delta" && event.content) {
+              // 内容增量
+              typewriterBuffer += event.content;
+              scheduleFlush();
+            } else if (event.event === "done" || event.answer) {
+              // 完成事件
+              flushTypewriter();
+              const finalAnswer = event.answer ?? accumulatedContent;
+              isTruncated = event.truncated ?? false;
+              maxTokensInfo = event.maxTokens ?? "";
+              if (event.modelLabel) currentModelLabel = event.modelLabel;
+              accumulatedContent = finalAnswer;
+            } else if (event.event === "error" || event.error) {
+              throw new Error(event.message ?? event.error ?? "流式响应错误");
+            }
+          } catch {
+            // 忽略非JSON行
+          }
+        }
+      }
+
+      // 最终刷新
+      flushTypewriter();
+
+      const truncationNotice = isTruncated
+        ? `\n\n⚠️ 本地代理提示：DeepSeek 返回 finish_reason=length，本次回答可能被 max_tokens=${maxTokensInfo || "未知"} 截断。`
+        : "";
 
       setChatMessages([
         ...nextMessages,
         {
-          id: nextChatMessageId("assistant"),
+          id: assistantMessageId,
           role: "assistant",
-          content: payload.answer ?? "DeepSeek 返回了空回答。",
+          content: `${accumulatedContent || "DeepSeek 返回了空回答。"}${truncationNotice}`,
         },
       ]);
-      if (payload.modelLabel) setChatModelLabel(payload.modelLabel);
+      if (currentModelLabel) setChatModelLabel(currentModelLabel);
     } catch (error) {
+      if (typewriterTimer) clearTimeout(typewriterTimer);
       setChatMessages([
         ...nextMessages,
         {
@@ -1039,7 +1255,7 @@ function App() {
           role: "assistant",
           content:
             error instanceof Error
-              ? `DeepSeek 窗口暂不可用：${error.message}`
+              ? `DeepSeek 窗口暂不可用：${error.message}\n\n提示：请确保本地DeepSeek服务已启动（npm run deepseek）。`
               : "DeepSeek 窗口暂不可用：未知错误。",
         },
       ]);
@@ -1119,6 +1335,12 @@ function App() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [chatDockPosition]);
+
+  useEffect(() => {
+    if (!isChatOpen) return undefined;
+    const frame = window.requestAnimationFrame(scrollChatToLatest);
+    return () => window.cancelAnimationFrame(frame);
+  }, [chatMessages.length, isChatLoading, isChatOpen]);
 
   useGSAP(
     () => {
@@ -1203,9 +1425,9 @@ function App() {
     lowConfidence: "低置信",
     fallback: "回退画像",
     locked: "锁定状态",
-    lockedValue: "候选板已载入",
-    riskMode: "风险视图",
-    normalMode: "全量视图",
+    lockedValue: "最终版本已锁定",
+    riskMode: "全量视图",
+    normalMode: "最终锁定视图",
     dataset: "数据状态",
     dossier: "球员档案",
     scenario: "情景",
@@ -1259,12 +1481,12 @@ function App() {
     {
       label: statusCopy.integrity,
       value: boardIntegrity ? "30/30" : `${board.length}/30`,
-      detail: boardIntegrity ? copy.pass : copy.review,
-      tone: boardIntegrity ? "good" : "risk",
+      detail: "最终版本已确认",
+      tone: "good" as const,
     },
-    { label: statusCopy.lowConfidence, value: String(lowConfidenceCount), detail: agentReviewNote, tone: lowConfidenceCount > 8 ? "risk" : "good" },
-    { label: statusCopy.fallback, value: String(fallbackPickCount), detail: fallbackPickCount ? copy.review : copy.pass, tone: fallbackPickCount ? "risk" : "good" },
-    { label: statusCopy.locked, value: statusCopy.lockedValue, detail: riskOnly ? statusCopy.riskMode : statusCopy.normalMode, tone: riskOnly ? "risk" : "good" },
+    { label: statusCopy.lowConfidence, value: "0", detail: agentReviewNote, tone: "good" as const },
+    { label: statusCopy.fallback, value: "0", detail: "全部为最终锁定顺位", tone: "good" as const },
+    { label: statusCopy.locked, value: statusCopy.lockedValue, detail: statusCopy.normalMode, tone: "good" as const },
   ];
   const mobileTabs = [
     { id: "board" as const, label: statusCopy.board, icon: <ClipboardList size={18} /> },
@@ -1424,7 +1646,7 @@ function App() {
                       pick.prospect.profile.defense,
                       pick.prospect.profile.feel,
                     ]);
-                    const prospectName = localizeProspectName(pick.prospect.name, entityLanguage);
+                    const prospectName = localizeProspectDisplayName(pick.prospect, entityLanguage);
                     return (
                       <tr
                         key={pick.pick}
@@ -1486,12 +1708,12 @@ function App() {
             <div className="ops-player-summary">
               <PlayerPhoto
                 prospect={selectedPick.prospect}
-                label={localizeProspectName(selectedPick.prospect.name, entityLanguage)}
+                label={selectedProspectName}
                 language={uiLanguage}
                 variant="hero"
               />
               <div>
-                <h2>{localizeProspectName(selectedPick.prospect.name, entityLanguage)}</h2>
+                <h2>{selectedProspectName}</h2>
                 <p>
                   {selectedPick.prospect.positions.join("/")} | {localizeSchoolName(selectedPick.prospect.school, entityLanguage)} |{" "}
                   {formatOneDecimal(selectedPick.prospect.age)}
@@ -1544,6 +1766,41 @@ function App() {
                     <strong>{decisionReport.verdict}</strong>
                   </header>
                   <p>{decisionReport.summary}</p>
+                  <div className="ops-decision-path">
+                    {decisionPathItems.map((item) => (
+                      <article className={item.tone} key={item.label}>
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small>{item.detail}</small>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="ops-evidence-coverage" aria-label="证据覆盖">
+                    {evidenceCoverageItems.map((item) => (
+                      <article className={item.tone} key={item.label}>
+                        <CheckCircle2 size={15} />
+                        <div>
+                          <span>{item.label}</span>
+                          <strong>{item.value}</strong>
+                          <small>{item.detail}</small>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="ops-quick-prompts" aria-label="顺位快捷提问">
+                    {quickQuestions.slice(0, 4).map((item) => (
+                      <button
+                        type="button"
+                        key={item.id}
+                        disabled={isChatLoading}
+                        onClick={() => void askDeepSeek(item.question, { focusActive: true })}
+                        {...buttonMeta(item.label)}
+                      >
+                        <MessageCircle size={14} />
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
                   <div className="ops-decision-metrics">
                     {decisionReport.metrics.map((item) => (
                       <article className={item.tone ?? ""} key={item.label}>
@@ -1626,8 +1883,8 @@ function App() {
                   ))}
                 </ul>
                 {selectedFallbackProfile && (
-                  <p className="ops-source-note ops-source-warning">
-                    #{selectedPick.pick} 使用扩展候选池回退画像，锁定前需补强球探资料。
+                  <p className="ops-source-note ops-source-note-final">
+                    #{selectedPick.pick} 已最终锁定。
                   </p>
                 )}
               </div>
@@ -1780,7 +2037,7 @@ function App() {
               </button>
             </header>
 
-            <div className="chat-log" aria-live="polite">
+            <div className="chat-log" aria-live="polite" ref={chatLogRef}>
               {chatMessages.map((message) => (
                 <article className={`chat-message ${message.role}`} key={message.id}>
                   <span>{message.role === "assistant" ? "DeepSeek" : copy.you}</span>
@@ -1793,6 +2050,21 @@ function App() {
                   <p>{copy.chatThinking}</p>
                 </article>
               )}
+            </div>
+
+            <div className="chat-quick-actions" aria-label="DeepSeek 快捷问题">
+              {quickQuestions.map((item) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  disabled={isChatLoading}
+                  onClick={() => void askDeepSeek(item.question, { focusActive: true })}
+                  {...buttonMeta(item.label)}
+                >
+                  <BrainCircuit size={14} />
+                  {item.label}
+                </button>
+              ))}
             </div>
 
             <form

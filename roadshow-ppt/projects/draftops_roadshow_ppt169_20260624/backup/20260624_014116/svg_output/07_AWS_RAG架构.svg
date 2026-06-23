@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <g id="background">
+    <rect width="1280" height="720" fill="#070B10"/>
+  </g>
+  <g id="header">
+    <text x="64" y="78" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#E7F2FF" font-weight="800">AWS/RAG：可回答、能部署、可追溯</text>
+    <text x="64" y="116" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#94A8BC">Lambda/API + RAG 负责只读问答；索引来自本地构建并可同步到 S3。</text>
+  </g>
+  <g id="top-architecture">
+    <rect x="143" y="168" width="190" height="112" rx="14" fill="#142231" stroke="#62B8FF"/>
+    <use data-icon="tabler-outline/screen-share" x="169" y="194" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="217" y="218" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF" font-weight="800">DraftOps 前端</text>
+    <text x="169" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">预测板 / 证据 / 导出</text>
+    <line x1="333" y1="224" x2="411" y2="224" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="411,224 397,216 397,232" fill="#62B8FF"/>
+    <rect x="411" y="168" width="190" height="112" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/api" x="437" y="194" width="34" height="34" fill="#62B8FF" stroke-width="2"/>
+    <text x="485" y="218" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF" font-weight="800">Agent API</text>
+    <text x="437" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">Lambda / local proxy</text>
+    <line x1="601" y1="224" x2="679" y2="224" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="679,224 665,216 665,232" fill="#62B8FF"/>
+    <rect x="679" y="168" width="190" height="112" rx="14" fill="#142231" stroke="#33E18A"/>
+    <use data-icon="tabler-outline/route" x="705" y="194" width="34" height="34" fill="#33E18A" stroke-width="2"/>
+    <text x="753" y="218" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF" font-weight="800">RAG 检索层</text>
+    <text x="705" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">ranking / MMR / fallback</text>
+    <line x1="869" y1="224" x2="947" y2="224" stroke="#62B8FF" stroke-width="3"/>
+    <polygon points="947,224 933,216 933,232" fill="#62B8FF"/>
+    <rect x="947" y="168" width="190" height="112" rx="14" fill="#142231" stroke="#28455E"/>
+    <use data-icon="tabler-outline/brain" x="973" y="194" width="34" height="34" fill="#FFD166" stroke-width="2"/>
+    <text x="1021" y="218" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#E7F2FF" font-weight="800">模型层</text>
+    <text x="973" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">DeepSeek / Bedrock</text>
+  </g>
+  <g id="storage-row">
+    <rect x="126" y="376" width="300" height="150" rx="16" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/cloud" x="162" y="410" width="40" height="40" fill="#62B8FF" stroke-width="2"/>
+    <text x="222" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="800">S3 索引文件</text>
+    <text x="162" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#62B8FF" font-weight="800">5 indexes / 1304 chunks</text>
+    <text x="162" y="514" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">55 sources，local-hash vectors</text>
+    <rect x="490" y="376" width="300" height="150" rx="16" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/server" x="526" y="410" width="40" height="40" fill="#33E18A" stroke-width="2"/>
+    <text x="586" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="800">DynamoDB</text>
+    <text x="526" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#33E18A" font-weight="800">124 feature records</text>
+    <text x="526" y="514" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">身体、测量、标签与嵌套字段</text>
+    <rect x="854" y="376" width="300" height="150" rx="16" fill="#101820" stroke="#28455E"/>
+    <use data-icon="tabler-outline/shield-check" x="890" y="410" width="40" height="40" fill="#FFD166" stroke-width="2"/>
+    <text x="950" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" fill="#E7F2FF" font-weight="800">只读护栏</text>
+    <text x="890" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" fill="#FFD166" font-weight="800">weak evidence aware</text>
+    <text x="890" y="514" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#94A8BC">不改代码、不换人、不覆盖 board</text>
+  </g>
+  <g id="takeaway">
+    <rect x="216" y="590" width="848" height="54" rx="10" fill="#142231" stroke="#33E18A"/>
+    <text x="246" y="625" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#33E18A" font-weight="700">项目边界：代码含 Lambda API；未补完整 IaC 前，按可部署 API 层表述。</text>
+  </g>
+  <g id="footer">
+    <text x="64" y="674" font-family="Consolas, 'Courier New', monospace" font-size="15" fill="#94A8BC">07 / 08</text>
+  </g>
+</svg>

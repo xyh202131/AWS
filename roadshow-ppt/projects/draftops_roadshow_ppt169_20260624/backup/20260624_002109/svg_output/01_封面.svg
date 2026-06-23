@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070B10"/>
+      <stop offset="1" stop-color="#102033"/>
+    </linearGradient>
+    <linearGradient id="blueGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#62B8FF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#33E18A" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#bg)"/>
+  <rect x="42" y="48" width="1196" height="624" rx="18" fill="#101820" fill-opacity="0.82" stroke="#28455E" stroke-width="1.5"/>
+  <rect x="752" y="78" width="424" height="294" rx="12" fill="#070B10" stroke="#28455E" stroke-width="1.2"/>
+  <image href="../images/product-home.png" x="770" y="96" width="388" height="269" preserveAspectRatio="xMidYMid meet"/>
+  <rect x="770" y="96" width="388" height="269" fill="#070B10" fill-opacity="0.20"/>
+  <text x="78" y="122" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#62B8FF" font-weight="700">AWS × NBA Competition Roadshow</text>
+  <text x="78" y="198" font-family="Microsoft YaHei, Arial, sans-serif" font-size="60" fill="#E7F2FF" font-weight="800">DraftOps</text>
+  <text x="78" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="30" fill="#94A8BC">面向 2026 NBA 选秀的 Agent 预测驾驶舱</text>
+  <rect x="78" y="300" width="560" height="5" fill="url(#blueGlow)" rx="2.5"/>
+  <text x="78" y="362" font-family="Microsoft YaHei, Arial, sans-serif" font-size="25" fill="#E7F2FF">
+    <tspan x="78" dy="0">把官方数据、外部选秀信号、球队需求和多 Agent 复核流程，</tspan>
+    <tspan x="78" dy="38">转化为可解释、可审计、可提交的首轮预测。</tspan>
+  </text>
+  <rect x="78" y="466" width="156" height="96" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="102" y="512" font-family="Consolas, 'Courier New', monospace" font-size="38" fill="#33E18A" font-weight="800">30/30</text>
+  <text x="102" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">完整预测板</text>
+  <rect x="258" y="466" width="156" height="96" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="282" y="512" font-family="Consolas, 'Courier New', monospace" font-size="38" fill="#62B8FF" font-weight="800">124</text>
+  <text x="282" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">本地候选池</text>
+  <rect x="438" y="466" width="156" height="96" rx="12" fill="#142231" stroke="#28455E"/>
+  <text x="462" y="512" font-family="Consolas, 'Courier New', monospace" font-size="38" fill="#FFD166" font-weight="800">RAG</text>
+  <text x="462" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#94A8BC">AWS 问答层</text>
+  <text x="78" y="632" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#94A8BC">可信数据 / 可解释预测 / 可提交系统</text>
+</svg>

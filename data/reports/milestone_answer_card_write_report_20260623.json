@@ -3,19 +3,19 @@
   "sourceTemplate": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_模板）.xlsx",
   "deepseekDiscussion": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\reports\\milestone_deepseek_discussion_20260623.json",
   "roundCount": 5,
-  "outputWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_里程碑预测已填）.xlsx",
+  "outputWorkbook": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\数据\\上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx",
   "writtenCells": {
     "Q1": {
       "cell": "F3",
-      "value": 2
+      "value": 3
     },
     "Q2": {
       "cell": "F4",
-      "value": 1
+      "value": 2
     },
     "Q3": {
       "cell": "F5",
-      "value": 3
+      "value": 4
     },
     "Q4": {
       "cell": "F6",
@@ -23,7 +23,7 @@
     },
     "Q5": {
       "cell": "F7",
-      "value": 6
+      "value": 7
     },
     "Q6": {
       "cell": "F8",
@@ -31,11 +31,45 @@
     },
     "Q7": {
       "cell": "F9",
-      "value": 2
+      "value": 3
     }
   },
   "validation": {
     "q6InDropdown": true,
     "reopenVerified": true
-  }
+  },
+  "revisions": [
+    {
+      "generatedAt": "2026-06-23T15:14:46.107973+00:00",
+      "cell": "F7",
+      "previousValue": 6,
+      "newValue": 7,
+      "reason": "NBA official notes classify Yaxel Lendeborg as Dominican Republic international prospect.",
+      "sourceReport": "data/reports/milestone_q5_nba_notes_recalculation_20260623.json"
+    },
+    {
+      "generatedAt": "2026-06-23T15:52:10.226575+00:00",
+      "type": "tolerance-strategy-adjustment",
+      "previousAnswers": {
+        "Q1": 2,
+        "Q2": 1,
+        "Q3": 3,
+        "Q4": 8,
+        "Q5": 7,
+        "Q6": "密歇根大学",
+        "Q7": 2
+      },
+      "newAnswers": {
+        "Q1": 3,
+        "Q2": 2,
+        "Q3": 4,
+        "Q4": 8,
+        "Q5": 7,
+        "Q6": "密歇根大学",
+        "Q7": 3
+      },
+      "sourceReport": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\reports\\milestone_tolerance_strategy_adjustment_20260623.json"
+    }
+  ],
+  "toleranceStrategyReport": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\reports\\milestone_tolerance_strategy_adjustment_20260623.json"
 }

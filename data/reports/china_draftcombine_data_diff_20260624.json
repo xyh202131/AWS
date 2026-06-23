@@ -1,0 +1,4843 @@
+{
+  "schemaVersion": "draftops.china_nba_draftcombine_diff.v1",
+  "generatedAt": "2026-06-23T18:17:11.531Z",
+  "scope": "Field-level verification of current NBA China Draft Combine data against DraftOps local 124-player feature reference. Local data is not modified.",
+  "scrapedSource": "https://china.nba.cn/statistics/draftcombine",
+  "note": "Firecrawl proxy fetch returned a blocked 404 response, so the page was fetched locally and its static JSON endpoints from the Vue bundle were used.",
+  "seasons": {
+    "anthropometric": "26-27",
+    "strengthAgility": "2026-27",
+    "shooting": "2026"
+  },
+  "sources": {
+    "page": {
+      "label": "NBA China Draft Combine page",
+      "url": "https://china.nba.cn/statistics/draftcombine",
+      "localHtmlPath": ".firecrawl/china-nba-local-draftcombine-20260624.html",
+      "firecrawlAttemptPath": ".firecrawl/china-nba-draftcombine-20260624.json",
+      "sha256": "5A1414A2E2A70EA13EE6D96B14DBD91D5900C1BC460E267E9C2F55358D6EFDCA"
+    },
+    "bundle": {
+      "label": "NBA China Vue bundle exposing static JSON endpoints",
+      "url": "https://res.nba.cn/static/webmaster/assets/js/index-e2ff8c41.js",
+      "path": ".firecrawl/china-index-e2ff8c41.js",
+      "sha256": "0B69DBF913D7B9C668E6FF7F49B8DD53F853DAD55E4E1B40A31BDCBEA0C6F86A"
+    },
+    "candidates": {
+      "label": "NBA China Draft Combine candidates",
+      "url": "https://res.nba.cn/static/data/draft_combine/candidates.json",
+      "path": "data/raw/china_nba_draftcombine_20260624/candidates.json",
+      "sha256": "636F873111B90D59DCD47398F1956004F6C35A86CFFC8D7D613E030359200FF6"
+    },
+    "anthropometric": {
+      "label": "NBA China Draft Combine anthropometric data",
+      "url": "https://res.nba.cn/static/data/draft_combine/anthro.json",
+      "path": "data/raw/china_nba_draftcombine_20260624/anthro.json",
+      "seasonKey": "26-27",
+      "sha256": "E75F282BB114FF0D40165BC505C76B004AAFA79F4D7C5C9684E0B3819A6AE5E8"
+    },
+    "strengthAgility": {
+      "label": "NBA China Draft Combine strength and agility data",
+      "url": "https://res.nba.cn/static/data/draft_combine/strength%26agility.json",
+      "path": "data/raw/china_nba_draftcombine_20260624/strength&agility.json",
+      "seasonKey": "2026-27",
+      "sha256": "34B9E93445AC0279B8E575FA46CEC1FF15F95AA996CF22A6A12FE15282EE4A02"
+    },
+    "shooting": {
+      "label": "NBA China Draft Combine shooting drills",
+      "url": "https://res.nba.cn/static/data/draft_combine/shooting_drills.json",
+      "path": "data/raw/china_nba_draftcombine_20260624/shooting_drills.json",
+      "seasonKey": "2026",
+      "sha256": "DD1FBB9199D53927D4D074824EC8693C940A2F8437D77AA0CD9CEF1325D2E639"
+    },
+    "localFeatureReference": {
+      "label": "DraftOps local 124-player feature reference",
+      "path": "data/normalized/normalized_2026_player_feature_reference_124.json",
+      "sha256": "294F30DFC7606B406D3941F54D0ADDEDA0DCBF18C9FB702E48EFA2E8EA037BB9"
+    }
+  },
+  "summary": {
+    "localRows": 124,
+    "localUniquePlayers": 123,
+    "normalizedSourceUniquePlayers": 123,
+    "sourceRows": {
+      "candidates": 107,
+      "anthropometric": 78,
+      "strengthAgility": 78,
+      "shooting": 73
+    },
+    "candidateCoverage": {
+      "localUniquePlayersNotInCandidates": 16,
+      "candidatesNotInLocalUniquePlayers": 0,
+      "localNotCandidates": [
+        "安德烈 斯托亚科维奇",
+        "小杰里米 费尔斯",
+        "小比利 里士满三世",
+        "弗洛里 比敦加",
+        "泰勒 坦纳",
+        "米兰 莫姆契洛维奇",
+        "约翰 布莱克威尔",
+        "通德 耶苏福",
+        "阿伦 恩克鲁玛",
+        "阿马里 阿伦",
+        "雅各布 科菲",
+        "马修 埃布尔",
+        "马拉奇 莫雷诺",
+        "鲁本 钦耶卢",
+        "小克里斯托弗 布朗",
+        "杰登 哈里斯"
+      ],
+      "candidatesNotLocal": []
+    },
+    "duplicateLocalNames": [
+      {
+        "key": "纳撒尼尔阿门特",
+        "names": [
+          "纳撒尼尔 阿门特"
+        ],
+        "poolOrdinals": [
+          67,
+          84
+        ],
+        "count": 2
+      }
+    ],
+    "duplicateSourceNames": {
+      "candidates": [],
+      "anthropometric": [],
+      "strengthAgility": [],
+      "shooting": [
+        {
+          "key": "马利奇布朗",
+          "names": [
+            "马利奇 布朗"
+          ],
+          "poolOrdinals": [],
+          "count": 2
+        }
+      ]
+    },
+    "datasetSummaries": {
+      "anthropometric": {
+        "sourceRows": 78,
+        "sourceUniquePlayers": 78,
+        "comparedUniqueLocalPlayers": 123,
+        "matchedPlayers": 78,
+        "exactMatchedPlayers": 78,
+        "playersWithDifferences": 0,
+        "sourceMissingPlayers": 45,
+        "fieldDifferences": 0,
+        "mismatchByField": {},
+        "sourceOnly": [],
+        "localOnly": [
+          "AJ 施托尔",
+          "BJ 爱德华兹",
+          "亚当 阿塔姆纳",
+          "克肖恩 墨菲",
+          "内特 比特尔",
+          "凯德 泰森",
+          "卡迪尔 科普兰",
+          "塔克 德弗里斯",
+          "塔明 利普西",
+          "多诺万 登特",
+          "奥斯卡 克拉夫",
+          "奥格年 斯尔曾蒂奇",
+          "威廉 凯尔",
+          "小梅尔文 康斯尔",
+          "小欧内斯特 乌德",
+          "小雅龙 皮埃尔",
+          "布赖森 塔克",
+          "帕夫莱 巴奇科",
+          "弗塞沃落德 伊先科",
+          "弗朗西斯科 法拉利",
+          "弗莱彻 洛耶尔",
+          "戴米恩 科林斯",
+          "拉贾伊 琼斯",
+          "拉马尔 威尔克森",
+          "本 亨歇尔",
+          "杰登 亨利",
+          "泰恩 格兰特-福斯特",
+          "泽维安 李",
+          "特伦斯 阿西诺",
+          "特雷 怀特",
+          "穆罕默德 费伊",
+          "穆罕默德 阿米尼",
+          "米伊卡 穆里宁",
+          "约什 迪克斯",
+          "莱利 库格尔",
+          "蒂埃里 达尔兰",
+          "赛斯 特林布尔",
+          "达什 丹尼尔斯",
+          "达里恩 威廉姆斯",
+          "迈克尔 布朗",
+          "迈克尔 阿贾伊",
+          "迈克尔 鲁日奇",
+          "马克 米切尔",
+          "马利克 尤因",
+          "马利克 雷诺"
+        ]
+      },
+      "strengthAgility": {
+        "sourceRows": 78,
+        "sourceUniquePlayers": 78,
+        "comparedUniqueLocalPlayers": 123,
+        "matchedPlayers": 78,
+        "exactMatchedPlayers": 78,
+        "playersWithDifferences": 0,
+        "sourceMissingPlayers": 45,
+        "fieldDifferences": 0,
+        "mismatchByField": {},
+        "sourceOnly": [],
+        "localOnly": [
+          "AJ 施托尔",
+          "BJ 爱德华兹",
+          "亚当 阿塔姆纳",
+          "克肖恩 墨菲",
+          "内特 比特尔",
+          "凯德 泰森",
+          "卡迪尔 科普兰",
+          "塔克 德弗里斯",
+          "塔明 利普西",
+          "多诺万 登特",
+          "奥斯卡 克拉夫",
+          "奥格年 斯尔曾蒂奇",
+          "威廉 凯尔",
+          "小梅尔文 康斯尔",
+          "小欧内斯特 乌德",
+          "小雅龙 皮埃尔",
+          "布赖森 塔克",
+          "帕夫莱 巴奇科",
+          "弗塞沃落德 伊先科",
+          "弗朗西斯科 法拉利",
+          "弗莱彻 洛耶尔",
+          "戴米恩 科林斯",
+          "拉贾伊 琼斯",
+          "拉马尔 威尔克森",
+          "本 亨歇尔",
+          "杰登 亨利",
+          "泰恩 格兰特-福斯特",
+          "泽维安 李",
+          "特伦斯 阿西诺",
+          "特雷 怀特",
+          "穆罕默德 费伊",
+          "穆罕默德 阿米尼",
+          "米伊卡 穆里宁",
+          "约什 迪克斯",
+          "莱利 库格尔",
+          "蒂埃里 达尔兰",
+          "赛斯 特林布尔",
+          "达什 丹尼尔斯",
+          "达里恩 威廉姆斯",
+          "迈克尔 布朗",
+          "迈克尔 阿贾伊",
+          "迈克尔 鲁日奇",
+          "马克 米切尔",
+          "马利克 尤因",
+          "马利克 雷诺"
+        ]
+      },
+      "shooting": {
+        "sourceRows": 73,
+        "sourceUniquePlayers": 72,
+        "comparedUniqueLocalPlayers": 123,
+        "matchedPlayers": 72,
+        "exactMatchedPlayers": 72,
+        "playersWithDifferences": 0,
+        "sourceMissingPlayers": 51,
+        "fieldDifferences": 0,
+        "mismatchByField": {},
+        "sourceOnly": [],
+        "localOnly": [
+          "塞尔吉奥 德拉雷亚",
+          "杰克 卡伊尔",
+          "路易吉 苏伊戈",
+          "里奇 桑德斯",
+          "小克里斯托弗 布朗",
+          "杰登 哈里斯",
+          "AJ 施托尔",
+          "BJ 爱德华兹",
+          "亚当 阿塔姆纳",
+          "克肖恩 墨菲",
+          "内特 比特尔",
+          "凯德 泰森",
+          "卡迪尔 科普兰",
+          "塔克 德弗里斯",
+          "塔明 利普西",
+          "多诺万 登特",
+          "奥斯卡 克拉夫",
+          "奥格年 斯尔曾蒂奇",
+          "威廉 凯尔",
+          "小梅尔文 康斯尔",
+          "小欧内斯特 乌德",
+          "小雅龙 皮埃尔",
+          "布赖森 塔克",
+          "帕夫莱 巴奇科",
+          "弗塞沃落德 伊先科",
+          "弗朗西斯科 法拉利",
+          "弗莱彻 洛耶尔",
+          "戴米恩 科林斯",
+          "拉贾伊 琼斯",
+          "拉马尔 威尔克森",
+          "本 亨歇尔",
+          "杰登 亨利",
+          "泰恩 格兰特-福斯特",
+          "泽维安 李",
+          "特伦斯 阿西诺",
+          "特雷 怀特",
+          "穆罕默德 费伊",
+          "穆罕默德 阿米尼",
+          "米伊卡 穆里宁",
+          "约什 迪克斯",
+          "莱利 库格尔",
+          "蒂埃里 达尔兰",
+          "赛斯 特林布尔",
+          "达什 丹尼尔斯",
+          "达里恩 威廉姆斯",
+          "迈克尔 布朗",
+          "迈克尔 阿贾伊",
+          "迈克尔 鲁日奇",
+          "马克 米切尔",
+          "马利克 尤因",
+          "马利克 雷诺"
+        ]
+      }
+    },
+    "fieldDifferences": 0
+  },
+  "differences": [],
+  "perPlayerComparisons": [
+    {
+      "poolOrdinal": 1,
+      "nameKey": "aj迪班萨",
+      "nameZh": "AJ 迪班萨",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 2,
+      "nameKey": "乌戈纳奥尼恩索",
+      "nameZh": "乌戈纳 奥尼恩索",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 3,
+      "nameKey": "乔舒亚杰弗森",
+      "nameZh": "乔舒亚 杰弗森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 4,
+      "nameKey": "亚克塞尔伦德伯格",
+      "nameZh": "亚克塞尔 伦德伯格",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 5,
+      "nameKey": "亚历克斯卡拉班",
+      "nameZh": "亚历克斯 卡拉班",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 6,
+      "nameKey": "亨利维萨尔",
+      "nameZh": "亨利 维萨尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 7,
+      "nameKey": "以赛亚埃文斯",
+      "nameZh": "以赛亚 埃文斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 8,
+      "nameKey": "以赛亚尼尔森",
+      "nameZh": "以赛亚 尼尔森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 9,
+      "nameKey": "伊曼纽尔夏普",
+      "nameZh": "伊曼纽尔 夏普",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 10,
+      "nameKey": "克里斯塞纳克",
+      "nameZh": "克里斯 塞纳克",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 11,
+      "nameKey": "克里斯蒂安安德森",
+      "nameZh": "克里斯蒂安 安德森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 12,
+      "nameKey": "凯兰博斯韦尔",
+      "nameZh": "凯兰 博斯韦尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 13,
+      "nameKey": "凯莱布威尔逊",
+      "nameZh": "凯莱布 威尔逊",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 14,
+      "nameKey": "卡梅隆卡尔",
+      "nameZh": "卡梅隆 卡尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 15,
+      "nameKey": "卡梅隆布泽尔",
+      "nameZh": "卡梅隆 布泽尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 16,
+      "nameKey": "卡里姆洛佩兹",
+      "nameZh": "卡里姆 洛佩兹",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 17,
+      "nameKey": "埃布卡奥科里",
+      "nameZh": "埃布卡 奥科里",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 18,
+      "nameKey": "基肖恩霍尔",
+      "nameZh": "基肖恩 霍尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 19,
+      "nameKey": "基顿瓦格勒",
+      "nameZh": "基顿 瓦格勒",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 20,
+      "nameKey": "奥泰加奥韦",
+      "nameZh": "奥泰加 奥韦",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 21,
+      "nameKey": "小塔里斯里德",
+      "nameZh": "小塔里斯 里德",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 22,
+      "nameKey": "小拉巴伦菲隆",
+      "nameZh": "小拉巴伦 菲隆",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 23,
+      "nameKey": "小莫雷兹约翰逊",
+      "nameZh": "小莫雷兹 约翰逊",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 24,
+      "nameKey": "尼克博伊德",
+      "nameZh": "尼克 博伊德",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 25,
+      "nameKey": "尼克马丁内利",
+      "nameZh": "尼克 马丁内利",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 26,
+      "nameKey": "巴巴米勒",
+      "nameZh": "巴巴 米勒",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 27,
+      "nameKey": "布赖斯霍普金斯",
+      "nameZh": "布赖斯 霍普金斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 28,
+      "nameKey": "布雷登伯里斯",
+      "nameZh": "布雷登 伯里斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 29,
+      "nameKey": "布雷登史密斯",
+      "nameZh": "布雷登 史密斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 30,
+      "nameKey": "布鲁斯索顿",
+      "nameZh": "布鲁斯 索顿",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 31,
+      "nameKey": "彼得祖德尔",
+      "nameZh": "彼得 祖德尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 32,
+      "nameKey": "戴林斯温",
+      "nameZh": "戴林 斯温",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 33,
+      "nameKey": "托比拉瓦尔",
+      "nameZh": "托比 拉瓦尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 34,
+      "nameKey": "托比阿瓦卡",
+      "nameZh": "托比 阿瓦卡",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 35,
+      "nameKey": "拉斐尔卡斯特罗",
+      "nameZh": "拉斐尔 卡斯特罗",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 36,
+      "nameKey": "本内特斯特茨",
+      "nameZh": "本内特 斯特茨",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 37,
+      "nameKey": "杰登布拉德利",
+      "nameZh": "杰登 布拉德利",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 38,
+      "nameKey": "杰登昆坦斯",
+      "nameZh": "杰登 昆坦斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 39,
+      "nameKey": "汉内斯施泰因巴赫",
+      "nameZh": "汉内斯 施泰因巴赫",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 40,
+      "nameKey": "泰勒尼科尔",
+      "nameZh": "泰勒 尼科尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 41,
+      "nameKey": "泰勒比洛多",
+      "nameZh": "泰勒 比洛多",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 42,
+      "nameKey": "特雷考夫曼雷恩",
+      "nameZh": "特雷 考夫曼-雷恩",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 43,
+      "nameKey": "特雷冯布拉齐尔",
+      "nameZh": "特雷冯 布拉齐尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 44,
+      "nameKey": "狄龙米切尔",
+      "nameZh": "狄龙 米切尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 45,
+      "nameKey": "祖比埃吉奥福尔",
+      "nameZh": "祖比 埃吉奥福尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 46,
+      "nameKey": "科阿皮特",
+      "nameZh": "科阿 皮特",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 47,
+      "nameKey": "米洛斯尤赞",
+      "nameZh": "米洛斯 尤赞",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 48,
+      "nameKey": "莱恩康韦尔",
+      "nameZh": "莱恩 康韦尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 49,
+      "nameKey": "费利克斯奥克帕拉",
+      "nameZh": "费利克斯 奥克帕拉",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 50,
+      "nameKey": "贾科比吉莱斯皮",
+      "nameZh": "贾科比 吉莱斯皮",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 51,
+      "nameKey": "达林彼得森",
+      "nameZh": "达林 彼得森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 52,
+      "nameKey": "达柳斯阿卡夫",
+      "nameZh": "达柳斯 阿卡夫",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 53,
+      "nameKey": "金斯顿弗莱明斯",
+      "nameZh": "金斯顿 弗莱明斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 54,
+      "nameKey": "阿伦格雷夫斯",
+      "nameZh": "阿伦 格雷夫斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 55,
+      "nameKey": "阿达伊马拉",
+      "nameZh": "阿达伊 马拉",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 56,
+      "nameKey": "马利克托马斯",
+      "nameZh": "马利克 托马斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 57,
+      "nameKey": "马利奇布朗",
+      "nameZh": "马利奇 布朗",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 2,
+          "matchedSourceRowIndex": 1,
+          "sourceMatchStrategy": "best-field-match"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 58,
+      "nameKey": "塞尔吉奥德拉雷亚",
+      "nameZh": "塞尔吉奥 德拉雷亚",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 59,
+      "nameKey": "安德烈斯托亚科维奇",
+      "nameZh": "安德烈 斯托亚科维奇",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 60,
+      "nameKey": "小杰里米费尔斯",
+      "nameZh": "小杰里米 费尔斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 61,
+      "nameKey": "小比利里士满三世",
+      "nameZh": "小比利 里士满三世",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 62,
+      "nameKey": "弗洛里比敦加",
+      "nameZh": "弗洛里 比敦加",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 63,
+      "nameKey": "杰克卡伊尔",
+      "nameZh": "杰克 卡伊尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 64,
+      "nameKey": "泰勒坦纳",
+      "nameZh": "泰勒 坦纳",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 65,
+      "nameKey": "米兰莫姆契洛维奇",
+      "nameZh": "米兰 莫姆契洛维奇",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 66,
+      "nameKey": "约翰布莱克威尔",
+      "nameZh": "约翰 布莱克威尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 67,
+      "nameKey": "纳撒尼尔阿门特",
+      "nameZh": "纳撒尼尔 阿门特",
+      "duplicateLocalCount": 2,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 68,
+      "nameKey": "路易吉苏伊戈",
+      "nameZh": "路易吉 苏伊戈",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 69,
+      "nameKey": "通德耶苏福",
+      "nameZh": "通德 耶苏福",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 70,
+      "nameKey": "里奇桑德斯",
+      "nameZh": "里奇 桑德斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 71,
+      "nameKey": "阿伦恩克鲁玛",
+      "nameZh": "阿伦 恩克鲁玛",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 72,
+      "nameKey": "阿马里阿伦",
+      "nameZh": "阿马里 阿伦",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 73,
+      "nameKey": "雅各布科菲",
+      "nameZh": "雅各布 科菲",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 74,
+      "nameKey": "马修埃布尔",
+      "nameZh": "马修 埃布尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 75,
+      "nameKey": "马拉奇莫雷诺",
+      "nameZh": "马拉奇 莫雷诺",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 76,
+      "nameKey": "鲁本钦耶卢",
+      "nameZh": "鲁本 钦耶卢",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": true
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        }
+      }
+    },
+    {
+      "poolOrdinal": 77,
+      "nameKey": "小克里斯托弗布朗",
+      "nameZh": "小克里斯托弗 布朗",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 78,
+      "nameKey": "杰登哈里斯",
+      "nameZh": "杰登 哈里斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": false,
+        "anthropometric": true,
+        "strengthAgility": true,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "matched",
+          "differences": [],
+          "sourceDuplicateCount": 1,
+          "matchedSourceRowIndex": 0,
+          "sourceMatchStrategy": "single-source-row"
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 79,
+      "nameKey": "aj施托尔",
+      "nameZh": "AJ 施托尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 80,
+      "nameKey": "bj爱德华兹",
+      "nameZh": "BJ 爱德华兹",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 81,
+      "nameKey": "亚当阿塔姆纳",
+      "nameZh": "亚当 阿塔姆纳",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 82,
+      "nameKey": "克肖恩墨菲",
+      "nameZh": "克肖恩 墨菲",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 83,
+      "nameKey": "内特比特尔",
+      "nameZh": "内特 比特尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 85,
+      "nameKey": "凯德泰森",
+      "nameZh": "凯德 泰森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 86,
+      "nameKey": "卡迪尔科普兰",
+      "nameZh": "卡迪尔 科普兰",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 87,
+      "nameKey": "塔克德弗里斯",
+      "nameZh": "塔克 德弗里斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 88,
+      "nameKey": "塔明利普西",
+      "nameZh": "塔明 利普西",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 89,
+      "nameKey": "多诺万登特",
+      "nameZh": "多诺万 登特",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 90,
+      "nameKey": "奥斯卡克拉夫",
+      "nameZh": "奥斯卡 克拉夫",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 91,
+      "nameKey": "奥格年斯尔曾蒂奇",
+      "nameZh": "奥格年 斯尔曾蒂奇",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 92,
+      "nameKey": "威廉凯尔",
+      "nameZh": "威廉 凯尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 93,
+      "nameKey": "小梅尔文康斯尔",
+      "nameZh": "小梅尔文 康斯尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 94,
+      "nameKey": "小欧内斯特乌德",
+      "nameZh": "小欧内斯特 乌德",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 95,
+      "nameKey": "小雅龙皮埃尔",
+      "nameZh": "小雅龙 皮埃尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 96,
+      "nameKey": "布赖森塔克",
+      "nameZh": "布赖森 塔克",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 97,
+      "nameKey": "帕夫莱巴奇科",
+      "nameZh": "帕夫莱 巴奇科",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 98,
+      "nameKey": "弗塞沃落德伊先科",
+      "nameZh": "弗塞沃落德 伊先科",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 99,
+      "nameKey": "弗朗西斯科法拉利",
+      "nameZh": "弗朗西斯科 法拉利",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 100,
+      "nameKey": "弗莱彻洛耶尔",
+      "nameZh": "弗莱彻 洛耶尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 101,
+      "nameKey": "戴米恩科林斯",
+      "nameZh": "戴米恩 科林斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 102,
+      "nameKey": "拉贾伊琼斯",
+      "nameZh": "拉贾伊 琼斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 103,
+      "nameKey": "拉马尔威尔克森",
+      "nameZh": "拉马尔 威尔克森",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 104,
+      "nameKey": "本亨歇尔",
+      "nameZh": "本 亨歇尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 105,
+      "nameKey": "杰登亨利",
+      "nameZh": "杰登 亨利",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 106,
+      "nameKey": "泰恩格兰特福斯特",
+      "nameZh": "泰恩 格兰特-福斯特",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 107,
+      "nameKey": "泽维安李",
+      "nameZh": "泽维安 李",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 108,
+      "nameKey": "特伦斯阿西诺",
+      "nameZh": "特伦斯 阿西诺",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 109,
+      "nameKey": "特雷怀特",
+      "nameZh": "特雷 怀特",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 110,
+      "nameKey": "穆罕默德费伊",
+      "nameZh": "穆罕默德 费伊",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 111,
+      "nameKey": "穆罕默德阿米尼",
+      "nameZh": "穆罕默德 阿米尼",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 112,
+      "nameKey": "米伊卡穆里宁",
+      "nameZh": "米伊卡 穆里宁",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 113,
+      "nameKey": "约什迪克斯",
+      "nameZh": "约什 迪克斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 114,
+      "nameKey": "莱利库格尔",
+      "nameZh": "莱利 库格尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 115,
+      "nameKey": "蒂埃里达尔兰",
+      "nameZh": "蒂埃里 达尔兰",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 116,
+      "nameKey": "赛斯特林布尔",
+      "nameZh": "赛斯 特林布尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 117,
+      "nameKey": "达什丹尼尔斯",
+      "nameZh": "达什 丹尼尔斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 118,
+      "nameKey": "达里恩威廉姆斯",
+      "nameZh": "达里恩 威廉姆斯",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 119,
+      "nameKey": "迈克尔布朗",
+      "nameZh": "迈克尔 布朗",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 120,
+      "nameKey": "迈克尔阿贾伊",
+      "nameZh": "迈克尔 阿贾伊",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 121,
+      "nameKey": "迈克尔鲁日奇",
+      "nameZh": "迈克尔 鲁日奇",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 122,
+      "nameKey": "马克米切尔",
+      "nameZh": "马克 米切尔",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 123,
+      "nameKey": "马利克尤因",
+      "nameZh": "马利克 尤因",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    },
+    {
+      "poolOrdinal": 124,
+      "nameKey": "马利克雷诺",
+      "nameZh": "马利克 雷诺",
+      "duplicateLocalCount": 1,
+      "sourcePresence": {
+        "candidates": true,
+        "anthropometric": false,
+        "strengthAgility": false,
+        "shooting": false
+      },
+      "comparisons": {
+        "anthropometric": {
+          "dataset": "anthropometric",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "strengthAgility": {
+          "dataset": "strengthAgility",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        },
+        "shooting": {
+          "dataset": "shooting",
+          "status": "source-missing",
+          "differences": [],
+          "sourceDuplicateCount": 0,
+          "matchedSourceRowIndex": null
+        }
+      }
+    }
+  ]
+}

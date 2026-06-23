@@ -1,0 +1,783 @@
+{
+  "generatedAt": "2026-06-23T14:46:58.150178+00:00",
+  "scope": "Audit players that exist in current frontend/NBA.com 101 pool but not in the official answer-card 124-player dropdown pool.",
+  "sources": {
+    "frontendBundle101": "public/data/expanded_import_bundle.json",
+    "frontendBoard": "public/data/agent_expanded_recommended_board.json",
+    "answerCardPoolWorkbook": "数据/上传此文件即可（选秀+里程碑问题选手答题卡_完整下拉选项已填）.xlsx!球员池_勿修改",
+    "localPoolBoard": "data/boards/local_pool_124_baseline_board.json",
+    "localPoolNormalized": "data/normalized/normalized_2026_local_player_pool_124.json",
+    "featureReference124": "data/normalized/normalized_2026_player_feature_reference_124.json",
+    "onlineReverification": "data/normalized/normalized_2026_online_player_list_reverification_20260623.json"
+  },
+  "counts": {
+    "frontendProspectCount": 101,
+    "answerCardPoolRows": 124,
+    "answerCardPoolUniqueNames": 123,
+    "matchedFrontendToAnswerCard": 84,
+    "frontendExcludedByAnswerCardPool": 17,
+    "answerCardOnlyFallbackProfiles": 39,
+    "answerCardDuplicateRowsSkipped": 1,
+    "frontendBoardInvalidPicks": 1,
+    "frontendAlternativeHits": 3
+  },
+  "excludedFrontend101NotInAnswerCardPool": [
+    {
+      "prospectId": "bassala-bagayoko",
+      "name": "Bassala Bagayoko",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "C"
+      ],
+      "school": "Bilbao Basket (Spain)",
+      "origin": "Mali",
+      "consensusRank": 31,
+      "mockHeat": 20,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [
+        {
+          "pick": 26,
+          "team": "Denver Nuggets",
+          "prospectId": "bassala-bagayoko",
+          "name": "Bassala Bagayoko",
+          "score": 65,
+          "roleFit": "rebounder"
+        },
+        {
+          "pick": 29,
+          "team": "Cleveland Cavaliers",
+          "prospectId": "bassala-bagayoko",
+          "name": "Bassala Bagayoko",
+          "score": 75,
+          "roleFit": "rim protector"
+        }
+      ],
+      "sourceNotesSample": [
+        "NBA.com official prospects: C, age 19, Bilbao Basket (Spain), 6-9, 210 lbs, International, Mali",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "chad-baker-mazara",
+      "name": "Chad Baker-Mazara",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "SG",
+        "SF"
+      ],
+      "school": "USC",
+      "origin": "Dominican Republic",
+      "consensusRank": 98,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G-F, age 26, USC, 6-7, 172 lbs, Senior, Dominican Republic",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "donovan-atwell",
+      "name": "Donovan Atwell",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Texas Tech",
+      "origin": "United States",
+      "consensusRank": 71,
+      "mockHeat": 11,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 23, Texas Tech, 6-5, 200 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "duke-miles",
+      "name": "Duke Miles",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Vanderbilt",
+      "origin": "United States",
+      "consensusRank": 93,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 24, Vanderbilt, 6-0, 180 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "graham-ike",
+      "name": "Graham Ike",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Gonzaga",
+      "origin": "United States",
+      "consensusRank": 78,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: F, age 23, Gonzaga, 6-9, 250 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "isaac-mckneely",
+      "name": "Isaac McKneely",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Louisville",
+      "origin": "United States",
+      "consensusRank": 61,
+      "mockHeat": 14,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 22, Louisville, 6-4, 205 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "jalen-washington",
+      "name": "Jalen Washington",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "C"
+      ],
+      "school": "Vanderbilt",
+      "origin": "United States",
+      "consensusRank": 88,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: C, age 23, Vanderbilt, 6-10, 240 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "jaxon-kohler",
+      "name": "Jaxon Kohler",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Michigan State",
+      "origin": "United States",
+      "consensusRank": 81,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: F, age 23, Michigan State, 6-10, 245 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "jaylin-sellers",
+      "name": "Jaylin Sellers",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Providence",
+      "origin": "United States",
+      "consensusRank": 86,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 23, Providence, 6-5, 205 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "kashie-natt",
+      "name": "Kashie Natt",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Sam Houston State",
+      "origin": "United States",
+      "consensusRank": 83,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 23, Sam Houston State, 6-3, 190 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "malique-lewis",
+      "name": "Malique Lewis",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "South East Melbourne (Australia)",
+      "origin": "Trinidad and Tobago",
+      "consensusRank": 40,
+      "mockHeat": 20,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: F, age 21, South East Melbourne (Australia), 6-8, 195 lbs, International, Trinidad and Tobago",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "marc-owen-fodzo-dada",
+      "name": "Marc-Owen Fodzo Dada",
+      "mappedZh": "马克-欧文 福佐 达达",
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Nancy Basket (France)",
+      "origin": "France",
+      "consensusRank": 32,
+      "mockHeat": 20,
+      "currentFrontendPick": 30,
+      "currentFrontendTeam": "Dallas Mavericks",
+      "currentFrontendScore": 75,
+      "currentFrontendConfidence": 60,
+      "appearsAsAlternative": [
+        {
+          "pick": 28,
+          "team": "Minnesota Timberwolves",
+          "prospectId": "marc-owen-fodzo-dada",
+          "name": "Marc-Owen Fodzo Dada",
+          "score": 72,
+          "roleFit": "combo guard"
+        }
+      ],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 19, Nancy Basket (France), 6-2, 180 lbs, International, France",
+        "NBA.com official profile: came through the SLUC Nancy youth system and represented France at the 2025 FIBA U19 Basketball World Cup."
+      ]
+    },
+    {
+      "prospectId": "noam-yaacov",
+      "name": "Noam Yaacov",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Telenet BC Oostende (Belgium)",
+      "origin": "Denmark",
+      "consensusRank": 43,
+      "mockHeat": 20,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 21, Telenet BC Oostende (Belgium), 6-0, 190 lbs, International, Denmark",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "reynan-dos-santos",
+      "name": "Reynan dos Santos",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "SF",
+        "PF"
+      ],
+      "school": "Mexico City Capitanes (G League)",
+      "origin": "Brazil",
+      "consensusRank": 70,
+      "mockHeat": 11,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: F, age 22, Mexico City Capitanes (G League), 6-4, 187 lbs, G League, Brazil",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "rienk-mast",
+      "name": "Rienk Mast",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "C"
+      ],
+      "school": "Nebraska",
+      "origin": "Netherlands",
+      "consensusRank": 92,
+      "mockHeat": 8,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: C, age 24, Nebraska, 6-10, 250 lbs, Senior, Netherlands",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "tre-carroll",
+      "name": "Tre Carroll",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "C"
+      ],
+      "school": "Xavier",
+      "origin": "United States",
+      "consensusRank": 74,
+      "mockHeat": 10,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: C, age 23, Xavier, 6-8, 235 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    },
+    {
+      "prospectId": "tre-donaldson",
+      "name": "Tre Donaldson",
+      "mappedZh": null,
+      "mappedZhInAnswerCardPool": false,
+      "positions": [
+        "PG",
+        "SG"
+      ],
+      "school": "Miami (FL)",
+      "origin": "United States",
+      "consensusRank": 51,
+      "mockHeat": 18,
+      "currentFrontendPick": null,
+      "currentFrontendTeam": null,
+      "currentFrontendScore": null,
+      "currentFrontendConfidence": null,
+      "appearsAsAlternative": [],
+      "sourceNotesSample": [
+        "NBA.com official prospects: G, age 22, Miami (FL), 6-3, 198 lbs, Senior, United States",
+        "Expanded-pool fallback profile: no full DraftOps scouting profile in original 30-player bundle."
+      ]
+    }
+  ],
+  "answerCardOnlyRowsNotMatchedToFrontend101": [
+    {
+      "ordinal": 44,
+      "nameZh": "狄龙 米切尔",
+      "positionZh": "前锋",
+      "schoolClubZh": "圣约翰大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 59,
+      "nameZh": "安德烈 斯托亚科维奇",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 60,
+      "nameZh": "小杰里米 费尔斯",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 61,
+      "nameZh": "小比利 里士满三世",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 62,
+      "nameZh": "弗洛里 比敦加",
+      "positionZh": "C",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 64,
+      "nameZh": "泰勒 坦纳",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 65,
+      "nameZh": "米兰 莫姆契洛维奇",
+      "positionZh": "PF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 66,
+      "nameZh": "约翰 布莱克威尔",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 68,
+      "nameZh": "路易吉 苏伊戈",
+      "positionZh": "中锋",
+      "schoolClubZh": "意大利",
+      "countryRegionZh": "意大利"
+    },
+    {
+      "ordinal": 69,
+      "nameZh": "通德 耶苏福",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 72,
+      "nameZh": "阿马里 阿伦",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 73,
+      "nameZh": "雅各布 科菲",
+      "positionZh": "PF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 74,
+      "nameZh": "马修 埃布尔",
+      "positionZh": "SG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 76,
+      "nameZh": "鲁本 钦耶卢",
+      "positionZh": "C",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 77,
+      "nameZh": "小克里斯托弗 布朗",
+      "positionZh": "PG",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 78,
+      "nameZh": "杰登 哈里斯",
+      "positionZh": "SF",
+      "schoolClubZh": "-",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 79,
+      "nameZh": "AJ 施托尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "密西西比大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 80,
+      "nameZh": "BJ 爱德华兹",
+      "positionZh": "后卫",
+      "schoolClubZh": "南卫理公会大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 81,
+      "nameZh": "亚当 阿塔姆纳",
+      "positionZh": "后卫",
+      "schoolClubZh": "法国",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 82,
+      "nameZh": "克肖恩 墨菲",
+      "positionZh": "前锋",
+      "schoolClubZh": "奥本大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 85,
+      "nameZh": "凯德 泰森",
+      "positionZh": "后卫",
+      "schoolClubZh": "明尼苏达大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 89,
+      "nameZh": "多诺万 登特",
+      "positionZh": "后卫",
+      "schoolClubZh": "UCLA",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 91,
+      "nameZh": "奥格年 斯尔曾蒂奇",
+      "positionZh": "前锋",
+      "schoolClubZh": "塞尔维亚",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 96,
+      "nameZh": "布赖森 塔克",
+      "positionZh": "前锋",
+      "schoolClubZh": "华盛顿大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 97,
+      "nameZh": "帕夫莱 巴奇科",
+      "positionZh": "中锋",
+      "schoolClubZh": "塞尔维亚",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 99,
+      "nameZh": "弗朗西斯科 法拉利",
+      "positionZh": "前锋",
+      "schoolClubZh": "意大利",
+      "countryRegionZh": "意大利"
+    },
+    {
+      "ordinal": 101,
+      "nameZh": "戴米恩 科林斯",
+      "positionZh": "前锋",
+      "schoolClubZh": "南佛罗里达大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 102,
+      "nameZh": "拉贾伊 琼斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "佛罗里达州立大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 104,
+      "nameZh": "本 亨歇尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "澳大利亚",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 106,
+      "nameZh": "泰恩 格兰特-福斯特",
+      "positionZh": "后卫",
+      "schoolClubZh": "冈萨加大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 108,
+      "nameZh": "特伦斯 阿西诺",
+      "positionZh": "后卫",
+      "schoolClubZh": "北卡罗来纳州立大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 109,
+      "nameZh": "特雷 怀特",
+      "positionZh": "后卫",
+      "schoolClubZh": "堪萨斯大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 110,
+      "nameZh": "穆罕默德 费伊",
+      "positionZh": "中锋",
+      "schoolClubZh": "塞内加尔",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 112,
+      "nameZh": "米伊卡 穆里宁",
+      "positionZh": "前锋",
+      "schoolClubZh": "芬兰",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 114,
+      "nameZh": "莱利 库格尔",
+      "positionZh": "后卫",
+      "schoolClubZh": "中佛罗里达大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 115,
+      "nameZh": "蒂埃里 达尔兰",
+      "positionZh": "后卫",
+      "schoolClubZh": "圣塔克拉拉大学",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 117,
+      "nameZh": "达什 丹尼尔斯",
+      "positionZh": "后卫",
+      "schoolClubZh": "澳大利亚",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 121,
+      "nameZh": "迈克尔 鲁日奇",
+      "positionZh": "中锋",
+      "schoolClubZh": "克罗地亚",
+      "countryRegionZh": "-"
+    },
+    {
+      "ordinal": 123,
+      "nameZh": "马利克 尤因",
+      "positionZh": "前锋",
+      "schoolClubZh": "阿肯色大学",
+      "countryRegionZh": "-"
+    }
+  ],
+  "duplicateAnswerCardRowsSkipped": [
+    {
+      "ordinal": 67,
+      "nameZh": "纳撒尼尔 阿门特",
+      "reason": "duplicate-source-name-less-complete-row"
+    }
+  ],
+  "frontendToLocalPoolBoardPickChanges": [
+    {
+      "pick": 30,
+      "team": "Dallas Mavericks",
+      "previous": "Marc-Owen Fodzo Dada",
+      "next": "Jack Kayil",
+      "nextLocalNameZh": "杰克 卡伊尔"
+    }
+  ],
+  "featureReferenceValidation": {
+    "extraSheetNamesNotInPool": {
+      "participantProfile": [],
+      "anthropometric": [],
+      "athleticAgility": [],
+      "shootingDrill": []
+    },
+    "duplicatePoolNames": [
+      "纳撒尼尔 阿门特"
+    ],
+    "matchedCoverageCounts": {
+      "participantProfile": 108,
+      "anthropometric": 79,
+      "athleticAgility": 79,
+      "shootingDrill": 73
+    }
+  },
+  "onlineReverificationSummary": {
+    "nbaProspects": {
+      "currentRowCount": 101,
+      "savedRowCount": 101,
+      "duplicateNames": [],
+      "missingRequiredFieldRows": [],
+      "addedVsSaved": [],
+      "removedVsSaved": []
+    },
+    "localPlayerPool": {
+      "rowCount": 124,
+      "duplicateNames": [
+        "纳撒尼尔 阿门特"
+      ],
+      "firstOrdinal": 1,
+      "lastOrdinal": 124,
+      "missingOrdinalCount": 0
+    },
+    "crossSource": {
+      "combineInviteNotInStatsAnthro": [
+        "Mikel Brown Jr.",
+        "Juke Harris"
+      ],
+      "statsAnthroNotInCombineInvite": [
+        "Christopher Brown Jr",
+        "Rafael Castro",
+        "Jacob Cofie",
+        "Jaden Harris",
+        "Bryce Hopkins",
+        "Trey Kaufman-Renn",
+        "Aaron Nkrumah"
+      ],
+      "earlyEntryNotInProspectsCount": 38,
+      "prospectsNotInEarlyEntryCount": 68
+    }
+  }
+}

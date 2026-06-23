@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-06-23T18:54:28.749Z",
+  "frontendBoardPath": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\public\\data\\agent_expanded_recommended_board.json",
+  "source": "C:\\Users\\24048\\Desktop\\AWS\\draftops\\data\\boards\\consensus_10_agent_prediction_20260624_relative.json",
+  "changedVsPrevious": [],
+  "media": {
+    "localPhotoCount": 30,
+    "missingLocalPhotoCount": 0,
+    "missingMedia": []
+  },
+  "health": {
+    "hasThirtyPicks": true,
+    "noDuplicates": true,
+    "lowConfidence": 0,
+    "missingLocalPhotos": 0,
+    "ready": true
+  }
+}
