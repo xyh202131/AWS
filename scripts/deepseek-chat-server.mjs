@@ -100,8 +100,75 @@ const compactText = (value, maxLength = 9000) => {
   return text.length > maxLength ? `${text.slice(0, maxLength)}\n...[truncated]` : text;
 };
 
-const getSearchTerms = ({ question, selectedPick }) => {
-  const selectedTerms = selectedPick
+const toDeepSeekSelectedPick = (selectedPick) =>
+  selectedPick
+    ? {
+        pick: selectedPick.pick,
+        team: selectedPick.team,
+        acquiredFrom: selectedPick.acquiredFrom ?? null,
+        player: selectedPick.prospect?.name,
+        positions: selectedPick.prospect?.positions ?? [],
+        school: selectedPick.prospect?.school,
+        origin: selectedPick.prospect?.origin,
+        classYear: selectedPick.prospect?.classYear,
+        international: Boolean(selectedPick.prospect?.international),
+      }
+    : null;
+
+const includesAlias = (text, alias) => {
+  const normalizedAlias = String(alias ?? "").toLowerCase().trim();
+  return normalizedAlias.length >= 3 && text.includes(normalizedAlias);
+};
+
+const selectedPickAliases = (selectedPick) => {
+  if (!selectedPick) return [];
+  const player = String(selectedPick.prospect?.name ?? "");
+  const team = String(selectedPick.team ?? "");
+  const school = String(selectedPick.prospect?.school ?? "");
+  const origin = String(selectedPick.prospect?.origin ?? "");
+  const aliases = [player, team, school, origin];
+
+  for (const value of [player, team]) {
+    const parts = value.split(/\s+/).filter((part) => part.length >= 4);
+    aliases.push(...parts);
+  }
+
+  return [...new Set(aliases.filter(Boolean))];
+};
+
+const questionNamesSelectedPick = (question, selectedPick) => {
+  const text = String(question ?? "").toLowerCase();
+  if (!selectedPick || !text) return false;
+
+  const explicitPickNumbers = [
+    ...text.matchAll(/(?:#|pick\s*)\s*(\d{1,2})|(?:第\s*)?(\d{1,2})\s*(?:顺位|签位|号签)/g),
+  ]
+    .map((match) => Number(match[1] ?? match[2]))
+    .filter(Number.isFinite);
+  if (explicitPickNumbers.includes(Number(selectedPick.pick))) return true;
+
+  return selectedPickAliases(selectedPick).some((alias) => includesAlias(text, alias));
+};
+
+const shouldUseSelectedPickContext = (question, selectedPick) => {
+  if (!selectedPick) return false;
+  const text = String(question ?? "").toLowerCase();
+  if (!text) return false;
+
+  const selectedContextPatterns = [
+    /当前\s*(顺位|签位|球队|球员|栏目|选中)/,
+    /(这个|该|此)\s*(顺位|签位|球队|球员|栏目)/,
+    /(选中|点击|右侧|详情页|详情栏|当前页).*(顺位|签位|球队|球员|栏目)/,
+    /(顺位|签位|球队|球员|栏目).*(选中|点击|右侧|详情页|详情栏|当前页)/,
+    /\b(this|selected|current)\s+(pick|team|player|slot|panel|card)\b/,
+    /\b(pick|team|player|slot|panel|card)\s+(selected|current)\b/,
+  ];
+
+  return selectedContextPatterns.some((pattern) => pattern.test(text)) || questionNamesSelectedPick(question, selectedPick);
+};
+
+const getSearchTerms = ({ question, selectedPick, useSelectedPickContext = false }) => {
+  const selectedTerms = useSelectedPickContext && selectedPick
     ? [
         selectedPick.team,
         selectedPick.prospect?.name,
@@ -149,8 +216,8 @@ const readKnowledgeFile = async (relativePath) => {
   }));
 };
 
-const retrieveLocalKnowledge = async ({ question, selectedPick }) => {
-  const terms = getSearchTerms({ question, selectedPick });
+const retrieveLocalKnowledge = async ({ question, selectedPick, useSelectedPickContext = false }) => {
+  const terms = getSearchTerms({ question, selectedPick, useSelectedPickContext });
   const allChunks = (await Promise.all(knowledgePaths.map(readKnowledgeFile))).flat();
   const ranked = allChunks
     .map((chunk) => ({
@@ -249,6 +316,32 @@ const boardRows = (board = []) =>
     consensusRank: pick.prospect?.consensusRank,
   }));
 
+const readOnlyPredictionRows = (board = []) =>
+  board.map((pick) => ({
+    pick: pick.pick,
+    team: pick.team,
+    acquiredFrom: pick.acquiredFrom ?? null,
+    player: pick.prospect?.name,
+    positions: pick.prospect?.positions ?? [],
+    school: pick.prospect?.school,
+    origin: pick.prospect?.origin,
+    classYear: pick.prospect?.classYear,
+    international: Boolean(pick.prospect?.international),
+    consensusRank: pick.prospect?.consensusRank,
+    score: pick.score,
+    confidence: pick.confidence,
+    margin: pick.margin,
+    roleFit: pick.roleFit,
+    evidence: (pick.evidence ?? []).slice(0, 5),
+    warnings: pick.warnings ?? [],
+    risks: pick.prospect?.risks ?? [],
+    alternatives: (pick.alternatives ?? []).slice(0, 3).map((item) => ({
+      name: item.name,
+      score: item.score,
+      roleFit: item.roleFit,
+    })),
+  }));
+
 const schoolCounts = (board = []) => {
   const firstSeen = new Map();
   const counts = {};
@@ -326,12 +419,11 @@ const buildExamFacts = (board = []) => {
   ];
 
   return {
-    scope: "当前 DeepSeek 是只读问答 Agent：可回答应试题、参考文档口径和预测主题问题，但只能读取当前锁定预测板，不能生成或改动预测球员。",
-    predictionLockRules: [
-      "当前 DeepSeek 禁止生成预测球员。",
-      "当前 DeepSeek 禁止修改、增删、交换、重排任何预测球员。",
-      "当前 DeepSeek 禁止建议某队改选其他球员。",
-      "涉及预测主题的问题只能读取当前锁定预测板并回答，不得参与预测改动。",
+    scope: "当前 DeepSeek 是比赛相关只读问答 Agent：可回答比赛、数据、里程碑、预测板、AWS/提交、路演和代码说明类问题，但不能直接修改代码、文件或仓库。",
+    readOnlyRules: [
+      "当前 DeepSeek 可以回答预测主题问题，包括预测结果、理由、风险、备选人选和策略讨论。",
+      "当前 DeepSeek 的回答只是文本问答，不会直接改代码、写文件、提交仓库、运行命令或改写锁定预测板。",
+      "如果用户要求直接修改代码、写文件、运行命令、提交或推送，必须说明当前 DeepSeek 不能直接执行，只能解释思路或交由代码工作流处理。",
     ],
     questionCount: examQuestions.length,
     examQuestions,
@@ -378,31 +470,23 @@ const buildContext = async (selectedPickNumber) => {
         usagePolicy:
           "DraftCode24里程碑事件预测.md 可用于题意、字段口径、评分口径参考；不是官方赛果，不能用于调整预测球员。",
       },
-      selectedPick: selectedPick
-        ? {
-            pick: selectedPick.pick,
-            team: selectedPick.team,
-            acquiredFrom: selectedPick.acquiredFrom ?? null,
-            player: selectedPick.prospect?.name,
-            positions: selectedPick.prospect?.positions ?? [],
-            school: selectedPick.prospect?.school,
-            origin: selectedPick.prospect?.origin,
-            classYear: selectedPick.prospect?.classYear,
-            international: Boolean(selectedPick.prospect?.international),
-          }
-        : null,
+      predictionBoardForReadOnlyQa: readOnlyPredictionRows(board),
+      selectedPick: toDeepSeekSelectedPick(selectedPick),
       examFacts,
     },
   };
 };
 
-const buildRetrievedKnowledge = async ({ question, selectedPick }) => {
-  const local = await retrieveLocalKnowledge({ question, selectedPick });
+const buildRetrievedKnowledge = async ({ question, selectedPick, useSelectedPickContext = false }) => {
+  const local = await retrieveLocalKnowledge({ question, selectedPick, useSelectedPickContext });
   const officialWeb = local.hasStrongLocalMatch ? [] : await fetchOfficialWebKnowledge(local.terms);
 
   return {
     retrievalPolicy:
       "优先使用本地知识库与官方本地数据；本地证据不足时才使用官方联网网页；官方数据优先于媒体和模型全局知识；模型全局知识只作最后兜底。",
+    selectedPickRetrievalPolicy: useSelectedPickContext
+      ? "用户明确询问当前/这个/选中栏目或直接点名同一顺位、球队、球员；检索词可以使用当前选中栏目的球队和球员。"
+      : "用户没有明确询问当前/这个/选中栏目；检索词不得使用前端点击栏目的球队或球员，必须按全局比赛问题检索。",
     localSnippets: local.snippets.map(({ source, sourceRank, text }) => ({ source, sourceRank, text })),
     officialWebSnippets: officialWeb.map(({ source, sourceName, sourceRank, text }) => ({
       source,
@@ -494,94 +578,36 @@ const isPlayerPredictionQuestion = (question) => {
   return false;
 };
 
-const chineseDigits = {
-  零: 0,
-  一: 1,
-  二: 2,
-  两: 2,
-  三: 3,
-  四: 4,
-  五: 5,
-  六: 6,
-  七: 7,
-  八: 8,
-  九: 9,
-};
-
-const parseChineseNumber = (value) => {
-  const text = String(value ?? "").trim();
-  if (!text) return null;
-  if (text === "十") return 10;
-  if (text.includes("十")) {
-    const [tensText, onesText] = text.split("十");
-    const tens = tensText ? chineseDigits[tensText] : 1;
-    const ones = onesText ? chineseDigits[onesText] : 0;
-    if (typeof tens !== "number" || typeof ones !== "number") return null;
-    return tens * 10 + ones;
-  }
-  return typeof chineseDigits[text] === "number" ? chineseDigits[text] : null;
-};
-
-const getRequestedPickNumber = (question, selectedPickNumber) => {
-  const text = String(question ?? "");
-  const lower = text.toLowerCase();
-  if (/状元|第一顺位|第\s*一\s*顺位/.test(text)) return 1;
-  if (/榜眼|第二顺位|第\s*二\s*顺位/.test(text)) return 2;
-  if (/探花|第三顺位|第\s*三\s*顺位/.test(text)) return 3;
-
-  const numericMatch =
-    lower.match(/(?:第\s*)?(\d{1,2})\s*(?:顺位|号签)/) ?? lower.match(/pick\s*#?\s*(\d{1,2})/);
-  if (numericMatch) {
-    const pick = Number(numericMatch[1]);
-    if (pick >= 1 && pick <= 30) return pick;
-  }
-
-  const chineseMatch = text.match(/(?:第\s*)?([一二两三四五六七八九十]{1,3})\s*(?:顺位|号签)/);
-  if (chineseMatch) {
-    const pick = parseChineseNumber(chineseMatch[1]);
-    if (pick && pick >= 1 && pick <= 30) return pick;
-  }
-
-  return selectedPickNumber;
-};
-
-const buildReadOnlyPredictionAnswer = ({ question, context, selectedPickNumber }) => {
+const isCompetitionRelatedQuestion = (question, context) => {
   const text = String(question ?? "").toLowerCase();
-  const board = context.board ?? [];
-  const asksFullBoard = /完整.*首轮|全部.*首轮|所有.*首轮|30.*顺位|三十.*顺位|full.*board/.test(text);
-
-  if (asksFullBoard) {
-    const lines = board.map(
-      (pick) => `第 ${pick.pick} 顺位 ${pick.team} 选择 ${pick.prospect?.name ?? "N/A"}`,
-    );
-    return `当前锁定首轮预测：\n${lines.join("\n")}`;
+  if (isExamQuestion(question, context) || isPredictionQuestion(question) || isPlayerPredictionQuestion(question)) {
+    return true;
   }
 
-  const requestedPickNumber = getRequestedPickNumber(question, selectedPickNumber);
-  const pick = board.find((item) => item.pick === requestedPickNumber) ?? context.selectedPick ?? board[0];
-  if (!pick) return "当前没有可用的锁定预测板。";
+  return /比赛|竞赛|赛题|提交|答题|路演|ppt|视频|github|仓库|aws|bedrock|s3|dynamodb|app runner|ecs|nba|选秀|draft|combine|球员|顺位|球队|里程碑|数据|模型|agent|deepseek|codex|界面|前端|代码|部署|运行|readme|架构|成本|评分|规则|deadline|截止/.test(
+    text,
+  );
+};
 
-  const base = `当前锁定预测：第 ${pick.pick} 顺位 ${pick.team} 选择 ${pick.prospect?.name ?? "N/A"}。`;
-  if (/风险|risk|warning|隐患/.test(text)) {
-    const risks = [...(pick.warnings ?? []), ...(pick.prospect?.risks ?? [])].filter(Boolean);
-    return `${base}主要风险：${risks.slice(0, 3).join("；") || "当前锁定板未标注主要风险。"}。`;
-  }
+const isDirectCodeModificationRequest = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  const asksForExplanation = /怎么|如何|为什么|解释|说明|建议|方案|思路|能不能|是否|可不可以|where|how|why|explain|suggest|plan/.test(
+    text,
+  );
+  if (asksForExplanation) return false;
 
-  if (/替代|备选|人选|alternative|runner-up/.test(text)) {
-    const alternatives = (pick.alternatives ?? []).slice(0, 3).map((item) => item.name);
-    return `${base}备选人选：${alternatives.join("；") || "当前锁定板未保留备选人选。"}。`;
-  }
+  const codeTarget = /代码|文件|脚本|组件|css|tsx|ts|js|mjs|json|readme|git|github|仓库|项目|页面|按钮|样式|接口|server|package|commit|push|提交|推送/.test(
+    text,
+  );
+  const directAction = /改|修改|新增|添加|删除|实现|接入|创建|写入|修复|重构|替换|运行|执行|提交|推送|部署|帮我|给我|直接/.test(
+    text,
+  );
 
-  if (/为什么|理由|依据|证据|适配|fit|why/.test(text)) {
-    const evidence = (pick.evidence ?? []).slice(0, 3);
-    return `${base}主要依据：${evidence.join("；") || pick.roleFit || "当前锁定板未保留依据。"}。`;
-  }
-
-  return base;
+  return codeTarget && directAction;
 };
 
 const buildScopeGuardAnswer = () =>
-  "当前 DeepSeek 只负责只读问答：可以回答应试题、参考文档口径和预测主题问题，但只能读取当前锁定预测板，不能生成、修改、交换、重排或建议调整预测球员。";
+  "当前 DeepSeek 可以回答比赛相关问题，但不能直接修改代码、写文件、运行命令、提交或推送仓库。";
 
 const callDeepSeek = async ({ question, history, selectedPickNumber, context: providedContext }) => {
   const apiKey = process.env.DEEPSEEK_API_KEY;
@@ -594,9 +620,18 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
   const modelLabel = getModelLabel(model);
   const maxTokens = Number(process.env.DEEPSEEK_CHAT_MAX_TOKENS ?? 1800);
   const context = providedContext ?? (await buildContext(selectedPickNumber));
+  const useSelectedPickContext = shouldUseSelectedPickContext(question, context.selectedPick);
+  const deepSeekContext = {
+    ...context.deepSeekContext,
+    selectedPick: useSelectedPickContext ? toDeepSeekSelectedPick(context.selectedPick) : null,
+    selectedPickUsage: useSelectedPickContext
+      ? "用户明确询问当前/这个/选中栏目，或直接点名同一顺位、球队、球员；可以使用 selectedPick。"
+      : "用户没有明确询问当前/这个/选中栏目，也没有直接点名同一顺位、球队、球员；必须忽略前端点击栏目，不要只回答当前球队或当前顺位。",
+  };
   const retrievedKnowledge = await buildRetrievedKnowledge({
     question,
     selectedPick: context.selectedPick,
+    useSelectedPickContext,
   });
   const compactHistory = Array.isArray(history)
     ? history.slice(-8).map((message) => ({
@@ -611,19 +646,17 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
       {
         role: "system",
         content: [
-          "你是 DraftOps 当前 DeepSeek 只读问答 Agent，不是预测生成 Agent，不是预测修改 Agent。",
-          "你可以回答当前本地应试题集合、参考文档里的里程碑题意/字段口径/评分口径，也可以回答预测主题问题。",
-          "预测主题问题只允许基于当前锁定预测板做只读回答；不得产生新的预测，不得替换预测球员，不得建议改动。",
-          "硬性边界 1：当前 DeepSeek 禁止生成预测球员，禁止新增预测球员，禁止删除预测球员。",
-          "硬性边界 2：当前 DeepSeek 禁止修改、交换、重排、复核或建议调整任何 30 顺位球员预测。",
-          "硬性边界 3：当前 DeepSeek 禁止建议某队改选其他球员，禁止输出替代预测板。",
-          "硬性边界 4：30 顺位球员预测由当前锁定预测管线提供；该管线未来可以是 Codex、另一个 DeepSeek 或其他指定模块，但不是当前这个只读问答 DeepSeek。",
-          "参考文档边界：DraftCode24里程碑事件预测.md 可用于回答题意、字段口径、评分口径和参考题目说明，不能作为官方赛果或预测球员调整依据。",
-          "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，必须以当前本地 examFacts 为准。",
-          "如果参考文档与当前本地 examFacts 冲突，必须以当前本地 examFacts 为准；不能因为参考文档而改预测球员。",
-          "如果问题涉及具体球员预测、预测理由、风险或备选人选，只能基于当前锁定预测板中已有字段回答；如果用户要求改动、重排、替换或推荐新预测，必须拒绝改动并说明当前 DeepSeek 只读。",
-          "再次确认：你只能回答问题；你不能调整预测球员；你不能输出新的选秀预测。",
-          "必须按以下优先级回答：1 本地知识库和当前锁定板应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
+          "你是 DraftOps 当前 DeepSeek 比赛问答 Agent。",
+          "你可以回答任何与本次 AWS/NBA 选秀比赛有关的问题，包括赛题规则、数据、里程碑题、参考文档口径、预测板、预测理由、风险、备选人选、AWS 架构、提交、路演、前端界面、代码结构和运行说明。",
+          "唯一硬边界：当前 DeepSeek 不能直接修改代码，不能写文件，不能运行命令，不能提交或推送仓库，不能声称已经完成了代码或文件改动。",
+          "如果用户要求你直接改代码、写文件、运行命令、提交或推送，你只能说明当前 DeepSeek 不能直接执行，可以用文字解释思路、影响、步骤或让代码工作流处理。",
+          "你可以讨论预测主题和可能的预测分析，但输出只是问答文本，不会直接改写锁定预测板、代码或提交文件。",
+          "前端可能有点击或选中的球队/顺位栏目，但这不是默认问题范围。只有用户明确说当前顺位、这个球队、选中球员、当前栏目，或直接点名同一顺位/球队/球员时，才能使用 selectedPick。",
+          "如果上下文里的 selectedPick 为 null，或 selectedPickUsage 表示必须忽略前端点击栏目，你必须按全局比赛问题回答，不要把答案限制到当前点击球队、当前点击顺位或当前点击球员。",
+          "重复规则：不要因为用户点了某个球队栏目就只回答该栏目；没有明确问当前栏目时，一律按用户文字本身和全局数据回答。",
+          "参考文档边界：DraftCode24里程碑事件预测.md 可用于回答题意、字段口径、评分口径和参考题目说明，不能当作官方赛果。",
+          "如果用户问参考文档里的 A1/B1/C1/D1 等题目设计，按参考文档回答字段和口径；如果问当前最终答案，优先使用当前本地 examFacts 和锁定预测板。",
+          "必须按以下优先级回答：1 本地知识库、当前锁定预测板和当前应试题事实；2 官方本地数据和 NBA.com 官方材料；3 如果本地证据不足，使用提供的官方联网检索片段；4 仍不足时才使用模型全局知识。",
           "官方来源优先级高于媒体、社区、传闻和模型记忆。",
           "最终只输出当前问题最可能正确的答案。",
           "只回答用户当前问题，不要给额外建议，不要扩展无关背景，不要列来源清单，不要免责声明。",
@@ -634,9 +667,10 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
       {
         role: "user",
         content: [
-          "预测边界重复说明：当前 DeepSeek 禁止调整预测球员；禁止生成、修改、交换、重排 30 顺位预测；预测主题问题只能读取当前锁定预测板回答。",
-          "当前应试题上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
-          JSON.stringify(context.deepSeekContext),
+          "执行边界重复说明：当前 DeepSeek 只能回答问题，不能直接修改代码、写文件、运行命令、提交或推送仓库。",
+          "栏目范围重复说明：只有用户明确说当前/这个/选中栏目，或直接点名同一顺位、球队、球员，才允许使用 selectedPick；否则 selectedPick 已置空，必须忽略前端点击栏目。",
+          "当前比赛上下文如下，题目数量以 questionCount 和 examQuestions 数组为准：",
+          JSON.stringify(deepSeekContext),
           "已按优先级检索到的知识如下：",
           JSON.stringify(retrievedKnowledge),
           "最近对话：",
@@ -672,7 +706,7 @@ const callDeepSeek = async ({ question, history, selectedPickNumber, context: pr
     answer,
     model,
     modelLabel,
-    mode: "deepseek-exam",
+    mode: "deepseek-competition",
     usage: completion.usage ?? null,
   };
 };
@@ -711,29 +745,25 @@ const server = http.createServer(async (request, response) => {
       const selectedPickNumber = Number(body.selectedPickNumber ?? 1);
       const context = await buildContext(selectedPickNumber);
       const model = normalizeModelId(process.env.DEEPSEEK_MODEL ?? "deepseek-v4-pro");
-      const examQuestion = isExamQuestion(question, context);
-      const predictionQuestion = isPredictionQuestion(question);
-      const playerPredictionQuestion = isPlayerPredictionQuestion(question);
+      const codeModificationRequest = isDirectCodeModificationRequest(question);
+      const competitionRelatedQuestion = isCompetitionRelatedQuestion(question, context);
 
-      if (playerPredictionQuestion) {
+      if (codeModificationRequest) {
         sendJson(request, response, 200, {
-          answer: buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber }),
+          answer: buildScopeGuardAnswer(),
           model,
           modelLabel: getModelLabel(model),
-          mode: "locked-board-readonly",
+          mode: "local-code-guard",
         });
         return;
       }
 
-      if (!examQuestion) {
-        const answer = predictionQuestion
-          ? buildReadOnlyPredictionAnswer({ question, context, selectedPickNumber })
-          : buildScopeGuardAnswer();
+      if (!competitionRelatedQuestion) {
         sendJson(request, response, 200, {
-          answer,
+          answer: "当前 DeepSeek 只回答本次比赛相关问题。",
           model,
           modelLabel: getModelLabel(model),
-          mode: predictionQuestion ? "locked-board-readonly" : "local-scope-guard",
+          mode: "local-scope-guard",
         });
         return;
       }

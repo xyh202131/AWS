@@ -32,7 +32,7 @@ npm run build
 
 ## DeepSeek Agent
 
-The interactive window and local exam-answer agent call DeepSeek through an OpenAI-compatible chat completions request. This DeepSeek is a read-only Q&A agent: it can answer the current milestone/exam question set, explain milestone wording, field intent, and scoring rules from `data/documents/milestone-questions/DraftCode24里程碑事件预测.md`, and answer prediction-themed questions by reading the locked board declared in `src/config/draftops-manifest.json`. It must not generate, change, reorder, or recommend changes to predicted players. The 30-pick board belongs to the designated locked prediction pipeline, which may be Codex, another DeepSeek, or another explicit module later, but not this read-only DeepSeek. The browser talks to the local proxy from `DEEPSEEK_AGENT_PORT` or `4318`; the launcher automatically moves to the next available port when needed. The proxy reads `.env.local`, so the API key is never sent to the frontend.
+The interactive window calls DeepSeek through an OpenAI-compatible chat completions request. This DeepSeek can answer any competition-related question, including data, milestones, reference-document wording, prediction-board discussion, AWS architecture, submission, roadshow, frontend behavior, code structure, and run guidance. It answers from the global competition context by default; the currently clicked pick/team is only passed to DeepSeek when the user explicitly asks about the current pick, this team, the selected player, or directly names that same pick/team/player. Its hard boundary is execution: it must not directly edit code, write files, run commands, commit, or push. Real code changes stay in the repository workflow. The browser talks to the local proxy from `DEEPSEEK_AGENT_PORT` or `4318`; the launcher automatically moves to the next available port when needed. The proxy reads `.env.local`, so the API key is never sent to the frontend.
 
 Create `.env.local` from `.env.example` and set `DEEPSEEK_API_KEY`. Keep model, label, and preferred ports in `.env.local` when they need to differ from the defaults, then run:
 
@@ -61,7 +61,7 @@ Expected import shape:
 
 The seed data is intentionally replaceable. It is based on public order/consensus sources and should be refreshed with official Team Portal files during the event.
 
-Hard prediction rule: the 1-30 board must come from the designated locked prediction pipeline. Humans and helper agents may only change structured inputs, parameters, scoring guardrails, or source-quality rules, then rerun the board pipeline. This read-only DeepSeek may answer questions about the board but must not generate, change, reorder, or recommend changes to predicted players. Manual player selection, manual swaps, JSON edits to picks, or frontend overrides are prohibited.
+Hard execution rule: the DeepSeek chat window is for competition Q&A only. It can discuss prediction-board reasoning and code structure, but it must not directly edit code, write files, run commands, commit, or push. Real board and code changes must go through the designated repository workflow. Selection scope rule: clicking a pick/team in the UI does not narrow every answer to that row; DeepSeek only receives that row when the question explicitly asks about the current or selected item.
 
 ## Method
 
