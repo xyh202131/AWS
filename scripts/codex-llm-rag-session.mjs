@@ -3,7 +3,9 @@ import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const rootDir = process.cwd();
-const runStamp = "20260623";
+const stampArgIndex = process.argv.indexOf("--run-stamp");
+const defaultRunStamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z").replace("T", "_");
+const runStamp = stampArgIndex >= 0 && process.argv[stampArgIndex + 1] ? process.argv[stampArgIndex + 1] : defaultRunStamp;
 const cleanRagMode = process.argv.includes("--clean-rag") || process.env.DRAFTOPS_RAG_SCOPE === "clean";
 const runSlug = cleanRagMode ? "codex_clean_rag_sequential_123_prediction" : "codex_llm_rag_sequential_123_prediction";
 const stateSlug = cleanRagMode ? "codex_clean_rag_prediction" : "codex_llm_rag_prediction";
@@ -556,6 +558,7 @@ const writeFinalArtifacts = async (state, context) => {
       candidateBoundary: "123 unique candidates from data/final/local_pool_124_import_bundle.json",
       sequentialRemoval: true,
       allRemainingCandidatesReviewedEachPick: true,
+      scoreMode: "relative-within-current-team-and-remaining-candidate-pool",
     },
     summary: {
       pickCount: state.boardRows.length,
@@ -587,6 +590,9 @@ const writeFinalArtifacts = async (state, context) => {
     }),
   };
   await Promise.all([mkdir(dirname(outputJsonPath), { recursive: true }), mkdir(dirname(outputReportPath), { recursive: true })]);
+  if (existsSync(outputJsonPath) || existsSync(outputReportPath)) {
+    throw new Error(`Refusing to overwrite existing Codex LLM RAG output for run stamp ${runStamp}. Use a new --run-stamp value.`);
+  }
   await Promise.all([
     writeFile(outputJsonPath, `${JSON.stringify(artifact, null, 2)}\n`, "utf8"),
     writeFile(outputReportPath, `${makeReport(artifact)}\n`, "utf8"),

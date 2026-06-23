@@ -11,10 +11,12 @@ const featureReferencePath = resolve(rootDir, "data", "normalized", "normalized_
 const currentBoardPath = resolve(rootDir, "public", "data", "agent_expanded_recommended_board.json");
 const ragDir = resolve(rootDir, "data", "rag");
 
-const stamp = new Date().toISOString().slice(0, 10).replaceAll("-", "");
-const outputJsonPath = resolve(rootDir, "data", "boards", `deepseek_sequential_123_prediction_${stamp}.json`);
-const outputReportPath = resolve(rootDir, "data", "reports", `deepseek_sequential_123_prediction_${stamp}.md`);
-const checkpointPath = resolve(rootDir, ".draftops-watch", `deepseek_sequential_123_prediction_${stamp}.checkpoint.json`);
+const stampArgIndex = process.argv.indexOf("--run-stamp");
+const defaultRunStamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z").replace("T", "_");
+const runStamp = stampArgIndex >= 0 && process.argv[stampArgIndex + 1] ? process.argv[stampArgIndex + 1] : defaultRunStamp;
+const outputJsonPath = resolve(rootDir, "data", "boards", `deepseek_sequential_123_prediction_${runStamp}.json`);
+const outputReportPath = resolve(rootDir, "data", "reports", `deepseek_sequential_123_prediction_${runStamp}.md`);
+const checkpointPath = resolve(rootDir, ".draftops-watch", `deepseek_sequential_123_prediction_${runStamp}.checkpoint.json`);
 
 const loadEnvFile = async (path) => {
   const content = await readFile(path, "utf8").catch((error) => {
@@ -244,6 +246,8 @@ const buildPrompt = ({ team, remainingCandidates, featureByOrdinal, boardSoFar, 
     decisionRules: [
       "Select exactly one prospectId from remainingCandidates.",
       "Every pick is independent but sequential: selected player will be removed before the next pick.",
+      "Use relative scoring only: score candidates against the current remainingCandidate pool for this pick, not against a fixed global grade.",
+      "The selected prospect must be the highest relative-scored candidate in topCandidates.",
       "Use current team needs, phase, risk tolerance, prior same-team selections, prospect profile, consensus rank, source notes, cleaned RAG snippets, and feature reference.",
       "You may adjust weights dynamically for position preference, school/institution only if evidence exists, international/status, risk, upside, and pick value.",
       "Do not invent candidates, schools, rumors, measurements, team preferences, sources, or external facts not present in input.",
@@ -256,7 +260,8 @@ const buildPrompt = ({ team, remainingCandidates, featureByOrdinal, boardSoFar, 
     "你是 DraftOps 的 DeepSeek 逐顺位预测 Agent。",
     "绝对禁止人工预测。当前选择必须由你基于 input 数据完成，且只能从 remainingCandidates 里选一个 prospectId。",
     "这是逐顺位重跑：本次只预测当前 pick，脚本会把你选中的球员剔除，再进入下一顺位。",
-    "你必须审视 remainingCandidates 全体；可以在内部打分，但输出只保留前 6 名候选和最终选择。",
+    "你必须审视 remainingCandidates 全体，并只做当前剩余候选池内的相对评分：分数含义是本顺位当前可选球员之间的相对优先级，不是固定全局分。",
+    "你输出的 topCandidates 必须按相对分从高到低排序；selectedProspectId 必须等于 topCandidates[0].prospectId。",
     "禁止使用模型记忆补事实；球员、球队、顺位、学校、来源、风险、体测、球队偏好都必须来自 input 或 cleanedRagSnippets。",
     "若学校/州偏好没有数据支撑，写 schoolInstitutionSignal='none-data-backed'，不得幻想偏好。",
     "返回严格 JSON，不要 Markdown，不要代码块，不要输出密钥。",
@@ -385,6 +390,20 @@ const validatePrediction = ({ parsed, remainingCandidates, pick, team }) => {
   if (!selectedId) return "selectedProspectId is required";
   if (!remainingCandidates.some((prospect) => prospect.id === selectedId)) return `selectedProspectId not in remaining pool: ${selectedId}`;
   if (!Array.isArray(parsed.topCandidates) || parsed.topCandidates.length === 0) return "topCandidates must be non-empty";
+  const candidateIds = new Set(remainingCandidates.map((prospect) => prospect.id));
+  for (const candidate of parsed.topCandidates) {
+    if (!candidateIds.has(String(candidate.prospectId ?? "").trim())) return `topCandidate not in remaining pool: ${candidate.prospectId}`;
+    if (!Number.isFinite(Number(candidate.score))) return `topCandidate score is not numeric: ${candidate.prospectId}`;
+  }
+  const sortedTopCandidates = [...parsed.topCandidates].sort((left, right) => Number(right.score) - Number(left.score));
+  if (String(sortedTopCandidates[0]?.prospectId ?? "").trim() !== selectedId) {
+    return `selectedProspectId is not the highest relative-scored topCandidate: ${selectedId}`;
+  }
+  for (let index = 1; index < parsed.topCandidates.length; index += 1) {
+    if (Number(parsed.topCandidates[index].score) > Number(parsed.topCandidates[index - 1].score)) {
+      return "topCandidates must be sorted by descending relative score";
+    }
+  }
   return "";
 };
 
@@ -481,6 +500,8 @@ const makeReport = ({ artifact }) => {
     "",
     "- No manual prediction.",
     "- DeepSeek selected exactly one supplied prospect id per pick.",
+    "- DeepSeek was instructed to score candidates only relative to the current remaining pool for that pick.",
+    "- Validation required the selected prospect to be the highest-scored returned candidate.",
     "- After every pick, the selected prospect was removed before the next DeepSeek call.",
     "- Candidate boundary is the local 124-row answer-card pool resolved to 123 unique candidates.",
     "- Cleaned RAG snippets were supplied as grounding context.",
@@ -665,6 +686,7 @@ const run = async () => {
     schemaVersion: "draftops.deepseek_sequential_123_prediction.v1",
     generatedAt,
     generatedBy: "scripts/deepseek-sequential-prediction.mjs",
+    runStamp,
     model,
     modelLabel,
     inputFiles: [
@@ -678,6 +700,8 @@ const run = async () => {
       noManualPrediction: true,
       noHumanPickInjection: true,
       selectedProspectRemovedAfterEachPick: true,
+      poolRelativeScoring: true,
+      selectedMustBeHighestReturnedScore: true,
       candidateBoundary: "local 124-row answer-card pool resolved to 123 unique candidates",
       cleanedRagOnly: true,
     },
@@ -704,6 +728,9 @@ const run = async () => {
   };
 
   await Promise.all([mkdir(dirname(outputJsonPath), { recursive: true }), mkdir(dirname(outputReportPath), { recursive: true })]);
+  if (existsSync(outputJsonPath) || existsSync(outputReportPath)) {
+    throw new Error(`Refusing to overwrite existing output for run stamp ${runStamp}. Use a new --run-stamp value.`);
+  }
   await Promise.all([
     writeFile(outputJsonPath, `${JSON.stringify(artifact, null, 2)}\n`, "utf8"),
     writeFile(outputReportPath, `${makeReport({ artifact })}\n`, "utf8"),
@@ -713,10 +740,10 @@ const run = async () => {
     JSON.stringify(
       {
         output: [
-          `data/boards/deepseek_sequential_123_prediction_${stamp}.json`,
-          `data/reports/deepseek_sequential_123_prediction_${stamp}.md`,
+          `data/boards/deepseek_sequential_123_prediction_${runStamp}.json`,
+          `data/reports/deepseek_sequential_123_prediction_${runStamp}.md`,
         ],
-        checkpoint: `.draftops-watch/deepseek_sequential_123_prediction_${stamp}.checkpoint.json`,
+        checkpoint: `.draftops-watch/deepseek_sequential_123_prediction_${runStamp}.checkpoint.json`,
         model,
         modelLabel,
         summary: artifact.summary,

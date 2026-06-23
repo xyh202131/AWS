@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.rag.manifest.v1",
-  "generatedAt": "2026-06-23T16:21:11.215Z",
+  "generatedAt": "2026-06-23T19:15:23.943Z",
   "generatedBy": "scripts/build-rag-index.mjs",
   "cleaningSummary": {
     "qualityGate": "enabled",

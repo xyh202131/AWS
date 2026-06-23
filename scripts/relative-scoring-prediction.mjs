@@ -15,6 +15,7 @@ const ragDir = resolve(rootDir, "data", "rag");
 
 const outputJsonPath = resolve(rootDir, "data", "boards", `relative_scoring_prediction_${runStamp}.json`);
 const outputReportPath = resolve(rootDir, "data", "reports", `relative_scoring_prediction_${runStamp}.md`);
+const scorerRole = "Codex-as-LLM local scoring subagent";
 
 const tagAliases = {
   "alpha scorer": "shot creator",
@@ -650,6 +651,11 @@ const getConfidence = ({ selected, runnerUp, team }) => {
   return Math.round(clamp(selected.score - rankPenalty + marginBonus - dataPenalty));
 };
 
+const getLowConfidence = ({ selected, runnerUp, confidence }) => {
+  const margin = runnerUp ? selected.score - runnerUp.score : 10;
+  return confidence < 60 || margin < 1.5 || selected.matchStatus === "fallback-local-only" || selected.sourceEvidence.ragMatchCount === 0;
+};
+
 const toBoardRow = ({ team, selected, runnerUp, confidence, remainingBefore, remainingAfter }) => ({
   pick: Number(team.pick),
   team: team.team,
@@ -669,6 +675,7 @@ const toBoardRow = ({ team, selected, runnerUp, confidence, remainingBefore, rem
   score: selected.scoreRounded,
   scoreExact: selected.score,
   confidence,
+  lowConfidence: getLowConfidence({ selected, runnerUp, confidence }),
   margin: runnerUp ? round(selected.score - runnerUp.score, 3) : null,
   reviewedCandidates: remainingBefore,
   remainingBefore,
@@ -744,7 +751,7 @@ const validateArtifact = ({ boardRows, remainingProspects, pickAudits, initialCa
 const makeReport = ({ artifact }) => {
   const boardRows = artifact.boardRows.map(
     (row) =>
-      `| ${row.pick} | ${row.team} | ${row.player} | ${row.localNameZh ?? ""} | ${row.position} | ${row.consensusRank} | ${row.scoreExact} | ${row.confidence} | ${row.margin ?? ""} | ${row.reviewedCandidates} |`,
+      `| ${row.pick} | ${row.team} | ${row.player} | ${row.localNameZh ?? ""} | ${row.position} | ${row.consensusRank} | ${row.scoreExact} | ${row.confidence} | ${row.lowConfidence ? "yes" : "no"} | ${row.margin ?? ""} | ${row.reviewedCandidates} |`,
   );
   const changedRows = artifact.changedVsCurrentBoard.map(
     (row) =>
@@ -757,6 +764,7 @@ const makeReport = ({ artifact }) => {
     "",
     `Generated: ${artifact.generatedAt}`,
     `Script: \`${artifact.generatedBy}\``,
+    `Scorer role: ${artifact.scorerRole}`,
     "",
     "## Key Difference: Relative vs Absolute Scoring",
     "",
@@ -780,6 +788,7 @@ const makeReport = ({ artifact }) => {
     `- Total candidate reviews: ${artifact.summary.totalCandidateReviews}`,
     `- Average score: ${artifact.summary.averageScore}`,
     `- Average confidence: ${artifact.summary.averageConfidence}`,
+    `- Low-confidence picks: ${artifact.summary.lowConfidencePicks}`,
     `- Changed vs current frontend board: ${artifact.summary.changedVsCurrentBoardCount}`,
     "",
     "## Validation",
@@ -790,10 +799,33 @@ const makeReport = ({ artifact }) => {
     "",
     "## Board",
     "",
-    "| Pick | Team | Player | Local name | Pos | Rank | Score | Confidence | Margin | Reviewed |",
-    "|---:|---|---|---|---|---:|---:|---:|---:|---:|",
+    "| Pick | Team | Player | Local name | Pos | Rank | Score | Confidence | Low conf | Margin | Reviewed |",
+    "|---:|---|---|---|---|---:|---:|---:|---|---:|---:|",
     ...boardRows,
     "",
+    "## Per-Pick Relative Scoring And Removal Proof",
+    "",
+    ...artifact.pickAudits.flatMap((audit) => {
+      const topRows = audit.topCandidates.slice(0, 5).map(
+        (candidate) =>
+          `| ${candidate.rankWithinPick} | ${candidate.name} | ${candidate.localNameZh ?? ""} | ${candidate.score} | ${candidate.consensusRank ?? ""} | ${candidate.breakdown.consensus} | ${candidate.breakdown.need} | ${candidate.breakdown.player} | ${candidate.breakdown.upside} | ${candidate.breakdown.feature} | ${candidate.breakdown.source} |`,
+      );
+      return [
+        `### Pick ${audit.pick}: ${audit.team}`,
+        "",
+        `- Pool before scoring: ${audit.remainingBefore}`,
+        `- Pool after removal: ${audit.remainingAfter}`,
+        `- Removed prospect id: \`${audit.removedProspectId}\``,
+        `- Selection: ${audit.selected.name} (${audit.selected.localNameZh ?? ""}), score ${audit.selected.score}, margin ${audit.margin ?? ""}, low confidence ${audit.lowConfidence ? "yes" : "no"}`,
+        `- Scoring basis: weights ${JSON.stringify(audit.dynamicParameters.weights)}; needs ${(audit.dynamicParameters.needs ?? []).join(", ") || "none"}; priority tags ${(audit.dynamicParameters.priorityTags ?? []).join(", ") || "none"}; preference families ${(audit.dynamicParameters.preferenceFamilies ?? []).join(", ") || "none"}.`,
+        `- Evidence basis: RAG matches ${audit.selected.sourceEvidence.ragMatchCount}; trust weight ${audit.selected.sourceEvidence.ragTrustWeight}; source notes ${(audit.selected.sourceNotes ?? []).join(" / ") || "none"}.`,
+        "",
+        "| Rank | Player | Local name | Score | Consensus | Rel consensus | Rel need | Rel player | Rel upside | Rel feature | Rel source |",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ...topRows,
+        "",
+      ];
+    }),
     "## Changed Vs Current Frontend Board",
     "",
     artifact.changedVsCurrentBoard.length
@@ -866,6 +898,7 @@ const runSequentialPrediction = ({ teams, prospects, teamPreference, featureRefe
     available.splice(selectedIndex, 1);
 
     const confidence = getConfidence({ selected, runnerUp, team });
+    const lowConfidence = getLowConfidence({ selected, runnerUp, confidence });
     const teamRagSnippets = getTeamRagSnippets({ team, ragChunks });
     const pickAudit = {
       pick: Number(team.pick),
@@ -909,6 +942,7 @@ const runSequentialPrediction = ({ teams, prospects, teamPreference, featureRefe
       })),
       teamRagSnippets,
       confidence,
+      lowConfidence,
       margin: runnerUp ? round(selected.score - runnerUp.score, 3) : null,
       removedProspectId: selected.prospectId,
       noManualPrediction: true,
@@ -981,6 +1015,8 @@ const main = async () => {
     schemaVersion: "draftops.relative_scoring_prediction.v1",
     generatedAt,
     generatedBy: "scripts/relative-scoring-prediction.mjs",
+    scorerRole,
+    scorerMode: "codex-as-llm-no-external-deepseek",
     runStamp,
     method:
       "RELATIVE POOL-SCORING: Each pick first computes raw dimension scores for all remaining candidates, then applies MIN-MAX NORMALIZATION across the CURRENT available pool (0=worst remaining, 100=best remaining) for each dimension before weighted scoring. The top relative score is selected, removed, and the next pick renormalizes against the new smaller pool. This simulates true BPA (Best Player Available) logic where value is relative to who is left, not an absolute global grade.",
@@ -1000,6 +1036,8 @@ const main = async () => {
       poolRelativeScoring: true,
       allRemainingCandidatesReviewedEachPick: true,
       frontendBoardReadOnly: true,
+      noExternalDeepSeek: true,
+      codexAsLlmScorer: true,
       candidateBoundary: "data/final/local_pool_124_import_bundle.json, 123 unique prospect ids",
     },
     candidatePool: {
@@ -1017,6 +1055,7 @@ const main = async () => {
       totalCandidateReviews: pickAudits.reduce((sum, pick) => sum + pick.reviewedCandidates, 0),
       averageScore: round(boardRows.reduce((sum, row) => sum + row.scoreExact, 0) / Math.max(1, boardRows.length), 2),
       averageConfidence: Math.round(boardRows.reduce((sum, row) => sum + row.confidence, 0) / Math.max(1, boardRows.length)),
+      lowConfidencePicks: boardRows.filter((row) => row.lowConfidence).length,
       changedVsCurrentBoardCount: changedVsCurrentBoard.length,
     },
     validation,
@@ -1033,6 +1072,9 @@ const main = async () => {
 
   if (!Object.entries(validation).every(([key, value]) => key === "duplicateSelectedProspectIds" || value === true || typeof value === "number")) {
     throw new Error(`Validation failed: ${JSON.stringify(validation)}`);
+  }
+  if (existsSync(outputJsonPath) || existsSync(outputReportPath)) {
+    throw new Error(`Refusing to overwrite existing output for runStamp=${runStamp}`);
   }
 
   await Promise.all([mkdir(dirname(outputJsonPath), { recursive: true }), mkdir(dirname(outputReportPath), { recursive: true })]);

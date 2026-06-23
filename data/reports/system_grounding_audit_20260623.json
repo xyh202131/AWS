@@ -1,6 +1,6 @@
 {
   "schemaVersion": "draftops.system_grounding_audit.v1",
-  "generatedAt": "2026-06-23T19:08:31.646Z",
+  "generatedAt": "2026-06-23T19:15:55.585Z",
   "generatedBy": "scripts/audit-grounding.mjs",
   "status": "pass_with_warnings",
   "summary": {
