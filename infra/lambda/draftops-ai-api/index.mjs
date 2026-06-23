@@ -42,15 +42,40 @@ const ragCacheTtlMs = Number(process.env.DRAFTOPS_RAG_CACHE_TTL_MS ?? "300000");
 const ragEmbeddingProvider = (process.env.DRAFTOPS_RAG_EMBEDDING_PROVIDER ?? "local").toLowerCase();
 const ragBedrockEmbeddingModelId = process.env.DRAFTOPS_RAG_BEDROCK_EMBEDDING_MODEL_ID ?? "amazon.titan-embed-text-v2:0";
 const ragBedrockEmbeddingMaxChars = Number(process.env.DRAFTOPS_RAG_BEDROCK_EMBEDDING_MAX_CHARS ?? "6000");
+const ragDashScopeSecretId = process.env.DRAFTOPS_RAG_DASHSCOPE_SECRET_ID ?? process.env.DASHSCOPE_SECRET_ID ?? "";
+const ragDashScopeBaseUrl = process.env.DRAFTOPS_RAG_DASHSCOPE_BASE_URL ?? "https://dashscope.aliyuncs.com/compatible-mode/v1";
+const ragDashScopeEmbeddingModel = process.env.DRAFTOPS_RAG_DASHSCOPE_EMBEDDING_MODEL ?? "text-embedding-v4";
+const ragDashScopeEmbeddingMaxChars = Number(process.env.DRAFTOPS_RAG_DASHSCOPE_EMBEDDING_MAX_CHARS ?? "6000");
+const ragDashScopeBatchSize = Math.min(Math.max(Number(process.env.DRAFTOPS_RAG_DASHSCOPE_BATCH_SIZE ?? "10"), 1), 10);
 const ragEmbeddingDimensions = Number(process.env.DRAFTOPS_RAG_EMBEDDING_DIMENSIONS ?? "256");
 const ragRerankPoolSize = Number(process.env.DRAFTOPS_RAG_RERANK_POOL ?? "36");
 const ragTopK = Number(process.env.DRAFTOPS_RAG_TOP_K ?? "12");
 const allowedOrigins = csv(process.env.CORS_ALLOWED_ORIGINS);
 
 let cachedSecret;
+let cachedDashScopeSecret;
 let cachedRagChunks;
 let cachedRagLoadedAt = 0;
 const bedrockEmbeddingCache = new Map();
+const dashScopeEmbeddingCache = new Map();
+
+const isDashScopeEmbeddingProvider = () => ["dashscope", "qwen", "tongyi", "aliyun"].includes(ragEmbeddingProvider);
+
+const retrievalModeLabel = () => {
+  if (ragEmbeddingProvider === "bedrock") {
+    return "Bedrock Titan candidate embeddings + lexical hybrid score + MMR rerank; local hash fallback";
+  }
+  if (isDashScopeEmbeddingProvider()) {
+    return "Qwen/DashScope candidate embeddings + lexical hybrid score + MMR rerank; local hash fallback";
+  }
+  return "hashed-token-embedding + lexical hybrid score + MMR rerank";
+};
+
+const embeddingProviderLabel = () => {
+  if (ragEmbeddingProvider === "bedrock") return "bedrock";
+  if (isDashScopeEmbeddingProvider()) return "dashscope";
+  return "local-hash";
+};
 
 const isPlaceholder = (value) => /replace|placeholder|change-me|changeme|your-/i.test(String(value ?? ""));
 
@@ -109,6 +134,34 @@ const readDeepSeekKey = async () => {
 
   if (isPlaceholder(cachedSecret)) cachedSecret = "";
   return cachedSecret;
+};
+
+const readDashScopeKey = async () => {
+  if (process.env.DASHSCOPE_API_KEY && !isPlaceholder(process.env.DASHSCOPE_API_KEY)) {
+    return process.env.DASHSCOPE_API_KEY;
+  }
+
+  if (!ragDashScopeSecretId) return "";
+  if (cachedDashScopeSecret !== undefined) return cachedDashScopeSecret;
+
+  const result = await secrets.send(new GetSecretValueCommand({ SecretId: ragDashScopeSecretId }));
+  const value = result.SecretString ?? "";
+  try {
+    const parsed = JSON.parse(value);
+    cachedDashScopeSecret =
+      parsed.DASHSCOPE_API_KEY ??
+      parsed.dashscopeApiKey ??
+      parsed.DRAFTOPS_RAG_DASHSCOPE_API_KEY ??
+      parsed.apiKey ??
+      parsed.key ??
+      "";
+  } catch {
+    cachedDashScopeSecret = value;
+  }
+
+  cachedDashScopeSecret = String(cachedDashScopeSecret ?? "").trim();
+  if (isPlaceholder(cachedDashScopeSecret)) cachedDashScopeSecret = "";
+  return cachedDashScopeSecret;
 };
 
 const compactHistory = (history) =>
@@ -270,6 +323,78 @@ const getBedrockChunkEmbedding = async (chunk) => {
   return embedding;
 };
 
+const dashScopeEmbedTexts = async (texts) => {
+  const apiKey = await readDashScopeKey();
+  if (!apiKey) throw new Error("DashScope embedding API key is not configured in AWS Secrets Manager.");
+
+  const endpoint = `${ragDashScopeBaseUrl.replace(/\/$/, "")}/embeddings`;
+  const normalizedTexts = texts.map((text) => String(text ?? "").slice(0, ragDashScopeEmbeddingMaxChars));
+  const embeddings = [];
+
+  for (let index = 0; index < normalizedTexts.length; index += ragDashScopeBatchSize) {
+    const batch = normalizedTexts.slice(index, index + ragDashScopeBatchSize);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: ragDashScopeEmbeddingModel,
+        input: batch,
+        dimensions: ragEmbeddingDimensions,
+        encoding_format: "float",
+      }),
+    });
+
+    const text = await response.text();
+    if (!response.ok) {
+      throw new Error(`DashScope embedding request failed: ${response.status} ${response.statusText}: ${text.slice(0, 300)}`);
+    }
+
+    const payload = JSON.parse(text);
+    const data = Array.isArray(payload.data) ? payload.data : [];
+    const batchEmbeddings = batch.map((_, batchIndex) => {
+      const item = data.find((entry) => entry.index === batchIndex) ?? data[batchIndex];
+      return item?.embedding;
+    });
+
+    for (const embedding of batchEmbeddings) {
+      if (!Array.isArray(embedding)) throw new Error("DashScope embedding response did not include an embedding array.");
+      embeddings.push(normalizeVector(embedding));
+    }
+  }
+
+  return embeddings;
+};
+
+const dashScopeChunkCacheKey = (chunk) =>
+  [ragDashScopeEmbeddingModel, ragEmbeddingDimensions, chunk.source, chunk.path, chunk.text?.slice(0, 160)]
+    .filter(Boolean)
+    .join("|");
+
+const getDashScopeChunkEmbeddings = async (chunks) => {
+  const missing = [];
+  for (const chunk of chunks) {
+    const cacheKey = dashScopeChunkCacheKey(chunk);
+    if (!dashScopeEmbeddingCache.has(cacheKey)) {
+      missing.push({
+        cacheKey,
+        text: [chunk.source, chunk.path, chunk.text].filter(Boolean).join("\n"),
+      });
+    }
+  }
+
+  if (missing.length) {
+    const embeddings = await dashScopeEmbedTexts(missing.map((item) => item.text));
+    embeddings.forEach((embedding, index) => {
+      dashScopeEmbeddingCache.set(missing[index].cacheKey, embedding);
+    });
+  }
+
+  return chunks.map((chunk) => dashScopeEmbeddingCache.get(dashScopeChunkCacheKey(chunk)));
+};
+
 const scoreChunkForRetrieval = (chunk, { terms, queryEmbedding }) => {
   const searchableText = [chunk.source, chunk.path, chunk.text].filter(Boolean).join("\n");
   const embedding = chunk.embedding ?? embedText(searchableText);
@@ -337,6 +462,33 @@ const maybeRerankWithBedrockEmbeddings = async ({ question, terms, candidates })
     return rerankChunks(rescored, ragTopK, ragRerankPoolSize);
   } catch (error) {
     console.warn("Bedrock embedding rerank failed; falling back to local hashed embeddings:", error instanceof Error ? error.message : error);
+    return null;
+  }
+};
+
+const maybeRerankWithDashScopeEmbeddings = async ({ question, terms, candidates }) => {
+  if (!isDashScopeEmbeddingProvider() || !candidates.length) return null;
+
+  try {
+    const [queryEmbedding] = await dashScopeEmbedTexts([[question, ...terms].join(" ")]);
+    const rerankCandidates = candidates.slice(0, ragRerankPoolSize);
+    const candidateEmbeddings = await getDashScopeChunkEmbeddings(rerankCandidates);
+    const rescored = rerankCandidates.map((candidate, index) => {
+      const embedding = candidateEmbeddings[index];
+      const semanticScore = Math.max(0, cosineSimilarity(queryEmbedding, embedding));
+      const sourceBoost = sourceBoostForRank(candidate.sourceRank);
+      const score = semanticScore * 0.66 + candidate.lexicalScore * 0.24 + sourceBoost + (candidate.exactMatches >= 2 ? 0.05 : 0);
+      return {
+        ...candidate,
+        embedding,
+        embeddingProvider: "dashscope",
+        semanticScore,
+        score,
+      };
+    });
+    return rerankChunks(rescored, ragTopK, ragRerankPoolSize);
+  } catch (error) {
+    console.warn("DashScope embedding rerank failed; falling back to local hashed embeddings:", error instanceof Error ? error.message : error);
     return null;
   }
 };
@@ -484,6 +636,7 @@ const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
   const matching = scored.filter((chunk) => chunk.exactMatches > 0 || chunk.semanticScore >= 0.08);
   const localCandidates = rerankChunks(matching.length ? matching : scored, ragRerankPoolSize, Math.max(ragRerankPoolSize, ragTopK));
   const finalRanked = (await maybeRerankWithBedrockEmbeddings({ question, terms, candidates: localCandidates })) ??
+    (await maybeRerankWithDashScopeEmbeddings({ question, terms, candidates: localCandidates })) ??
     rerankChunks(localCandidates, ragTopK, ragRerankPoolSize);
   const snippets = finalRanked
     .map((chunk) => ({
@@ -500,17 +653,15 @@ const retrieveKnowledge = async ({ question, selectedPickNumber }) => {
 
   return {
     terms,
-    retrievalMode:
-      ragEmbeddingProvider === "bedrock"
-        ? "Bedrock Titan candidate embeddings + lexical hybrid score + MMR rerank; local hash fallback"
-        : "hashed-token-embedding + lexical hybrid score + MMR rerank",
+    retrievalMode: retrievalModeLabel(),
     configuredSources: {
       s3: Boolean(ragS3Bucket && ragS3Keys.length),
       dynamodb: ragDynamoTables.length > 0,
     },
     selectedPickContextUsed,
-    embeddingProvider: ragEmbeddingProvider === "bedrock" ? "bedrock" : "local-hash",
+    embeddingProvider: embeddingProviderLabel(),
     bedrockEmbeddingModelId: ragEmbeddingProvider === "bedrock" ? ragBedrockEmbeddingModelId : null,
+    dashScopeEmbeddingModel: isDashScopeEmbeddingProvider() ? ragDashScopeEmbeddingModel : null,
     embeddingDimensions: ragEmbeddingDimensions,
     rerankPoolSize: ragRerankPoolSize,
     snippetCount: snippets.length,
@@ -642,6 +793,7 @@ export const handler = async (event) => {
   try {
     if (method === "GET" && path.endsWith("/api/deepseek/health")) {
       const configured = provider === "bedrock" ? true : Boolean(await readDeepSeekKey());
+      const dashScopeEmbeddingConfigured = isDashScopeEmbeddingProvider() ? Boolean(await readDashScopeKey()) : false;
       return json(event, 200, {
         ok: true,
         configured,
@@ -652,12 +804,11 @@ export const handler = async (event) => {
           s3Configured: Boolean(ragS3Bucket && ragS3Keys.length),
           dynamodbConfigured: ragDynamoTables.length > 0,
           dynamodbTableCount: ragDynamoTables.length,
-          retrievalMode:
-            ragEmbeddingProvider === "bedrock"
-              ? "Bedrock Titan candidate embeddings + lexical hybrid score + MMR rerank; local hash fallback"
-              : "hashed-token-embedding + lexical hybrid score + MMR rerank",
-          embeddingProvider: ragEmbeddingProvider === "bedrock" ? "bedrock" : "local-hash",
+          retrievalMode: retrievalModeLabel(),
+          embeddingProvider: embeddingProviderLabel(),
           bedrockEmbeddingModelId: ragEmbeddingProvider === "bedrock" ? ragBedrockEmbeddingModelId : null,
+          dashScopeEmbeddingModel: isDashScopeEmbeddingProvider() ? ragDashScopeEmbeddingModel : null,
+          dashScopeEmbeddingConfigured,
           embeddingDimensions: ragEmbeddingDimensions,
           rerankPoolSize: ragRerankPoolSize,
           topK: ragTopK,
