@@ -23,6 +23,12 @@ const csv = (value) =>
     .filter(Boolean);
 const unique = (items) => [...new Set(items)];
 const defaultRagS3Keys = [
+  "data/rag/rag-core-board.json",
+  "data/rag/rag-team-preference.json",
+  "data/rag/rag-prospect-evidence.json",
+  "data/rag/rag-milestone.json",
+  "data/rag/rag-architecture.json",
+  "data/rag/rag-manifest.json",
   "public-data/expanded_import_bundle.json",
   "public-data/agent_expanded_recommended_board.json",
   "public-data/agent_expanded_board.json",
@@ -291,6 +297,7 @@ const scoreText = (text, terms) => {
 
 const sourceBoostForRank = (sourceRank) =>
   ({
+    "aws-s3-rag-index": 0.19,
     "aws-dynamodb": 0.16,
     "aws-s3-json": 0.13,
     "aws-s3-text": 0.09,
@@ -304,6 +311,7 @@ const questionIntent = (question) => {
     prospect: /球员|候选|学校|身高|体重|位置|prospect|player|school|height|weight|position/.test(text),
     evidence: /来源|证据|官方|验证|审计|source|evidence|official|audit|verify/.test(text),
     board: /预测|榜单|首轮|顺位|board|mock|draft|rank/.test(text),
+    architecture: /架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text),
   };
 };
 
@@ -335,6 +343,14 @@ const sourceIntentBoost = (source, question) => {
 
 const sourceKeyMatchesIntent = (key, intent) => {
   const lower = String(key ?? "").toLowerCase();
+  if (/data\/rag\/rag-core-board\.json/.test(lower)) return true;
+  if (intent.team && /data\/rag\/rag-team-preference\.json/.test(lower)) return true;
+  if (intent.prospect && /data\/rag\/rag-prospect-evidence\.json/.test(lower)) return true;
+  if (intent.team && /data\/rag\/rag-prospect-evidence\.json/.test(lower)) return true;
+  if (intent.prospect && /data\/rag\/rag-team-preference\.json/.test(lower)) return true;
+  if (intent.milestone && /data\/rag\/rag-milestone\.json/.test(lower)) return true;
+  if (intent.architecture && /data\/rag\/rag-architecture\.json/.test(lower)) return true;
+  if ((intent.evidence || intent.board) && /data\/rag\/rag-prospect-evidence\.json/.test(lower)) return true;
   if (/expanded_import_bundle|final_import_bundle|agent_expanded_recommended_board|agent_balanced_board/.test(lower)) return true;
   if (/team_preference|integrated_scoring|parameter|prediction_strategy|multi_agent|main_parameter|consensus/.test(lower)) return true;
   if (intent.milestone && /milestone|answer|draftcode24|deepseek_discussion|answer_card/.test(lower)) return true;
@@ -345,8 +361,17 @@ const sourceKeyMatchesIntent = (key, intent) => {
   return false;
 };
 
-const selectRagS3KeysForQuestion = (question) => {
+const selectRagS3KeysForQuestion = (question, { focusMode = "inactive" } = {}) => {
   const intent = questionIntent(question);
+  const indexed = ragS3Keys.filter((key) => {
+    const value = String(key);
+    if (!value.startsWith("data/rag/")) return false;
+    if (focusMode === "direct" && /data\/rag\/rag-(core-board|team-preference|prospect-evidence)\.json/.test(value)) {
+      return true;
+    }
+    return sourceKeyMatchesIntent(value, intent);
+  });
+  if (indexed.length) return indexed.slice(0, ragMaxS3KeysPerQuery);
   const selected = ragS3Keys.filter((key) => sourceKeyMatchesIntent(key, intent));
   const fallback = selected.length ? selected : ragS3Keys;
   return fallback.slice(0, ragMaxS3KeysPerQuery);
@@ -397,6 +422,18 @@ const normalizeVector = (values) => {
   if (!norm) return vector;
   for (let index = 0; index < vector.length; index += 1) vector[index] /= norm;
   return vector;
+};
+
+const normalizePrecomputedEmbedding = (chunk) => {
+  if (
+    Array.isArray(chunk.embedding) &&
+    ["dashscope", "qwen", "tongyi", "aliyun"].includes(String(chunk.embeddingProvider ?? "").toLowerCase()) &&
+    Number(chunk.embeddingDimensions ?? chunk.embedding.length) === ragEmbeddingDimensions
+  ) {
+    chunk.dashScopeEmbedding = normalizeVector(chunk.embedding);
+    delete chunk.embedding;
+  }
+  return chunk;
 };
 
 const bedrockEmbedText = async (text) => {
@@ -480,6 +517,7 @@ const dashScopeChunkCacheKey = (chunk) =>
 const getDashScopeChunkEmbeddings = async (chunks) => {
   const missing = [];
   for (const chunk of chunks) {
+    if (chunk.dashScopeEmbedding?.length === ragEmbeddingDimensions) continue;
     const cacheKey = dashScopeChunkCacheKey(chunk);
     if (!dashScopeEmbeddingCache.has(cacheKey)) {
       missing.push({
@@ -496,7 +534,11 @@ const getDashScopeChunkEmbeddings = async (chunks) => {
     });
   }
 
-  return chunks.map((chunk) => dashScopeEmbeddingCache.get(dashScopeChunkCacheKey(chunk)));
+  return chunks.map((chunk) =>
+    chunk.dashScopeEmbedding?.length === ragEmbeddingDimensions
+      ? chunk.dashScopeEmbedding
+      : dashScopeEmbeddingCache.get(dashScopeChunkCacheKey(chunk)),
+  );
 };
 
 const scoreChunkForRetrieval = (chunk, { question, terms, queryEmbedding, focusTerms = [], focusWeight = 0 }) => {
@@ -728,6 +770,11 @@ const questionAsksGlobalScope = (question) => {
   return /整体|全局|全部|所有|整轮|首轮|前\s*30|30\s*(顺位|签|队|人)|三十|排名|榜单|统计|数量|多少|几个|哪所|哪支|哪个大学|哪个学校|里程碑|答题卡|比赛|赛题|规则|提交|演示|视频|架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text);
 };
 
+const questionRejectsSelectedOnlyScope = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return /不要.*(只|仅).*当前|别.*(只|仅).*当前|不.*(只|仅).*当前|不要只回答|不要仅回答|not\s+only.*current|don't\s+only.*current|do\s+not\s+only.*current/.test(text);
+};
+
 const questionLooksLikeSelectedFollowUp = (question) => {
   const text = String(question ?? "").toLowerCase().trim();
   if (!text) return false;
@@ -736,6 +783,7 @@ const questionLooksLikeSelectedFollowUp = (question) => {
 };
 
 const selectedPickFocusMode = ({ question, selectedPickFocusActive = false }) => {
+  if (selectedPickFocusActive && (questionAsksGlobalScope(question) || questionRejectsSelectedOnlyScope(question))) return "background";
   if (questionDirectlyTargetsSelectedPick(question)) return "direct";
   if (!selectedPickFocusActive) return "inactive";
   if (questionLooksLikeSelectedFollowUp(question) && !questionAsksGlobalScope(question)) return "direct";
@@ -799,7 +847,34 @@ const chunksFromS3Object = async (key) => {
   const content = await bodyToText(result.Body);
   const source = `s3://${ragS3Bucket}/${key}`;
   try {
-    return collectStructuredChunks(JSON.parse(content), { source, sourceRank: "aws-s3-json" });
+    const parsed = JSON.parse(content);
+    if (parsed?.schemaVersion === "draftops.rag.index.v1" && Array.isArray(parsed.chunks)) {
+      return parsed.chunks.map((chunk, index) =>
+        normalizePrecomputedEmbedding({
+          source: chunk.source ? `${source}#${chunk.source}` : source,
+          sourceRank: "aws-s3-rag-index",
+          path: chunk.path ?? `$rag[${index}]`,
+          text: String(chunk.text ?? ""),
+          category: chunk.category ?? parsed.id ?? "",
+          embeddingProvider: chunk.embeddingProvider ?? parsed.embeddingProvider ?? null,
+          embeddingModel: chunk.embeddingModel ?? parsed.embeddingModel ?? null,
+          embeddingDimensions: chunk.embeddingDimensions ?? parsed.embeddingDimensions ?? null,
+          embedding: chunk.embedding ?? null,
+        }),
+      );
+    }
+    if (parsed?.schemaVersion === "draftops.rag.manifest.v1") {
+      return [
+        {
+          source,
+          sourceRank: "aws-s3-rag-index",
+          path: "$manifest",
+          text: compactJson(parsed, 1800),
+          category: "rag-manifest",
+        },
+      ];
+    }
+    return collectStructuredChunks(parsed, { source, sourceRank: "aws-s3-json" });
   } catch {
     return chunkText(content).map((text, index) => ({ source, sourceRank: "aws-s3-text", path: `$text[${index}]`, text }));
   }
@@ -853,9 +928,8 @@ const mapWithConcurrency = async (items, limit, mapper) => {
   return results;
 };
 
-const loadRagChunks = async (question) => {
+const loadRagChunks = async (question, selectedS3Keys = selectRagS3KeysForQuestion(question)) => {
   const now = Date.now();
-  const selectedS3Keys = selectRagS3KeysForQuestion(question);
   const cacheKey = [selectedS3Keys.join(","), ragDynamoTables.join(",")].join("|");
   if (cachedRagChunks && cachedRagCacheKey === cacheKey && now - cachedRagLoadedAt < ragCacheTtlMs) return cachedRagChunks;
 
@@ -896,8 +970,8 @@ const retrieveKnowledge = async ({ question, selectedPickNumber, selectedPickCon
   const questionTerms = tokenize(question);
   const terms = unique([...questionTerms, ...(selectedPickDirectScope ? focusTerms : [])]).slice(0, 48);
   const queryEmbedding = embedText([question, ...(selectedPickDirectScope ? focusValues : [])].join(" "));
-  const selectedS3Keys = selectRagS3KeysForQuestion(question);
-  const chunks = await loadRagChunks(question);
+  const selectedS3Keys = selectRagS3KeysForQuestion(question, { focusMode });
+  const chunks = await loadRagChunks(question, selectedS3Keys);
   const focusWeight = selectedPickDirectScope ? 0.2 : selectedPickContextUsed ? 0.06 : 0;
   const scored = chunks.map((chunk) => scoreChunkForRetrieval(chunk, { question, terms, queryEmbedding, focusTerms, focusWeight }));
   const focused = selectedPickContextUsed ? scored.filter((chunk) => chunk.focusMatches > 0) : [];

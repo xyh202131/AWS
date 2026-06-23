@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "draftops.rag.manifest.v1",
+  "generatedAt": "2026-06-23T10:55:12.520Z",
+  "generatedBy": "scripts/build-rag-index.mjs",
+  "indexes": [
+    {
+      "id": "core-board",
+      "key": "data/rag/rag-core-board.json",
+      "sourceCount": 12,
+      "chunkCount": 231,
+      "embeddingProvider": "dashscope",
+      "embeddingModel": "text-embedding-v4",
+      "embeddingDimensions": 1024
+    },
+    {
+      "id": "team-preference",
+      "key": "data/rag/rag-team-preference.json",
+      "sourceCount": 8,
+      "chunkCount": 134,
+      "embeddingProvider": "dashscope",
+      "embeddingModel": "text-embedding-v4",
+      "embeddingDimensions": 1024
+    },
+    {
+      "id": "prospect-evidence",
+      "key": "data/rag/rag-prospect-evidence.json",
+      "sourceCount": 13,
+      "chunkCount": 225,
+      "embeddingProvider": "dashscope",
+      "embeddingModel": "text-embedding-v4",
+      "embeddingDimensions": 1024
+    },
+    {
+      "id": "milestone",
+      "key": "data/rag/rag-milestone.json",
+      "sourceCount": 8,
+      "chunkCount": 68,
+      "embeddingProvider": "dashscope",
+      "embeddingModel": "text-embedding-v4",
+      "embeddingDimensions": 1024
+    },
+    {
+      "id": "architecture",
+      "key": "data/rag/rag-architecture.json",
+      "sourceCount": 9,
+      "chunkCount": 78,
+      "embeddingProvider": "dashscope",
+      "embeddingModel": "text-embedding-v4",
+      "embeddingDimensions": 1024
+    }
+  ]
+}

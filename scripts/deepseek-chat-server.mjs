@@ -27,6 +27,11 @@ const knowledgePaths = [
   "data/raw/china-nba-draft-20260623.md",
 ];
 const structuredKnowledgePaths = [
+  "data/rag/rag-core-board.json",
+  "data/rag/rag-team-preference.json",
+  "data/rag/rag-prospect-evidence.json",
+  "data/rag/rag-milestone.json",
+  "data/rag/rag-architecture.json",
   "data/documents/document_index.json",
   "data/clean/data_quality_report.md",
   "data/clean/official_prospect_reconciliation.json",
@@ -195,6 +200,11 @@ const questionAsksGlobalScope = (question) => {
   return /整体|全局|全部|所有|整轮|首轮|前\s*30|30\s*(顺位|签|队|人)|三十|排名|榜单|统计|数量|多少|几个|哪所|哪支|哪个大学|哪个学校|里程碑|答题卡|比赛|赛题|规则|提交|演示|视频|架构|aws|部署|系统|平台|agent|rag|embedding|数据库|前端|后端|lambda|s3|cloudfront|dynamodb|deepseek|bedrock|qwen|dashscope/.test(text);
 };
 
+const questionRejectsSelectedOnlyScope = (question) => {
+  const text = String(question ?? "").toLowerCase();
+  return /不要.*(只|仅).*当前|别.*(只|仅).*当前|不.*(只|仅).*当前|不要只回答|不要仅回答|not\s+only.*current|don't\s+only.*current|do\s+not\s+only.*current/.test(text);
+};
+
 const questionLooksLikeSelectedFollowUp = (question) => {
   const text = String(question ?? "").toLowerCase().trim();
   if (!text) return false;
@@ -203,6 +213,7 @@ const questionLooksLikeSelectedFollowUp = (question) => {
 };
 
 const selectedPickFocusMode = ({ question, selectedPick, selectedPickFocusActive = false }) => {
+  if (selectedPickFocusActive && (questionAsksGlobalScope(question) || questionRejectsSelectedOnlyScope(question))) return "background";
   if (shouldUseSelectedPickContext(question, selectedPick)) return "direct";
   if (!selectedPickFocusActive) return "inactive";
   if (questionLooksLikeSelectedFollowUp(question) && !questionAsksGlobalScope(question)) return "direct";
@@ -487,6 +498,14 @@ const readStructuredKnowledgeFile = async (relativePath) => {
 
   try {
     const parsed = JSON.parse(trimmed);
+    if (parsed?.schemaVersion === "draftops.rag.index.v1" && Array.isArray(parsed.chunks)) {
+      return parsed.chunks.map((chunk, index) => ({
+        source: `${relativePath}#${chunk.source ?? "chunk"}`,
+        sourceRank,
+        path: chunk.path ?? `$rag[${index}]`,
+        text: String(chunk.text ?? ""),
+      }));
+    }
     return collectStructuredChunks(parsed, { source: relativePath, sourceRank });
   } catch {
     return chunkText(content).map((text, index) => ({
