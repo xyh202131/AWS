@@ -27,6 +27,7 @@ Current artifact contract:
 - `data/normalized/normalized_2026_online_player_list_reverification_20260623.json` reconciles the live NBA.com Prospects, NBA China draft board, Combine invite, Stats Anthro, Early-entry, and local 124-player pool counts.
 - `agent_expanded_recommended_board.json` contains 30 picks, 30 unique selected prospects, no duplicate players, and `noManualOverride: true`.
 - The current recommended scenario is `baseline`.
+- README status note refreshed on 2026-06-26 to keep the current run guidance easy to find.
 - The current board health gate is passing: exactly 30 picks, no duplicates, and 1 low-confidence pick.
 - The current milestone set has 7 answers, matching `src/config/draftops-manifest.json` and `data/final/milestone_answers.json`.
 - The filled answer-card workbook is `数据/上传此文件即可（选秀+里程碑问题选手答题卡_里程碑预测已填）.xlsx`.
